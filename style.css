@@ -10,6 +10,7 @@
     --radius: 10px;
     --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     --sidebar-w: 264px;
+    --sidebar-collapsed-w: 84px;
 }
 
 * {
@@ -94,14 +95,21 @@ a {
     top: 0;
     left: 0;
     bottom: 0;
-    width: var(--sidebar-w);
+    width: var(--sidebar-collapsed-w);
     background: var(--sidebar);
     border-right: 3px solid var(--red);
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow: hidden;
     z-index: 40;
-    transition: transform 0.25s ease;
+    transition: width 0.28s ease, box-shadow 0.28s ease;
+}
+
+.sidebar:hover,
+.sidebar:focus-within {
+    width: var(--sidebar-w);
+    overflow-y: auto;
+    box-shadow: 8px 0 24px rgba(0, 0, 0, 0.25);
 }
 
 .sidebar-brand {
@@ -137,6 +145,21 @@ a {
     flex-shrink: 0;
     width: 20px;
     height: 20px;
+}
+
+.sidebar-nav a .label {
+    opacity: 0;
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: opacity 0.2s ease, max-width 0.28s ease;
+}
+
+.sidebar:hover .sidebar-nav a .label,
+.sidebar:focus-within .sidebar-nav a .label {
+    opacity: 1;
+    max-width: 160px;
+    transition: opacity 0.2s ease 0.08s, max-width 0.28s ease;
 }
 
 .sidebar-nav a:hover {
@@ -180,8 +203,9 @@ a {
 
 /* Page content offset by sidebar */
 .page {
-    margin-left: var(--sidebar-w);
+    margin-left: var(--sidebar-collapsed-w);
     min-width: 0;
+    transition: margin-left 0.28s ease;
 }
 
 /* Hero */
@@ -358,11 +382,19 @@ main {
     }
 
     .sidebar {
+        width: var(--sidebar-w);
+        overflow-y: auto;
         transform: translateX(-100%);
+        transition: transform 0.25s ease;
     }
 
     .sidebar.is-open {
         transform: translateX(0);
+    }
+
+    .sidebar-nav a .label {
+        opacity: 1;
+        max-width: none;
     }
 
     .sidebar-overlay.is-open {
