@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.submenu-toggle').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var item = btn.closest('.has-submenu');
+            if (!item) return;
+            var isOpen = item.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+    });
+
     var toggle = document.querySelector('.nav-toggle');
     var sidebar = document.querySelector('.sidebar');
     var overlay = document.querySelector('.sidebar-overlay');
