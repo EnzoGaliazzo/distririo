@@ -136,8 +136,11 @@ a {
     width: 100%;
     gap: 0.85rem;
     padding: 0.85rem 1.5rem;
+    -webkit-appearance: none;
+    appearance: none;
     background: none;
     border: none;
+    border-radius: 0;
     border-left: 3px solid transparent;
     color: #c7c7cf;
     text-decoration: none;
@@ -546,9 +549,22 @@ a.product-card {
         transform: translateX(0);
     }
 
-    .sidebar-nav a .label {
+    .sidebar-nav a .label,
+    .sidebar-nav button.submenu-toggle .label {
         opacity: 1;
         max-width: none;
+    }
+
+    .submenu-toggle .chevron {
+        opacity: 1;
+    }
+
+    .submenu {
+        max-height: 0;
+    }
+
+    .has-submenu.is-open .submenu {
+        max-height: 32rem;
     }
 
     .sidebar-overlay.is-open {
