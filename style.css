@@ -44,8 +44,10 @@ button {
 
 /* ===== Site header ===== */
 .site-header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 50;
     background: var(--ink);
     border-bottom: 3px solid var(--red);
@@ -533,7 +535,6 @@ button {
 /* ===== Main / sections ===== */
 main {
     flex: 1;
-    padding-bottom: var(--footer-h);
 }
 
 .section {
@@ -754,11 +755,6 @@ main {
 
 /* ===== Footer ===== */
 .footer {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 40;
     background: var(--dark);
     color: #999;
     border-top: 3px solid var(--red);
@@ -804,10 +800,19 @@ main {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    padding-top: calc(var(--header-h) + var(--info-h));
 }
 
 /* ===== Mobile ===== */
 @media (max-width: 900px) {
+    html {
+        scroll-padding-top: 285px;
+    }
+
+    .page {
+        padding-top: 215px;
+    }
+
     .header-bar {
         flex-wrap: wrap;
     }
