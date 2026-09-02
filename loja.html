@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja - Distri Rio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-info">
+        <span>📍 Atendemos o Rio de Janeiro</span>
+        <span>🚚 Consulte prazo de entrega</span>
+        <span>📦 Consulte pedido mínimo</span>
+    </div>
+    <div class="header-bar">
+        <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="index.html" class="header-logo">
+            <img src="assets/logo.png" alt="Distri Rio">
+        </a>
+        <form class="header-search" action="loja.html" method="get">
+            <input type="search" name="q" placeholder="Buscar marca ou produto...">
+            <button type="submit" aria-label="Buscar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </button>
+        </form>
+        <nav class="header-nav">
+            <a href="index.html">Home</a>
+            <a href="loja.html" class="is-active">Loja</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="servicos.html">Serviços</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+        <button class="cart-toggle" type="button" aria-label="Ver carrinho">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            <span class="cart-count" id="cartCount" hidden>0</span>
+        </button>
+    </div>
+</header>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+        <h2>Seu pedido</h2>
+        <button class="cart-close" id="cartClose" aria-label="Fechar carrinho" type="button">&times;</button>
+    </div>
+    <ul class="cart-items" id="cartItems" hidden></ul>
+    <p class="cart-empty" id="cartEmpty">Seu carrinho está vazio.</p>
+    <div class="cart-drawer-footer">
+        <a href="#" class="btn cart-checkout" id="cartCheckout" target="_blank" rel="noopener" aria-disabled="true">Finalizar pedido no WhatsApp</a>
+    </div>
+</aside>
+
+<div class="page">
+    <main>
+        <section class="hero">
+            <h1>Loja Distri Rio</h1>
+            <p>Monte seu pedido e finalize direto pelo WhatsApp. Sem cadastro, sem complicação.</p>
+        </section>
+
+        <nav class="category-bar" aria-label="Categorias">
+            <a href="#doces-chocolates" class="category-chip">Doces &amp; Chocolates</a>
+            <a href="#bebidas" class="category-chip">Bebidas &amp; Isotônicos</a>
+            <a href="#agua-de-coco" class="category-chip">Água de Coco</a>
+            <a href="#sucos-nectares" class="category-chip">Sucos &amp; Néctares</a>
+            <a href="#molhos-temperos" class="category-chip">Molhos &amp; Temperos</a>
+            <a href="#azeitonas" class="category-chip">Azeitonas</a>
+            <a href="#barras-snacks" class="category-chip">Barras &amp; Snacks</a>
+            <a href="#cereais-granola" class="category-chip">Cereais &amp; Granola</a>
+            <a href="#geleias-mel" class="category-chip">Geleias &amp; Mel</a>
+            <a href="#limpeza" class="category-chip">Limpeza</a>
+        </nav>
+
+        <section class="section">
+            <p class="no-results" id="noResults" hidden>Nenhum produto encontrado para essa busca.</p>
+
+            <div class="category-section" id="doces-chocolates">
+                <h2>Doces &amp; Chocolates</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-name="Trident &amp; Chiclets" data-desc="gomas de mascar chicletes">
+                        <img src="assets/produtos/trident.jpg" alt="Trident & Chiclets">
+                        <div class="product-info">
+                            <h3>Trident &amp; Chiclets</h3>
+                            <p>Gomas de mascar Trident (5S, 14S, Max e XSenses) e Chiclets, em diversos sabores.</p>
+                            <button type="button" class="add-to-cart" data-name="Trident &amp; Chiclets">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-name="Halls" data-desc="balas extra forte">
+                        <img src="assets/produtos/halls.jpg" alt="Halls">
+                        <div class="product-info">
+                            <h3>Halls</h3>
+                            <p>Balas Halls em diversas versões, incluindo extra forte.</p>
+                            <button type="button" class="add-to-cart" data-name="Halls">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-name="Bubbaloo" data-desc="chicletes balas tutti-frutti">
+                        <img src="assets/produtos/bubbaloo.jpg" alt="Bubbaloo">
+                        <div class="product-info">
+                            <h3>Bubbaloo</h3>
+                            <p>Chicletes e balas de tutti-frutti Bubbaloo.</p>
+                            <button type="button" class="add-to-cart" data-name="Bubbaloo">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-name="Tang" data-desc="refresco em po uva tangerina maracuja guarana">
+                        <img src="assets/produtos/tang.jpg" alt="Tang">
+                        <div class="product-info">
+                            <h3>Tang</h3>
+                            <p>Refresco em pó Tang em diversos sabores, como uva, tangerina, maracujá e guaraná.</p>
+                            <button type="button" class="add-to-cart" data-name="Tang">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-name="Oreo" data-desc="biscoitos original chocolate mini">
+                        <img src="assets/produtos/oreo.jpg" alt="Oreo">
+                        <div class="product-info">
+                            <h3>Oreo</h3>
+                            <p>Biscoitos Oreo original, chocolate e mini Oreo.</p>
+                            <button type="button" class="add-to-cart" data-name="Oreo">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-name="Club Social" data-desc="biscoitos snacks">
+                        <img src="assets/produtos/clubsocial.jpg" alt="Club Social">
+                        <div class="product-info">
+                            <h3>Club Social</h3>
+                            <p>Biscoitos e snacks Club Social, em diversos sabores.</p>
+                            <button type="button" class="add-to-cart" data-name="Club Social">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-name="Lacta" data-desc="chocolates bis 5star sonho de valsa ouro branco">
+                        <img src="assets/produtos/lacta.jpg" alt="Lacta">
+                        <div class="product-info">
+                            <h3>Lacta</h3>
+                            <p>Chocolates Lacta, Bis, 5Star, Sonho de Valsa e Ouro Branco.</p>
+                            <button type="button" class="add-to-cart" data-name="Lacta">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" id="bebidas">
+                <h2>Bebidas Energéticas &amp; Isotônicos</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-name="BALY Brasil" data-desc="energeticos isotonicos zero acucar sonic">
+                        <img src="assets/produtos/baly.jpg" alt="BALY Brasil">
+                        <div class="product-info">
+                            <h3>BALY Brasil</h3>
+                            <p>Energéticos e isotônicos em diversos sabores, incluindo versões zero açúcar e a linha infantil licenciada Sonic.</p>
+                            <button type="button" class="add-to-cart" data-name="BALY Brasil">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" id="agua-de-coco">
+                <h2>Água de Coco</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-name="Aqua Coco" data-desc="agua de coco integral sem acucar turma da monica">
+                        <img src="assets/produtos/aquacoco.jpg" alt="Aqua Coco">
+                        <div class="product-info">
+                            <h3>Aqua Coco</h3>
+                            <p>Água de coco integral, sem adição de açúcar, com a chancela da Turma da Mônica.</p>
+                            <button type="button" class="add-to-cart" data-name="Aqua Coco">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" id="sucos-nectares">
+                <h2>Sucos &amp; Néctares</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-name="Sucos Sumo" data-desc="sucos prontos frutas norte nordeste">
+                        <img src="assets/produtos/sumo.jpg" alt="Sucos Sumo">
+                        <div class="product-info">
+                            <h3>Sucos Sumo</h3>
+                            <p>Sucos prontos com frutas típicas do Norte e Nordeste do Brasil.</p>
+                            <button type="button" class="add-to-cart" data-name="Sucos Sumo">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-name="Maratá Néctar" data-desc="nectares mara-tinho">
+                        <img src="assets/produtos/marata-nectar.jpg" alt="Maratá Néctar">
+                        <div class="product-info">
+                            <h3>Maratá</h3>
+                            <p>Néctares de fruta e a linha infantil Mara-Tinho, em diversos sabores.</p>
+                            <button type="button" class="add-to-cart" data-name="Maratá Néctar">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" id="molhos-temperos">
+                <h2>Molhos &amp; Temperos</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-name="Maratá Molhos" data-desc="gota flocao de milho">
+                        <img src="assets/produtos/marata-molhos.jpg" alt="Maratá Molhos">
+                        <div class="product-info">
+                            <h3>Maratá</h3>
+                            <p>Linha Gota de molhos (inglês, shoyu, pimenta, alho) e flocão de milho.</p>
+                            <button type="button" class="add-to-cart" data-name="Maratá Molhos">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" id="azeitonas">
+                <h2>Azeitonas</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-name="Rivoli" data-desc="azeitonas verdes pretas saches potes baldes">
+                        <img src="assets/produtos/rivoli.jpg" alt="Rivoli">
+                        <div class="product-info">
+                            <h3>Rivoli</h3>
+                            <p>Azeitonas verdes e pretas em sachês, potes e baldes, desde 1961.</p>
+                            <button type="button" class="add-to-cart" data-name="Rivoli">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" id="barras-snacks">
+                <h2>Barras &amp; Snacks Saudáveis</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-name="Trio" data-desc="barras de cereais display flowpack zero acucar">
+                        <img src="assets/produtos/trio.jpg" alt="Trio">
+                        <div class="product-info">
+                            <h3>Trio</h3>
+                            <p>Barras de cereais em display, flowpack e versão zero açúcar.</p>
+                            <button type="button" class="add-to-cart" data-name="Trio">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-name="Banana Brasil" data-desc="banana passa supino protein nuts minions">
+                        <img src="assets/produtos/bananabrasil.jpg" alt="Banana Brasil">
+                        <div class="product-info">
+                            <h3>Banana Brasil</h3>
+                            <p>Banana passa e barras Supino, Protein+, Nuts e a linha kids com Minions.</p>
+                            <button type="button" class="add-to-cart" data-name="Banana Brasil">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" id="cereais-granola">
+                <h2>Cereais &amp; Granola</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-name="Kobber" data-desc="granola cereais integrais fibras">
+                        <img src="assets/produtos/kobber.jpg" alt="Kobber">
+                        <div class="product-info">
+                            <h3>Kobber</h3>
+                            <p>Granola com 5 cereais integrais, fonte de fibras, em diversos sabores.</p>
+                            <button type="button" class="add-to-cart" data-name="Kobber">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" id="geleias-mel">
+                <h2>Geleias &amp; Mel</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-name="Baldoni" data-desc="geleias de frutas mel zero acucar refinado">
+                        <img src="assets/produtos/baldoni.jpg" alt="Baldoni">
+                        <div class="product-info">
+                            <h3>Baldoni</h3>
+                            <p>Geleias de frutas 100% adoçadas com mel, zero açúcar refinado.</p>
+                            <button type="button" class="add-to-cart" data-name="Baldoni">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section" id="limpeza">
+                <h2>Produtos de Limpeza</h2>
+                <div class="product-grid">
+                    <div class="product-card" data-name="ACE" data-desc="detergente em po licenca p&g">
+                        <img src="assets/produtos/ace.jpg" alt="ACE">
+                        <div class="product-info">
+                            <h3>ACE</h3>
+                            <p>Detergente em pó de alto poder de limpeza, usada sob licença da P&amp;G.</p>
+                            <button type="button" class="add-to-cart" data-name="ACE">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card" data-name="Espumil" data-desc="detergentes liquidos sabao em barra po roupas">
+                        <img src="assets/produtos/espumil.jpg" alt="Espumil">
+                        <div class="product-info">
+                            <h3>Espumil</h3>
+                            <p>Detergentes líquidos, sabão em barra e em pó para roupas.</p>
+                            <button type="button" class="add-to-cart" data-name="Espumil">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-social">
+            <a href="https://www.instagram.com/distririo01/" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+            </a>
+            <a href="https://wa.me/5521992111843?text=Ol%C3%A1!%20Vim%20pelo%20link%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener" aria-label="WhatsApp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.47 1.29 4.92L2 22l5.31-1.39a9.87 9.87 0 0 0 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2Zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.15.83.84-3.07-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.53 3.69-8.22 8.23-8.22 2.2 0 4.26.86 5.82 2.41a8.18 8.18 0 0 1 2.41 5.82c0 4.53-3.69 8.22-8.19 8.22Zm4.51-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.99-1.22-.73-.66-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42-.14 0-.31-.02-.48-.02s-.44.06-.67.31c-.23.25-.87.85-.87 2.08s.89 2.42 1.01 2.58c.12.17 1.75 2.67 4.24 3.75.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29Z"/></svg>
+            </a>
+        </div>
+        <p>&copy; 2024 Distri Rio. Todos os direitos reservados.</p>
+    </footer>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
