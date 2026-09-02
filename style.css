@@ -213,6 +213,20 @@ button {
     text-align: center;
 }
 
+.search-suggestion-more {
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    background: var(--gray-100);
+    color: var(--red);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.search-suggestion-more:hover {
+    background: var(--gray-300);
+}
+
 .header-nav {
     display: flex;
     align-items: center;

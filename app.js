@@ -1,3 +1,12 @@
+// ===== Utilitario de busca: ignora maiusculas/minusculas e acentos =====
+// Assim "marata"/"agua"/"acucar" encontram "Maratá"/"água"/"açúcar".
+function normalizeSearch(str) {
+    return (str || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '');
+}
+
 // ===== Mobile nav toggle =====
 document.addEventListener('DOMContentLoaded', function () {
     var navToggle = document.querySelector('.nav-toggle');
@@ -200,13 +209,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // ===== Catálogo de produtos (usado nas sugestões de busca) =====
 var PRODUCTS = [
-    { name: "Trident & Chiclets", category: "Doces & Chocolates", img: "assets/produtos/trident.jpg", keywords: "trident chiclets gomas de mascar 5s 14s max xsenses" },
-    { name: "Halls", category: "Doces & Chocolates", img: "assets/produtos/halls.jpg", keywords: "halls balas extra forte" },
-    { name: "Bubbaloo", category: "Doces & Chocolates", img: "assets/produtos/bubbaloo.jpg", keywords: "bubbaloo chicletes balas tutti-frutti" },
-    { name: "Tang", category: "Doces & Chocolates", img: "assets/produtos/tang.jpg", keywords: "tang refresco em po uva tangerina maracuja guarana" },
-    { name: "Oreo", category: "Doces & Chocolates", img: "assets/produtos/oreo.jpg", keywords: "oreo biscoitos original chocolate mini" },
-    { name: "Club Social", category: "Doces & Chocolates", img: "assets/produtos/clubsocial.jpg", keywords: "club social biscoitos snacks" },
-    { name: "Lacta", category: "Doces & Chocolates", img: "assets/produtos/lacta.jpg", keywords: "lacta chocolates bis 5star sonho de valsa ouro branco" },
+    { name: "Trident & Chiclets", category: "Doces & Chocolates", img: "assets/produtos/trident.jpg", keywords: "trident chiclets gomas de mascar 5s 14s max xsenses mondelez" },
+    { name: "Halls", category: "Doces & Chocolates", img: "assets/produtos/halls.jpg", keywords: "halls balas extra forte mondelez" },
+    { name: "Bubbaloo", category: "Doces & Chocolates", img: "assets/produtos/bubbaloo.jpg", keywords: "bubbaloo chicletes balas tutti-frutti mondelez" },
+    { name: "Tang", category: "Doces & Chocolates", img: "assets/produtos/tang.jpg", keywords: "tang refresco em po uva tangerina maracuja guarana mondelez" },
+    { name: "Oreo", category: "Doces & Chocolates", img: "assets/produtos/oreo.jpg", keywords: "oreo biscoitos original chocolate mini mondelez" },
+    { name: "Club Social", category: "Doces & Chocolates", img: "assets/produtos/clubsocial.jpg", keywords: "club social biscoitos snacks mondelez" },
+    { name: "Lacta", category: "Doces & Chocolates", img: "assets/produtos/lacta.jpg", keywords: "lacta chocolates bis 5star sonho de valsa ouro branco mondelez" },
     { name: "BALY Brasil", category: "Bebidas & Isotônicos", img: "assets/produtos/baly.jpg", keywords: "baly energetico isotonico zero acucar sonic" },
     { name: "Aqua Coco", category: "Água de Coco", img: "assets/produtos/aquacoco.jpg", keywords: "aqua coco agua de coco integral turma da monica" },
     { name: "Sucos Sumo", category: "Sucos & Néctares", img: "assets/produtos/sumo.jpg", keywords: "sucos sumo frutas norte nordeste" },
@@ -247,7 +256,7 @@ var PRODUCTS = [
         }
 
         function renderSuggestions(term) {
-            var t = term.trim().toLowerCase();
+            var t = normalizeSearch(term.trim());
             list.innerHTML = '';
             activeIndex = -1;
 
@@ -256,9 +265,10 @@ var PRODUCTS = [
                 return;
             }
 
-            var matches = PRODUCTS.filter(function (p) {
-                return (p.name + ' ' + p.category + ' ' + p.keywords).toLowerCase().indexOf(t) !== -1;
-            }).slice(0, 6);
+            var allMatches = PRODUCTS.filter(function (p) {
+                return normalizeSearch(p.name + ' ' + p.category + ' ' + p.keywords).indexOf(t) !== -1;
+            });
+            var matches = allMatches.slice(0, 6);
 
             if (matches.length === 0) {
                 var empty = document.createElement('li');
@@ -297,6 +307,17 @@ var PRODUCTS = [
                 li.appendChild(a);
                 list.appendChild(li);
             });
+
+            if (allMatches.length > matches.length) {
+                var moreLi = document.createElement('li');
+                var moreA = document.createElement('a');
+                moreA.className = 'search-suggestion search-suggestion-more';
+                moreA.href = 'loja.html?q=' + encodeURIComponent(term.trim());
+                moreA.textContent = 'Ver todos os ' + allMatches.length + ' resultados para "' + term.trim() + '"';
+                moreLi.appendChild(moreA);
+                list.appendChild(moreLi);
+            }
+
             list.hidden = false;
         }
 
@@ -350,13 +371,13 @@ document.addEventListener('DOMContentLoaded', function () {
     if (cards.length === 0) return;
 
     function applyFilter(term) {
-        var t = term.trim().toLowerCase();
+        var t = normalizeSearch(term.trim());
         var visibleCount = 0;
 
         document.querySelectorAll('.category-section').forEach(function (section) {
             var sectionHasMatch = false;
             section.querySelectorAll('.product-card[data-name]').forEach(function (card) {
-                var haystack = (card.getAttribute('data-name') + ' ' + card.getAttribute('data-desc')).toLowerCase();
+                var haystack = normalizeSearch(card.getAttribute('data-name') + ' ' + card.getAttribute('data-desc'));
                 var match = !t || haystack.indexOf(t) !== -1;
                 card.hidden = !match;
                 if (match) {
