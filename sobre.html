@@ -21,12 +21,15 @@
         <a href="index.html" class="header-logo">
             <img src="assets/logo.png" alt="Distri Rio">
         </a>
-        <form class="header-search" action="loja.html" method="get">
-            <input type="search" name="q" placeholder="Buscar marca ou produto...">
-            <button type="submit" aria-label="Buscar">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            </button>
-        </form>
+        <div class="header-search-wrap">
+            <form class="header-search" action="loja.html" method="get">
+                <input type="search" name="q" placeholder="Buscar marca ou produto..." autocomplete="off">
+                <button type="submit" aria-label="Buscar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </button>
+            </form>
+            <ul class="search-suggestions" id="searchSuggestions" hidden></ul>
+        </div>
         <nav class="header-nav">
             <a href="index.html">Home</a>
             <a href="loja.html">Loja</a>

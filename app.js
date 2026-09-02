@@ -198,6 +198,144 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 })();
 
+// ===== Catálogo de produtos (usado nas sugestões de busca) =====
+var PRODUCTS = [
+    { name: "Trident & Chiclets", category: "Doces & Chocolates", img: "assets/produtos/trident.jpg", keywords: "trident chiclets gomas de mascar 5s 14s max xsenses" },
+    { name: "Halls", category: "Doces & Chocolates", img: "assets/produtos/halls.jpg", keywords: "halls balas extra forte" },
+    { name: "Bubbaloo", category: "Doces & Chocolates", img: "assets/produtos/bubbaloo.jpg", keywords: "bubbaloo chicletes balas tutti-frutti" },
+    { name: "Tang", category: "Doces & Chocolates", img: "assets/produtos/tang.jpg", keywords: "tang refresco em po uva tangerina maracuja guarana" },
+    { name: "Oreo", category: "Doces & Chocolates", img: "assets/produtos/oreo.jpg", keywords: "oreo biscoitos original chocolate mini" },
+    { name: "Club Social", category: "Doces & Chocolates", img: "assets/produtos/clubsocial.jpg", keywords: "club social biscoitos snacks" },
+    { name: "Lacta", category: "Doces & Chocolates", img: "assets/produtos/lacta.jpg", keywords: "lacta chocolates bis 5star sonho de valsa ouro branco" },
+    { name: "BALY Brasil", category: "Bebidas & Isotônicos", img: "assets/produtos/baly.jpg", keywords: "baly energetico isotonico zero acucar sonic" },
+    { name: "Aqua Coco", category: "Água de Coco", img: "assets/produtos/aquacoco.jpg", keywords: "aqua coco agua de coco integral turma da monica" },
+    { name: "Sucos Sumo", category: "Sucos & Néctares", img: "assets/produtos/sumo.jpg", keywords: "sucos sumo frutas norte nordeste" },
+    { name: "Maratá Néctar", category: "Sucos & Néctares", img: "assets/produtos/marata-nectar.jpg", keywords: "marata nectar mara-tinho fruta" },
+    { name: "Maratá Molhos", category: "Molhos & Temperos", img: "assets/produtos/marata-molhos.jpg", keywords: "marata gota flocao de milho molho" },
+    { name: "Rivoli", category: "Azeitonas", img: "assets/produtos/rivoli.jpg", keywords: "rivoli azeitonas verdes pretas saches potes baldes" },
+    { name: "Trio", category: "Barras & Snacks", img: "assets/produtos/trio.jpg", keywords: "trio barras de cereais display flowpack zero acucar" },
+    { name: "Banana Brasil", category: "Barras & Snacks", img: "assets/produtos/bananabrasil.jpg", keywords: "banana brasil passa supino protein nuts minions" },
+    { name: "Kobber", category: "Cereais & Granola", img: "assets/produtos/kobber.jpg", keywords: "kobber granola cereais integrais fibras" },
+    { name: "Baldoni", category: "Geleias & Mel", img: "assets/produtos/baldoni.jpg", keywords: "baldoni geleias de frutas mel" },
+    { name: "ACE", category: "Produtos de Limpeza", img: "assets/produtos/ace.jpg", keywords: "ace detergente em po p&g" },
+    { name: "Espumil", category: "Produtos de Limpeza", img: "assets/produtos/espumil.jpg", keywords: "espumil detergentes liquidos sabao roupas" }
+];
+
+// ===== Sugestões de busca (dropdown no cabeçalho) =====
+(function () {
+    // Na loja.html a busca já filtra a grade de produtos em tempo real,
+    // então o dropdown de sugestões só faz sentido nas outras páginas.
+    if (document.querySelector('.product-card[data-name]')) return;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var wrap = document.querySelector('.header-search-wrap');
+        if (!wrap) return;
+
+        var input = wrap.querySelector('input');
+        var list = wrap.querySelector('.search-suggestions');
+        if (!input || !list) return;
+
+        var activeIndex = -1;
+
+        function updateActive(items) {
+            items.forEach(function (el, i) {
+                el.classList.toggle('is-highlighted', i === activeIndex);
+            });
+            if (activeIndex >= 0) {
+                items[activeIndex].scrollIntoView({ block: 'nearest' });
+            }
+        }
+
+        function renderSuggestions(term) {
+            var t = term.trim().toLowerCase();
+            list.innerHTML = '';
+            activeIndex = -1;
+
+            if (!t) {
+                list.hidden = true;
+                return;
+            }
+
+            var matches = PRODUCTS.filter(function (p) {
+                return (p.name + ' ' + p.category + ' ' + p.keywords).toLowerCase().indexOf(t) !== -1;
+            }).slice(0, 6);
+
+            if (matches.length === 0) {
+                var empty = document.createElement('li');
+                empty.className = 'search-suggestion-empty';
+                empty.textContent = 'Nenhum produto encontrado para "' + term.trim() + '"';
+                list.appendChild(empty);
+                list.hidden = false;
+                return;
+            }
+
+            matches.forEach(function (p) {
+                var li = document.createElement('li');
+                var a = document.createElement('a');
+                a.className = 'search-suggestion';
+                a.href = 'loja.html?q=' + encodeURIComponent(p.name);
+
+                var img = document.createElement('img');
+                img.src = p.img;
+                img.alt = '';
+
+                var info = document.createElement('div');
+                info.className = 'search-suggestion-info';
+
+                var nameEl = document.createElement('div');
+                nameEl.className = 'search-suggestion-name';
+                nameEl.textContent = p.name;
+
+                var catEl = document.createElement('div');
+                catEl.className = 'search-suggestion-category';
+                catEl.textContent = p.category;
+
+                info.appendChild(nameEl);
+                info.appendChild(catEl);
+                a.appendChild(img);
+                a.appendChild(info);
+                li.appendChild(a);
+                list.appendChild(li);
+            });
+            list.hidden = false;
+        }
+
+        input.addEventListener('input', function () {
+            renderSuggestions(input.value);
+        });
+
+        input.addEventListener('focus', function () {
+            if (input.value.trim()) renderSuggestions(input.value);
+        });
+
+        input.addEventListener('keydown', function (e) {
+            var items = list.querySelectorAll('.search-suggestion');
+            if (list.hidden || items.length === 0) return;
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                activeIndex = Math.min(activeIndex + 1, items.length - 1);
+                updateActive(items);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                activeIndex = Math.max(activeIndex - 1, 0);
+                updateActive(items);
+            } else if (e.key === 'Enter' && activeIndex >= 0) {
+                e.preventDefault();
+                items[activeIndex].click();
+            } else if (e.key === 'Escape') {
+                list.hidden = true;
+            }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!wrap.contains(e.target)) {
+                list.hidden = true;
+            }
+        });
+    });
+})();
+
 // ===== Loja: busca e filtro por categoria =====
 document.addEventListener('DOMContentLoaded', function () {
     var searchInput = document.querySelector('.header-search input');
