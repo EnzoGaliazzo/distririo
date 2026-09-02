@@ -11,6 +11,7 @@
     --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     --header-h: 76px;
     --info-h: 40px;
+    --footer-h: 132px;
 }
 
 * {
@@ -461,6 +462,7 @@ button {
 /* ===== Main / sections ===== */
 main {
     flex: 1;
+    padding-bottom: var(--footer-h);
 }
 
 .section {
@@ -681,6 +683,11 @@ main {
 
 /* ===== Footer ===== */
 .footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
     background: var(--dark);
     color: #999;
     border-top: 3px solid var(--red);
