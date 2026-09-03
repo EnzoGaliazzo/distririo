@@ -523,12 +523,15 @@ button {
     background: linear-gradient(135deg, var(--gray-100) 0%, var(--white) 100%);
 }
 
-.hero-banner {
-    padding-bottom: 280px;
-    background-image: url('assets/hero-banner.png'), linear-gradient(135deg, var(--gray-100) 0%, var(--white) 100%);
-    background-repeat: no-repeat, no-repeat;
-    background-position: center calc(100% + 10px), center;
-    background-size: min(1400px, 92%) auto, cover;
+.hero-banner-art {
+    width: 100vw;
+    margin: 2.5rem calc(50% - 50vw) 0;
+}
+
+.hero-banner-art img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 .hero h1 {
@@ -902,9 +905,8 @@ main {
         font-size: 1.8rem;
     }
 
-    .hero-banner {
-        padding-bottom: 150px;
-        background-size: min(700px, 96%) auto, cover;
+    .hero-banner-art {
+        margin-top: 1.5rem;
     }
 
     .category-bar {
