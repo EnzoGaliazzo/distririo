@@ -50,11 +50,40 @@ document.addEventListener('DOMContentLoaded', function () {
     if (slides.length < 2) return;
 
     var current = 0;
-    setInterval(function () {
+    var timer = null;
+
+    function goTo(index) {
         slides[current].classList.remove('is-active');
-        current = (current + 1) % slides.length;
+        current = (index + slides.length) % slides.length;
         slides[current].classList.add('is-active');
-    }, 4000);
+    }
+
+    function startAutoplay() {
+        timer = setInterval(function () { goTo(current + 1); }, 4000);
+    }
+
+    function restartAutoplay() {
+        clearInterval(timer);
+        startAutoplay();
+    }
+
+    startAutoplay();
+
+    var prevBtn = carousel.querySelector('.hero-carousel-prev');
+    var nextBtn = carousel.querySelector('.hero-carousel-next');
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function () {
+            goTo(current - 1);
+            restartAutoplay();
+        });
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+            goTo(current + 1);
+            restartAutoplay();
+        });
+    }
 });
 
 // ===== Mobile nav toggle =====

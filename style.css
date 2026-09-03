@@ -563,6 +563,63 @@ button {
     opacity: 1;
 }
 
+.hero-carousel-prev,
+.hero-carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    color: var(--white);
+    cursor: pointer;
+    transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.hero-carousel-prev svg,
+.hero-carousel-next svg {
+    width: 20px;
+    height: 20px;
+}
+
+.hero-carousel-prev:hover,
+.hero-carousel-next:hover {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.hero-carousel-prev:active,
+.hero-carousel-next:active {
+    transform: translateY(-50%) scale(0.92);
+}
+
+.hero-carousel-prev {
+    left: 12px;
+}
+
+.hero-carousel-next {
+    right: 12px;
+}
+
+@media (max-width: 640px) {
+    .hero-carousel-prev,
+    .hero-carousel-next {
+        width: 30px;
+        height: 30px;
+    }
+
+    .hero-carousel-prev svg,
+    .hero-carousel-next svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
 .hero h1 {
     font-size: 2.4rem;
     color: var(--dark);
