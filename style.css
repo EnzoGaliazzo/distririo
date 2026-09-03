@@ -782,10 +782,11 @@ main {
     background: var(--gray-100);
 }
 
-.brand-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1rem;
+.brand-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
 }
 
 .brands-cta {
@@ -793,48 +794,22 @@ main {
     margin-top: 1.75rem;
 }
 
-.brand-card {
-    position: relative;
-    display: block;
-    aspect-ratio: 1 / 1;
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    text-decoration: none;
+.brand-tag {
     background: var(--white);
-    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    border: 1px solid var(--gray-300);
+    border-radius: 999px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 600;
+    color: var(--dark);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
 }
 
-.brand-card:hover {
-    transform: translateY(-6px);
+.brand-tag:hover {
+    transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
-}
-
-.brand-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.35s var(--ease);
-}
-
-.brand-card:hover img {
-    transform: scale(1.06);
-}
-
-.brand-card span {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 0.6rem 0.7rem;
-    background: linear-gradient(to top, rgba(28, 20, 13, 0.85), transparent);
-    color: var(--white);
-    font-family: var(--font-display);
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    line-height: 1.2;
+    color: var(--red);
+    border-color: var(--red);
 }
 
 /* ===== Products / loja ===== */
