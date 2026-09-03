@@ -9,9 +9,20 @@
     --white: #ffffff;
     --radius: 10px;
     --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 14px 32px rgba(0, 0, 0, 0.14);
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
     --header-h: 76px;
     --info-h: 40px;
     --footer-h: 132px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 * {
@@ -87,6 +98,11 @@ button {
     gap: 0.5rem;
     flex-shrink: 0;
     text-decoration: none;
+    transition: opacity 0.2s var(--ease);
+}
+
+.header-logo:hover {
+    opacity: 0.85;
 }
 
 .header-logo img {
@@ -356,13 +372,14 @@ button {
     font-size: 0.85rem;
     font-weight: 600;
     white-space: nowrap;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease);
 }
 
 .category-chip:hover {
     background: var(--red);
     border-color: var(--red);
     color: var(--white);
+    transform: translateY(-2px);
 }
 
 /* ===== Cart drawer ===== */
@@ -577,6 +594,23 @@ button {
 .btn:hover {
     background: var(--red-dark);
     transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(224, 30, 36, 0.32);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* ===== Scroll reveal ===== */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ===== Main / sections ===== */
@@ -625,11 +659,12 @@ main {
     min-width: 0;
     max-width: 320px;
     box-shadow: var(--shadow);
-    transition: transform 0.2s;
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
 
 .service-item:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
 }
 
 .service-item h3 {
@@ -662,6 +697,14 @@ main {
     font-weight: 600;
     color: var(--dark);
     box-shadow: var(--shadow);
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.brand-tag:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    color: var(--red);
+    border-color: var(--red);
 }
 
 /* ===== Products / loja ===== */
@@ -695,13 +738,14 @@ main {
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow);
-    transition: transform 0.2s;
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
     display: flex;
     flex-direction: column;
 }
 
 .product-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
 }
 
 .product-card img {
@@ -711,6 +755,11 @@ main {
     object-fit: contain;
     background: var(--white);
     padding: 0.5rem;
+    transition: transform 0.35s var(--ease);
+}
+
+.product-card:hover img {
+    transform: scale(1.06);
 }
 
 .product-card .product-info {
@@ -759,6 +808,24 @@ main {
 
 .add-to-cart.is-added {
     background: #1a9e4e;
+    animation: add-to-cart-pop 0.35s var(--ease);
+}
+
+@keyframes add-to-cart-pop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+.cart-toggle.is-bumped {
+    animation: cart-bump 0.4s var(--ease);
+}
+
+@keyframes cart-bump {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.25) rotate(-8deg); }
+    60% { transform: scale(1.1) rotate(6deg); }
+    100% { transform: scale(1) rotate(0); }
 }
 
 .no-results {
@@ -788,6 +855,12 @@ main {
     max-width: 340px;
     box-shadow: var(--shadow);
     border-left: 4px solid var(--red);
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.testimonial:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
 }
 
 .testimonial p.quote {

@@ -7,6 +7,31 @@ function normalizeSearch(str) {
         .replace(/[̀-ͯ]/g, '');
 }
 
+// ===== Animacao de entrada ao rolar a tela =====
+document.addEventListener('DOMContentLoaded', function () {
+    var targets = document.querySelectorAll('.section, .category-section');
+    if (!targets.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    targets.forEach(function (el) {
+        el.classList.add('reveal');
+        observer.observe(el);
+    });
+});
+
 // ===== Carrossel do banner do hero (home) =====
 document.addEventListener('DOMContentLoaded', function () {
     var carousel = document.getElementById('heroCarousel');
@@ -77,6 +102,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         saveCart(cart);
         renderCart();
+
+        document.querySelectorAll('.cart-toggle').forEach(function (btn) {
+            btn.classList.remove('is-bumped');
+            void btn.offsetWidth; /* forca reinicio da animacao mesmo em cliques seguidos */
+            btn.classList.add('is-bumped');
+            setTimeout(function () { btn.classList.remove('is-bumped'); }, 400);
+        });
     }
 
     function changeQty(name, delta) {
