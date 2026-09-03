@@ -1,16 +1,19 @@
 :root {
     --red: #e01e24;
     --red-dark: #b3151a;
-    --dark: #000000;
+    --dark: #1c140d;
     --ink: #12131a;
+    --stamp: #1f6b4a;
     --gray-800: #2a2a2a;
-    --gray-100: #f4f4f4;
-    --gray-300: #e2e2e2;
-    --white: #ffffff;
+    --gray-100: #f2e8d5;
+    --gray-300: #e4d7bc;
+    --white: #fffdf8;
     --radius: 10px;
-    --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 14px 32px rgba(0, 0, 0, 0.14);
+    --shadow: 0 4px 16px rgba(28, 20, 13, 0.1);
+    --shadow-lg: 0 14px 32px rgba(28, 20, 13, 0.16);
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --font-display: 'Archivo Black', Arial, sans-serif;
+    --font-body: 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
     --header-h: 76px;
     --info-h: 40px;
     --footer-h: 132px;
@@ -38,7 +41,7 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-family: var(--font-body);
     color: var(--dark);
     line-height: 1.6;
     background: var(--white);
@@ -111,11 +114,12 @@ button {
 }
 
 .header-logo-text {
+    font-family: var(--font-display);
     color: var(--white);
-    font-weight: 800;
     font-size: 1.05rem;
     letter-spacing: 0.01em;
     white-space: nowrap;
+    text-transform: uppercase;
 }
 
 .header-search-wrap {
@@ -545,8 +549,19 @@ button {
     width: 100%;
     aspect-ratio: 1920 / 560;
     overflow: hidden;
-    border-radius: var(--radius);
+    border-radius: var(--radius) var(--radius) 0 0;
     background: var(--gray-800);
+}
+
+.torn-edge {
+    height: 14px;
+    background-image:
+        linear-gradient(135deg, var(--white) 50%, transparent 50%),
+        linear-gradient(45deg, var(--white) 50%, transparent 50%);
+    background-size: 20px 14px, 20px 14px;
+    background-position: 0 0, 10px 0;
+    background-repeat: repeat-x;
+    background-color: var(--gray-800);
 }
 
 .hero-carousel img {
@@ -622,9 +637,13 @@ button {
 }
 
 .hero h1 {
-    font-size: 2.4rem;
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
     color: var(--dark);
     margin-bottom: 0.75rem;
+    text-transform: uppercase;
 }
 
 .hero p {
@@ -683,11 +702,14 @@ main {
 }
 
 .section h2 {
+    font-family: var(--font-display);
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
+    letter-spacing: -0.01em;
     margin-bottom: 2rem;
     color: var(--dark);
     position: relative;
+    text-transform: uppercase;
 }
 
 .section h2::after {
@@ -776,7 +798,10 @@ main {
 }
 
 .category-section h2 {
+    font-family: var(--font-display);
     text-align: left;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
     margin-bottom: 1.5rem;
 }
 
