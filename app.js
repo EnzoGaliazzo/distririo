@@ -8,14 +8,19 @@ function normalizeSearch(str) {
 }
 
 // ===== Animacao de entrada ao rolar a tela =====
+// So aplicada em ".section" (paginas institucionais, poucas secoes por pagina).
+// Fora de proposito em ".category-section" (loja.html tem 30+ delas, com centenas
+// de produtos) - la o risco de alguma secao ficar presa invisivel supera o ganho.
 document.addEventListener('DOMContentLoaded', function () {
-    var targets = document.querySelectorAll('.section, .category-section');
+    var targets = document.querySelectorAll('.section');
     if (!targets.length) return;
 
     if (!('IntersectionObserver' in window)) {
         targets.forEach(function (el) { el.classList.add('is-visible'); });
         return;
     }
+
+    targets.forEach(function (el) { el.classList.add('reveal'); });
 
     var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -26,10 +31,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    targets.forEach(function (el) {
-        el.classList.add('reveal');
-        observer.observe(el);
-    });
+    targets.forEach(function (el) { observer.observe(el); });
+
+    // Rede de seguranca: se por algum motivo o observer nao disparar pra alguma
+    // secao (dispositivo/navegador especifico, timing, etc.), garante que nada
+    // fique preso invisivel para sempre.
+    setTimeout(function () {
+        targets.forEach(function (el) { el.classList.add('is-visible'); });
+    }, 2500);
 });
 
 // ===== Carrossel do banner do hero (home) =====
