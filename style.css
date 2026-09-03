@@ -523,17 +523,6 @@ button {
     background: linear-gradient(135deg, var(--gray-100) 0%, var(--white) 100%);
 }
 
-.hero-banner-art {
-    width: 100vw;
-    margin: 2.5rem calc(50% - 50vw) 0;
-}
-
-.hero-banner-art img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
 .hero h1 {
     font-size: 2.4rem;
     color: var(--dark);
@@ -903,10 +892,6 @@ main {
 @media (max-width: 640px) {
     .hero h1 {
         font-size: 1.8rem;
-    }
-
-    .hero-banner-art {
-        margin-top: 1.5rem;
     }
 
     .category-bar {
