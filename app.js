@@ -7,6 +7,22 @@ function normalizeSearch(str) {
         .replace(/[̀-ͯ]/g, '');
 }
 
+// ===== Carrossel do banner do hero (home) =====
+document.addEventListener('DOMContentLoaded', function () {
+    var carousel = document.getElementById('heroCarousel');
+    if (!carousel) return;
+
+    var slides = carousel.querySelectorAll('img');
+    if (slides.length < 2) return;
+
+    var current = 0;
+    setInterval(function () {
+        slides[current].classList.remove('is-active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('is-active');
+    }, 4000);
+});
+
 // ===== Mobile nav toggle =====
 document.addEventListener('DOMContentLoaded', function () {
     var navToggle = document.querySelector('.nav-toggle');
