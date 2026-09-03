@@ -41,6 +41,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 2500);
 });
 
+// ===== Analytics: mede cliques em links do WhatsApp (pedido/contato) =====
+document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href*="wa.me/"]');
+    if (!link || typeof gtag !== 'function') return;
+    gtag('event', 'whatsapp_click', {
+        link_id: link.id || null,
+        link_text: link.textContent.trim(),
+        page_path: window.location.pathname
+    });
+});
+
 // ===== Carrossel do banner do hero (home) =====
 document.addEventListener('DOMContentLoaded', function () {
     var carousel = document.getElementById('heroCarousel');
