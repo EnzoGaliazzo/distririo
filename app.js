@@ -225,6 +225,84 @@ document.addEventListener('DOMContentLoaded', function () {
     toggleFloatVisibility();
 });
 
+// ===== FAQ (acordeao) na pagina "Trabalhe conosco" =====
+document.addEventListener('DOMContentLoaded', function () {
+    var faqItems = document.querySelectorAll('.faq-item');
+    if (!faqItems.length) return;
+
+    faqItems.forEach(function (item) {
+        var question = item.querySelector('.faq-question');
+        var answer = item.querySelector('.faq-answer');
+        if (!question || !answer) return;
+
+        question.addEventListener('click', function () {
+            var isOpen = item.classList.contains('is-open');
+
+            faqItems.forEach(function (other) {
+                other.classList.remove('is-open');
+                other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                other.querySelector('.faq-answer').style.maxHeight = '';
+            });
+
+            if (!isOpen) {
+                item.classList.add('is-open');
+                question.setAttribute('aria-expanded', 'true');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+        });
+    });
+});
+
+// ===== Formulario "Trabalhe conosco" (envia via Web3Forms) =====
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('jobForm');
+    if (!form) return;
+
+    var statusEl = document.getElementById('jobFormStatus');
+    var submitBtn = form.querySelector('.job-submit');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var formData = new FormData(form);
+        var originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+        statusEl.hidden = true;
+        statusEl.classList.remove('is-success', 'is-error');
+
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData,
+            headers: { Accept: 'application/json' }
+        })
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+                if (data.success) {
+                    statusEl.textContent = 'Candidatura enviada! Vamos analisar seu perfil e entrar em contato.';
+                    statusEl.classList.add('is-success');
+                    form.reset();
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'job_application_submit', { page_path: window.location.pathname });
+                    }
+                } else {
+                    statusEl.textContent = 'Não deu pra enviar agora. Tenta de novo em instantes ou chama a gente no WhatsApp.';
+                    statusEl.classList.add('is-error');
+                }
+                statusEl.hidden = false;
+            })
+            .catch(function () {
+                statusEl.textContent = 'Não deu pra enviar agora. Tenta de novo em instantes ou chama a gente no WhatsApp.';
+                statusEl.classList.add('is-error');
+                statusEl.hidden = false;
+            })
+            .finally(function () {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            });
+    });
+});
+
 // ===== Mobile nav toggle =====
 document.addEventListener('DOMContentLoaded', function () {
     var navToggle = document.querySelector('.nav-toggle');
