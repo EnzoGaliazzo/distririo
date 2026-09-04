@@ -325,191 +325,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// ===== Cart =====
-(function () {
-    var CART_KEY = 'distririo_cart';
-    var WHATSAPP_NUMBER = '5521992111843';
-
-    function getCart() {
-        try {
-            var raw = localStorage.getItem(CART_KEY);
-            return raw ? JSON.parse(raw) : [];
-        } catch (e) {
-            return [];
-        }
-    }
-
-    function saveCart(cart) {
-        try {
-            localStorage.setItem(CART_KEY, JSON.stringify(cart));
-        } catch (e) {
-            /* localStorage unavailable, cart stays in-memory for this page view */
-        }
-    }
-
-    function addToCart(name) {
-        var cart = getCart();
-        var item = cart.find(function (i) { return i.name === name; });
-        if (item) {
-            item.qty += 1;
-        } else {
-            cart.push({ name: name, qty: 1 });
-        }
-        saveCart(cart);
-        renderCart();
-
-        document.querySelectorAll('.cart-toggle').forEach(function (btn) {
-            btn.classList.remove('is-bumped');
-            void btn.offsetWidth; /* forca reinicio da animacao mesmo em cliques seguidos */
-            btn.classList.add('is-bumped');
-            setTimeout(function () { btn.classList.remove('is-bumped'); }, 400);
-        });
-    }
-
-    function changeQty(name, delta) {
-        var cart = getCart();
-        var item = cart.find(function (i) { return i.name === name; });
-        if (!item) return;
-        item.qty += delta;
-        if (item.qty <= 0) {
-            cart = cart.filter(function (i) { return i.name !== name; });
-        }
-        saveCart(cart);
-        renderCart();
-    }
-
-    function removeItem(name) {
-        var cart = getCart().filter(function (i) { return i.name !== name; });
-        saveCart(cart);
-        renderCart();
-    }
-
-    function renderCart() {
-        var cart = getCart();
-        var total = cart.reduce(function (sum, i) { return sum + i.qty; }, 0);
-
-        document.querySelectorAll('.cart-count').forEach(function (el) {
-            el.textContent = String(total);
-            el.hidden = total === 0;
-        });
-
-        var list = document.getElementById('cartItems');
-        var empty = document.getElementById('cartEmpty');
-        if (list && empty) {
-            list.innerHTML = '';
-            if (cart.length === 0) {
-                list.hidden = true;
-                empty.hidden = false;
-            } else {
-                list.hidden = false;
-                empty.hidden = true;
-                cart.forEach(function (item) {
-                    var li = document.createElement('li');
-                    li.className = 'cart-item';
-
-                    var nameSpan = document.createElement('span');
-                    nameSpan.className = 'cart-item-name';
-                    nameSpan.textContent = item.name;
-
-                    var controls = document.createElement('div');
-                    controls.className = 'cart-item-controls';
-
-                    var decBtn = document.createElement('button');
-                    decBtn.type = 'button';
-                    decBtn.className = 'qty-btn';
-                    decBtn.textContent = '-';
-                    decBtn.setAttribute('aria-label', 'Diminuir quantidade de ' + item.name);
-                    decBtn.addEventListener('click', function () { changeQty(item.name, -1); });
-
-                    var qtySpan = document.createElement('span');
-                    qtySpan.className = 'cart-item-qty';
-                    qtySpan.textContent = String(item.qty);
-
-                    var incBtn = document.createElement('button');
-                    incBtn.type = 'button';
-                    incBtn.className = 'qty-btn';
-                    incBtn.textContent = '+';
-                    incBtn.setAttribute('aria-label', 'Aumentar quantidade de ' + item.name);
-                    incBtn.addEventListener('click', function () { changeQty(item.name, 1); });
-
-                    var removeBtn = document.createElement('button');
-                    removeBtn.type = 'button';
-                    removeBtn.className = 'cart-item-remove';
-                    removeBtn.innerHTML = '&times;';
-                    removeBtn.setAttribute('aria-label', 'Remover ' + item.name);
-                    removeBtn.addEventListener('click', function () { removeItem(item.name); });
-
-                    controls.appendChild(decBtn);
-                    controls.appendChild(qtySpan);
-                    controls.appendChild(incBtn);
-                    controls.appendChild(removeBtn);
-
-                    li.appendChild(nameSpan);
-                    li.appendChild(controls);
-                    list.appendChild(li);
-                });
-            }
-        }
-
-        var checkoutBtn = document.getElementById('cartCheckout');
-        if (checkoutBtn) {
-            if (cart.length === 0) {
-                checkoutBtn.setAttribute('aria-disabled', 'true');
-                checkoutBtn.removeAttribute('href');
-            } else {
-                checkoutBtn.removeAttribute('aria-disabled');
-                var lines = cart.map(function (i) { return '- ' + i.qty + 'x ' + i.name; }).join('\n');
-                var msg = 'Olá! Gostaria de fazer o seguinte pedido:\n' + lines + '\n\nAguardo o retorno, obrigado!';
-                checkoutBtn.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
-            }
-        }
-    }
-
-    function openCart() {
-        var drawer = document.getElementById('cartDrawer');
-        var overlay = document.getElementById('cartOverlay');
-        if (drawer) drawer.classList.add('is-open');
-        if (overlay) overlay.classList.add('is-open');
-    }
-
-    function closeCart() {
-        var drawer = document.getElementById('cartDrawer');
-        var overlay = document.getElementById('cartOverlay');
-        if (drawer) drawer.classList.remove('is-open');
-        if (overlay) overlay.classList.remove('is-open');
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        renderCart();
-
-        document.querySelectorAll('.cart-toggle').forEach(function (btn) {
-            btn.addEventListener('click', openCart);
-        });
-
-        var closeBtn = document.getElementById('cartClose');
-        if (closeBtn) closeBtn.addEventListener('click', closeCart);
-
-        var overlay = document.getElementById('cartOverlay');
-        if (overlay) overlay.addEventListener('click', closeCart);
-
-        document.querySelectorAll('.add-to-cart').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var name = btn.getAttribute('data-name');
-                if (!name) return;
-                addToCart(name);
-                openCart();
-                btn.classList.add('is-added');
-                var original = btn.textContent;
-                btn.textContent = 'Adicionado!';
-                setTimeout(function () {
-                    btn.classList.remove('is-added');
-                    btn.textContent = original;
-                }, 1200);
-            });
-        });
-    });
-})();
-
 // ===== Catálogo de produtos (usado nas sugestões de busca) =====
 var PRODUCTS = [
     { name: 'Chocolate 5 Star', category: '5Star', img: 'assets/produtos/mondelez/5star__chocolate-5-star.jpg', keywords: 'chocolate 5 star 5star mondelez' },
@@ -957,4 +772,44 @@ document.addEventListener('DOMContentLoaded', function () {
             applyFilter(searchInput.value);
         });
     }
+});
+
+// ===== Formulario "Quero ser cliente" (monta mensagem e abre o WhatsApp) =====
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('clientForm');
+    if (!form) return;
+
+    var WHATSAPP_NUMBER = '5521992111843';
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var company = form.company.value.trim();
+        var cnpj = form.cnpj.value.trim();
+        var segmento = form.segmento.value;
+        var name = form.name.value.trim();
+        var phone = form.phone.value.trim();
+        var city = form.city.value.trim();
+        var message = form.message.value.trim();
+
+        var lines = [
+            'Olá! Gostaria de me tornar cliente da Distri Rio.',
+            '',
+            '*Empresa:* ' + company,
+            '*CNPJ:* ' + cnpj,
+            '*Ramo:* ' + segmento,
+            '*Responsável:* ' + name,
+            '*Telefone:* ' + phone
+        ];
+        if (city) lines.push('*Cidade:* ' + city);
+        if (message) lines.push('', message);
+
+        var text = lines.join('\n');
+
+        if (typeof gtag === 'function') {
+            gtag('event', 'client_signup_submit', { page_path: window.location.pathname });
+        }
+
+        window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+    });
 });

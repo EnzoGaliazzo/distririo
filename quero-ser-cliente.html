@@ -12,16 +12,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Fale com a Distri Rio pelo telefone, WhatsApp ou Instagram e solicite mais informações sobre nossos produtos e serviços.">
+    <meta name="description" content="Torne-se cliente Distri Rio. Vendas apenas para pessoa jurídica (CNPJ) - preencha o formulário e fale com a gente pelo WhatsApp.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
     <meta property="og:site_name" content="Distri Rio">
-    <meta property="og:url" content="https://www.distririo.com.br/contato.html">
-    <meta property="og:title" content="Contato - Distri Rio">
-    <meta property="og:description" content="Fale com a Distri Rio pelo telefone, WhatsApp ou Instagram e solicite mais informações sobre nossos produtos e serviços.">
+    <meta property="og:url" content="https://www.distririo.com.br/quero-ser-cliente.html">
+    <meta property="og:title" content="Quero Ser Cliente - Distri Rio">
+    <meta property="og:description" content="Torne-se cliente Distri Rio. Vendas apenas para pessoa jurídica (CNPJ) - preencha o formulário e fale com a gente pelo WhatsApp.">
     <meta property="og:image" content="https://www.distririo.com.br/assets/logo.png">
     <meta name="twitter:card" content="summary_large_image">
-    <title>Contato - Distri Rio</title>
+    <title>Quero Ser Cliente - Distri Rio</title>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,40 +59,71 @@
             <a href="loja.html">Loja</a>
             <a href="sobre.html">Sobre</a>
             <a href="servicos.html">Serviços</a>
-            <a href="contato.html" class="is-active">Contato</a>
+            <a href="contato.html">Contato</a>
             <a href="trabalhe-conosco.html">Trabalhe Conosco</a>
         </nav>
-        <a href="quero-ser-cliente.html" class="header-cta">Quero ser cliente</a>
+        <a href="quero-ser-cliente.html" class="header-cta is-active">Quero ser cliente</a>
     </div>
 </header>
 
 <div class="page">
     <main>
         <section class="hero">
-            <h1>Contato</h1>
-            <p>Fale com a Distri Rio e solicite mais informações sobre nossos produtos e serviços.</p>
+            <h1>Quero ser cliente</h1>
+            <p>As vendas da Distri Rio são feitas apenas para pessoa jurídica, ou seja, comércios com CNPJ ativo (mercadinhos, farmácias, conveniências, padarias, bares e afins). Preencha os dados abaixo e nossa equipe entra em contato pelo WhatsApp.</p>
         </section>
 
         <section class="section">
-            <h2>Fale conosco</h2>
-            <div class="services">
-                <div class="service-item">
-                    <h3>Telefone / WhatsApp</h3>
-                    <p>(21) 99211-1843</p>
-                </div>
-                <div class="service-item">
-                    <h3>Endereço</h3>
-                    <p>Rod. Washington Luiz, 2070 - Parque Boa Vista II, Duque de Caxias - RJ, 25055-009</p>
-                </div>
-                <div class="service-item">
-                    <h3>Instagram</h3>
-                    <p><a href="https://www.instagram.com/distririo01/" target="_blank" rel="noopener">@distririo01</a></p>
-                </div>
-            </div>
-        </section>
+            <div class="job-form-card">
+                <form id="clientForm" class="job-form">
+                    <div class="form-field">
+                        <label for="clientCompany">Razão social / Nome da empresa</label>
+                        <input type="text" id="clientCompany" name="company" placeholder="Nome do seu comércio" required>
+                    </div>
 
-        <section class="hero">
-            <a href="https://wa.me/5521992111843?text=Ol%C3%A1!%20Vim%20pelo%20link%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." class="btn" target="_blank" rel="noopener">Fale conosco no WhatsApp</a>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="clientCnpj">CNPJ</label>
+                            <input type="text" id="clientCnpj" name="cnpj" placeholder="00.000.000/0000-00" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="clientSegment">Ramo de atividade</label>
+                            <select id="clientSegment" name="segmento" required>
+                                <option value="" disabled selected>Selecione um...</option>
+                                <option>Mercadinho / Conveniência</option>
+                                <option>Farmácia</option>
+                                <option>Padaria</option>
+                                <option>Bar / Restaurante</option>
+                                <option>Distribuidora / Atacado</option>
+                                <option>Outro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="clientName">Nome do responsável</label>
+                        <input type="text" id="clientName" name="name" placeholder="Seu nome completo" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="clientPhone">Telefone / WhatsApp</label>
+                            <input type="tel" id="clientPhone" name="phone" placeholder="(21) 99999-9999" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="clientCity">Cidade</label>
+                            <input type="text" id="clientCity" name="city" placeholder="Sua cidade">
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="clientMessage">Mensagem (opcional)</label>
+                        <textarea id="clientMessage" name="message" rows="3" placeholder="Conte um pouco sobre o seu comércio ou o que você procura"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn job-submit">Enviar pelo WhatsApp</button>
+                </form>
+            </div>
         </section>
     </main>
 
