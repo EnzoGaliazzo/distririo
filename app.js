@@ -97,6 +97,134 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// ===== Parallax sutil no banner do hero (home) =====
+// Aplica um leve deslocamento vertical na imagem ativa do carrossel conforme
+// rola a pagina. Desligado se o usuario prefere menos movimento.
+document.addEventListener('DOMContentLoaded', function () {
+    var carousel = document.getElementById('heroCarousel');
+    if (!carousel) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var slides = carousel.querySelectorAll('img');
+    var ticking = false;
+
+    function updateParallax() {
+        var rect = carousel.getBoundingClientRect();
+        if (rect.bottom > 0 && rect.top < window.innerHeight) {
+            var offset = Math.max(-24, Math.min(24, rect.top * -0.06));
+            slides.forEach(function (img) {
+                img.style.transform = 'translateY(' + offset + 'px) scale(1.06)';
+            });
+        }
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    updateParallax();
+});
+
+// ===== Seletor de marcas com troca de foto (home) =====
+document.addEventListener('DOMContentLoaded', function () {
+    var selector = document.querySelector('.brand-selector');
+    if (!selector) return;
+
+    var buttons = selector.querySelectorAll('.brand-select-btn');
+    var images = selector.querySelectorAll('.brand-preview-img');
+
+    buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var brand = btn.getAttribute('data-brand');
+            buttons.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+            images.forEach(function (img) {
+                img.classList.toggle('is-active', img.getAttribute('data-brand') === brand);
+            });
+        });
+    });
+});
+
+// ===== Contadores animados (home) =====
+document.addEventListener('DOMContentLoaded', function () {
+    var counters = document.querySelectorAll('.stat-number[data-count-to]');
+    if (!counters.length) return;
+
+    function animateCounter(el) {
+        var target = parseInt(el.getAttribute('data-count-to'), 10) || 0;
+        var suffix = el.getAttribute('data-suffix') || '';
+        var duration = 1200;
+        var start = null;
+
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            var progress = Math.min((timestamp - start) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target) + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    if (!('IntersectionObserver' in window)) {
+        counters.forEach(animateCounter);
+        return;
+    }
+
+    var counterObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(function (el) { counterObserver.observe(el); });
+});
+
+// ===== "Como funciona": desenha a linha e revela os icones ao rolar (home) =====
+document.addEventListener('DOMContentLoaded', function () {
+    var steps = document.querySelector('.how-steps');
+    if (!steps) return;
+
+    var line = steps.querySelector('.how-steps-line');
+
+    if (!('IntersectionObserver' in window)) {
+        steps.classList.add('is-visible');
+        if (line) line.classList.add('is-visible');
+        return;
+    }
+
+    var stepsObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                steps.classList.add('is-visible');
+                if (line) line.classList.add('is-visible');
+                stepsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    stepsObserver.observe(steps);
+});
+
+// ===== Botao flutuante do WhatsApp: aparece depois que rola a hero =====
+document.addEventListener('DOMContentLoaded', function () {
+    var floatBtn = document.getElementById('whatsappFloat');
+    if (!floatBtn) return;
+
+    function toggleFloatVisibility() {
+        floatBtn.classList.toggle('is-visible', window.scrollY > 400);
+    }
+
+    window.addEventListener('scroll', toggleFloatVisibility, { passive: true });
+    toggleFloatVisibility();
+});
+
 // ===== Mobile nav toggle =====
 document.addEventListener('DOMContentLoaded', function () {
     var navToggle = document.querySelector('.nav-toggle');
