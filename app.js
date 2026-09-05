@@ -11,8 +11,12 @@ function normalizeSearch(str) {
 // So aplicada em ".section" (paginas institucionais, poucas secoes por pagina).
 // Fora de proposito em ".category-section" (loja.html tem 30+ delas, com centenas
 // de produtos) - la o risco de alguma secao ficar presa invisivel supera o ganho.
+// A propria ".section" que envolve o catalogo inteiro em loja.html (marcada com
+// ".section-catalog") tambem fica de fora pelo mesmo motivo: ela sozinha passou a
+// abranger 600+ produtos, ficando alta demais pra o threshold do observer disparar
+// de forma confiavel - deixava a loja inteira em branco ao entrar na pagina.
 document.addEventListener('DOMContentLoaded', function () {
-    var targets = document.querySelectorAll('.section');
+    var targets = document.querySelectorAll('.section:not(.section-catalog)');
     if (!targets.length) return;
 
     if (!('IntersectionObserver' in window)) {
