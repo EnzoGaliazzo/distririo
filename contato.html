@@ -94,8 +94,99 @@
             </div>
         </section>
 
-        <section class="hero">
-            <a href="https://wa.me/5521992111843?text=Ol%C3%A1!%20Vim%20pelo%20link%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." class="btn" target="_blank" rel="noopener">Fale conosco no WhatsApp</a>
+        <section class="section">
+            <div class="job-form-card">
+                <h2>Selecione o assunto e fale conosco</h2>
+                <form id="contactForm" class="job-form">
+                    <div class="form-field">
+                        <label for="contactSubject">Assunto</label>
+                        <select id="contactSubject" name="subject" required>
+                            <option value="" disabled selected>Selecione um...</option>
+                            <option value="cliente">Quero ser cliente (tenho CNPJ)</option>
+                            <option value="fornecedor">Quero ser fornecedor / representar uma marca</option>
+                            <option value="pedido">Dúvida sobre um pedido</option>
+                            <option value="trabalhe">Trabalhe conosco</option>
+                            <option value="outro">Outro assunto</option>
+                        </select>
+                    </div>
+
+                    <p class="contact-form-note" id="contactNoteCliente" hidden>Show! Pra virar cliente é só preencher <a href="quero-ser-cliente.html">esse formulário rápido</a> com o CNPJ do seu comércio — nossa equipe fala com você direto no WhatsApp.</p>
+                    <p class="contact-form-note" id="contactNoteTrabalhe" hidden>Boa! Pra se candidatar é só acessar a página <a href="trabalhe-conosco.html">Trabalhe Conosco</a> e enviar seu currículo.</p>
+
+                    <div class="contact-form-fields" id="contactFormFields" hidden>
+                        <div class="form-field">
+                            <label for="contactName">Nome</label>
+                            <input type="text" id="contactName" name="name" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="contactPhone">Telefone / WhatsApp</label>
+                                <input type="tel" id="contactPhone" name="phone" placeholder="(21) 99999-9999" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="contactCompany">Empresa (opcional)</label>
+                                <input type="text" id="contactCompany" name="company" placeholder="Nome do seu comércio">
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="contactMessage">Mensagem</label>
+                            <textarea id="contactMessage" name="message" rows="4" placeholder="Conte o que você precisa" required></textarea>
+                        </div>
+                        <button type="submit" class="btn job-submit">Enviar pelo WhatsApp</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="section faq-section">
+            <h2>Perguntas frequentes</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>Como faço um pedido na Distri Rio?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>É simples: dá uma olhada nos produtos na loja ou já chama a gente direto, e fechamos o pedido pelo WhatsApp. Sem cadastro complicado.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>A Distri Rio vende para pessoa física?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Não, as vendas são feitas apenas para pessoa jurídica (CNPJ) - mercadinhos, farmácias, bares, padarias e comércios em geral. Veja como virar cliente na página <a href="quero-ser-cliente.html">Quero ser cliente</a>.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>Qual a área de entrega?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Atendemos todo o Rio de Janeiro. Fala com a gente pelo WhatsApp pra confirmar o prazo pro seu endereço.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>Tem pedido mínimo?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Pode variar conforme a região e os produtos. É só chamar no WhatsApp que a gente confirma certinho pro seu caso.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false">
+                        <span>Como acompanho o status do meu pedido?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>O acompanhamento é feito direto pelo WhatsApp com quem fechou seu pedido - é só chamar por lá.</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 

@@ -1175,3 +1175,57 @@ document.addEventListener('DOMContentLoaded', function () {
         window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
     });
 });
+
+// ===== Formulario "Selecione o assunto e fale conosco" (pagina Contato) =====
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('contactForm');
+    if (!form) return;
+
+    var WHATSAPP_NUMBER = '5521992111843';
+    var subjectSelect = document.getElementById('contactSubject');
+    var fieldsWrap = document.getElementById('contactFormFields');
+    var noteCliente = document.getElementById('contactNoteCliente');
+    var noteTrabalhe = document.getElementById('contactNoteTrabalhe');
+
+    // Assuntos ja resolvidos por uma pagina dedicada (cliente/trabalhe) nao
+    // tem entrada aqui - pra esses so mostramos a nota com o link certo.
+    var SUBJECT_LABELS = {
+        fornecedor: 'Quero ser fornecedor / representar uma marca',
+        pedido: 'Dúvida sobre um pedido',
+        outro: 'Outro assunto'
+    };
+
+    subjectSelect.addEventListener('change', function () {
+        var value = subjectSelect.value;
+        noteCliente.hidden = value !== 'cliente';
+        noteTrabalhe.hidden = value !== 'trabalhe';
+        fieldsWrap.hidden = !SUBJECT_LABELS[value];
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var subjectLabel = SUBJECT_LABELS[subjectSelect.value];
+        if (!subjectLabel) return;
+
+        var name = form.name.value.trim();
+        var phone = form.phone.value.trim();
+        var company = form.company.value.trim();
+        var message = form.message.value.trim();
+
+        var lines = [
+            'Olá! Assunto: ' + subjectLabel,
+            '',
+            '*Nome:* ' + name,
+            '*Telefone:* ' + phone
+        ];
+        if (company) lines.push('*Empresa:* ' + company);
+        lines.push('', message);
+
+        if (typeof gtag === 'function') {
+            gtag('event', 'contact_form_submit', { page_path: window.location.pathname, subject: subjectSelect.value });
+        }
+
+        window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+    });
+});

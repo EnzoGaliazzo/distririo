@@ -1188,6 +1188,26 @@ main {
     }
 }
 
+/* ===== Formulario de contato com "Selecione o assunto" ===== */
+.contact-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.contact-form-note {
+    font-size: 0.9rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 10px;
+    background: var(--gray-100);
+    color: var(--dark);
+}
+
+.contact-form-note a {
+    color: var(--red);
+    font-weight: 600;
+}
+
 /* ===== FAQ (accordion) ===== */
 .faq-list {
     max-width: 760px;
