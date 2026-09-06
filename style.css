@@ -607,6 +607,13 @@ main {
     margin-bottom: 0.5rem;
 }
 
+.service-item-icon {
+    display: block;
+    font-size: 1.75rem;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+}
+
 /* ===== Brands ===== */
 .brands {
     background: var(--gray-100);
