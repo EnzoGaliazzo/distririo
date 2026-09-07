@@ -1190,7 +1190,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Assuntos ja resolvidos por uma pagina dedicada (cliente/trabalhe) nao
     // tem entrada aqui - pra esses so mostramos a nota com o link certo.
     var SUBJECT_LABELS = {
-        fornecedor: 'Quero ser fornecedor / representar uma marca',
         pedido: 'Dúvida sobre um pedido',
         outro: 'Outro assunto'
     };
