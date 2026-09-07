@@ -377,6 +377,10 @@ button {
     background: linear-gradient(135deg, var(--gray-100) 0%, var(--white) 100%);
 }
 
+.hero-compact {
+    padding: 2rem 1.5rem 1.5rem;
+}
+
 .hero-statement {
     max-width: 900px;
     margin: 2.5rem auto 2rem;
@@ -1193,6 +1197,10 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+}
+
+.contact-form-fields[hidden] {
+    display: none;
 }
 
 .contact-form-note {
