@@ -1304,6 +1304,169 @@ main {
     font-size: 0.92rem;
 }
 
+/* ===== Missao / Visao / Valores / Proposito (Sobre) ===== */
+.mv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.mv-card {
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--mv-color, var(--red));
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), opacity 0.5s var(--ease), translate 0.5s var(--ease);
+    opacity: 0;
+    translate: 0 16px;
+}
+
+.section.is-visible .mv-card {
+    opacity: 1;
+    translate: 0 0;
+}
+
+.mv-card:nth-child(2) { transition-delay: 0.1s; }
+.mv-card:nth-child(3) { transition-delay: 0.2s; }
+.mv-card:nth-child(4) { transition-delay: 0.3s; }
+
+.mv-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+
+.mv-card h3 {
+    color: var(--mv-color, var(--red));
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+}
+
+.mv-card p {
+    color: #55483a;
+    font-size: 0.92rem;
+}
+
+.mv-card.is-missao { --mv-color: #1f4d8c; }
+.mv-card.is-valores { --mv-color: var(--stamp); }
+.mv-card.is-visao { --mv-color: #b8860b; }
+.mv-card.is-proposito { --mv-color: var(--red); }
+
+/* ===== Timeline (Sobre - historia) ===== */
+.timeline {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateX(-16px);
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.section.is-visible .timeline-item {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timeline-item:nth-child(2) { transition-delay: 0.15s; }
+.timeline-item:nth-child(3) { transition-delay: 0.3s; }
+
+.timeline-year {
+    flex-shrink: 0;
+    width: 84px;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--red);
+    text-align: right;
+    line-height: 1.3;
+}
+
+.timeline-item-body {
+    flex: 1;
+    padding-left: 1.25rem;
+    border-left: 3px solid var(--gray-300);
+    padding-bottom: 0.25rem;
+}
+
+.timeline-item-body h3 {
+    font-size: 1rem;
+    color: var(--dark);
+    margin-bottom: 0.3rem;
+}
+
+.timeline-item-body p {
+    color: #55483a;
+    font-size: 0.9rem;
+}
+
+/* ===== Estrutura (Sobre - fotos ilustrativas) ===== */
+.structure-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+}
+
+.structure-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--white);
+}
+
+.structure-card img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.structure-card-body {
+    padding: 1.25rem 1.4rem;
+}
+
+.structure-card-body h3 {
+    color: var(--red);
+    margin-bottom: 0.4rem;
+}
+
+.structure-card-body p {
+    color: #55483a;
+    font-size: 0.9rem;
+}
+
+/* ===== Mapa (Contato) ===== */
+.map-embed {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.map-embed iframe {
+    display: block;
+    width: 100%;
+    height: 340px;
+    border: 0;
+}
+
+@media (max-width: 640px) {
+    .timeline-year {
+        width: 64px;
+        font-size: 1.05rem;
+    }
+}
+
 /* ===== Footer ===== */
 .footer {
     background: var(--dark);
