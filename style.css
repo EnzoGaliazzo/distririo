@@ -431,7 +431,9 @@ button {
     width: 100%;
     aspect-ratio: 1920 / 560;
     overflow: hidden;
-    border-radius: var(--radius);
+    /* A faixa de destaques vem colada logo abaixo: o canto de baixo fica reto
+       para os dois lerem como um bloco so. */
+    border-radius: var(--radius) var(--radius) 0 0;
     background: var(--gray-800);
 }
 
@@ -796,6 +798,8 @@ main {
     overflow: hidden;
     background: var(--dark);
     padding: 0.7rem 0;
+    margin-top: 0;
+    border-radius: 0 0 var(--radius) var(--radius);
 }
 
 .marquee-track {
