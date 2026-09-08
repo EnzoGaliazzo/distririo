@@ -612,10 +612,28 @@ main {
 }
 
 .service-item-icon {
-    display: block;
-    font-size: 1.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 1rem;
+    border-radius: 14px;
+    background: var(--gray-100);
+    color: var(--red);
     line-height: 1;
-    margin-bottom: 0.75rem;
+    transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.service-item-icon .icon {
+    width: 26px;
+    height: 26px;
+}
+
+.service-item:hover .service-item-icon {
+    background: var(--red);
+    color: var(--white);
+    transform: translateY(-3px) rotate(-4deg);
 }
 
 /* ===== Brands ===== */
@@ -1472,16 +1490,93 @@ main {
     background: var(--dark);
     color: #999;
     border-top: 3px solid var(--red);
-    text-align: center;
-    padding: 1.75rem 1.5rem 1.25rem;
+    padding: 3rem 1.5rem 1.5rem;
     font-size: 0.85rem;
+}
+
+.footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.footer-col h4 {
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.footer-logo {
+    height: 42px;
+    width: auto;
+    margin-bottom: 0.9rem;
+}
+
+.footer-about {
+    line-height: 1.65;
+    max-width: 34ch;
+    margin-bottom: 1.25rem;
+}
+
+.footer-contact li {
+    line-height: 1.6;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 2.5rem auto 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.footer-note {
+    color: #777;
+}
+
+@media (max-width: 900px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .footer-col-brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 560px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+        justify-content: center;
+        text-align: center;
+    }
 }
 
 .footer-social {
     display: flex;
-    justify-content: center;
     gap: 0.75rem;
-    margin-bottom: 1rem;
 }
 
 .footer-social a {
@@ -1589,4 +1684,48 @@ main {
         flex-wrap: nowrap;
         padding-bottom: 0.75rem;
     }
+}
+
+/* ---------- Documentos legais (politica de privacidade) ---------- */
+.legal-doc {
+    max-width: 780px;
+    margin: 0 auto;
+    color: var(--ink);
+    line-height: 1.75;
+}
+
+.legal-doc h2 {
+    font-family: var(--font-body);
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 2.5rem 0 0.85rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--gray-300);
+}
+
+.legal-doc p {
+    margin-bottom: 1rem;
+}
+
+.legal-doc ul {
+    margin: 0 0 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.legal-doc a {
+    color: var(--red);
+    font-weight: 600;
+}
+
+.legal-updated {
+    display: inline-block;
+    background: var(--gray-100);
+    border-radius: 999px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.82rem;
+    color: #666;
+    margin-bottom: 1.75rem;
 }
