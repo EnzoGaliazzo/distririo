@@ -1,6 +1,12 @@
 :root {
     --red: #e01e24;
     --red-dark: #b3151a;
+    /* --red-text: vermelho aprovado em AA para texto pequeno sobre creme e branco. */
+    --red-text: #b3151a;
+    --texto-suave: #55483a;
+    --texto-fraco: #6b6257;
+    --focus: #12131a;
+    --focus-claro: #ffd166;
     --dark: #1c140d;
     --ink: #12131a;
     --stamp: #1f6b4a;
@@ -16,6 +22,8 @@
     --font-body: 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
     --header-h: 76px;
     --info-h: 40px;
+    /* --header-total: escrito por app.js a partir da altura real do cabeçalho. */
+    --header-total: calc(var(--header-h) + var(--info-h));
     --footer-h: 132px;
 }
 
@@ -223,12 +231,12 @@ button {
 
 .search-suggestion-category {
     font-size: 0.75rem;
-    color: #888;
+    color: var(--texto-fraco);
 }
 
 .search-suggestion-empty {
     padding: 0.9rem 1rem;
-    color: #888;
+    color: var(--texto-fraco);
     font-size: 0.85rem;
     text-align: center;
 }
@@ -248,10 +256,13 @@ button {
 }
 
 .header-nav {
+    flex-shrink: 0;
+}
+
+.header-nav-lista {
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    flex-shrink: 0;
 }
 
 .header-nav a {
@@ -402,7 +413,7 @@ button {
 .hero-statement p {
     margin-top: 1rem;
     font-size: 1.1rem;
-    color: #55483a;
+    color: var(--texto-suave);
     max-width: 620px;
     margin-left: auto;
     margin-right: auto;
@@ -422,6 +433,20 @@ button {
     overflow: hidden;
     border-radius: var(--radius);
     background: var(--gray-800);
+}
+
+/* Abaixo de 720px a peça inteira aparece, sem corte e sem virar uma tarja:
+   o banner é publicidade do fornecedor, não o argumento de venda do site. */
+@media (max-width: 720px) {
+    .hero-carousel {
+        aspect-ratio: 1400 / 480;
+        background: var(--gray-100);
+    }
+
+    .hero-carousel img {
+        object-fit: contain;
+        transform: none;
+    }
 }
 
 .hero-carousel img {
@@ -509,7 +534,7 @@ button {
 .hero p {
     max-width: 620px;
     margin: 0 auto;
-    color: #555;
+    color: var(--texto-suave);
     font-size: 1.05rem;
 }
 
@@ -695,7 +720,7 @@ main {
     padding: 0.55rem 0 0.55rem 1rem;
     font-weight: 600;
     font-size: 1rem;
-    color: #8a7a63;
+    color: var(--texto-fraco);
     cursor: pointer;
     transition: color 0.2s var(--ease), border-color 0.2s var(--ease), padding-left 0.2s var(--ease);
 }
@@ -827,7 +852,7 @@ main {
 .stat-label {
     margin-top: 0.5rem;
     font-size: 0.9rem;
-    color: #55483a;
+    color: var(--texto-suave);
     font-weight: 600;
 }
 
@@ -845,12 +870,15 @@ main {
     margin-top: 0.5rem;
 }
 
+/* A linha começa e termina no centro dos círculos das pontas: com três
+   colunas de larguras iguais e gap de 2rem, isso é (100% - 4rem) / 6.
+   Antes eram 68px fixos, e em telas médias a linha sobrava nas laterais. */
 .how-steps-line {
     position: absolute;
     top: 34px;
-    left: 68px;
-    right: 68px;
-    width: calc(100% - 136px);
+    left: calc((100% - 4rem) / 6);
+    right: calc((100% - 4rem) / 6);
+    width: auto;
     height: 4px;
     z-index: 0;
     overflow: visible;
@@ -909,7 +937,7 @@ main {
 
 .how-step p {
     font-size: 0.88rem;
-    color: #55483a;
+    color: var(--texto-suave);
 }
 
 @media (max-width: 640px) {
@@ -972,6 +1000,10 @@ main {
 .category-section {
     padding: 2.5rem 0;
     border-top: 1px solid var(--gray-300);
+    /* Só calcula layout da seção quando ela chega perto da tela. */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+    scroll-margin-top: calc(var(--header-total) + 64px);
 }
 
 .category-section:first-of-type {
@@ -1006,9 +1038,11 @@ main {
     flex-direction: column;
 }
 
-.product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
+@media (hover: hover) and (pointer: fine) {
+    .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-lg);
+    }
 }
 
 .product-card img {
@@ -1021,8 +1055,10 @@ main {
     transition: transform 0.35s var(--ease);
 }
 
-.product-card:hover img {
-    transform: scale(1.06);
+@media (hover: hover) and (pointer: fine) {
+    .product-card:hover img {
+        transform: scale(1.06);
+    }
 }
 
 .product-card .product-info {
@@ -1038,7 +1074,7 @@ main {
 }
 
 .product-card p {
-    color: #555;
+    color: var(--texto-suave);
     font-size: 0.88rem;
     flex: 1;
 }
@@ -1046,7 +1082,7 @@ main {
 
 .no-results {
     text-align: center;
-    color: #888;
+    color: var(--texto-fraco);
     padding: 3rem 1.5rem;
 }
 
@@ -1054,15 +1090,22 @@ main {
     display: none;
 }
 
-/* ===== Testimonials ===== */
-.testimonials {
+/* ===== Prova social factual (home) ===== */
+.section-lead {
+    text-align: center;
+    max-width: 56ch;
+    margin: -1.2rem auto 2rem;
+    color: var(--texto-suave);
+}
+
+.proof-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
     justify-content: center;
 }
 
-.testimonial {
+.proof-card {
     background: var(--white);
     border-radius: var(--radius);
     padding: 1.5rem;
@@ -1074,20 +1117,28 @@ main {
     transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
 
-.testimonial:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
+.proof-fact {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--red-dark);
+    background: var(--gray-100);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    margin-bottom: 0.8rem;
 }
 
-.testimonial p.quote {
-    font-style: italic;
-    color: #444;
-    margin-bottom: 0.75rem;
+.proof-card h3 {
+    font-size: 1.08rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
 }
 
-.testimonial .author {
-    font-weight: 700;
-    color: var(--red);
+.proof-card p {
+    color: var(--texto-suave);
+    font-size: 0.95rem;
 }
 
 /* ===== Formulario "Trabalhe conosco" ===== */
@@ -1168,7 +1219,7 @@ main {
     align-items: flex-start;
     gap: 0.6rem;
     font-size: 0.85rem;
-    color: #55483a;
+    color: var(--texto-suave);
     cursor: pointer;
 }
 
@@ -1318,7 +1369,7 @@ main {
 
 .faq-answer p {
     padding: 0 1.4rem 1.1rem;
-    color: #55483a;
+    color: var(--texto-suave);
     font-size: 0.92rem;
 }
 
@@ -1364,7 +1415,7 @@ main {
 }
 
 .mv-card p {
-    color: #55483a;
+    color: var(--texto-suave);
     font-size: 0.92rem;
 }
 
@@ -1423,7 +1474,7 @@ main {
 }
 
 .timeline-item-body p {
-    color: #55483a;
+    color: var(--texto-suave);
     font-size: 0.9rem;
 }
 
@@ -1458,7 +1509,7 @@ main {
 }
 
 .structure-card-body p {
-    color: #55483a;
+    color: var(--texto-suave);
     font-size: 0.9rem;
 }
 
@@ -1488,7 +1539,7 @@ main {
 /* ===== Footer ===== */
 .footer {
     background: var(--dark);
-    color: #999;
+    color: var(--texto-fraco);
     border-top: 3px solid var(--red);
     padding: 3rem 1.5rem 1.5rem;
     font-size: 0.85rem;
@@ -1549,7 +1600,7 @@ main {
 }
 
 .footer-note {
-    color: #777;
+    color: var(--texto-fraco);
 }
 
 @media (max-width: 900px) {
@@ -1609,19 +1660,11 @@ main {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding-top: calc(var(--header-h) + var(--info-h));
+    padding-top: var(--header-total);
 }
 
 /* ===== Mobile ===== */
 @media (max-width: 900px) {
-    html {
-        scroll-padding-top: 285px;
-    }
-
-    .page {
-        padding-top: 215px;
-    }
-
     .header-bar {
         flex-wrap: wrap;
     }
@@ -1646,23 +1689,35 @@ main {
         width: 100%;
     }
 
+    /* grid-template-rows 0fr -> 1fr anima sem depender de uma altura chutada:
+       cabe um sétimo link amanhã sem cortar o último item. */
     .header-nav {
         order: 5;
         width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        max-height: 0;
+        display: grid;
+        grid-template-rows: 0fr;
         overflow: hidden;
-        transition: max-height 0.25s ease;
+        transition: grid-template-rows 0.25s var(--ease);
+    }
+
+    .header-nav > * {
+        min-height: 0;
     }
 
     .header-nav.is-open {
-        max-height: 20rem;
+        grid-template-rows: 1fr;
         margin-top: 0.5rem;
     }
 
+    .header-nav-lista {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
     .header-nav a {
+        display: block;
         padding: 0.7rem 0.25rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
@@ -1680,8 +1735,6 @@ main {
 
     .category-bar {
         justify-content: flex-start;
-        overflow-x: auto;
-        flex-wrap: nowrap;
         padding-bottom: 0.75rem;
     }
 }
@@ -1726,7 +1779,7 @@ main {
     border-radius: 999px;
     padding: 0.35rem 0.9rem;
     font-size: 0.82rem;
-    color: #666;
+    color: var(--texto-fraco);
     margin-bottom: 1.75rem;
 }
 
@@ -1864,3 +1917,1026 @@ main {
 .reveal .stat-item:nth-child(5) { transition-delay: 0.4s; }
 
 .reveal .service-item:nth-child(6) { transition-delay: 0.5s; }
+
+/* =====================================================================
+   Acessibilidade — foco visível, pular para o conteúdo, movimento reduzido
+   ===================================================================== */
+
+/* O atributo hidden perde para qualquer display declarado no autor.
+   Sem esta linha, esconder um .product-card (display:flex) não faz nada. */
+[hidden] {
+    display: none !important;
+}
+
+.skip-link {
+    position: absolute;
+    left: 0.75rem;
+    top: -100%;
+    z-index: 200;
+    padding: 0.7rem 1.1rem;
+    background: var(--white);
+    color: var(--ink);
+    font-weight: 700;
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: var(--shadow-lg);
+    transition: top 0.18s var(--ease);
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Regra única de foco: o anel padrão do navegador some contra o cabeçalho escuro. */
+:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.site-header :focus-visible,
+.footer :focus-visible,
+.whatsapp-float:focus-visible {
+    outline-color: var(--focus-claro);
+}
+
+/* O campo de busca zerava o outline sem pôr nada no lugar (WCAG 2.4.7). */
+.header-search:focus-within {
+    outline: 3px solid var(--focus-claro);
+    outline-offset: 2px;
+}
+
+.header-search input:focus-visible {
+    outline: none;
+}
+
+.link-botao {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    text-decoration: none;
+}
+
+.link-botao:hover {
+    text-decoration: underline;
+}
+
+/* O marquee parava no meio da frase quando o movimento era reduzido. */
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+        animation: none !important;
+        transform: none !important;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .marquee-track > *:nth-child(n + 2) {
+        display: none;
+    }
+}
+
+/* =====================================================================
+   Cabeçalho no celular — de 250px para uma faixa de 60px
+   ===================================================================== */
+
+.search-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.search-toggle svg {
+    width: 18px;
+    height: 18px;
+}
+
+@media (max-width: 900px) {
+    /* A faixa de avisos repete o que já está no marquee e na FAQ. */
+    .header-info {
+        display: none;
+    }
+
+    .header-bar {
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .header-search-wrap {
+        order: 4;
+        width: auto;
+        margin-left: auto;
+    }
+
+    .search-toggle {
+        display: inline-flex;
+    }
+
+    .header-search {
+        display: none;
+    }
+
+    .header-search-wrap.is-open {
+        position: absolute;
+        left: 1rem;
+        right: 1rem;
+        top: 100%;
+        width: auto;
+        margin: 0;
+        padding-bottom: 0.75rem;
+    }
+
+    .header-search-wrap.is-open .header-search {
+        display: flex;
+        width: 100%;
+    }
+
+    .header-cta {
+        order: 5;
+        margin-left: 0;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .header-nav {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        background: var(--ink);
+        border-bottom: 3px solid var(--red);
+        padding: 0 1rem;
+    }
+
+    .header-nav.is-open {
+        padding-bottom: 0.5rem;
+    }
+}
+
+/* =====================================================================
+   Catálogo — cartões clicáveis, placeholder e barra de categorias
+   ===================================================================== */
+
+.category-bar {
+    position: sticky;
+    top: var(--header-total);
+    z-index: 20;
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scroll-snap-type: x proximity;
+    padding: 0.7rem 1.5rem;
+    margin: 0 auto;
+    max-width: 1100px;
+    background: color-mix(in srgb, var(--gray-100) 92%, transparent);
+    backdrop-filter: blur(8px);
+    scrollbar-width: thin;
+    /* As duas pontas somem em gradiente: é a pista de que há mais categorias. */
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+}
+
+.category-chip {
+    scroll-snap-align: start;
+    white-space: nowrap;
+}
+
+.category-chip[aria-current="true"] {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+}
+
+.category-chip.sem-resultado {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.category-count {
+    margin: -1rem 0 1.25rem;
+    color: var(--texto-fraco);
+    font-size: 0.85rem;
+}
+
+.search-status {
+    margin: 0 0 0.5rem;
+    color: var(--texto-fraco);
+    font-size: 0.9rem;
+    min-height: 1.2em;
+}
+
+.product-card-link {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Espaço reservado antes da foto chegar: sem isso a grade pula (CLS). */
+.product-thumb {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    max-height: 190px;
+    /* As fotos vêm com fundo branco chapado: qualquer outra cor aqui
+       desenha uma caixa visível em volta do produto. */
+    background: #fff;
+    overflow: hidden;
+}
+
+.product-thumb picture,
+.product-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.product-card img {
+    height: 100%;
+    object-fit: contain;
+    padding: 0.5rem;
+    background: transparent;
+    animation: fotoEntra 0.4s var(--ease) both;
+}
+
+@keyframes fotoEntra {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Placeholder desenhado: 128 produtos ainda não têm foto, e uma caixa
+   intencional lê melhor do que um cartão quebrado. */
+.product-thumb-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    width: 100%;
+    height: 100%;
+    background:
+        repeating-linear-gradient(135deg, transparent, transparent 14px, rgba(28, 20, 13, 0.035) 14px, rgba(28, 20, 13, 0.035) 28px),
+        var(--gray-100);
+    color: var(--red-text);
+}
+
+.product-inicial {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    line-height: 1;
+    opacity: 0.45;
+}
+
+.product-marca-vazia {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--texto-fraco);
+}
+
+.product-card h3 {
+    color: var(--red-text);
+    font-size: 1rem;
+}
+
+.product-desc {
+    color: var(--texto-suave);
+    font-size: 0.88rem;
+}
+
+.product-pack {
+    flex: 0 0 auto;
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--texto-fraco);
+    letter-spacing: 0.01em;
+}
+
+.voltar-topo {
+    position: fixed;
+    right: 1rem;
+    bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+    z-index: 40;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--gray-300);
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--ink);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0.25s;
+}
+
+.voltar-topo.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* O botão do WhatsApp cobria o último cartão e ignorava o notch. */
+.whatsapp-float {
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+}
+
+.section-catalog {
+    padding-top: 1rem;
+    padding-bottom: 6rem;
+}
+
+.search-status:empty {
+    min-height: 0;
+    margin: 0;
+}
+
+/* =====================================================================
+   Página de produto
+   ===================================================================== */
+
+.migalhas {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.25rem 1.5rem 0;
+    font-size: 0.85rem;
+    color: var(--texto-fraco);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.migalhas a {
+    color: var(--red-text);
+    text-decoration: none;
+}
+
+.migalhas a:hover {
+    text-decoration: underline;
+}
+
+.produto-detalhe {
+    display: grid;
+    grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.produto-foto {
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.produto-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1.5rem;
+}
+
+.produto-foto-vazia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-display);
+    font-size: 5rem;
+    color: var(--red-text);
+    opacity: 0.4;
+    background:
+        repeating-linear-gradient(135deg, transparent, transparent 16px, rgba(28, 20, 13, 0.035) 16px, rgba(28, 20, 13, 0.035) 32px),
+        var(--gray-100);
+}
+
+.produto-texto h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.25rem;
+    color: var(--dark);
+}
+
+.produto-ficha {
+    margin: 0 0 1.5rem;
+    border-top: 1px solid var(--gray-300);
+}
+
+.ficha-linha {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--gray-300);
+}
+
+.ficha-linha dt {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--texto-fraco);
+}
+
+.ficha-linha dd {
+    margin: 0;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.produto-nota {
+    font-size: 0.9rem;
+    color: var(--texto-fraco);
+    margin-bottom: 1.25rem;
+}
+
+.produto-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--red-text);
+    border: 2px solid var(--red);
+}
+
+.btn-ghost:hover {
+    background: var(--red);
+    color: var(--white);
+}
+
+.produto-voltar a {
+    color: var(--texto-fraco);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.produto-voltar a:hover {
+    color: var(--red-text);
+    text-decoration: underline;
+}
+
+@media (max-width: 760px) {
+    .produto-detalhe {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Sem limite, a foto vira um quadrado do tamanho da tela inteira. */
+    .produto-foto {
+        max-width: 340px;
+        margin: 0 auto;
+    }
+
+    .ficha-linha {
+        grid-template-columns: 110px minmax(0, 1fr);
+        gap: 0.5rem;
+    }
+}
+
+/* =====================================================================
+   Consentimento de cookies
+   ===================================================================== */
+
+.cookie-banner {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    z-index: 120;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 1.1rem 1.25rem;
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+    border-left: 5px solid var(--red);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+}
+
+.cookie-banner h2 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    color: var(--dark);
+}
+
+.cookie-banner p {
+    font-size: 0.88rem;
+    color: var(--texto-suave);
+    margin-bottom: 0.9rem;
+}
+
+.cookie-banner a {
+    color: var(--red-text);
+}
+
+.cookie-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.cookie-acoes button {
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    border: 2px solid var(--red);
+}
+
+.cookie-aceitar {
+    background: var(--red);
+    color: var(--white);
+}
+
+.cookie-recusar {
+    background: transparent;
+    color: var(--red-text);
+}
+
+/* =====================================================================
+   Consentimento nos formulários (LGPD)
+   ===================================================================== */
+
+.form-consent {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    color: var(--texto-suave);
+    line-height: 1.5;
+}
+
+.form-consent input[type="checkbox"] {
+    margin-top: 0.2rem;
+    width: 17px;
+    height: 17px;
+    accent-color: var(--red);
+    flex-shrink: 0;
+}
+
+.form-consent a {
+    color: var(--red-text);
+}
+
+/* =====================================================================
+   Transição entre páginas e modo escuro
+   ===================================================================== */
+
+@view-transition {
+    navigation: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dark: #f0e9df;
+        --ink: #0e0f14;
+        --gray-800: #d8d0c4;
+        --gray-100: #1a1713;
+        --gray-300: #322c25;
+        --white: #201c18;
+        --red: #f2565b;
+        --red-dark: #ff8a8e;
+        --red-text: #ff9a9e;
+        --texto-suave: #c9bfb3;
+        --texto-fraco: #a2988c;
+        --focus: #ffd166;
+        --shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+        --shadow-lg: 0 14px 32px rgba(0, 0, 0, 0.6);
+    }
+
+    body {
+        background: #14110e;
+        color: #e8e0d5;
+    }
+
+    .site-header {
+        background: #0b0c10;
+    }
+}
+
+/* =====================================================================
+   Carrossel: indicadores, pausa e barra de progresso
+   ===================================================================== */
+
+.hero-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 0.9rem;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    gap: 0.45rem;
+}
+
+.hero-dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+    transition: background 0.2s var(--ease), width 0.2s var(--ease);
+}
+
+.hero-dot[aria-selected="true"] {
+    background: var(--white);
+    width: 22px;
+    border-radius: 999px;
+}
+
+.hero-pausa {
+    position: absolute;
+    right: 0.9rem;
+    bottom: 0.75rem;
+    z-index: 3;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    line-height: 1;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    cursor: pointer;
+}
+
+.hero-progresso {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.hero-progresso i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--red);
+}
+
+@media (max-width: 720px) {
+    .hero-dots {
+        bottom: 0.5rem;
+    }
+
+    .hero-carousel-prev,
+    .hero-carousel-next {
+        display: none;
+    }
+}
+
+/* =====================================================================
+   Balão do WhatsApp, confirmação dos formulários e "nada encontrado"
+   ===================================================================== */
+
+.zap-balao {
+    position: absolute;
+    right: calc(100% + 0.6rem);
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--ink);
+    font-size: 0.82rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-lg);
+    animation: balaoEntra 0.35s var(--ease) both;
+    pointer-events: none;
+}
+
+.zap-balao.sumindo {
+    animation: balaoSai 0.5s var(--ease) both;
+}
+
+@keyframes balaoEntra {
+    from { opacity: 0; transform: translateY(-50%) translateX(8px); }
+    to { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+
+@keyframes balaoSai {
+    to { opacity: 0; transform: translateY(-50%) translateX(8px); }
+}
+
+@media (max-width: 520px) {
+    .zap-balao {
+        display: none;
+    }
+}
+
+.form-enviado {
+    margin-top: 1.25rem;
+    padding: 1rem 1.1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-300);
+    border-left: 4px solid var(--stamp);
+    background: var(--white);
+}
+
+.form-enviado-titulo {
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.7rem;
+}
+
+.no-results-acoes {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.25rem;
+}
+
+/* =====================================================================
+   Home — a proposta de valor no topo, o banner do fornecedor abaixo
+   ===================================================================== */
+
+.hero-principal {
+    max-width: 900px;
+    margin: 2.5rem auto 2rem;
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+.hero-kicker {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red-text);
+    margin-bottom: 0.9rem;
+    opacity: 0;
+    animation: hero-intro 0.6s var(--ease) both;
+}
+
+.hero-principal h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 4.8vw, 3.1rem);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    color: var(--dark);
+    /* Sem <br> fixo: o navegador equilibra as linhas em cada largura. */
+    text-wrap: balance;
+    max-width: 22ch;
+    margin: 0 auto;
+    opacity: 0;
+    animation: hero-intro 0.6s var(--ease) 0.05s both;
+}
+
+.sem-quebra {
+    white-space: nowrap;
+}
+
+.hero-sub {
+    margin: 1.1rem auto 0;
+    font-size: 1.08rem;
+    color: var(--texto-suave);
+    max-width: 56ch;
+    text-wrap: pretty;
+    opacity: 0;
+    animation: hero-intro 0.6s var(--ease) 0.18s both;
+}
+
+.hero-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1.6rem;
+    opacity: 0;
+    animation: hero-intro 0.6s var(--ease) 0.3s both;
+}
+
+.hero-nota {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--texto-fraco);
+}
+
+@media (max-width: 560px) {
+    .sem-quebra {
+        white-space: normal;
+    }
+
+    .hero-acoes .btn {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+}
+
+/* O marquee é uma faixa em loop: a segunda metade é cópia da primeira,
+   e some quando o visitante pede menos movimento. */
+@media (prefers-reduced-motion: reduce) {
+    .marquee-copia {
+        display: none;
+    }
+}
+
+/* Três contadores numa grade de duas colunas deixavam o terceiro órfão. */
+@media (max-width: 620px) {
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem 1rem;
+    }
+
+    .stats:has(> .stat-item:nth-child(3):last-child) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem 0.5rem;
+    }
+
+    .stat-item {
+        min-width: 0;
+    }
+}
+
+/* =====================================================================
+   Faixa de credibilidade com a foto do armazém
+   ===================================================================== */
+
+.faixa-estrutura {
+    position: relative;
+    margin: 3rem 0;
+    min-height: 340px;
+    display: grid;
+    align-items: center;
+    isolation: isolate;
+}
+
+.faixa-estrutura picture,
+.faixa-estrutura img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    z-index: -2;
+}
+
+.faixa-estrutura::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(100deg, rgba(18, 19, 26, 0.92) 0%, rgba(18, 19, 26, 0.78) 45%, rgba(18, 19, 26, 0.15) 100%);
+}
+
+.faixa-estrutura-texto {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    color: var(--white);
+}
+
+.faixa-estrutura-texto h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3.2vw, 2rem);
+    line-height: 1.15;
+    max-width: 18ch;
+    text-wrap: balance;
+    margin-bottom: 0.8rem;
+    color: #fffdf8;
+}
+
+.faixa-estrutura-texto p {
+    max-width: 46ch;
+    margin-bottom: 1.4rem;
+    color: rgba(255, 253, 248, 0.86);
+}
+
+.faixa-estrutura-texto .btn-ghost {
+    color: #fffdf8;
+    border-color: #fffdf8;
+}
+
+.faixa-estrutura-texto .btn-ghost:hover {
+    background: #fffdf8;
+    color: var(--ink);
+}
+
+@media (max-width: 640px) {
+    .faixa-estrutura::after {
+        background: linear-gradient(180deg, rgba(18, 19, 26, 0.62) 0%, rgba(18, 19, 26, 0.93) 55%);
+    }
+
+    .faixa-estrutura-texto h2 {
+        max-width: none;
+    }
+}
+
+/* Foto de produto usada como prévia de marca: o recorte "cover" comeria
+   metade da embalagem, então essa variação mostra a peça inteira. */
+.brand-preview-produto {
+    object-fit: contain;
+    background: #fff;
+    padding: 1.5rem;
+}
+
+/* =====================================================================
+   Página 404
+   ===================================================================== */
+
+.erro-404 {
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+}
+
+.erro-404-codigo {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 14vw, 8rem);
+    line-height: 1;
+    color: var(--red);
+    opacity: 0.18;
+    margin-bottom: -0.18em;
+}
+
+.erro-404 h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: var(--dark);
+    margin-bottom: 0.8rem;
+}
+
+.erro-404-texto {
+    max-width: 50ch;
+    margin: 0 auto 1.75rem;
+    color: var(--texto-suave);
+}
+
+.erro-404-ajuda {
+    margin-top: 1.75rem;
+    font-size: 0.92rem;
+    color: var(--texto-fraco);
+}
+
+.erro-404-ajuda a {
+    color: var(--red-text);
+}
+
+.form-dica {
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--texto-fraco);
+}
+
+/* Abaixo de 480px o wordmark ao lado do símbolo é o que empurra o CTA
+   para fora da tela. O símbolo sozinho já identifica a marca. */
+@media (max-width: 480px) {
+    .header-logo-text {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    .header-bar {
+        gap: 0.4rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .header-cta {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.78rem;
+    }
+}

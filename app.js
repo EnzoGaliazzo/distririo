@@ -1,1150 +1,1176 @@
-// ===== Utilitario de busca: ignora maiusculas/minusculas e acentos =====
-// Assim "marata"/"agua"/"acucar" encontram "Maratá"/"água"/"açúcar".
-function normalizeSearch(str) {
-    return (str || '')
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[̀-ͯ]/g, '');
-}
-
-// ===== Animacao de entrada ao rolar a tela =====
-// So aplicada em ".section" (paginas institucionais, poucas secoes por pagina).
-// Fora de proposito em ".category-section" (loja.html tem 30+ delas, com centenas
-// de produtos) - la o risco de alguma secao ficar presa invisivel supera o ganho.
-// A propria ".section" que envolve o catalogo inteiro em loja.html (marcada com
-// ".section-catalog") tambem fica de fora pelo mesmo motivo: ela sozinha passou a
-// abranger 600+ produtos, ficando alta demais pra o threshold do observer disparar
-// de forma confiavel - deixava a loja inteira em branco ao entrar na pagina.
-document.addEventListener('DOMContentLoaded', function () {
-    var targets = document.querySelectorAll('.section:not(.section-catalog)');
-    if (!targets.length) return;
-
-    if (!('IntersectionObserver' in window)) {
-        targets.forEach(function (el) { el.classList.add('is-visible'); });
-        return;
-    }
-
-    targets.forEach(function (el) { el.classList.add('reveal'); });
-
-    var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    targets.forEach(function (el) { observer.observe(el); });
-
-    // Rede de seguranca: se por algum motivo o observer nao disparar pra alguma
-    // secao (dispositivo/navegador especifico, timing, etc.), garante que nada
-    // fique preso invisivel para sempre.
-    setTimeout(function () {
-        targets.forEach(function (el) { el.classList.add('is-visible'); });
-    }, 2500);
-});
-
-// ===== Analytics: mede cliques em links do WhatsApp (pedido/contato) =====
-document.addEventListener('click', function (e) {
-    var link = e.target.closest('a[href*="wa.me/"]');
-    if (!link || typeof gtag !== 'function') return;
-    gtag('event', 'whatsapp_click', {
-        link_id: link.id || null,
-        link_text: link.textContent.trim(),
-        page_path: window.location.pathname
-    });
-});
-
-// ===== Carrossel do banner do hero (home) =====
-document.addEventListener('DOMContentLoaded', function () {
-    var carousel = document.getElementById('heroCarousel');
-    if (!carousel) return;
-
-    var slides = carousel.querySelectorAll('img');
-    if (slides.length < 2) return;
-
-    var current = 0;
-    var timer = null;
-
-    function goTo(index) {
-        slides[current].classList.remove('is-active');
-        current = (index + slides.length) % slides.length;
-        slides[current].classList.add('is-active');
-    }
-
-    function startAutoplay() {
-        timer = setInterval(function () { goTo(current + 1); }, 4000);
-    }
-
-    function restartAutoplay() {
-        clearInterval(timer);
-        startAutoplay();
-    }
-
-    startAutoplay();
-
-    var prevBtn = carousel.querySelector('.hero-carousel-prev');
-    var nextBtn = carousel.querySelector('.hero-carousel-next');
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function () {
-            goTo(current - 1);
-            restartAutoplay();
-        });
-    }
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function () {
-            goTo(current + 1);
-            restartAutoplay();
-        });
-    }
-});
-
-// ===== Parallax sutil no banner do hero (home) =====
-// Aplica um leve deslocamento vertical na imagem ativa do carrossel conforme
-// rola a pagina. Desligado se o usuario prefere menos movimento.
-document.addEventListener('DOMContentLoaded', function () {
-    var carousel = document.getElementById('heroCarousel');
-    if (!carousel) return;
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    var slides = carousel.querySelectorAll('img');
-    var ticking = false;
-
-    function updateParallax() {
-        var rect = carousel.getBoundingClientRect();
-        if (rect.bottom > 0 && rect.top < window.innerHeight) {
-            var offset = Math.max(-24, Math.min(24, rect.top * -0.06));
-            slides.forEach(function (img) {
-                img.style.transform = 'translateY(' + offset + 'px) scale(1.06)';
-            });
-        }
-        ticking = false;
-    }
-
-    window.addEventListener('scroll', function () {
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-        }
-    }, { passive: true });
-
-    updateParallax();
-});
-
-// ===== Seletor de marcas com troca de foto (home) =====
-document.addEventListener('DOMContentLoaded', function () {
-    var selector = document.querySelector('.brand-selector');
-    if (!selector) return;
-
-    var buttons = selector.querySelectorAll('.brand-select-btn');
-    var images = selector.querySelectorAll('.brand-preview-img');
-
-    buttons.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            var brand = btn.getAttribute('data-brand');
-            buttons.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
-            images.forEach(function (img) {
-                img.classList.toggle('is-active', img.getAttribute('data-brand') === brand);
-            });
-        });
-    });
-});
-
-// ===== Contadores animados (home) =====
-document.addEventListener('DOMContentLoaded', function () {
-    var counters = document.querySelectorAll('.stat-number[data-count-to]');
-    if (!counters.length) return;
-
-    function animateCounter(el) {
-        var target = parseInt(el.getAttribute('data-count-to'), 10) || 0;
-        var suffix = el.getAttribute('data-suffix') || '';
-        var duration = 1200;
-        var start = null;
-
-        function step(timestamp) {
-            if (!start) start = timestamp;
-            var progress = Math.min((timestamp - start) / duration, 1);
-            var eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.round(eased * target) + suffix;
-            if (progress < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-    }
-
-    if (!('IntersectionObserver' in window)) {
-        counters.forEach(animateCounter);
-        return;
-    }
-
-    var counterObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                counterObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    counters.forEach(function (el) { counterObserver.observe(el); });
-
-    // Mesma rede de seguranca do scroll reveal. O valor inicial no HTML e "0",
-    // entao um observer que nao dispara nao deixa a animacao pendente: deixa o
-    // site anunciando "0 produtos no catalogo". Passado o prazo, quem ainda
-    // estiver zerado recebe o numero final direto, sem animacao.
-    setTimeout(function () {
-        counters.forEach(function (el) {
-            if (el.textContent.trim() !== '0') return;
-            counterObserver.unobserve(el);
-            el.textContent = (el.getAttribute('data-count-to') || '0')
-                + (el.getAttribute('data-suffix') || '');
-        });
-    }, 2500);
-});
-
-// ===== "Como funciona": desenha a linha e revela os icones ao rolar (home) =====
-document.addEventListener('DOMContentLoaded', function () {
-    var steps = document.querySelector('.how-steps');
-    if (!steps) return;
-
-    var line = steps.querySelector('.how-steps-line');
-
-    if (!('IntersectionObserver' in window)) {
-        steps.classList.add('is-visible');
-        if (line) line.classList.add('is-visible');
-        return;
-    }
-
-    var stepsObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                steps.classList.add('is-visible');
-                if (line) line.classList.add('is-visible');
-                stepsObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.3 });
-
-    stepsObserver.observe(steps);
-});
-
-// ===== Botao flutuante do WhatsApp: aparece depois que rola a hero =====
-document.addEventListener('DOMContentLoaded', function () {
-    var floatBtn = document.getElementById('whatsappFloat');
-    if (!floatBtn) return;
-
-    function toggleFloatVisibility() {
-        floatBtn.classList.toggle('is-visible', window.scrollY > 400);
-    }
-
-    window.addEventListener('scroll', toggleFloatVisibility, { passive: true });
-    toggleFloatVisibility();
-});
-
-// ===== FAQ (acordeao) na pagina "Trabalhe conosco" =====
-document.addEventListener('DOMContentLoaded', function () {
-    var faqItems = document.querySelectorAll('.faq-item');
-    if (!faqItems.length) return;
-
-    faqItems.forEach(function (item) {
-        var question = item.querySelector('.faq-question');
-        var answer = item.querySelector('.faq-answer');
-        if (!question || !answer) return;
-
-        question.addEventListener('click', function () {
-            var isOpen = item.classList.contains('is-open');
-
-            faqItems.forEach(function (other) {
-                other.classList.remove('is-open');
-                other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-                other.querySelector('.faq-answer').style.maxHeight = '';
-            });
-
-            if (!isOpen) {
-                item.classList.add('is-open');
-                question.setAttribute('aria-expanded', 'true');
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-            }
-        });
-    });
-});
-
-// ===== Formulario "Trabalhe conosco" (envia via Web3Forms) =====
-document.addEventListener('DOMContentLoaded', function () {
-    var form = document.getElementById('jobForm');
-    if (!form) return;
-
-    var statusEl = document.getElementById('jobFormStatus');
-    var submitBtn = form.querySelector('.job-submit');
-
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        var formData = new FormData(form);
-        var originalText = submitBtn.textContent;
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Enviando...';
-        statusEl.hidden = true;
-        statusEl.classList.remove('is-success', 'is-error');
-
-        fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            body: formData,
-            headers: { Accept: 'application/json' }
-        })
-            .then(function (res) { return res.json(); })
-            .then(function (data) {
-                if (data.success) {
-                    statusEl.textContent = 'Candidatura enviada! Vamos analisar seu perfil e entrar em contato.';
-                    statusEl.classList.add('is-success');
-                    form.reset();
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'job_application_submit', { page_path: window.location.pathname });
-                    }
-                } else {
-                    statusEl.textContent = 'Não deu pra enviar agora. Tenta de novo em instantes ou chama a gente no WhatsApp.';
-                    statusEl.classList.add('is-error');
-                }
-                statusEl.hidden = false;
-            })
-            .catch(function () {
-                statusEl.textContent = 'Não deu pra enviar agora. Tenta de novo em instantes ou chama a gente no WhatsApp.';
-                statusEl.classList.add('is-error');
-                statusEl.hidden = false;
-            })
-            .finally(function () {
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-            });
-    });
-});
-
-// ===== Mobile nav toggle =====
-document.addEventListener('DOMContentLoaded', function () {
-    var navToggle = document.querySelector('.nav-toggle');
-    var headerNav = document.querySelector('.header-nav');
-
-    if (navToggle && headerNav) {
-        navToggle.addEventListener('click', function () {
-            var isOpen = headerNav.classList.toggle('is-open');
-            navToggle.classList.toggle('is-open', isOpen);
-            navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        });
-
-        headerNav.querySelectorAll('a').forEach(function (link) {
-            link.addEventListener('click', function () {
-                headerNav.classList.remove('is-open');
-                navToggle.classList.remove('is-open');
-                navToggle.setAttribute('aria-expanded', 'false');
-            });
-        });
-    }
-});
-
-// ===== Catálogo de produtos (usado nas sugestões de busca) =====
-var PRODUCTS = [
-    { name: 'Trident 5S', category: 'Menta, Hortelã, Tutti-Frutti, Melancia, Morango, Canela', img: 'assets/produtos/mondelez-novo/mondelez__trident-5s.jpg', keywords: 'trident 5s menta hortela tutti frutti melancia morango canela mondelez' },
-    { name: 'Trident 14S', category: 'Melancia, Hortelã, Intense, Blueberry, Menta, Tutti-Frutti', img: 'assets/produtos/mondelez-novo/mondelez__trident-14s.jpg', keywords: 'trident 14s melancia hortela intense blueberry menta tutti frutti mondelez' },
-    { name: 'Trident Bag', category: 'Hortelã, Menta, Tutti-Frutti, Morango, Melancia', img: 'assets/produtos/mondelez-novo/mondelez__trident-bag.jpg', keywords: 'trident bag hortela menta tutti frutti morango melancia mondelez' },
-    { name: 'Trident Xsenses Garrafa', category: 'Morango Lime, Melancia Mint, Citrus, Spearmint, Peppermint, Blueberry', img: 'assets/produtos/mondelez-novo/mondelez__trident-xsenses-garrafa.jpg', keywords: 'trident xsenses garrafa morango lime melancia mint citrus spearmint peppermint blueberry mondelez' },
-    { name: 'Trident Xsenses 5S', category: 'Cereja Ice, Acid Blueberry, Intense, Herbal', img: 'assets/produtos/mondelez-novo/mondelez__trident-xsenses-5s.jpg', keywords: 'trident xsenses 5s cereja ice acid blueberry intense herbal mondelez' },
-    { name: 'Chiclets', category: 'Chiclets Hortelã 100/2S, Chiclets Tutti-Frutti 100/2S', img: 'assets/produtos/mondelez-novo/mondelez__chiclets.jpg', keywords: 'chiclets chiclets hortela 100 2s chiclets tutti frutti 100 2s mondelez' },
-    { name: 'Trident Max', category: 'Hortelã Fresca, Menta Blueberry', img: 'assets/produtos/mondelez-novo/mondelez__trident-max.jpg', keywords: 'trident max hortela fresca menta blueberry mondelez' },
-    { name: 'Trident Max', category: 'Cool Raspberry', img: 'assets/produtos/mondelez-novo/mondelez__trident-max-2.jpg', keywords: 'trident max cool raspberry mondelez' },
-    { name: 'Bubbaloo Gum', category: 'Bubbaloo Gum DSP Hortelã/Menta, Bubbaloo Gum DSP Morango, Bubbaloo Gum DSP Tutti-Frutti, Bubbaloo Gum DSP Uva', img: 'assets/produtos/mondelez-novo/mondelez__bubbaloo.jpg', keywords: 'bubbaloo gum bubbaloo gum dsp hortela menta bubbaloo gum dsp morango bubbaloo gum dsp tutti frutti bubbaloo gum dsp uva mondelez' },
-    { name: 'Bubbaloo Balas', category: 'Bubbaloo Bala Mix 15G, Bubbaloo Bala Morango 15G, Bubbaloo Bala Tutti-Frutti 15G', img: 'assets/produtos/mondelez-novo/mondelez__bubbaloo-balas.jpg', keywords: 'bubbaloo balas bubbaloo bala mix 15g bubbaloo bala morango 15g bubbaloo bala tutti frutti 15g mondelez' },
-    { name: 'Bubbaloo Balas', category: 'Bubbaloo Bala Tutti-Frutti 75G, Bubbaloo Bala Morango Azedinha 82.5G, Bubbaloo Bala Mix Azedinha 82.5G, Bubbaloo Bala Morango 75G, Bubbaloo Bala Citric Blueberry 82.5G, Bubbaloo Bala Mix 75G', img: 'assets/produtos/mondelez-novo/mondelez__bubbaloo-balas-2.jpg', keywords: 'bubbaloo balas bubbaloo bala tutti frutti 75g bubbaloo bala morango azedinha 82 5g bubbaloo bala mix azedinha 82 5g bubbaloo bala morango 75g bubbaloo bala citric blueberry 82 5g bubbaloo bala mix 75g mondelez' },
-    { name: 'Halls', category: 'Halls Base DSP Uva Verde, Halls Base DSP Extra Forte, Halls Base DSP Menta, Halls Base DSP Morango, Halls Base DSP Cereja, Halls Blueberry, Halls Base DSP Melancia, Halls Base DSP Mentol', img: 'assets/produtos/mondelez-novo/mondelez__halls.jpg', keywords: 'halls halls base dsp uva verde halls base dsp extra forte halls base dsp menta halls base dsp morango halls base dsp cereja halls blueberry halls base dsp melancia halls base dsp mentol mondelez' },
-    { name: 'Halls Bag', category: 'Menta, Cereja, Morango, Extra Forte', img: 'assets/produtos/mondelez-novo/mondelez__halls-bag.jpg', keywords: 'halls bag menta cereja morango extra forte mondelez' },
-    { name: 'Tang', category: 'Uva, Tangerina, Joia da Ilha', img: 'assets/produtos/mondelez-novo/mondelez__tang.jpg', keywords: 'tang uva tangerina joia da ilha mondelez' },
-    { name: 'Tang Edição Limitada', category: 'Tang - Maracujá (Edição Limitada), Tang - Guaraná (Edição Limitada), Tang - Laranja com Mamão (Edição Limitada)', img: 'assets/produtos/mondelez-novo/mondelez__tang-edicao-limitada.jpg', keywords: 'tang edicao limitada tang maracuja edicao limitada tang guarana edicao limitada tang laranja com mamao edicao limitada mondelez' },
-    { name: 'Oreo 18G', category: 'Original', img: 'assets/produtos/mondelez-novo/mondelez__oreo-18g.jpg', keywords: 'oreo 18g original mondelez' },
-    { name: 'Mini Oreo 35G', category: 'Oreo', img: 'assets/produtos/mondelez-novo/mondelez__mini-oreo-35g.jpg', keywords: 'mini oreo 35g oreo mondelez' },
-    { name: 'Oreo Original 90G', category: 'Oreo', img: 'assets/produtos/mondelez-novo/mondelez__oreo-original-90g.jpg', keywords: 'oreo original 90g oreo mondelez' },
-    { name: 'Oreo Chocolate 90G', category: 'Oreo', img: 'assets/produtos/mondelez-novo/mondelez__oreo-chocolate-90g.jpg', keywords: 'oreo chocolate 90g oreo mondelez' },
-    { name: 'Club Social Snack', category: 'Parmesão 115G, Parmesão 68G, Marguerita 68G, American Barbecue 68G, Cebola e Salsa 68G, Cebola e Salsa 115G, Churras na Brasa 68G, Churras na Brasa 115G', img: 'assets/produtos/mondelez-novo/mondelez__club-social-snack.jpg', keywords: 'club social snack parmesao 115g parmesao 68g marguerita 68g american barbecue 68g cebola e salsa 68g cebola e salsa 115g churras na brasa 68g churras na brasa 115g mondelez' },
-    { name: 'Club Social Regular', category: 'Original, Pizza, Pão de Alho, Presunto, Cebola Caramelizada', img: 'assets/produtos/mondelez-novo/mondelez__club-social-regular.jpg', keywords: 'club social regular original pizza pao de alho presunto cebola caramelizada mondelez' },
-    { name: 'Club Social Integral', category: 'Integral Tradicional', img: 'assets/produtos/mondelez-novo/mondelez__club-social-integral.jpg', keywords: 'club social integral integral tradicional mondelez' },
-    { name: 'Club Social Snack (Sul/SP)', category: 'Club Social Snack - Cebola e Salsa 68G (Sul/SP), Club Social Snack - Cebola e Salsa 115G (Sul/SP), Club Social Snack - Churras na Brasa 68G (Sul/SP), Club Social Snack - Churras na Brasa 115G (Sul/SP), Club Social Snack - Parmesão 115G (Sul/SP), Club Social Snack - Parmesão 68G (Sul/SP), Club Social Snack - Marguerita 68G (Sul/SP), Club Social Snack - American Barbecue 68G (Sul/SP)', img: 'assets/produtos/mondelez-novo/mondelez__club-social-snack-sul-sp.jpg', keywords: 'club social snack sul sp club social snack cebola e salsa 68g sul sp club social snack cebola e salsa 115g sul sp club social snack churras na brasa 68g sul sp club social snack churras na brasa 115g sul sp club social snack parmesao 115g sul sp club social snack parmesao 68g sul sp club social snack marguerita 68g sul sp club social snack american barbecue 68g sul sp mondelez' },
-    { name: '5Star', category: 'Lacta', img: 'assets/produtos/mondelez-novo/mondelez__5star.jpg', keywords: '5star lacta mondelez' },
-    { name: 'Wafer Lacta Oreo', category: 'Lacta', img: 'assets/produtos/mondelez-novo/mondelez__wafer-lacta-oreo.jpg', keywords: 'wafer lacta oreo lacta mondelez' },
-    { name: 'Sonho de Valsa e Ouro Branco', category: 'Sonho de Valsa Unitário, Ouro Branco Unitário, Wafer Recheado Sonho de Valsa, Wafer Recheado Ouro Branco', img: 'assets/produtos/mondelez-novo/mondelez__sonho-de-valsa-e-ouro-branco.jpg', keywords: 'sonho de valsa e ouro branco sonho de valsa unitario ouro branco unitario wafer recheado sonho de valsa wafer recheado ouro branco mondelez' },
-    { name: 'Lacta Obrigado', category: 'Lacta', img: 'assets/produtos/mondelez-novo/mondelez__lacta-obrigado.jpg', keywords: 'lacta obrigado lacta mondelez' },
-    { name: 'Lacta 80G', category: 'Ao Leite, Laka, Diamante Negro, Shot, Diamante Negro/Laka, Amaro', img: 'assets/produtos/mondelez-novo/mondelez__lacta-80g.jpg', keywords: 'lacta 80g ao leite laka diamante negro shot diamante negro laka amaro mondelez' },
-    { name: 'Lacta Recheados', category: 'Lacta Oreo, Lacta Ouro Branco, Lacta Sonho de Valsa, Laka Caramelo', img: 'assets/produtos/mondelez-novo/mondelez__lacta-recheados.jpg', keywords: 'lacta recheados lacta oreo lacta ouro branco lacta sonho de valsa laka caramelo mondelez' },
-    { name: 'Bis', category: 'Bis Original, Bis Branco', img: 'assets/produtos/mondelez-novo/mondelez__bis-2.jpg', keywords: 'bis bis original bis branco mondelez' },
-    { name: 'Bis', category: 'Bis 10 ao Leite, Bis 10 Laka', img: 'assets/produtos/mondelez-novo/mondelez__bis.jpg', keywords: 'bis bis 10 ao leite bis 10 laka mondelez' },
-    { name: 'Bis Xtra', category: 'Bis Xtra Original, Bis Xtra Oreo, Bis Xtra Black, Bis Xtra Branco', img: 'assets/produtos/mondelez-novo/mondelez__bis-xtra.jpg', keywords: 'bis xtra bis xtra original bis xtra oreo bis xtra black bis xtra branco mondelez' },
-    { name: 'Tábuas Intense', category: '70% Cacau Original, 60% Cacau Original, 40% Cacau Original, 60% Cacau Mix Nuts, 60% Cacau Café, Tábuas Intense Nuts - 40% Cacau Avelã & Crocante de Cacau, Tábuas Intense Nuts - 40% Cacau Amêndoas & Caramelo Salgado, Tábuas Intense Nuts - 40% Cacau Amêndoas & Framboesa', img: 'assets/produtos/mondelez-novo/mondelez__tabuas-intense.jpg', keywords: 'tabuas intense 70 cacau original 60 cacau original 40 cacau original 60 cacau mix nuts 60 cacau cafe tabuas intense nuts 40 cacau avela crocante de cacau tabuas intense nuts 40 cacau amendoas caramelo salgado tabuas intense nuts 40 cacau amendoas framboesa mondelez' },
-    { name: 'Água de Coco 1L', category: 'Aqua Coco', img: 'assets/produtos/distririo/aqua-coco__agua-de-coco-300ml.jpg', keywords: 'agua de coco 1l aqua coco aqua coco' },
-    { name: 'Água de Coco 300ml', category: 'Aqua Coco', img: 'assets/produtos/distririo/aqua-coco__agua-de-coco-300ml.jpg', keywords: 'agua de coco 300ml aqua coco aqua coco' },
-    { name: 'Água de Coco Garrafa Turma da Mônica', category: 'Aqua Coco', img: 'assets/produtos/distririo/aqua-coco__agua-de-coco-garrafa-turma-da-monica.jpg', keywords: 'agua de coco garrafa turma da monica aqua coco aqua coco' },
-    { name: 'Suco de Acerola 300ml', category: 'Sumo', img: 'assets/produtos/distririo/sumo__suco-de-acerola-1l.jpg', keywords: 'suco de acerola 300ml sumo sumo' },
-    { name: 'Suco de Cajá 300ml', category: 'Sumo', img: 'assets/produtos/distririo/sumo__suco-de-caja-1l.jpg', keywords: 'suco de caja 300ml sumo sumo' },
-    { name: 'Suco de Caju 300ml', category: 'Sumo', img: 'assets/produtos/distririo/sumo__suco-de-caju-1l.jpg', keywords: 'suco de caju 300ml sumo sumo' },
-    { name: 'Suco de Goiaba', category: 'Sumo', img: 'assets/produtos/distririo/sumo__suco-de-goiaba.jpg', keywords: 'suco de goiaba sumo sumo' },
-    { name: 'Suco de Graviola 300ml', category: 'Sumo', img: 'assets/produtos/distririo/sumo__suco-de-graviola-1l.jpg', keywords: 'suco de graviola 300ml sumo sumo' },
-    { name: 'Suco de Uva', category: 'Sumo', img: 'assets/produtos/distririo/sumo__suco-de-uva.jpg', keywords: 'suco de uva sumo sumo' },
-    { name: 'Suco Sumo Açaí', category: 'Sumo', img: 'assets/produtos/distririo/sumo__suco-sumo-acai.jpg', keywords: 'suco sumo acai sumo sumo' },
-    { name: 'Suco de Acerola 1L', category: 'Sumo', img: 'assets/produtos/distririo/sumo__suco-de-acerola-1l.jpg', keywords: 'suco de acerola 1l sumo sumo' },
-    { name: 'Suco de Cajá 1L', category: 'Sumo', img: 'assets/produtos/distririo/sumo__suco-de-caja-1l.jpg', keywords: 'suco de caja 1l sumo sumo' },
-    { name: 'Suco de Caju 1L', category: 'Sumo', img: 'assets/produtos/distririo/sumo__suco-de-caju-1l.jpg', keywords: 'suco de caju 1l sumo sumo' },
-    { name: 'Suco de Graviola 1L', category: 'Sumo', img: 'assets/produtos/distririo/sumo__suco-de-graviola-1l.jpg', keywords: 'suco de graviola 1l sumo sumo' },
-    { name: 'Néctar Maratá Caju 1L', category: 'Maratá', img: 'assets/produtos/distririo/marata__nectar-marata-caju.jpg', keywords: 'nectar marata caju 1l marata marata' },
-    { name: 'Néctar Maratá Laranja 1L', category: 'Maratá', img: 'assets/produtos/distririo/marata__nectar-marata-laranja-200ml.jpg', keywords: 'nectar marata laranja 1l marata marata' },
-    { name: 'Néctar Maratá Pêssego 1L', category: 'Maratá', img: 'assets/produtos/distririo/marata__nectar-marata-pessego.jpg', keywords: 'nectar marata pessego 1l marata marata' },
-    { name: 'Néctar Maratá Uva 1L', category: 'Maratá', img: 'assets/produtos/distririo/marata__nectar-marata-uva-200ml.jpg', keywords: 'nectar marata uva 1l marata marata' },
-    { name: 'Néctar Maratá Caju 200ml', category: 'Maratá', img: 'assets/produtos/distririo/marata__nectar-marata-caju.jpg', keywords: 'nectar marata caju 200ml marata marata' },
-    { name: 'Néctar Maratá Laranja 200ml', category: 'Maratá', img: 'assets/produtos/distririo/marata__nectar-marata-laranja-200ml.jpg', keywords: 'nectar marata laranja 200ml marata marata' },
-    { name: 'Néctar Maratá Maracujá', category: 'Maratá', img: 'assets/produtos/distririo/marata__nectar-marata-maracuja.jpg', keywords: 'nectar marata maracuja marata marata' },
-    { name: 'Néctar Maratá Pêssego 200ml', category: 'Maratá', img: 'assets/produtos/distririo/marata__nectar-marata-pessego.jpg', keywords: 'nectar marata pessego 200ml marata marata' },
-    { name: 'Néctar Maratá Uva 200ml', category: 'Maratá', img: 'assets/produtos/distririo/marata__nectar-marata-uva-200ml.jpg', keywords: 'nectar marata uva 200ml marata marata' },
-    { name: 'Flocão de Milho Maratá', category: 'Maratá', img: 'assets/produtos/distririo/marata__flocao-de-milho-marata.jpg', keywords: 'flocao de milho marata marata marata' },
-    { name: 'Refresco Mara-tinho Abacaxi', category: 'Mara-tinho', img: 'assets/produtos/distririo/mara-tinho__refresco-mara-tinho-abacaxi.jpg', keywords: 'refresco mara tinho abacaxi mara tinho mara tinho' },
-    { name: 'Refresco Mara-tinho Laranja', category: 'Mara-tinho', img: 'assets/produtos/distririo/mara-tinho__refresco-mara-tinho-laranja.jpg', keywords: 'refresco mara tinho laranja mara tinho mara tinho' },
-    { name: 'Refresco Mara-tinho Maracujá', category: 'Mara-tinho', img: 'assets/produtos/distririo/mara-tinho__refresco-mara-tinho-maracuja.jpg', keywords: 'refresco mara tinho maracuja mara tinho mara tinho' },
-    { name: 'Refresco Mara-tinho Morango', category: 'Mara-tinho', img: 'assets/produtos/distririo/mara-tinho__refresco-mara-tinho-morango.jpg', keywords: 'refresco mara tinho morango mara tinho mara tinho' },
-    { name: 'Refresco Mara-tinho Uva', category: 'Mara-tinho', img: 'assets/produtos/distririo/mara-tinho__refresco-mara-tinho-uva.jpg', keywords: 'refresco mara tinho uva mara tinho mara tinho' },
-    { name: 'Molho Gota Alho', category: 'Gota', img: 'assets/produtos/distririo/gota__molho-gota-alho.jpg', keywords: 'molho gota alho gota gota' },
-    { name: 'Molho Gota Inglês', category: 'Gota', img: 'assets/produtos/distririo/gota__molho-gota-ingles.jpg', keywords: 'molho gota ingles gota gota' },
-    { name: 'Molho Gota Pimenta', category: 'Gota', img: 'assets/produtos/distririo/gota__molho-gota-pimenta.jpg', keywords: 'molho gota pimenta gota gota' },
-    { name: 'Molho Gota Pimenta Verde', category: 'Gota', img: 'assets/produtos/distririo/gota__molho-gota-pimenta-verde.jpg', keywords: 'molho gota pimenta verde gota gota' },
-    { name: 'Azeitona Verde Sachê Fatiada 150g', category: 'Rivoli', img: 'assets/produtos/distririo/rivoli__azeitona-verde-sache-fatiada-80g.jpg', keywords: 'azeitona verde sache fatiada 150g rivoli rivoli' },
-    { name: 'Azeitona Verde Sachê Fatiada 80g', category: 'Rivoli', img: 'assets/produtos/distririo/rivoli__azeitona-verde-sache-fatiada-80g.jpg', keywords: 'azeitona verde sache fatiada 80g rivoli rivoli' },
-    { name: 'Azeitona Preta Sachê Fatiada', category: 'Rivoli', img: 'assets/produtos/distririo/rivoli__azeitona-preta-sache-fatiada.jpg', keywords: 'azeitona preta sache fatiada rivoli rivoli' },
-    { name: 'Azeitona Verde Gordal Vidro c/ Caroço', category: 'Rivoli', img: 'assets/produtos/distririo/rivoli__azeitona-verde-gordal-vidro-c-caroco.jpg', keywords: 'azeitona verde gordal vidro c caroco rivoli rivoli' },
-    { name: 'Azeitonas Verde Fatiadas Balde', category: 'Rivoli', img: 'assets/produtos/distririo/rivoli__azeitonas-verde-fatiadas-balde.jpg', keywords: 'azeitonas verde fatiadas balde rivoli rivoli' },
-    { name: 'Azeitonas Verde Sem Caroço Balde', category: 'Rivoli', img: 'assets/produtos/distririo/rivoli__azeitonas-verde-sem-caroco-balde.jpg', keywords: 'azeitonas verde sem caroco balde rivoli rivoli' },
-    { name: 'Azeitonas Verde Média Balde', category: 'Rivoli', img: 'assets/produtos/distririo/rivoli__azeitonas-verde-media-balde.jpg', keywords: 'azeitonas verde media balde rivoli rivoli' },
-    { name: 'Azeitona Verde Sachê c/ Caroço 100g', category: 'Rivoli', img: 'assets/produtos/distririo/rivoli__azeitona-verde-sache-c-caroco-80g.jpg', keywords: 'azeitona verde sache c caroco 100g rivoli rivoli' },
-    { name: 'Azeitona Verde Sachê c/ Caroço 80g', category: 'Rivoli', img: 'assets/produtos/distririo/rivoli__azeitona-verde-sache-c-caroco-80g.jpg', keywords: 'azeitona verde sache c caroco 80g rivoli rivoli' },
-    { name: 'Azeitona Verde Sachê s/ Caroço 120g', category: 'Rivoli', img: 'assets/produtos/distririo/rivoli__azeitona-verde-sache-s-caroco-80g.jpg', keywords: 'azeitona verde sache s caroco 120g rivoli rivoli' },
-    { name: 'Azeitona Verde Sachê s/ Caroço 80g', category: 'Rivoli', img: 'assets/produtos/distririo/rivoli__azeitona-verde-sache-s-caroco-80g.jpg', keywords: 'azeitona verde sache s caroco 80g rivoli rivoli' },
-    { name: 'Trio Avelã e Castanha com Chocolate', category: 'Trio', img: 'assets/produtos/distririo/trio__trio-avela-e-castanha-com-chocolate.jpg', keywords: 'trio avela e castanha com chocolate trio trio' },
-    { name: 'Trio Banana Aveia e Mel', category: 'Trio', img: 'assets/produtos/distririo/trio__trio-banana-aveia-e-mel.jpg', keywords: 'trio banana aveia e mel trio trio' },
-    { name: 'Trio Brigadeiro', category: 'Trio', img: 'assets/produtos/distririo/trio__trio-brigadeiro.jpg', keywords: 'trio brigadeiro trio trio' },
-    { name: 'Trio Côco com Chocolate', category: 'Trio', img: 'assets/produtos/distririo/trio__trio-coco-com-chocolate.jpg', keywords: 'trio coco com chocolate trio trio' },
-    { name: 'Trio Morango com Chocolate', category: 'Trio', img: 'assets/produtos/distririo/trio__trio-morango-com-chocolate.jpg', keywords: 'trio morango com chocolate trio trio' },
-    { name: 'Trio Original Avelã e Castanha com Chocolate', category: 'Trio', img: 'assets/produtos/distririo/trio__trio-original-avela-e-castanha-com-chocolate.jpg', keywords: 'trio original avela e castanha com chocolate trio trio' },
-    { name: 'Trio Original Banana Aveia e Mel', category: 'Trio', img: 'assets/produtos/distririo/trio__trio-original-banana-aveia-e-mel.jpg', keywords: 'trio original banana aveia e mel trio trio' },
-    { name: 'Trio Original Brigadeiro', category: 'Trio', img: 'assets/produtos/distririo/trio__trio-original-brigadeiro.jpg', keywords: 'trio original brigadeiro trio trio' },
-    { name: 'Trio Original Morango com Chocolate', category: 'Trio', img: 'assets/produtos/distririo/trio__trio-original-morango-com-chocolate.jpg', keywords: 'trio original morango com chocolate trio trio' },
-    { name: 'Trio Côco Chocolate', category: 'Trio', img: 'assets/produtos/distririo/trio__trio-coco-chocolate.jpg', keywords: 'trio coco chocolate trio trio' },
-    { name: 'Trio Zero Banana com Chocolate', category: 'Trio', img: 'assets/produtos/distririo/trio__trio-zero-banana-com-chocolate.jpg', keywords: 'trio zero banana com chocolate trio trio' },
-    { name: 'Trio Zero Morango com Chocolate', category: 'Trio', img: 'assets/produtos/distririo/trio__trio-zero-morango-com-chocolate.jpg', keywords: 'trio zero morango com chocolate trio trio' },
-    { name: 'Granola Tradicional', category: 'Kobber', img: 'assets/produtos/distririo/kobber__granola-tradicional.jpg', keywords: 'granola tradicional kobber kobber' },
-    { name: 'Granola Frutas e Mel', category: 'Kobber', img: 'assets/produtos/distririo/kobber__granola-frutas-e-mel.jpg', keywords: 'granola frutas e mel kobber kobber' },
-    { name: 'Granola Banana e Mel', category: 'Kobber', img: 'assets/produtos/distririo/kobber__granola-banana-e-mel.jpg', keywords: 'granola banana e mel kobber kobber' },
-    { name: 'Granola Chocolate e Amendoim', category: 'Kobber', img: 'assets/produtos/distririo/kobber__granola-chocolate-e-amendoim.jpg', keywords: 'granola chocolate e amendoim kobber kobber' },
-    { name: 'Granola Castanha', category: 'Kobber', img: 'assets/produtos/distririo/kobber__granola-castanha.jpg', keywords: 'granola castanha kobber kobber' },
-    { name: 'Granola Zero', category: 'Kobber', img: 'assets/produtos/distririo/kobber__granola-zero.jpg', keywords: 'granola zero kobber kobber' },
-    { name: 'Geleia Baldoni Abacaxi c/ Pimenta', category: 'Baldoni', img: 'assets/produtos/distririo/baldoni__geleia-baldoni-abacaxi-c-pimenta.jpg', keywords: 'geleia baldoni abacaxi c pimenta baldoni baldoni' },
-    { name: 'Geleia Baldoni Frutas Amarelas', category: 'Baldoni', img: 'assets/produtos/distririo/baldoni__geleia-baldoni-frutas-amarelas.jpg', keywords: 'geleia baldoni frutas amarelas baldoni baldoni' },
-    { name: 'Geleia Baldoni Frutas Vermelhas', category: 'Baldoni', img: 'assets/produtos/distririo/baldoni__geleia-baldoni-frutas-vermelhas.jpg', keywords: 'geleia baldoni frutas vermelhas baldoni baldoni' },
-    { name: 'Geleia Baldoni Morango', category: 'Baldoni', img: 'assets/produtos/distririo/baldoni__geleia-baldoni-morango.jpg', keywords: 'geleia baldoni morango baldoni baldoni' },
-    { name: 'Mel Turma da Mônica Orgânico', category: 'Baldoni', img: 'assets/produtos/distririo/baldoni__mel-turma-da-monica-organico.jpg', keywords: 'mel turma da monica organico baldoni baldoni' },
-    { name: 'Mel Turma da Mônica Laranjeira', category: 'Baldoni', img: 'assets/produtos/distririo/baldoni__mel-turma-da-monica-laranjeira.jpg', keywords: 'mel turma da monica laranjeira baldoni baldoni' },
-    { name: 'Mel Chef Bisnaga (Chefão)', category: 'Baldoni', img: 'assets/produtos/distririo/baldoni__mel-chef-bisnaga-chefao.jpg', keywords: 'mel chef bisnaga chefao baldoni baldoni' },
-    { name: 'Mel Chef Bisnaga', category: 'Baldoni', img: 'assets/produtos/distririo/baldoni__mel-chef-bisnaga.jpg', keywords: 'mel chef bisnaga baldoni baldoni' },
-    { name: 'Mel Orgânico Bisnaga', category: 'Baldoni', img: 'assets/produtos/distririo/baldoni__mel-organico-bisnaga.jpg', keywords: 'mel organico bisnaga baldoni baldoni' },
-    { name: 'Mel Holanda Bisnaga', category: 'Baldoni', img: 'assets/produtos/distririo/baldoni__mel-holanda-bisnaga.jpg', keywords: 'mel holanda bisnaga baldoni baldoni' },
-    { name: 'Detergente em Pó Ace Sachê 800g', category: 'Ace', img: 'assets/produtos/distririo/ace__detergente-em-po-ace-sache-2-4kg.jpg', keywords: 'detergente em po ace sache 800g ace ace' },
-    { name: 'Detergente em Pó Ace Sachê 1,5kg', category: 'Ace', img: 'assets/produtos/distririo/ace__detergente-em-po-ace-sache-2-4kg.jpg', keywords: 'detergente em po ace sache 1 5kg ace ace' },
-    { name: 'Detergente em Pó Ace Sachê 2,4kg', category: 'Ace', img: 'assets/produtos/distririo/ace__detergente-em-po-ace-sache-2-4kg.jpg', keywords: 'detergente em po ace sache 2 4kg ace ace' },
-    { name: 'Detergente em Pó Ace Cartucho 1,6kg', category: 'Ace', img: 'assets/produtos/distririo/ace__detergente-em-po-ace-cartucho-2-2kg.jpg', keywords: 'detergente em po ace cartucho 1 6kg ace ace' },
-    { name: 'Detergente em Pó Ace Cartucho 2,2kg', category: 'Ace', img: 'assets/produtos/distririo/ace__detergente-em-po-ace-cartucho-2-2kg.jpg', keywords: 'detergente em po ace cartucho 2 2kg ace ace' },
-    { name: 'Detergente em Pó Espumil Premium Cartucho', category: 'Espumil', img: 'assets/produtos/distririo/espumil__detergente-em-po-espumil-premium-cartucho.jpg', keywords: 'detergente em po espumil premium cartucho espumil espumil' },
-    { name: 'Lava Roupas Líquido Espumil 1L', category: 'Espumil', img: 'assets/produtos/distririo/espumil__lava-roupas-liquido-espumil-1l.jpg', keywords: 'lava roupas liquido espumil 1l espumil espumil' },
-    { name: 'Lava Roupas Líquido Espumil 3L', category: 'Espumil', img: 'assets/produtos/distririo/espumil__lava-roupas-liquido-espumil-1l.jpg', keywords: 'lava roupas liquido espumil 3l espumil espumil' },
-    { name: 'Sabão em Pedra Espumil Côco', category: 'Espumil', img: 'assets/produtos/distririo/espumil__sabao-em-pedra-espumil-coco.jpg', keywords: 'sabao em pedra espumil coco espumil espumil' },
-    { name: 'Sabão em Pedra Espumil Glicerinado Neutro', category: 'Espumil', img: 'assets/produtos/distririo/espumil__sabao-em-pedra-espumil-glicerinado-neutro.jpg', keywords: 'sabao em pedra espumil glicerinado neutro espumil espumil' },
-    { name: 'Supino - Barra de Banana com Cobertura de Chocolate ao Leite', category: 'Supino', img: 'assets/produtos/banana-brasil/supino__supino-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg', keywords: 'supino barra de banana com cobertura de chocolate ao leite supino banana brasil' },
-    { name: 'Supino - Barra de Banana com Cobertura de Chocolate Branco', category: 'Supino', img: 'assets/produtos/banana-brasil/supino__supino-barra-de-banana-com-cobertura-de-chocolate-branco.jpg', keywords: 'supino barra de banana com cobertura de chocolate branco supino banana brasil' },
-    { name: 'Supino Zero - Barra de Banana com Cobertura de Chocolate ao Leite', category: 'Supino', img: 'assets/produtos/banana-brasil/supino__supino-zero-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg', keywords: 'supino zero barra de banana com cobertura de chocolate ao leite supino banana brasil' },
-    { name: 'Supino Zero - Barra de Banana com Cobertura de Chocolate Branco', category: 'Supino', img: 'assets/produtos/banana-brasil/supino__supino-zero-barra-de-banana-com-cobertura-de-chocolate-branco.jpg', keywords: 'supino zero barra de banana com cobertura de chocolate branco supino banana brasil' },
-    { name: 'Supino - Barra de Banana e Ameixa', category: 'Supino', img: 'assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-ameixa.jpg', keywords: 'supino barra de banana e ameixa supino banana brasil' },
-    { name: 'Supino - Barra de Banana, Nozes e Damasco', category: 'Supino', img: 'assets/produtos/banana-brasil/supino__supino-barra-de-banana-nozes-e-damasco.jpg', keywords: 'supino barra de banana nozes e damasco supino banana brasil' },
-    { name: 'Supino - Barra de Banana, Maçã e Canela', category: 'Supino', img: 'assets/produtos/banana-brasil/supino__supino-barra-de-banana-maca-e-canela.jpg', keywords: 'supino barra de banana maca e canela supino banana brasil' },
-    { name: 'Supino - Barra de Banana e Açaí', category: 'Supino', img: 'assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-acai.jpg', keywords: 'supino barra de banana e acai supino banana brasil' },
-    { name: 'Supino - Barra de Banana e Morango', category: 'Supino', img: 'assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-morango.jpg', keywords: 'supino barra de banana e morango supino banana brasil' },
-    { name: 'Supino - Barra de Banana e Abacaxi', category: 'Supino', img: 'assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-abacaxi.jpg', keywords: 'supino barra de banana e abacaxi supino banana brasil' },
-    { name: 'Nuts - Barra de Castanhas, Amendoim e Abacaxi', category: 'Nuts', img: 'assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-abacaxi.jpg', keywords: 'nuts barra de castanhas amendoim e abacaxi nuts banana brasil' },
-    { name: 'Nuts - Barra de Castanhas, Amendoim e Frutas Vermelhas', category: 'Nuts', img: 'assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-frutas-vermelhas.jpg', keywords: 'nuts barra de castanhas amendoim e frutas vermelhas nuts banana brasil' },
-    { name: 'Nuts - Barra de Castanhas, Amendoim, Banana e Canela', category: 'Nuts', img: 'assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-banana-e-canela.jpg', keywords: 'nuts barra de castanhas amendoim banana e canela nuts banana brasil' },
-    { name: 'Nuts - Barra de Castanhas, Amendoim e Sementes', category: 'Nuts', img: 'assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-sementes.jpg', keywords: 'nuts barra de castanhas amendoim e sementes nuts banana brasil' },
-    { name: 'Nuts - Barra de Castanhas, Amendoim e Frutas', category: 'Nuts', img: 'assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-frutas.jpg', keywords: 'nuts barra de castanhas amendoim e frutas nuts banana brasil' },
-    { name: 'Nuts - Barra de Castanhas e Amendoim com Cobertura de Chocolate', category: 'Nuts', img: 'assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-e-amendoim-com-cobertura-de-chocolate.jpg', keywords: 'nuts barra de castanhas e amendoim com cobertura de chocolate nuts banana brasil' },
-    { name: 'Nuts - Barra de Castanhas, Amendoim e Coco com Cobertura de Chocolate', category: 'Nuts', img: 'assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-coco-com-cobertura-de-chocolate.jpg', keywords: 'nuts barra de castanhas amendoim e coco com cobertura de chocolate nuts banana brasil' },
-    { name: 'Nuts - Barra de Castanhas e Amendoim com Cobertura de Morango', category: 'Nuts', img: 'assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-e-amendoim-com-cobertura-de-morango.jpg', keywords: 'nuts barra de castanhas e amendoim com cobertura de morango nuts banana brasil' },
-    { name: 'Nuts - Barra de Castanhas e Pasta de Amendoim com Cobertura de Chocolate', category: 'Nuts', img: 'assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-e-pasta-de-amendoim-com-cobertura-de-chocolate.jpg', keywords: 'nuts barra de castanhas e pasta de amendoim com cobertura de chocolate nuts banana brasil' },
-    { name: 'Pé de Moleque - Barra Crocante de Amendoim Tradicional', category: 'Pé de Moleque', img: 'assets/produtos/banana-brasil/pe-de-moleque__pe-de-moleque-barra-crocante-de-amendoim-tradicional.jpg', keywords: 'pe de moleque barra crocante de amendoim tradicional pe de moleque banana brasil' },
-    { name: 'Pé de Moleque - Barra Crocante de Amendoim Caramelo Salgado', category: 'Pé de Moleque', img: 'assets/produtos/banana-brasil/pe-de-moleque__pe-de-moleque-barra-crocante-de-amendoim-caramelo-salgado.jpg', keywords: 'pe de moleque barra crocante de amendoim caramelo salgado pe de moleque banana brasil' },
-    { name: 'Protein+ - Napolitano', category: 'Protein+', img: 'assets/produtos/banana-brasil/protein__protein-napolitano.jpg', keywords: 'protein napolitano protein banana brasil' },
-    { name: 'Protein+ - Torta de Limão', category: 'Protein+', img: 'assets/produtos/banana-brasil/protein__protein-torta-de-limao.jpg', keywords: 'protein torta de limao protein banana brasil' },
-    { name: 'Protein+ - Cookies & Cream', category: 'Protein+', img: 'assets/produtos/banana-brasil/protein__protein-cookies-cream.jpg', keywords: 'protein cookies cream protein banana brasil' },
-    { name: 'Protein+ - Banoffee', category: 'Protein+', img: 'assets/produtos/banana-brasil/protein__protein-banoffee.jpg', keywords: 'protein banoffee protein banana brasil' },
-    { name: 'Protein+ Vegano - Pasta de Amendoim e Caramelo Salgado', category: 'Protein+', img: 'assets/produtos/banana-brasil/protein__protein-vegano-pasta-de-amendoim-e-caramelo-salgado.jpg', keywords: 'protein vegano pasta de amendoim e caramelo salgado protein banana brasil' },
-    { name: 'Supino Protein - Baunilha com Crispies', category: 'Supino Protein', img: 'assets/produtos/banana-brasil/supino-protein__supino-protein-baunilha-com-crispies.jpg', keywords: 'supino protein baunilha com crispies supino protein banana brasil' },
-    { name: 'Supino Protein - Coco', category: 'Supino Protein', img: 'assets/produtos/banana-brasil/supino-protein__supino-protein-coco.jpg', keywords: 'supino protein coco supino protein banana brasil' },
-    { name: 'Supino Protein - Cappuccino', category: 'Supino Protein', img: 'assets/produtos/banana-brasil/supino-protein__supino-protein-cappuccino.jpg', keywords: 'supino protein cappuccino supino protein banana brasil' },
-    { name: 'Supino Protein - Chocolate', category: 'Supino Protein', img: 'assets/produtos/banana-brasil/supino-protein__supino-protein-chocolate.jpg', keywords: 'supino protein chocolate supino protein banana brasil' },
-    { name: 'Supino Protein Max - Amendoim e Caramelo', category: 'Supino Protein', img: 'assets/produtos/banana-brasil/supino-protein__supino-protein-max-amendoim-e-caramelo.jpg', keywords: 'supino protein max amendoim e caramelo supino protein banana brasil' },
-    { name: 'Levittá - Barra Crocante de Gergelim e Linhaça', category: 'Levittá', img: 'assets/produtos/banana-brasil/levitta__levitta-barra-crocante-de-gergelim-e-linhaca.jpg', keywords: 'levitta barra crocante de gergelim e linhaca levitta banana brasil' },
-    { name: 'Levittá - Barra Crocante de Gergelim, Quinoa e Cacau', category: 'Levittá', img: 'assets/produtos/banana-brasil/levitta__levitta-barra-crocante-de-gergelim-quinoa-e-cacau.jpg', keywords: 'levitta barra crocante de gergelim quinoa e cacau levitta banana brasil' },
-    { name: 'Levittá - Barra Crocante de Gergelim e Chia', category: 'Levittá', img: 'assets/produtos/banana-brasil/levitta__levitta-barra-crocante-de-gergelim-e-chia.jpg', keywords: 'levitta barra crocante de gergelim e chia levitta banana brasil' },
-    { name: 'Levittá - Barra Crocante de Gergelim e Castanha-de-Caju', category: 'Levittá', img: 'assets/produtos/banana-brasil/levitta__levitta-barra-crocante-de-gergelim-e-castanha-de-caju.jpg', keywords: 'levitta barra crocante de gergelim e castanha de caju levitta banana brasil' },
-    { name: 'Só Frutas - Original', category: 'Só Frutas', img: 'assets/produtos/banana-brasil/so-frutas__so-frutas-original.jpg', keywords: 'so frutas original so frutas banana brasil' },
-    { name: 'Só Frutas + Coco', category: 'Só Frutas', img: 'assets/produtos/banana-brasil/so-frutas__so-frutas-coco.jpg', keywords: 'so frutas coco so frutas banana brasil' },
-    { name: 'Só Frutas + Cacau e Especiarias', category: 'Só Frutas', img: 'assets/produtos/banana-brasil/so-frutas__so-frutas-cacau-e-especiarias.jpg', keywords: 'so frutas cacau e especiarias so frutas banana brasil' },
-    { name: 'Banana Passa', category: 'Banana Passa', img: 'assets/produtos/banana-brasil/banana-passa__banana-passa.jpg', keywords: 'banana passa banana passa banana brasil' },
-    { name: 'NutsBITES - Bombom de Castanhas, Pasta de Amendoim e Caramelo com Cobertura de Chocolate ao Leite', category: 'NutsBITES', img: 'assets/produtos/banana-brasil/nutsbites__nutsbites-bombom-de-castanhas-pasta-de-amendoim-e-caramelo-com-cobertura-de-chocolate-ao-leite.jpg', keywords: 'nutsbites bombom de castanhas pasta de amendoim e caramelo com cobertura de chocolate ao leite nutsbites banana brasil' },
-    { name: 'NutsBITES - Bombom de Castanhas, Amendoim e Frutas com Cobertura de Chocolate Branco', category: 'NutsBITES', img: 'assets/produtos/banana-brasil/nutsbites__nutsbites-bombom-de-castanhas-amendoim-e-frutas-com-cobertura-de-chocolate-branco.jpg', keywords: 'nutsbites bombom de castanhas amendoim e frutas com cobertura de chocolate branco nutsbites banana brasil' },
-    { name: 'NutsBITES Vegano - Bombom de Castanhas, Amendoim, Nibs de Cacau e Canela com Cobertura de Chocolate Meio Amargo', category: 'NutsBITES', img: 'assets/produtos/banana-brasil/nutsbites__nutsbites-vegano-bombom-de-castanhas-amendoim-nibs-de-cacau-e-canela-com-cobertura-de-chocolate-meio-amargo.jpg', keywords: 'nutsbites vegano bombom de castanhas amendoim nibs de cacau e canela com cobertura de chocolate meio amargo nutsbites banana brasil' },
-    { name: 'Banana Brasil Kids - Barra de Banana e Melancia com Cobertura de Melancia', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-e-melancia-com-cobertura-de-melancia.jpg', keywords: 'banana brasil kids barra de banana e melancia com cobertura de melancia kids banana brasil' },
-    { name: 'Banana Brasil Kids - Barra de Banana com Cobertura de Chocolate ao Leite', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg', keywords: 'banana brasil kids barra de banana com cobertura de chocolate ao leite kids banana brasil' },
-    { name: 'Banana Brasil Kids - Barra de Banana com Cobertura de Chocolate Branco', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-com-cobertura-de-chocolate-branco.jpg', keywords: 'banana brasil kids barra de banana com cobertura de chocolate branco kids banana brasil' },
-    { name: 'Banana Brasil Kids - Barra de Banana e Uva com Cobertura de Uva', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-e-uva-com-cobertura-de-uva.jpg', keywords: 'banana brasil kids barra de banana e uva com cobertura de uva kids banana brasil' },
-    { name: 'Banana Brasil Kids - Barra de Banana e Morango com Cobertura de Morango', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-e-morango-com-cobertura-de-morango.jpg', keywords: 'banana brasil kids barra de banana e morango com cobertura de morango kids banana brasil' },
-    { name: 'Frutalalá - Barra de Frutas Maçã e Morango', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__frutalala-barra-de-frutas-maca-e-morango.jpg', keywords: 'frutalala barra de frutas maca e morango kids banana brasil' },
-    { name: 'Frutalalá - Barra de Frutas Banana e Maçã', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__frutalala-barra-de-frutas-banana-e-maca.jpg', keywords: 'frutalala barra de frutas banana e maca kids banana brasil' },
-    { name: 'Frutalalá - Barra de Frutas Salada de Frutas', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__frutalala-barra-de-frutas-salada-de-frutas.jpg', keywords: 'frutalala barra de frutas salada de frutas kids banana brasil' },
-    { name: 'Granobá - Barra de Granola e Morango com Cobertura de Iogurte', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__granoba-barra-de-granola-e-morango-com-cobertura-de-iogurte.jpg', keywords: 'granoba barra de granola e morango com cobertura de iogurte kids banana brasil' },
-    { name: 'Granobá - Barra de Granola com Cobertura de Chocolate', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__granoba-barra-de-granola-com-cobertura-de-chocolate.jpg', keywords: 'granoba barra de granola com cobertura de chocolate kids banana brasil' },
-    { name: 'Granobá - Barra de Granola, Banana e Maçã com Cobertura de Iogurte', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__granoba-barra-de-granola-banana-e-maca-com-cobertura-de-iogurte.jpg', keywords: 'granoba barra de granola banana e maca com cobertura de iogurte kids banana brasil' },
-    { name: 'Proteyá - Barra de Proteína Leitinho com Cookies', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__proteya-barra-de-proteina-leitinho-com-cookies.jpg', keywords: 'proteya barra de proteina leitinho com cookies kids banana brasil' },
-    { name: 'Proteyá - Barra de Proteína Chocolate', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__proteya-barra-de-proteina-chocolate.jpg', keywords: 'proteya barra de proteina chocolate kids banana brasil' },
-    { name: 'Proteyá - Barra de Proteína Iogurte de Morango', category: 'Kids', img: 'assets/produtos/banana-brasil/kids__proteya-barra-de-proteina-iogurte-de-morango.jpg', keywords: 'proteya barra de proteina iogurte de morango kids banana brasil' },
-    { name: 'Cafeína Performance', category: 'Performance', img: 'assets/produtos/lauton/performance__cafeina-performance.jpg', keywords: 'cafeina performance performance lauton' },
-    { name: 'Powerdrol', category: 'Performance', img: 'assets/produtos/lauton/saude-integral__powerdrol.jpg', keywords: 'powerdrol performance lauton' },
-    { name: 'L-Arginina Plus', category: 'Performance', img: 'assets/produtos/lauton/performance__l-arginina-plus.jpg', keywords: 'l arginina plus performance lauton' },
-    { name: 'Cúrcuma Premium', category: 'Performance', img: 'assets/produtos/lauton/saude-integral__curcuma-premium.jpg', keywords: 'curcuma premium performance lauton' },
-    { name: 'Colágeno Tipo II', category: 'Performance', img: 'assets/produtos/lauton/performance__colageno-tipo-ii.jpg', keywords: 'colageno tipo ii performance lauton' },
-    { name: 'Feno Grego Premium', category: 'Performance', img: 'assets/produtos/lauton/performance__feno-grego-premium.jpg', keywords: 'feno grego premium performance lauton' },
-    { name: 'Maca Peruana Premium', category: 'Performance', img: 'assets/produtos/lauton/performance__maca-peruana-premium.jpg', keywords: 'maca peruana premium performance lauton' },
-    { name: 'Extrato de Laranja Moro Premium', category: 'Performance', img: 'assets/produtos/lauton/performance__extrato-de-laranja-moro-premium.jpg', keywords: 'extrato de laranja moro premium performance lauton' },
-    { name: 'Multi Vitamínico Hemovital A-Z', category: 'Performance', img: 'assets/produtos/lauton/performance__multi-vitaminico-hemovital-a-z.jpg', keywords: 'multi vitaminico hemovital a z performance lauton' },
-    { name: 'Boro Decahidratado', category: 'Performance', img: 'assets/produtos/lauton/performance__boro-decahidratado.jpg', keywords: 'boro decahidratado performance lauton' },
-    { name: 'Complexo B Max', category: 'Corpo e beleza', img: 'assets/produtos/lauton/corpo-e-beleza__complexo-b-max.jpg', keywords: 'complexo b max corpo e beleza lauton' },
-    { name: 'Biotina Plus', category: 'Corpo e beleza', img: 'assets/produtos/lauton/corpo-e-beleza__biotina-plus.jpg', keywords: 'biotina plus corpo e beleza lauton' },
-    { name: 'Coenzima Q10 PRO', category: 'Corpo e beleza', img: 'assets/produtos/lauton/corpo-e-beleza__coenzima-q10-pro.jpg', keywords: 'coenzima q10 pro corpo e beleza lauton' },
-    { name: 'Hialux Skincare', category: 'Corpo e beleza', img: 'assets/produtos/lauton/corpo-e-beleza__hialux-skincare.jpg', keywords: 'hialux skincare corpo e beleza lauton' },
-    { name: 'Procran Cranberry', category: 'Corpo e beleza', img: 'assets/produtos/lauton/corpo-e-beleza__procran-cranberry.jpg', keywords: 'procran cranberry corpo e beleza lauton' },
-    { name: 'Colágeno Hidrolisado', category: 'Corpo e beleza', img: 'assets/produtos/lauton/corpo-e-beleza__colageno-hidrolisado.jpg', keywords: 'colageno hidrolisado corpo e beleza lauton' },
-    { name: 'Coenzima Q10 ULTRA', category: 'Corpo e beleza', img: 'assets/produtos/lauton/mente-e-bem-estar__coenzima-q10-ultra.jpg', keywords: 'coenzima q10 ultra corpo e beleza lauton' },
-    { name: 'Cromo Picolinato', category: 'Corpo e beleza', img: 'assets/produtos/lauton/corpo-e-beleza__cromo-picolinato.jpg', keywords: 'cromo picolinato corpo e beleza lauton' },
-    { name: 'Luteína + Zeaxantina', category: 'Corpo e beleza', img: 'assets/produtos/lauton/corpo-e-beleza__luteina-zeaxantina.jpg', keywords: 'luteina zeaxantina corpo e beleza lauton' },
-    { name: 'Triptoflex', category: 'Mente e bem estar', img: 'assets/produtos/lauton/mente-e-bem-estar__triptoflex.jpg', keywords: 'triptoflex mente e bem estar lauton' },
-    { name: 'Melatonina Líquida', category: 'Mente e bem estar', img: 'assets/produtos/lauton/mente-e-bem-estar__melatonina-liquida.jpg', keywords: 'melatonina liquida mente e bem estar lauton' },
-    { name: 'Melatonina Premium', category: 'Mente e bem estar', img: 'assets/produtos/lauton/mente-e-bem-estar__melatonina-premium.jpg', keywords: 'melatonina premium mente e bem estar lauton' },
-    { name: 'Amora Miúra Amorine', category: 'Mente e bem estar', img: 'assets/produtos/lauton/mente-e-bem-estar__amora-miura-amorine.jpg', keywords: 'amora miura amorine mente e bem estar lauton' },
-    { name: 'Óleo de Prímula', category: 'Mente e bem estar', img: 'assets/produtos/lauton/mente-e-bem-estar__oleo-de-primula.jpg', keywords: 'oleo de primula mente e bem estar lauton' },
-    { name: 'Magnésio Dimalato', category: 'Mente e bem estar', img: 'assets/produtos/lauton/mente-e-bem-estar__magnesio-dimalato.jpg', keywords: 'magnesio dimalato mente e bem estar lauton' },
-    { name: 'Ômega 3 Ultra', category: 'Mente e bem estar', img: 'assets/produtos/lauton/mente-e-bem-estar__omega-3-ultra.jpg', keywords: 'omega 3 ultra mente e bem estar lauton' },
-    { name: 'Ômega 3 Pro', category: 'Mente e bem estar', img: 'assets/produtos/lauton/mente-e-bem-estar__omega-3-pro.jpg', keywords: 'omega 3 pro mente e bem estar lauton' },
-    { name: 'Própolis Defense', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__propolis-defense.jpg', keywords: 'propolis defense saude integral lauton' },
-    { name: 'Vitamina C 500', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__vitamina-c-500.jpg', keywords: 'vitamina c 500 saude integral lauton' },
-    { name: 'Vitamina K2-MK7', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__vitamina-k2-mk7.jpg', keywords: 'vitamina k2 mk7 saude integral lauton' },
-    { name: 'MSM - Enxofre Orgânico', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__msm-enxofre-organico.jpg', keywords: 'msm enxofre organico saude integral lauton' },
-    { name: 'Vitamina B12', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__vitamina-b12.jpg', keywords: 'vitamina b12 saude integral lauton' },
-    { name: 'Cobre Quelato Bisglicinato', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__cobre-quelato-bisglicinato.jpg', keywords: 'cobre quelato bisglicinato saude integral lauton' },
-    { name: 'Vitamina D3+K2', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__vitamina-d3-k2.jpg', keywords: 'vitamina d3 k2 saude integral lauton' },
-    { name: 'Vitamina D3 2.000 UI', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__vitamina-d3-2-000-ui.jpg', keywords: 'vitamina d3 2 000 ui saude integral lauton' },
-    { name: 'Ferro Quelato Bisglicinato', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__ferro-quelato-bisglicinato.jpg', keywords: 'ferro quelato bisglicinato saude integral lauton' },
-    { name: 'Ora Pro Nóbis', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__ora-pro-nobis.jpg', keywords: 'ora pro nobis saude integral lauton' },
-    { name: 'Metilfolax 600mcg', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__metilfolax-600mcg.jpg', keywords: 'metilfolax 600mcg saude integral lauton' },
-    { name: 'Óleo de Alho Cru', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__oleo-de-alho-cru.jpg', keywords: 'oleo de alho cru saude integral lauton' },
-    { name: 'Zinco Quelato Bisglicinato', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__zinco-quelato-bisglicinato.jpg', keywords: 'zinco quelato bisglicinato saude integral lauton' },
-    { name: 'Resveratrol', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__resveratrol.jpg', keywords: 'resveratrol saude integral lauton' },
-    { name: 'Beta Glucana Premium', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__beta-glucana-premium.jpg', keywords: 'beta glucana premium saude integral lauton' },
-    { name: 'Magnésio Inositol', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__magnesio-inositol.jpg', keywords: 'magnesio inositol saude integral lauton' },
-    { name: 'Cálcio Citrato Malato', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__calcio-citrato-malato.jpg', keywords: 'calcio citrato malato saude integral lauton' },
-    { name: 'Cloreto de Magnésio P.A.', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__cloreto-de-magnesio-p-a.jpg', keywords: 'cloreto de magnesio p a saude integral lauton' },
-    { name: 'Vitamina A', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__vitamina-a.jpg', keywords: 'vitamina a saude integral lauton' },
-    { name: 'Licopeno de Tomate', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__licopeno-de-tomate.jpg', keywords: 'licopeno de tomate saude integral lauton' },
-    { name: 'Vitamina B12 Líquida', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__vitamina-b12-liquida.jpg', keywords: 'vitamina b12 liquida saude integral lauton' },
-    { name: 'NAC - N-Acetil L-Cisteína', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__nac-n-acetil-l-cisteina.jpg', keywords: 'nac n acetil l cisteina saude integral lauton' },
-    { name: 'Vitamina D3 Líquida', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__vitamina-d3-liquida.jpg', keywords: 'vitamina d3 liquida saude integral lauton' },
-    { name: 'Quadrimag Quadri4Tech', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__quadrimag-quadri4tech.jpg', keywords: 'quadrimag quadri4tech saude integral lauton' },
-    { name: 'Treonato Treotech', category: 'Saúde integral', img: 'assets/produtos/lauton/saude-integral__treonato-treotech.jpg', keywords: 'treonato treotech saude integral lauton' },
-    { name: 'FiberLiv - 7 Fontes de Fibra', category: 'Performance series', img: 'assets/produtos/lauton/performance-series__fiberliv-7-fontes-de-fibra.jpg', keywords: 'fiberliv 7 fontes de fibra performance series lauton' },
-    { name: 'Cafeína - Caffeine Performance', category: 'Performance series', img: 'assets/produtos/lauton/performance-series__cafeina-caffeine-performance.jpg', keywords: 'cafeina caffeine performance performance series lauton' },
-    { name: 'Creatina - Monohidratada', category: 'Performance series / Creatina e Glutamina', img: 'assets/produtos/lauton/performance-series-creatina-e-glutamina__creatina-monohidratada.jpg', keywords: 'creatina monohidratada performance series creatina e glutamina lauton' },
-    { name: 'Glutamina - 100% Pura', category: 'Performance series / Creatina e Glutamina', img: 'assets/produtos/lauton/performance-series-creatina-e-glutamina__glutamina-100-pura.jpg', keywords: 'glutamina 100 pura performance series creatina e glutamina lauton' },
-    { name: 'Kit Scudo P.', category: 'Lançamentos - Antipiolhos', img: 'assets/produtos/abelha-rainha/lancamentos-antipiolhos__kit-scudo-p.jpg', keywords: 'kit scudo p lancamentos antipiolhos abelha rainha' },
-    { name: 'Body Splash Vanilla', category: 'Lançamentos - Body Splash / Perfumaria', img: 'assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-vanilla.jpg', keywords: 'body splash vanilla lancamentos body splash perfumaria abelha rainha' },
-    { name: 'Body Splash Melancia', category: 'Lançamentos - Body Splash / Perfumaria', img: 'assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-melancia.jpg', keywords: 'body splash melancia lancamentos body splash perfumaria abelha rainha' },
-    { name: 'Body Splash Maracujá', category: 'Lançamentos - Body Splash / Perfumaria', img: 'assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-maracuja.jpg', keywords: 'body splash maracuja lancamentos body splash perfumaria abelha rainha' },
-    { name: 'Body Splash Pitaya', category: 'Lançamentos - Body Splash / Perfumaria', img: 'assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-pitaya.jpg', keywords: 'body splash pitaya lancamentos body splash perfumaria abelha rainha' },
-    { name: 'Esfoliante Corporal Vanilla', category: 'Lançamentos - Esfoliantes Corporais', img: 'assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-vanilla.jpg', keywords: 'esfoliante corporal vanilla lancamentos esfoliantes corporais abelha rainha' },
-    { name: 'Esfoliante Corporal Melancia', category: 'Lançamentos - Esfoliantes Corporais', img: 'assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-melancia.jpg', keywords: 'esfoliante corporal melancia lancamentos esfoliantes corporais abelha rainha' },
-    { name: 'Esfoliante Corporal Maracujá', category: 'Lançamentos - Esfoliantes Corporais', img: 'assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-maracuja.jpg', keywords: 'esfoliante corporal maracuja lancamentos esfoliantes corporais abelha rainha' },
-    { name: 'Esfoliante Corporal Pitaya', category: 'Lançamentos - Esfoliantes Corporais', img: 'assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-pitaya.jpg', keywords: 'esfoliante corporal pitaya lancamentos esfoliantes corporais abelha rainha' },
-    { name: 'Hidratante Facial e Corporal para Pele Extrasseca', category: 'Hidratantes', img: 'assets/produtos/abelha-rainha/hidratantes__hidratante-facial-e-corporal-para-pele-extrasseca.jpg', keywords: 'hidratante facial e corporal para pele extrasseca hidratantes abelha rainha' },
-    { name: 'Hidratante Corporal para Pele Extrasseca', category: 'Hidratantes', img: 'assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-extrasseca.jpg', keywords: 'hidratante corporal para pele extrasseca hidratantes abelha rainha' },
-    { name: 'Hidratante Corporal para Pele Seca', category: 'Hidratantes', img: 'assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-seca.jpg', keywords: 'hidratante corporal para pele seca hidratantes abelha rainha' },
-    { name: 'Hidratante Corporal Q10 e Vitamina C', category: 'Hidratantes', img: 'assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-q10-e-vitamina-c.jpg', keywords: 'hidratante corporal q10 e vitamina c hidratantes abelha rainha' },
-    { name: 'Hidratante Corporal Rosa Mosqueta', category: 'Hidratantes', img: 'assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-rosa-mosqueta.jpg', keywords: 'hidratante corporal rosa mosqueta hidratantes abelha rainha' },
-    { name: 'Óleo de Rosa Mosqueta Puro', category: 'Rosa Mosqueta', img: 'assets/produtos/abelha-rainha/rosa-mosqueta__oleo-de-rosa-mosqueta-puro.jpg', keywords: 'oleo de rosa mosqueta puro rosa mosqueta abelha rainha' },
-    { name: 'Óleo de Rosa Mosqueta', category: 'Rosa Mosqueta', img: 'assets/produtos/abelha-rainha/rosa-mosqueta__oleo-de-rosa-mosqueta.jpg', keywords: 'oleo de rosa mosqueta rosa mosqueta abelha rainha' },
-    { name: 'Creme Facial Clareador de Rosa Mosqueta', category: 'Rosa Mosqueta', img: 'assets/produtos/abelha-rainha/rosa-mosqueta__creme-facial-clareador-de-rosa-mosqueta.jpg', keywords: 'creme facial clareador de rosa mosqueta rosa mosqueta abelha rainha' },
-    { name: 'Creme Facial Preventivo às Rugas de Rosa Mosqueta', category: 'Rosa Mosqueta', img: 'assets/produtos/abelha-rainha/rosa-mosqueta__creme-facial-preventivo-as-rugas-de-rosa-mosqueta.jpg', keywords: 'creme facial preventivo as rugas de rosa mosqueta rosa mosqueta abelha rainha' },
-    { name: 'Sabonete Facial Vitamina C e Ácido Hialurônico', category: 'Vitamina C', img: 'assets/produtos/abelha-rainha/vitamina-c__sabonete-facial-vitamina-c-e-acido-hialuronico.jpg', keywords: 'sabonete facial vitamina c e acido hialuronico vitamina c abelha rainha' },
-    { name: 'Sérum Facial Vitamina C', category: 'Vitamina C', img: 'assets/produtos/abelha-rainha/vitamina-c__serum-facial-vitamina-c.jpg', keywords: 'serum facial vitamina c vitamina c abelha rainha' },
-    { name: 'Protetor Solar Facial Vitamina C', category: 'Vitamina C / Proteção Solar', img: 'assets/produtos/abelha-rainha/vitamina-c-protecao-solar__protetor-solar-facial-vitamina-c.jpg', keywords: 'protetor solar facial vitamina c vitamina c protecao solar abelha rainha' },
-    { name: 'Protetor Solar Facial em Creme', category: 'Proteção Solar', img: 'assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-em-creme.jpg', keywords: 'protetor solar facial em creme protecao solar abelha rainha' },
-    { name: 'Protetor Solar Corporal em Spray', category: 'Proteção Solar', img: 'assets/produtos/abelha-rainha/protecao-solar__protetor-solar-corporal-em-spray.jpg', keywords: 'protetor solar corporal em spray protecao solar abelha rainha' },
-    { name: 'Protetor Solar Facial FPS 80 - Cor de Base Bege Natural', category: 'Proteção Solar', img: 'assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-fps-80-cor-de-base-bege-natural.jpg', keywords: 'protetor solar facial fps 80 cor de base bege natural protecao solar abelha rainha' },
-    { name: 'Protetor Solar Facial FPS 80 - Cor de Base Bege Médio', category: 'Proteção Solar', img: 'assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-fps-80-cor-de-base-bege-medio.jpg', keywords: 'protetor solar facial fps 80 cor de base bege medio protecao solar abelha rainha' },
-    { name: 'Gel Refrescante Pós-sol', category: 'Proteção Solar', img: 'assets/produtos/abelha-rainha/protecao-solar__gel-refrescante-pos-sol.jpg', keywords: 'gel refrescante pos sol protecao solar abelha rainha' },
-    { name: 'Sabonete Facial Antibacteriano', category: 'Acne', img: 'assets/produtos/abelha-rainha/acne__sabonete-facial-antibacteriano.jpg', keywords: 'sabonete facial antibacteriano acne abelha rainha' },
-    { name: 'Loção Tônica Adstringente', category: 'Acne', img: 'assets/produtos/abelha-rainha/acne__locao-tonica-adstringente.jpg', keywords: 'locao tonica adstringente acne abelha rainha' },
-    { name: 'Gel Secativo para Espinhas Roll-On', category: 'Acne', img: 'assets/produtos/abelha-rainha/acne__gel-secativo-para-espinhas-roll-on.jpg', keywords: 'gel secativo para espinhas roll on acne abelha rainha' },
-    { name: 'Bastão Secativo para Espinhas', category: 'Acne', img: 'assets/produtos/abelha-rainha/acne__bastao-secativo-para-espinhas.jpg', keywords: 'bastao secativo para espinhas acne abelha rainha' },
-    { name: 'Kit Antiacne', category: 'Acne', img: 'assets/produtos/abelha-rainha/acne__kit-antiacne.jpg', keywords: 'kit antiacne acne abelha rainha' },
-    { name: 'Loção para Afinar os Pés - Milagre dos Pés', category: 'Dermopés', img: 'assets/produtos/abelha-rainha/dermopes__locao-para-afinar-os-pes-milagre-dos-pes.jpg', keywords: 'locao para afinar os pes milagre dos pes dermopes abelha rainha' },
-    { name: 'Creme Ultra-Hidratante para os Pés', category: 'Dermopés', img: 'assets/produtos/abelha-rainha/dermopes__creme-ultra-hidratante-para-os-pes.jpg', keywords: 'creme ultra hidratante para os pes dermopes abelha rainha' },
-    { name: 'Creme para Hidratar e Afinar os Pés', category: 'Dermopés', img: 'assets/produtos/abelha-rainha/dermopes__creme-para-hidratar-e-afinar-os-pes.jpg', keywords: 'creme para hidratar e afinar os pes dermopes abelha rainha' },
-    { name: 'Gel Esfoliante para os Pés', category: 'Dermopés', img: 'assets/produtos/abelha-rainha/dermopes__gel-esfoliante-para-os-pes.jpg', keywords: 'gel esfoliante para os pes dermopes abelha rainha' },
-    { name: 'Nanoprópolis Própolis Verde', category: 'Apisvida', img: 'assets/produtos/apisvida/propolis__nanopropolis-propolis-verde.jpg', keywords: 'nanopropolis propolis verde apisvida apisvida' },
-    { name: 'Mel Tradicional Bisnaga Tampa Cone', category: 'Apisvida', img: 'assets/produtos/apisvida/mel__mel-tradicional-bisnaga-tampa-cone.jpg', keywords: 'mel tradicional bisnaga tampa cone apisvida apisvida' },
-    { name: 'Própolis 2000 Extrato de Própolis Verde em Cápsulas', category: 'Apisvida', img: 'assets/produtos/apisvida/propolis__propolis-2000-extrato-de-propolis-verde-em-capsulas.jpg', keywords: 'propolis 2000 extrato de propolis verde em capsulas apisvida apisvida' },
-    { name: 'Propoflex AP60 Extrato de Própolis Verde', category: 'Apisvida', img: 'assets/produtos/apisvida/propolis__propoflex-ap60-extrato-de-propolis-verde.jpg', keywords: 'propoflex ap60 extrato de propolis verde apisvida apisvida' },
-    { name: 'Propoflex Extrato de Própolis Verde', category: 'Apisvida', img: 'assets/produtos/apisvida/propolis__propoflex-extrato-de-propolis-verde.jpg', keywords: 'propoflex extrato de propolis verde apisvida apisvida' },
-    { name: 'Nanoprópolis Própolis Verde em Gotas', category: 'Apisvida', img: 'assets/produtos/apisvida/propolis__nanopropolis-propolis-verde-em-gotas.jpg', keywords: 'nanopropolis propolis verde em gotas apisvida apisvida' },
-    { name: 'Nanoprópolis Própolis Blend em Gotas', category: 'Apisvida', img: 'assets/produtos/apisvida/propolis__nanopropolis-propolis-blend-em-gotas.jpg', keywords: 'nanopropolis propolis blend em gotas apisvida apisvida' },
-    { name: 'Relâmpago Energético', category: 'Apisvida', img: 'assets/produtos/apisvida/energeticos__relampago-energetico.jpg', keywords: 'relampago energetico apisvida apisvida' },
-    { name: 'Protetor Labial Manteiga de Cacau com Própolis', category: 'Apisvida', img: 'assets/produtos/apisvida/cuidado-pessoal__protetor-labial-manteiga-de-cacau-com-propolis.jpg', keywords: 'protetor labial manteiga de cacau com propolis apisvida apisvida' },
-    { name: 'Mantex Manteiga de Cacau com Ácido Hialurônico', category: 'Apisvida', img: 'assets/produtos/apisvida/cuidado-pessoal__mantex-manteiga-de-cacau-com-acido-hialuronico.jpg', keywords: 'mantex manteiga de cacau com acido hialuronico apisvida apisvida' },
-    { name: 'Spray para Garganta Extrato de Própolis (Mel, Menta, Malva e Gengibre)', category: 'Apisvida', img: 'assets/produtos/apisvida/propolis__spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-gengibre.jpg', keywords: 'spray para garganta extrato de propolis mel menta malva e gengibre apisvida apisvida' },
-    { name: 'Spray para Garganta Extrato de Própolis (Mel, Menta, Malva e Romã)', category: 'Apisvida', img: 'assets/produtos/apisvida/propolis__spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-roma.jpg', keywords: 'spray para garganta extrato de propolis mel menta malva e roma apisvida apisvida' },
-    { name: 'Propoflex Kids Spray para Garganta (Mel, Malva e Romã)', category: 'Apisvida', img: 'assets/produtos/apisvida/propolis-kids__propoflex-kids-spray-para-garganta-mel-malva-e-roma.jpg', keywords: 'propoflex kids spray para garganta mel malva e roma apisvida apisvida' },
-    { name: 'Balas Diet Halfresh Morango com Nanoprópolis', category: 'Apisvida', img: 'assets/produtos/apisvida/balas-diet__balas-diet-halfresh-morango-com-nanopropolis.jpg', keywords: 'balas diet halfresh morango com nanopropolis apisvida apisvida' },
-    { name: 'Balas Diet Halfresh Mentol com Nanoprópolis', category: 'Apisvida', img: 'assets/produtos/apisvida/balas-diet__balas-diet-halfresh-mentol-com-nanopropolis.jpg', keywords: 'balas diet halfresh mentol com nanopropolis apisvida apisvida' },
-    { name: 'Balas Diet Halfresh Gengibre com Nanoprópolis', category: 'Apisvida', img: 'assets/produtos/apisvida/balas-diet__balas-diet-halfresh-gengibre-com-nanopropolis.jpg', keywords: 'balas diet halfresh gengibre com nanopropolis apisvida apisvida' },
-    { name: 'Propoflex Extrato Aquoso de Própolis', category: 'Apisvida', img: 'assets/produtos/apisvida/apisvida__propoflex-extrato-aquoso-de-propolis.jpg', keywords: 'propoflex extrato aquoso de propolis apisvida apisvida' },
-    { name: 'Propoflex Extrato de Própolis', category: 'Apisvida', img: 'assets/produtos/apisvida/apisvida__propoflex-extrato-de-propolis.jpg', keywords: 'propoflex extrato de propolis apisvida apisvida' },
-    { name: 'Nanoprópolis Extrato de Própolis Vermelho', category: 'Apisvida', img: 'assets/produtos/apisvida/apisvida__nanopropolis-extrato-de-propolis-vermelho.jpg', keywords: 'nanopropolis extrato de propolis vermelho apisvida apisvida' },
-    { name: 'Propoflex Kids Xarope Mel + Própolis', category: 'Apisvida', img: 'assets/produtos/apisvida/apisvida__propoflex-kids-xarope-mel-propolis.jpg', keywords: 'propoflex kids xarope mel propolis apisvida apisvida' },
-    { name: 'Propoflex Kids Própolis', category: 'Apisvida', img: 'assets/produtos/apisvida/apisvida__propoflex-kids-propolis.jpg', keywords: 'propoflex kids propolis apisvida apisvida' },
-    { name: 'Propoflex Kids Própolis + Morango', category: 'Apisvida', img: 'assets/produtos/apisvida/apisvida__propoflex-kids-propolis-morango.jpg', keywords: 'propoflex kids propolis morango apisvida apisvida' },
-    { name: 'Mel Apisvida', category: 'Apisvida', img: 'assets/produtos/apisvida/apisvida__mel-apisvida.jpg', keywords: 'mel apisvida apisvida apisvida' },
-    { name: '1896 Nac N-acetil L-cisteina 60X550MG', category: '60X550MG', img: '', keywords: '1896 nac n acetil l cisteina 60x550mg 60x550mg farma' },
-    { name: 'Barra Supino Zero Nozes e Damasco24g', category: '20X24G', img: '', keywords: 'barra supino zero nozes e damasco24g 20x24g farma' },
-    { name: 'Barra Supino Zero Banana e Ameixa 24G', category: '20X24G', img: '', keywords: 'barra supino zero banana e ameixa 24g 20x24g farma' },
-    { name: 'Barra Supino Zero Banana ao Leite 24G', category: '20X24G', img: '', keywords: 'barra supino zero banana ao leite 24g 20x24g farma' },
-    { name: '1735 Treonato Magn + Treonina 60X650MG', category: '60X650MG', img: '', keywords: '1735 treonato magn treonina 60x650mg 60x650mg farma' },
-    { name: 'Barra Supino Zero Banana e Açaí 24G', category: '20X24G', img: '', keywords: 'barra supino zero banana e acai 24g 20x24g farma' },
-    { name: 'Barra Nuts e Chocolate 25G', category: '12X25G', img: '', keywords: 'barra nuts e chocolate 25g 12x25g farma' },
-    { name: 'Barra Supino Zero Banana Branco 24G', category: '20X24G', img: '', keywords: 'barra supino zero banana branco 24g 20x24g farma' },
-    { name: 'Barra Supino Zero Banana Maçã Canela 24G', category: '20X24G', img: '', keywords: 'barra supino zero banana maca canela 24g 20x24g farma' },
-    { name: 'Barra Protein + Banoffee 50G', category: '9X50G', img: '', keywords: 'barra protein banoffee 50g 9x50g farma' },
-    { name: 'Barra Supino Orig. Banana ao Leite 24G', category: '20X24G', img: '', keywords: 'barra supino orig banana ao leite 24g 20x24g farma' },
-    { name: 'Barra Nuts e Sementes 25G', category: '12X25G', img: '', keywords: 'barra nuts e sementes 25g 12x25g farma' },
-    { name: 'Barra Protein + Napolitano 50G', category: '9X50G', img: '', keywords: 'barra protein napolitano 50g 9x50g farma' },
-    { name: 'Supino Protein Morango 30G', category: '12X30G', img: '', keywords: 'supino protein morango 30g 12x30g farma' },
-    { name: 'Barra Supino Zero Banana e Abacaxi 24G', category: '20X24G', img: '', keywords: 'barra supino zero banana e abacaxi 24g 20x24g farma' },
-    { name: 'Barra Nuts Frutas 25G', category: '12X25G', img: '', keywords: 'barra nuts frutas 25g 12x25g farma' },
-    { name: 'Banana Passa 86G', category: '9X86G', img: '', keywords: 'banana passa 86g 9x86g farma' },
-    { name: 'Barra Protein + Torta de Limao 50G', category: '9X50G', img: '', keywords: 'barra protein torta de limao 50g 9x50g farma' },
-    { name: 'Barra Nuts e Morango 25G', category: '12X25G', img: '', keywords: 'barra nuts e morango 25g 12x25g farma' },
-    { name: 'Supino Protein Chocolate 30G', category: '12X30G', img: '', keywords: 'supino protein chocolate 30g 12x30g farma' },
-    { name: 'Barra Nuts Banana e Canela 25G', category: '12X25G', img: '', keywords: 'barra nuts banana e canela 25g 12x25g farma' },
-    { name: 'Barra de Frutas Kids Choc Branco 22G', category: '20X22G', img: '', keywords: 'barra de frutas kids choc branco 22g 20x22g farma' },
-    { name: 'Barra Supino Zero Banana e Morango 24G', category: '20X24G', img: '', keywords: 'barra supino zero banana e morango 24g 20x24g farma' },
-    { name: 'Supino Protein Cookies 30G', category: '12X30G', img: '', keywords: 'supino protein cookies 30g 12x30g farma' },
-    { name: 'Supino Protein Max Amend e Caramelo 46G', category: '9X46G', img: '', keywords: 'supino protein max amend e caramelo 46g 9x46g farma' },
-    { name: 'Barra Protein + Cookies N\' Cream 50G', category: '9X50G', img: '', keywords: 'barra protein cookies n cream 50g 9x50g farma' },
-    { name: 'Barra de Frutas Kids Morango 22G', category: '20X22G', img: '', keywords: 'barra de frutas kids morango 22g 20x22g farma' },
-    { name: 'Barra de Frutas Kids Choc ao Leite 22G', category: '20X22G', img: '', keywords: 'barra de frutas kids choc ao leite 22g 20x22g farma' },
-    { name: '1728 Quadrimag 4 60X700MG', category: '60X700MG', img: '', keywords: '1728 quadrimag 4 60x700mg 60x700mg farma' },
-    { name: 'Energ Baly Tadaly 473ML', category: '473 ML', img: '', keywords: 'energ baly tadaly 473ml 473 ml farma' },
-    { name: 'Creatina 100% 300G - Mix Nutri', category: '300G', img: '', keywords: 'creatina 100 300g mix nutri 300g farma' },
-    { name: 'Supino Protein Coco C/choc. Branco 30G', category: '12X30G', img: '', keywords: 'supino protein coco c choc branco 30g 12x30g farma' },
-    { name: '6669 Amora Miura Amorine 60X1000MG', category: '60X1000MG', img: '', keywords: '6669 amora miura amorine 60x1000mg 60x1000mg farma' },
-    { name: 'Trio Avela e Castanha C Chocolate 12X20G', category: '12UNX20G', img: '', keywords: 'trio avela e castanha c chocolate 12x20g 12unx20g farma' },
-    { name: '7574 Luteina C/ Zeaxantina 60X500MG', category: '60X500MG', img: '', keywords: '7574 luteina c zeaxantina 60x500mg 60x500mg farma' },
-    { name: '0479 Vitam K2 Mk7 Menaquinona 60X500MG', category: '60X500MG', img: '', keywords: '0479 vitam k2 mk7 menaquinona 60x500mg 60x500mg farma' },
-    { name: '6539 Biotina Plus 60X500MG', category: '60X500MG', img: '', keywords: '6539 biotina plus 60x500mg 60x500mg farma' },
-    { name: 'Barra Mini Pouch Nuts Meio Amargo 60G', category: '60G', img: '', keywords: 'barra mini pouch nuts meio amargo 60g 60g farma' },
-    { name: 'Barra de Frutas Kids Uva 22G', category: '20X22G', img: '', keywords: 'barra de frutas kids uva 22g 20x22g farma' },
-    { name: '1377 Trimaca Peruana em Pó 100G', category: '100G', img: '', keywords: '1377 trimaca peruana em po 100g 100g farma' },
-    { name: 'Barra Protein + Caramelo Salgado 50G', category: '9X50G', img: '', keywords: 'barra protein caramelo salgado 50g 9x50g farma' },
-    { name: 'Energ Baly Frutas Tropicais 473ML', category: '473 ML', img: '', keywords: 'energ baly frutas tropicais 473ml 473 ml farma' },
-    { name: 'Energ Baly Melancia 473ML', category: '473 ML', img: '', keywords: 'energ baly melancia 473ml 473 ml farma' },
-    { name: '1797 Coenzima Q10 Pro 60 Comp 100MG', category: '60X500MG', img: '', keywords: '1797 coenzima q10 pro 60 comp 100mg 60x500mg farma' },
-    { name: 'Hidratante Corp Rosa Mosqueta 400ML', category: '400ML', img: '', keywords: 'hidratante corp rosa mosqueta 400ml 400ml farma' },
-    { name: 'Oleo de Rosa Mosqueta 20ML', category: '20ML', img: '', keywords: 'oleo de rosa mosqueta 20ml 20ml farma' },
-    { name: 'Barra Supino Original Banana Branco 24G', category: '20X24G', img: '', keywords: 'barra supino original banana branco 24g 20x24g farma' },
-    { name: '1292 Vitamina B12 Gotas Sabor Uva 20ML', category: '20ML', img: '', keywords: '1292 vitamina b12 gotas sabor uva 20ml 20ml farma' },
-    { name: 'Balas Diet Halfresh Sabor Gengibre 192G', category: '192G', img: '', keywords: 'balas diet halfresh sabor gengibre 192g 192g farma' },
-    { name: 'Energ Baly Maçã Verde sem Açucar 473ML', category: '473 ML', img: '', keywords: 'energ baly maca verde sem acucar 473ml 473 ml farma' },
-    { name: 'Hidratante Corp Q10 Vitamina C 400ML', category: '400ML', img: '', keywords: 'hidratante corp q10 vitamina c 400ml 400ml farma' },
-    { name: 'Energ Baly Melancia sem Açucar 473ML', category: '473 ML', img: '', keywords: 'energ baly melancia sem acucar 473ml 473 ml farma' },
-    { name: '7093 Ferro Quelato Bisglicinato 60X500MG', category: '60X500MG', img: '', keywords: '7093 ferro quelato bisglicinato 60x500mg 60x500mg farma' },
-    { name: 'Spray Propolis C/ Gengibre 30ML', category: '30ML', img: '', keywords: 'spray propolis c gengibre 30ml 30ml farma' },
-    { name: 'Spray Propolis C/ Menta e Roma 30ML', category: '30ML', img: '', keywords: 'spray propolis c menta e roma 30ml 30ml farma' },
-    { name: 'Hidratante Corp Pele Extrasseca 400ML', category: '400ML', img: '', keywords: 'hidratante corp pele extrasseca 400ml 400ml farma' },
-    { name: 'Energ Baly Tradicional sem Açucar 473ML', category: '473 ML', img: '', keywords: 'energ baly tradicional sem acucar 473ml 473 ml farma' },
-    { name: 'Energ Baly 473ML', category: '473 ML', img: '', keywords: 'energ baly 473ml 473 ml farma' },
-    { name: 'Barra Mini Pouch Nuts ao Leite 60G', category: '60G', img: '', keywords: 'barra mini pouch nuts ao leite 60g 60g farma' },
-    { name: 'Fitas de Clar Dental Roxa - 5 Aplicaçoes', category: '5G', img: '', keywords: 'fitas de clar dental roxa 5 aplicacoes 5g farma' },
-    { name: 'Propoflex Ap60-ext. de Próp. 15% 30ML', category: '30ML', img: '', keywords: 'propoflex ap60 ext de prop 15 30ml 30ml farma' },
-    { name: '0882 Creatina 300G', category: '300G', img: '', keywords: '0882 creatina 300g 300g farma' },
-    { name: 'Energ Baly Maçã Verde 473ML', category: '473 ML', img: '', keywords: 'energ baly maca verde 473ml 473 ml farma' },
-    { name: 'Supino Protein Cappuccino 30G', category: '12X30G', img: '', keywords: 'supino protein cappuccino 30g 12x30g farma' },
-    { name: 'Oleo de Rosa Mosqueta 30ML', category: '30ML', img: '', keywords: 'oleo de rosa mosqueta 30ml 30ml farma' },
-    { name: 'Nanopropolis Ext. Propolis Verde 20ML', category: '20ML', img: '', keywords: 'nanopropolis ext propolis verde 20ml 20ml farma' },
-    { name: '8007 Vitamina B12 60X500MG', category: '60X500MG', img: '', keywords: '8007 vitamina b12 60x500mg 60x500mg farma' },
-    { name: 'Creatina 100% Monohidra 300G - Pronabol', category: '300G', img: '', keywords: 'creatina 100 monohidra 300g pronabol 300g farma' },
-    { name: '4832 Propolis Defense 60X550MG', category: '60X550MG', img: '', keywords: '4832 propolis defense 60x550mg 60x550mg farma' },
-    { name: 'Barra Nuts e Abacaxi 25G', category: '12X25G', img: '', keywords: 'barra nuts e abacaxi 25g 12x25g farma' },
-    { name: 'Hidratante Corp Pele Seca 400ML', category: '400ML', img: '', keywords: 'hidratante corp pele seca 400ml 400ml farma' },
-    { name: 'Barra Nuts e Frutas Vermelhas 25G', category: '12X25G', img: '', keywords: 'barra nuts e frutas vermelhas 25g 12x25g farma' },
-    { name: 'Diet Shake Baunilha Nutrilatina 420G', category: '420G', img: '', keywords: 'diet shake baunilha nutrilatina 420g 420g farma' },
-    { name: 'Barra Nuts e Pasta de Amendoim 25G', category: '12X25G', img: '', keywords: 'barra nuts e pasta de amendoim 25g 12x25g farma' },
-    { name: 'Barra Pe de Moleque Caramelo Salgado 20G', category: '16X20G', img: '', keywords: 'barra pe de moleque caramelo salgado 20g 16x20g farma' },
-    { name: 'Mel Holanda Bisnaga 200G', category: '200G', img: '', keywords: 'mel holanda bisnaga 200g 200g farma' },
-    { name: 'Barra Nuts Coco e Chocolate 25G', category: '12X25G', img: '', keywords: 'barra nuts coco e chocolate 25g 12x25g farma' },
-    { name: '6126 Magnesio Dimalato 60X650MG', category: '60X650MG', img: '', keywords: '6126 magnesio dimalato 60x650mg 60x650mg farma' },
-    { name: '8106 Zinco Quelato Bisglicinato 60X500MG', category: '60X500MG', img: '', keywords: '8106 zinco quelato bisglicinato 60x500mg 60x500mg farma' },
-    { name: '6553 Moviflex Colageno Tipo 2 60X650MG', category: '60X650MG', img: '', keywords: '6553 moviflex colageno tipo 2 60x650mg 60x650mg farma' },
-    { name: 'Energ Baly Mor e Pêss S/ Açucar 473ML', category: '473 ML', img: '', keywords: 'energ baly mor e pess s acucar 473ml 473 ml farma' },
-    { name: '6607 Vitamina a 60X500MG', category: '60X500MG', img: '', keywords: '6607 vitamina a 60x500mg 60x500mg farma' },
-    { name: 'Barra Pe de Moleque 20G', category: '16X20G', img: '', keywords: 'barra pe de moleque 20g 16x20g farma' },
-    { name: '0806 Resveratrol Trans 30X500MG', category: '30X500MG', img: '', keywords: '0806 resveratrol trans 30x500mg 30x500mg farma' },
-    { name: '5075 Curcuma 30 Caps 30X500MG', category: '30X500MG', img: '', keywords: '5075 curcuma 30 caps 30x500mg 30x500mg farma' },
-    { name: 'Creme Para Os Pes Ultra-hidratante 100G', category: '100G', img: '', keywords: 'creme para os pes ultra hidratante 100g 100g farma' },
-    { name: '6331 Colageno Hidrolisado 60X1100MG', category: '60X1100MG', img: '', keywords: '6331 colageno hidrolisado 60x1100mg 60x1100mg farma' },
-    { name: '0776 Laranja Moro 60X500MG', category: '60X500MG', img: '', keywords: '0776 laranja moro 60x500mg 60x500mg farma' },
-    { name: 'Creme Para Os Pes Hidratar e Afinar 100G', category: '100G', img: '', keywords: 'creme para os pes hidratar e afinar 100g 100g farma' },
-    { name: '6102 Triptoflex 60X600MG', category: '60X600MG', img: '', keywords: '6102 triptoflex 60x600mg 60x600mg farma' },
-    { name: 'Diet Shake Chocolate Nutrilatina 420G', category: '420G', img: '', keywords: 'diet shake chocolate nutrilatina 420g 420g farma' },
-    { name: 'Propoflex Kids Spray Tutti-frutti 35ML', category: '35ML', img: '', keywords: 'propoflex kids spray tutti frutti 35ml 35ml farma' },
-    { name: 'Energ Baly Tropical S/ Açucar 473ML', category: '473 ML', img: '', keywords: 'energ baly tropical s acucar 473ml 473 ml farma' },
-    { name: 'Fitas de Clar Dental Roxa - 7 Aplicaçoes', category: '2G', img: '', keywords: 'fitas de clar dental roxa 7 aplicacoes 2g farma' },
-    { name: 'Diet Shake Banana Nutrilatina 420G', category: '420G', img: '', keywords: 'diet shake banana nutrilatina 420g 420g farma' },
-    { name: 'Energ Baly Morango e Pessego 473ML', category: '473 ML', img: '', keywords: 'energ baly morango e pessego 473ml 473 ml farma' },
-    { name: 'Trio Morango com Chocolate 12X20G', category: '12UNX20G', img: '', keywords: 'trio morango com chocolate 12x20g 12unx20g farma' },
-    { name: 'Protetor Sol Facial Fps 80 - sem Cor 60G', category: '60G', img: '', keywords: 'protetor sol facial fps 80 sem cor 60g 60g farma' },
-    { name: 'Choklers Crisp Caramelo C Cho 12X33G', category: '12X33G', img: '', keywords: 'choklers crisp caramelo c cho 12x33g 12x33g farma' },
-    { name: '6690 Cromo Picolinato 60X500MG', category: '60X500MG', img: '', keywords: '6690 cromo picolinato 60x500mg 60x500mg farma' },
-    { name: 'Energ Baly Coco e Açai 473ML', category: '473 ML', img: '', keywords: 'energ baly coco e acai 473ml 473 ml farma' },
-    { name: '3255 Coenzima Q10 Ultra 60 Comp 500MG', category: '60X500MG', img: '', keywords: '3255 coenzima q10 ultra 60 comp 500mg 60x500mg farma' },
-    { name: 'B. Proteica Pistache C Choco Branco 70G', category: '9UNX70G', img: '', keywords: 'b proteica pistache c choco branco 70g 9unx70g farma' },
-    { name: 'Energ Baly Melancia 2L', category: '2 LITROS', img: '', keywords: 'energ baly melancia 2l 2 litros farma' },
-    { name: '1308 Magnesio Inositol 330G', category: '330G', img: '', keywords: '1308 magnesio inositol 330g 330g farma' },
-    { name: '9172 Curcuma Curcumina 60X500MG', category: '60X500MG', img: '', keywords: '9172 curcuma curcumina 60x500mg 60x500mg farma' },
-    { name: '0820 Melatonina Gotas Sab Maracuja 20ML', category: '30ML', img: '', keywords: '0820 melatonina gotas sab maracuja 20ml 30ml farma' },
-    { name: 'Diet Shake Morango Nutrilatina 420G', category: '420G', img: '', keywords: 'diet shake morango nutrilatina 420g 420g farma' },
-    { name: '6522 Multi Vitaminico Hemovital 60X750MG', category: '60X750MG', img: '', keywords: '6522 multi vitaminico hemovital 60x750mg 60x750mg farma' },
-    { name: 'Vitamina C 20% Serum Face e Olhos 30ML', category: '30ML', img: '', keywords: 'vitamina c 20 serum face e olhos 30ml 30ml farma' },
-    { name: '6744 Total Efa 60X1350MG', category: '60X1350MG', img: '', keywords: '6744 total efa 60x1350mg 60x1350mg farma' },
-    { name: 'Trio Banana Aveia e Mel 12X20G', category: '12UNX20G', img: '', keywords: 'trio banana aveia e mel 12x20g 12unx20g farma' },
-    { name: '6546 Complexo B Max 60X500MG', category: '60X500MG', img: '', keywords: '6546 complexo b max 60x500mg 60x500mg farma' },
-    { name: 'Energ Baly 250ML Lata', category: '250ML', img: '', keywords: 'energ baly 250ml lata 250ml farma' },
-    { name: '6720 Omega 3 Pro 18/12 60X1350MG', category: '60X1350MG', img: '', keywords: '6720 omega 3 pro 18 12 60x1350mg 60x1350mg farma' },
-    { name: 'Loçao P/ Afinar Os Pes 30ML', category: '30ML', img: '', keywords: 'locao p afinar os pes 30ml 30ml farma' },
-    { name: 'Manteiga de Cacau C/ Propolis 12UN', category: '42G', img: '', keywords: 'manteiga de cacau c propolis 12un 42g farma' },
-    { name: 'Trio Brigadeiro 12X20G', category: '12UNX20G', img: '', keywords: 'trio brigadeiro 12x20g 12unx20g farma' },
-    { name: '6676 Calcio Citrato Malato 60X1200MG', category: '60X1200MG', img: '', keywords: '6676 calcio citrato malato 60x1200mg 60x1200mg farma' },
-    { name: '9554 Omega 3 Ultra 50/20 60X1350MG', category: '60X1350MG', img: '', keywords: '9554 omega 3 ultra 50 20 60x1350mg 60x1350mg farma' },
-    { name: 'Energ Baly Tadaly 2L', category: '2 LITROS', img: '', keywords: 'energ baly tadaly 2l 2 litros farma' },
-    { name: 'Choklers Crisp Cookies 12X33G', category: '12X33G', img: '', keywords: 'choklers crisp cookies 12x33g 12x33g farma' },
-    { name: 'L - Arginina Performance 60X625MG', category: '60X625MG', img: '', keywords: 'l arginina performance 60x625mg 60x625mg farma' },
-    { name: 'Kit Scudo P/ Piolho - Arruda e Citronela', category: '437ML', img: '', keywords: 'kit scudo p piolho arruda e citronela 437ml farma' },
-    { name: '6713 Oleo de Primula 60X1340MG', category: '60X1340MG', img: '', keywords: '6713 oleo de primula 60x1340mg 60x1340mg farma' },
-    { name: '9424 Oleo de Alho Desodorizado 60X500MG', category: '60X500MG', img: '', keywords: '9424 oleo de alho desodorizado 60x500mg 60x500mg farma' },
-    { name: '0998 Fiberliv 7 Fibras 250G', category: '250G', img: '', keywords: '0998 fiberliv 7 fibras 250g 250g farma' },
-    { name: 'Whey Sache Baunilha Nutrilatina 300G', category: '10UNX30G', img: '', keywords: 'whey sache baunilha nutrilatina 300g 10unx30g farma' },
-    { name: '9158 Melatonina 120X500MG', category: '120X500MG', img: '', keywords: '9158 melatonina 120x500mg 120x500mg farma' },
-    { name: 'Creme Facial Clareador Para Marcas 50G', category: '50G', img: '', keywords: 'creme facial clareador para marcas 50g 50g farma' },
-    { name: 'Relampago Energetico 10ML Display C/ 24U', category: '240ML', img: '', keywords: 'relampago energetico 10ml display c 24u 240ml farma' },
-    { name: '1391 Ora Pro Nobis Sabor Limao 150G', category: '150G', img: '', keywords: '1391 ora pro nobis sabor limao 150g 150g farma' },
-    { name: 'Nanopropolis Ext. Propolis Vermelha 20ML', category: '20ML', img: '', keywords: 'nanopropolis ext propolis vermelha 20ml 20ml farma' },
-    { name: 'Manteiga de Cacau C/ Propolis 50UN', category: '175G', img: '', keywords: 'manteiga de cacau c propolis 50un 175g farma' },
-    { name: 'Choklers Morango C/ Nibs de Cacau 12X40G', category: '12X40G', img: '', keywords: 'choklers morango c nibs de cacau 12x40g 12x40g farma' },
-    { name: 'Choklers Banoffe 12X40G', category: '12X40G', img: '', keywords: 'choklers banoffe 12x40g 12x40g farma' },
-    { name: 'Balas Diet Halfresh Sabor Mentol 192G', category: '192G', img: '', keywords: 'balas diet halfresh sabor mentol 192g 192g farma' },
-    { name: 'Manteiga de Cacau C/ Propolis 3,5G', category: '3,5G', img: '', keywords: 'manteiga de cacau c propolis 3 5g 3 5g farma' },
-    { name: 'Detergente Pó Ace Cartucho 2,2KG', category: '2,2KG', img: '', keywords: 'detergente po ace cartucho 2 2kg 2 2kg farma' },
-    { name: 'Bastao Acne Secativo 5G', category: '5G', img: '', keywords: 'bastao acne secativo 5g 5g farma' },
-    { name: 'Whey Sache Choco Belga Nutrilatina 310G', category: '10UNX31G', img: '', keywords: 'whey sache choco belga nutrilatina 310g 10unx31g farma' },
-    { name: '6560 Cloreto de Magnesio 60X650MG', category: '60X650MG', img: '', keywords: '6560 cloreto de magnesio 60x650mg 60x650mg farma' },
-    { name: 'Mix Nutri Snack Bacon 50G', category: '50G', img: '', keywords: 'mix nutri snack bacon 50g 50g farma' },
-    { name: 'Mix Nutri Snack 4 Queijos 50G', category: '50G', img: '', keywords: 'mix nutri snack 4 queijos 50g 50g farma' },
-    { name: 'Mix Nutri Snack Requeijão 50G', category: '50G', img: '', keywords: 'mix nutri snack requeijao 50g 50g farma' },
-    { name: 'Hidra Facial e Corp Pele Extrasseca 60G', category: '60G', img: '', keywords: 'hidra facial e corp pele extrasseca 60g 60g farma' },
-    { name: 'Trio Coco com Chocolate 12X20G', category: '12UNX20G', img: '', keywords: 'trio coco com chocolate 12x20g 12unx20g farma' },
-    { name: 'Energ Baly 2L', category: '2 LITROS', img: '', keywords: 'energ baly 2l 2 litros farma' },
-    { name: 'Vitamina C + Zinco Quelato 60X750MG', category: '60X750MG', img: '', keywords: 'vitamina c zinco quelato 60x750mg 60x750mg farma' },
-    { name: '1773 Vitamina D3 + K2 em Gotas', category: '20ML', img: '', keywords: '1773 vitamina d3 k2 em gotas 20ml farma' },
-    { name: '0813 Cafeina 60X500MG', category: '60X500MG', img: '', keywords: '0813 cafeina 60x500mg 60x500mg farma' },
-    { name: '100% Whey Banoffe 900G', category: '900G', img: '', keywords: '100 whey banoffe 900g 900g farma' },
-    { name: '7031 Cobre Quelato Bisglicinato 60X500MG', category: '60X500MG', img: '', keywords: '7031 cobre quelato bisglicinato 60x500mg 60x500mg farma' },
-    { name: 'Gel Esfoliante Para Os Pes 100G', category: '100G', img: '', keywords: 'gel esfoliante para os pes 100g 100g farma' },
-    { name: '2644 Oleo de Semente de Abobora 1400MG', category: '60X1400MG', img: '', keywords: '2644 oleo de semente de abobora 1400mg 60x1400mg farma' },
-    { name: 'Mel Organico 300G', category: '300G', img: '', keywords: 'mel organico 300g 300g farma' },
-    { name: 'Mel Puro Bisnaga 250G - Apis Vida', category: '250G', img: '', keywords: 'mel puro bisnaga 250g apis vida 250g farma' },
-    { name: '0790 Beta Glucana 30 Caps 30X500MG', category: '30X500MG', img: '', keywords: '0790 beta glucana 30 caps 30x500mg 30x500mg farma' },
-    { name: 'Fitas de Clar Dental Roxa 12 Aplicaçoes', category: '12G', img: '', keywords: 'fitas de clar dental roxa 12 aplicacoes 12g farma' },
-    { name: '8014 Licopeno de Tomate 60X500MG', category: '60X500MG', img: '', keywords: '8014 licopeno de tomate 60x500mg 60x500mg farma' },
-    { name: '1780 Vitamina D3 20ML', category: '20ML', img: '', keywords: '1780 vitamina d3 20ml 20ml farma' },
-    { name: 'Balas Diet Halfresh Sabor Morango192g', category: '192G', img: '', keywords: 'balas diet halfresh sabor morango192g 192g farma' },
-    { name: '6324 Extrato de Propolis 60X550MG', category: '60X550MG', img: '', keywords: '6324 extrato de propolis 60x550mg 60x550mg farma' },
-    { name: '6348 Cranberry 60X1100MG', category: '60X1100MG', img: '', keywords: '6348 cranberry 60x1100mg 60x1100mg farma' },
-    { name: 'Choklers Chocrante 12X40G', category: '12X40G', img: '', keywords: 'choklers chocrante 12x40g 12x40g farma' },
-    { name: 'Creme Facial Preventivo As Rugas 50G', category: '50G', img: '', keywords: 'creme facial preventivo as rugas 50g 50g farma' },
-    { name: 'Energ Baly Floripa Spritz 250ML Lata', category: '250ML', img: '', keywords: 'energ baly floripa spritz 250ml lata 250ml farma' },
-    { name: 'Nectar Marata Laranja 1L', category: '1L', img: '', keywords: 'nectar marata laranja 1l 1l farma' },
-    { name: 'Mel T Monica Organico 300G', category: '300G', img: '', keywords: 'mel t monica organico 300g 300g farma' },
-    { name: 'Kit Acne Tratamento em Casa 230ML / 5G', category: '230ML / 5G', img: '', keywords: 'kit acne tratamento em casa 230ml 5g 230ml 5g farma' },
-    { name: 'Mel T Monica Laranjeira 300G', category: '300G', img: '', keywords: 'mel t monica laranjeira 300g 300g farma' },
-    { name: '100% Whey Cookies And Cream 900G\'', category: '900G', img: '', keywords: '100 whey cookies and cream 900g 900g farma' },
-    { name: '6157 Vitamina D3 Colecalciferol 60X500MG', category: '60X500MG', img: '', keywords: '6157 vitamina d3 colecalciferol 60x500mg 60x500mg farma' },
-    { name: '0721 Metil Folax 60X500MG', category: '60X500MG', img: '', keywords: '0721 metil folax 60x500mg 60x500mg farma' },
-    { name: 'Energ Baly Morango e Pessego 2L', category: '2 LITROS', img: '', keywords: 'energ baly morango e pessego 2l 2 litros farma' },
-    { name: 'Energ Cereja Baly sem Açucar 2L', category: '2 LITROS', img: '', keywords: 'energ cereja baly sem acucar 2l 2 litros farma' },
-    { name: 'Energ Maçã Verde 2L', category: '2 LITROS', img: '', keywords: 'energ maca verde 2l 2 litros farma' },
-    { name: 'Protetor Sol Facial Fps 80 -bege Med 40G', category: '40G', img: '', keywords: 'protetor sol facial fps 80 bege med 40g 40g farma' },
-    { name: 'Protetor Sol Facial Fps 80 -bege Nat 40G', category: '40G', img: '', keywords: 'protetor sol facial fps 80 bege nat 40g 40g farma' },
-    { name: 'Relampago Energetico 10ML Display C/ 48', category: '480ML', img: '', keywords: 'relampago energetico 10ml display c 48 480ml farma' },
-    { name: 'Nectar Marata Maracuja 200ML', category: '200ML', img: '', keywords: 'nectar marata maracuja 200ml 200ml farma' },
-    { name: '5082 Procran Cranberry 30X500MG', category: '30X500MG', img: '', keywords: '5082 procran cranberry 30x500mg 30x500mg farma' },
-    { name: 'Choklers Cookies 12X40G', category: '12X40G', img: '', keywords: 'choklers cookies 12x40g 12x40g farma' },
-    { name: 'Choklers Cheesecake 12X40G', category: '12X40G', img: '', keywords: 'choklers cheesecake 12x40g 12x40g farma' },
-    { name: 'Choklers Pistache 12X40G', category: '12X40G', img: '', keywords: 'choklers pistache 12x40g 12x40g farma' },
-    { name: '6058 Msm Enxofre Organico 60X600MG', category: '60X600MG', img: '', keywords: '6058 msm enxofre organico 60x600mg 60x600mg farma' },
-    { name: 'Nectar Marata Uva 1L', category: '1L', img: '', keywords: 'nectar marata uva 1l 1l farma' },
-    { name: 'Nectar Marata Maracuja 1L', category: '1L', img: '', keywords: 'nectar marata maracuja 1l 1l farma' },
-    { name: 'Nectar Marata Pessego 1L', category: '1L', img: '', keywords: 'nectar marata pessego 1l 1l farma' },
-    { name: 'Sup. Alim. Baly Kids Tutti Frutti 220ML', category: '220ML', img: '', keywords: 'sup alim baly kids tutti frutti 220ml 220ml farma' },
-    { name: '100% Whey Chocolate e Avela 900G', category: '900G', img: '', keywords: '100 whey chocolate e avela 900g 900g farma' },
-    { name: 'Sup. Alim. Baly Kids Morango 220ML', category: '220ML', img: '', keywords: 'sup alim baly kids morango 220ml 220ml farma' },
-    { name: 'Geleia Baldoni Morango Pote 270G', category: '270G', img: '', keywords: 'geleia baldoni morango pote 270g 270g farma' },
-    { name: 'Geleia Baldoni Frutas Vermelhas Pote 270', category: '270G', img: '', keywords: 'geleia baldoni frutas vermelhas pote 270 270g farma' },
-    { name: 'Geleia Baldoni Abacaxi Pote 270G', category: '270G', img: '', keywords: 'geleia baldoni abacaxi pote 270g 270g farma' },
-    { name: 'Geleia Baldoni Frutas Amarelas Pote 270G', category: '270G', img: '', keywords: 'geleia baldoni frutas amarelas pote 270g 270g farma' },
-    { name: 'Energ Frutas Tropicais 2L', category: '2 LITROS', img: '', keywords: 'energ frutas tropicais 2l 2 litros farma' },
-    { name: 'Nectar Marata Uva 200ML', category: '200ML', img: '', keywords: 'nectar marata uva 200ml 200ml farma' },
-    { name: 'Nectar Marata Laranja 200ML', category: '200ML', img: '', keywords: 'nectar marata laranja 200ml 200ml farma' },
-    { name: 'Nectar Marata Caju 200ML', category: '200ML', img: '', keywords: 'nectar marata caju 200ml 200ml farma' },
-    { name: 'Sabonete Acne Liquido Facial 110ML', category: '110ML', img: '', keywords: 'sabonete acne liquido facial 110ml 110ml farma' },
-    { name: 'Mel Organica Sache 80G - Apis Vida', category: '80G', img: '', keywords: 'mel organica sache 80g apis vida 80g farma' },
-    { name: 'Azeitona Verde Sache C/ Caroço 100G', category: '160G', img: '', keywords: 'azeitona verde sache c caroco 100g 160g farma' },
-    { name: 'Energ Baly Cereja 473ML', category: '473 ML', img: '', keywords: 'energ baly cereja 473ml 473 ml farma' },
-    { name: 'Energ Baly Champanhe 250ML Lata', category: '250ML', img: '', keywords: 'energ baly champanhe 250ml lata 250ml farma' },
-    { name: 'Sup. Alim. Baly Kids Laranja 220ML', category: '220ML', img: '', keywords: 'sup alim baly kids laranja 220ml 220ml farma' },
-    { name: 'Suco Sumo Acai 300 Ml', category: '6UNX300ML', img: '', keywords: 'suco sumo acai 300 ml 6unx300ml farma' },
-    { name: 'Esfoliante Corporal Melancia 200G', category: '200G', img: '', keywords: 'esfoliante corporal melancia 200g 200g farma' },
-    { name: 'Mix Nutri Snack Barbecue 50G', category: '50G', img: '', keywords: 'mix nutri snack barbecue 50g 50g farma' },
-    { name: 'Sup. Alim. Baly Kids Melancia 220ML', category: '220ML', img: '', keywords: 'sup alim baly kids melancia 220ml 220ml farma' },
-    { name: 'Baly Tradicional', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__tradicional.jpg', keywords: 'baly tradicional baly brasil baly brasil' },
-    { name: 'Baly Tropical', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__tropical.jpg', keywords: 'baly tropical baly brasil baly brasil' },
-    { name: 'Baly Maçã Verde', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__maca-verde.jpg', keywords: 'baly maca verde baly brasil baly brasil' },
-    { name: 'Baly Melancia', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__melancia.jpg', keywords: 'baly melancia baly brasil baly brasil' },
-    { name: 'Baly Morango e Pêssego', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__morango-e-pessego.jpg', keywords: 'baly morango e pessego baly brasil baly brasil' },
-    { name: 'Baly Coco e Açaí', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__coco-e-acai.jpg', keywords: 'baly coco e acai baly brasil baly brasil' },
-    { name: 'Baly Tadaly', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__tadaly.jpg', keywords: 'baly tadaly baly brasil baly brasil' },
-    { name: 'Baly Uva Verde', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__uva-verde.jpg', keywords: 'baly uva verde baly brasil baly brasil' },
-    { name: 'Baly Abacaxi com Hortelã', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__abacaxi-com-hortela.jpg', keywords: 'baly abacaxi com hortela baly brasil baly brasil' },
-    { name: 'Baly Amora com Hortelã', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__amora-com-hortela.jpg', keywords: 'baly amora com hortela baly brasil baly brasil' },
-    { name: 'Baly Freegells', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__freegells.jpg', keywords: 'baly freegells baly brasil baly brasil' },
-    { name: 'Baly Summer Loko', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__summer-loko.jpg', keywords: 'baly summer loko baly brasil baly brasil' },
-    { name: 'Baly Celebre Champagne', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__celebre-champagne.jpg', keywords: 'baly celebre champagne baly brasil baly brasil' },
-    { name: 'Baly Celebre Floripa', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__celebre-floripa.jpg', keywords: 'baly celebre floripa baly brasil baly brasil' },
-    { name: 'Baly Celebre Caipirinha', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__celebre-caipirinha.jpg', keywords: 'baly celebre caipirinha baly brasil baly brasil' },
-    { name: 'Baly Tradicional Sem Açúcar', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__tradicional-sem-acucar.jpg', keywords: 'baly tradicional sem acucar baly brasil baly brasil' },
-    { name: 'Baly Tropical Sem Açúcar', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__tropical-sem-acucar.jpg', keywords: 'baly tropical sem acucar baly brasil baly brasil' },
-    { name: 'Baly Maçã Verde Sem Açúcar', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__maca-verde-sem-acucar.jpg', keywords: 'baly maca verde sem acucar baly brasil baly brasil' },
-    { name: 'Baly Uva Verde Sem Açúcar', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__uva-verde-sem-acucar.jpg', keywords: 'baly uva verde sem acucar baly brasil baly brasil' },
-    { name: 'Baly Melancia Sem Açúcar', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__melancia-sem-acucar.jpg', keywords: 'baly melancia sem acucar baly brasil baly brasil' },
-    { name: 'Baly Morango e Pêssego Sem Açúcar', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__morango-e-pessego-sem-acucar.jpg', keywords: 'baly morango e pessego sem acucar baly brasil baly brasil' },
-    { name: 'Baly Amora com Hortelã Sem Açúcar', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__amora-com-hortela-sem-acucar.jpg', keywords: 'baly amora com hortela sem acucar baly brasil baly brasil' },
-    { name: 'Baly Redragon', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__redragon.jpg', keywords: 'baly redragon baly brasil baly brasil' },
-    { name: 'Baly Pro Tropical', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__pro-tropical.jpg', keywords: 'baly pro tropical baly brasil baly brasil' },
-    { name: 'Baly Pro Morango e Pêssego', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__pro-morango-e-pessego.jpg', keywords: 'baly pro morango e pessego baly brasil baly brasil' },
-    { name: 'Baly Pro Banana', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__pro-banana.jpg', keywords: 'baly pro banana baly brasil baly brasil' },
-    { name: 'Baly Free Tradicional', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__free-tradicional.jpg', keywords: 'baly free tradicional baly brasil baly brasil' },
-    { name: 'Baly Free Maçã Verde', category: 'Baly Brasil', img: 'assets/produtos/baly/energy__free-maca-verde.jpg', keywords: 'baly free maca verde baly brasil baly brasil' },
-    { name: 'Baly Kids Tutti Frutti', category: 'Baly Brasil', img: 'assets/produtos/baly/kids__tutti-frutti.jpg', keywords: 'baly kids tutti frutti baly brasil baly brasil' },
-    { name: 'Baly Kids Laranja', category: 'Baly Brasil', img: 'assets/produtos/baly/kids__laranja.jpg', keywords: 'baly kids laranja baly brasil baly brasil' },
-    { name: 'Baly Kids Melancia', category: 'Baly Brasil', img: 'assets/produtos/baly/kids__melancia.jpg', keywords: 'baly kids melancia baly brasil baly brasil' },
-    { name: 'Baly Kids Morango', category: 'Baly Brasil', img: 'assets/produtos/baly/kids__morango.jpg', keywords: 'baly kids morango baly brasil baly brasil' },
-    { name: 'Baly Kids Uva', category: 'Baly Brasil', img: 'assets/produtos/baly/kids__uva.jpg', keywords: 'baly kids uva baly brasil baly brasil' },
-];
-
-// ===== Sugestões de busca (dropdown no cabeçalho) =====
+/* =====================================================================
+   Distri Rio — comportamento do site
+   O catálogo NÃO mora mais aqui: é baixado sob demanda de
+   assets/data/produtos.json, gerado por tools/gerar.js a partir de
+   data/produtos.json. Editar produto é editar aquele arquivo.
+   ===================================================================== */
 (function () {
-    // Na loja.html a busca já filtra a grade de produtos em tempo real,
-    // então o dropdown de sugestões só faz sentido nas outras páginas.
-    if (document.querySelector('.product-card[data-name]')) return;
+    'use strict';
 
-    document.addEventListener('DOMContentLoaded', function () {
-        var wrap = document.querySelector('.header-search-wrap');
-        if (!wrap) return;
+    // =================================================================
+    // Utilitários
+    // =================================================================
 
-        var input = wrap.querySelector('input');
-        var list = wrap.querySelector('.search-suggestions');
-        if (!input || !list) return;
+    // Ignora maiúsculas/minúsculas e acentos: "marata" acha "Maratá".
+    // O intervalo dos acentos combinantes vai escapado de propósito — escrito
+    // literalmente, a busca quebra em silêncio se o arquivo mudar de encoding.
+    function normalizar(str) {
+        return (str || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    }
 
-        var activeIndex = -1;
+    function aoCarregar(fn) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fn);
+        } else {
+            fn();
+        }
+    }
 
-        function updateActive(items) {
-            items.forEach(function (el, i) {
-                el.classList.toggle('is-highlighted', i === activeIndex);
-            });
-            if (activeIndex >= 0) {
-                items[activeIndex].scrollIntoView({ block: 'nearest' });
-            }
+    function debounce(fn, ms) {
+        var t;
+        return function () {
+            var args = arguments, ctx = this;
+            clearTimeout(t);
+            t = setTimeout(function () { fn.apply(ctx, args); }, ms);
+        };
+    }
+
+    function menosMovimento() {
+        return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    function noViewport(el) {
+        var r = el.getBoundingClientRect();
+        return r.bottom > 0 && r.top < (window.innerHeight || 0);
+    }
+
+    function guardar(chave, valor) {
+        try { localStorage.setItem(chave, valor); } catch (e) { /* modo privado */ }
+    }
+
+    function recuperar(chave) {
+        try { return localStorage.getItem(chave); } catch (e) { return null; }
+    }
+
+    // =================================================================
+    // Consentimento de cookies e Analytics
+    // O gtag.js só entra na página depois do aceite. Antes disso o
+    // Consent Mode já está em "denied" pelo stub que roda no <head>.
+    // =================================================================
+    var CHAVE_CONSENTIMENTO = 'dr-consentimento-medicao';
+
+    function carregarAnalytics() {
+        if (window.DR_GA_CARREGADO || !window.DR_GA_ID) return;
+        window.DR_GA_CARREGADO = true;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.DR_GA_ID;
+        document.head.appendChild(s);
+        if (typeof gtag === 'function') {
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+            gtag('config', window.DR_GA_ID, { anonymize_ip: true });
+        }
+    }
+
+    function decidirMedicao(aceitou) {
+        guardar(CHAVE_CONSENTIMENTO, aceitou ? 'sim' : 'nao');
+        if (aceitou) carregarAnalytics();
+    }
+
+    function montarBannerCookies() {
+        var banner = document.createElement('div');
+        banner.className = 'cookie-banner';
+        banner.setAttribute('role', 'dialog');
+        banner.setAttribute('aria-labelledby', 'cookieTitulo');
+        banner.setAttribute('aria-describedby', 'cookieTexto');
+        banner.innerHTML =
+            '<h2 id="cookieTitulo">Cookies de medição</h2>' +
+            '<p id="cookieTexto">Usamos o Google Analytics só para entender quais páginas as pessoas visitam. ' +
+            'Nada é carregado antes de você escolher. Veja a ' +
+            '<a href="' + (document.body.getAttribute('data-base') || '') + 'politica-de-privacidade.html">política de privacidade</a>.</p>' +
+            '<div class="cookie-acoes">' +
+            '<button type="button" class="cookie-aceitar">Aceitar</button>' +
+            '<button type="button" class="cookie-recusar">Recusar</button>' +
+            '</div>';
+        document.body.appendChild(banner);
+
+        function fechar(aceitou) {
+            decidirMedicao(aceitou);
+            banner.remove();
+        }
+        banner.querySelector('.cookie-aceitar').addEventListener('click', function () { fechar(true); });
+        banner.querySelector('.cookie-recusar').addEventListener('click', function () { fechar(false); });
+        banner.querySelector('.cookie-aceitar').focus();
+        return banner;
+    }
+
+    aoCarregar(function () {
+        var escolha = recuperar(CHAVE_CONSENTIMENTO);
+        if (escolha === 'sim') {
+            carregarAnalytics();
+        } else if (escolha !== 'nao') {
+            montarBannerCookies();
         }
 
-        function renderSuggestions(term) {
-            var t = normalizeSearch(term.trim());
-            list.innerHTML = '';
-            activeIndex = -1;
-
-            if (!t) {
-                list.hidden = true;
-                return;
-            }
-
-            var allMatches = PRODUCTS.filter(function (p) {
-                return normalizeSearch(p.name + ' ' + p.category + ' ' + p.keywords).indexOf(t) !== -1;
+        var reabrir = document.getElementById('abrirPreferenciasCookies');
+        if (reabrir) {
+            reabrir.addEventListener('click', function () {
+                if (!document.querySelector('.cookie-banner')) montarBannerCookies();
             });
-            var matches = allMatches.slice(0, 6);
+        }
+    });
 
-            if (matches.length === 0) {
-                var empty = document.createElement('li');
-                empty.className = 'search-suggestion-empty';
-                empty.textContent = 'Nenhum produto encontrado para "' + term.trim() + '"';
-                list.appendChild(empty);
-                list.hidden = false;
-                return;
-            }
+    // Mede cliques em links do WhatsApp (só reporta se o gtag existir de fato).
+    document.addEventListener('click', function (e) {
+        var link = e.target.closest && e.target.closest('a[href*="wa.me/"]');
+        if (!link || !window.DR_GA_CARREGADO || typeof gtag !== 'function') return;
+        gtag('event', 'whatsapp_click', {
+            link_id: link.id || null,
+            link_text: (link.textContent || '').trim(),
+            page_path: window.location.pathname
+        });
+    });
 
-            matches.forEach(function (p) {
-                var li = document.createElement('li');
-                var a = document.createElement('a');
-                a.className = 'search-suggestion';
-                a.href = 'loja.html?q=' + encodeURIComponent(p.name);
+    // =================================================================
+    // Altura real do cabeçalho
+    // O padding do conteúdo era um número fixo (215px) que não batia com a
+    // altura real entre 700 e 900px de largura, deixando uma faixa vazia.
+    // =================================================================
+    aoCarregar(function () {
+        var header = document.querySelector('.site-header');
+        if (!header) return;
 
-                var img = document.createElement('img');
-                img.src = p.img;
-                img.alt = '';
-
-                var info = document.createElement('div');
-                info.className = 'search-suggestion-info';
-
-                var nameEl = document.createElement('div');
-                nameEl.className = 'search-suggestion-name';
-                nameEl.textContent = p.name;
-
-                var catEl = document.createElement('div');
-                catEl.className = 'search-suggestion-category';
-                catEl.textContent = p.category;
-
-                info.appendChild(nameEl);
-                info.appendChild(catEl);
-                a.appendChild(img);
-                a.appendChild(info);
-                li.appendChild(a);
-                list.appendChild(li);
-            });
-
-            if (allMatches.length > matches.length) {
-                var moreLi = document.createElement('li');
-                var moreA = document.createElement('a');
-                moreA.className = 'search-suggestion search-suggestion-more';
-                moreA.href = 'loja.html?q=' + encodeURIComponent(term.trim());
-                moreA.textContent = 'Ver todos os ' + allMatches.length + ' resultados para "' + term.trim() + '"';
-                moreLi.appendChild(moreA);
-                list.appendChild(moreLi);
-            }
-
-            list.hidden = false;
+        function medir() {
+            var h = Math.round(header.getBoundingClientRect().height);
+            document.documentElement.style.setProperty('--header-total', h + 'px');
+            document.documentElement.style.scrollPaddingTop = (h + 12) + 'px';
         }
 
-        input.addEventListener('input', function () {
-            renderSuggestions(input.value);
+        medir();
+        if ('ResizeObserver' in window) {
+            new ResizeObserver(medir).observe(header);
+        } else {
+            window.addEventListener('resize', debounce(medir, 120));
+        }
+        window.addEventListener('load', medir);
+    });
+
+    // =================================================================
+    // Ano do rodapé
+    // =================================================================
+    aoCarregar(function () {
+        var ano = document.getElementById('anoAtual');
+        if (ano) ano.textContent = String(new Date().getFullYear());
+    });
+
+    // =================================================================
+    // Menu do celular — fecha no Esc, no clique fora e ao trocar de página
+    // =================================================================
+    aoCarregar(function () {
+        var botao = document.querySelector('.nav-toggle');
+        var menu = document.getElementById('menuPrincipal');
+        if (!botao || !menu) return;
+
+        function abrir(estado) {
+            menu.classList.toggle('is-open', estado);
+            botao.classList.toggle('is-open', estado);
+            botao.setAttribute('aria-expanded', estado ? 'true' : 'false');
+            botao.setAttribute('aria-label', estado ? 'Fechar menu' : 'Abrir menu');
+        }
+
+        botao.addEventListener('click', function () {
+            abrir(!menu.classList.contains('is-open'));
         });
 
-        input.addEventListener('focus', function () {
-            if (input.value.trim()) renderSuggestions(input.value);
+        menu.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', function () { abrir(false); });
         });
 
-        input.addEventListener('keydown', function (e) {
-            var items = list.querySelectorAll('.search-suggestion');
-            if (list.hidden || items.length === 0) return;
-
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                activeIndex = Math.min(activeIndex + 1, items.length - 1);
-                updateActive(items);
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                activeIndex = Math.max(activeIndex - 1, 0);
-                updateActive(items);
-            } else if (e.key === 'Enter' && activeIndex >= 0) {
-                e.preventDefault();
-                items[activeIndex].click();
-            } else if (e.key === 'Escape') {
-                list.hidden = true;
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+                abrir(false);
+                botao.focus();
             }
         });
 
         document.addEventListener('click', function (e) {
-            if (!wrap.contains(e.target)) {
-                list.hidden = true;
+            if (!menu.classList.contains('is-open')) return;
+            if (menu.contains(e.target) || botao.contains(e.target)) return;
+            abrir(false);
+        });
+
+        // Enquanto aberto, Tab circula dentro do menu.
+        menu.addEventListener('keydown', function (e) {
+            if (e.key !== 'Tab' || !menu.classList.contains('is-open')) return;
+            var focaveis = [botao].concat(Array.prototype.slice.call(menu.querySelectorAll('a')));
+            var primeiro = focaveis[0], ultimo = focaveis[focaveis.length - 1];
+            if (e.shiftKey && document.activeElement === primeiro) {
+                e.preventDefault(); ultimo.focus();
+            } else if (!e.shiftKey && document.activeElement === ultimo) {
+                e.preventDefault(); primeiro.focus();
             }
         });
     });
-})();
 
-// ===== Loja: busca e filtro por categoria =====
-document.addEventListener('DOMContentLoaded', function () {
-    var searchInput = document.querySelector('.header-search input');
-    var params = new URLSearchParams(window.location.search);
-    var query = (params.get('q') || '').trim().toLowerCase();
+    // =================================================================
+    // Busca do cabeçalho no celular (ícone que expande)
+    // =================================================================
+    aoCarregar(function () {
+        var botao = document.querySelector('.search-toggle');
+        var wrap = document.querySelector('.header-search-wrap');
+        if (!botao || !wrap) return;
+        var campo = wrap.querySelector('input');
 
-    if (searchInput && query) {
-        searchInput.value = query;
-    }
+        botao.addEventListener('click', function () {
+            var aberto = wrap.classList.toggle('is-open');
+            botao.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+            botao.setAttribute('aria-label', aberto ? 'Fechar busca' : 'Abrir busca');
+            if (aberto && campo) campo.focus();
+        });
 
-    var cards = document.querySelectorAll('.product-card[data-name]');
-    if (cards.length === 0) return;
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && wrap.classList.contains('is-open')) {
+                wrap.classList.remove('is-open');
+                botao.setAttribute('aria-expanded', 'false');
+                botao.focus();
+            }
+        });
+    });
 
-    function applyFilter(term) {
-        var t = normalizeSearch(term.trim());
-        var visibleCount = 0;
+    // =================================================================
+    // Revelação ao rolar
+    // A rede de segurança antiga revelava TODAS as seções depois de 2,5s,
+    // o que matava a animação em qualquer página com mais de duas dobras.
+    // Agora ela só destrava o que já está na tela.
+    // =================================================================
+    aoCarregar(function () {
+        var alvos = document.querySelectorAll('.section:not(.section-catalog)');
+        if (!alvos.length) return;
 
-        document.querySelectorAll('.category-section').forEach(function (section) {
-            var sectionHasMatch = false;
-            section.querySelectorAll('.product-card[data-name]').forEach(function (card) {
-                var haystack = normalizeSearch(card.getAttribute('data-name') + ' ' + card.getAttribute('data-desc'));
-                var match = !t || haystack.indexOf(t) !== -1;
-                card.hidden = !match;
-                if (match) {
-                    sectionHasMatch = true;
-                    visibleCount++;
+        if (!('IntersectionObserver' in window)) {
+            alvos.forEach(function (el) { el.classList.add('is-visible'); });
+            return;
+        }
+
+        alvos.forEach(function (el) { el.classList.add('reveal'); });
+
+        var obs = new IntersectionObserver(function (entradas) {
+            entradas.forEach(function (e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-visible');
+                    obs.unobserve(e.target);
                 }
             });
-            section.hidden = !sectionHasMatch;
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        alvos.forEach(function (el) { obs.observe(el); });
+
+        setTimeout(function () {
+            alvos.forEach(function (el) {
+                if (!el.classList.contains('is-visible') && noViewport(el)) {
+                    el.classList.add('is-visible');
+                    obs.unobserve(el);
+                }
+            });
+        }, 2500);
+    });
+
+    // =================================================================
+    // Contadores
+    // =================================================================
+    aoCarregar(function () {
+        var contadores = document.querySelectorAll('.stat-number[data-count-to]');
+        if (!contadores.length) return;
+
+        function animar(el) {
+            if (el.dataset.pronto) return;
+            el.dataset.pronto = '1';
+            var alvo = parseInt(el.getAttribute('data-count-to'), 10) || 0;
+            var sufixo = el.getAttribute('data-suffix') || '';
+            var prefixo = el.getAttribute('data-prefix') || '';
+
+            if (menosMovimento()) {
+                el.textContent = prefixo + alvo + sufixo;
+                return;
+            }
+            var inicio = null;
+            function passo(t) {
+                if (!inicio) inicio = t;
+                var p = Math.min((t - inicio) / 1200, 1);
+                var suave = 1 - Math.pow(1 - p, 3);
+                el.textContent = prefixo + Math.round(suave * alvo) + sufixo;
+                if (p < 1) requestAnimationFrame(passo);
+            }
+            requestAnimationFrame(passo);
+        }
+
+        if (!('IntersectionObserver' in window)) {
+            contadores.forEach(animar);
+            return;
+        }
+
+        var obs = new IntersectionObserver(function (entradas) {
+            entradas.forEach(function (e) {
+                if (e.isIntersecting) { animar(e.target); obs.unobserve(e.target); }
+            });
+        }, { threshold: 0.5 });
+
+        contadores.forEach(function (el) { obs.observe(el); });
+
+        // Mesma correção do reveal: o atalho de 2,5s só vale para quem já está
+        // na tela; quem está lá embaixo continua ganhando a animação ao chegar.
+        setTimeout(function () {
+            contadores.forEach(function (el) {
+                if (!el.dataset.pronto && noViewport(el)) { obs.unobserve(el); animar(el); }
+            });
+        }, 2500);
+    });
+
+    // =================================================================
+    // Carrossel do hero — indicadores, pausa, swipe e barra de progresso
+    // =================================================================
+    aoCarregar(function () {
+        var carrossel = document.getElementById('heroCarousel');
+        if (!carrossel) return;
+
+        var slides = Array.prototype.slice.call(carrossel.querySelectorAll('img'));
+        if (slides.length < 2) return;
+
+        var INTERVALO = 5000;
+        var atual = 0;
+        var timer = null;
+        var pausado = menosMovimento();
+
+        var indicadores = document.createElement('div');
+        indicadores.className = 'hero-dots';
+        indicadores.setAttribute('role', 'tablist');
+        indicadores.setAttribute('aria-label', 'Escolher banner');
+
+        var pontos = slides.map(function (_, i) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'hero-dot';
+            b.setAttribute('role', 'tab');
+            b.setAttribute('aria-label', 'Banner ' + (i + 1) + ' de ' + slides.length);
+            b.addEventListener('click', function () { irPara(i); reiniciar(); });
+            indicadores.appendChild(b);
+            return b;
         });
 
-        var noResults = document.getElementById('noResults');
-        if (noResults) noResults.hidden = visibleCount !== 0;
-    }
+        var botaoPausa = document.createElement('button');
+        botaoPausa.type = 'button';
+        botaoPausa.className = 'hero-pausa';
+        botaoPausa.setAttribute('aria-label', pausado ? 'Reproduzir banners' : 'Pausar banners');
+        botaoPausa.textContent = pausado ? '▶' : '❚❚';
 
-    if (query) {
-        applyFilter(query);
-    }
+        var progresso = document.createElement('div');
+        progresso.className = 'hero-progresso';
+        progresso.innerHTML = '<i></i>';
+        var barra = progresso.querySelector('i');
 
-    // From here on we know we're on loja.html (it's the only page with product cards)
-    var form = document.querySelector('.header-search');
-    if (form) {
+        carrossel.appendChild(indicadores);
+        carrossel.appendChild(botaoPausa);
+        carrossel.appendChild(progresso);
+
+        function irPara(i) {
+            slides[atual].classList.remove('is-active');
+            pontos[atual].setAttribute('aria-selected', 'false');
+            atual = (i + slides.length) % slides.length;
+            slides[atual].classList.add('is-active');
+            pontos[atual].setAttribute('aria-selected', 'true');
+            // Marca a hora da troca: o zoom lento do slide lê esse carimbo.
+            window.DR_SLIDE_EM = Date.now();
+            // Carrega o próximo só quando ele passa a fazer sentido.
+            var proximo = slides[(atual + 1) % slides.length];
+            if (proximo.loading === 'lazy') proximo.loading = 'eager';
+            animarBarra();
+        }
+
+        function animarBarra() {
+            if (!barra) return;
+            barra.style.transition = 'none';
+            barra.style.width = '0%';
+            if (pausado) return;
+            requestAnimationFrame(function () {
+                barra.style.transition = 'width ' + INTERVALO + 'ms linear';
+                barra.style.width = '100%';
+            });
+        }
+
+        function comecar() {
+            if (pausado || timer) return;
+            timer = setInterval(function () { irPara(atual + 1); }, INTERVALO);
+            animarBarra();
+        }
+
+        function parar() {
+            clearInterval(timer);
+            timer = null;
+            if (barra) {
+                barra.style.transition = 'none';
+                barra.style.width = '0%';
+            }
+        }
+
+        function reiniciar() {
+            parar();
+            comecar();
+        }
+
+        botaoPausa.addEventListener('click', function () {
+            pausado = !pausado;
+            botaoPausa.textContent = pausado ? '▶' : '❚❚';
+            botaoPausa.setAttribute('aria-label', pausado ? 'Reproduzir banners' : 'Pausar banners');
+            if (pausado) parar(); else comecar();
+        });
+
+        // Autoplay que não respeita hover, foco ou movimento reduzido reprova
+        // no WCAG 2.2.2 — aqui ele para nos três casos.
+        carrossel.addEventListener('mouseenter', parar);
+        carrossel.addEventListener('mouseleave', function () { if (!pausado) comecar(); });
+        carrossel.addEventListener('focusin', parar);
+        carrossel.addEventListener('focusout', function () { if (!pausado) comecar(); });
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) parar(); else if (!pausado) comecar();
+        });
+
+        var anterior = carrossel.querySelector('.hero-carousel-prev');
+        var proximo = carrossel.querySelector('.hero-carousel-next');
+        if (anterior) anterior.addEventListener('click', function () { irPara(atual - 1); reiniciar(); });
+        if (proximo) proximo.addEventListener('click', function () { irPara(atual + 1); reiniciar(); });
+
+        // Arrastar com o dedo — no celular ninguém acha setas de 30px.
+        var x0 = null;
+        carrossel.addEventListener('pointerdown', function (e) { x0 = e.clientX; parar(); });
+        carrossel.addEventListener('pointerup', function (e) {
+            if (x0 === null) return;
+            var d = e.clientX - x0;
+            x0 = null;
+            if (Math.abs(d) > 40) irPara(atual + (d < 0 ? 1 : -1));
+            if (!pausado) comecar();
+        });
+        carrossel.addEventListener('pointercancel', function () { x0 = null; if (!pausado) comecar(); });
+
+        pontos[0].setAttribute('aria-selected', 'true');
+        window.DR_SLIDE_EM = Date.now();
+        window.DR_SLIDE_MS = INTERVALO;
+        comecar();
+    });
+
+    // =================================================================
+    // Movimento do hero — parallax ao rolar + zoom lento no slide ativo
+    // Os dois escrevem no mesmo transform, então moram na mesma função:
+    // separados, um sobrescreveria o outro a cada quadro.
+    // =================================================================
+    aoCarregar(function () {
+        var carrossel = document.getElementById('heroCarousel');
+        if (!carrossel || menosMovimento()) return;
+
+        var rodando = false;
+
+        function desenhar() {
+            var r = carrossel.getBoundingClientRect();
+            var ativa = carrossel.querySelector('img.is-active');
+            var visivel = r.bottom > 0 && r.top < window.innerHeight;
+
+            if (ativa && visivel) {
+                var deslocamento = Math.max(-24, Math.min(24, r.top * -0.06));
+                var duracao = window.DR_SLIDE_MS || 5000;
+                var idade = Math.min(1, (Date.now() - (window.DR_SLIDE_EM || Date.now())) / duracao);
+                var escala = 1.06 + 0.05 * idade;
+                ativa.style.transform = 'translateY(' + deslocamento + 'px) scale(' + escala.toFixed(4) + ')';
+            }
+
+            if (visivel && !document.hidden) {
+                requestAnimationFrame(desenhar);
+            } else {
+                rodando = false;
+            }
+        }
+
+        function ligar() {
+            if (!rodando) { rodando = true; requestAnimationFrame(desenhar); }
+        }
+
+        window.addEventListener('scroll', ligar, { passive: true });
+        window.addEventListener('resize', ligar);
+        document.addEventListener('visibilitychange', function () { if (!document.hidden) ligar(); });
+        ligar();
+    });
+
+    // =================================================================
+    // Seletor de marcas (home)
+    // =================================================================
+    aoCarregar(function () {
+        var seletor = document.querySelector('.brand-selector');
+        if (!seletor) return;
+
+        var botoes = seletor.querySelectorAll('.brand-select-btn');
+        var imagens = seletor.querySelectorAll('.brand-preview-img');
+
+        botoes.forEach(function (b) {
+            b.addEventListener('click', function () {
+                var marca = b.getAttribute('data-brand');
+                botoes.forEach(function (o) {
+                    var ativo = o === b;
+                    o.classList.toggle('is-active', ativo);
+                    o.setAttribute('aria-pressed', ativo ? 'true' : 'false');
+                });
+                imagens.forEach(function (img) {
+                    img.classList.toggle('is-active', img.getAttribute('data-brand') === marca);
+                });
+            });
+        });
+    });
+
+    // =================================================================
+    // "Como funciona"
+    // =================================================================
+    aoCarregar(function () {
+        var passos = document.querySelector('.how-steps');
+        if (!passos) return;
+        var linha = passos.querySelector('.how-steps-line');
+
+        function revelar() {
+            passos.classList.add('is-visible');
+            if (linha) linha.classList.add('is-visible');
+        }
+
+        if (!('IntersectionObserver' in window)) { revelar(); return; }
+
+        var obs = new IntersectionObserver(function (entradas) {
+            entradas.forEach(function (e) {
+                if (e.isIntersecting) { revelar(); obs.unobserve(e.target); }
+            });
+        }, { threshold: 0.3 });
+        obs.observe(passos);
+    });
+
+    // =================================================================
+    // Botão do WhatsApp e "voltar ao topo"
+    // =================================================================
+    aoCarregar(function () {
+        var zap = document.getElementById('whatsappFloat');
+        var temCatalogo = !!document.querySelector('.category-section');
+
+        var topo = null;
+        if (temCatalogo) {
+            topo = document.createElement('button');
+            topo.type = 'button';
+            topo.className = 'voltar-topo';
+            topo.setAttribute('aria-label', 'Voltar ao topo da página');
+            topo.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>';
+            topo.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: menosMovimento() ? 'instant' : 'smooth' });
+            });
+            document.body.appendChild(topo);
+        }
+
+        function aoRolar() {
+            var passou = window.scrollY > 400;
+            if (zap) zap.classList.toggle('is-visible', passou);
+            if (topo) topo.classList.toggle('is-visible', window.scrollY > window.innerHeight * 1.5);
+        }
+
+        window.addEventListener('scroll', aoRolar, { passive: true });
+        aoRolar();
+
+        // Um balão, uma vez por sessão: o WhatsApp é a conversão do site e
+        // hoje ele só aparece e some.
+        if (zap && !sessionStorage.getItem('dr-balao-zap') && !menosMovimento()) {
+            setTimeout(function () {
+                if (!zap.classList.contains('is-visible')) return;
+                var balao = document.createElement('span');
+                balao.className = 'zap-balao';
+                balao.textContent = 'Fale com a gente';
+                zap.appendChild(balao);
+                try { sessionStorage.setItem('dr-balao-zap', '1'); } catch (e) { /* ok */ }
+                setTimeout(function () { balao.classList.add('sumindo'); }, 5000);
+                setTimeout(function () { balao.remove(); }, 5600);
+            }, 3500);
+        }
+    });
+
+    // =================================================================
+    // FAQ — recalcula a altura quando a largura da tela muda
+    // =================================================================
+    aoCarregar(function () {
+        var itens = document.querySelectorAll('.faq-item');
+        if (!itens.length) return;
+
+        function medirAberto() {
+            itens.forEach(function (item) {
+                var resposta = item.querySelector('.faq-answer');
+                if (!resposta) return;
+                resposta.style.maxHeight = item.classList.contains('is-open')
+                    ? resposta.scrollHeight + 'px' : '';
+            });
+        }
+
+        itens.forEach(function (item) {
+            var pergunta = item.querySelector('.faq-question');
+            var resposta = item.querySelector('.faq-answer');
+            if (!pergunta || !resposta) return;
+
+            pergunta.addEventListener('click', function () {
+                var estavaAberto = item.classList.contains('is-open');
+                itens.forEach(function (o) {
+                    o.classList.remove('is-open');
+                    var q = o.querySelector('.faq-question');
+                    var a = o.querySelector('.faq-answer');
+                    if (q) q.setAttribute('aria-expanded', 'false');
+                    if (a) a.style.maxHeight = '';
+                });
+                if (!estavaAberto) {
+                    item.classList.add('is-open');
+                    pergunta.setAttribute('aria-expanded', 'true');
+                    resposta.style.maxHeight = resposta.scrollHeight + 'px';
+                }
+            });
+        });
+
+        window.addEventListener('resize', debounce(medirAberto, 120));
+        window.addEventListener('orientationchange', function () { setTimeout(medirAberto, 200); });
+    });
+
+    // =================================================================
+    // Formulário "Trabalhe conosco" (Web3Forms)
+    // =================================================================
+    aoCarregar(function () {
+        var form = document.getElementById('jobForm');
+        if (!form) return;
+
+        var status = document.getElementById('jobFormStatus');
+        var botao = form.querySelector('.job-submit');
+
         form.addEventListener('submit', function (e) {
             e.preventDefault();
-            applyFilter(searchInput.value);
-            history.replaceState(null, '', 'loja.html' + (searchInput.value ? '?q=' + encodeURIComponent(searchInput.value) : ''));
+
+            var dados = new FormData(form);
+            var texto = botao.textContent;
+            botao.disabled = true;
+            botao.textContent = 'Enviando...';
+            status.hidden = true;
+            status.classList.remove('is-success', 'is-error');
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST', body: dados, headers: { Accept: 'application/json' }
+            })
+                .then(function (r) { return r.json(); })
+                .then(function (d) {
+                    if (d.success) {
+                        status.textContent = 'Candidatura enviada! Vamos analisar seu perfil e entrar em contato.';
+                        status.classList.add('is-success');
+                        form.reset();
+                        if (window.DR_GA_CARREGADO && typeof gtag === 'function') {
+                            gtag('event', 'job_application_submit', { page_path: window.location.pathname });
+                        }
+                    } else {
+                        status.textContent = 'Não deu pra enviar agora. Tenta de novo em instantes ou chama a gente no WhatsApp.';
+                        status.classList.add('is-error');
+                    }
+                    status.hidden = false;
+                })
+                .catch(function () {
+                    status.textContent = 'Não deu pra enviar agora. Tenta de novo em instantes ou chama a gente no WhatsApp.';
+                    status.classList.add('is-error');
+                    status.hidden = false;
+                })
+                .then(function () {
+                    botao.disabled = false;
+                    botao.textContent = texto;
+                });
         });
+    });
+
+    // =================================================================
+    // Índice de busca — baixado sob demanda, não embutido em toda página
+    // =================================================================
+    var indicePromessa = null;
+
+    function carregarIndice() {
+        if (indicePromessa) return indicePromessa;
+        var base = document.body.getAttribute('data-base') || '';
+        indicePromessa = fetch(base + 'assets/data/produtos.json')
+            .then(function (r) { return r.json(); })
+            .then(function (d) { return d.produtos || []; })
+            .catch(function () { return []; });
+        return indicePromessa;
     }
-    if (searchInput) {
-        searchInput.addEventListener('input', function () {
-            applyFilter(searchInput.value);
-        });
-    }
-});
 
-// ===== Formulario "Quero ser cliente" (monta mensagem e abre o WhatsApp) =====
-document.addEventListener('DOMContentLoaded', function () {
-    var form = document.getElementById('clientForm');
-    if (!form) return;
+    // =================================================================
+    // Sugestões de busca (fora da loja) — padrão combobox do ARIA
+    // =================================================================
+    aoCarregar(function () {
+        if (document.querySelector('.product-card[data-name]')) return;
 
-    var WHATSAPP_NUMBER = '5521992111843';
+        var wrap = document.querySelector('.header-search-wrap');
+        if (!wrap) return;
+        var campo = wrap.querySelector('input');
+        var lista = wrap.querySelector('.search-suggestions');
+        if (!campo || !lista) return;
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
+        var base = document.body.getAttribute('data-base') || '';
+        var ativo = -1;
 
-        var company = form.company.value.trim();
-        var cnpj = form.cnpj.value.trim();
-        var segmento = form.segmento.value;
-        var name = form.name.value.trim();
-        var phone = form.phone.value.trim();
-        var city = form.city.value.trim();
-        var message = form.message.value.trim();
+        campo.addEventListener('focus', carregarIndice, { once: true });
 
-        var lines = [
-            'Olá! Gostaria de me tornar cliente da Distri Rio.',
-            '',
-            '*Empresa:* ' + company,
-            '*CNPJ:* ' + cnpj,
-            '*Ramo:* ' + segmento,
-            '*Responsável:* ' + name,
-            '*Telefone:* ' + phone
-        ];
-        if (city) lines.push('*Cidade:* ' + city);
-        if (message) lines.push('', message);
-
-        var text = lines.join('\n');
-
-        if (typeof gtag === 'function') {
-            gtag('event', 'client_signup_submit', { page_path: window.location.pathname });
+        function marcar(itens) {
+            itens.forEach(function (el, i) {
+                var sel = i === ativo;
+                el.classList.toggle('is-highlighted', sel);
+                el.setAttribute('aria-selected', sel ? 'true' : 'false');
+                if (sel) {
+                    el.id = el.id || 'sugestao-' + i;
+                    campo.setAttribute('aria-activedescendant', el.id);
+                    el.scrollIntoView({ block: 'nearest' });
+                }
+            });
+            if (ativo < 0) campo.removeAttribute('aria-activedescendant');
         }
 
-        window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
-    });
-});
-
-// ===== Formulario "Selecione o assunto e fale conosco" (pagina Contato) =====
-document.addEventListener('DOMContentLoaded', function () {
-    var form = document.getElementById('contactForm');
-    if (!form) return;
-
-    var WHATSAPP_NUMBER = '5521992111843';
-    var subjectSelect = document.getElementById('contactSubject');
-    var fieldsWrap = document.getElementById('contactFormFields');
-    var noteCliente = document.getElementById('contactNoteCliente');
-    var noteTrabalhe = document.getElementById('contactNoteTrabalhe');
-
-    // Assuntos ja resolvidos por uma pagina dedicada (cliente/trabalhe) nao
-    // tem entrada aqui - pra esses so mostramos a nota com o link certo.
-    var SUBJECT_LABELS = {
-        pedido: 'Dúvida sobre um pedido',
-        outro: 'Outro assunto'
-    };
-
-    subjectSelect.addEventListener('change', function () {
-        var value = subjectSelect.value;
-        noteCliente.hidden = value !== 'cliente';
-        noteTrabalhe.hidden = value !== 'trabalhe';
-        fieldsWrap.hidden = !SUBJECT_LABELS[value];
-    });
-
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        var subjectLabel = SUBJECT_LABELS[subjectSelect.value];
-        if (!subjectLabel) return;
-
-        var name = form.name.value.trim();
-        var phone = form.phone.value.trim();
-        var company = form.company.value.trim();
-        var message = form.message.value.trim();
-
-        var lines = [
-            'Olá! Assunto: ' + subjectLabel,
-            '',
-            '*Nome:* ' + name,
-            '*Telefone:* ' + phone
-        ];
-        if (company) lines.push('*Empresa:* ' + company);
-        lines.push('', message);
-
-        if (typeof gtag === 'function') {
-            gtag('event', 'contact_form_submit', { page_path: window.location.pathname, subject: subjectSelect.value });
+        function fechar() {
+            lista.hidden = true;
+            campo.setAttribute('aria-expanded', 'false');
+            campo.removeAttribute('aria-activedescendant');
+            ativo = -1;
         }
 
-        window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+        function desenhar(termo) {
+            var t = normalizar(termo.trim());
+            lista.innerHTML = '';
+            ativo = -1;
+
+            if (!t) { fechar(); return; }
+
+            carregarIndice().then(function (produtos) {
+                if (normalizar(campo.value.trim()) !== t) return;
+                var todos = produtos.filter(function (p) { return p.b.indexOf(t) !== -1; });
+                var alguns = todos.slice(0, 6);
+
+                lista.innerHTML = '';
+                if (!alguns.length) {
+                    var vazio = document.createElement('li');
+                    vazio.className = 'search-suggestion-empty';
+                    vazio.textContent = 'Nenhum produto encontrado para "' + termo.trim() + '"';
+                    lista.appendChild(vazio);
+                } else {
+                    alguns.forEach(function (p, i) {
+                        var li = document.createElement('li');
+                        var a = document.createElement('a');
+                        a.className = 'search-suggestion';
+                        a.id = 'sugestao-' + i;
+                        a.setAttribute('role', 'option');
+                        a.setAttribute('aria-selected', 'false');
+                        a.href = base + 'produto/' + p.i + '.html';
+
+                        if (p.g) {
+                            var img = document.createElement('img');
+                            img.src = base + p.g.replace(/\.jpe?g$/i, '.webp');
+                            img.alt = '';
+                            img.loading = 'lazy';
+                            img.width = 40;
+                            img.height = 40;
+                            a.appendChild(img);
+                        }
+
+                        var info = document.createElement('div');
+                        info.className = 'search-suggestion-info';
+                        var nome = document.createElement('div');
+                        nome.className = 'search-suggestion-name';
+                        nome.textContent = p.n;
+                        var cat = document.createElement('div');
+                        cat.className = 'search-suggestion-category';
+                        cat.textContent = p.m || '';
+                        info.appendChild(nome);
+                        info.appendChild(cat);
+                        a.appendChild(info);
+                        li.appendChild(a);
+                        lista.appendChild(li);
+                    });
+
+                    if (todos.length > alguns.length) {
+                        var li2 = document.createElement('li');
+                        var a2 = document.createElement('a');
+                        a2.className = 'search-suggestion search-suggestion-more';
+                        a2.setAttribute('role', 'option');
+                        a2.href = base + 'loja.html?q=' + encodeURIComponent(termo.trim());
+                        a2.textContent = 'Ver todos os ' + todos.length + ' resultados para "' + termo.trim() + '"';
+                        li2.appendChild(a2);
+                        lista.appendChild(li2);
+                    }
+                }
+                lista.hidden = false;
+                campo.setAttribute('aria-expanded', 'true');
+            });
+        }
+
+        campo.addEventListener('input', debounce(function () { desenhar(campo.value); }, 120));
+        campo.addEventListener('focus', function () { if (campo.value.trim()) desenhar(campo.value); });
+
+        campo.addEventListener('keydown', function (e) {
+            var itens = lista.querySelectorAll('.search-suggestion');
+            if (lista.hidden || !itens.length) return;
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                ativo = Math.min(ativo + 1, itens.length - 1);
+                marcar(itens);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                ativo = Math.max(ativo - 1, 0);
+                marcar(itens);
+            } else if (e.key === 'Enter' && ativo >= 0) {
+                e.preventDefault();
+                itens[ativo].click();
+            } else if (e.key === 'Escape') {
+                fechar();
+            }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!wrap.contains(e.target)) fechar();
+        });
     });
-});
+
+    // =================================================================
+    // Loja — filtro, contagem falada, âncoras e categoria atual
+    // =================================================================
+    aoCarregar(function () {
+        var cartoes = document.querySelectorAll('.product-card[data-name]');
+        if (!cartoes.length) return;
+
+        var campo = document.querySelector('.header-search input');
+        var status = document.getElementById('searchStatus');
+        var semResultado = document.getElementById('noResults');
+        var secoes = Array.prototype.slice.call(document.querySelectorAll('.category-section'));
+        var chips = Array.prototype.slice.call(document.querySelectorAll('.category-chip'));
+
+        // O texto de busca já vem normalizado do build: nada de reprocessar
+        // 400 produtos a cada tecla digitada.
+        var itens = Array.prototype.map.call(cartoes, function (c) {
+            return { el: c, texto: (c.getAttribute('data-name') + ' ' + c.getAttribute('data-desc') + ' ' + (c.getAttribute('data-sku') || '')).toLowerCase() };
+        });
+
+        function filtrar(termo, rolar) {
+            var t = normalizar(termo.trim());
+            var visiveis = 0;
+            var primeiraSecao = null;
+
+            secoes.forEach(function (secao) {
+                var achou = false;
+                secao.querySelectorAll('.product-card[data-name]').forEach(function (card) {
+                    var item = itens.find(function (i) { return i.el === card; });
+                    var bate = !t || (item && item.texto.indexOf(t) !== -1);
+                    card.hidden = !bate;
+                    if (bate) { achou = true; visiveis++; }
+                });
+                secao.hidden = !achou;
+                if (achou && !primeiraSecao) primeiraSecao = secao;
+
+                // A contagem da seção é do catálogo inteiro; durante a busca
+                // ela mentiria ("56 produtos" com 2 na tela).
+                var contagem = secao.querySelector('.category-count');
+                if (contagem) {
+                    if (!contagem.dataset.total) contagem.dataset.total = contagem.textContent;
+                    if (t) {
+                        var n = secao.querySelectorAll('.product-card:not([hidden])').length;
+                        contagem.textContent = n + (n === 1 ? ' produto encontrado' : ' produtos encontrados');
+                    } else {
+                        contagem.textContent = contagem.dataset.total;
+                    }
+                }
+
+                var chip = chips.find(function (c) { return c.getAttribute('href') === '#' + secao.id; });
+                if (chip) chip.classList.toggle('sem-resultado', !achou);
+            });
+
+            if (semResultado) semResultado.hidden = visiveis !== 0;
+            if (status) {
+                status.textContent = !t
+                    ? ''
+                    : visiveis === 0
+                        ? 'Nenhum produto encontrado para "' + termo.trim() + '".'
+                        : visiveis + (visiveis === 1 ? ' produto encontrado' : ' produtos encontrados') + ' para "' + termo.trim() + '".';
+            }
+
+            // Filtrar sem rolar deixava o visitante olhando para a parte da
+            // página que acabou de esvaziar.
+            if (rolar && t && primeiraSecao) {
+                primeiraSecao.scrollIntoView({ behavior: menosMovimento() ? 'instant' : 'smooth', block: 'start' });
+            }
+            return visiveis;
+        }
+
+        var parametros = new URLSearchParams(window.location.search);
+        var consulta = (parametros.get('q') || '').trim();
+        if (campo && consulta) {
+            campo.value = consulta;
+            filtrar(consulta, true);
+        }
+
+        var form = document.querySelector('.header-search');
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                filtrar(campo.value, true);
+                history.replaceState(null, '', 'loja.html' + (campo.value ? '?q=' + encodeURIComponent(campo.value) : ''));
+            });
+        }
+        if (campo) {
+            campo.addEventListener('input', debounce(function () { filtrar(campo.value, false); }, 140));
+        }
+
+        // Estado de "nada encontrado" com saída, em vez de um parágrafo solto.
+        if (semResultado && !semResultado.querySelector('.no-results-acoes')) {
+            var acoes = document.createElement('div');
+            acoes.className = 'no-results-acoes';
+            var zap = document.createElement('a');
+            zap.className = 'btn';
+            zap.target = '_blank';
+            zap.rel = 'noopener';
+            acoes.appendChild(zap);
+            semResultado.appendChild(acoes);
+
+            var atualizarZap = function () {
+                var termo = campo ? campo.value.trim() : '';
+                zap.textContent = 'Perguntar no WhatsApp se temos';
+                zap.href = 'https://wa.me/5521992111843?text=' + encodeURIComponent(
+                    'Olá! Procurei por "' + termo + '" no site e não achei. Vocês trabalham com esse produto?');
+            };
+            if (campo) campo.addEventListener('input', debounce(atualizarZap, 140));
+            atualizarZap();
+        }
+
+        // As seções usam content-visibility, então na primeira carga o navegador
+        // ainda não sabe a altura real e erra a âncora. Corrige depois do layout.
+        // Com âncora na URL, a restauração automática de scroll do navegador
+        // roda depois do nosso ajuste e joga a página de volta onde estava.
+        if (window.location.hash && 'scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        function corrigirAncora() {
+            var id = decodeURIComponent(window.location.hash.slice(1));
+            if (!id) return;
+            var alvo = document.getElementById(id);
+            if (!alvo) return;
+            // Cada correção materializa as seções pelo caminho, o que muda a
+            // altura da página. Repete até a posição parar de se mexer.
+            var tentativas = 0;
+            (function estabilizar() {
+                var antes = Math.round(alvo.getBoundingClientRect().top);
+                alvo.scrollIntoView({ behavior: 'instant', block: 'start' });
+                var depois = Math.round(alvo.getBoundingClientRect().top);
+                if (++tentativas < 30 && Math.abs(depois - antes) > 2) {
+                    requestAnimationFrame(estabilizar);
+                }
+            })();
+        }
+
+        window.addEventListener('hashchange', corrigirAncora);
+        window.addEventListener('load', corrigirAncora);
+        corrigirAncora();
+
+        // Marca no chip a categoria que está passando pela tela.
+        if ('IntersectionObserver' in window && chips.length) {
+            var espia = new IntersectionObserver(function (entradas) {
+                entradas.forEach(function (e) {
+                    if (!e.isIntersecting) return;
+                    chips.forEach(function (c) {
+                        var alvo = c.getAttribute('href') === '#' + e.target.id;
+                        c.setAttribute('aria-current', alvo ? 'true' : 'false');
+                        if (alvo) c.scrollIntoView({ block: 'nearest', inline: 'center' });
+                    });
+                });
+            }, { rootMargin: '-30% 0px -60% 0px' });
+            secoes.forEach(function (s) { espia.observe(s); });
+        }
+    });
+
+    // =================================================================
+    // Formulários que abrem o WhatsApp
+    // =================================================================
+    var ZAP = '5521992111843';
+
+    // O pop-up pode ser engolido em silêncio (bloqueador, navegador in-app do
+    // Instagram, Safari restrito). Nesse caso o visitante preenchia tudo e não
+    // acontecia nada — agora ele sempre recebe uma confirmação com o link.
+    function abrirWhatsApp(form, texto) {
+        var url = 'https://wa.me/' + ZAP + '?text=' + encodeURIComponent(texto);
+        var janela = null;
+        try {
+            janela = window.open(url, '_blank', 'noopener');
+        } catch (e) {
+            janela = null;
+        }
+
+        var caixa = form.querySelector('.form-enviado');
+        if (!caixa) {
+            caixa = document.createElement('div');
+            caixa.className = 'form-enviado';
+            caixa.setAttribute('role', 'status');
+            form.appendChild(caixa);
+        }
+        caixa.innerHTML = '';
+
+        var titulo = document.createElement('p');
+        titulo.className = 'form-enviado-titulo';
+        titulo.textContent = janela ? 'Pronto! Abrimos o WhatsApp com sua mensagem.' : 'Sua mensagem está pronta.';
+        caixa.appendChild(titulo);
+
+        var link = document.createElement('a');
+        link.className = 'btn btn-zap';
+        link.href = url;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = janela ? 'Não abriu? Clique aqui' : 'Abrir no WhatsApp';
+        caixa.appendChild(link);
+
+        caixa.hidden = false;
+        caixa.scrollIntoView({ behavior: menosMovimento() ? 'instant' : 'smooth', block: 'nearest' });
+        if (!janela) link.focus();
+    }
+
+    // --- máscaras e validação ---
+    function mascararCnpj(v) {
+        var d = v.replace(/\D/g, '').slice(0, 14);
+        return d
+            .replace(/^(\d{2})(\d)/, '$1.$2')
+            .replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3')
+            .replace(/\.(\d{3})(\d)/, '.$1/$2')
+            .replace(/(\d{4})(\d)/, '$1-$2');
+    }
+
+    function mascararTelefone(v) {
+        var d = v.replace(/\D/g, '').slice(0, 11);
+        if (d.length <= 10) {
+            return d.replace(/^(\d{2})(\d)/, '($1) $2').replace(/(\d{4})(\d)/, '$1-$2');
+        }
+        return d.replace(/^(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2');
+    }
+
+    function cnpjValido(valor) {
+        var c = (valor || '').replace(/\D/g, '');
+        if (c.length !== 14 || /^(\d)\1{13}$/.test(c)) return false;
+        function digito(base, pesos) {
+            var soma = 0;
+            for (var i = 0; i < pesos.length; i++) soma += parseInt(base[i], 10) * pesos[i];
+            var r = soma % 11;
+            return r < 2 ? 0 : 11 - r;
+        }
+        var d1 = digito(c, [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+        var d2 = digito(c, [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+        return d1 === parseInt(c[12], 10) && d2 === parseInt(c[13], 10);
+    }
+
+    function ligarMascaras(form) {
+        var cnpj = form.querySelector('input[name="cnpj"]');
+        if (cnpj) {
+            cnpj.setAttribute('inputmode', 'numeric');
+            cnpj.addEventListener('input', function () {
+                var pos = cnpj.selectionStart === cnpj.value.length;
+                cnpj.value = mascararCnpj(cnpj.value);
+                if (pos) cnpj.setSelectionRange(cnpj.value.length, cnpj.value.length);
+                cnpj.setCustomValidity(!cnpj.value || cnpjValido(cnpj.value) ? '' : 'CNPJ inválido — confira os números.');
+            });
+            cnpj.addEventListener('blur', function () {
+                cnpj.setCustomValidity(!cnpj.value || cnpjValido(cnpj.value) ? '' : 'CNPJ inválido — confira os números.');
+            });
+        }
+
+        form.querySelectorAll('input[name="phone"], input[type="tel"]').forEach(function (tel) {
+            tel.setAttribute('inputmode', 'tel');
+            tel.addEventListener('input', function () {
+                var fim = tel.selectionStart === tel.value.length;
+                tel.value = mascararTelefone(tel.value);
+                if (fim) tel.setSelectionRange(tel.value.length, tel.value.length);
+                var digitos = tel.value.replace(/\D/g, '').length;
+                tel.setCustomValidity(!tel.value || digitos >= 10 ? '' : 'Telefone incompleto — inclua o DDD.');
+            });
+        });
+    }
+
+    // --- "Quero ser cliente" ---
+    aoCarregar(function () {
+        var form = document.getElementById('clientForm');
+        if (!form) return;
+        ligarMascaras(form);
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!form.reportValidity()) return;
+
+            var linhas = [
+                'Olá! Gostaria de me tornar cliente da Distri Rio.',
+                '',
+                '*Empresa:* ' + form.company.value.trim(),
+                '*CNPJ:* ' + form.cnpj.value.trim(),
+                '*Ramo:* ' + form.segmento.value,
+                '*Responsável:* ' + form.name.value.trim(),
+                '*Telefone:* ' + form.phone.value.trim()
+            ];
+            if (form.city.value.trim()) linhas.push('*Cidade:* ' + form.city.value.trim());
+            if (form.message.value.trim()) linhas.push('', form.message.value.trim());
+
+            if (window.DR_GA_CARREGADO && typeof gtag === 'function') {
+                gtag('event', 'client_signup_submit', { page_path: window.location.pathname });
+            }
+            abrirWhatsApp(form, linhas.join('\n'));
+        });
+    });
+
+    // --- "Selecione o assunto e fale conosco" ---
+    aoCarregar(function () {
+        var form = document.getElementById('contactForm');
+        if (!form) return;
+        ligarMascaras(form);
+
+        var assunto = document.getElementById('contactSubject');
+        var campos = document.getElementById('contactFormFields');
+        var notaCliente = document.getElementById('contactNoteCliente');
+        var notaTrabalhe = document.getElementById('contactNoteTrabalhe');
+
+        var ROTULOS = { pedido: 'Dúvida sobre um pedido', outro: 'Outro assunto' };
+
+        // Campo obrigatório dentro de bloco escondido faz o Chrome recusar o
+        // envio com "invalid form control is not focusable" e nada acontecer na
+        // tela. Desabilitar junto com o hidden tira o campo da validação.
+        function alternarCampos(mostrar) {
+            campos.hidden = !mostrar;
+            campos.querySelectorAll('input, select, textarea').forEach(function (c) {
+                c.disabled = !mostrar;
+            });
+        }
+
+        assunto.addEventListener('change', function () {
+            var v = assunto.value;
+            notaCliente.hidden = v !== 'cliente';
+            notaTrabalhe.hidden = v !== 'trabalhe';
+            alternarCampos(!!ROTULOS[v]);
+        });
+        alternarCampos(!!ROTULOS[assunto.value]);
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var rotulo = ROTULOS[assunto.value];
+            if (!rotulo || !form.reportValidity()) return;
+
+            var linhas = [
+                'Olá! Assunto: ' + rotulo,
+                '',
+                '*Nome:* ' + form.name.value.trim(),
+                '*Telefone:* ' + form.phone.value.trim()
+            ];
+            if (form.company.value.trim()) linhas.push('*Empresa:* ' + form.company.value.trim());
+            linhas.push('', form.message.value.trim());
+
+            if (window.DR_GA_CARREGADO && typeof gtag === 'function') {
+                gtag('event', 'contact_form_submit', {
+                    page_path: window.location.pathname, subject: assunto.value
+                });
+            }
+            abrirWhatsApp(form, linhas.join('\n'));
+        });
+    });
+})();
