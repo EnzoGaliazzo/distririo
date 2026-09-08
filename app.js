@@ -188,6 +188,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { threshold: 0.5 });
 
     counters.forEach(function (el) { counterObserver.observe(el); });
+
+    // Mesma rede de seguranca do scroll reveal. O valor inicial no HTML e "0",
+    // entao um observer que nao dispara nao deixa a animacao pendente: deixa o
+    // site anunciando "0 produtos no catalogo". Passado o prazo, quem ainda
+    // estiver zerado recebe o numero final direto, sem animacao.
+    setTimeout(function () {
+        counters.forEach(function (el) {
+            if (el.textContent.trim() !== '0') return;
+            counterObserver.unobserve(el);
+            el.textContent = (el.getAttribute('data-count-to') || '0')
+                + (el.getAttribute('data-suffix') || '');
+        });
+    }, 2500);
 });
 
 // ===== "Como funciona": desenha a linha e revela os icones ao rolar (home) =====
