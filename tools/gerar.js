@@ -150,9 +150,32 @@ function aplicarJsonLd(html, arquivo) {
     return html.replace(/([ \t]*<link rel="stylesheet" href="style.css">\r?\n)/, '$1' + bloco);
 }
 
+// ---------------------------------------------------------------------
+// Versão nos links do CSS e do JS
+// O GitHub Pages manda cache-control: max-age=600 em tudo e não deixa
+// mudar. Sem versão no endereço, quem já visitou o site pega, por até dez
+// minutos depois de um deploy, o HTML novo com o CSS velho — e a página
+// aparece sem estilo. Com ?v=<hash do conteúdo>, arquivo novo é endereço
+// novo, e o navegador não tem como servir a cópia antiga.
+// ---------------------------------------------------------------------
+const crypto = require('crypto');
+
+const versaoDe = arquivo =>
+    crypto.createHash('sha1').update(fs.readFileSync(path.join(root, arquivo))).digest('hex').slice(0, 8);
+
+const VERSOES = { 'style.css': versaoDe('style.css'), 'app.js': versaoDe('app.js') };
+
+// Tira a versão antiga na leitura, para o build continuar idempotente.
+const limparVersao = html =>
+    html.replace(/(href|src)="((?:\.\.\/|\/)?(?:style\.css|app\.js))\?v=[0-9a-f]+"/g, '$1="$2"');
+
+const versionar = html =>
+    html.replace(/(href|src)="((?:\.\.\/|\/)?(style\.css|app\.js))"/g,
+        (_, attr, caminho, base) => `${attr}="${caminho}?v=${VERSOES[base]}"`);
+
 // 1. páginas normais
 for (const [arquivo, chave] of Object.entries(PAGINAS)) {
-    let html = ler(arquivo);
+    let html = limparVersao(ler(arquivo));
     html = arrumarHead(html, arquivo);
     html = aplicarJsonLd(html, arquivo);
     html = aplicarPartials(html, '', chave);
@@ -160,16 +183,16 @@ for (const [arquivo, chave] of Object.entries(PAGINAS)) {
         html = html.replace(/<main(\s|>)/, '<main id="conteudo"$1');
     }
     if (arquivo === 'loja.html') html = trocarCatalogo(html);
-    gravar(arquivo, html);
+    gravar(arquivo, versionar(html));
     relatorio.push(`  ${arquivo}`);
 }
 
 // 1b. página de erro (o GitHub Pages serve /404.html em qualquer profundidade,
 // então ela usa caminhos absolutos)
-gravar('404.html', ler('tools/partials/404.html')
+gravar('404.html', versionar(ler('tools/partials/404.html')
     .replace(/\r?\n/g, '\n')
     .replace('{{CABECALHO}}', B.montarCabecalho('/', ''))
-    .replace('{{RODAPE}}', indentar(B.montarRodape('/'), 4)));
+    .replace('{{RODAPE}}', indentar(B.montarRodape('/'), 4))));
 relatorio.push('  404.html');
 
 // 2. páginas de produto
@@ -180,7 +203,7 @@ if (fs.existsSync(dirProduto)) {
         if (f.endsWith('.html')) fs.unlinkSync(path.join(dirProduto, f));
     }
 }
-dados.produtos.forEach(p => gravar(`produto/${p.id}.html`, paginaProduto(p, tplProduto)));
+dados.produtos.forEach(p => gravar(`produto/${p.id}.html`, versionar(paginaProduto(p, tplProduto))));
 
 // 3. índice de busca (baixado sob demanda, não embutido no app.js)
 const indice = dados.produtos.map(p => ({

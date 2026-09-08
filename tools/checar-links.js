@@ -54,7 +54,9 @@ for (const pagina of paginas) {
                 }
                 continue;
             }
-            const [caminho, hash] = ref.split('#');
+            // O CSS e o JS levam ?v=<hash> para furar o cache do Pages.
+            const [semQuery] = ref.split('?');
+            const [caminho, hash] = (semQuery + (ref.includes('#') ? '#' + ref.split('#')[1] : '')).split('#');
             if (!caminho) continue;
             const alvo = caminho.startsWith('/')
                 ? path.join(root, caminho.slice(1))
