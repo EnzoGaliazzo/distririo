@@ -52,6 +52,51 @@
         try { return localStorage.getItem(chave); } catch (e) { return null; }
     }
 
+    // Rolagem suave feita na mão.
+    // A nativa (scroll-behavior: smooth) morre na loja: com content-visibility
+    // em 33 seções numa página de 50 mil pixels, as seções materializam durante
+    // a animação, o layout muda e o navegador aborta a rolagem no meio — o
+    // "voltar ao topo" simplesmente não saía do lugar. Aqui cada quadro fixa a
+    // posição com 'instant' e o alvo é recalculado, então mudança de layout no
+    // caminho não quebra nada.
+    function rolarAte(alvo, aoTerminar) {
+        var destino = function () {
+            if (typeof alvo === 'number') return alvo;
+            var r = alvo.getBoundingClientRect();
+            var recuo = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+            return window.scrollY + r.top - recuo;
+        };
+
+        var limite = function (y) {
+            var max = document.documentElement.scrollHeight - window.innerHeight;
+            return Math.max(0, Math.min(y, max));
+        };
+
+        if (menosMovimento()) {
+            window.scrollTo({ top: limite(destino()), behavior: 'instant' });
+            if (aoTerminar) aoTerminar();
+            return;
+        }
+
+        var inicio = window.scrollY;
+        var t0 = null;
+        var DURACAO = 520;
+
+        function passo(t) {
+            if (t0 === null) t0 = t;
+            var p = Math.min((t - t0) / DURACAO, 1);
+            var suave = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+            var fim = limite(destino());
+            window.scrollTo({ top: inicio + (fim - inicio) * suave, behavior: 'instant' });
+            if (p < 1) {
+                requestAnimationFrame(passo);
+            } else if (aoTerminar) {
+                aoTerminar();
+            }
+        }
+        requestAnimationFrame(passo);
+    }
+
     // =================================================================
     // Consentimento de cookies e Analytics
     // O gtag.js só entra na página depois do aceite. Antes disso o
@@ -561,7 +606,7 @@
             topo.setAttribute('aria-label', 'Voltar ao topo da página');
             topo.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>';
             topo.addEventListener('click', function () {
-                window.scrollTo({ top: 0, behavior: menosMovimento() ? 'instant' : 'smooth' });
+                rolarAte(0);
             });
             document.body.appendChild(topo);
         }
@@ -897,7 +942,7 @@
             // Filtrar sem rolar deixava o visitante olhando para a parte da
             // página que acabou de esvaziar.
             if (rolar && t && primeiraSecao) {
-                primeiraSecao.scrollIntoView({ behavior: menosMovimento() ? 'instant' : 'smooth', block: 'start' });
+                rolarAte(primeiraSecao);
             }
             return visiveis;
         }
@@ -956,16 +1001,32 @@
             var alvo = document.getElementById(id);
             if (!alvo) return;
             // Cada correção materializa as seções pelo caminho, o que muda a
-            // altura da página. Repete até a posição parar de se mexer.
+            // altura da página. Repete até a posição parar de se mexer — mas
+            // desiste na hora se o visitante mexer na rolagem, senão o laço
+            // briga com ele e a página parece voltar sozinha.
             var tentativas = 0;
+            var abortado = false;
+            var desistir = function () { abortado = true; };
+            var eventos = ['wheel', 'touchstart', 'keydown', 'pointerdown'];
+            eventos.forEach(function (ev) {
+                window.addEventListener(ev, desistir, { passive: true, once: true });
+            });
+
             (function estabilizar() {
+                if (abortado) return soltar();
                 var antes = Math.round(alvo.getBoundingClientRect().top);
                 alvo.scrollIntoView({ behavior: 'instant', block: 'start' });
                 var depois = Math.round(alvo.getBoundingClientRect().top);
                 if (++tentativas < 30 && Math.abs(depois - antes) > 2) {
                     requestAnimationFrame(estabilizar);
+                } else {
+                    soltar();
                 }
             })();
+
+            function soltar() {
+                eventos.forEach(function (ev) { window.removeEventListener(ev, desistir); });
+            }
         }
 
         window.addEventListener('hashchange', corrigirAncora);
@@ -974,13 +1035,27 @@
 
         // Marca no chip a categoria que está passando pela tela.
         if ('IntersectionObserver' in window && chips.length) {
+            var barra = document.querySelector('.category-bar');
+
+            // Centralizar o chip mexendo só no scrollLeft da barra.
+            // scrollIntoView aqui era um tiro no pé: ele rola TODOS os
+            // ancestrais roláveis, inclusive a página, e como isso disparava a
+            // cada seção que cruzava a tela, a página era puxada de volta no
+            // meio da rolagem do visitante.
+            function centralizarChip(chip) {
+                if (!barra) return;
+                var alvo = chip.offsetLeft - (barra.clientWidth - chip.offsetWidth) / 2;
+                var max = barra.scrollWidth - barra.clientWidth;
+                barra.scrollLeft = Math.max(0, Math.min(alvo, max));
+            }
+
             var espia = new IntersectionObserver(function (entradas) {
                 entradas.forEach(function (e) {
                     if (!e.isIntersecting) return;
                     chips.forEach(function (c) {
                         var alvo = c.getAttribute('href') === '#' + e.target.id;
                         c.setAttribute('aria-current', alvo ? 'true' : 'false');
-                        if (alvo) c.scrollIntoView({ block: 'nearest', inline: 'center' });
+                        if (alvo) centralizarChip(c);
                     });
                 });
             }, { rootMargin: '-30% 0px -60% 0px' });
@@ -1028,7 +1103,7 @@
         caixa.appendChild(link);
 
         caixa.hidden = false;
-        caixa.scrollIntoView({ behavior: menosMovimento() ? 'instant' : 'smooth', block: 'nearest' });
+        if (caixa.getBoundingClientRect().bottom > window.innerHeight) rolarAte(caixa);
         if (!janela) link.focus();
     }
 
