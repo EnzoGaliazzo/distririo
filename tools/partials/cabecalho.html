@@ -1,0 +1,42 @@
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<header class="site-header">
+    <div class="header-info">
+        <span>📍 Atendemos o Rio de Janeiro e a Baixada</span>
+        <span>🧾 Vendas só para CNPJ</span>
+        <span>💬 Pedido pelo WhatsApp</span>
+    </div>
+    <div class="header-bar">
+        <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menuPrincipal">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="{{BASE}}index.html" class="header-logo">
+            <img src="{{BASE}}assets/logo-mark.png" alt="" width="87" height="80">
+            <span class="header-logo-text">Distri Rio</span>
+        </a>
+        <div class="header-search-wrap">
+            <button class="search-toggle" type="button" aria-label="Abrir busca" aria-expanded="false" aria-controls="buscaCabecalho">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </button>
+            <form class="header-search" id="buscaCabecalho" action="{{BASE}}loja.html" method="get" role="search">
+                <input type="search" name="q" placeholder="Buscar marca ou produto..." autocomplete="off"
+                       aria-label="Buscar produto ou marca" role="combobox" aria-expanded="false"
+                       aria-controls="searchSuggestions" aria-autocomplete="list" aria-haspopup="listbox">
+                <button type="submit" aria-label="Buscar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </button>
+            </form>
+            <ul class="search-suggestions" id="searchSuggestions" role="listbox" aria-label="Sugestões de produto" hidden></ul>
+        </div>
+        <nav class="header-nav" id="menuPrincipal" aria-label="Navegação principal">
+            <div class="header-nav-lista">
+                <a href="{{BASE}}index.html"{{ATIVO:index}}>Início</a>
+                <a href="{{BASE}}loja.html"{{ATIVO:loja}}>Catálogo</a>
+                <a href="{{BASE}}sobre.html"{{ATIVO:sobre}}>Sobre nós</a>
+                <a href="{{BASE}}servicos.html"{{ATIVO:servicos}}>Serviços</a>
+                <a href="{{BASE}}contato.html"{{ATIVO:contato}}>Contato</a>
+                <a href="{{BASE}}trabalhe-conosco.html"{{ATIVO:trabalhe-conosco}}>Trabalhe conosco</a>
+            </div>
+        </nav>
+        <a href="{{BASE}}quero-ser-cliente.html" class="header-cta{{CTA}}">Quero ser cliente</a>
+    </div>
+</header>

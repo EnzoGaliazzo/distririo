@@ -1,0 +1,4908 @@
+{
+  "secoes": [
+    {
+      "id": "mdz-trident",
+      "titulo": "Trident",
+      "n": 3
+    },
+    {
+      "id": "mdz-trident-xsenses",
+      "titulo": "Trident Xsenses",
+      "n": 2
+    },
+    {
+      "id": "mdz-chiclets-adams",
+      "titulo": "Chiclets (Adams)",
+      "n": 1
+    },
+    {
+      "id": "mdz-trident-max",
+      "titulo": "Trident Max",
+      "n": 2
+    },
+    {
+      "id": "mdz-bubbaloo",
+      "titulo": "Bubbaloo",
+      "n": 3
+    },
+    {
+      "id": "mdz-halls",
+      "titulo": "Halls",
+      "n": 2
+    },
+    {
+      "id": "mdz-tang",
+      "titulo": "Tang",
+      "n": 2
+    },
+    {
+      "id": "mdz-oreo",
+      "titulo": "Oreo",
+      "n": 4
+    },
+    {
+      "id": "mdz-club-social",
+      "titulo": "Club Social",
+      "n": 4
+    },
+    {
+      "id": "mdz-lacta",
+      "titulo": "Lacta",
+      "n": 6
+    },
+    {
+      "id": "mdz-bis",
+      "titulo": "Bis",
+      "n": 2
+    },
+    {
+      "id": "mdz-bis-xtra",
+      "titulo": "Bis Xtra",
+      "n": 1
+    },
+    {
+      "id": "mdz-lacta-intense",
+      "titulo": "Lacta Intense",
+      "n": 1
+    },
+    {
+      "id": "baly",
+      "titulo": "Baly Brasil",
+      "n": 33
+    },
+    {
+      "id": "dr-aqua-coco",
+      "titulo": "Aqua Coco",
+      "n": 3
+    },
+    {
+      "id": "dr-sumo",
+      "titulo": "Sumo",
+      "n": 11
+    },
+    {
+      "id": "dr-marata",
+      "titulo": "Maratá",
+      "n": 10
+    },
+    {
+      "id": "dr-mara-tinho",
+      "titulo": "Mara-tinho",
+      "n": 5
+    },
+    {
+      "id": "dr-gota",
+      "titulo": "Gota",
+      "n": 4
+    },
+    {
+      "id": "dr-rivoli",
+      "titulo": "Rivoli",
+      "n": 11
+    },
+    {
+      "id": "dr-trio",
+      "titulo": "Trio",
+      "n": 12
+    },
+    {
+      "id": "dr-kobber",
+      "titulo": "Kobber",
+      "n": 6
+    },
+    {
+      "id": "dr-baldoni",
+      "titulo": "Baldoni",
+      "n": 10
+    },
+    {
+      "id": "dr-ace",
+      "titulo": "Ace",
+      "n": 5
+    },
+    {
+      "id": "dr-espumil",
+      "titulo": "Espumil",
+      "n": 5
+    },
+    {
+      "id": "banana-brasil",
+      "titulo": "Banana Brasil",
+      "n": 56
+    },
+    {
+      "id": "lauton",
+      "titulo": "Lauton",
+      "n": 56
+    },
+    {
+      "id": "abelha-rainha",
+      "titulo": "Abelha Rainha",
+      "n": 35
+    },
+    {
+      "id": "apisvida",
+      "titulo": "Apisvida",
+      "n": 23
+    },
+    {
+      "id": "farma",
+      "titulo": "Farma",
+      "n": 210
+    }
+  ],
+  "produtos": [
+    {
+      "nome": "Trident 5S",
+      "categoria": "mdz-trident",
+      "categoriaTitulo": "Trident",
+      "descricao": "Menta, Hortelã, Tutti-Frutti, Melancia, Morango, Canela",
+      "img": "assets/produtos/mondelez-novo/mondelez__trident-5s.jpg",
+      "keywords": "trident 5s menta hortela tutti frutti melancia morango canela mondelez",
+      "categoriaApp": "Menta, Hortelã, Tutti-Frutti, Melancia, Morango, Canela"
+    },
+    {
+      "nome": "Trident 14S",
+      "categoria": "mdz-trident",
+      "categoriaTitulo": "Trident",
+      "descricao": "Melancia, Hortelã, Intense, Blueberry, Menta, Tutti-Frutti",
+      "img": "assets/produtos/mondelez-novo/mondelez__trident-14s.jpg",
+      "keywords": "trident 14s melancia hortela intense blueberry menta tutti frutti mondelez",
+      "categoriaApp": "Melancia, Hortelã, Intense, Blueberry, Menta, Tutti-Frutti"
+    },
+    {
+      "nome": "Trident Bag",
+      "categoria": "mdz-trident",
+      "categoriaTitulo": "Trident",
+      "descricao": "Hortelã, Menta, Tutti-Frutti, Morango, Melancia",
+      "img": "assets/produtos/mondelez-novo/mondelez__trident-bag.jpg",
+      "keywords": "trident bag hortela menta tutti frutti morango melancia mondelez",
+      "categoriaApp": "Hortelã, Menta, Tutti-Frutti, Morango, Melancia"
+    },
+    {
+      "nome": "Trident Xsenses Garrafa",
+      "categoria": "mdz-trident-xsenses",
+      "categoriaTitulo": "Trident Xsenses",
+      "descricao": "Morango Lime, Melancia Mint, Citrus, Spearmint, Peppermint, Blueberry",
+      "img": "assets/produtos/mondelez-novo/mondelez__trident-xsenses-garrafa.jpg",
+      "keywords": "trident xsenses garrafa morango lime melancia mint citrus spearmint peppermint blueberry mondelez",
+      "categoriaApp": "Morango Lime, Melancia Mint, Citrus, Spearmint, Peppermint, Blueberry"
+    },
+    {
+      "nome": "Trident Xsenses 5S",
+      "categoria": "mdz-trident-xsenses",
+      "categoriaTitulo": "Trident Xsenses",
+      "descricao": "Cereja Ice, Acid Blueberry, Intense, Herbal",
+      "img": "assets/produtos/mondelez-novo/mondelez__trident-xsenses-5s.jpg",
+      "keywords": "trident xsenses 5s cereja ice acid blueberry intense herbal mondelez",
+      "categoriaApp": "Cereja Ice, Acid Blueberry, Intense, Herbal"
+    },
+    {
+      "nome": "Chiclets",
+      "categoria": "mdz-chiclets-adams",
+      "categoriaTitulo": "Chiclets (Adams)",
+      "descricao": "Chiclets Hortelã 100/2S, Chiclets Tutti-Frutti 100/2S",
+      "img": "assets/produtos/mondelez-novo/mondelez__chiclets.jpg",
+      "keywords": "chiclets chiclets hortela 100 2s chiclets tutti frutti 100 2s mondelez",
+      "categoriaApp": "Chiclets Hortelã 100/2S, Chiclets Tutti-Frutti 100/2S"
+    },
+    {
+      "nome": "Trident Max",
+      "categoria": "mdz-trident-max",
+      "categoriaTitulo": "Trident Max",
+      "descricao": "Hortelã Fresca, Menta Blueberry",
+      "img": "assets/produtos/mondelez-novo/mondelez__trident-max.jpg",
+      "keywords": "trident max hortela fresca menta blueberry mondelez",
+      "categoriaApp": "Hortelã Fresca, Menta Blueberry"
+    },
+    {
+      "nome": "Trident Max",
+      "categoria": "mdz-trident-max",
+      "categoriaTitulo": "Trident Max",
+      "descricao": "Cool Raspberry",
+      "img": "assets/produtos/mondelez-novo/mondelez__trident-max-2.jpg",
+      "keywords": "trident max cool raspberry mondelez",
+      "categoriaApp": "Cool Raspberry"
+    },
+    {
+      "nome": "Bubbaloo Gum",
+      "categoria": "mdz-bubbaloo",
+      "categoriaTitulo": "Bubbaloo",
+      "descricao": "Bubbaloo Gum DSP Hortelã/Menta, Bubbaloo Gum DSP Morango, Bubbaloo Gum DSP Tutti-Frutti, Bubbaloo Gum DSP Uva",
+      "img": "assets/produtos/mondelez-novo/mondelez__bubbaloo.jpg",
+      "keywords": "bubbaloo gum bubbaloo gum dsp hortela menta bubbaloo gum dsp morango bubbaloo gum dsp tutti frutti bubbaloo gum dsp uva mondelez",
+      "categoriaApp": "Bubbaloo Gum DSP Hortelã/Menta, Bubbaloo Gum DSP Morango, Bubbaloo Gum DSP Tutti-Frutti, Bubbaloo Gum DSP Uva"
+    },
+    {
+      "nome": "Bubbaloo Balas",
+      "categoria": "mdz-bubbaloo",
+      "categoriaTitulo": "Bubbaloo",
+      "descricao": "Bubbaloo Bala Mix 15G, Bubbaloo Bala Morango 15G, Bubbaloo Bala Tutti-Frutti 15G",
+      "img": "assets/produtos/mondelez-novo/mondelez__bubbaloo-balas.jpg",
+      "keywords": "bubbaloo balas bubbaloo bala mix 15g bubbaloo bala morango 15g bubbaloo bala tutti frutti 15g mondelez",
+      "categoriaApp": "Bubbaloo Bala Mix 15G, Bubbaloo Bala Morango 15G, Bubbaloo Bala Tutti-Frutti 15G"
+    },
+    {
+      "nome": "Bubbaloo Balas",
+      "categoria": "mdz-bubbaloo",
+      "categoriaTitulo": "Bubbaloo",
+      "descricao": "Bubbaloo Bala Tutti-Frutti 75G, Bubbaloo Bala Morango Azedinha 82.5G, Bubbaloo Bala Mix Azedinha 82.5G, Bubbaloo Bala Morango 75G, Bubbaloo Bala Citric Blueberry 82.5G, Bubbaloo Bala Mix 75G",
+      "img": "assets/produtos/mondelez-novo/mondelez__bubbaloo-balas-2.jpg",
+      "keywords": "bubbaloo balas bubbaloo bala tutti frutti 75g bubbaloo bala morango azedinha 82 5g bubbaloo bala mix azedinha 82 5g bubbaloo bala morango 75g bubbaloo bala citric blueberry 82 5g bubbaloo bala mix 75g mondelez",
+      "categoriaApp": "Bubbaloo Bala Tutti-Frutti 75G, Bubbaloo Bala Morango Azedinha 82.5G, Bubbaloo Bala Mix Azedinha 82.5G, Bubbaloo Bala Morango 75G, Bubbaloo Bala Citric Blueberry 82.5G, Bubbaloo Bala Mix 75G"
+    },
+    {
+      "nome": "Halls",
+      "categoria": "mdz-halls",
+      "categoriaTitulo": "Halls",
+      "descricao": "Halls Base DSP Uva Verde, Halls Base DSP Extra Forte, Halls Base DSP Menta, Halls Base DSP Morango, Halls Base DSP Cereja, Halls Blueberry, Halls Base DSP Melancia, Halls Base DSP Mentol",
+      "img": "assets/produtos/mondelez-novo/mondelez__halls.jpg",
+      "keywords": "halls halls base dsp uva verde halls base dsp extra forte halls base dsp menta halls base dsp morango halls base dsp cereja halls blueberry halls base dsp melancia halls base dsp mentol mondelez",
+      "categoriaApp": "Halls Base DSP Uva Verde, Halls Base DSP Extra Forte, Halls Base DSP Menta, Halls Base DSP Morango, Halls Base DSP Cereja, Halls Blueberry, Halls Base DSP Melancia, Halls Base DSP Mentol"
+    },
+    {
+      "nome": "Halls Bag",
+      "categoria": "mdz-halls",
+      "categoriaTitulo": "Halls",
+      "descricao": "Menta, Cereja, Morango, Extra Forte",
+      "img": "assets/produtos/mondelez-novo/mondelez__halls-bag.jpg",
+      "keywords": "halls bag menta cereja morango extra forte mondelez",
+      "categoriaApp": "Menta, Cereja, Morango, Extra Forte"
+    },
+    {
+      "nome": "Tang",
+      "categoria": "mdz-tang",
+      "categoriaTitulo": "Tang",
+      "descricao": "Uva, Tangerina, Joia da Ilha",
+      "img": "assets/produtos/mondelez-novo/mondelez__tang.jpg",
+      "keywords": "tang uva tangerina joia da ilha mondelez",
+      "categoriaApp": "Uva, Tangerina, Joia da Ilha"
+    },
+    {
+      "nome": "Tang Edição Limitada",
+      "categoria": "mdz-tang",
+      "categoriaTitulo": "Tang",
+      "descricao": "Tang - Maracujá (Edição Limitada), Tang - Guaraná (Edição Limitada), Tang - Laranja com Mamão (Edição Limitada)",
+      "img": "assets/produtos/mondelez-novo/mondelez__tang-edicao-limitada.jpg",
+      "keywords": "tang edicao limitada tang maracuja edicao limitada tang guarana edicao limitada tang laranja com mamao edicao limitada mondelez",
+      "categoriaApp": "Tang - Maracujá (Edição Limitada), Tang - Guaraná (Edição Limitada), Tang - Laranja com Mamão (Edição Limitada)"
+    },
+    {
+      "nome": "Oreo 18G",
+      "categoria": "mdz-oreo",
+      "categoriaTitulo": "Oreo",
+      "descricao": "Original",
+      "img": "assets/produtos/mondelez-novo/mondelez__oreo-18g.jpg",
+      "keywords": "oreo 18g original mondelez",
+      "categoriaApp": "Original"
+    },
+    {
+      "nome": "Mini Oreo 35G",
+      "categoria": "mdz-oreo",
+      "categoriaTitulo": "Oreo",
+      "descricao": "Oreo",
+      "img": "assets/produtos/mondelez-novo/mondelez__mini-oreo-35g.jpg",
+      "keywords": "mini oreo 35g oreo mondelez",
+      "categoriaApp": "Oreo"
+    },
+    {
+      "nome": "Oreo Original 90G",
+      "categoria": "mdz-oreo",
+      "categoriaTitulo": "Oreo",
+      "descricao": "Oreo",
+      "img": "assets/produtos/mondelez-novo/mondelez__oreo-original-90g.jpg",
+      "keywords": "oreo original 90g oreo mondelez",
+      "categoriaApp": "Oreo"
+    },
+    {
+      "nome": "Oreo Chocolate 90G",
+      "categoria": "mdz-oreo",
+      "categoriaTitulo": "Oreo",
+      "descricao": "Oreo",
+      "img": "assets/produtos/mondelez-novo/mondelez__oreo-chocolate-90g.jpg",
+      "keywords": "oreo chocolate 90g oreo mondelez",
+      "categoriaApp": "Oreo"
+    },
+    {
+      "nome": "Club Social Snack",
+      "categoria": "mdz-club-social",
+      "categoriaTitulo": "Club Social",
+      "descricao": "Parmesão 115G, Parmesão 68G, Marguerita 68G, American Barbecue 68G, Cebola e Salsa 68G, Cebola e Salsa 115G, Churras na Brasa 68G, Churras na Brasa 115G",
+      "img": "assets/produtos/mondelez-novo/mondelez__club-social-snack.jpg",
+      "keywords": "club social snack parmesao 115g parmesao 68g marguerita 68g american barbecue 68g cebola e salsa 68g cebola e salsa 115g churras na brasa 68g churras na brasa 115g mondelez",
+      "categoriaApp": "Parmesão 115G, Parmesão 68G, Marguerita 68G, American Barbecue 68G, Cebola e Salsa 68G, Cebola e Salsa 115G, Churras na Brasa 68G, Churras na Brasa 115G"
+    },
+    {
+      "nome": "Club Social Regular",
+      "categoria": "mdz-club-social",
+      "categoriaTitulo": "Club Social",
+      "descricao": "Original, Pizza, Pão de Alho, Presunto, Cebola Caramelizada",
+      "img": "assets/produtos/mondelez-novo/mondelez__club-social-regular.jpg",
+      "keywords": "club social regular original pizza pao de alho presunto cebola caramelizada mondelez",
+      "categoriaApp": "Original, Pizza, Pão de Alho, Presunto, Cebola Caramelizada"
+    },
+    {
+      "nome": "Club Social Integral",
+      "categoria": "mdz-club-social",
+      "categoriaTitulo": "Club Social",
+      "descricao": "Integral Tradicional",
+      "img": "assets/produtos/mondelez-novo/mondelez__club-social-integral.jpg",
+      "keywords": "club social integral integral tradicional mondelez",
+      "categoriaApp": "Integral Tradicional"
+    },
+    {
+      "nome": "Club Social Snack (Sul/SP)",
+      "categoria": "mdz-club-social",
+      "categoriaTitulo": "Club Social",
+      "descricao": "Club Social Snack - Cebola e Salsa 68G (Sul/SP), Club Social Snack - Cebola e Salsa 115G (Sul/SP), Club Social Snack - Churras na Brasa 68G (Sul/SP), Club Social Snack - Churras na Brasa 115G (Sul/SP), Club Social Snack - Parmesão 115G (Sul/SP), Club Social Snack - Parmesão 68G (Sul/SP), Club Social Snack - Marguerita 68G (Sul/SP), Club Social Snack - American Barbecue 68G (Sul/SP)",
+      "img": "assets/produtos/mondelez-novo/mondelez__club-social-snack-sul-sp.jpg",
+      "keywords": "club social snack sul sp club social snack cebola e salsa 68g sul sp club social snack cebola e salsa 115g sul sp club social snack churras na brasa 68g sul sp club social snack churras na brasa 115g sul sp club social snack parmesao 115g sul sp club social snack parmesao 68g sul sp club social snack marguerita 68g sul sp club social snack american barbecue 68g sul sp mondelez",
+      "categoriaApp": "Club Social Snack - Cebola e Salsa 68G (Sul/SP), Club Social Snack - Cebola e Salsa 115G (Sul/SP), Club Social Snack - Churras na Brasa 68G (Sul/SP), Club Social Snack - Churras na Brasa 115G (Sul/SP), Club Social Snack - Parmesão 115G (Sul/SP), Club Social Snack - Parmesão 68G (Sul/SP), Club Social Snack - Marguerita 68G (Sul/SP), Club Social Snack - American Barbecue 68G (Sul/SP)"
+    },
+    {
+      "nome": "5Star",
+      "categoria": "mdz-lacta",
+      "categoriaTitulo": "Lacta",
+      "descricao": "Lacta",
+      "img": "assets/produtos/mondelez-novo/mondelez__5star.jpg",
+      "keywords": "5star lacta mondelez",
+      "categoriaApp": "Lacta"
+    },
+    {
+      "nome": "Wafer Lacta Oreo",
+      "categoria": "mdz-lacta",
+      "categoriaTitulo": "Lacta",
+      "descricao": "Lacta",
+      "img": "assets/produtos/mondelez-novo/mondelez__wafer-lacta-oreo.jpg",
+      "keywords": "wafer lacta oreo lacta mondelez",
+      "categoriaApp": "Lacta"
+    },
+    {
+      "nome": "Sonho de Valsa e Ouro Branco",
+      "categoria": "mdz-lacta",
+      "categoriaTitulo": "Lacta",
+      "descricao": "Sonho de Valsa Unitário, Ouro Branco Unitário, Wafer Recheado Sonho de Valsa, Wafer Recheado Ouro Branco",
+      "img": "assets/produtos/mondelez-novo/mondelez__sonho-de-valsa-e-ouro-branco.jpg",
+      "keywords": "sonho de valsa e ouro branco sonho de valsa unitario ouro branco unitario wafer recheado sonho de valsa wafer recheado ouro branco mondelez",
+      "categoriaApp": "Sonho de Valsa Unitário, Ouro Branco Unitário, Wafer Recheado Sonho de Valsa, Wafer Recheado Ouro Branco"
+    },
+    {
+      "nome": "Lacta Obrigado",
+      "categoria": "mdz-lacta",
+      "categoriaTitulo": "Lacta",
+      "descricao": "Lacta",
+      "img": "assets/produtos/mondelez-novo/mondelez__lacta-obrigado.jpg",
+      "keywords": "lacta obrigado lacta mondelez",
+      "categoriaApp": "Lacta"
+    },
+    {
+      "nome": "Lacta 80G",
+      "categoria": "mdz-lacta",
+      "categoriaTitulo": "Lacta",
+      "descricao": "Ao Leite, Laka, Diamante Negro, Shot, Diamante Negro/Laka, Amaro",
+      "img": "assets/produtos/mondelez-novo/mondelez__lacta-80g.jpg",
+      "keywords": "lacta 80g ao leite laka diamante negro shot diamante negro laka amaro mondelez",
+      "categoriaApp": "Ao Leite, Laka, Diamante Negro, Shot, Diamante Negro/Laka, Amaro"
+    },
+    {
+      "nome": "Lacta Recheados",
+      "categoria": "mdz-lacta",
+      "categoriaTitulo": "Lacta",
+      "descricao": "Lacta Oreo, Lacta Ouro Branco, Lacta Sonho de Valsa, Laka Caramelo",
+      "img": "assets/produtos/mondelez-novo/mondelez__lacta-recheados.jpg",
+      "keywords": "lacta recheados lacta oreo lacta ouro branco lacta sonho de valsa laka caramelo mondelez",
+      "categoriaApp": "Lacta Oreo, Lacta Ouro Branco, Lacta Sonho de Valsa, Laka Caramelo"
+    },
+    {
+      "nome": "Bis",
+      "categoria": "mdz-bis",
+      "categoriaTitulo": "Bis",
+      "descricao": "Bis Original, Bis Branco",
+      "img": "assets/produtos/mondelez-novo/mondelez__bis-2.jpg",
+      "keywords": "bis bis original bis branco mondelez",
+      "categoriaApp": "Bis Original, Bis Branco"
+    },
+    {
+      "nome": "Bis",
+      "categoria": "mdz-bis",
+      "categoriaTitulo": "Bis",
+      "descricao": "Bis 10 ao Leite, Bis 10 Laka",
+      "img": "assets/produtos/mondelez-novo/mondelez__bis.jpg",
+      "keywords": "bis bis 10 ao leite bis 10 laka mondelez",
+      "categoriaApp": "Bis 10 ao Leite, Bis 10 Laka"
+    },
+    {
+      "nome": "Bis Xtra",
+      "categoria": "mdz-bis-xtra",
+      "categoriaTitulo": "Bis Xtra",
+      "descricao": "Bis Xtra Original, Bis Xtra Oreo, Bis Xtra Black, Bis Xtra Branco",
+      "img": "assets/produtos/mondelez-novo/mondelez__bis-xtra.jpg",
+      "keywords": "bis xtra bis xtra original bis xtra oreo bis xtra black bis xtra branco mondelez",
+      "categoriaApp": "Bis Xtra Original, Bis Xtra Oreo, Bis Xtra Black, Bis Xtra Branco"
+    },
+    {
+      "nome": "Tábuas Intense",
+      "categoria": "mdz-lacta-intense",
+      "categoriaTitulo": "Lacta Intense",
+      "descricao": "70% Cacau Original, 60% Cacau Original, 40% Cacau Original, 60% Cacau Mix Nuts, 60% Cacau Café, Tábuas Intense Nuts - 40% Cacau Avelã & Crocante de Cacau, Tábuas Intense Nuts - 40% Cacau Amêndoas & Caramelo Salgado, Tábuas Intense Nuts - 40% Cacau Amêndoas & Framboesa",
+      "img": "assets/produtos/mondelez-novo/mondelez__tabuas-intense.jpg",
+      "keywords": "tabuas intense 70 cacau original 60 cacau original 40 cacau original 60 cacau mix nuts 60 cacau cafe tabuas intense nuts 40 cacau avela crocante de cacau tabuas intense nuts 40 cacau amendoas caramelo salgado tabuas intense nuts 40 cacau amendoas framboesa mondelez",
+      "categoriaApp": "70% Cacau Original, 60% Cacau Original, 40% Cacau Original, 60% Cacau Mix Nuts, 60% Cacau Café, Tábuas Intense Nuts - 40% Cacau Avelã & Crocante de Cacau, Tábuas Intense Nuts - 40% Cacau Amêndoas & Caramelo Salgado, Tábuas Intense Nuts - 40% Cacau Amêndoas & Framboesa"
+    },
+    {
+      "nome": "Baly Tradicional",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__tradicional.jpg",
+      "keywords": "baly tradicional baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Tropical",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__tropical.jpg",
+      "keywords": "baly tropical baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Maçã Verde",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__maca-verde.jpg",
+      "keywords": "baly maca verde baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Melancia",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__melancia.jpg",
+      "keywords": "baly melancia baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Morango e Pêssego",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__morango-e-pessego.jpg",
+      "keywords": "baly morango e pessego baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Coco e Açaí",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__coco-e-acai.jpg",
+      "keywords": "baly coco e acai baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Tadaly",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__tadaly.jpg",
+      "keywords": "baly tadaly baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Uva Verde",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__uva-verde.jpg",
+      "keywords": "baly uva verde baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Abacaxi com Hortelã",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__abacaxi-com-hortela.jpg",
+      "keywords": "baly abacaxi com hortela baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Amora com Hortelã",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__amora-com-hortela.jpg",
+      "keywords": "baly amora com hortela baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Freegells",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__freegells.jpg",
+      "keywords": "baly freegells baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Summer Loko",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__summer-loko.jpg",
+      "keywords": "baly summer loko baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Celebre Champagne",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__celebre-champagne.jpg",
+      "keywords": "baly celebre champagne baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Celebre Floripa",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__celebre-floripa.jpg",
+      "keywords": "baly celebre floripa baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Celebre Caipirinha",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__celebre-caipirinha.jpg",
+      "keywords": "baly celebre caipirinha baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Tradicional Sem Açúcar",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__tradicional-sem-acucar.jpg",
+      "keywords": "baly tradicional sem acucar baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Tropical Sem Açúcar",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__tropical-sem-acucar.jpg",
+      "keywords": "baly tropical sem acucar baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Maçã Verde Sem Açúcar",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__maca-verde-sem-acucar.jpg",
+      "keywords": "baly maca verde sem acucar baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Uva Verde Sem Açúcar",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__uva-verde-sem-acucar.jpg",
+      "keywords": "baly uva verde sem acucar baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Melancia Sem Açúcar",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__melancia-sem-acucar.jpg",
+      "keywords": "baly melancia sem acucar baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Morango e Pêssego Sem Açúcar",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__morango-e-pessego-sem-acucar.jpg",
+      "keywords": "baly morango e pessego sem acucar baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Amora com Hortelã Sem Açúcar",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__amora-com-hortela-sem-acucar.jpg",
+      "keywords": "baly amora com hortela sem acucar baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Redragon",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__redragon.jpg",
+      "keywords": "baly redragon baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Pro Tropical",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__pro-tropical.jpg",
+      "keywords": "baly pro tropical baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Pro Morango e Pêssego",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__pro-morango-e-pessego.jpg",
+      "keywords": "baly pro morango e pessego baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Pro Banana",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__pro-banana.jpg",
+      "keywords": "baly pro banana baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Free Tradicional",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__free-tradicional.jpg",
+      "keywords": "baly free tradicional baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Free Maçã Verde",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/energy__free-maca-verde.jpg",
+      "keywords": "baly free maca verde baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Kids Tutti Frutti",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/kids__tutti-frutti.jpg",
+      "keywords": "baly kids tutti frutti baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Kids Laranja",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/kids__laranja.jpg",
+      "keywords": "baly kids laranja baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Kids Melancia",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/kids__melancia.jpg",
+      "keywords": "baly kids melancia baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Kids Morango",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/kids__morango.jpg",
+      "keywords": "baly kids morango baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Baly Kids Uva",
+      "categoria": "baly",
+      "categoriaTitulo": "Baly Brasil",
+      "descricao": "Baly Brasil",
+      "img": "assets/produtos/baly/kids__uva.jpg",
+      "keywords": "baly kids uva baly brasil baly brasil",
+      "categoriaApp": "Baly Brasil"
+    },
+    {
+      "nome": "Água de Coco 1L",
+      "categoria": "dr-aqua-coco",
+      "categoriaTitulo": "Aqua Coco",
+      "descricao": "Aqua Coco",
+      "img": "assets/produtos/distririo/aqua-coco__agua-de-coco-300ml.jpg",
+      "keywords": "agua de coco 1l aqua coco aqua coco",
+      "categoriaApp": "Aqua Coco"
+    },
+    {
+      "nome": "Água de Coco 300ml",
+      "categoria": "dr-aqua-coco",
+      "categoriaTitulo": "Aqua Coco",
+      "descricao": "Aqua Coco",
+      "img": "assets/produtos/distririo/aqua-coco__agua-de-coco-300ml.jpg",
+      "keywords": "agua de coco 300ml aqua coco aqua coco",
+      "categoriaApp": "Aqua Coco"
+    },
+    {
+      "nome": "Água de Coco Garrafa Turma da Mônica",
+      "categoria": "dr-aqua-coco",
+      "categoriaTitulo": "Aqua Coco",
+      "descricao": "Aqua Coco",
+      "img": "assets/produtos/distririo/aqua-coco__agua-de-coco-garrafa-turma-da-monica.jpg",
+      "keywords": "agua de coco garrafa turma da monica aqua coco aqua coco",
+      "categoriaApp": "Aqua Coco"
+    },
+    {
+      "nome": "Suco de Acerola 300ml",
+      "categoria": "dr-sumo",
+      "categoriaTitulo": "Sumo",
+      "descricao": "Sumo",
+      "img": "assets/produtos/distririo/sumo__suco-de-acerola-1l.jpg",
+      "keywords": "suco de acerola 300ml sumo sumo",
+      "categoriaApp": "Sumo"
+    },
+    {
+      "nome": "Suco de Cajá 300ml",
+      "categoria": "dr-sumo",
+      "categoriaTitulo": "Sumo",
+      "descricao": "Sumo",
+      "img": "assets/produtos/distririo/sumo__suco-de-caja-1l.jpg",
+      "keywords": "suco de caja 300ml sumo sumo",
+      "categoriaApp": "Sumo"
+    },
+    {
+      "nome": "Suco de Caju 300ml",
+      "categoria": "dr-sumo",
+      "categoriaTitulo": "Sumo",
+      "descricao": "Sumo",
+      "img": "assets/produtos/distririo/sumo__suco-de-caju-1l.jpg",
+      "keywords": "suco de caju 300ml sumo sumo",
+      "categoriaApp": "Sumo"
+    },
+    {
+      "nome": "Suco de Goiaba",
+      "categoria": "dr-sumo",
+      "categoriaTitulo": "Sumo",
+      "descricao": "Sumo",
+      "img": "assets/produtos/distririo/sumo__suco-de-goiaba.jpg",
+      "keywords": "suco de goiaba sumo sumo",
+      "categoriaApp": "Sumo"
+    },
+    {
+      "nome": "Suco de Graviola 300ml",
+      "categoria": "dr-sumo",
+      "categoriaTitulo": "Sumo",
+      "descricao": "Sumo",
+      "img": "assets/produtos/distririo/sumo__suco-de-graviola-1l.jpg",
+      "keywords": "suco de graviola 300ml sumo sumo",
+      "categoriaApp": "Sumo"
+    },
+    {
+      "nome": "Suco de Uva",
+      "categoria": "dr-sumo",
+      "categoriaTitulo": "Sumo",
+      "descricao": "Sumo",
+      "img": "assets/produtos/distririo/sumo__suco-de-uva.jpg",
+      "keywords": "suco de uva sumo sumo",
+      "categoriaApp": "Sumo"
+    },
+    {
+      "nome": "Suco Sumo Açaí",
+      "categoria": "dr-sumo",
+      "categoriaTitulo": "Sumo",
+      "descricao": "Sumo",
+      "img": "assets/produtos/distririo/sumo__suco-sumo-acai.jpg",
+      "keywords": "suco sumo acai sumo sumo",
+      "categoriaApp": "Sumo"
+    },
+    {
+      "nome": "Suco de Acerola 1L",
+      "categoria": "dr-sumo",
+      "categoriaTitulo": "Sumo",
+      "descricao": "Sumo",
+      "img": "assets/produtos/distririo/sumo__suco-de-acerola-1l.jpg",
+      "keywords": "suco de acerola 1l sumo sumo",
+      "categoriaApp": "Sumo"
+    },
+    {
+      "nome": "Suco de Cajá 1L",
+      "categoria": "dr-sumo",
+      "categoriaTitulo": "Sumo",
+      "descricao": "Sumo",
+      "img": "assets/produtos/distririo/sumo__suco-de-caja-1l.jpg",
+      "keywords": "suco de caja 1l sumo sumo",
+      "categoriaApp": "Sumo"
+    },
+    {
+      "nome": "Suco de Caju 1L",
+      "categoria": "dr-sumo",
+      "categoriaTitulo": "Sumo",
+      "descricao": "Sumo",
+      "img": "assets/produtos/distririo/sumo__suco-de-caju-1l.jpg",
+      "keywords": "suco de caju 1l sumo sumo",
+      "categoriaApp": "Sumo"
+    },
+    {
+      "nome": "Suco de Graviola 1L",
+      "categoria": "dr-sumo",
+      "categoriaTitulo": "Sumo",
+      "descricao": "Sumo",
+      "img": "assets/produtos/distririo/sumo__suco-de-graviola-1l.jpg",
+      "keywords": "suco de graviola 1l sumo sumo",
+      "categoriaApp": "Sumo"
+    },
+    {
+      "nome": "Néctar Maratá Caju 1L",
+      "categoria": "dr-marata",
+      "categoriaTitulo": "Maratá",
+      "descricao": "Maratá",
+      "img": "assets/produtos/distririo/marata__nectar-marata-caju.jpg",
+      "keywords": "nectar marata caju 1l marata marata",
+      "categoriaApp": "Maratá"
+    },
+    {
+      "nome": "Néctar Maratá Laranja 1L",
+      "categoria": "dr-marata",
+      "categoriaTitulo": "Maratá",
+      "descricao": "Maratá",
+      "img": "assets/produtos/distririo/marata__nectar-marata-laranja-200ml.jpg",
+      "keywords": "nectar marata laranja 1l marata marata",
+      "categoriaApp": "Maratá"
+    },
+    {
+      "nome": "Néctar Maratá Pêssego 1L",
+      "categoria": "dr-marata",
+      "categoriaTitulo": "Maratá",
+      "descricao": "Maratá",
+      "img": "assets/produtos/distririo/marata__nectar-marata-pessego.jpg",
+      "keywords": "nectar marata pessego 1l marata marata",
+      "categoriaApp": "Maratá"
+    },
+    {
+      "nome": "Néctar Maratá Uva 1L",
+      "categoria": "dr-marata",
+      "categoriaTitulo": "Maratá",
+      "descricao": "Maratá",
+      "img": "assets/produtos/distririo/marata__nectar-marata-uva-200ml.jpg",
+      "keywords": "nectar marata uva 1l marata marata",
+      "categoriaApp": "Maratá"
+    },
+    {
+      "nome": "Néctar Maratá Caju 200ml",
+      "categoria": "dr-marata",
+      "categoriaTitulo": "Maratá",
+      "descricao": "Maratá",
+      "img": "assets/produtos/distririo/marata__nectar-marata-caju.jpg",
+      "keywords": "nectar marata caju 200ml marata marata",
+      "categoriaApp": "Maratá"
+    },
+    {
+      "nome": "Néctar Maratá Laranja 200ml",
+      "categoria": "dr-marata",
+      "categoriaTitulo": "Maratá",
+      "descricao": "Maratá",
+      "img": "assets/produtos/distririo/marata__nectar-marata-laranja-200ml.jpg",
+      "keywords": "nectar marata laranja 200ml marata marata",
+      "categoriaApp": "Maratá"
+    },
+    {
+      "nome": "Néctar Maratá Maracujá",
+      "categoria": "dr-marata",
+      "categoriaTitulo": "Maratá",
+      "descricao": "Maratá",
+      "img": "assets/produtos/distririo/marata__nectar-marata-maracuja.jpg",
+      "keywords": "nectar marata maracuja marata marata",
+      "categoriaApp": "Maratá"
+    },
+    {
+      "nome": "Néctar Maratá Pêssego 200ml",
+      "categoria": "dr-marata",
+      "categoriaTitulo": "Maratá",
+      "descricao": "Maratá",
+      "img": "assets/produtos/distririo/marata__nectar-marata-pessego.jpg",
+      "keywords": "nectar marata pessego 200ml marata marata",
+      "categoriaApp": "Maratá"
+    },
+    {
+      "nome": "Néctar Maratá Uva 200ml",
+      "categoria": "dr-marata",
+      "categoriaTitulo": "Maratá",
+      "descricao": "Maratá",
+      "img": "assets/produtos/distririo/marata__nectar-marata-uva-200ml.jpg",
+      "keywords": "nectar marata uva 200ml marata marata",
+      "categoriaApp": "Maratá"
+    },
+    {
+      "nome": "Flocão de Milho Maratá",
+      "categoria": "dr-marata",
+      "categoriaTitulo": "Maratá",
+      "descricao": "Maratá",
+      "img": "assets/produtos/distririo/marata__flocao-de-milho-marata.jpg",
+      "keywords": "flocao de milho marata marata marata",
+      "categoriaApp": "Maratá"
+    },
+    {
+      "nome": "Refresco Mara-tinho Abacaxi",
+      "categoria": "dr-mara-tinho",
+      "categoriaTitulo": "Mara-tinho",
+      "descricao": "Mara-tinho",
+      "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-abacaxi.jpg",
+      "keywords": "refresco mara tinho abacaxi mara tinho mara tinho",
+      "categoriaApp": "Mara-tinho"
+    },
+    {
+      "nome": "Refresco Mara-tinho Laranja",
+      "categoria": "dr-mara-tinho",
+      "categoriaTitulo": "Mara-tinho",
+      "descricao": "Mara-tinho",
+      "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-laranja.jpg",
+      "keywords": "refresco mara tinho laranja mara tinho mara tinho",
+      "categoriaApp": "Mara-tinho"
+    },
+    {
+      "nome": "Refresco Mara-tinho Maracujá",
+      "categoria": "dr-mara-tinho",
+      "categoriaTitulo": "Mara-tinho",
+      "descricao": "Mara-tinho",
+      "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-maracuja.jpg",
+      "keywords": "refresco mara tinho maracuja mara tinho mara tinho",
+      "categoriaApp": "Mara-tinho"
+    },
+    {
+      "nome": "Refresco Mara-tinho Morango",
+      "categoria": "dr-mara-tinho",
+      "categoriaTitulo": "Mara-tinho",
+      "descricao": "Mara-tinho",
+      "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-morango.jpg",
+      "keywords": "refresco mara tinho morango mara tinho mara tinho",
+      "categoriaApp": "Mara-tinho"
+    },
+    {
+      "nome": "Refresco Mara-tinho Uva",
+      "categoria": "dr-mara-tinho",
+      "categoriaTitulo": "Mara-tinho",
+      "descricao": "Mara-tinho",
+      "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-uva.jpg",
+      "keywords": "refresco mara tinho uva mara tinho mara tinho",
+      "categoriaApp": "Mara-tinho"
+    },
+    {
+      "nome": "Molho Gota Alho",
+      "categoria": "dr-gota",
+      "categoriaTitulo": "Gota",
+      "descricao": "Gota",
+      "img": "assets/produtos/distririo/gota__molho-gota-alho.jpg",
+      "keywords": "molho gota alho gota gota",
+      "categoriaApp": "Gota"
+    },
+    {
+      "nome": "Molho Gota Inglês",
+      "categoria": "dr-gota",
+      "categoriaTitulo": "Gota",
+      "descricao": "Gota",
+      "img": "assets/produtos/distririo/gota__molho-gota-ingles.jpg",
+      "keywords": "molho gota ingles gota gota",
+      "categoriaApp": "Gota"
+    },
+    {
+      "nome": "Molho Gota Pimenta",
+      "categoria": "dr-gota",
+      "categoriaTitulo": "Gota",
+      "descricao": "Gota",
+      "img": "assets/produtos/distririo/gota__molho-gota-pimenta.jpg",
+      "keywords": "molho gota pimenta gota gota",
+      "categoriaApp": "Gota"
+    },
+    {
+      "nome": "Molho Gota Pimenta Verde",
+      "categoria": "dr-gota",
+      "categoriaTitulo": "Gota",
+      "descricao": "Gota",
+      "img": "assets/produtos/distririo/gota__molho-gota-pimenta-verde.jpg",
+      "keywords": "molho gota pimenta verde gota gota",
+      "categoriaApp": "Gota"
+    },
+    {
+      "nome": "Azeitona Verde Sachê Fatiada 150g",
+      "categoria": "dr-rivoli",
+      "categoriaTitulo": "Rivoli",
+      "descricao": "Rivoli",
+      "img": "assets/produtos/distririo/rivoli__azeitona-verde-sache-fatiada-80g.jpg",
+      "keywords": "azeitona verde sache fatiada 150g rivoli rivoli",
+      "categoriaApp": "Rivoli"
+    },
+    {
+      "nome": "Azeitona Verde Sachê Fatiada 80g",
+      "categoria": "dr-rivoli",
+      "categoriaTitulo": "Rivoli",
+      "descricao": "Rivoli",
+      "img": "assets/produtos/distririo/rivoli__azeitona-verde-sache-fatiada-80g.jpg",
+      "keywords": "azeitona verde sache fatiada 80g rivoli rivoli",
+      "categoriaApp": "Rivoli"
+    },
+    {
+      "nome": "Azeitona Preta Sachê Fatiada",
+      "categoria": "dr-rivoli",
+      "categoriaTitulo": "Rivoli",
+      "descricao": "Rivoli",
+      "img": "assets/produtos/distririo/rivoli__azeitona-preta-sache-fatiada.jpg",
+      "keywords": "azeitona preta sache fatiada rivoli rivoli",
+      "categoriaApp": "Rivoli"
+    },
+    {
+      "nome": "Azeitona Verde Gordal Vidro c/ Caroço",
+      "categoria": "dr-rivoli",
+      "categoriaTitulo": "Rivoli",
+      "descricao": "Rivoli",
+      "img": "assets/produtos/distririo/rivoli__azeitona-verde-gordal-vidro-c-caroco.jpg",
+      "keywords": "azeitona verde gordal vidro c caroco rivoli rivoli",
+      "categoriaApp": "Rivoli"
+    },
+    {
+      "nome": "Azeitonas Verde Fatiadas Balde",
+      "categoria": "dr-rivoli",
+      "categoriaTitulo": "Rivoli",
+      "descricao": "Rivoli",
+      "img": "assets/produtos/distririo/rivoli__azeitonas-verde-fatiadas-balde.jpg",
+      "keywords": "azeitonas verde fatiadas balde rivoli rivoli",
+      "categoriaApp": "Rivoli"
+    },
+    {
+      "nome": "Azeitonas Verde Sem Caroço Balde",
+      "categoria": "dr-rivoli",
+      "categoriaTitulo": "Rivoli",
+      "descricao": "Rivoli",
+      "img": "assets/produtos/distririo/rivoli__azeitonas-verde-sem-caroco-balde.jpg",
+      "keywords": "azeitonas verde sem caroco balde rivoli rivoli",
+      "categoriaApp": "Rivoli"
+    },
+    {
+      "nome": "Azeitonas Verde Média Balde",
+      "categoria": "dr-rivoli",
+      "categoriaTitulo": "Rivoli",
+      "descricao": "Rivoli",
+      "img": "assets/produtos/distririo/rivoli__azeitonas-verde-media-balde.jpg",
+      "keywords": "azeitonas verde media balde rivoli rivoli",
+      "categoriaApp": "Rivoli"
+    },
+    {
+      "nome": "Azeitona Verde Sachê c/ Caroço 100g",
+      "categoria": "dr-rivoli",
+      "categoriaTitulo": "Rivoli",
+      "descricao": "Rivoli",
+      "img": "assets/produtos/distririo/rivoli__azeitona-verde-sache-c-caroco-80g.jpg",
+      "keywords": "azeitona verde sache c caroco 100g rivoli rivoli",
+      "categoriaApp": "Rivoli"
+    },
+    {
+      "nome": "Azeitona Verde Sachê c/ Caroço 80g",
+      "categoria": "dr-rivoli",
+      "categoriaTitulo": "Rivoli",
+      "descricao": "Rivoli",
+      "img": "assets/produtos/distririo/rivoli__azeitona-verde-sache-c-caroco-80g.jpg",
+      "keywords": "azeitona verde sache c caroco 80g rivoli rivoli",
+      "categoriaApp": "Rivoli"
+    },
+    {
+      "nome": "Azeitona Verde Sachê s/ Caroço 120g",
+      "categoria": "dr-rivoli",
+      "categoriaTitulo": "Rivoli",
+      "descricao": "Rivoli",
+      "img": "assets/produtos/distririo/rivoli__azeitona-verde-sache-s-caroco-80g.jpg",
+      "keywords": "azeitona verde sache s caroco 120g rivoli rivoli",
+      "categoriaApp": "Rivoli"
+    },
+    {
+      "nome": "Azeitona Verde Sachê s/ Caroço 80g",
+      "categoria": "dr-rivoli",
+      "categoriaTitulo": "Rivoli",
+      "descricao": "Rivoli",
+      "img": "assets/produtos/distririo/rivoli__azeitona-verde-sache-s-caroco-80g.jpg",
+      "keywords": "azeitona verde sache s caroco 80g rivoli rivoli",
+      "categoriaApp": "Rivoli"
+    },
+    {
+      "nome": "Trio Avelã e Castanha com Chocolate",
+      "categoria": "dr-trio",
+      "categoriaTitulo": "Trio",
+      "descricao": "Trio",
+      "img": "assets/produtos/distririo/trio__trio-avela-e-castanha-com-chocolate.jpg",
+      "keywords": "trio avela e castanha com chocolate trio trio",
+      "categoriaApp": "Trio"
+    },
+    {
+      "nome": "Trio Banana Aveia e Mel",
+      "categoria": "dr-trio",
+      "categoriaTitulo": "Trio",
+      "descricao": "Trio",
+      "img": "assets/produtos/distririo/trio__trio-banana-aveia-e-mel.jpg",
+      "keywords": "trio banana aveia e mel trio trio",
+      "categoriaApp": "Trio"
+    },
+    {
+      "nome": "Trio Brigadeiro",
+      "categoria": "dr-trio",
+      "categoriaTitulo": "Trio",
+      "descricao": "Trio",
+      "img": "assets/produtos/distririo/trio__trio-brigadeiro.jpg",
+      "keywords": "trio brigadeiro trio trio",
+      "categoriaApp": "Trio"
+    },
+    {
+      "nome": "Trio Côco com Chocolate",
+      "categoria": "dr-trio",
+      "categoriaTitulo": "Trio",
+      "descricao": "Trio",
+      "img": "assets/produtos/distririo/trio__trio-coco-com-chocolate.jpg",
+      "keywords": "trio coco com chocolate trio trio",
+      "categoriaApp": "Trio"
+    },
+    {
+      "nome": "Trio Morango com Chocolate",
+      "categoria": "dr-trio",
+      "categoriaTitulo": "Trio",
+      "descricao": "Trio",
+      "img": "assets/produtos/distririo/trio__trio-morango-com-chocolate.jpg",
+      "keywords": "trio morango com chocolate trio trio",
+      "categoriaApp": "Trio"
+    },
+    {
+      "nome": "Trio Original Avelã e Castanha com Chocolate",
+      "categoria": "dr-trio",
+      "categoriaTitulo": "Trio",
+      "descricao": "Trio",
+      "img": "assets/produtos/distririo/trio__trio-original-avela-e-castanha-com-chocolate.jpg",
+      "keywords": "trio original avela e castanha com chocolate trio trio",
+      "categoriaApp": "Trio"
+    },
+    {
+      "nome": "Trio Original Banana Aveia e Mel",
+      "categoria": "dr-trio",
+      "categoriaTitulo": "Trio",
+      "descricao": "Trio",
+      "img": "assets/produtos/distririo/trio__trio-original-banana-aveia-e-mel.jpg",
+      "keywords": "trio original banana aveia e mel trio trio",
+      "categoriaApp": "Trio"
+    },
+    {
+      "nome": "Trio Original Brigadeiro",
+      "categoria": "dr-trio",
+      "categoriaTitulo": "Trio",
+      "descricao": "Trio",
+      "img": "assets/produtos/distririo/trio__trio-original-brigadeiro.jpg",
+      "keywords": "trio original brigadeiro trio trio",
+      "categoriaApp": "Trio"
+    },
+    {
+      "nome": "Trio Original Morango com Chocolate",
+      "categoria": "dr-trio",
+      "categoriaTitulo": "Trio",
+      "descricao": "Trio",
+      "img": "assets/produtos/distririo/trio__trio-original-morango-com-chocolate.jpg",
+      "keywords": "trio original morango com chocolate trio trio",
+      "categoriaApp": "Trio"
+    },
+    {
+      "nome": "Trio Côco Chocolate",
+      "categoria": "dr-trio",
+      "categoriaTitulo": "Trio",
+      "descricao": "Trio",
+      "img": "assets/produtos/distririo/trio__trio-coco-chocolate.jpg",
+      "keywords": "trio coco chocolate trio trio",
+      "categoriaApp": "Trio"
+    },
+    {
+      "nome": "Trio Zero Banana com Chocolate",
+      "categoria": "dr-trio",
+      "categoriaTitulo": "Trio",
+      "descricao": "Trio",
+      "img": "assets/produtos/distririo/trio__trio-zero-banana-com-chocolate.jpg",
+      "keywords": "trio zero banana com chocolate trio trio",
+      "categoriaApp": "Trio"
+    },
+    {
+      "nome": "Trio Zero Morango com Chocolate",
+      "categoria": "dr-trio",
+      "categoriaTitulo": "Trio",
+      "descricao": "Trio",
+      "img": "assets/produtos/distririo/trio__trio-zero-morango-com-chocolate.jpg",
+      "keywords": "trio zero morango com chocolate trio trio",
+      "categoriaApp": "Trio"
+    },
+    {
+      "nome": "Granola Tradicional",
+      "categoria": "dr-kobber",
+      "categoriaTitulo": "Kobber",
+      "descricao": "Kobber",
+      "img": "assets/produtos/distririo/kobber__granola-tradicional.jpg",
+      "keywords": "granola tradicional kobber kobber",
+      "categoriaApp": "Kobber"
+    },
+    {
+      "nome": "Granola Frutas e Mel",
+      "categoria": "dr-kobber",
+      "categoriaTitulo": "Kobber",
+      "descricao": "Kobber",
+      "img": "assets/produtos/distririo/kobber__granola-frutas-e-mel.jpg",
+      "keywords": "granola frutas e mel kobber kobber",
+      "categoriaApp": "Kobber"
+    },
+    {
+      "nome": "Granola Banana e Mel",
+      "categoria": "dr-kobber",
+      "categoriaTitulo": "Kobber",
+      "descricao": "Kobber",
+      "img": "assets/produtos/distririo/kobber__granola-banana-e-mel.jpg",
+      "keywords": "granola banana e mel kobber kobber",
+      "categoriaApp": "Kobber"
+    },
+    {
+      "nome": "Granola Chocolate e Amendoim",
+      "categoria": "dr-kobber",
+      "categoriaTitulo": "Kobber",
+      "descricao": "Kobber",
+      "img": "assets/produtos/distririo/kobber__granola-chocolate-e-amendoim.jpg",
+      "keywords": "granola chocolate e amendoim kobber kobber",
+      "categoriaApp": "Kobber"
+    },
+    {
+      "nome": "Granola Castanha",
+      "categoria": "dr-kobber",
+      "categoriaTitulo": "Kobber",
+      "descricao": "Kobber",
+      "img": "assets/produtos/distririo/kobber__granola-castanha.jpg",
+      "keywords": "granola castanha kobber kobber",
+      "categoriaApp": "Kobber"
+    },
+    {
+      "nome": "Granola Zero",
+      "categoria": "dr-kobber",
+      "categoriaTitulo": "Kobber",
+      "descricao": "Kobber",
+      "img": "assets/produtos/distririo/kobber__granola-zero.jpg",
+      "keywords": "granola zero kobber kobber",
+      "categoriaApp": "Kobber"
+    },
+    {
+      "nome": "Geleia Baldoni Abacaxi c/ Pimenta",
+      "categoria": "dr-baldoni",
+      "categoriaTitulo": "Baldoni",
+      "descricao": "Baldoni",
+      "img": "assets/produtos/distririo/baldoni__geleia-baldoni-abacaxi-c-pimenta.jpg",
+      "keywords": "geleia baldoni abacaxi c pimenta baldoni baldoni",
+      "categoriaApp": "Baldoni"
+    },
+    {
+      "nome": "Geleia Baldoni Frutas Amarelas",
+      "categoria": "dr-baldoni",
+      "categoriaTitulo": "Baldoni",
+      "descricao": "Baldoni",
+      "img": "assets/produtos/distririo/baldoni__geleia-baldoni-frutas-amarelas.jpg",
+      "keywords": "geleia baldoni frutas amarelas baldoni baldoni",
+      "categoriaApp": "Baldoni"
+    },
+    {
+      "nome": "Geleia Baldoni Frutas Vermelhas",
+      "categoria": "dr-baldoni",
+      "categoriaTitulo": "Baldoni",
+      "descricao": "Baldoni",
+      "img": "assets/produtos/distririo/baldoni__geleia-baldoni-frutas-vermelhas.jpg",
+      "keywords": "geleia baldoni frutas vermelhas baldoni baldoni",
+      "categoriaApp": "Baldoni"
+    },
+    {
+      "nome": "Geleia Baldoni Morango",
+      "categoria": "dr-baldoni",
+      "categoriaTitulo": "Baldoni",
+      "descricao": "Baldoni",
+      "img": "assets/produtos/distririo/baldoni__geleia-baldoni-morango.jpg",
+      "keywords": "geleia baldoni morango baldoni baldoni",
+      "categoriaApp": "Baldoni"
+    },
+    {
+      "nome": "Mel Turma da Mônica Orgânico",
+      "categoria": "dr-baldoni",
+      "categoriaTitulo": "Baldoni",
+      "descricao": "Baldoni",
+      "img": "assets/produtos/distririo/baldoni__mel-turma-da-monica-organico.jpg",
+      "keywords": "mel turma da monica organico baldoni baldoni",
+      "categoriaApp": "Baldoni"
+    },
+    {
+      "nome": "Mel Turma da Mônica Laranjeira",
+      "categoria": "dr-baldoni",
+      "categoriaTitulo": "Baldoni",
+      "descricao": "Baldoni",
+      "img": "assets/produtos/distririo/baldoni__mel-turma-da-monica-laranjeira.jpg",
+      "keywords": "mel turma da monica laranjeira baldoni baldoni",
+      "categoriaApp": "Baldoni"
+    },
+    {
+      "nome": "Mel Chef Bisnaga (Chefão)",
+      "categoria": "dr-baldoni",
+      "categoriaTitulo": "Baldoni",
+      "descricao": "Baldoni",
+      "img": "assets/produtos/distririo/baldoni__mel-chef-bisnaga-chefao.jpg",
+      "keywords": "mel chef bisnaga chefao baldoni baldoni",
+      "categoriaApp": "Baldoni"
+    },
+    {
+      "nome": "Mel Chef Bisnaga",
+      "categoria": "dr-baldoni",
+      "categoriaTitulo": "Baldoni",
+      "descricao": "Baldoni",
+      "img": "assets/produtos/distririo/baldoni__mel-chef-bisnaga.jpg",
+      "keywords": "mel chef bisnaga baldoni baldoni",
+      "categoriaApp": "Baldoni"
+    },
+    {
+      "nome": "Mel Orgânico Bisnaga",
+      "categoria": "dr-baldoni",
+      "categoriaTitulo": "Baldoni",
+      "descricao": "Baldoni",
+      "img": "assets/produtos/distririo/baldoni__mel-organico-bisnaga.jpg",
+      "keywords": "mel organico bisnaga baldoni baldoni",
+      "categoriaApp": "Baldoni"
+    },
+    {
+      "nome": "Mel Holanda Bisnaga",
+      "categoria": "dr-baldoni",
+      "categoriaTitulo": "Baldoni",
+      "descricao": "Baldoni",
+      "img": "assets/produtos/distririo/baldoni__mel-holanda-bisnaga.jpg",
+      "keywords": "mel holanda bisnaga baldoni baldoni",
+      "categoriaApp": "Baldoni"
+    },
+    {
+      "nome": "Detergente em Pó Ace Sachê 800g",
+      "categoria": "dr-ace",
+      "categoriaTitulo": "Ace",
+      "descricao": "Ace",
+      "img": "assets/produtos/distririo/ace__detergente-em-po-ace-sache-2-4kg.jpg",
+      "keywords": "detergente em po ace sache 800g ace ace",
+      "categoriaApp": "Ace"
+    },
+    {
+      "nome": "Detergente em Pó Ace Sachê 1,5kg",
+      "categoria": "dr-ace",
+      "categoriaTitulo": "Ace",
+      "descricao": "Ace",
+      "img": "assets/produtos/distririo/ace__detergente-em-po-ace-sache-2-4kg.jpg",
+      "keywords": "detergente em po ace sache 1 5kg ace ace",
+      "categoriaApp": "Ace"
+    },
+    {
+      "nome": "Detergente em Pó Ace Sachê 2,4kg",
+      "categoria": "dr-ace",
+      "categoriaTitulo": "Ace",
+      "descricao": "Ace",
+      "img": "assets/produtos/distririo/ace__detergente-em-po-ace-sache-2-4kg.jpg",
+      "keywords": "detergente em po ace sache 2 4kg ace ace",
+      "categoriaApp": "Ace"
+    },
+    {
+      "nome": "Detergente em Pó Ace Cartucho 1,6kg",
+      "categoria": "dr-ace",
+      "categoriaTitulo": "Ace",
+      "descricao": "Ace",
+      "img": "assets/produtos/distririo/ace__detergente-em-po-ace-cartucho-2-2kg.jpg",
+      "keywords": "detergente em po ace cartucho 1 6kg ace ace",
+      "categoriaApp": "Ace"
+    },
+    {
+      "nome": "Detergente em Pó Ace Cartucho 2,2kg",
+      "categoria": "dr-ace",
+      "categoriaTitulo": "Ace",
+      "descricao": "Ace",
+      "img": "assets/produtos/distririo/ace__detergente-em-po-ace-cartucho-2-2kg.jpg",
+      "keywords": "detergente em po ace cartucho 2 2kg ace ace",
+      "categoriaApp": "Ace"
+    },
+    {
+      "nome": "Detergente em Pó Espumil Premium Cartucho",
+      "categoria": "dr-espumil",
+      "categoriaTitulo": "Espumil",
+      "descricao": "Espumil",
+      "img": "assets/produtos/distririo/espumil__detergente-em-po-espumil-premium-cartucho.jpg",
+      "keywords": "detergente em po espumil premium cartucho espumil espumil",
+      "categoriaApp": "Espumil"
+    },
+    {
+      "nome": "Lava Roupas Líquido Espumil 1L",
+      "categoria": "dr-espumil",
+      "categoriaTitulo": "Espumil",
+      "descricao": "Espumil",
+      "img": "assets/produtos/distririo/espumil__lava-roupas-liquido-espumil-1l.jpg",
+      "keywords": "lava roupas liquido espumil 1l espumil espumil",
+      "categoriaApp": "Espumil"
+    },
+    {
+      "nome": "Lava Roupas Líquido Espumil 3L",
+      "categoria": "dr-espumil",
+      "categoriaTitulo": "Espumil",
+      "descricao": "Espumil",
+      "img": "assets/produtos/distririo/espumil__lava-roupas-liquido-espumil-1l.jpg",
+      "keywords": "lava roupas liquido espumil 3l espumil espumil",
+      "categoriaApp": "Espumil"
+    },
+    {
+      "nome": "Sabão em Pedra Espumil Côco",
+      "categoria": "dr-espumil",
+      "categoriaTitulo": "Espumil",
+      "descricao": "Espumil",
+      "img": "assets/produtos/distririo/espumil__sabao-em-pedra-espumil-coco.jpg",
+      "keywords": "sabao em pedra espumil coco espumil espumil",
+      "categoriaApp": "Espumil"
+    },
+    {
+      "nome": "Sabão em Pedra Espumil Glicerinado Neutro",
+      "categoria": "dr-espumil",
+      "categoriaTitulo": "Espumil",
+      "descricao": "Espumil",
+      "img": "assets/produtos/distririo/espumil__sabao-em-pedra-espumil-glicerinado-neutro.jpg",
+      "keywords": "sabao em pedra espumil glicerinado neutro espumil espumil",
+      "categoriaApp": "Espumil"
+    },
+    {
+      "nome": "Supino - Barra de Banana com Cobertura de Chocolate ao Leite",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino",
+      "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg",
+      "keywords": "supino barra de banana com cobertura de chocolate ao leite supino banana brasil",
+      "categoriaApp": "Supino"
+    },
+    {
+      "nome": "Supino - Barra de Banana com Cobertura de Chocolate Branco",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino",
+      "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-com-cobertura-de-chocolate-branco.jpg",
+      "keywords": "supino barra de banana com cobertura de chocolate branco supino banana brasil",
+      "categoriaApp": "Supino"
+    },
+    {
+      "nome": "Supino Zero - Barra de Banana com Cobertura de Chocolate ao Leite",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino",
+      "img": "assets/produtos/banana-brasil/supino__supino-zero-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg",
+      "keywords": "supino zero barra de banana com cobertura de chocolate ao leite supino banana brasil",
+      "categoriaApp": "Supino"
+    },
+    {
+      "nome": "Supino Zero - Barra de Banana com Cobertura de Chocolate Branco",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino",
+      "img": "assets/produtos/banana-brasil/supino__supino-zero-barra-de-banana-com-cobertura-de-chocolate-branco.jpg",
+      "keywords": "supino zero barra de banana com cobertura de chocolate branco supino banana brasil",
+      "categoriaApp": "Supino"
+    },
+    {
+      "nome": "Supino - Barra de Banana e Ameixa",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino",
+      "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-ameixa.jpg",
+      "keywords": "supino barra de banana e ameixa supino banana brasil",
+      "categoriaApp": "Supino"
+    },
+    {
+      "nome": "Supino - Barra de Banana, Nozes e Damasco",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino",
+      "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-nozes-e-damasco.jpg",
+      "keywords": "supino barra de banana nozes e damasco supino banana brasil",
+      "categoriaApp": "Supino"
+    },
+    {
+      "nome": "Supino - Barra de Banana, Maçã e Canela",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino",
+      "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-maca-e-canela.jpg",
+      "keywords": "supino barra de banana maca e canela supino banana brasil",
+      "categoriaApp": "Supino"
+    },
+    {
+      "nome": "Supino - Barra de Banana e Açaí",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino",
+      "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-acai.jpg",
+      "keywords": "supino barra de banana e acai supino banana brasil",
+      "categoriaApp": "Supino"
+    },
+    {
+      "nome": "Supino - Barra de Banana e Morango",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino",
+      "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-morango.jpg",
+      "keywords": "supino barra de banana e morango supino banana brasil",
+      "categoriaApp": "Supino"
+    },
+    {
+      "nome": "Supino - Barra de Banana e Abacaxi",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino",
+      "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-abacaxi.jpg",
+      "keywords": "supino barra de banana e abacaxi supino banana brasil",
+      "categoriaApp": "Supino"
+    },
+    {
+      "nome": "Nuts - Barra de Castanhas, Amendoim e Abacaxi",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Nuts",
+      "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-abacaxi.jpg",
+      "keywords": "nuts barra de castanhas amendoim e abacaxi nuts banana brasil",
+      "categoriaApp": "Nuts"
+    },
+    {
+      "nome": "Nuts - Barra de Castanhas, Amendoim e Frutas Vermelhas",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Nuts",
+      "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-frutas-vermelhas.jpg",
+      "keywords": "nuts barra de castanhas amendoim e frutas vermelhas nuts banana brasil",
+      "categoriaApp": "Nuts"
+    },
+    {
+      "nome": "Nuts - Barra de Castanhas, Amendoim, Banana e Canela",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Nuts",
+      "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-banana-e-canela.jpg",
+      "keywords": "nuts barra de castanhas amendoim banana e canela nuts banana brasil",
+      "categoriaApp": "Nuts"
+    },
+    {
+      "nome": "Nuts - Barra de Castanhas, Amendoim e Sementes",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Nuts",
+      "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-sementes.jpg",
+      "keywords": "nuts barra de castanhas amendoim e sementes nuts banana brasil",
+      "categoriaApp": "Nuts"
+    },
+    {
+      "nome": "Nuts - Barra de Castanhas, Amendoim e Frutas",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Nuts",
+      "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-frutas.jpg",
+      "keywords": "nuts barra de castanhas amendoim e frutas nuts banana brasil",
+      "categoriaApp": "Nuts"
+    },
+    {
+      "nome": "Nuts - Barra de Castanhas e Amendoim com Cobertura de Chocolate",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Nuts",
+      "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-e-amendoim-com-cobertura-de-chocolate.jpg",
+      "keywords": "nuts barra de castanhas e amendoim com cobertura de chocolate nuts banana brasil",
+      "categoriaApp": "Nuts"
+    },
+    {
+      "nome": "Nuts - Barra de Castanhas, Amendoim e Coco com Cobertura de Chocolate",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Nuts",
+      "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-coco-com-cobertura-de-chocolate.jpg",
+      "keywords": "nuts barra de castanhas amendoim e coco com cobertura de chocolate nuts banana brasil",
+      "categoriaApp": "Nuts"
+    },
+    {
+      "nome": "Nuts - Barra de Castanhas e Amendoim com Cobertura de Morango",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Nuts",
+      "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-e-amendoim-com-cobertura-de-morango.jpg",
+      "keywords": "nuts barra de castanhas e amendoim com cobertura de morango nuts banana brasil",
+      "categoriaApp": "Nuts"
+    },
+    {
+      "nome": "Nuts - Barra de Castanhas e Pasta de Amendoim com Cobertura de Chocolate",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Nuts",
+      "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-e-pasta-de-amendoim-com-cobertura-de-chocolate.jpg",
+      "keywords": "nuts barra de castanhas e pasta de amendoim com cobertura de chocolate nuts banana brasil",
+      "categoriaApp": "Nuts"
+    },
+    {
+      "nome": "Pé de Moleque - Barra Crocante de Amendoim Tradicional",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Pé de Moleque",
+      "img": "assets/produtos/banana-brasil/pe-de-moleque__pe-de-moleque-barra-crocante-de-amendoim-tradicional.jpg",
+      "keywords": "pe de moleque barra crocante de amendoim tradicional pe de moleque banana brasil",
+      "categoriaApp": "Pé de Moleque"
+    },
+    {
+      "nome": "Pé de Moleque - Barra Crocante de Amendoim Caramelo Salgado",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Pé de Moleque",
+      "img": "assets/produtos/banana-brasil/pe-de-moleque__pe-de-moleque-barra-crocante-de-amendoim-caramelo-salgado.jpg",
+      "keywords": "pe de moleque barra crocante de amendoim caramelo salgado pe de moleque banana brasil",
+      "categoriaApp": "Pé de Moleque"
+    },
+    {
+      "nome": "Protein+ - Napolitano",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Protein+",
+      "img": "assets/produtos/banana-brasil/protein__protein-napolitano.jpg",
+      "keywords": "protein napolitano protein banana brasil",
+      "categoriaApp": "Protein+"
+    },
+    {
+      "nome": "Protein+ - Torta de Limão",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Protein+",
+      "img": "assets/produtos/banana-brasil/protein__protein-torta-de-limao.jpg",
+      "keywords": "protein torta de limao protein banana brasil",
+      "categoriaApp": "Protein+"
+    },
+    {
+      "nome": "Protein+ - Cookies & Cream",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Protein+",
+      "img": "assets/produtos/banana-brasil/protein__protein-cookies-cream.jpg",
+      "keywords": "protein cookies cream protein banana brasil",
+      "categoriaApp": "Protein+"
+    },
+    {
+      "nome": "Protein+ - Banoffee",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Protein+",
+      "img": "assets/produtos/banana-brasil/protein__protein-banoffee.jpg",
+      "keywords": "protein banoffee protein banana brasil",
+      "categoriaApp": "Protein+"
+    },
+    {
+      "nome": "Protein+ Vegano - Pasta de Amendoim e Caramelo Salgado",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Protein+",
+      "img": "assets/produtos/banana-brasil/protein__protein-vegano-pasta-de-amendoim-e-caramelo-salgado.jpg",
+      "keywords": "protein vegano pasta de amendoim e caramelo salgado protein banana brasil",
+      "categoriaApp": "Protein+"
+    },
+    {
+      "nome": "Supino Protein - Baunilha com Crispies",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino Protein",
+      "img": "assets/produtos/banana-brasil/supino-protein__supino-protein-baunilha-com-crispies.jpg",
+      "keywords": "supino protein baunilha com crispies supino protein banana brasil",
+      "categoriaApp": "Supino Protein"
+    },
+    {
+      "nome": "Supino Protein - Coco",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino Protein",
+      "img": "assets/produtos/banana-brasil/supino-protein__supino-protein-coco.jpg",
+      "keywords": "supino protein coco supino protein banana brasil",
+      "categoriaApp": "Supino Protein"
+    },
+    {
+      "nome": "Supino Protein - Cappuccino",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino Protein",
+      "img": "assets/produtos/banana-brasil/supino-protein__supino-protein-cappuccino.jpg",
+      "keywords": "supino protein cappuccino supino protein banana brasil",
+      "categoriaApp": "Supino Protein"
+    },
+    {
+      "nome": "Supino Protein - Chocolate",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino Protein",
+      "img": "assets/produtos/banana-brasil/supino-protein__supino-protein-chocolate.jpg",
+      "keywords": "supino protein chocolate supino protein banana brasil",
+      "categoriaApp": "Supino Protein"
+    },
+    {
+      "nome": "Supino Protein Max - Amendoim e Caramelo",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Supino Protein",
+      "img": "assets/produtos/banana-brasil/supino-protein__supino-protein-max-amendoim-e-caramelo.jpg",
+      "keywords": "supino protein max amendoim e caramelo supino protein banana brasil",
+      "categoriaApp": "Supino Protein"
+    },
+    {
+      "nome": "Levittá - Barra Crocante de Gergelim e Linhaça",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Levittá",
+      "img": "assets/produtos/banana-brasil/levitta__levitta-barra-crocante-de-gergelim-e-linhaca.jpg",
+      "keywords": "levitta barra crocante de gergelim e linhaca levitta banana brasil",
+      "categoriaApp": "Levittá"
+    },
+    {
+      "nome": "Levittá - Barra Crocante de Gergelim, Quinoa e Cacau",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Levittá",
+      "img": "assets/produtos/banana-brasil/levitta__levitta-barra-crocante-de-gergelim-quinoa-e-cacau.jpg",
+      "keywords": "levitta barra crocante de gergelim quinoa e cacau levitta banana brasil",
+      "categoriaApp": "Levittá"
+    },
+    {
+      "nome": "Levittá - Barra Crocante de Gergelim e Chia",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Levittá",
+      "img": "assets/produtos/banana-brasil/levitta__levitta-barra-crocante-de-gergelim-e-chia.jpg",
+      "keywords": "levitta barra crocante de gergelim e chia levitta banana brasil",
+      "categoriaApp": "Levittá"
+    },
+    {
+      "nome": "Levittá - Barra Crocante de Gergelim e Castanha-de-Caju",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Levittá",
+      "img": "assets/produtos/banana-brasil/levitta__levitta-barra-crocante-de-gergelim-e-castanha-de-caju.jpg",
+      "keywords": "levitta barra crocante de gergelim e castanha de caju levitta banana brasil",
+      "categoriaApp": "Levittá"
+    },
+    {
+      "nome": "Só Frutas - Original",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Só Frutas",
+      "img": "assets/produtos/banana-brasil/so-frutas__so-frutas-original.jpg",
+      "keywords": "so frutas original so frutas banana brasil",
+      "categoriaApp": "Só Frutas"
+    },
+    {
+      "nome": "Só Frutas + Coco",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Só Frutas",
+      "img": "assets/produtos/banana-brasil/so-frutas__so-frutas-coco.jpg",
+      "keywords": "so frutas coco so frutas banana brasil",
+      "categoriaApp": "Só Frutas"
+    },
+    {
+      "nome": "Só Frutas + Cacau e Especiarias",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Só Frutas",
+      "img": "assets/produtos/banana-brasil/so-frutas__so-frutas-cacau-e-especiarias.jpg",
+      "keywords": "so frutas cacau e especiarias so frutas banana brasil",
+      "categoriaApp": "Só Frutas"
+    },
+    {
+      "nome": "Banana Passa",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Banana Passa",
+      "img": "assets/produtos/banana-brasil/banana-passa__banana-passa.jpg",
+      "keywords": "banana passa banana passa banana brasil",
+      "categoriaApp": "Banana Passa"
+    },
+    {
+      "nome": "NutsBITES - Bombom de Castanhas, Pasta de Amendoim e Caramelo com Cobertura de Chocolate ao Leite",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "NutsBITES",
+      "img": "assets/produtos/banana-brasil/nutsbites__nutsbites-bombom-de-castanhas-pasta-de-amendoim-e-caramelo-com-cobertura-de-chocolate-ao-leite.jpg",
+      "keywords": "nutsbites bombom de castanhas pasta de amendoim e caramelo com cobertura de chocolate ao leite nutsbites banana brasil",
+      "categoriaApp": "NutsBITES"
+    },
+    {
+      "nome": "NutsBITES - Bombom de Castanhas, Amendoim e Frutas com Cobertura de Chocolate Branco",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "NutsBITES",
+      "img": "assets/produtos/banana-brasil/nutsbites__nutsbites-bombom-de-castanhas-amendoim-e-frutas-com-cobertura-de-chocolate-branco.jpg",
+      "keywords": "nutsbites bombom de castanhas amendoim e frutas com cobertura de chocolate branco nutsbites banana brasil",
+      "categoriaApp": "NutsBITES"
+    },
+    {
+      "nome": "NutsBITES Vegano - Bombom de Castanhas, Amendoim, Nibs de Cacau e Canela com Cobertura de Chocolate Meio Amargo",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "NutsBITES",
+      "img": "assets/produtos/banana-brasil/nutsbites__nutsbites-vegano-bombom-de-castanhas-amendoim-nibs-de-cacau-e-canela-com-cobertura-de-chocolate-meio-amargo.jpg",
+      "keywords": "nutsbites vegano bombom de castanhas amendoim nibs de cacau e canela com cobertura de chocolate meio amargo nutsbites banana brasil",
+      "categoriaApp": "NutsBITES"
+    },
+    {
+      "nome": "Banana Brasil Kids - Barra de Banana e Melancia com Cobertura de Melancia",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-e-melancia-com-cobertura-de-melancia.jpg",
+      "keywords": "banana brasil kids barra de banana e melancia com cobertura de melancia kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Banana Brasil Kids - Barra de Banana com Cobertura de Chocolate ao Leite",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg",
+      "keywords": "banana brasil kids barra de banana com cobertura de chocolate ao leite kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Banana Brasil Kids - Barra de Banana com Cobertura de Chocolate Branco",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-com-cobertura-de-chocolate-branco.jpg",
+      "keywords": "banana brasil kids barra de banana com cobertura de chocolate branco kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Banana Brasil Kids - Barra de Banana e Uva com Cobertura de Uva",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-e-uva-com-cobertura-de-uva.jpg",
+      "keywords": "banana brasil kids barra de banana e uva com cobertura de uva kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Banana Brasil Kids - Barra de Banana e Morango com Cobertura de Morango",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-e-morango-com-cobertura-de-morango.jpg",
+      "keywords": "banana brasil kids barra de banana e morango com cobertura de morango kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Frutalalá - Barra de Frutas Maçã e Morango",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__frutalala-barra-de-frutas-maca-e-morango.jpg",
+      "keywords": "frutalala barra de frutas maca e morango kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Frutalalá - Barra de Frutas Banana e Maçã",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__frutalala-barra-de-frutas-banana-e-maca.jpg",
+      "keywords": "frutalala barra de frutas banana e maca kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Frutalalá - Barra de Frutas Salada de Frutas",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__frutalala-barra-de-frutas-salada-de-frutas.jpg",
+      "keywords": "frutalala barra de frutas salada de frutas kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Granobá - Barra de Granola e Morango com Cobertura de Iogurte",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__granoba-barra-de-granola-e-morango-com-cobertura-de-iogurte.jpg",
+      "keywords": "granoba barra de granola e morango com cobertura de iogurte kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Granobá - Barra de Granola com Cobertura de Chocolate",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__granoba-barra-de-granola-com-cobertura-de-chocolate.jpg",
+      "keywords": "granoba barra de granola com cobertura de chocolate kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Granobá - Barra de Granola, Banana e Maçã com Cobertura de Iogurte",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__granoba-barra-de-granola-banana-e-maca-com-cobertura-de-iogurte.jpg",
+      "keywords": "granoba barra de granola banana e maca com cobertura de iogurte kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Proteyá - Barra de Proteína Leitinho com Cookies",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__proteya-barra-de-proteina-leitinho-com-cookies.jpg",
+      "keywords": "proteya barra de proteina leitinho com cookies kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Proteyá - Barra de Proteína Chocolate",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__proteya-barra-de-proteina-chocolate.jpg",
+      "keywords": "proteya barra de proteina chocolate kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Proteyá - Barra de Proteína Iogurte de Morango",
+      "categoria": "banana-brasil",
+      "categoriaTitulo": "Banana Brasil",
+      "descricao": "Kids",
+      "img": "assets/produtos/banana-brasil/kids__proteya-barra-de-proteina-iogurte-de-morango.jpg",
+      "keywords": "proteya barra de proteina iogurte de morango kids banana brasil",
+      "categoriaApp": "Kids"
+    },
+    {
+      "nome": "Cafeína Performance",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance",
+      "img": "assets/produtos/lauton/performance__cafeina-performance.jpg",
+      "keywords": "cafeina performance performance lauton",
+      "categoriaApp": "Performance"
+    },
+    {
+      "nome": "Powerdrol",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance",
+      "img": "assets/produtos/lauton/saude-integral__powerdrol.jpg",
+      "keywords": "powerdrol performance lauton",
+      "categoriaApp": "Performance"
+    },
+    {
+      "nome": "L-Arginina Plus",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance",
+      "img": "assets/produtos/lauton/performance__l-arginina-plus.jpg",
+      "keywords": "l arginina plus performance lauton",
+      "categoriaApp": "Performance"
+    },
+    {
+      "nome": "Cúrcuma Premium",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance",
+      "img": "assets/produtos/lauton/saude-integral__curcuma-premium.jpg",
+      "keywords": "curcuma premium performance lauton",
+      "categoriaApp": "Performance"
+    },
+    {
+      "nome": "Colágeno Tipo II",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance",
+      "img": "assets/produtos/lauton/performance__colageno-tipo-ii.jpg",
+      "keywords": "colageno tipo ii performance lauton",
+      "categoriaApp": "Performance"
+    },
+    {
+      "nome": "Feno Grego Premium",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance",
+      "img": "assets/produtos/lauton/performance__feno-grego-premium.jpg",
+      "keywords": "feno grego premium performance lauton",
+      "categoriaApp": "Performance"
+    },
+    {
+      "nome": "Maca Peruana Premium",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance",
+      "img": "assets/produtos/lauton/performance__maca-peruana-premium.jpg",
+      "keywords": "maca peruana premium performance lauton",
+      "categoriaApp": "Performance"
+    },
+    {
+      "nome": "Extrato de Laranja Moro Premium",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance",
+      "img": "assets/produtos/lauton/performance__extrato-de-laranja-moro-premium.jpg",
+      "keywords": "extrato de laranja moro premium performance lauton",
+      "categoriaApp": "Performance"
+    },
+    {
+      "nome": "Multi Vitamínico Hemovital A-Z",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance",
+      "img": "assets/produtos/lauton/performance__multi-vitaminico-hemovital-a-z.jpg",
+      "keywords": "multi vitaminico hemovital a z performance lauton",
+      "categoriaApp": "Performance"
+    },
+    {
+      "nome": "Boro Decahidratado",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance",
+      "img": "assets/produtos/lauton/performance__boro-decahidratado.jpg",
+      "keywords": "boro decahidratado performance lauton",
+      "categoriaApp": "Performance"
+    },
+    {
+      "nome": "Complexo B Max",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Corpo e beleza",
+      "img": "assets/produtos/lauton/corpo-e-beleza__complexo-b-max.jpg",
+      "keywords": "complexo b max corpo e beleza lauton",
+      "categoriaApp": "Corpo e beleza"
+    },
+    {
+      "nome": "Biotina Plus",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Corpo e beleza",
+      "img": "assets/produtos/lauton/corpo-e-beleza__biotina-plus.jpg",
+      "keywords": "biotina plus corpo e beleza lauton",
+      "categoriaApp": "Corpo e beleza"
+    },
+    {
+      "nome": "Coenzima Q10 PRO",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Corpo e beleza",
+      "img": "assets/produtos/lauton/corpo-e-beleza__coenzima-q10-pro.jpg",
+      "keywords": "coenzima q10 pro corpo e beleza lauton",
+      "categoriaApp": "Corpo e beleza"
+    },
+    {
+      "nome": "Hialux Skincare",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Corpo e beleza",
+      "img": "assets/produtos/lauton/corpo-e-beleza__hialux-skincare.jpg",
+      "keywords": "hialux skincare corpo e beleza lauton",
+      "categoriaApp": "Corpo e beleza"
+    },
+    {
+      "nome": "Procran Cranberry",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Corpo e beleza",
+      "img": "assets/produtos/lauton/corpo-e-beleza__procran-cranberry.jpg",
+      "keywords": "procran cranberry corpo e beleza lauton",
+      "categoriaApp": "Corpo e beleza"
+    },
+    {
+      "nome": "Colágeno Hidrolisado",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Corpo e beleza",
+      "img": "assets/produtos/lauton/corpo-e-beleza__colageno-hidrolisado.jpg",
+      "keywords": "colageno hidrolisado corpo e beleza lauton",
+      "categoriaApp": "Corpo e beleza"
+    },
+    {
+      "nome": "Coenzima Q10 ULTRA",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Corpo e beleza",
+      "img": "assets/produtos/lauton/mente-e-bem-estar__coenzima-q10-ultra.jpg",
+      "keywords": "coenzima q10 ultra corpo e beleza lauton",
+      "categoriaApp": "Corpo e beleza"
+    },
+    {
+      "nome": "Cromo Picolinato",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Corpo e beleza",
+      "img": "assets/produtos/lauton/corpo-e-beleza__cromo-picolinato.jpg",
+      "keywords": "cromo picolinato corpo e beleza lauton",
+      "categoriaApp": "Corpo e beleza"
+    },
+    {
+      "nome": "Luteína + Zeaxantina",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Corpo e beleza",
+      "img": "assets/produtos/lauton/corpo-e-beleza__luteina-zeaxantina.jpg",
+      "keywords": "luteina zeaxantina corpo e beleza lauton",
+      "categoriaApp": "Corpo e beleza"
+    },
+    {
+      "nome": "Triptoflex",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Mente e bem estar",
+      "img": "assets/produtos/lauton/mente-e-bem-estar__triptoflex.jpg",
+      "keywords": "triptoflex mente e bem estar lauton",
+      "categoriaApp": "Mente e bem estar"
+    },
+    {
+      "nome": "Melatonina Líquida",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Mente e bem estar",
+      "img": "assets/produtos/lauton/mente-e-bem-estar__melatonina-liquida.jpg",
+      "keywords": "melatonina liquida mente e bem estar lauton",
+      "categoriaApp": "Mente e bem estar"
+    },
+    {
+      "nome": "Melatonina Premium",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Mente e bem estar",
+      "img": "assets/produtos/lauton/mente-e-bem-estar__melatonina-premium.jpg",
+      "keywords": "melatonina premium mente e bem estar lauton",
+      "categoriaApp": "Mente e bem estar"
+    },
+    {
+      "nome": "Amora Miúra Amorine",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Mente e bem estar",
+      "img": "assets/produtos/lauton/mente-e-bem-estar__amora-miura-amorine.jpg",
+      "keywords": "amora miura amorine mente e bem estar lauton",
+      "categoriaApp": "Mente e bem estar"
+    },
+    {
+      "nome": "Óleo de Prímula",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Mente e bem estar",
+      "img": "assets/produtos/lauton/mente-e-bem-estar__oleo-de-primula.jpg",
+      "keywords": "oleo de primula mente e bem estar lauton",
+      "categoriaApp": "Mente e bem estar"
+    },
+    {
+      "nome": "Magnésio Dimalato",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Mente e bem estar",
+      "img": "assets/produtos/lauton/mente-e-bem-estar__magnesio-dimalato.jpg",
+      "keywords": "magnesio dimalato mente e bem estar lauton",
+      "categoriaApp": "Mente e bem estar"
+    },
+    {
+      "nome": "Ômega 3 Ultra",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Mente e bem estar",
+      "img": "assets/produtos/lauton/mente-e-bem-estar__omega-3-ultra.jpg",
+      "keywords": "omega 3 ultra mente e bem estar lauton",
+      "categoriaApp": "Mente e bem estar"
+    },
+    {
+      "nome": "Ômega 3 Pro",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Mente e bem estar",
+      "img": "assets/produtos/lauton/mente-e-bem-estar__omega-3-pro.jpg",
+      "keywords": "omega 3 pro mente e bem estar lauton",
+      "categoriaApp": "Mente e bem estar"
+    },
+    {
+      "nome": "Própolis Defense",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__propolis-defense.jpg",
+      "keywords": "propolis defense saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Vitamina C 500",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__vitamina-c-500.jpg",
+      "keywords": "vitamina c 500 saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Vitamina K2-MK7",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__vitamina-k2-mk7.jpg",
+      "keywords": "vitamina k2 mk7 saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "MSM - Enxofre Orgânico",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__msm-enxofre-organico.jpg",
+      "keywords": "msm enxofre organico saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Vitamina B12",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__vitamina-b12.jpg",
+      "keywords": "vitamina b12 saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Cobre Quelato Bisglicinato",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__cobre-quelato-bisglicinato.jpg",
+      "keywords": "cobre quelato bisglicinato saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Vitamina D3+K2",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__vitamina-d3-k2.jpg",
+      "keywords": "vitamina d3 k2 saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Vitamina D3 2.000 UI",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__vitamina-d3-2-000-ui.jpg",
+      "keywords": "vitamina d3 2 000 ui saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Ferro Quelato Bisglicinato",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__ferro-quelato-bisglicinato.jpg",
+      "keywords": "ferro quelato bisglicinato saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Ora Pro Nóbis",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__ora-pro-nobis.jpg",
+      "keywords": "ora pro nobis saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Metilfolax 600mcg",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__metilfolax-600mcg.jpg",
+      "keywords": "metilfolax 600mcg saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Óleo de Alho Cru",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__oleo-de-alho-cru.jpg",
+      "keywords": "oleo de alho cru saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Zinco Quelato Bisglicinato",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__zinco-quelato-bisglicinato.jpg",
+      "keywords": "zinco quelato bisglicinato saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Resveratrol",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__resveratrol.jpg",
+      "keywords": "resveratrol saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Beta Glucana Premium",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__beta-glucana-premium.jpg",
+      "keywords": "beta glucana premium saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Magnésio Inositol",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__magnesio-inositol.jpg",
+      "keywords": "magnesio inositol saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Cálcio Citrato Malato",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__calcio-citrato-malato.jpg",
+      "keywords": "calcio citrato malato saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Cloreto de Magnésio P.A.",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__cloreto-de-magnesio-p-a.jpg",
+      "keywords": "cloreto de magnesio p a saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Vitamina A",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__vitamina-a.jpg",
+      "keywords": "vitamina a saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Licopeno de Tomate",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__licopeno-de-tomate.jpg",
+      "keywords": "licopeno de tomate saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Vitamina B12 Líquida",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__vitamina-b12-liquida.jpg",
+      "keywords": "vitamina b12 liquida saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "NAC - N-Acetil L-Cisteína",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__nac-n-acetil-l-cisteina.jpg",
+      "keywords": "nac n acetil l cisteina saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Vitamina D3 Líquida",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__vitamina-d3-liquida.jpg",
+      "keywords": "vitamina d3 liquida saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Quadrimag Quadri4Tech",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__quadrimag-quadri4tech.jpg",
+      "keywords": "quadrimag quadri4tech saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "Treonato Treotech",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Saúde integral",
+      "img": "assets/produtos/lauton/saude-integral__treonato-treotech.jpg",
+      "keywords": "treonato treotech saude integral lauton",
+      "categoriaApp": "Saúde integral"
+    },
+    {
+      "nome": "FiberLiv - 7 Fontes de Fibra",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance series",
+      "img": "assets/produtos/lauton/performance-series__fiberliv-7-fontes-de-fibra.jpg",
+      "keywords": "fiberliv 7 fontes de fibra performance series lauton",
+      "categoriaApp": "Performance series"
+    },
+    {
+      "nome": "Cafeína - Caffeine Performance",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance series",
+      "img": "assets/produtos/lauton/performance-series__cafeina-caffeine-performance.jpg",
+      "keywords": "cafeina caffeine performance performance series lauton",
+      "categoriaApp": "Performance series"
+    },
+    {
+      "nome": "Creatina - Monohidratada",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance series / Creatina e Glutamina",
+      "img": "assets/produtos/lauton/performance-series-creatina-e-glutamina__creatina-monohidratada.jpg",
+      "keywords": "creatina monohidratada performance series creatina e glutamina lauton",
+      "categoriaApp": "Performance series / Creatina e Glutamina"
+    },
+    {
+      "nome": "Glutamina - 100% Pura",
+      "categoria": "lauton",
+      "categoriaTitulo": "Lauton",
+      "descricao": "Performance series / Creatina e Glutamina",
+      "img": "assets/produtos/lauton/performance-series-creatina-e-glutamina__glutamina-100-pura.jpg",
+      "keywords": "glutamina 100 pura performance series creatina e glutamina lauton",
+      "categoriaApp": "Performance series / Creatina e Glutamina"
+    },
+    {
+      "nome": "Kit Scudo P.",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Lançamentos - Antipiolhos",
+      "img": "assets/produtos/abelha-rainha/lancamentos-antipiolhos__kit-scudo-p.jpg",
+      "keywords": "kit scudo p lancamentos antipiolhos abelha rainha",
+      "categoriaApp": "Lançamentos - Antipiolhos"
+    },
+    {
+      "nome": "Body Splash Vanilla",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Lançamentos - Body Splash / Perfumaria",
+      "img": "assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-vanilla.jpg",
+      "keywords": "body splash vanilla lancamentos body splash perfumaria abelha rainha",
+      "categoriaApp": "Lançamentos - Body Splash / Perfumaria"
+    },
+    {
+      "nome": "Body Splash Melancia",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Lançamentos - Body Splash / Perfumaria",
+      "img": "assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-melancia.jpg",
+      "keywords": "body splash melancia lancamentos body splash perfumaria abelha rainha",
+      "categoriaApp": "Lançamentos - Body Splash / Perfumaria"
+    },
+    {
+      "nome": "Body Splash Maracujá",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Lançamentos - Body Splash / Perfumaria",
+      "img": "assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-maracuja.jpg",
+      "keywords": "body splash maracuja lancamentos body splash perfumaria abelha rainha",
+      "categoriaApp": "Lançamentos - Body Splash / Perfumaria"
+    },
+    {
+      "nome": "Body Splash Pitaya",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Lançamentos - Body Splash / Perfumaria",
+      "img": "assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-pitaya.jpg",
+      "keywords": "body splash pitaya lancamentos body splash perfumaria abelha rainha",
+      "categoriaApp": "Lançamentos - Body Splash / Perfumaria"
+    },
+    {
+      "nome": "Esfoliante Corporal Vanilla",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Lançamentos - Esfoliantes Corporais",
+      "img": "assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-vanilla.jpg",
+      "keywords": "esfoliante corporal vanilla lancamentos esfoliantes corporais abelha rainha",
+      "categoriaApp": "Lançamentos - Esfoliantes Corporais"
+    },
+    {
+      "nome": "Esfoliante Corporal Melancia",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Lançamentos - Esfoliantes Corporais",
+      "img": "assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-melancia.jpg",
+      "keywords": "esfoliante corporal melancia lancamentos esfoliantes corporais abelha rainha",
+      "categoriaApp": "Lançamentos - Esfoliantes Corporais"
+    },
+    {
+      "nome": "Esfoliante Corporal Maracujá",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Lançamentos - Esfoliantes Corporais",
+      "img": "assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-maracuja.jpg",
+      "keywords": "esfoliante corporal maracuja lancamentos esfoliantes corporais abelha rainha",
+      "categoriaApp": "Lançamentos - Esfoliantes Corporais"
+    },
+    {
+      "nome": "Esfoliante Corporal Pitaya",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Lançamentos - Esfoliantes Corporais",
+      "img": "assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-pitaya.jpg",
+      "keywords": "esfoliante corporal pitaya lancamentos esfoliantes corporais abelha rainha",
+      "categoriaApp": "Lançamentos - Esfoliantes Corporais"
+    },
+    {
+      "nome": "Hidratante Facial e Corporal para Pele Extrasseca",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Hidratantes",
+      "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-facial-e-corporal-para-pele-extrasseca.jpg",
+      "keywords": "hidratante facial e corporal para pele extrasseca hidratantes abelha rainha",
+      "categoriaApp": "Hidratantes"
+    },
+    {
+      "nome": "Hidratante Corporal para Pele Extrasseca",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Hidratantes",
+      "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-extrasseca.jpg",
+      "keywords": "hidratante corporal para pele extrasseca hidratantes abelha rainha",
+      "categoriaApp": "Hidratantes"
+    },
+    {
+      "nome": "Hidratante Corporal para Pele Seca",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Hidratantes",
+      "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-seca.jpg",
+      "keywords": "hidratante corporal para pele seca hidratantes abelha rainha",
+      "categoriaApp": "Hidratantes"
+    },
+    {
+      "nome": "Hidratante Corporal Q10 e Vitamina C",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Hidratantes",
+      "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-q10-e-vitamina-c.jpg",
+      "keywords": "hidratante corporal q10 e vitamina c hidratantes abelha rainha",
+      "categoriaApp": "Hidratantes"
+    },
+    {
+      "nome": "Hidratante Corporal Rosa Mosqueta",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Hidratantes",
+      "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-rosa-mosqueta.jpg",
+      "keywords": "hidratante corporal rosa mosqueta hidratantes abelha rainha",
+      "categoriaApp": "Hidratantes"
+    },
+    {
+      "nome": "Óleo de Rosa Mosqueta Puro",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Rosa Mosqueta",
+      "img": "assets/produtos/abelha-rainha/rosa-mosqueta__oleo-de-rosa-mosqueta-puro.jpg",
+      "keywords": "oleo de rosa mosqueta puro rosa mosqueta abelha rainha",
+      "categoriaApp": "Rosa Mosqueta"
+    },
+    {
+      "nome": "Óleo de Rosa Mosqueta",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Rosa Mosqueta",
+      "img": "assets/produtos/abelha-rainha/rosa-mosqueta__oleo-de-rosa-mosqueta.jpg",
+      "keywords": "oleo de rosa mosqueta rosa mosqueta abelha rainha",
+      "categoriaApp": "Rosa Mosqueta"
+    },
+    {
+      "nome": "Creme Facial Clareador de Rosa Mosqueta",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Rosa Mosqueta",
+      "img": "assets/produtos/abelha-rainha/rosa-mosqueta__creme-facial-clareador-de-rosa-mosqueta.jpg",
+      "keywords": "creme facial clareador de rosa mosqueta rosa mosqueta abelha rainha",
+      "categoriaApp": "Rosa Mosqueta"
+    },
+    {
+      "nome": "Creme Facial Preventivo às Rugas de Rosa Mosqueta",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Rosa Mosqueta",
+      "img": "assets/produtos/abelha-rainha/rosa-mosqueta__creme-facial-preventivo-as-rugas-de-rosa-mosqueta.jpg",
+      "keywords": "creme facial preventivo as rugas de rosa mosqueta rosa mosqueta abelha rainha",
+      "categoriaApp": "Rosa Mosqueta"
+    },
+    {
+      "nome": "Sabonete Facial Vitamina C e Ácido Hialurônico",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Vitamina C",
+      "img": "assets/produtos/abelha-rainha/vitamina-c__sabonete-facial-vitamina-c-e-acido-hialuronico.jpg",
+      "keywords": "sabonete facial vitamina c e acido hialuronico vitamina c abelha rainha",
+      "categoriaApp": "Vitamina C"
+    },
+    {
+      "nome": "Sérum Facial Vitamina C",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Vitamina C",
+      "img": "assets/produtos/abelha-rainha/vitamina-c__serum-facial-vitamina-c.jpg",
+      "keywords": "serum facial vitamina c vitamina c abelha rainha",
+      "categoriaApp": "Vitamina C"
+    },
+    {
+      "nome": "Protetor Solar Facial Vitamina C",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Vitamina C / Proteção Solar",
+      "img": "assets/produtos/abelha-rainha/vitamina-c-protecao-solar__protetor-solar-facial-vitamina-c.jpg",
+      "keywords": "protetor solar facial vitamina c vitamina c protecao solar abelha rainha",
+      "categoriaApp": "Vitamina C / Proteção Solar"
+    },
+    {
+      "nome": "Protetor Solar Facial em Creme",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Proteção Solar",
+      "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-em-creme.jpg",
+      "keywords": "protetor solar facial em creme protecao solar abelha rainha",
+      "categoriaApp": "Proteção Solar"
+    },
+    {
+      "nome": "Protetor Solar Corporal em Spray",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Proteção Solar",
+      "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-corporal-em-spray.jpg",
+      "keywords": "protetor solar corporal em spray protecao solar abelha rainha",
+      "categoriaApp": "Proteção Solar"
+    },
+    {
+      "nome": "Protetor Solar Facial FPS 80 - Cor de Base Bege Natural",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Proteção Solar",
+      "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-fps-80-cor-de-base-bege-natural.jpg",
+      "keywords": "protetor solar facial fps 80 cor de base bege natural protecao solar abelha rainha",
+      "categoriaApp": "Proteção Solar"
+    },
+    {
+      "nome": "Protetor Solar Facial FPS 80 - Cor de Base Bege Médio",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Proteção Solar",
+      "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-fps-80-cor-de-base-bege-medio.jpg",
+      "keywords": "protetor solar facial fps 80 cor de base bege medio protecao solar abelha rainha",
+      "categoriaApp": "Proteção Solar"
+    },
+    {
+      "nome": "Gel Refrescante Pós-sol",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Proteção Solar",
+      "img": "assets/produtos/abelha-rainha/protecao-solar__gel-refrescante-pos-sol.jpg",
+      "keywords": "gel refrescante pos sol protecao solar abelha rainha",
+      "categoriaApp": "Proteção Solar"
+    },
+    {
+      "nome": "Sabonete Facial Antibacteriano",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Acne",
+      "img": "assets/produtos/abelha-rainha/acne__sabonete-facial-antibacteriano.jpg",
+      "keywords": "sabonete facial antibacteriano acne abelha rainha",
+      "categoriaApp": "Acne"
+    },
+    {
+      "nome": "Loção Tônica Adstringente",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Acne",
+      "img": "assets/produtos/abelha-rainha/acne__locao-tonica-adstringente.jpg",
+      "keywords": "locao tonica adstringente acne abelha rainha",
+      "categoriaApp": "Acne"
+    },
+    {
+      "nome": "Gel Secativo para Espinhas Roll-On",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Acne",
+      "img": "assets/produtos/abelha-rainha/acne__gel-secativo-para-espinhas-roll-on.jpg",
+      "keywords": "gel secativo para espinhas roll on acne abelha rainha",
+      "categoriaApp": "Acne"
+    },
+    {
+      "nome": "Bastão Secativo para Espinhas",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Acne",
+      "img": "assets/produtos/abelha-rainha/acne__bastao-secativo-para-espinhas.jpg",
+      "keywords": "bastao secativo para espinhas acne abelha rainha",
+      "categoriaApp": "Acne"
+    },
+    {
+      "nome": "Kit Antiacne",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Acne",
+      "img": "assets/produtos/abelha-rainha/acne__kit-antiacne.jpg",
+      "keywords": "kit antiacne acne abelha rainha",
+      "categoriaApp": "Acne"
+    },
+    {
+      "nome": "Loção para Afinar os Pés - Milagre dos Pés",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Dermopés",
+      "img": "assets/produtos/abelha-rainha/dermopes__locao-para-afinar-os-pes-milagre-dos-pes.jpg",
+      "keywords": "locao para afinar os pes milagre dos pes dermopes abelha rainha",
+      "categoriaApp": "Dermopés"
+    },
+    {
+      "nome": "Creme Ultra-Hidratante para os Pés",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Dermopés",
+      "img": "assets/produtos/abelha-rainha/dermopes__creme-ultra-hidratante-para-os-pes.jpg",
+      "keywords": "creme ultra hidratante para os pes dermopes abelha rainha",
+      "categoriaApp": "Dermopés"
+    },
+    {
+      "nome": "Creme para Hidratar e Afinar os Pés",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Dermopés",
+      "img": "assets/produtos/abelha-rainha/dermopes__creme-para-hidratar-e-afinar-os-pes.jpg",
+      "keywords": "creme para hidratar e afinar os pes dermopes abelha rainha",
+      "categoriaApp": "Dermopés"
+    },
+    {
+      "nome": "Gel Esfoliante para os Pés",
+      "categoria": "abelha-rainha",
+      "categoriaTitulo": "Abelha Rainha",
+      "descricao": "Dermopés",
+      "img": "assets/produtos/abelha-rainha/dermopes__gel-esfoliante-para-os-pes.jpg",
+      "keywords": "gel esfoliante para os pes dermopes abelha rainha",
+      "categoriaApp": "Dermopés"
+    },
+    {
+      "nome": "Nanoprópolis Própolis Verde",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/propolis__nanopropolis-propolis-verde.jpg",
+      "keywords": "nanopropolis propolis verde apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Mel Tradicional Bisnaga Tampa Cone",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/mel__mel-tradicional-bisnaga-tampa-cone.jpg",
+      "keywords": "mel tradicional bisnaga tampa cone apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Própolis 2000 Extrato de Própolis Verde em Cápsulas",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/propolis__propolis-2000-extrato-de-propolis-verde-em-capsulas.jpg",
+      "keywords": "propolis 2000 extrato de propolis verde em capsulas apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Propoflex AP60 Extrato de Própolis Verde",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/propolis__propoflex-ap60-extrato-de-propolis-verde.jpg",
+      "keywords": "propoflex ap60 extrato de propolis verde apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Propoflex Extrato de Própolis Verde",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/propolis__propoflex-extrato-de-propolis-verde.jpg",
+      "keywords": "propoflex extrato de propolis verde apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Nanoprópolis Própolis Verde em Gotas",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/propolis__nanopropolis-propolis-verde-em-gotas.jpg",
+      "keywords": "nanopropolis propolis verde em gotas apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Nanoprópolis Própolis Blend em Gotas",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/propolis__nanopropolis-propolis-blend-em-gotas.jpg",
+      "keywords": "nanopropolis propolis blend em gotas apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Relâmpago Energético",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/energeticos__relampago-energetico.jpg",
+      "keywords": "relampago energetico apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Protetor Labial Manteiga de Cacau com Própolis",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/cuidado-pessoal__protetor-labial-manteiga-de-cacau-com-propolis.jpg",
+      "keywords": "protetor labial manteiga de cacau com propolis apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Mantex Manteiga de Cacau com Ácido Hialurônico",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/cuidado-pessoal__mantex-manteiga-de-cacau-com-acido-hialuronico.jpg",
+      "keywords": "mantex manteiga de cacau com acido hialuronico apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Spray para Garganta Extrato de Própolis (Mel, Menta, Malva e Gengibre)",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/propolis__spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-gengibre.jpg",
+      "keywords": "spray para garganta extrato de propolis mel menta malva e gengibre apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Spray para Garganta Extrato de Própolis (Mel, Menta, Malva e Romã)",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/propolis__spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-roma.jpg",
+      "keywords": "spray para garganta extrato de propolis mel menta malva e roma apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Propoflex Kids Spray para Garganta (Mel, Malva e Romã)",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/propolis-kids__propoflex-kids-spray-para-garganta-mel-malva-e-roma.jpg",
+      "keywords": "propoflex kids spray para garganta mel malva e roma apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Balas Diet Halfresh Morango com Nanoprópolis",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/balas-diet__balas-diet-halfresh-morango-com-nanopropolis.jpg",
+      "keywords": "balas diet halfresh morango com nanopropolis apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Balas Diet Halfresh Mentol com Nanoprópolis",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/balas-diet__balas-diet-halfresh-mentol-com-nanopropolis.jpg",
+      "keywords": "balas diet halfresh mentol com nanopropolis apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Balas Diet Halfresh Gengibre com Nanoprópolis",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/balas-diet__balas-diet-halfresh-gengibre-com-nanopropolis.jpg",
+      "keywords": "balas diet halfresh gengibre com nanopropolis apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Propoflex Extrato Aquoso de Própolis",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/apisvida__propoflex-extrato-aquoso-de-propolis.jpg",
+      "keywords": "propoflex extrato aquoso de propolis apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Propoflex Extrato de Própolis",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/apisvida__propoflex-extrato-de-propolis.jpg",
+      "keywords": "propoflex extrato de propolis apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Nanoprópolis Extrato de Própolis Vermelho",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/apisvida__nanopropolis-extrato-de-propolis-vermelho.jpg",
+      "keywords": "nanopropolis extrato de propolis vermelho apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Propoflex Kids Xarope Mel + Própolis",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/apisvida__propoflex-kids-xarope-mel-propolis.jpg",
+      "keywords": "propoflex kids xarope mel propolis apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Propoflex Kids Própolis",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/apisvida__propoflex-kids-propolis.jpg",
+      "keywords": "propoflex kids propolis apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Propoflex Kids Própolis + Morango",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/apisvida__propoflex-kids-propolis-morango.jpg",
+      "keywords": "propoflex kids propolis morango apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "Mel Apisvida",
+      "categoria": "apisvida",
+      "categoriaTitulo": "Apisvida",
+      "descricao": "Apisvida",
+      "img": "assets/produtos/apisvida/apisvida__mel-apisvida.jpg",
+      "keywords": "mel apisvida apisvida apisvida",
+      "categoriaApp": "Apisvida"
+    },
+    {
+      "nome": "1896 Nac N-acetil L-cisteina 60X550MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X550MG",
+      "img": null,
+      "keywords": "1896 nac n acetil l cisteina 60x550mg 60x550mg farma",
+      "categoriaApp": "60X550MG"
+    },
+    {
+      "nome": "Barra Supino Zero Nozes e Damasco24g",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X24G",
+      "img": null,
+      "keywords": "barra supino zero nozes e damasco24g 20x24g farma",
+      "categoriaApp": "20X24G"
+    },
+    {
+      "nome": "Barra Supino Zero Banana e Ameixa 24G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X24G",
+      "img": null,
+      "keywords": "barra supino zero banana e ameixa 24g 20x24g farma",
+      "categoriaApp": "20X24G"
+    },
+    {
+      "nome": "Barra Supino Zero Banana ao Leite 24G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X24G",
+      "img": null,
+      "keywords": "barra supino zero banana ao leite 24g 20x24g farma",
+      "categoriaApp": "20X24G"
+    },
+    {
+      "nome": "1735 Treonato Magn + Treonina 60X650MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X650MG",
+      "img": null,
+      "keywords": "1735 treonato magn treonina 60x650mg 60x650mg farma",
+      "categoriaApp": "60X650MG"
+    },
+    {
+      "nome": "Barra Supino Zero Banana e Açaí 24G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X24G",
+      "img": null,
+      "keywords": "barra supino zero banana e acai 24g 20x24g farma",
+      "categoriaApp": "20X24G"
+    },
+    {
+      "nome": "Barra Nuts e Chocolate 25G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X25G",
+      "img": null,
+      "keywords": "barra nuts e chocolate 25g 12x25g farma",
+      "categoriaApp": "12X25G"
+    },
+    {
+      "nome": "Barra Supino Zero Banana Branco 24G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X24G",
+      "img": null,
+      "keywords": "barra supino zero banana branco 24g 20x24g farma",
+      "categoriaApp": "20X24G"
+    },
+    {
+      "nome": "Barra Supino Zero Banana Maçã Canela 24G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X24G",
+      "img": null,
+      "keywords": "barra supino zero banana maca canela 24g 20x24g farma",
+      "categoriaApp": "20X24G"
+    },
+    {
+      "nome": "Barra Protein + Banoffee 50G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "9X50G",
+      "img": null,
+      "keywords": "barra protein banoffee 50g 9x50g farma",
+      "categoriaApp": "9X50G"
+    },
+    {
+      "nome": "Barra Supino Orig. Banana ao Leite 24G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X24G",
+      "img": null,
+      "keywords": "barra supino orig banana ao leite 24g 20x24g farma",
+      "categoriaApp": "20X24G"
+    },
+    {
+      "nome": "Barra Nuts e Sementes 25G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X25G",
+      "img": null,
+      "keywords": "barra nuts e sementes 25g 12x25g farma",
+      "categoriaApp": "12X25G"
+    },
+    {
+      "nome": "Barra Protein + Napolitano 50G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "9X50G",
+      "img": null,
+      "keywords": "barra protein napolitano 50g 9x50g farma",
+      "categoriaApp": "9X50G"
+    },
+    {
+      "nome": "Supino Protein Morango 30G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X30G",
+      "img": null,
+      "keywords": "supino protein morango 30g 12x30g farma",
+      "categoriaApp": "12X30G"
+    },
+    {
+      "nome": "Barra Supino Zero Banana e Abacaxi 24G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X24G",
+      "img": null,
+      "keywords": "barra supino zero banana e abacaxi 24g 20x24g farma",
+      "categoriaApp": "20X24G"
+    },
+    {
+      "nome": "Barra Nuts Frutas 25G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X25G",
+      "img": null,
+      "keywords": "barra nuts frutas 25g 12x25g farma",
+      "categoriaApp": "12X25G"
+    },
+    {
+      "nome": "Banana Passa 86G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "9X86G",
+      "img": null,
+      "keywords": "banana passa 86g 9x86g farma",
+      "categoriaApp": "9X86G"
+    },
+    {
+      "nome": "Barra Protein + Torta de Limao 50G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "9X50G",
+      "img": null,
+      "keywords": "barra protein torta de limao 50g 9x50g farma",
+      "categoriaApp": "9X50G"
+    },
+    {
+      "nome": "Barra Nuts e Morango 25G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X25G",
+      "img": null,
+      "keywords": "barra nuts e morango 25g 12x25g farma",
+      "categoriaApp": "12X25G"
+    },
+    {
+      "nome": "Supino Protein Chocolate 30G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X30G",
+      "img": null,
+      "keywords": "supino protein chocolate 30g 12x30g farma",
+      "categoriaApp": "12X30G"
+    },
+    {
+      "nome": "Barra Nuts Banana e Canela 25G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X25G",
+      "img": null,
+      "keywords": "barra nuts banana e canela 25g 12x25g farma",
+      "categoriaApp": "12X25G"
+    },
+    {
+      "nome": "Barra de Frutas Kids Choc Branco 22G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X22G",
+      "img": null,
+      "keywords": "barra de frutas kids choc branco 22g 20x22g farma",
+      "categoriaApp": "20X22G"
+    },
+    {
+      "nome": "Barra Supino Zero Banana e Morango 24G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X24G",
+      "img": null,
+      "keywords": "barra supino zero banana e morango 24g 20x24g farma",
+      "categoriaApp": "20X24G"
+    },
+    {
+      "nome": "Supino Protein Cookies 30G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X30G",
+      "img": null,
+      "keywords": "supino protein cookies 30g 12x30g farma",
+      "categoriaApp": "12X30G"
+    },
+    {
+      "nome": "Supino Protein Max Amend e Caramelo 46G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "9X46G",
+      "img": null,
+      "keywords": "supino protein max amend e caramelo 46g 9x46g farma",
+      "categoriaApp": "9X46G"
+    },
+    {
+      "nome": "Barra Protein + Cookies N' Cream 50G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "9X50G",
+      "img": null,
+      "keywords": "barra protein cookies n cream 50g 9x50g farma",
+      "categoriaApp": "9X50G"
+    },
+    {
+      "nome": "Barra de Frutas Kids Morango 22G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X22G",
+      "img": null,
+      "keywords": "barra de frutas kids morango 22g 20x22g farma",
+      "categoriaApp": "20X22G"
+    },
+    {
+      "nome": "Barra de Frutas Kids Choc ao Leite 22G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X22G",
+      "img": null,
+      "keywords": "barra de frutas kids choc ao leite 22g 20x22g farma",
+      "categoriaApp": "20X22G"
+    },
+    {
+      "nome": "1728 Quadrimag 4 60X700MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X700MG",
+      "img": null,
+      "keywords": "1728 quadrimag 4 60x700mg 60x700mg farma",
+      "categoriaApp": "60X700MG"
+    },
+    {
+      "nome": "Energ Baly Tadaly 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly tadaly 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "Creatina 100% 300G - Mix Nutri",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "300G",
+      "img": null,
+      "keywords": "creatina 100 300g mix nutri 300g farma",
+      "categoriaApp": "300G"
+    },
+    {
+      "nome": "Supino Protein Coco C/choc. Branco 30G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X30G",
+      "img": null,
+      "keywords": "supino protein coco c choc branco 30g 12x30g farma",
+      "categoriaApp": "12X30G"
+    },
+    {
+      "nome": "6669 Amora Miura Amorine 60X1000MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X1000MG",
+      "img": null,
+      "keywords": "6669 amora miura amorine 60x1000mg 60x1000mg farma",
+      "categoriaApp": "60X1000MG"
+    },
+    {
+      "nome": "Trio Avela e Castanha C Chocolate 12X20G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12UNX20G",
+      "img": null,
+      "keywords": "trio avela e castanha c chocolate 12x20g 12unx20g farma",
+      "categoriaApp": "12UNX20G"
+    },
+    {
+      "nome": "7574 Luteina C/ Zeaxantina 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "7574 luteina c zeaxantina 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "0479 Vitam K2 Mk7 Menaquinona 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "0479 vitam k2 mk7 menaquinona 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "6539 Biotina Plus 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "6539 biotina plus 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "Barra Mini Pouch Nuts Meio Amargo 60G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60G",
+      "img": null,
+      "keywords": "barra mini pouch nuts meio amargo 60g 60g farma",
+      "categoriaApp": "60G"
+    },
+    {
+      "nome": "Barra de Frutas Kids Uva 22G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X22G",
+      "img": null,
+      "keywords": "barra de frutas kids uva 22g 20x22g farma",
+      "categoriaApp": "20X22G"
+    },
+    {
+      "nome": "1377 Trimaca Peruana em Pó 100G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "100G",
+      "img": null,
+      "keywords": "1377 trimaca peruana em po 100g 100g farma",
+      "categoriaApp": "100G"
+    },
+    {
+      "nome": "Barra Protein + Caramelo Salgado 50G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "9X50G",
+      "img": null,
+      "keywords": "barra protein caramelo salgado 50g 9x50g farma",
+      "categoriaApp": "9X50G"
+    },
+    {
+      "nome": "Energ Baly Frutas Tropicais 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly frutas tropicais 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "Energ Baly Melancia 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly melancia 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "1797 Coenzima Q10 Pro 60 Comp 100MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "1797 coenzima q10 pro 60 comp 100mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "Hidratante Corp Rosa Mosqueta 400ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "400ML",
+      "img": null,
+      "keywords": "hidratante corp rosa mosqueta 400ml 400ml farma",
+      "categoriaApp": "400ML"
+    },
+    {
+      "nome": "Oleo de Rosa Mosqueta 20ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20ML",
+      "img": null,
+      "keywords": "oleo de rosa mosqueta 20ml 20ml farma",
+      "categoriaApp": "20ML"
+    },
+    {
+      "nome": "Barra Supino Original Banana Branco 24G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20X24G",
+      "img": null,
+      "keywords": "barra supino original banana branco 24g 20x24g farma",
+      "categoriaApp": "20X24G"
+    },
+    {
+      "nome": "1292 Vitamina B12 Gotas Sabor Uva 20ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20ML",
+      "img": null,
+      "keywords": "1292 vitamina b12 gotas sabor uva 20ml 20ml farma",
+      "categoriaApp": "20ML"
+    },
+    {
+      "nome": "Balas Diet Halfresh Sabor Gengibre 192G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "192G",
+      "img": null,
+      "keywords": "balas diet halfresh sabor gengibre 192g 192g farma",
+      "categoriaApp": "192G"
+    },
+    {
+      "nome": "Energ Baly Maçã Verde sem Açucar 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly maca verde sem acucar 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "Hidratante Corp Q10 Vitamina C 400ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "400ML",
+      "img": null,
+      "keywords": "hidratante corp q10 vitamina c 400ml 400ml farma",
+      "categoriaApp": "400ML"
+    },
+    {
+      "nome": "Energ Baly Melancia sem Açucar 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly melancia sem acucar 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "7093 Ferro Quelato Bisglicinato 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "7093 ferro quelato bisglicinato 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "Spray Propolis C/ Gengibre 30ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "30ML",
+      "img": null,
+      "keywords": "spray propolis c gengibre 30ml 30ml farma",
+      "categoriaApp": "30ML"
+    },
+    {
+      "nome": "Spray Propolis C/ Menta e Roma 30ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "30ML",
+      "img": null,
+      "keywords": "spray propolis c menta e roma 30ml 30ml farma",
+      "categoriaApp": "30ML"
+    },
+    {
+      "nome": "Hidratante Corp Pele Extrasseca 400ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "400ML",
+      "img": null,
+      "keywords": "hidratante corp pele extrasseca 400ml 400ml farma",
+      "categoriaApp": "400ML"
+    },
+    {
+      "nome": "Energ Baly Tradicional sem Açucar 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly tradicional sem acucar 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "Energ Baly 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "Barra Mini Pouch Nuts ao Leite 60G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60G",
+      "img": null,
+      "keywords": "barra mini pouch nuts ao leite 60g 60g farma",
+      "categoriaApp": "60G"
+    },
+    {
+      "nome": "Fitas de Clar Dental Roxa - 5 Aplicaçoes",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "5G",
+      "img": null,
+      "keywords": "fitas de clar dental roxa 5 aplicacoes 5g farma",
+      "categoriaApp": "5G"
+    },
+    {
+      "nome": "Propoflex Ap60-ext. de Próp. 15% 30ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "30ML",
+      "img": null,
+      "keywords": "propoflex ap60 ext de prop 15 30ml 30ml farma",
+      "categoriaApp": "30ML"
+    },
+    {
+      "nome": "0882 Creatina 300G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "300G",
+      "img": null,
+      "keywords": "0882 creatina 300g 300g farma",
+      "categoriaApp": "300G"
+    },
+    {
+      "nome": "Energ Baly Maçã Verde 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly maca verde 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "Supino Protein Cappuccino 30G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X30G",
+      "img": null,
+      "keywords": "supino protein cappuccino 30g 12x30g farma",
+      "categoriaApp": "12X30G"
+    },
+    {
+      "nome": "Oleo de Rosa Mosqueta 30ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "30ML",
+      "img": null,
+      "keywords": "oleo de rosa mosqueta 30ml 30ml farma",
+      "categoriaApp": "30ML"
+    },
+    {
+      "nome": "Nanopropolis Ext. Propolis Verde 20ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20ML",
+      "img": null,
+      "keywords": "nanopropolis ext propolis verde 20ml 20ml farma",
+      "categoriaApp": "20ML"
+    },
+    {
+      "nome": "8007 Vitamina B12 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "8007 vitamina b12 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "Creatina 100% Monohidra 300G - Pronabol",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "300G",
+      "img": null,
+      "keywords": "creatina 100 monohidra 300g pronabol 300g farma",
+      "categoriaApp": "300G"
+    },
+    {
+      "nome": "4832 Propolis Defense 60X550MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X550MG",
+      "img": null,
+      "keywords": "4832 propolis defense 60x550mg 60x550mg farma",
+      "categoriaApp": "60X550MG"
+    },
+    {
+      "nome": "Barra Nuts e Abacaxi 25G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X25G",
+      "img": null,
+      "keywords": "barra nuts e abacaxi 25g 12x25g farma",
+      "categoriaApp": "12X25G"
+    },
+    {
+      "nome": "Hidratante Corp Pele Seca 400ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "400ML",
+      "img": null,
+      "keywords": "hidratante corp pele seca 400ml 400ml farma",
+      "categoriaApp": "400ML"
+    },
+    {
+      "nome": "Barra Nuts e Frutas Vermelhas 25G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X25G",
+      "img": null,
+      "keywords": "barra nuts e frutas vermelhas 25g 12x25g farma",
+      "categoriaApp": "12X25G"
+    },
+    {
+      "nome": "Diet Shake Baunilha Nutrilatina 420G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "420G",
+      "img": null,
+      "keywords": "diet shake baunilha nutrilatina 420g 420g farma",
+      "categoriaApp": "420G"
+    },
+    {
+      "nome": "Barra Nuts e Pasta de Amendoim 25G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X25G",
+      "img": null,
+      "keywords": "barra nuts e pasta de amendoim 25g 12x25g farma",
+      "categoriaApp": "12X25G"
+    },
+    {
+      "nome": "Barra Pe de Moleque Caramelo Salgado 20G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "16X20G",
+      "img": null,
+      "keywords": "barra pe de moleque caramelo salgado 20g 16x20g farma",
+      "categoriaApp": "16X20G"
+    },
+    {
+      "nome": "Mel Holanda Bisnaga 200G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "200G",
+      "img": null,
+      "keywords": "mel holanda bisnaga 200g 200g farma",
+      "categoriaApp": "200G"
+    },
+    {
+      "nome": "Barra Nuts Coco e Chocolate 25G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X25G",
+      "img": null,
+      "keywords": "barra nuts coco e chocolate 25g 12x25g farma",
+      "categoriaApp": "12X25G"
+    },
+    {
+      "nome": "6126 Magnesio Dimalato 60X650MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X650MG",
+      "img": null,
+      "keywords": "6126 magnesio dimalato 60x650mg 60x650mg farma",
+      "categoriaApp": "60X650MG"
+    },
+    {
+      "nome": "8106 Zinco Quelato Bisglicinato 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "8106 zinco quelato bisglicinato 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "6553 Moviflex Colageno Tipo 2 60X650MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X650MG",
+      "img": null,
+      "keywords": "6553 moviflex colageno tipo 2 60x650mg 60x650mg farma",
+      "categoriaApp": "60X650MG"
+    },
+    {
+      "nome": "Energ Baly Mor e Pêss S/ Açucar 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly mor e pess s acucar 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "6607 Vitamina a 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "6607 vitamina a 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "Barra Pe de Moleque 20G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "16X20G",
+      "img": null,
+      "keywords": "barra pe de moleque 20g 16x20g farma",
+      "categoriaApp": "16X20G"
+    },
+    {
+      "nome": "0806 Resveratrol Trans 30X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "30X500MG",
+      "img": null,
+      "keywords": "0806 resveratrol trans 30x500mg 30x500mg farma",
+      "categoriaApp": "30X500MG"
+    },
+    {
+      "nome": "5075 Curcuma 30 Caps 30X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "30X500MG",
+      "img": null,
+      "keywords": "5075 curcuma 30 caps 30x500mg 30x500mg farma",
+      "categoriaApp": "30X500MG"
+    },
+    {
+      "nome": "Creme Para Os Pes Ultra-hidratante 100G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "100G",
+      "img": null,
+      "keywords": "creme para os pes ultra hidratante 100g 100g farma",
+      "categoriaApp": "100G"
+    },
+    {
+      "nome": "6331 Colageno Hidrolisado 60X1100MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X1100MG",
+      "img": null,
+      "keywords": "6331 colageno hidrolisado 60x1100mg 60x1100mg farma",
+      "categoriaApp": "60X1100MG"
+    },
+    {
+      "nome": "0776 Laranja Moro 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "0776 laranja moro 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "Creme Para Os Pes Hidratar e Afinar 100G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "100G",
+      "img": null,
+      "keywords": "creme para os pes hidratar e afinar 100g 100g farma",
+      "categoriaApp": "100G"
+    },
+    {
+      "nome": "6102 Triptoflex 60X600MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X600MG",
+      "img": null,
+      "keywords": "6102 triptoflex 60x600mg 60x600mg farma",
+      "categoriaApp": "60X600MG"
+    },
+    {
+      "nome": "Diet Shake Chocolate Nutrilatina 420G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "420G",
+      "img": null,
+      "keywords": "diet shake chocolate nutrilatina 420g 420g farma",
+      "categoriaApp": "420G"
+    },
+    {
+      "nome": "Propoflex Kids Spray Tutti-frutti 35ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "35ML",
+      "img": null,
+      "keywords": "propoflex kids spray tutti frutti 35ml 35ml farma",
+      "categoriaApp": "35ML"
+    },
+    {
+      "nome": "Energ Baly Tropical S/ Açucar 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly tropical s acucar 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "Fitas de Clar Dental Roxa - 7 Aplicaçoes",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "2G",
+      "img": null,
+      "keywords": "fitas de clar dental roxa 7 aplicacoes 2g farma",
+      "categoriaApp": "2G"
+    },
+    {
+      "nome": "Diet Shake Banana Nutrilatina 420G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "420G",
+      "img": null,
+      "keywords": "diet shake banana nutrilatina 420g 420g farma",
+      "categoriaApp": "420G"
+    },
+    {
+      "nome": "Energ Baly Morango e Pessego 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly morango e pessego 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "Trio Morango com Chocolate 12X20G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12UNX20G",
+      "img": null,
+      "keywords": "trio morango com chocolate 12x20g 12unx20g farma",
+      "categoriaApp": "12UNX20G"
+    },
+    {
+      "nome": "Protetor Sol Facial Fps 80 - sem Cor 60G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60G",
+      "img": null,
+      "keywords": "protetor sol facial fps 80 sem cor 60g 60g farma",
+      "categoriaApp": "60G"
+    },
+    {
+      "nome": "Choklers Crisp Caramelo C Cho 12X33G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X33G",
+      "img": null,
+      "keywords": "choklers crisp caramelo c cho 12x33g 12x33g farma",
+      "categoriaApp": "12X33G"
+    },
+    {
+      "nome": "6690 Cromo Picolinato 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "6690 cromo picolinato 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "Energ Baly Coco e Açai 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly coco e acai 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "3255 Coenzima Q10 Ultra 60 Comp 500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "3255 coenzima q10 ultra 60 comp 500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "B. Proteica Pistache C Choco Branco 70G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "9UNX70G",
+      "img": null,
+      "keywords": "b proteica pistache c choco branco 70g 9unx70g farma",
+      "categoriaApp": "9UNX70G"
+    },
+    {
+      "nome": "Energ Baly Melancia 2L",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "2 LITROS",
+      "img": null,
+      "keywords": "energ baly melancia 2l 2 litros farma",
+      "categoriaApp": "2 LITROS"
+    },
+    {
+      "nome": "1308 Magnesio Inositol 330G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "330G",
+      "img": null,
+      "keywords": "1308 magnesio inositol 330g 330g farma",
+      "categoriaApp": "330G"
+    },
+    {
+      "nome": "9172 Curcuma Curcumina 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "9172 curcuma curcumina 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "0820 Melatonina Gotas Sab Maracuja 20ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "30ML",
+      "img": null,
+      "keywords": "0820 melatonina gotas sab maracuja 20ml 30ml farma",
+      "categoriaApp": "30ML"
+    },
+    {
+      "nome": "Diet Shake Morango Nutrilatina 420G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "420G",
+      "img": null,
+      "keywords": "diet shake morango nutrilatina 420g 420g farma",
+      "categoriaApp": "420G"
+    },
+    {
+      "nome": "6522 Multi Vitaminico Hemovital 60X750MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X750MG",
+      "img": null,
+      "keywords": "6522 multi vitaminico hemovital 60x750mg 60x750mg farma",
+      "categoriaApp": "60X750MG"
+    },
+    {
+      "nome": "Vitamina C 20% Serum Face e Olhos 30ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "30ML",
+      "img": null,
+      "keywords": "vitamina c 20 serum face e olhos 30ml 30ml farma",
+      "categoriaApp": "30ML"
+    },
+    {
+      "nome": "6744 Total Efa 60X1350MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X1350MG",
+      "img": null,
+      "keywords": "6744 total efa 60x1350mg 60x1350mg farma",
+      "categoriaApp": "60X1350MG"
+    },
+    {
+      "nome": "Trio Banana Aveia e Mel 12X20G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12UNX20G",
+      "img": null,
+      "keywords": "trio banana aveia e mel 12x20g 12unx20g farma",
+      "categoriaApp": "12UNX20G"
+    },
+    {
+      "nome": "6546 Complexo B Max 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "6546 complexo b max 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "Energ Baly 250ML Lata",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "250ML",
+      "img": null,
+      "keywords": "energ baly 250ml lata 250ml farma",
+      "categoriaApp": "250ML"
+    },
+    {
+      "nome": "6720 Omega 3 Pro 18/12 60X1350MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X1350MG",
+      "img": null,
+      "keywords": "6720 omega 3 pro 18 12 60x1350mg 60x1350mg farma",
+      "categoriaApp": "60X1350MG"
+    },
+    {
+      "nome": "Loçao P/ Afinar Os Pes 30ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "30ML",
+      "img": null,
+      "keywords": "locao p afinar os pes 30ml 30ml farma",
+      "categoriaApp": "30ML"
+    },
+    {
+      "nome": "Manteiga de Cacau C/ Propolis 12UN",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "42G",
+      "img": null,
+      "keywords": "manteiga de cacau c propolis 12un 42g farma",
+      "categoriaApp": "42G"
+    },
+    {
+      "nome": "Trio Brigadeiro 12X20G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12UNX20G",
+      "img": null,
+      "keywords": "trio brigadeiro 12x20g 12unx20g farma",
+      "categoriaApp": "12UNX20G"
+    },
+    {
+      "nome": "6676 Calcio Citrato Malato 60X1200MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X1200MG",
+      "img": null,
+      "keywords": "6676 calcio citrato malato 60x1200mg 60x1200mg farma",
+      "categoriaApp": "60X1200MG"
+    },
+    {
+      "nome": "9554 Omega 3 Ultra 50/20 60X1350MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X1350MG",
+      "img": null,
+      "keywords": "9554 omega 3 ultra 50 20 60x1350mg 60x1350mg farma",
+      "categoriaApp": "60X1350MG"
+    },
+    {
+      "nome": "Energ Baly Tadaly 2L",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "2 LITROS",
+      "img": null,
+      "keywords": "energ baly tadaly 2l 2 litros farma",
+      "categoriaApp": "2 LITROS"
+    },
+    {
+      "nome": "Choklers Crisp Cookies 12X33G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X33G",
+      "img": null,
+      "keywords": "choklers crisp cookies 12x33g 12x33g farma",
+      "categoriaApp": "12X33G"
+    },
+    {
+      "nome": "L - Arginina Performance 60X625MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X625MG",
+      "img": null,
+      "keywords": "l arginina performance 60x625mg 60x625mg farma",
+      "categoriaApp": "60X625MG"
+    },
+    {
+      "nome": "Kit Scudo P/ Piolho - Arruda e Citronela",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "437ML",
+      "img": null,
+      "keywords": "kit scudo p piolho arruda e citronela 437ml farma",
+      "categoriaApp": "437ML"
+    },
+    {
+      "nome": "6713 Oleo de Primula 60X1340MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X1340MG",
+      "img": null,
+      "keywords": "6713 oleo de primula 60x1340mg 60x1340mg farma",
+      "categoriaApp": "60X1340MG"
+    },
+    {
+      "nome": "9424 Oleo de Alho Desodorizado 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "9424 oleo de alho desodorizado 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "0998 Fiberliv 7 Fibras 250G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "250G",
+      "img": null,
+      "keywords": "0998 fiberliv 7 fibras 250g 250g farma",
+      "categoriaApp": "250G"
+    },
+    {
+      "nome": "Whey Sache Baunilha Nutrilatina 300G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "10UNX30G",
+      "img": null,
+      "keywords": "whey sache baunilha nutrilatina 300g 10unx30g farma",
+      "categoriaApp": "10UNX30G"
+    },
+    {
+      "nome": "9158 Melatonina 120X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "120X500MG",
+      "img": null,
+      "keywords": "9158 melatonina 120x500mg 120x500mg farma",
+      "categoriaApp": "120X500MG"
+    },
+    {
+      "nome": "Creme Facial Clareador Para Marcas 50G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "50G",
+      "img": null,
+      "keywords": "creme facial clareador para marcas 50g 50g farma",
+      "categoriaApp": "50G"
+    },
+    {
+      "nome": "Relampago Energetico 10ML Display C/ 24U",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "240ML",
+      "img": null,
+      "keywords": "relampago energetico 10ml display c 24u 240ml farma",
+      "categoriaApp": "240ML"
+    },
+    {
+      "nome": "1391 Ora Pro Nobis Sabor Limao 150G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "150G",
+      "img": null,
+      "keywords": "1391 ora pro nobis sabor limao 150g 150g farma",
+      "categoriaApp": "150G"
+    },
+    {
+      "nome": "Nanopropolis Ext. Propolis Vermelha 20ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20ML",
+      "img": null,
+      "keywords": "nanopropolis ext propolis vermelha 20ml 20ml farma",
+      "categoriaApp": "20ML"
+    },
+    {
+      "nome": "Manteiga de Cacau C/ Propolis 50UN",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "175G",
+      "img": null,
+      "keywords": "manteiga de cacau c propolis 50un 175g farma",
+      "categoriaApp": "175G"
+    },
+    {
+      "nome": "Choklers Morango C/ Nibs de Cacau 12X40G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X40G",
+      "img": null,
+      "keywords": "choklers morango c nibs de cacau 12x40g 12x40g farma",
+      "categoriaApp": "12X40G"
+    },
+    {
+      "nome": "Choklers Banoffe 12X40G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X40G",
+      "img": null,
+      "keywords": "choklers banoffe 12x40g 12x40g farma",
+      "categoriaApp": "12X40G"
+    },
+    {
+      "nome": "Balas Diet Halfresh Sabor Mentol 192G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "192G",
+      "img": null,
+      "keywords": "balas diet halfresh sabor mentol 192g 192g farma",
+      "categoriaApp": "192G"
+    },
+    {
+      "nome": "Manteiga de Cacau C/ Propolis 3,5G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "3,5G",
+      "img": null,
+      "keywords": "manteiga de cacau c propolis 3 5g 3 5g farma",
+      "categoriaApp": "3,5G"
+    },
+    {
+      "nome": "Detergente Pó Ace Cartucho 2,2KG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "2,2KG",
+      "img": null,
+      "keywords": "detergente po ace cartucho 2 2kg 2 2kg farma",
+      "categoriaApp": "2,2KG"
+    },
+    {
+      "nome": "Bastao Acne Secativo 5G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "5G",
+      "img": null,
+      "keywords": "bastao acne secativo 5g 5g farma",
+      "categoriaApp": "5G"
+    },
+    {
+      "nome": "Whey Sache Choco Belga Nutrilatina 310G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "10UNX31G",
+      "img": null,
+      "keywords": "whey sache choco belga nutrilatina 310g 10unx31g farma",
+      "categoriaApp": "10UNX31G"
+    },
+    {
+      "nome": "6560 Cloreto de Magnesio 60X650MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X650MG",
+      "img": null,
+      "keywords": "6560 cloreto de magnesio 60x650mg 60x650mg farma",
+      "categoriaApp": "60X650MG"
+    },
+    {
+      "nome": "Mix Nutri Snack Bacon 50G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "50G",
+      "img": null,
+      "keywords": "mix nutri snack bacon 50g 50g farma",
+      "categoriaApp": "50G"
+    },
+    {
+      "nome": "Mix Nutri Snack 4 Queijos 50G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "50G",
+      "img": null,
+      "keywords": "mix nutri snack 4 queijos 50g 50g farma",
+      "categoriaApp": "50G"
+    },
+    {
+      "nome": "Mix Nutri Snack Requeijão 50G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "50G",
+      "img": null,
+      "keywords": "mix nutri snack requeijao 50g 50g farma",
+      "categoriaApp": "50G"
+    },
+    {
+      "nome": "Hidra Facial e Corp Pele Extrasseca 60G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60G",
+      "img": null,
+      "keywords": "hidra facial e corp pele extrasseca 60g 60g farma",
+      "categoriaApp": "60G"
+    },
+    {
+      "nome": "Trio Coco com Chocolate 12X20G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12UNX20G",
+      "img": null,
+      "keywords": "trio coco com chocolate 12x20g 12unx20g farma",
+      "categoriaApp": "12UNX20G"
+    },
+    {
+      "nome": "Energ Baly 2L",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "2 LITROS",
+      "img": null,
+      "keywords": "energ baly 2l 2 litros farma",
+      "categoriaApp": "2 LITROS"
+    },
+    {
+      "nome": "Vitamina C + Zinco Quelato 60X750MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X750MG",
+      "img": null,
+      "keywords": "vitamina c zinco quelato 60x750mg 60x750mg farma",
+      "categoriaApp": "60X750MG"
+    },
+    {
+      "nome": "1773 Vitamina D3 + K2 em Gotas",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20ML",
+      "img": null,
+      "keywords": "1773 vitamina d3 k2 em gotas 20ml farma",
+      "categoriaApp": "20ML"
+    },
+    {
+      "nome": "0813 Cafeina 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "0813 cafeina 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "100% Whey Banoffe 900G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "900G",
+      "img": null,
+      "keywords": "100 whey banoffe 900g 900g farma",
+      "categoriaApp": "900G"
+    },
+    {
+      "nome": "7031 Cobre Quelato Bisglicinato 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "7031 cobre quelato bisglicinato 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "Gel Esfoliante Para Os Pes 100G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "100G",
+      "img": null,
+      "keywords": "gel esfoliante para os pes 100g 100g farma",
+      "categoriaApp": "100G"
+    },
+    {
+      "nome": "2644 Oleo de Semente de Abobora 1400MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X1400MG",
+      "img": null,
+      "keywords": "2644 oleo de semente de abobora 1400mg 60x1400mg farma",
+      "categoriaApp": "60X1400MG"
+    },
+    {
+      "nome": "Mel Organico 300G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "300G",
+      "img": null,
+      "keywords": "mel organico 300g 300g farma",
+      "categoriaApp": "300G"
+    },
+    {
+      "nome": "Mel Puro Bisnaga 250G - Apis Vida",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "250G",
+      "img": null,
+      "keywords": "mel puro bisnaga 250g apis vida 250g farma",
+      "categoriaApp": "250G"
+    },
+    {
+      "nome": "0790 Beta Glucana 30 Caps 30X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "30X500MG",
+      "img": null,
+      "keywords": "0790 beta glucana 30 caps 30x500mg 30x500mg farma",
+      "categoriaApp": "30X500MG"
+    },
+    {
+      "nome": "Fitas de Clar Dental Roxa 12 Aplicaçoes",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12G",
+      "img": null,
+      "keywords": "fitas de clar dental roxa 12 aplicacoes 12g farma",
+      "categoriaApp": "12G"
+    },
+    {
+      "nome": "8014 Licopeno de Tomate 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "8014 licopeno de tomate 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "1780 Vitamina D3 20ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "20ML",
+      "img": null,
+      "keywords": "1780 vitamina d3 20ml 20ml farma",
+      "categoriaApp": "20ML"
+    },
+    {
+      "nome": "Balas Diet Halfresh Sabor Morango192g",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "192G",
+      "img": null,
+      "keywords": "balas diet halfresh sabor morango192g 192g farma",
+      "categoriaApp": "192G"
+    },
+    {
+      "nome": "6324 Extrato de Propolis 60X550MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X550MG",
+      "img": null,
+      "keywords": "6324 extrato de propolis 60x550mg 60x550mg farma",
+      "categoriaApp": "60X550MG"
+    },
+    {
+      "nome": "6348 Cranberry 60X1100MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X1100MG",
+      "img": null,
+      "keywords": "6348 cranberry 60x1100mg 60x1100mg farma",
+      "categoriaApp": "60X1100MG"
+    },
+    {
+      "nome": "Choklers Chocrante 12X40G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X40G",
+      "img": null,
+      "keywords": "choklers chocrante 12x40g 12x40g farma",
+      "categoriaApp": "12X40G"
+    },
+    {
+      "nome": "Creme Facial Preventivo As Rugas 50G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "50G",
+      "img": null,
+      "keywords": "creme facial preventivo as rugas 50g 50g farma",
+      "categoriaApp": "50G"
+    },
+    {
+      "nome": "Energ Baly Floripa Spritz 250ML Lata",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "250ML",
+      "img": null,
+      "keywords": "energ baly floripa spritz 250ml lata 250ml farma",
+      "categoriaApp": "250ML"
+    },
+    {
+      "nome": "Nectar Marata Laranja 1L",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "1L",
+      "img": null,
+      "keywords": "nectar marata laranja 1l 1l farma",
+      "categoriaApp": "1L"
+    },
+    {
+      "nome": "Mel T Monica Organico 300G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "300G",
+      "img": null,
+      "keywords": "mel t monica organico 300g 300g farma",
+      "categoriaApp": "300G"
+    },
+    {
+      "nome": "Kit Acne Tratamento em Casa 230ML / 5G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "230ML / 5G",
+      "img": null,
+      "keywords": "kit acne tratamento em casa 230ml 5g 230ml 5g farma",
+      "categoriaApp": "230ML / 5G"
+    },
+    {
+      "nome": "Mel T Monica Laranjeira 300G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "300G",
+      "img": null,
+      "keywords": "mel t monica laranjeira 300g 300g farma",
+      "categoriaApp": "300G"
+    },
+    {
+      "nome": "100% Whey Cookies And Cream 900G'",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "900G",
+      "img": null,
+      "keywords": "100 whey cookies and cream 900g 900g farma",
+      "categoriaApp": "900G"
+    },
+    {
+      "nome": "6157 Vitamina D3 Colecalciferol 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "6157 vitamina d3 colecalciferol 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "0721 Metil Folax 60X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X500MG",
+      "img": null,
+      "keywords": "0721 metil folax 60x500mg 60x500mg farma",
+      "categoriaApp": "60X500MG"
+    },
+    {
+      "nome": "Energ Baly Morango e Pessego 2L",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "2 LITROS",
+      "img": null,
+      "keywords": "energ baly morango e pessego 2l 2 litros farma",
+      "categoriaApp": "2 LITROS"
+    },
+    {
+      "nome": "Energ Cereja Baly sem Açucar 2L",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "2 LITROS",
+      "img": null,
+      "keywords": "energ cereja baly sem acucar 2l 2 litros farma",
+      "categoriaApp": "2 LITROS"
+    },
+    {
+      "nome": "Energ Maçã Verde 2L",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "2 LITROS",
+      "img": null,
+      "keywords": "energ maca verde 2l 2 litros farma",
+      "categoriaApp": "2 LITROS"
+    },
+    {
+      "nome": "Protetor Sol Facial Fps 80 -bege Med 40G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "40G",
+      "img": null,
+      "keywords": "protetor sol facial fps 80 bege med 40g 40g farma",
+      "categoriaApp": "40G"
+    },
+    {
+      "nome": "Protetor Sol Facial Fps 80 -bege Nat 40G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "40G",
+      "img": null,
+      "keywords": "protetor sol facial fps 80 bege nat 40g 40g farma",
+      "categoriaApp": "40G"
+    },
+    {
+      "nome": "Relampago Energetico 10ML Display C/ 48",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "480ML",
+      "img": null,
+      "keywords": "relampago energetico 10ml display c 48 480ml farma",
+      "categoriaApp": "480ML"
+    },
+    {
+      "nome": "Nectar Marata Maracuja 200ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "200ML",
+      "img": null,
+      "keywords": "nectar marata maracuja 200ml 200ml farma",
+      "categoriaApp": "200ML"
+    },
+    {
+      "nome": "5082 Procran Cranberry 30X500MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "30X500MG",
+      "img": null,
+      "keywords": "5082 procran cranberry 30x500mg 30x500mg farma",
+      "categoriaApp": "30X500MG"
+    },
+    {
+      "nome": "Choklers Cookies 12X40G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X40G",
+      "img": null,
+      "keywords": "choklers cookies 12x40g 12x40g farma",
+      "categoriaApp": "12X40G"
+    },
+    {
+      "nome": "Choklers Cheesecake 12X40G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X40G",
+      "img": null,
+      "keywords": "choklers cheesecake 12x40g 12x40g farma",
+      "categoriaApp": "12X40G"
+    },
+    {
+      "nome": "Choklers Pistache 12X40G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "12X40G",
+      "img": null,
+      "keywords": "choklers pistache 12x40g 12x40g farma",
+      "categoriaApp": "12X40G"
+    },
+    {
+      "nome": "6058 Msm Enxofre Organico 60X600MG",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "60X600MG",
+      "img": null,
+      "keywords": "6058 msm enxofre organico 60x600mg 60x600mg farma",
+      "categoriaApp": "60X600MG"
+    },
+    {
+      "nome": "Nectar Marata Uva 1L",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "1L",
+      "img": null,
+      "keywords": "nectar marata uva 1l 1l farma",
+      "categoriaApp": "1L"
+    },
+    {
+      "nome": "Nectar Marata Maracuja 1L",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "1L",
+      "img": null,
+      "keywords": "nectar marata maracuja 1l 1l farma",
+      "categoriaApp": "1L"
+    },
+    {
+      "nome": "Nectar Marata Pessego 1L",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "1L",
+      "img": null,
+      "keywords": "nectar marata pessego 1l 1l farma",
+      "categoriaApp": "1L"
+    },
+    {
+      "nome": "Sup. Alim. Baly Kids Tutti Frutti 220ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "220ML",
+      "img": null,
+      "keywords": "sup alim baly kids tutti frutti 220ml 220ml farma",
+      "categoriaApp": "220ML"
+    },
+    {
+      "nome": "100% Whey Chocolate e Avela 900G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "900G",
+      "img": null,
+      "keywords": "100 whey chocolate e avela 900g 900g farma",
+      "categoriaApp": "900G"
+    },
+    {
+      "nome": "Sup. Alim. Baly Kids Morango 220ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "220ML",
+      "img": null,
+      "keywords": "sup alim baly kids morango 220ml 220ml farma",
+      "categoriaApp": "220ML"
+    },
+    {
+      "nome": "Geleia Baldoni Morango Pote 270G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "270G",
+      "img": null,
+      "keywords": "geleia baldoni morango pote 270g 270g farma",
+      "categoriaApp": "270G"
+    },
+    {
+      "nome": "Geleia Baldoni Frutas Vermelhas Pote 270",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "270G",
+      "img": null,
+      "keywords": "geleia baldoni frutas vermelhas pote 270 270g farma",
+      "categoriaApp": "270G"
+    },
+    {
+      "nome": "Geleia Baldoni Abacaxi Pote 270G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "270G",
+      "img": null,
+      "keywords": "geleia baldoni abacaxi pote 270g 270g farma",
+      "categoriaApp": "270G"
+    },
+    {
+      "nome": "Geleia Baldoni Frutas Amarelas Pote 270G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "270G",
+      "img": null,
+      "keywords": "geleia baldoni frutas amarelas pote 270g 270g farma",
+      "categoriaApp": "270G"
+    },
+    {
+      "nome": "Energ Frutas Tropicais 2L",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "2 LITROS",
+      "img": null,
+      "keywords": "energ frutas tropicais 2l 2 litros farma",
+      "categoriaApp": "2 LITROS"
+    },
+    {
+      "nome": "Nectar Marata Uva 200ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "200ML",
+      "img": null,
+      "keywords": "nectar marata uva 200ml 200ml farma",
+      "categoriaApp": "200ML"
+    },
+    {
+      "nome": "Nectar Marata Laranja 200ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "200ML",
+      "img": null,
+      "keywords": "nectar marata laranja 200ml 200ml farma",
+      "categoriaApp": "200ML"
+    },
+    {
+      "nome": "Nectar Marata Caju 200ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "200ML",
+      "img": null,
+      "keywords": "nectar marata caju 200ml 200ml farma",
+      "categoriaApp": "200ML"
+    },
+    {
+      "nome": "Sabonete Acne Liquido Facial 110ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "110ML",
+      "img": null,
+      "keywords": "sabonete acne liquido facial 110ml 110ml farma",
+      "categoriaApp": "110ML"
+    },
+    {
+      "nome": "Mel Organica Sache 80G - Apis Vida",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "80G",
+      "img": null,
+      "keywords": "mel organica sache 80g apis vida 80g farma",
+      "categoriaApp": "80G"
+    },
+    {
+      "nome": "Azeitona Verde Sache C/ Caroço 100G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "160G",
+      "img": null,
+      "keywords": "azeitona verde sache c caroco 100g 160g farma",
+      "categoriaApp": "160G"
+    },
+    {
+      "nome": "Energ Baly Cereja 473ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "473 ML",
+      "img": null,
+      "keywords": "energ baly cereja 473ml 473 ml farma",
+      "categoriaApp": "473 ML"
+    },
+    {
+      "nome": "Energ Baly Champanhe 250ML Lata",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "250ML",
+      "img": null,
+      "keywords": "energ baly champanhe 250ml lata 250ml farma",
+      "categoriaApp": "250ML"
+    },
+    {
+      "nome": "Sup. Alim. Baly Kids Laranja 220ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "220ML",
+      "img": null,
+      "keywords": "sup alim baly kids laranja 220ml 220ml farma",
+      "categoriaApp": "220ML"
+    },
+    {
+      "nome": "Suco Sumo Acai 300 Ml",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "6UNX300ML",
+      "img": null,
+      "keywords": "suco sumo acai 300 ml 6unx300ml farma",
+      "categoriaApp": "6UNX300ML"
+    },
+    {
+      "nome": "Esfoliante Corporal Melancia 200G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "200G",
+      "img": null,
+      "keywords": "esfoliante corporal melancia 200g 200g farma",
+      "categoriaApp": "200G"
+    },
+    {
+      "nome": "Mix Nutri Snack Barbecue 50G",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "50G",
+      "img": null,
+      "keywords": "mix nutri snack barbecue 50g 50g farma",
+      "categoriaApp": "50G"
+    },
+    {
+      "nome": "Sup. Alim. Baly Kids Melancia 220ML",
+      "categoria": "farma",
+      "categoriaTitulo": "Farma",
+      "descricao": "220ML",
+      "img": null,
+      "keywords": "sup alim baly kids melancia 220ml 220ml farma",
+      "categoriaApp": "220ML"
+    }
+  ]
+}

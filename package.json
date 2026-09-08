@@ -1,0 +1,11 @@
+{
+  "name": "distririo-site",
+  "private": true,
+  "description": "Site institucional e catálogo da Distri Rio (GitHub Pages).",
+  "scripts": {
+    "build": "node tools/gerar.js",
+    "catalogo": "node tools/gerar-produtos-json.js && node tools/gerar.js",
+    "checar": "node tools/checar-links.js && node tools/orfas.js",
+    "imagens": "python tools/webp-produtos.py"
+  }
+}

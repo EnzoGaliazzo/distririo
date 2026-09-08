@@ -1,0 +1,74 @@
+name: Verificação do site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-em-dia:
+    name: Build gerado está em dia
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Se alguém editar o catálogo direto no HTML em vez de em data/produtos.json,
+      # rodar o gerador produz diferença e o job falha.
+      - name: Regerar a partir de data/produtos.json
+        run: node tools/gerar.js
+
+      - name: Conferir se nada ficou fora de sincronia
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::O HTML gerado está diferente do que o build produz."
+            echo "Rode 'node tools/gerar.js' e comite o resultado."
+            git --no-pager diff --stat
+            exit 1
+          fi
+          echo "Tudo em dia."
+
+  imagens-e-links:
+    name: Imagens e links internos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Nenhuma imagem órfã
+        run: |
+          node tools/orfas.js | tee /tmp/orfas.txt
+          grep -q 'órfãs: 0' /tmp/orfas.txt || { echo "::error::Há imagens sem referência."; exit 1; }
+
+      - name: Nenhum caminho de imagem quebrado
+        run: node tools/checar-links.js
+
+  lighthouse:
+    name: Lighthouse (home e catálogo)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Subir servidor estático
+        run: npx --yes http-server . -p 4173 --silent &
+
+      - name: Esperar o servidor
+        run: npx --yes wait-on http://127.0.0.1:4173/index.html
+
+      - name: Rodar Lighthouse
+        run: |
+          npx --yes @lhci/cli@0.14.x autorun \
+            --collect.url=http://127.0.0.1:4173/index.html \
+            --collect.url=http://127.0.0.1:4173/loja.html \
+            --collect.numberOfRuns=1 \
+            --upload.target=temporary-public-storage \
+            --assert.assertions.categories:performance=off \
+            --assert.assertions.categories:accessibility=off
