@@ -5,7 +5,7 @@ const path = require('path');
 const B = require('./build.js');
 
 const { root, SITE, dados, ler, gravar, esc, indentar,
-    PAGINAS, aplicarPartials, montarCatalogo, paginaProduto, textoBusca } = B;
+    PAGINAS, aplicarPartials, montarCatalogo, montarFiltros, paginaProduto, textoBusca } = B;
 
 const GA_ID = 'G-8MYVJZMB64';
 
@@ -86,12 +86,13 @@ function trocarCatalogo(html) {
     const { chips, secoes } = montarCatalogo();
     const bloco = [
         MARCA_INI,
-        '        <nav class="category-bar" aria-label="Categorias do catálogo">',
+        montarFiltros(),
+        '',
+        '        <nav class="category-bar" aria-label="Ir para uma categoria">',
         chips,
         '        </nav>',
         '',
         '        <section class="section section-catalog">',
-        '            <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>',
         '            <p class="no-results" id="noResults" hidden>Nenhum produto encontrado para essa busca.</p>',
         '',
         secoes,

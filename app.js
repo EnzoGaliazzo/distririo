@@ -897,16 +897,50 @@
             return { el: c, texto: (c.getAttribute('data-name') + ' ' + c.getAttribute('data-desc') + ' ' + (c.getAttribute('data-sku') || '')).toLowerCase() };
         });
 
+        // Os três filtros do painel, combinados entre si e com a busca por texto.
+        var selMarca = document.getElementById('filtroMarca');
+        var selCategoria = document.getElementById('filtroCategoria');
+        var chkFoto = document.getElementById('filtroComFoto');
+        var btnLimpar = document.getElementById('limparFiltros');
+
+        function filtrosAtivos() {
+            return {
+                marca: selMarca ? selMarca.value : '',
+                categoria: selCategoria ? selCategoria.value : '',
+                soComFoto: chkFoto ? chkFoto.checked : false
+            };
+        }
+
+        function descreverFiltros(f, termo) {
+            var partes = [];
+            if (termo) partes.push('"' + termo + '"');
+            if (f.marca) partes.push('marca ' + f.marca);
+            if (f.categoria && selCategoria) {
+                var op = selCategoria.options[selCategoria.selectedIndex];
+                partes.push('categoria ' + op.textContent.replace(/\s*\(\d+\)$/, ''));
+            }
+            if (f.soComFoto) partes.push('só com foto');
+            return partes.join(' · ');
+        }
+
         function filtrar(termo, rolar) {
             var t = normalizar(termo.trim());
+            var f = filtrosAtivos();
+            var temFiltro = !!(t || f.marca || f.categoria || f.soComFoto);
             var visiveis = 0;
             var primeiraSecao = null;
 
+            if (btnLimpar) btnLimpar.hidden = !temFiltro;
+
             secoes.forEach(function (secao) {
                 var achou = false;
+                var foraDaCategoria = f.categoria && secao.id !== f.categoria;
                 secao.querySelectorAll('.product-card[data-name]').forEach(function (card) {
                     var item = itens.find(function (i) { return i.el === card; });
-                    var bate = !t || (item && item.texto.indexOf(t) !== -1);
+                    var bate = !foraDaCategoria
+                        && (!t || (item && item.texto.indexOf(t) !== -1))
+                        && (!f.marca || card.getAttribute('data-marca') === f.marca)
+                        && (!f.soComFoto || card.getAttribute('data-foto') === 'sim');
                     card.hidden = !bate;
                     if (bate) { achou = true; visiveis++; }
                 });
@@ -918,7 +952,7 @@
                 var contagem = secao.querySelector('.category-count');
                 if (contagem) {
                     if (!contagem.dataset.total) contagem.dataset.total = contagem.textContent;
-                    if (t) {
+                    if (temFiltro) {
                         var n = secao.querySelectorAll('.product-card:not([hidden])').length;
                         contagem.textContent = n + (n === 1 ? ' produto encontrado' : ' produtos encontrados');
                     } else {
@@ -932,16 +966,17 @@
 
             if (semResultado) semResultado.hidden = visiveis !== 0;
             if (status) {
-                status.textContent = !t
+                var descricao = descreverFiltros(f, termo.trim());
+                status.textContent = !temFiltro
                     ? ''
                     : visiveis === 0
-                        ? 'Nenhum produto encontrado para "' + termo.trim() + '".'
-                        : visiveis + (visiveis === 1 ? ' produto encontrado' : ' produtos encontrados') + ' para "' + termo.trim() + '".';
+                        ? 'Nenhum produto encontrado para ' + descricao + '.'
+                        : visiveis + (visiveis === 1 ? ' produto' : ' produtos') + ' para ' + descricao + '.';
             }
 
             // Filtrar sem rolar deixava o visitante olhando para a parte da
             // página que acabou de esvaziar.
-            if (rolar && t && primeiraSecao) {
+            if (rolar && temFiltro && primeiraSecao) {
                 rolarAte(primeiraSecao);
             }
             return visiveis;
@@ -965,6 +1000,39 @@
         if (campo) {
             campo.addEventListener('input', debounce(function () { filtrar(campo.value, false); }, 140));
         }
+
+        // Painel de filtros: qualquer mudança refaz a filtragem e leva o
+        // visitante para o primeiro resultado.
+        [selMarca, selCategoria, chkFoto].forEach(function (ctrl) {
+            if (!ctrl) return;
+            ctrl.addEventListener('change', function () {
+                filtrar(campo ? campo.value : '', true);
+            });
+        });
+
+        if (btnLimpar) {
+            btnLimpar.addEventListener('click', function () {
+                if (selMarca) selMarca.value = '';
+                if (selCategoria) selCategoria.value = '';
+                if (chkFoto) chkFoto.checked = false;
+                if (campo) campo.value = '';
+                filtrar('', false);
+                rolarAte(document.querySelector('.filtros') || 0);
+            });
+        }
+
+        // Clicar num chip de categoria também alimenta o filtro, para os dois
+        // não contarem histórias diferentes.
+        chips.forEach(function (chip) {
+            chip.addEventListener('click', function () {
+                if (!selCategoria) return;
+                var id = (chip.getAttribute('href') || '').slice(1);
+                if (selCategoria.value && selCategoria.value !== id) {
+                    selCategoria.value = '';
+                    filtrar(campo ? campo.value : '', false);
+                }
+            });
+        });
 
         // Estado de "nada encontrado" com saída, em vez de um parágrafo solto.
         if (semResultado && !semResultado.querySelector('.no-results-acoes')) {

@@ -113,6 +113,8 @@ function cartao(p, indice, base) {
     const detalhe = [p.linha, (p.embalagens || []).join(' · ')].filter(Boolean);
     const linhas = [
         '<article class="product-card" data-name="' + esc(p.nome) + '" data-desc="' + esc(textoBusca(p)) + '"' +
+            ' data-marca="' + esc(p.marca || '') + '" data-cat="' + esc(p.categoria) + '"' +
+            ' data-foto="' + (p.img ? 'sim' : 'nao') + '"' +
             (p.skus && p.skus.length ? ' data-sku="' + esc(p.skus.join(' ')) + '"' : '') + '>',
         '    <a class="product-card-link" href="' + base + 'produto/' + p.id + '.html">',
         '        <div class="product-thumb">',
@@ -126,6 +128,49 @@ function cartao(p, indice, base) {
     });
     linhas.push('        </div>', '    </a>', '</article>');
     return indentar(linhas.join('\n'), 20);
+}
+
+// Painel de filtros: marca, categoria e "só com foto", montados a partir do
+// próprio catálogo para nunca desencontrar dele.
+function montarFiltros() {
+    const marcas = [...new Set(dados.produtos.map(p => p.marca).filter(Boolean))]
+        .sort((a, b) => a.localeCompare(b, 'pt'));
+
+    const opcoesMarca = marcas
+        .map(m => '                    <option value="' + esc(m) + '">' + esc(m) + '</option>')
+        .join('\n');
+
+    const opcoesCategoria = dados.categorias
+        .map(c => '                    <option value="' + c.id + '">' + esc(c.titulo) +
+            ' (' + (porCategoria.get(c.id) || []).length + ')</option>')
+        .join('\n');
+
+    return [
+        '        <section class="filtros" aria-label="Filtrar o catálogo">',
+        '            <div class="filtros-campos">',
+        '                <label class="filtro">',
+        '                    <span>Marca</span>',
+        '                    <select id="filtroMarca">',
+        '                        <option value="">Todas as marcas</option>',
+        opcoesMarca.replace(/^ {20}/gm, '                        '),
+        '                    </select>',
+        '                </label>',
+        '                <label class="filtro">',
+        '                    <span>Categoria</span>',
+        '                    <select id="filtroCategoria">',
+        '                        <option value="">Todas as categorias</option>',
+        opcoesCategoria.replace(/^ {20}/gm, '                        '),
+        '                    </select>',
+        '                </label>',
+        '                <label class="filtro filtro-marcavel">',
+        '                    <input type="checkbox" id="filtroComFoto">',
+        '                    <span>Só produtos com foto</span>',
+        '                </label>',
+        '                <button type="button" class="filtro-limpar" id="limparFiltros" hidden>Limpar filtros</button>',
+        '            </div>',
+        '            <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>',
+        '        </section>',
+    ].join('\n');
 }
 
 function montarCatalogo() {
@@ -253,5 +298,5 @@ function paginaProduto(p, tpl) {
 module.exports = {
     root, SITE, ZAP, dados, ler, gravar, esc, semAcento, indentar,
     PAGINAS, montarCabecalho, montarRodape, aplicarPartials,
-    montarCatalogo, paginaProduto, textoBusca, porCategoria,
+    montarCatalogo, montarFiltros, paginaProduto, textoBusca, porCategoria,
 };

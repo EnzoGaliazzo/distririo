@@ -1,4 +1,7 @@
 :root {
+    /* Campos, barras de rolagem e menus nativos tambem em claro. */
+    color-scheme: light;
+
     --red: #e01e24;
     --red-dark: #b3151a;
     /* --red-text: vermelho aprovado em AA para texto pequeno sobre os neutros claros. */
@@ -1027,7 +1030,9 @@ main {
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    /* auto-fill, nao auto-fit: com auto-fit uma categoria de um produto so
+       esticava o cartao pela linha inteira e a foto ficava perdida no meio. */
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1.5rem;
 }
 
@@ -2520,31 +2525,12 @@ main {
     navigation: auto;
 }
 
+/* O site é claro, ponto. O modo escuro automático foi removido a pedido:
+   quem está com o Windows no tema escuro via um site diferente do que a
+   marca é, e a paleta clara é a que foi desenhada e conferida em AA. */
 @media (prefers-color-scheme: dark) {
     :root {
-        --dark: #eef0f3;
-        --ink: #0e0f14;
-        --gray-800: #cfd4db;
-        --gray-100: #191b1f;
-        --gray-300: #2e323a;
-        --white: #1e2126;
-        --red: #f2565b;
-        --red-dark: #ff8a8e;
-        --red-text: #ff9a9e;
-        --texto-suave: #c2c8d0;
-        --texto-fraco: #99a1ac;
-        --focus: #ffd166;
-        --shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
-        --shadow-lg: 0 14px 32px rgba(0, 0, 0, 0.6);
-    }
-
-    body {
-        background: #131519;
-        color: #e6e9ed;
-    }
-
-    .site-header {
-        background: #0b0c10;
+        color-scheme: light;
     }
 }
 
@@ -2942,5 +2928,131 @@ main {
     .header-cta {
         padding: 0.5rem 0.7rem;
         font-size: 0.78rem;
+    }
+}
+
+/* =====================================================================
+   Painel de filtros do catálogo
+   ===================================================================== */
+
+.filtros {
+    position: sticky;
+    top: var(--header-total);
+    z-index: 21;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.9rem 1.5rem;
+    background: color-mix(in srgb, var(--gray-100) 94%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gray-300);
+}
+
+.filtros-campos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem 1rem;
+}
+
+.filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
+    flex: 1 1 200px;
+}
+
+.filtro > span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--texto-fraco);
+}
+
+.filtro select {
+    font: inherit;
+    font-size: 0.92rem;
+    color: var(--dark);
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+    border-radius: 10px;
+    padding: 0.55rem 0.7rem;
+    width: 100%;
+    cursor: pointer;
+}
+
+.filtro select:hover {
+    border-color: var(--texto-fraco);
+}
+
+.filtro-marcavel {
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.6rem;
+    cursor: pointer;
+}
+
+.filtro-marcavel span {
+    font-size: 0.9rem;
+    color: var(--texto-suave);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 500;
+}
+
+.filtro-marcavel input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--red);
+    cursor: pointer;
+}
+
+.filtro-limpar {
+    flex: 0 0 auto;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--red-text);
+    background: transparent;
+    border: 1px solid var(--gray-300);
+    border-radius: 999px;
+    padding: 0.5rem 0.95rem;
+    margin-bottom: 0.35rem;
+    cursor: pointer;
+}
+
+.filtro-limpar:hover {
+    border-color: var(--red);
+    background: var(--white);
+}
+
+.filtros .search-status {
+    margin: 0.6rem 0 0;
+}
+
+/* A barra de categorias deixa de ser sticky: quem fixa agora é o painel,
+   e duas faixas grudadas no topo comiam metade da tela no celular. */
+.category-bar {
+    position: static;
+    backdrop-filter: none;
+    background: transparent;
+    padding-top: 0.35rem;
+    padding-bottom: 0.9rem;
+}
+
+@media (max-width: 720px) {
+    .filtros {
+        padding: 0.75rem 1rem;
+    }
+
+    .filtro {
+        flex: 1 1 100%;
+    }
+
+    .filtros-campos {
+        gap: 0.6rem 0.75rem;
     }
 }
