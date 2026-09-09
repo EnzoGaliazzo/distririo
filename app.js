@@ -179,11 +179,28 @@
     // Mede cliques em links do WhatsApp (só reporta se o gtag existir de fato).
     document.addEventListener('click', function (e) {
         var link = e.target.closest && e.target.closest('a[href*="wa.me/"]');
-        if (!link || !window.DR_GA_CARREGADO || typeof gtag !== 'function') return;
-        gtag('event', 'whatsapp_click', {
+        if (!link) return;
+        medir('whatsapp_click', {
             link_id: link.id || null,
-            link_text: (link.textContent || '').trim(),
-            page_path: window.location.pathname
+            link_text: (link.textContent || '').trim().slice(0, 60),
+            origem: link.className.indexOf('whatsapp-float') !== -1 ? 'botao_flutuante'
+                : link.className.indexOf('lista') !== -1 ? 'lista_de_pedido'
+                : link.closest('.footer') ? 'rodape'
+                : link.closest('.cta-band') ? 'faixa_final'
+                : link.closest('.produto-acoes') ? 'pagina_de_produto'
+                : 'conteudo'
+        });
+    });
+
+    // Clique em cartão de produto: qual produto e de onde.
+    document.addEventListener('click', function (e) {
+        var link = e.target.closest && e.target.closest('.product-card-link');
+        if (!link) return;
+        var cartao = link.closest('.product-card');
+        medir('produto_clique', {
+            item_name: cartao ? cartao.getAttribute('data-name') : null,
+            item_brand: cartao ? cartao.getAttribute('data-marca') : null,
+            item_category: cartao ? cartao.getAttribute('data-cat') : null
         });
     });
 
@@ -728,9 +745,7 @@
                         status.textContent = 'Candidatura enviada! Vamos analisar seu perfil e entrar em contato.';
                         status.classList.add('is-success');
                         form.reset();
-                        if (window.DR_GA_CARREGADO && typeof gtag === 'function') {
-                            gtag('event', 'job_application_submit', { page_path: window.location.pathname });
-                        }
+                        medir('formulario_enviado', { formulario: 'trabalhe_conosco' });
                     } else {
                         status.textContent = 'Não deu pra enviar agora. Tenta de novo em instantes ou chama a gente no WhatsApp.';
                         status.classList.add('is-error');
@@ -1020,6 +1035,17 @@
         }
         if (campo) {
             campo.addEventListener('input', debounce(function () { filtrar(campo.value, false); }, 140));
+
+            // Mede o termo depois que a pessoa para de digitar, não a cada
+            // tecla — senão "propolis" viraria oito eventos.
+            campo.addEventListener('input', debounce(function () {
+                var termo = campo.value.trim();
+                if (termo.length < 3) return;
+                medir('busca', {
+                    search_term: termo.toLowerCase(),
+                    resultados: document.querySelectorAll('.product-card:not([hidden])').length
+                });
+            }, 1200));
         }
 
         // Painel de filtros: qualquer mudança refaz a filtragem e leva o
@@ -1028,6 +1054,15 @@
             if (!ctrl) return;
             ctrl.addEventListener('change', function () {
                 filtrar(campo ? campo.value : '', true);
+                var f = filtrosAtivos();
+                medir('filtro_usado', {
+                    filtro: ctrl.id === 'filtroMarca' ? 'marca'
+                        : ctrl.id === 'filtroCategoria' ? 'categoria' : 'so_com_foto',
+                    valor: ctrl.type === 'checkbox' ? String(ctrl.checked) : ctrl.value,
+                    resultados: document.querySelectorAll('.product-card:not([hidden])').length,
+                    marca: f.marca || null,
+                    categoria: f.categoria || null
+                });
             });
         });
 
@@ -1614,9 +1649,11 @@
             if (form.bairro && form.bairro.value) linhas.push('*Bairro:* ' + form.bairro.value);
             if (form.message.value.trim()) linhas.push('', form.message.value.trim());
 
-            if (window.DR_GA_CARREGADO && typeof gtag === 'function') {
-                gtag('event', 'client_signup_submit', { page_path: window.location.pathname });
-            }
+            medir('formulario_enviado', {
+                formulario: 'quero_ser_cliente',
+                ramo: form.segmento.value,
+                bairro: form.bairro ? form.bairro.value : null
+            });
             abrirWhatsApp(form, linhas.join('\n'));
         });
     });
@@ -1666,11 +1703,7 @@
             if (form.company.value.trim()) linhas.push('*Empresa:* ' + form.company.value.trim());
             linhas.push('', form.message.value.trim());
 
-            if (window.DR_GA_CARREGADO && typeof gtag === 'function') {
-                gtag('event', 'contact_form_submit', {
-                    page_path: window.location.pathname, subject: assunto.value
-                });
-            }
+            medir('formulario_enviado', { formulario: 'contato', assunto: assunto.value });
             abrirWhatsApp(form, linhas.join('\n'));
         });
     });
