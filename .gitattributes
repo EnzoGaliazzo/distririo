@@ -1,0 +1,21 @@
+# Quebra de linha: LF em todo lugar, em disco e no repositório.
+#
+# Sem isto, quem manda no formato é o `core.autocrlf` de cada máquina. O
+# resultado é que o mesmo `gerar.js` produzia arquivos diferentes no Windows e
+# no Linux, e o job "Build gerado está em dia" reprovava a cada push com as 455
+# páginas marcadas como modificadas — por uma diferença que não existe no
+# conteúdo.
+#
+# LF também é o que o git já guardava e o que o GitHub Pages serve.
+* text=auto eol=lf
+
+# Binário: nunca converter.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary

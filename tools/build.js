@@ -12,7 +12,11 @@ const path = require('path');
 const root = path.join(__dirname, '..');
 const SITE = 'https://distririo.com.br';
 const ZAP = '5521992111843';
-const EOL = '\r\n';
+// O gerador escreve LF, que é o que o git guarda e o que o GitHub Pages
+// serve. Escrevendo CRLF, o job "Build gerado está em dia" reprovava a cada
+// push: no Linux do CI não existe core.autocrlf para esconder a diferença, e
+// as 455 páginas apareciam modificadas só pela quebra de linha.
+const EOL = '\n';
 
 const ler = p => fs.readFileSync(path.join(root, p), 'utf8');
 const gravar = (p, txt) => {
