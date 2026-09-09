@@ -93,6 +93,44 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
   depois (`patch-historia.py`, `patch-paleta.py`, `patch-formulario.py`,
   `patch-blocos.py`, `patch-faixa-clara.py`).
 
+## Design e layout
+
+O dono liberou a implementação. Carregue a skill `frontend-design` antes de
+mexer em aparência, faça **um redesenho por commit** e registre no
+`PROPOSTAS.md` o que decidiu e por quê. Não reabra as decisões fechadas
+listadas no REGRAS.md.
+
+- [ ] **Seção "Marcas que trabalhamos" na home.**
+  O dono disse, com essas palavras, que "essa construção está uma merda".
+  Hoje é uma coluna de 16 botões de texto ao lado de uma foto que troca ao
+  clicar (`.brand-selector`, `.brand-selector-list`, `.brand-select-btn`).
+  Problemas visíveis: a lista de 16 nomes empilhados domina o bloco, os nomes
+  têm comprimentos muito diferentes, e a foto ao lado muda de proporção
+  conforme a marca. Refazer o layout inteiro: grade, espaçamento e estado de
+  hover. Considere se marca precisa mesmo de foto ou se um grid de nomes bem
+  resolvido comunica melhor.
+
+- [ ] **Barra de categorias do catálogo.**
+  Primeira coisa de que o dono reclamou. É uma tira horizontal com 33 chips
+  que rola para o lado, com barra de rolagem visível e chips cortados nas
+  pontas. Já existe o painel de filtros acima dela, então a tira pode ter
+  outro papel — ou deixar de existir. Decida e justifique.
+
+- [ ] **Cartões de produto do catálogo.**
+  Padronizar o enquadramento: as fotos têm assuntos de tamanhos muito
+  diferentes dentro do mesmo quadrado de 1:1, então uns produtos aparecem
+  grandes e outros minúsculos. Avaliar `object-fit`, área de respiro e fundo
+  para o conjunto ficar regular. Não mexer nos arquivos de imagem.
+
+- [ ] **Placeholder dos 125 produtos sem foto.**
+  Hoje é a inicial do produto sobre hachura diagonal. Funciona, mas fica
+  pobre ao lado de cartões com foto. Melhorar sem inventar imagem.
+
+- [ ] **Revisar o conjunto depois das mudanças de ontem.**
+  A paleta trocou de bege para cinza neutro, o modo escuro saiu, a faixa de
+  CTA clareou e os heros perderam o gradiente. Passar pelas 9 páginas com
+  olhar de conjunto e listar o que ficou órfão do estilo antigo.
+
 ---
 
 ## Encontrado durante o turno

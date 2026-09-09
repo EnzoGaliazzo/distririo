@@ -71,14 +71,29 @@ renderizado**, em vez de afirmar que conferiu.
 
 ## Design e layout
 
-Mudança de aparência é gosto do dono, e ele já corrigiu escolhas feitas por
-conta própria antes. Então:
+O dono liberou o turno para **implementar** redesenho, não só propor. Vale para
+layout, hierarquia, espaçamento e repaginação de componentes.
 
-- **Correção objetiva** (contraste que reprova em AA, elemento quebrado,
-  sobreposição, texto ilegível, erro de console): pode corrigir.
-- **Redesenho** (trocar layout de uma seção, mudar hierarquia, repaginar um
-  componente): **não implemente**. Escreva a proposta em
-  `tools/noturno/PROPOSTAS.md`, com o que está ruim, o que você faria e por quê.
+Antes de mexer em aparência, carregue a skill `frontend-design` (está em
+`.agents/skills/frontend-design`) e siga o que ela orienta. Ela existe
+justamente para o resultado não sair com cara de template genérico.
+
+O que continua valendo:
+
+- **Um redesenho por commit**, com a seção afetada no título da mensagem. De
+  manhã o dono precisa poder aceitar um e descartar outro sem desfazer tudo.
+- **Nada de gráfico montado à mão** — sem colagem, sem composição, sem texto
+  sobreposto a foto para simular peça de campanha. Use os arquivos reais.
+- **Não reabra as decisões da lista acima.** Site claro, banner no topo, faixa
+  de CTA clara e o resto continuam fechados; liberdade de design é sobre
+  *como* cada seção se organiza, não sobre desfazer o que já foi decidido.
+- **Registre no `PROPOSTAS.md` o que você decidiu e por quê**, mesmo tendo
+  implementado. Uma seção por mudança, curta: o que estava ruim, o que você
+  fez, o que considerou e descartou. É o que permite o dono discordar de forma
+  específica em vez de mandar refazer tudo.
+- **Antes e depois medidos.** Para cada redesenho, registre as medidas que
+  mudaram (contraste, tamanho de fonte, espaçamento, largura de coluna) e
+  confirme que nada reprova em AA.
 
 ## Se travar
 
