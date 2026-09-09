@@ -355,3 +355,65 @@ página de erro não deve declarar porque é servida em qualquer endereço.
 **Uma coisa fica anotada e não resolvida:** as 9 páginas de raiz dividem a mesma
 imagem de compartilhamento. Resolver pede foto real de cada contexto (o
 armazém, a entrega, o catálogo), e isso depende de você.
+
+### 07:40 — privacidade e segurança (commit `3a755b4`)
+
+Você pediu para eu olhar "privacidade e segurança do site e dos clientes". Esta
+é a parte disso que dava para fazer sem mexer em DNS nem em Cloudflare.
+
+**Content-Security-Policy.** É a regra que diz ao navegador de onde ele pode
+carregar script, estilo, fonte e imagem, e para onde a página pode mandar
+dados. Sem ela, qualquer script que consiga entrar no HTML roda com acesso
+total.
+
+O caminho fácil aqui seria liberar `'unsafe-inline'` para script — quase todo
+site faz isso, e a política passa a existir sem proteger de nada. Preferi o
+caminho certo: **o build calcula a impressão digital (SHA-256) do único bloco
+de script embutido em cada página e libera só ela.** Qualquer outro script
+inline simplesmente não executa.
+
+Para isso funcionar tive que tirar o único `onload=""` do site, que ficava no
+carregamento da fonte. Atributo `on*` precisa de uma permissão especial que
+navegador antigo ignora, e aí a fonte nunca chegaria em quem usa um. A troca
+foi para dentro do bloco de consentimento, que já é assinado.
+
+A política libera exatamente quatro destinos externos, que são os que o site
+usa de verdade: o Google Tag Manager (só depois do aceite de cookies), as
+fontes do Google, o Web3Forms e a BrasilAPI. O mapa da página de contato é o
+único iframe permitido, e só naquela página. Todo o resto está bloqueado — se
+um dia alguém injetar código para mandar dados de cliente para fora, o
+navegador recusa.
+
+**Uma coisa não deu para fazer e você precisa saber.** A diretiva que impede
+alguém de colocar o seu site dentro de um iframe e enganar o visitante
+(`frame-ancestors`) **é ignorada quando declarada em `<meta>`** — ela só vale
+em cabeçalho HTTP, e o GitHub Pages não deixa mandar cabeçalho. Seu DNS já está
+no Cloudflare em modo "DNS only"; ligando o proxy dá para adicionar essa e mais
+duas de graça. Virou o item 17 das perguntas. **Não toquei em nada de
+Cloudflare nem de DNS** — você pediu para não mexer.
+
+**Referrer-Policy.** Agora o WhatsApp e o Google recebem só "distririo.com.br",
+não a página específica que a pessoa estava vendo quando clicou. É privacidade
+do seu visitante.
+
+**Honeypot: a tarefa estava certa, o motivo estava errado.** O briefing pedia
+antispam nos formulários de cadastro e contato. Ao abrir o código vi que esses
+dois **não enviam nada para servidor nenhum** — eles montam uma mensagem e
+abrem o WhatsApp. Robô preenchendo ali não gera e-mail, não gera lead, não gera
+nada. Ia ser trabalho decorativo.
+
+Só que gera uma coisa: um evento `formulario_enviado` no GA4. Ou seja, robô
+inflando o número de conversões que você vai usar para decidir onde investir.
+Aí o honeypot passa a valer a pena, e foi por esse motivo que entrou. Testei
+nos dois sentidos, nos dois formulários: campo marcado descarta em silêncio,
+campo vazio envia normal.
+
+**Verificação.** Abri home, loja, contato, página de produto, página de marca e
+o cadastro, uma por uma: **zero violação de CSP no console**, fonte certa
+aplicada, mapa carregando, o gtag.js carregando só depois do aceite, e a
+consulta de CNPJ voltando "BANCO DO BRASIL SA" da Receita — ou seja, a
+BrasilAPI continua passando pela política.
+
+**O que eu não testei de propósito:** o envio do Web3Forms de ponta a ponta.
+Seria um e-mail de verdade na sua caixa. O destino está liberado pelo mesmo
+mecanismo que a BrasilAPI acabou de provar que funciona.

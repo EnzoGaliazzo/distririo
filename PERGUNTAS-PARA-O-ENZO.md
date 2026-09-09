@@ -112,6 +112,18 @@ Estas travam o FAQ, que é a tarefa P0 nº 3.
     instale o `gh`, me avise.
     → Resposta:
 
+17. **Cabeçalhos de segurança que só o Cloudflare resolve.** O site agora tem
+    Content-Security-Policy e Referrer-Policy por `<meta>`, escritas pelo build.
+    Três coisas não cabem em `<meta>` e o GitHub Pages não deixa mandar
+    cabeçalho HTTP: `frame-ancestors` (impede que alguém coloque o site dentro
+    de um iframe e engane o visitante), `Strict-Transport-Security` e
+    `X-Content-Type-Options`. O seu DNS já está no Cloudflare em modo
+    "DNS only". Se você ligar o proxy (nuvem laranja), dá para adicionar os três
+    com uma Transform Rule, de graça. **Não mexi em nada de Cloudflare nem de
+    DNS** — você pediu para não mexer, e eu não mexi. Quer que eu escreva o
+    passo a passo para você fazer?
+    → Resposta:
+
 16. **Anexo de currículo do Web3Forms.** Continua sem teste. O plano gratuito
     historicamente ignora arquivo; se for o caso, o candidato lê "enviado" e o
     currículo se perde.

@@ -147,10 +147,12 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
   deploy funciona (push na `main` → GitHub Pages), e o que **não** mexer (DNS,
   CNAME, chaves, ID do GA4). Daqui a três meses ninguém lembra.
 
-- [ ] **22. Antispam nos formulários.** `trabalhe-conosco.html` **já tem**
-  honeypot (`botcheck`); `quero-ser-cliente.html` e `contato.html` não têm.
-  Adicionar equivalente nos dois e descartar envio com o campo preenchido. Sem
-  chave nova, sem serviço novo.
+- [x] **22. Antispam nos formulários.** FEITO (commit `3a755b4`), mas a
+  premissa estava errada e vale registrar: `quero-ser-cliente` e `contato`
+  **não enviam nada para servidor nenhum** — só montam uma mensagem de
+  WhatsApp. Robô preenchendo ali não gera e-mail nem lead. O que ele gera é
+  um `formulario_enviado` no GA4, que suja a conversão. O honeypot entrou por
+  esse motivo. Só a `trabalhe-conosco` posta no Web3Forms, e essa já tinha.
 
 ## P4 — Design, mobile e acessibilidade
 
@@ -188,11 +190,17 @@ de mexer em aparência, um redesenho por commit, registre o porquê em
 
 Fora do briefing, já levantados. Depois do P4.
 
-- [ ] **`Referrer-Policy`** não declarada. Meta no `<head>`, pelo build.
-- [ ] **Content-Security-Policy** ausente. Meta `http-equiv`, começando em
-  `report-only` numa página só. Cobrir Google Fonts, Analytics, Maps, BrasilAPI
-  e Web3Forms.
-- [ ] **`rel="noopener"`** — acrescentar a checagem ao `tools/checar-links.js`.
+- [x] **`Referrer-Policy`** FEITO (commit `3a755b4`):
+  `strict-origin-when-cross-origin`, escrita pelo build em todas as páginas.
+- [x] **Content-Security-Policy** FEITO (commit `3a755b4`). Duas correções ao
+  plano original: **`report-only` não existe em `<meta>`** (só em cabeçalho
+  HTTP, que o GitHub Pages não deixa mandar), então foi direto para a política
+  valendo, verificada página por página no navegador antes de commitar; e em
+  vez de `script-src 'unsafe-inline'` o build calcula o **hash SHA-256** do
+  bloco inline de cada página. **`frame-ancestors` ficou de fora**: em `<meta>`
+  o browser ignora. Virou item 17 do PERGUNTAS — só com Cloudflare na frente.
+- [x] **`rel="noopener"`** FEITO (commit `3a755b4`): a checagem entrou no
+  `tools/checar-links.js` e achou uma ocorrência na `trabalhe-conosco.html`.
 - [ ] **Duplicatas no `style.css`** (`.form-consent`, `.category-bar`,
   `.category-chip`, `.hero`, `.hero-carousel-next`, `.whatsapp-float`). Foi um
   par assim (`.btn-ghost`) que deixou um botão ilegível no ar.
