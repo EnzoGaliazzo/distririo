@@ -97,6 +97,8 @@ function trocarCatalogo(html) {
         '',
         secoes,
         '        </section>',
+        '',
+        B.montarNavMarcas(),
         MARCA_FIM,
     ].join('\n');
 
@@ -247,6 +249,18 @@ if (fs.existsSync(dirProduto)) {
 }
 dados.produtos.forEach(p => gravar(`produto/${p.id}.html`, versionar(paginaProduto(p, tplProduto))));
 
+// 2b. páginas de marca (18 marcas com 4+ produtos)
+const tplMarca = ler('tools/partials/marca.html').replace(/\r?\n/g, '\n');
+const marcas = B.marcasComProduto();
+const dirMarca = path.join(root, 'marca');
+if (fs.existsSync(dirMarca)) {
+    for (const f of fs.readdirSync(dirMarca)) {
+        if (f.endsWith('.html')) fs.unlinkSync(path.join(dirMarca, f));
+    }
+}
+marcas.forEach(m => gravar(`marca/${m.slug}.html`, versionar(B.paginaMarca(m, marcas, tplMarca))));
+relatorio.push(`  marca/*.html (${marcas.length} marcas)`);
+
 // 3. índice de busca (baixado sob demanda, não embutido no app.js)
 const indice = dados.produtos.map(p => ({
     i: p.id,
@@ -273,6 +287,7 @@ const urls = [
     ['/contato.html', '0.6', 'monthly'],
     ['/trabalhe-conosco.html', '0.5', 'monthly'],
     ['/politica-de-privacidade.html', '0.2', 'yearly'],
+    ...marcas.map(m => [`/marca/${m.slug}.html`, '0.7', 'monthly']),
     ...dados.produtos.map(p => [`/produto/${p.id}.html`, '0.6', 'monthly']),
 ];
 gravar('sitemap.xml', [

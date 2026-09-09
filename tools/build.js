@@ -245,14 +245,19 @@ function paginaProduto(p, tpl) {
     }
 
     const tituloCat = cat && cat.titulo !== p.marca ? cat.titulo : '';
+    // Marca com página própria vira link: é o caminho do produto para o
+    // resto da linha, e o que faz a página de marca ser rastreada.
+    const linkMarca = p.marca && paginasDeMarca.has(p.marca)
+        ? '<a href="../marca/' + paginasDeMarca.get(p.marca) + '.html">' + esc(p.marca) + '</a>'
+        : null;
     const ficha = [
-        ['Marca', p.marca],
+        ['Marca', p.marca, linkMarca],
         ['Categoria', tituloCat],
         ['Embalagem', embal],
         ['Sabores', p.linha],
         ['Código interno', (p.skus || []).join(', ')],
     ].filter(par => par[1])
-        .map(par => '                    <div class="ficha-linha"><dt>' + par[0] + '</dt><dd>' + esc(par[1]) + '</dd></div>')
+        .map(par => '                    <div class="ficha-linha"><dt>' + par[0] + '</dt><dd>' + (par[2] || esc(par[1])) + '</dd></div>')
         .join('\n');
 
     const jsonld = {
@@ -310,3 +315,142 @@ module.exports = {
     PAGINAS, montarCabecalho, montarRodape, aplicarPartials,
     montarCatalogo, montarFiltros, paginaProduto, textoBusca, porCategoria,
 };
+
+// =====================================================================
+// 5. páginas de marca
+// "distribuidor Mondelez Rio de Janeiro" é busca de intenção altíssima e o
+// site não tinha nenhuma página para responder. Uma página por marca, gerada
+// do mesmo data/produtos.json que gera o resto.
+// =====================================================================
+
+// Abaixo disso a página seria só um título e dois cards — conteúdo raso, que
+// o Google trata como ruído e o visitante trata como beco sem saída.
+const MIN_PRODUTOS_MARCA = 4;
+
+const slugMarca = m => semAcento(m).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+function marcasComProduto() {
+    const mapa = new Map();
+    dados.produtos.forEach(p => {
+        if (!p.marca) return;
+        if (!mapa.has(p.marca)) mapa.set(p.marca, []);
+        mapa.get(p.marca).push(p);
+    });
+    return [...mapa.entries()]
+        .map(([nome, produtos]) => ({
+            nome,
+            slug: slugMarca(nome),
+            produtos,
+            categorias: [...new Set(produtos.map(p => p.categoria))],
+        }))
+        .filter(m => m.produtos.length >= MIN_PRODUTOS_MARCA)
+        .sort((a, b) => b.produtos.length - a.produtos.length);
+}
+
+// Nome da marca -> slug, só para as que têm página. Usado pela ficha do
+// produto para linkar "Marca: Baly Brasil" na página da marca.
+const paginasDeMarca = new Map(marcasComProduto().map(m => [m.nome, m.slug]));
+
+function paginaMarca(marca, todas, tpl) {
+    const n = marca.produtos.length;
+    const nCat = marca.categorias.length;
+    const capa = marca.produtos.find(p => p.img);
+
+    const titulo = 'Distribuidor ' + marca.nome + ' no Rio de Janeiro | Distri Rio';
+    const descricao = 'Distribuímos ' + marca.nome + ' no atacado para comércios do Rio de Janeiro e da ' +
+        'Baixada Fluminense: ' + n + ' produtos no catálogo, pedido pelo WhatsApp. Venda apenas para CNPJ.';
+
+    // O texto só afirma o que dá para conferir no próprio catálogo.
+    const nomesCategorias = marca.categorias
+        .map(id => (dados.categorias.find(c => c.id === id) || {}).titulo)
+        .filter(Boolean);
+    // Categoria com o mesmo nome da marca não acrescenta nada à frase
+    // ("São 4 itens da marca em Gota") — sai da lista.
+    const outrasCats = nomesCategorias.filter(t => t.toLowerCase() !== marca.nome.toLowerCase());
+    let ondeEstao;
+    if (!outrasCats.length) {
+        ondeEstao = 'São ' + n + ' itens da marca no catálogo.';
+    } else if (outrasCats.length === 1) {
+        ondeEstao = 'São ' + n + ' itens da marca em ' + outrasCats[0] + '.';
+    } else {
+        ondeEstao = 'São ' + n + ' itens da marca em ' + outrasCats.length + ' categorias: ' +
+            outrasCats.slice(0, 4).join(', ') + (outrasCats.length > 4 ? ' e outras' : '') + '.';
+    }
+    const resumo = 'A Distri Rio distribui ' + marca.nome + ' para mercadinhos, farmácias, conveniências, ' +
+        'padarias e bares do Rio de Janeiro e da Baixada Fluminense, com entrega no endereço do seu ' +
+        'comércio a partir do nosso centro de distribuição em Duque de Caxias. ' + ondeEstao;
+
+    const msg = encodeURIComponent('Olá! Queria saber as condições dos produtos ' + marca.nome + '.');
+
+    let i = 0;
+    const cartoes = marca.produtos.map(p => cartao(p, i++, '../')).join('\n');
+
+    const outras = todas.filter(m => m.slug !== marca.slug)
+        .map(m => '                <a href="' + m.slug + '.html">' + esc(m.nome) +
+            ' <span aria-hidden="true">' + m.produtos.length + '</span></a>')
+        .join('\n');
+
+    const jsonld = {
+        '@context': 'https://schema.org',
+        '@type': 'Brand',
+        name: marca.nome,
+        description: descricao,
+        url: SITE + '/marca/' + marca.slug + '.html',
+    };
+    if (capa) jsonld.image = SITE + '/' + capa.img;
+
+    const migalhas = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Início', item: SITE + '/' },
+            { '@type': 'ListItem', position: 2, name: 'Catálogo', item: SITE + '/loja.html' },
+            { '@type': 'ListItem', position: 3, name: marca.nome, item: SITE + '/marca/' + marca.slug + '.html' },
+        ],
+    };
+
+    return tpl
+        .replace(/\{\{TITULO\}\}/g, esc(titulo))
+        .replace(/\{\{DESCRICAO\}\}/g, esc(descricao))
+        .replace(/\{\{URL\}\}/g, SITE + '/marca/' + marca.slug + '.html')
+        .replace(/\{\{IMG_ABS\}\}/g, capa ? SITE + '/' + capa.img : SITE + '/assets/og-distririo.jpg')
+        .replace(/\{\{RESUMO\}\}/g, esc(resumo))
+        .replace(/\{\{TOTAL\}\}/g, String(n))
+        .replace(/\{\{CATEGORIAS\}\}/g, String(nCat))
+        .replace(/\{\{ROTULO_CATEGORIAS\}\}/g, nCat === 1 ? 'categoria' : 'categorias')
+        .replace(/\{\{PRODUTOS\}\}/g, cartoes)
+        .replace(/\{\{OUTRAS\}\}/g, outras)
+        .replace(/\{\{ZAP\}\}/g, 'https://wa.me/' + ZAP + '?text=' + msg)
+        .replace(/\{\{JSONLD\}\}/g, JSON.stringify(jsonld))
+        .replace(/\{\{MIGALHAS\}\}/g, JSON.stringify(migalhas))
+        .replace(/\{\{CABECALHO\}\}/g, montarCabecalho('../', 'loja'))
+        .replace(/\{\{RODAPE\}\}/g, indentar(montarRodape('../'), 4))
+        // por último: {{MARCA}} aparece dentro dos textos acima e não pode
+        // ser substituído antes deles.
+        .replace(/\{\{MARCA\}\}/g, esc(marca.nome));
+}
+
+module.exports.MIN_PRODUTOS_MARCA = MIN_PRODUTOS_MARCA;
+module.exports.slugMarca = slugMarca;
+module.exports.marcasComProduto = marcasComProduto;
+module.exports.paginasDeMarca = paginasDeMarca;
+module.exports.paginaMarca = paginaMarca;
+
+// Bloco de links no fim do catálogo. Sem ele as páginas de marca só seriam
+// alcançáveis pela ficha do produto, e o filtro de marca da loja é um <select>
+// que robô nenhum segue.
+function montarNavMarcas() {
+    const lista = marcasComProduto().slice().sort((a, b) => a.nome.localeCompare(b.nome, 'pt'));
+    return [
+        '        <section class="section section-marcas">',
+        '            <h2>Marcas que distribuímos</h2>',
+        '            <p class="section-lead">Cada marca tem uma página com a linha completa dela.</p>',
+        '            <nav class="marca-lista" aria-label="Marcas">',
+        ...lista.map(m => '                <a href="marca/' + m.slug + '.html">' + esc(m.nome) +
+            ' <span aria-hidden="true">' + m.produtos.length + '</span></a>'),
+        '            </nav>',
+        '        </section>',
+    ].join('\n');
+}
+
+module.exports.montarNavMarcas = montarNavMarcas;

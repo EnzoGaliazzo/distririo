@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{TITULO}}</title>
+    <meta name="description" content="{{DESCRICAO}}">
+    <link rel="canonical" href="{{URL}}">
+    <meta name="theme-color" content="#12131a">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Distri Rio">
+    <meta property="og:url" content="{{URL}}">
+    <meta property="og:title" content="{{TITULO}}">
+    <meta property="og:description" content="{{DESCRICAO}}">
+    <meta property="og:image" content="{{IMG_ABS}}">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../style.css">
+    <script>
+      // Consent Mode v2: nada de cookie de medição antes do aceite.
+      // O gtag.js só é carregado por app.js depois que o visitante decide.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+        analytics_storage: 'denied', functionality_storage: 'granted', security_storage: 'granted'
+      });
+      gtag('js', new Date());
+      window.DR_GA_ID = 'G-8MYVJZMB64';
+    </script>
+    <script type="application/ld+json">{{JSONLD}}</script>
+    <script type="application/ld+json">{{MIGALHAS}}</script>
+</head>
+<body data-base="../">
+{{CABECALHO}}
+
+<div class="page">
+    <main id="conteudo">
+        <nav class="migalhas" aria-label="Trilha de navegação">
+            <a href="../index.html">Início</a>
+            <span aria-hidden="true">›</span>
+            <a href="../loja.html">Catálogo</a>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">{{MARCA}}</span>
+        </nav>
+
+        <section class="section marca-topo">
+            <h1>{{MARCA}} no atacado, no Rio de Janeiro</h1>
+            <p class="section-lead">{{RESUMO}}</p>
+            <div class="marca-numeros">
+                <div><strong>{{TOTAL}}</strong><span>produtos no catálogo</span></div>
+                <div><strong>{{CATEGORIAS}}</strong><span>{{ROTULO_CATEGORIAS}}</span></div>
+                <div><strong>CNPJ</strong><span>venda só para comércio</span></div>
+            </div>
+            <div class="marca-acoes">
+                <a href="../quero-ser-cliente.html" class="btn">Quero ser cliente</a>
+                <a href="{{ZAP}}" class="btn btn-ghost" target="_blank" rel="noopener">Pedir {{MARCA}} no WhatsApp</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Todos os produtos {{MARCA}}</h2>
+            <p class="category-count">{{TOTAL}} produtos</p>
+            <div class="product-grid">
+{{PRODUTOS}}
+            </div>
+        </section>
+
+        <section class="section marca-outras">
+            <h2>Outras marcas que distribuímos</h2>
+            <nav class="marca-lista" aria-label="Outras marcas">
+{{OUTRAS}}
+            </nav>
+        </section>
+    </main>
+
+{{RODAPE}}
+</div>
+
+<a href="https://wa.me/5521992111843?text=Ol%C3%A1!%20Vim%20pelo%20link%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." class="whatsapp-float" id="whatsappFloat" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.47 1.29 4.92L2 22l5.31-1.39a9.87 9.87 0 0 0 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2Zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.15.83.84-3.07-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.53 3.69-8.22 8.23-8.22 2.2 0 4.26.86 5.82 2.41a8.18 8.18 0 0 1 2.41 5.82c0 4.53-3.69 8.22-8.19 8.22Zm4.51-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.99-1.22-.73-.66-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42-.14 0-.31-.02-.48-.02s-.44.06-.67.31c-.23.25-.87.85-.87 2.08s.89 2.42 1.01 2.58c.12.17 1.75 2.67 4.24 3.75.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29Z"/></svg>
+</a>
+
+<script src="../app.js"></script>
+</body>
+</html>

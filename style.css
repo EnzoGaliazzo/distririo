@@ -3581,3 +3581,119 @@ body.lista-aberta {
     border: 1px dashed #b38600;
     font-size: 0.92em;
 }
+
+/* =====================================================================
+   Página de marca
+   ===================================================================== */
+
+.marca-topo {
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.marca-topo h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 2rem;
+    color: var(--dark);
+}
+
+.marca-numeros {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 0 auto 1.6rem;
+    max-width: 640px;
+}
+
+.marca-numeros > div {
+    flex: 1 1 165px;
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius);
+    padding: 1rem 1.1rem;
+    box-shadow: var(--shadow);
+}
+
+.marca-numeros strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1.1;
+    color: var(--ink);
+}
+
+.marca-numeros span {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.82rem;
+    color: var(--texto-fraco);
+}
+
+.marca-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+/* Lista de marcas: usada no rodapé do catálogo e no fim de cada página de
+   marca. Os 44px de altura mínima são alvo de toque de celular. */
+.marca-lista {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.marca-lista a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.marca-lista a:hover {
+    border-color: var(--red);
+    box-shadow: var(--shadow);
+}
+
+.marca-lista a > span {
+    font-weight: 500;
+    font-size: 0.76rem;
+    color: var(--texto-fraco);
+    background: var(--gray-100);
+    border-radius: 999px;
+    padding: 0.12rem 0.45rem;
+}
+
+.section-marcas {
+    border-top: 1px solid var(--gray-300);
+}
+
+@media (max-width: 520px) {
+    .marca-numeros > div {
+        flex-basis: 100%;
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .marca-numeros span {
+        margin-top: 0;
+    }
+}
