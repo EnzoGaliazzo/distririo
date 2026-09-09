@@ -3535,3 +3535,37 @@ body.lista-aberta {
         padding: 0.75rem 0.9rem;
     }
 }
+
+/* Formulário de cadastro em duas etapas */
+.form-passo {
+    margin-bottom: 1.1rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--texto-fraco);
+}
+
+.form-opcional {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--texto-fraco);
+}
+
+.form-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem;
+    margin-top: 1.25rem;
+}
+
+.form-acoes .btn {
+    min-height: 48px;
+}
+
+.form-acoes .link-botao {
+    color: var(--texto-fraco);
+    font-size: 0.9rem;
+}

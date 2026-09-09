@@ -1633,6 +1633,39 @@
         if (!form) return;
         ligarMascaras(form);
 
+        // Duas etapas. A primeira pede quatro coisas e é a única obrigatória;
+        // a segunda ajuda a gente a chegar preparado na conversa, mas quem
+        // parar na primeira já vira lead com CNPJ conferido na Receita.
+        var etapa1 = form.querySelector('[data-etapa="1"]');
+        var etapa2 = form.querySelector('[data-etapa="2"]');
+        var proximo = document.getElementById('clientProximo');
+        var voltar = document.getElementById('clientVoltar');
+
+        function mostrarEtapa(n) {
+            if (!etapa1 || !etapa2) return;
+            etapa1.hidden = n !== 1;
+            etapa2.hidden = n !== 2;
+            var visivel = n === 1 ? etapa1 : etapa2;
+            var primeiro = visivel.querySelector('input:not([type=hidden]), select, textarea');
+            if (primeiro) primeiro.focus();
+        }
+
+        if (proximo) {
+            proximo.addEventListener('click', function () {
+                var campos = etapa1.querySelectorAll('input, select, textarea');
+                for (var i = 0; i < campos.length; i++) {
+                    if (!campos[i].checkValidity()) { campos[i].reportValidity(); return; }
+                }
+                medir('cadastro_etapa1_ok', { formulario: 'quero_ser_cliente' });
+                mostrarEtapa(2);
+            });
+        }
+        if (voltar) voltar.addEventListener('click', function () { mostrarEtapa(1); });
+
+        var val = function (campo) {
+            return form[campo] && form[campo].value ? String(form[campo].value).trim() : '';
+        };
+
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             if (!form.reportValidity()) return;
@@ -1640,19 +1673,22 @@
             var linhas = [
                 'Olá! Gostaria de me tornar cliente da Distri Rio.',
                 '',
-                '*Empresa:* ' + form.company.value.trim(),
-                '*CNPJ:* ' + form.cnpj.value.trim(),
-                '*Ramo:* ' + form.segmento.value,
-                '*Responsável:* ' + form.name.value.trim(),
-                '*Telefone:* ' + form.phone.value.trim()
+                '*CNPJ:* ' + val('cnpj'),
+                '*Responsável:* ' + val('name'),
+                '*Telefone:* ' + val('phone')
             ];
-            if (form.bairro && form.bairro.value) linhas.push('*Bairro:* ' + form.bairro.value);
-            if (form.message.value.trim()) linhas.push('', form.message.value.trim());
+            // Tudo daqui para baixo é opcional: só entra na mensagem se a
+            // pessoa tiver preenchido a segunda etapa.
+            if (val('company')) linhas.splice(2, 0, '*Empresa:* ' + val('company'));
+            if (val('segmento')) linhas.push('*Ramo:* ' + val('segmento'));
+            if (val('bairro')) linhas.push('*Bairro:* ' + val('bairro'));
+            if (val('message')) linhas.push('', val('message'));
 
             medir('formulario_enviado', {
                 formulario: 'quero_ser_cliente',
-                ramo: form.segmento.value,
-                bairro: form.bairro ? form.bairro.value : null
+                ramo: val('segmento') || null,
+                bairro: val('bairro') || null,
+                completou_etapa2: !etapa2 || !etapa2.hidden
             });
             abrirWhatsApp(form, linhas.join('\n'));
         });
