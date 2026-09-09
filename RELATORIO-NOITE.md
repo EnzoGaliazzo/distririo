@@ -222,3 +222,46 @@ dependem de você: "Qual a área de entrega?" responde "todo o Rio de Janeiro" e
 "Tem pedido mínimo?" responde "pode variar". São exatamente o atrito que o seu
 briefing quer tirar. Com os itens 1 e 6 do PERGUNTAS respondidos, viram resposta
 de verdade em cinco minutos.
+
+### 04:50 — tarefa 10: páginas de marca (commit `7dbf237`)
+
+Até agora a marca só existia como opção de um `<select>` no filtro da loja.
+Robô nenhum abre um `<select>`, então quem procura **"distribuidor Mondelez Rio
+de Janeiro"** — que é busca de quem já decidiu comprar — não encontrava nada
+nosso. Agora são **18 páginas**, uma por marca, em `/marca/<slug>.html`.
+
+O que tem em cada uma: um resumo escrito só com o que dá para conferir no
+catálogo, três contadores reais (produtos, categorias, "só CNPJ"), a grade
+completa da marca reaproveitando o mesmo cartão da loja — com o botão
+"Adicionar à lista" funcionando igual —, os dois CTAs e a navegação para as
+outras 17 marcas. No `<head>`, schema `Brand` e `BreadcrumbList`.
+
+**Não inventei nada.** O texto só afirma o que sai do `data/produtos.json`: o
+número de itens, em que categorias eles caem, e as frases de cobertura e de
+entrega que já estavam no site. Nada de "marca líder", "pronta entrega" ou
+prazo.
+
+**O corte em 4 produtos.** Marca com um ou dois itens viraria uma página de
+duas linhas: raso para o Google e beco sem saída para quem chega. Ficaram de
+fora Aqua Coco, Ace, Hemovital e Pronabol — 39 dos 426 produtos, que continuam
+alcançáveis pela loja e pela página de produto de sempre.
+
+**Como se chega nelas** (página órfã não serve para nada):
+
+- a ficha de 387 páginas de produto passou a linkar "Marca" para a página da
+  marca;
+- o fim do catálogo ganhou o bloco "Marcas que distribuímos", com as 18;
+- as 18 URLs entraram no `sitemap.xml` com priority 0.7, acima das de produto.
+
+**Verificado:** `gerar.js` roda duas vezes sem gerar diferença; `checar-links`
+passou 453 páginas e 16.495 referências sem um caminho quebrado; o JSON-LD das
+18 é parseável; a grade cai para uma coluna a 375 px; os links da lista de
+marcas têm 44 px de altura, que é o alvo de toque de celular; e o botão
+"Pedir X no WhatsApp" saiu vermelho sobre branco, legível — era o erro que eu
+já tinha cometido com o `.btn-ghost`, então dessa vez fui olhar o elemento
+renderizado.
+
+**Um achado no caminho:** o site diz "426 produtos de **16 marcas parceiras**",
+mas o catálogo tem **22 marcas distintas**. Não mexi, porque "parceira" pode
+ser acordo comercial formal — e aí 16 está certo e é outro número. Virou o
+item 14 do `PERGUNTAS-PARA-O-ENZO.md`.

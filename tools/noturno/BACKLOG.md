@@ -63,10 +63,15 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
   produtos relacionados da mesma marca, link para a página da marca, CTA melhor.
   **Não inventar especificação** (peso, unidades por caixa, EAN, validade).
 
-- [ ] **10. Páginas de marca.** 16 marcas, nenhuma página própria.
-  "Distribuidor Mondelez Rio de Janeiro" é busca de intenção altíssima. Uma
-  página por marca agregando os produtos, com schema `Brand`. Gerar pelo
-  `tools/gerar.js` a partir do `data/produtos.json`, como as de produto.
+- [x] **10. Páginas de marca.** FEITO (commit `7dbf237`). 18 páginas em
+  `/marca/<slug>.html`, uma por marca com 4+ produtos, geradas pelo
+  `tools/gerar.js` a partir do `data/produtos.json`. Schema `Brand` +
+  `BreadcrumbList`, resumo escrito só com o que dá para conferir no catálogo,
+  grade completa da marca e navegação para as outras 17. Entradas: link "Marca"
+  na ficha de 387 produtos, bloco "Marcas que distribuímos" no fim do catálogo,
+  e as 18 URLs no `sitemap.xml` com priority 0.7. Aqua Coco, Ace, Hemovital e
+  Pronabol ficaram de fora do corte (menos de 4 itens) — publicar página de duas
+  linhas é conteúdo raso e beco sem saída.
 
 - [ ] **12. Auditar Open Graph e meta description página a página.** Conferir se
   cada página tem `og:title`, `og:description` e `<meta description>` próprios
@@ -207,3 +212,11 @@ Conferido no repositório em 09/09, 01:05. **Não refazer.**
 ## Encontrado durante o turno
 
 (acrescente aqui o que descobrir, em vez de sair implementando)
+
+- **"426 produtos de 16 marcas parceiras" está desencontrado do catálogo.** O
+  `data/produtos.json` tem **22 marcas distintas**, não 16. Não mexi no texto
+  porque "parceira" pode significar acordo comercial formal, e aí 16 estaria
+  certo e o número não seria o de marcas do catálogo. Pergunta para o Enzo
+  (item novo no `PERGUNTAS-PARA-O-ENZO.md`). Se for só "marcas que a gente
+  distribui", o `tools/gerar.js` passa a preencher esse número junto com os
+  outros contadores, e ele para de envelhecer sozinho.

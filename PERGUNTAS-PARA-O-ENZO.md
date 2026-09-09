@@ -96,15 +96,23 @@ Estas travam o FAQ, que é a tarefa P0 nº 3.
     ou planilha com descrição, peso e unidades por caixa?
     → Resposta:
 
+14. **"426 produtos de 16 marcas parceiras".** O catálogo tem **22 marcas
+    distintas**, não 16. "Parceira" quer dizer acordo comercial formal — e aí
+    16 está certo e é outro número, que não é o de marcas do catálogo — ou
+    quer dizer só "marcas que a gente distribui"? Se for a segunda, eu faço o
+    `tools/gerar.js` preencher esse número junto com os outros contadores e
+    ele para de envelhecer sozinho. Não mexi porque é fato comercial.
+    → Resposta:
+
 ## Técnico
 
-14. **`gh` não está instalado nesta máquina**, então não consigo abrir o Pull
+15. **`gh` não está instalado nesta máquina**, então não consigo abrir o Pull
     Request por linha de comando. Vou empurrar a branch e deixar o link de
     abrir o PR com um clique no `RELATORIO-NOITE.md`. Se preferir que eu
     instale o `gh`, me avise.
     → Resposta:
 
-15. **Anexo de currículo do Web3Forms.** Continua sem teste. O plano gratuito
+16. **Anexo de currículo do Web3Forms.** Continua sem teste. O plano gratuito
     historicamente ignora arquivo; se for o caso, o candidato lê "enviado" e o
     currículo se perde.
     → Resposta:
