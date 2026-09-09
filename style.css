@@ -2530,9 +2530,12 @@ main {
    Transição entre páginas e modo escuro
    ===================================================================== */
 
-@view-transition {
-    navigation: auto;
-}
+/* @view-transition foi removido de proposito.
+   Ele fazia o Chrome sobrepor um instantaneo da pagina anterior a nova durante
+   a navegacao, e nos titulos isso aparecia como sombra duplicada e deslocada —
+   o "glitch" relatado em "Sobre a Distri Rio" e "Contato". Tambem era a origem
+   dos erros "Transition was skipped" no console. Transicao bonita nao vale um
+   titulo tremido. */
 
 /* O site é claro, ponto. O modo escuro automático foi removido a pedido:
    quem está com o Windows no tema escuro via um site diferente do que a
@@ -3223,4 +3226,26 @@ a.service-item {
     .mapa-quadro {
         aspect-ratio: 16 / 11;
     }
+}
+
+/* As regras de quem pode comprar viram itens que a pessoa marca um a um. */
+.form-regras {
+    margin: 1.25rem 0;
+    padding: 1rem 1.1rem 0.6rem;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius);
+    background: var(--gray-100);
+}
+
+.form-regras legend {
+    padding: 0 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--texto-fraco);
+}
+
+.form-regras .form-consent {
+    margin: 0 0 0.7rem;
 }
