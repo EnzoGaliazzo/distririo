@@ -6,15 +6,19 @@ arquivo inteiro antes de mexer em qualquer coisa.
 
 ## A regra que não se quebra
 
-**Nunca commitar na `main`. Nunca dar `git push`.**
+**Nunca commitar na `main`. Nunca dar push na `main`.**
 
-Todo trabalho vai para a branch `noturno/melhorias`. O dono revisa de manhã e
+Empurrar a branch de trabalho e seguro e esperado: o GitHub Pages publica da
+`main`, entao `git push -u origin melhorias/noite-AAAA-MM-DD` nao coloca nada
+no ar. O que nao pode e a `main`.
+
+Todo trabalho vai para a branch `melhorias/noite-2026-09-09`. O dono revisa de manhã e
 decide o que sobe. O site publica em ~20 segundos a partir da `main`: um erro
 commitado lá de madrugada fica no ar até alguém acordar.
 
 ```bash
 git rev-parse --abbrev-ref HEAD          # confira onde está
-git checkout noturno/melhorias 2>/dev/null || git checkout -b noturno/melhorias
+git checkout melhorias/noite-2026-09-09
 ```
 
 Se a branch não existir, crie a partir da `main`. Se houver alteração não

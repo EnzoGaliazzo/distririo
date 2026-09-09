@@ -1,135 +1,149 @@
 # Fila do turno da noite
 
-Um item por execução, de cima para baixo. Ao concluir, marque `[x]` e escreva
-numa linha o que foi feito. Se descobrir algo novo durante o trabalho,
-acrescente ao fim em vez de sair fazendo.
+Ordem do briefing do Enzo: P0 (conversão) antes de P1 (SEO), antes de P2
+(desempenho), antes de P3 (design). Não pule para o item bonito antes de fechar
+o que dá dinheiro.
+
+Um item por execução. Ao concluir, marque `[x]` e escreva numa linha o que foi
+feito, com o hash do commit. Achou algo novo: anote em "Encontrado durante o
+turno", não saia fazendo.
 
 Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
+· `[?]` travado esperando resposta no `PERGUNTAS-PARA-O-ENZO.md`
 
 ---
 
-## Privacidade e conformidade
+## P0 — Conversão
 
-- [x] **A política de privacidade não menciona a consulta de CNPJ.** FEITO em 09/09: cláusula nova na seção 3, dizendo que só o CNPJ é enviado, para quem, para quê, e que a resposta não é gravada.
-  O campo de CNPJ em `quero-ser-cliente.html` envia o número digitado para
-  `brasilapi.com.br` (ver `consultarCnpj` em `app.js`). Isso é compartilhamento
-  com operador externo e precisa estar declarado na
-  `politica-de-privacidade.html`: qual dado sai, para quem, com que finalidade
-  e que a resposta não é armazenada pelo site. Acrescentar na seção de
-  compartilhamento de dados, no mesmo tom das outras cláusulas.
+- [ ] **1. Lista de pedido no catálogo.** A maior lacuna do site: ele promete
+  "você manda a lista e a gente confirma na conversa", mas o catálogo não deixa
+  montar lista nenhuma. Botão "+ Adicionar à lista" em cada card da `loja.html`
+  e na página de produto; contador flutuante; painel com ajuste de quantidade e
+  remoção; persistência em `localStorage` seguindo o padrão que já existe no
+  `app.js` (`guardar`/`recuperar`); botão "Enviar lista no WhatsApp" montando
+  mensagem em `wa.me` com nome, marca e quantidade. Limitar a ~2000 caracteres:
+  passando disso, mandar as primeiras linhas e avisar que a lista completa segue
+  na conversa. JS puro, sem dependência. **Item grande: quebre em partes e faça
+  a primeira.**
 
-- [x] **A política não menciona o campo Bairro nem a lista de bairros.** FEITO em 09/09: a lista de dados coletados dizia "cidade"; passou a dizer bairro ou município.
-  O formulário passou a coletar bairro. Conferir se a enumeração de dados
-  coletados na política cobre isso e o CNPJ; completar o que faltar.
+- [ ] **2. Eventos no GA4.** O GA4 está instalado e não mede nada acionável.
+  Eventos em: clique em botão de WhatsApp (com a página de origem), envio de
+  cada formulário, clique em card de produto, uso da busca (com o termo), uso
+  dos filtros, e cada passo da lista de pedido. Respeitar o consentimento: só
+  dispara se `window.DR_GA_CARREGADO` for verdadeiro.
 
-- [ ] **Formulário de cadastro sem honeypot.**
-  `trabalhe-conosco.html` tem campo `botcheck` contra robô; o `clientForm` e o
-  `contactForm` não têm nada. Adicionar um campo escondido equivalente e
-  descartar o envio quando vier preenchido.
+- [ ] **3. FAQ com schema FAQPage.** Perguntas que todo comerciante faz antes de
+  chamar no WhatsApp: pedido mínimo, prazo, região, pagamento, exigência de
+  CNPJ, pré-venda x pronta entrega. **As respostas dependem do Enzo** — montar a
+  estrutura, escrever as perguntas, deixar cada resposta como `[FALTA: ...]` e
+  conferir que a pergunta correspondente está no `PERGUNTAS-PARA-O-ENZO.md`
+  (itens 1 a 4).
 
-- [ ] **`Referrer-Policy` não está declarada.**
-  Acrescentar `<meta name="referrer" content="strict-origin-when-cross-origin">`
-  no `<head>`, pelo partial/`tools/gerar.js` para valer nas 435 páginas. Conferir
-  depois que o mapa do Google e a consulta de CNPJ continuam funcionando.
+- [ ] **4. Prova social.** Estrutura para depoimentos, fotos reais e números
+  verificáveis. **Só material que já existe no repositório** — hoje são duas
+  fotos (`assets/sobre/warehouse.jpg` e `frota.jpg`). O resto já está pedido nos
+  itens 8, 9 e 10 do PERGUNTAS. O site já teve depoimento inventado uma vez e
+  foi removido por isso: não repetir.
+
+- [ ] **5. Área de cobertura explícita.** "Atendemos todo o Rio de Janeiro" é
+  vago. Depende da resposta ao item 6 do PERGUNTAS. Sem ela, só Duque de Caxias
+  é fato confirmado. Montar a estrutura e marcar o resto.
+
+## P1 — SEO
+
+- [ ] **6. Páginas de produto estão rasas.** 426 páginas de ~14 KB com marca,
+  categoria e sabores, quase idênticas entre si — o Google trata como conteúdo
+  raso e pode não indexar. Enriquecer o template em
+  `tools/partials/produto.html`: apresentação, produtos relacionados da mesma
+  marca, link para a página da marca, CTA melhor. **Não inventar especificação**
+  (peso, unidades por caixa, EAN, validade).
+
+- [ ] **7. Páginas locais.** Só criar de lugar que a empresa realmente atende.
+  Enquanto o item 6 do PERGUNTAS não for respondido, **fazer apenas Duque de
+  Caxias**, que é a sede e fato confirmado. Conteúdo próprio e útil, não doorway
+  page recheada de keyword.
+
+- [ ] **8. Páginas de marca.** 16 marcas parceiras, nenhuma página própria.
+  "Distribuidor Mondelez Rio de Janeiro" é busca de intenção alta. Uma página
+  por marca agregando os produtos daquela marca, com schema `Brand`. Gerar pelo
+  `tools/gerar.js`, a partir do `data/produtos.json`, como as de produto.
+
+- [ ] **9. Reforçar o structured data.** `LocalBusiness` com horário (depende do
+  item 5 do PERGUNTAS), `Organization`, `WebSite` com `SearchAction`, e
+  `BreadcrumbList` onde ainda faltar. Validar antes de commitar.
+
+- [ ] **10. Atualizar `sitemap.xml`** com as páginas novas, mantendo o formato
+  atual. Já é gerado pelo `tools/gerar.js`.
+
+## P2 — Desempenho
+
+- [ ] **11. `loja.html` pesa 511 KB.** 426 cartões num arquivo só. Já tem
+  `content-visibility: auto` por seção com altura estimada. Medir o que isso já
+  entrega antes de trocar de abordagem, e só então avaliar renderização
+  progressiva ou "carregar mais". Registrar tamanho do HTML, número de nós no
+  DOM e LCP, antes e depois. **Cuidado:** o `content-visibility` já causou
+  problema de âncora e de rolagem antes; ler o comentário no `style.css`.
+
+- [ ] **12. Hero da home.** O carrossel demora a pintar e fica um bloco escuro —
+  é o LCP do site. Já tem `fetchpriority="high"` na primeira imagem e dimensões
+  explícitas. Falta `preload` da primeira e um fundo enquanto carrega. As
+  imagens já foram comprimidas (4,8 MB para 203 KB); conferir se dá para mais.
+
+- [ ] **13. Refatorar `app.js` (60 KB).** Separar por responsabilidade com
+  módulos ES nativos (`type="module"`), sem bundler, carregando só o que cada
+  página precisa. **Fazer depois que a lista de pedido estiver funcionando.**
+  Testar página por página.
+
+- [ ] **14. Otimizar imagens de produto.** Conferir WebP/AVIF, dimensões,
+  `width`/`height` e `loading="lazy"`. As 10 sem lazy na loja são as 8 acima da
+  dobra (propositais) mais 2 — conferir se as 2 são intencionais.
+
+## P3 — Design, mobile e acessibilidade
+
+O Enzo liberou implementar redesenho. Carregue a skill `frontend-design` antes
+de mexer em aparência, um redesenho por commit, registre o porquê no
+`tools/noturno/PROPOSTAS.md`. Não reabra as decisões fechadas do `REGRAS.md`.
+
+- [ ] **15. Auditoria mobile.** Todas as páginas em 375 px e 414 px: overflow
+  horizontal, texto pequeno, carrossel difícil no dedo, filtros ocupando meia
+  tela, botão do WhatsApp cobrindo conteúdo, formulário chato de preencher.
+
+- [ ] **16. Alvos de toque.** Elementos clicáveis com menos de 44 px de altura,
+  nos caminhos críticos: navegação, filtros, cards, CTAs.
+
+- [ ] **17. Acessibilidade.** Contraste em toda a paleta nova (mudou de bege
+  para cinza neutro ontem), foco visível, navegação por teclado, `aria-label`
+  faltando, e pausa real do carrossel e do ticker.
+
+- [x] **18. Página 404.** JÁ EXISTE, criada antes da noite: `404.html` com
+  busca, links de categoria e CTA de WhatsApp.
+
+- [ ] **19. Consistência visual.** Só depois de tudo acima. Espaçamentos,
+  hierarquia tipográfica e uso da cor de destaque. Não redesenhar o site — a
+  identidade é do cliente.
 
 ## Segurança
 
-- [ ] **Sem Content-Security-Policy.**
-  O GitHub Pages não envia cabeçalho, mas `<meta http-equiv="Content-Security-Policy">`
-  funciona. Montar uma política que cubra o que o site realmente usa:
-  Google Fonts (`fonts.googleapis.com`, `fonts.gstatic.com`), Analytics
-  (`googletagmanager.com`, `google-analytics.com`), o iframe do Maps
-  (`google.com/maps`), a consulta de CNPJ (`brasilapi.com.br`) e o envio do
-  formulário de vagas (`api.web3forms.com`). Começar em `report-only` numa
-  página só, conferir o console limpo, e só então valer para todas.
+- [ ] **20. Antispam nos formulários.** `trabalhe-conosco.html` tem honeypot
+  (`botcheck`); `quero-ser-cliente.html` e `contato.html` não têm nada.
+  Adicionar equivalente e descartar envio que vier com o campo preenchido. Sem
+  chave nova, sem serviço novo, sem mexer na chave existente.
 
-- [ ] **Conferir `rel="noopener"` em todo link externo.**
-  Escrever a checagem em `tools/checar-links.js` (ou script novo) para acusar
-  `target="_blank"` sem `rel` contendo `noopener`, e corrigir o que aparecer.
+## Extras herdados da fila anterior
 
-- [ ] **Auditar o que vai para o `localStorage` e `sessionStorage`.**
-  Hoje: `dr-consentimento-medicao` e `dr-balao-zap`. Confirmar que nada de
-  pessoal é gravado e que a política descreve isso.
+Não estão no briefing, mas já estavam levantados. Fazer só depois do P3.
 
-## Acessibilidade
-
-- [ ] **Varredura de contraste em toda a paleta nova.**
-  A paleta mudou de bege para cinza neutro. Escrever um script que percorra os
-  pares cor/fundo declarados no `style.css` e liste o que fica abaixo de 4,5:1
-  (3:1 para texto grande). Corrigir o que reprovar.
-
-- [ ] **Conferir a ordem de foco e o `:focus-visible` nos componentes novos.**
-  Painel de filtros do catálogo, lista de bairros, checkboxes de regra do
-  cadastro e botões do mapa. Navegar só pelo teclado e anotar o que não recebe
-  foco visível ou recebe fora de ordem.
-
-- [ ] **`aria-live` do resultado da busca com os filtros novos.**
-  O contador anuncia a busca por texto. Confirmar que também anuncia mudança de
-  marca, categoria e "só com foto", e que não fica tagarela demais.
-
-## Desempenho
-
-- [ ] **Medir a loja de novo depois de todas as mudanças de hoje.**
-  Registrar peso transferido e número de requisições no primeiro acesso, e
-  comparar com os 174 KB / 12 requisições medidos antes do painel de filtros.
-  Anotar o número no relatório.
-
-- [ ] **`loja.html` tem 481 KB não comprimidos.**
-  São 426 cartões em HTML. Avaliar (sem implementar) se vale renderizar só as
-  primeiras categorias no HTML e trazer o resto do `assets/data/produtos.json`
-  sob demanda. Escrever a análise em `PROPOSTAS.md` com números.
-
-## Higiene
-
-- [ ] **Duplicatas no `style.css`.**
-  `.form-consent`, `.category-bar`, `.category-chip`, `.hero`,
-  `.hero-carousel-next` e `.whatsapp-float` estão definidos mais de uma vez.
-  São complementares hoje, mas foi um par assim (`.btn-ghost`) que deixou um
-  botão ilegível no ar. Juntar cada par num lugar só, sem mudar o resultado
-  visual — conferindo antes e depois com os valores computados.
-
-- [ ] **`tools/migracao/` acumulou 8 scripts de uma passagem só.**
-  Conferir que o `LEIAME.md` de lá descreve todos, incluindo os adicionados
-  depois (`patch-historia.py`, `patch-paleta.py`, `patch-formulario.py`,
-  `patch-blocos.py`, `patch-faixa-clara.py`).
-
-## Design e layout
-
-O dono liberou a implementação. Carregue a skill `frontend-design` antes de
-mexer em aparência, faça **um redesenho por commit** e registre no
-`PROPOSTAS.md` o que decidiu e por quê. Não reabra as decisões fechadas
-listadas no REGRAS.md.
-
-- [ ] **Seção "Marcas que trabalhamos" na home.**
-  O dono disse, com essas palavras, que "essa construção está uma merda".
-  Hoje é uma coluna de 16 botões de texto ao lado de uma foto que troca ao
-  clicar (`.brand-selector`, `.brand-selector-list`, `.brand-select-btn`).
-  Problemas visíveis: a lista de 16 nomes empilhados domina o bloco, os nomes
-  têm comprimentos muito diferentes, e a foto ao lado muda de proporção
-  conforme a marca. Refazer o layout inteiro: grade, espaçamento e estado de
-  hover. Considere se marca precisa mesmo de foto ou se um grid de nomes bem
-  resolvido comunica melhor.
-
-- [ ] **Barra de categorias do catálogo.**
-  Primeira coisa de que o dono reclamou. É uma tira horizontal com 33 chips
-  que rola para o lado, com barra de rolagem visível e chips cortados nas
-  pontas. Já existe o painel de filtros acima dela, então a tira pode ter
-  outro papel — ou deixar de existir. Decida e justifique.
-
-- [ ] **Cartões de produto do catálogo.**
-  Padronizar o enquadramento: as fotos têm assuntos de tamanhos muito
-  diferentes dentro do mesmo quadrado de 1:1, então uns produtos aparecem
-  grandes e outros minúsculos. Avaliar `object-fit`, área de respiro e fundo
-  para o conjunto ficar regular. Não mexer nos arquivos de imagem.
-
-- [ ] **Placeholder dos 125 produtos sem foto.**
-  Hoje é a inicial do produto sobre hachura diagonal. Funciona, mas fica
-  pobre ao lado de cartões com foto. Melhorar sem inventar imagem.
-
-- [ ] **Revisar o conjunto depois das mudanças de ontem.**
-  A paleta trocou de bege para cinza neutro, o modo escuro saiu, a faixa de
-  CTA clareou e os heros perderam o gradiente. Passar pelas 9 páginas com
-  olhar de conjunto e listar o que ficou órfão do estilo antigo.
+- [x] **Política de privacidade não declarava a consulta de CNPJ.** FEITO,
+  commit `ae03ac6`.
+- [x] **Política não mencionava o campo Bairro.** FEITO, commit `ae03ac6`.
+- [ ] **`Referrer-Policy`** não declarada. Meta no `<head>`, pelo build.
+- [ ] **Content-Security-Policy** ausente. Meta `http-equiv`, começando em
+  `report-only` numa página só. Cobrir Google Fonts, Analytics, Maps, BrasilAPI
+  e Web3Forms.
+- [ ] **`rel="noopener"`** — escrever a checagem no `tools/checar-links.js`.
+- [ ] **Duplicatas no `style.css`** (`.form-consent`, `.category-bar`,
+  `.category-chip`, `.hero`, `.hero-carousel-next`, `.whatsapp-float`). Foi um
+  par assim (`.btn-ghost`) que deixou um botão ilegível no ar.
 
 ---
 
