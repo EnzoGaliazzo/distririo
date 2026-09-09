@@ -1,149 +1,213 @@
 # Fila do turno da noite
 
-Ordem do briefing do Enzo: P0 (conversão) antes de P1 (SEO), antes de P2
-(desempenho), antes de P3 (design). Não pule para o item bonito antes de fechar
-o que dá dinheiro.
+Ordem do briefing do Enzo: P0 (conversão) → P1 (SEO) → P2 (desempenho) →
+P3 (estrutura) → P4 (design). Não pule para o item bonito antes de fechar o que
+dá dinheiro.
 
-Um item por execução. Ao concluir, marque `[x]` e escreva numa linha o que foi
-feito, com o hash do commit. Achou algo novo: anote em "Encontrado durante o
-turno", não saia fazendo.
+Um item por execução. Ao concluir, marque `[x]` com o hash do commit. Achou algo
+novo: anote em "Encontrado durante o turno", não saia fazendo.
 
 Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
 · `[?]` travado esperando resposta no `PERGUNTAS-PARA-O-ENZO.md`
+
+> **Antes de começar qualquer tarefa, leia a seção "Tarefas que o briefing pede
+> mas já estão prontas", no fim deste arquivo.** Cinco tarefas do briefing foram
+> feitas ontem. Não refaça.
 
 ---
 
 ## P0 — Conversão
 
-- [ ] **1. Lista de pedido no catálogo.** A maior lacuna do site: ele promete
-  "você manda a lista e a gente confirma na conversa", mas o catálogo não deixa
-  montar lista nenhuma. Botão "+ Adicionar à lista" em cada card da `loja.html`
-  e na página de produto; contador flutuante; painel com ajuste de quantidade e
-  remoção; persistência em `localStorage` seguindo o padrão que já existe no
-  `app.js` (`guardar`/`recuperar`); botão "Enviar lista no WhatsApp" montando
-  mensagem em `wa.me` com nome, marca e quantidade. Limitar a ~2000 caracteres:
-  passando disso, mandar as primeiras linhas e avisar que a lista completa segue
-  na conversa. JS puro, sem dependência. **Item grande: quebre em partes e faça
-  a primeira.**
+- [ ] **1. Lista de pedido no catálogo.** A maior lacuna: o site promete "você
+  manda a lista e a gente confirma na conversa", e o catálogo não deixa montar
+  lista nenhuma. Botão "+ Adicionar à lista" em cada card da `loja.html` e na
+  página de produto; contador flutuante; painel com quantidade e remoção;
+  persistência em `localStorage` seguindo `guardar`/`recuperar` do `app.js`;
+  botão "Enviar lista no WhatsApp" montando mensagem em `wa.me` com produto,
+  marca e quantidade. Limite ~2000 caracteres: passando disso, mandar as
+  primeiras linhas e avisar que a lista completa segue na conversa. JS puro.
+  **Item grande: faça uma parte inteira e funcionando por execução.**
 
-- [ ] **2. Eventos no GA4.** O GA4 está instalado e não mede nada acionável.
-  Eventos em: clique em botão de WhatsApp (com a página de origem), envio de
-  cada formulário, clique em card de produto, uso da busca (com o termo), uso
-  dos filtros, e cada passo da lista de pedido. Respeitar o consentimento: só
-  dispara se `window.DR_GA_CARREGADO` for verdadeiro.
+- [ ] **8. Contadores entregam "0" no HTML.** *(subiu de prioridade — é bug de
+  SEO com dano desproporcional e conserto de minutos.)* `index.html` e
+  `sobre.html` escrevem `<div class="stat-number" data-count-to="426">0</div>`.
+  O Google, os previews de link e quem tem JS bloqueado leem "0 Produtos no
+  catálogo", "0 Anos de mercado", "0 Marcas parceiras". Colocar o número real no
+  HTML e fazer o JS animar de 0 até o valor que já está lá. O JS está em
+  `app.js`, seção "Contadores".
 
-- [ ] **3. FAQ com schema FAQPage.** Perguntas que todo comerciante faz antes de
-  chamar no WhatsApp: pedido mínimo, prazo, região, pagamento, exigência de
-  CNPJ, pré-venda x pronta entrega. **As respostas dependem do Enzo** — montar a
-  estrutura, escrever as perguntas, deixar cada resposta como `[FALTA: ...]` e
-  conferir que a pergunta correspondente está no `PERGUNTAS-PARA-O-ENZO.md`
-  (itens 1 a 4).
+- [ ] **2. Enxugar o formulário de cadastro.** `quero-ser-cliente.html` tem 11
+  campos obrigatórios (empresa, CNPJ, segmento, nome, telefone, bairro, mensagem
+  e 3 checkboxes). É atrito demais para lead B2B no celular. Duas etapas: a
+  primeira só CNPJ + nome + WhatsApp — a consulta à BrasilAPI já preenche a
+  razão social sozinha — e a segunda opcional. **O consentimento LGPD continua
+  obrigatório na primeira etapa.** Documentar o que mudou.
 
-- [ ] **4. Prova social.** Estrutura para depoimentos, fotos reais e números
-  verificáveis. **Só material que já existe no repositório** — hoje são duas
-  fotos (`assets/sobre/warehouse.jpg` e `frota.jpg`). O resto já está pedido nos
-  itens 8, 9 e 10 do PERGUNTAS. O site já teve depoimento inventado uma vez e
-  foi removido por isso: não repetir.
+- [ ] **3. Eventos no GA4.** Instalado e não mede nada acionável. Eventos em:
+  clique em botão de WhatsApp (com a página de origem), envio de cada
+  formulário, clique em card de produto, uso da busca (com o termo), uso dos
+  filtros, e cada passo da lista de pedido. **Respeitar o Consent Mode que já
+  existe:** só dispara se `window.DR_GA_CARREGADO` for verdadeiro.
 
-- [ ] **5. Área de cobertura explícita.** "Atendemos todo o Rio de Janeiro" é
-  vago. Depende da resposta ao item 6 do PERGUNTAS. Sem ela, só Duque de Caxias
-  é fato confirmado. Montar a estrutura e marcar o resto.
+- [ ] **4. FAQ com schema FAQPage.** Pedido mínimo, prazo, região, pagamento,
+  exigência de CNPJ, pré-venda x pronta entrega. **As respostas dependem do
+  Enzo** — montar a estrutura, escrever as perguntas, deixar cada resposta como
+  `[FALTA: ...]`. Ver itens 1 a 4 do PERGUNTAS.
+
+- [ ] **5. Prova social.** Estrutura para depoimentos, fotos reais e números
+  verificáveis. **Só material que já existe no repositório**: hoje são duas
+  fotos (`assets/sobre/warehouse.jpg` e `frota.jpg`). O site já teve depoimento
+  inventado uma vez e foi removido por isso. Ver itens 8 a 10 do PERGUNTAS.
+
+- [ ] **6. Área de cobertura explícita.** "Atendemos todo o Rio de Janeiro" é
+  vago. Depende do item 6 do PERGUNTAS. Sem resposta, só Duque de Caxias é fato.
 
 ## P1 — SEO
 
-- [ ] **6. Páginas de produto estão rasas.** 426 páginas de ~14 KB com marca,
-  categoria e sabores, quase idênticas entre si — o Google trata como conteúdo
-  raso e pode não indexar. Enriquecer o template em
-  `tools/partials/produto.html`: apresentação, produtos relacionados da mesma
-  marca, link para a página da marca, CTA melhor. **Não inventar especificação**
-  (peso, unidades por caixa, EAN, validade).
+- [ ] **9. Páginas de produto estão rasas.** 426 páginas de ~14 KB com marca,
+  categoria e sabores, quase idênticas — o Google trata como conteúdo raso e
+  pode não indexar. Enriquecer `tools/partials/produto.html`: apresentação,
+  produtos relacionados da mesma marca, link para a página da marca, CTA melhor.
+  **Não inventar especificação** (peso, unidades por caixa, EAN, validade).
 
-- [ ] **7. Páginas locais.** Só criar de lugar que a empresa realmente atende.
+- [ ] **10. Páginas de marca.** 16 marcas, nenhuma página própria.
+  "Distribuidor Mondelez Rio de Janeiro" é busca de intenção altíssima. Uma
+  página por marca agregando os produtos, com schema `Brand`. Gerar pelo
+  `tools/gerar.js` a partir do `data/produtos.json`, como as de produto.
+
+- [ ] **12. Auditar Open Graph e meta description página a página.** Conferir se
+  cada página tem `og:title`, `og:description` e `<meta description>` próprios
+  ou se repetem o texto da home. Descrição duplicada em 434 URLs é desperdício.
+
+- [ ] **13. `lastmod` real no sitemap.** Confirmado: **as 434 URLs têm a mesma
+  data**. Gerar por arquivo a partir do histórico do git, no `tools/gerar.js`.
+
+- [ ] **14. Reforçar o structured data.** `LocalBusiness` com horário (item 5 do
+  PERGUNTAS), `Organization`, `WebSite` com `SearchAction`, e `BreadcrumbList`
+  onde faltar. Validar antes de commitar.
+
+- [ ] **11. Páginas locais.** Só de lugar que a empresa realmente atende.
   Enquanto o item 6 do PERGUNTAS não for respondido, **fazer apenas Duque de
   Caxias**, que é a sede e fato confirmado. Conteúdo próprio e útil, não doorway
   page recheada de keyword.
 
-- [ ] **8. Páginas de marca.** 16 marcas parceiras, nenhuma página própria.
-  "Distribuidor Mondelez Rio de Janeiro" é busca de intenção alta. Uma página
-  por marca agregando os produtos daquela marca, com schema `Brand`. Gerar pelo
-  `tools/gerar.js`, a partir do `data/produtos.json`, como as de produto.
-
-- [ ] **9. Reforçar o structured data.** `LocalBusiness` com horário (depende do
-  item 5 do PERGUNTAS), `Organization`, `WebSite` com `SearchAction`, e
-  `BreadcrumbList` onde ainda faltar. Validar antes de commitar.
-
-- [ ] **10. Atualizar `sitemap.xml`** com as páginas novas, mantendo o formato
-  atual. Já é gerado pelo `tools/gerar.js`.
-
 ## P2 — Desempenho
 
-- [ ] **11. `loja.html` pesa 511 KB.** 426 cartões num arquivo só. Já tem
-  `content-visibility: auto` por seção com altura estimada. Medir o que isso já
-  entrega antes de trocar de abordagem, e só então avaliar renderização
-  progressiva ou "carregar mais". Registrar tamanho do HTML, número de nós no
-  DOM e LCP, antes e depois. **Cuidado:** o `content-visibility` já causou
-  problema de âncora e de rolagem antes; ler o comentário no `style.css`.
+- [ ] **15. Nenhuma imagem usa `srcset` com largura.** Confirmado: os 301
+  `srcset` da `loja.html` são `<source>` de formato (WebP/AVIF), não de largura.
+  As fotos de produto são **500×500 servidas em cards de ~245 px**, e as do hero
+  são 1600 px entregues também no celular. Com 303 imagens, é o maior
+  desperdício de banda do site. Gerar 2 ou 3 larguras e montar `srcset` + `sizes`
+  corretos. Processar com script Node local (`tools/webp-produtos.py` já faz algo
+  parecido) — sem dependência no deploy.
 
-- [ ] **12. Hero da home.** O carrossel demora a pintar e fica um bloco escuro —
-  é o LCP do site. Já tem `fetchpriority="high"` na primeira imagem e dimensões
-  explícitas. Falta `preload` da primeira e um fundo enquanto carrega. As
-  imagens já foram comprimidas (4,8 MB para 203 KB); conferir se dá para mais.
+- [ ] **16. `loja.html` pesa 511 KB.** Já tem `content-visibility: auto` por
+  seção com altura estimada. **Medir o que isso já entrega antes de trocar de
+  abordagem**, e só então avaliar renderização progressiva ou "carregar mais".
+  Registrar tamanho do HTML, nós no DOM e LCP, antes e depois. **Cuidado:** o
+  `content-visibility` já causou problema de âncora e de rolagem; ler o
+  comentário no `style.css`.
 
-- [ ] **13. Refatorar `app.js` (60 KB).** Separar por responsabilidade com
-  módulos ES nativos (`type="module"`), sem bundler, carregando só o que cada
-  página precisa. **Fazer depois que a lista de pedido estiver funcionando.**
-  Testar página por página.
+- [ ] **17. Hero da home.** Demora a pintar e fica um bloco escuro — é o LCP.
+  Já tem `fetchpriority="high"` na primeira e dimensões explícitas. Falta
+  `preload` da primeira e um fundo enquanto carrega. As imagens já caíram de
+  4,8 MB para 203 KB; conferir se dá para mais.
 
-- [ ] **14. Otimizar imagens de produto.** Conferir WebP/AVIF, dimensões,
-  `width`/`height` e `loading="lazy"`. As 10 sem lazy na loja são as 8 acima da
-  dobra (propositais) mais 2 — conferir se as 2 são intencionais.
+- [ ] **18. As 10 imagens sem `loading="lazy"` na `loja.html`.** São as 8 acima
+  da dobra (propositais, com `fetchpriority="high"`) mais 2. Conferir se as 2
+  são intencionais e corrigir se não forem.
 
-## P3 — Design, mobile e acessibilidade
+- [ ] **19. Refatorar `app.js` (60 KB).** Módulos ES nativos (`type="module"`),
+  carregando só o que cada página precisa, sem bundler. **Depois** que a lista de
+  pedido estiver funcionando. Testar página por página.
+
+## P3 — Estrutura e manutenção
+
+- [ ] **23. `README.md` de manutenção.** Existe `tools/LEIAME.md` cobrindo o
+  fluxo do catálogo, mas não há README na raiz. Escrever: organização do
+  repositório, como adicionar produto, como trocar a imagem do hero, como o
+  deploy funciona (push na `main` → GitHub Pages), e o que **não** mexer (DNS,
+  CNAME, chaves, ID do GA4). Daqui a três meses ninguém lembra.
+
+- [ ] **22. Antispam nos formulários.** `trabalhe-conosco.html` **já tem**
+  honeypot (`botcheck`); `quero-ser-cliente.html` e `contato.html` não têm.
+  Adicionar equivalente nos dois e descartar envio com o campo preenchido. Sem
+  chave nova, sem serviço novo.
+
+## P4 — Design, mobile e acessibilidade
 
 O Enzo liberou implementar redesenho. Carregue a skill `frontend-design` antes
-de mexer em aparência, um redesenho por commit, registre o porquê no
+de mexer em aparência, um redesenho por commit, registre o porquê em
 `tools/noturno/PROPOSTAS.md`. Não reabra as decisões fechadas do `REGRAS.md`.
+**Não redesenhe o site** — a identidade é do cliente e está boa.
 
-- [ ] **15. Auditoria mobile.** Todas as páginas em 375 px e 414 px: overflow
+- [ ] **24. Auditoria mobile.** Todas as páginas em 375 px e 414 px: overflow
   horizontal, texto pequeno, carrossel difícil no dedo, filtros ocupando meia
-  tela, botão do WhatsApp cobrindo conteúdo, formulário chato de preencher.
+  tela, botão do WhatsApp cobrindo conteúdo, formulário chato com uma mão.
 
-- [ ] **16. Alvos de toque.** Elementos clicáveis com menos de 44 px de altura,
-  nos caminhos críticos: navegação, filtros, cards, CTAs.
+- [ ] **25. Alvos de toque.** Clicáveis com menos de 44 px de altura, no caminho
+  crítico: navegação, filtros, cards, CTAs.
 
-- [ ] **17. Acessibilidade.** Contraste em toda a paleta nova (mudou de bege
-  para cinza neutro ontem), foco visível, navegação por teclado, `aria-label`
-  faltando, e pausa real do carrossel e do ticker.
+- [ ] **26. Acessibilidade.** O CSS já tem `focus-visible` e
+  `prefers-reduced-motion`. Completar: contraste na paleta nova (mudou de bege
+  para cinza neutro ontem), navegação por teclado, `aria-label` faltando, pausa
+  real do carrossel e do ticker.
 
-- [x] **18. Página 404.** JÁ EXISTE, criada antes da noite: `404.html` com
-  busca, links de categoria e CTA de WhatsApp.
+- [ ] **28. Folha de impressão.** O `style.css` não tem `@media print`
+  (confirmado). Comerciante imprime lista de pedido e catálogo. Fazer para
+  `loja.html`, páginas de produto e a lista de pedido. Entrega barata e
+  genuinamente útil no balcão.
 
-- [ ] **19. Consistência visual.** Só depois de tudo acima. Espaçamentos,
-  hierarquia tipográfica e uso da cor de destaque. Não redesenhar o site — a
-  identidade é do cliente.
+- [ ] **29. Revisar `servicos.html`.** Conferir se vende o serviço — diferença
+  entre pré-venda e pronta entrega, logística, o que o comerciante ganha — ou se
+  é texto genérico. Melhorar com o que já existe de verdade, sem inventar.
+  Ontem a página perdeu duas seções repetidas e ficou curta.
 
-## Segurança
+- [ ] **30. Consistência visual.** Só depois de tudo acima. Espaçamentos,
+  hierarquia tipográfica, uso da cor de destaque.
 
-- [ ] **20. Antispam nos formulários.** `trabalhe-conosco.html` tem honeypot
-  (`botcheck`); `quero-ser-cliente.html` e `contato.html` não têm nada.
-  Adicionar equivalente e descartar envio que vier com o campo preenchido. Sem
-  chave nova, sem serviço novo, sem mexer na chave existente.
+## Herdados da fila anterior
 
-## Extras herdados da fila anterior
+Fora do briefing, já levantados. Depois do P4.
 
-Não estão no briefing, mas já estavam levantados. Fazer só depois do P3.
-
-- [x] **Política de privacidade não declarava a consulta de CNPJ.** FEITO,
-  commit `ae03ac6`.
-- [x] **Política não mencionava o campo Bairro.** FEITO, commit `ae03ac6`.
 - [ ] **`Referrer-Policy`** não declarada. Meta no `<head>`, pelo build.
 - [ ] **Content-Security-Policy** ausente. Meta `http-equiv`, começando em
   `report-only` numa página só. Cobrir Google Fonts, Analytics, Maps, BrasilAPI
   e Web3Forms.
-- [ ] **`rel="noopener"`** — escrever a checagem no `tools/checar-links.js`.
+- [ ] **`rel="noopener"`** — acrescentar a checagem ao `tools/checar-links.js`.
 - [ ] **Duplicatas no `style.css`** (`.form-consent`, `.category-bar`,
   `.category-chip`, `.hero`, `.hero-carousel-next`, `.whatsapp-float`). Foi um
   par assim (`.btn-ghost`) que deixou um botão ilegível no ar.
+
+---
+
+## Tarefas que o briefing pede mas já estão prontas
+
+Conferido no repositório em 09/09, 01:05. **Não refazer.**
+
+- [x] **7. Mapa na página de contato.** O briefing diz "não existe nenhum
+  `<iframe>` no site". Existe: `contato.html` tem o mapa incorporado, com
+  endereço ao lado, referências de como chegar, aviso de retirada no local e
+  botões de traçar rota e combinar retirada. Feito ontem.
+
+- [x] **20. `catalogo.json` como fonte única.** Feito ontem, com outro nome:
+  `data/produtos.json` é a fonte, e `tools/gerar.js` regenera `loja.html`, as
+  426 páginas de produto, o índice de busca, o `sitemap.xml`, `robots.txt`, o
+  manifesto, a 404 e o cabeçalho/rodapé de todas as páginas. O build é
+  idempotente e o deploy continua sendo commitar HTML. **O que falta desta
+  tarefa:** os números de estatística ainda são escritos à mão no HTML — isso
+  está coberto pela tarefa 8.
+
+- [x] **21. Script de verificação.** Feito ontem, dividido em dois:
+  `tools/checar-links.js` (links internos, imagens e âncoras nas 434 URLs) e
+  `tools/orfas.js` (imagem sem referência). **O que falta:** checar `canonical`,
+  `og:title`, `og:description`, um `<h1>` por página e placeholder esquecido —
+  juntar isso na tarefa 12.
+
+- [x] **27. Estado de "nenhum resultado" na busca.** Feito ontem: mensagem mais
+  botão "Perguntar no WhatsApp se temos", já com o termo digitado na mensagem.
+
+- [x] **Página 404.** Existe, com busca, links de categoria e CTA de WhatsApp.
 
 ---
 

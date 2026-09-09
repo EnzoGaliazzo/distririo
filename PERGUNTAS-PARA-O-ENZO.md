@@ -111,17 +111,37 @@ Estas travam o FAQ, que é a tarefa P0 nº 3.
 
 ---
 
-## Correções ao briefing (só para registro)
+## Correções ao briefing
 
-Confer o que o briefing afirmava contra o repositório, em 09/09 00:55:
+Conferido contra o repositório em 09/09, 01:05. O briefing foi escrito a partir
+de uma análise do site **antes do trabalho de ontem**, então parte dele já está
+entregue.
 
-| Briefing dizia | Realidade |
+**Já estava pronto — o turno não vai refazer:**
+
+| Tarefa do briefing | Situação |
+|---|---|
+| 7. Mapa na contato ("não existe nenhum iframe") | Existe, feito ontem, com endereço, referências e botão de rota |
+| 20. `catalogo.json` como fonte única | Feito ontem como `data/produtos.json` + `tools/gerar.js` |
+| 21. Script de verificação | Feito ontem: `checar-links.js` e `orfas.js` |
+| 27. Estado de "nenhum resultado" | Feito ontem, com CTA de WhatsApp |
+| 404.html | Já existe, com busca e CTA |
+
+**Números que não batiam:**
+
+| Briefing | Realidade |
 |---|---|
 | `assets/style.css` | O CSS está em `style.css`, na raiz |
-| 428 produtos e 428 páginas | **426** produtos e 426 páginas |
-| `loja.html` ~505 KB | 511 KB |
-| `app.js` ~59 KB | 60 KB |
-| "Verifique se existe `404.html`" | **Já existe**, com busca e CTA — tarefa 18 já está feita |
-| sitemap com 434 URLs | Confere |
-| 10 imagens sem `lazy` na loja | Confere — são as 8 acima da dobra, propositais, mais 2 |
-| honeypot nos formulários | Só `trabalhe-conosco.html` tem; cliente e contato não têm |
+| 428 produtos e 428 páginas | **426** — a unificação de ontem reduziu |
+| "Nenhum formulário tem honeypot" | `trabalhe-conosco.html` tem `botcheck`; os outros dois não |
+| `loja.html` 505 KB, `app.js` 59 KB | 511 KB e 60 KB |
+
+**Confirmado, e são bons achados:**
+
+- **Contadores entregam `0` no HTML.** `<div data-count-to="426">0</div>` — o
+  Google e os previews de link leem "0 Produtos no catálogo". É o melhor achado
+  do briefing e subiu na fila.
+- **`lastmod` igual nas 434 URLs** do sitemap.
+- **`@media print` ausente.**
+- **Nenhum `srcset` de largura.** Os 301 da loja são `<source>` de formato
+  (WebP/AVIF), não de largura — a crítica de banda está certa.
