@@ -136,7 +136,10 @@ function aplicarJsonLd(html, arquivo) {
 
     const blocos = [];
     const faq = extrairFaq(html);
-    if (faq.length) blocos.push(blocoFaq(faq));
+    if (faq.length) {
+        var bf = blocoFaq(faq);
+        if (bf) blocos.push(bf);
+    }
     if (arquivo === 'servicos.html') blocos.push(blocoServico(dados.categorias));
     if (NOME_PAGINA[arquivo]) blocos.push(blocoMigalhas(NOME_PAGINA[arquivo], arquivo));
     if (!blocos.length) return html;

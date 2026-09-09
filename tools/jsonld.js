@@ -22,11 +22,18 @@ function extrairFaq(html) {
     return perguntas;
 }
 
+// Pergunta cuja resposta ainda depende de dado do dono não entra no schema.
+// O rich snippet do Google mostraria "[FALTA: prazo em dias úteis...]" para
+// quem buscasse — pior do que não ter snippet nenhum.
+const respostaPendente = r => /\[FALTA:/i.test(r);
+
 function blocoFaq(perguntas) {
+    const prontas = perguntas.filter(q => !respostaPendente(q.r));
+    if (!prontas.length) return null;
     return {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
-        mainEntity: perguntas.map(q => ({
+        mainEntity: prontas.map(q => ({
             '@type': 'Question',
             name: q.p,
             acceptedAnswer: { '@type': 'Answer', text: q.r },
