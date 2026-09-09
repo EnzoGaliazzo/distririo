@@ -265,3 +265,44 @@ renderizado.
 mas o catálogo tem **22 marcas distintas**. Não mexi, porque "parceira" pode
 ser acordo comercial formal — e aí 16 está certo e é outro número. Virou o
 item 14 do `PERGUNTAS-PARA-O-ENZO.md`.
+
+### 05:40 — tarefa 9: página de produto mais funda (commit `54d133c`)
+
+As 426 páginas eram uma foto, cinco linhas de ficha e dois botões — quase
+idênticas entre si. Para o Google isso é conteúdo raso, que ele pode nem
+indexar; para quem cai ali vindo de uma busca, é beco sem saída, porque não
+havia para onde ir a não ser voltar.
+
+**Parágrafo de apresentação.** Montado só do que o `data/produtos.json` sabe:
+onde o item se encaixa (linha da marca, como Trident, ou categoria do
+catálogo, como Suplementos), a embalagem, os sabores quando o campo traz uma
+lista, e como se compra. **Nada de peso, unidades por caixa, EAN ou validade**
+— nada disso está no dado.
+
+**Bloco de relacionados.** Até quatro produtos de verdade: primeiro os irmãos
+da mesma categoria, depois o resto da marca, mais o link "Ver os N produtos
+<marca>". As 426 páginas têm pelo menos um relacionado e a maioria tem quatro.
+Isso é o que faz a página deixar de ser folha solta: agora ela leva para outros
+produtos, para a página da marca e para a categoria.
+
+**Um erro que estava no ar.** O campo `linha` aparecia na ficha sempre como
+"Sabores", mas em boa parte do catálogo ele guarda o nome da linha, não
+sabores. O site dizia, literalmente, **"Sabores: Proteção Solar"**. Agora o
+rótulo é "Sabores" quando o valor é uma lista separada por vírgula e "Linha"
+quando não é.
+
+Detalhe de redação: a frase de abertura não usa artigo antes do nome do
+produto. "O Geleia Baldoni Morango" sairia errado em todo nome feminino do
+catálogo.
+
+**Verificado:** build idempotente, `checar-links` em 453 páginas e 21.502
+referências sem caminho quebrado, a 375 px sem overflow horizontal, a grade de
+relacionados em uma coluna e o link da marca com 44 px de alvo de toque. A
+página passou de ~14 KB para ~21 KB e as fotos dos relacionados são `lazy`.
+
+**Uma limitação do turno, para você saber:** de madrugada a janela do
+navegador embutido parou de conseguir desenhar a página (a máquina ficou com
+outra janela na frente), então a partir daqui eu conferi layout medindo o DOM
+— largura, número de colunas, altura dos alvos de toque, overflow — em vez de
+olhar print. É medida direta do que o navegador calculou, mas não substitui o
+seu olho: vale você abrir uma página de produto e uma de marca no celular.

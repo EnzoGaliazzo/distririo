@@ -57,7 +57,10 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
 
 ## P1 — SEO
 
-- [ ] **9. Páginas de produto estão rasas.** 426 páginas de ~14 KB com marca,
+- [x] **9. Páginas de produto estão rasas.** FEITO (commit `54d133c`):
+  apresentação montada do catálogo, bloco de até 4 relacionados com link para a
+  página da marca, e o rótulo "Sabores" corrigido para "Linha" onde o campo não
+  traz sabores. Texto original: 426 páginas de ~14 KB com marca,
   categoria e sabores, quase idênticas — o Google trata como conteúdo raso e
   pode não indexar. Enriquecer `tools/partials/produto.html`: apresentação,
   produtos relacionados da mesma marca, link para a página da marca, CTA melhor.
