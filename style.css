@@ -3697,3 +3697,37 @@ body.lista-aberta {
         margin-top: 0;
     }
 }
+
+/* Apresentação e relacionados da página de produto (tarefa 9): sem eles a
+   página era ficha técnica e mais nada — conteúdo raso e beco sem saída. */
+
+.produto-apresentacao {
+    color: var(--texto-suave);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+    max-width: 62ch;
+}
+
+.section-relacionados {
+    border-top: 1px solid var(--gray-300);
+}
+
+.relacionados-mais {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.relacionados-mais a {
+    /* Link de navegação no celular: 44px de alvo de toque, não 20. */
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.5rem;
+    color: var(--red-text);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.relacionados-mais a:hover {
+    text-decoration: underline;
+}

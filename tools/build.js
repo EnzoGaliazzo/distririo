@@ -212,6 +212,90 @@ function montarCatalogo() {
 // =====================================================================
 // 3. páginas de produto
 // =====================================================================
+// Até quatro produtos de verdade para seguir a partir daqui: primeiro os
+// irmãos da mesma categoria, depois o resto da marca. Ordem estável (o sort do
+// V8 é estável), então a build continua idempotente.
+function relacionados(p, limite) {
+    const comFotoPrimeiro = lista => lista.slice().sort((a, b) => (b.img ? 1 : 0) - (a.img ? 1 : 0));
+    const mesmaCategoria = dados.produtos.filter(x => x.id !== p.id && x.categoria === p.categoria);
+    const mesmaMarca = p.marca
+        ? dados.produtos.filter(x => x.id !== p.id && x.marca === p.marca && x.categoria !== p.categoria)
+        : [];
+    const escolhidos = [];
+    for (const lista of [comFotoPrimeiro(mesmaCategoria), comFotoPrimeiro(mesmaMarca)]) {
+        for (const x of lista) {
+            if (escolhidos.length >= limite) return escolhidos;
+            escolhidos.push(x);
+        }
+    }
+    return escolhidos;
+}
+
+function blocoRelacionados(p, cat) {
+    const lista = relacionados(p, 4);
+    if (!lista.length) return '';
+
+    const todosDaCategoria = lista.every(x => x.categoria === p.categoria);
+    let titulo;
+    if (todosDaCategoria && cat) titulo = 'Outros itens de ' + cat.titulo;
+    else if (p.marca) titulo = 'Mais de ' + p.marca;
+    else titulo = 'Outros itens do catálogo';
+
+    const slug = p.marca ? paginasDeMarca.get(p.marca) : null;
+    const totalMarca = slug ? dados.produtos.filter(x => x.marca === p.marca).length : 0;
+
+    const linhas = [
+        '',
+        '        <section class="section section-relacionados">',
+        '            <h2>' + esc(titulo) + '</h2>',
+        '            <div class="product-grid">',
+        // índice 100: nunca eager, essas fotos não são o LCP da página
+        ...lista.map(x => cartao(x, 100, '../')),
+        '            </div>',
+    ];
+    if (slug) {
+        linhas.push('            <p class="relacionados-mais"><a href="../marca/' + slug + '.html">' +
+            'Ver os ' + totalMarca + ' produtos ' + esc(p.marca) + ' &rsaquo;</a></p>');
+    }
+    linhas.push('        </section>');
+    return linhas.join('\n');
+}
+
+// Parágrafo de abertura montado só com campo que existe no catálogo. Sem peso,
+// unidades por caixa, EAN nem validade: nada disso está no dado.
+function apresentacao(p, cat) {
+    const frases = [];
+    // Categoria com marca no dado é linha de produto (Trident, Baly); sem marca
+    // é categoria de catálogo (Suplementos, Barras e snacks).
+    const daLinha = cat && cat.titulo !== p.nome && cat.titulo !== p.marca
+        ? (cat.marca ? 'da linha ' : 'da categoria ') + cat.titulo
+        : '';
+    const daMarca = p.marca ? 'da ' + p.marca : '';
+    const origem = [daLinha, daMarca].filter(Boolean).join(', ');
+    // Sem artigo antes do nome: "O Geleia Baldoni Morango" sairia errado.
+    const abre = origem
+        ? p.nome + ' é um item ' + origem + ', que a Distri Rio distribui no atacado para '
+        : 'A Distri Rio distribui ' + p.nome + ' no atacado para ';
+    frases.push(abre + 'mercadinhos, farmácias, conveniências, padarias e bares do Rio de ' +
+        'Janeiro e da Baixada Fluminense.');
+
+    const pacotes = p.embalagens || [];
+    if (pacotes.length === 1) {
+        frases.push('A embalagem é de ' + pacotes[0] + '.');
+    } else if (pacotes.length > 1) {
+        frases.push('Trabalhamos nas embalagens de ' + pacotes.slice(0, -1).join(', ') +
+            ' e ' + pacotes[pacotes.length - 1] + '.');
+    }
+
+    // "linha" com vírgula é lista de sabores; sem vírgula é nome de linha, e aí
+    // a ficha já mostra sem precisar repetir aqui.
+    if (p.linha && /,/.test(p.linha)) frases.push('Os sabores disponíveis são ' + p.linha + '.');
+
+    frases.push('Preço e quantidade mínima saem pelo WhatsApp; a venda é só para pessoa ' +
+        'jurídica com CNPJ ativo.');
+    return frases.join(' ');
+}
+
 function paginaProduto(p, tpl) {
     const cat = dados.categorias.find(c => c.id === p.categoria);
     const embal = (p.embalagens || []).join(' · ');
@@ -254,7 +338,10 @@ function paginaProduto(p, tpl) {
         ['Marca', p.marca, linkMarca],
         ['Categoria', tituloCat],
         ['Embalagem', embal],
-        ['Sabores', p.linha],
+        // "linha" às vezes é lista de sabores ("Menta, Hortelã...") e às vezes
+        // nome de linha ("Proteção Solar"). Rotular tudo como Sabores estava
+        // errado na metade dos casos.
+        [/,/.test(p.linha || '') ? 'Sabores' : 'Linha', p.linha],
         ['Código interno', (p.skus || []).join(', ')],
     ].filter(par => par[1])
         .map(par => '                    <div class="ficha-linha"><dt>' + par[0] + '</dt><dd>' + (par[2] || esc(par[1])) + '</dd></div>')
@@ -307,7 +394,10 @@ function paginaProduto(p, tpl) {
         .replace(/\{\{JSONLD\}\}/g, JSON.stringify(jsonld))
         .replace(/\{\{MIGALHAS\}\}/g, JSON.stringify(migalhas))
         .replace(/\{\{CABECALHO\}\}/g, montarCabecalho('../', 'loja'))
-        .replace(/\{\{RODAPE\}\}/g, indentar(montarRodape('../'), 4));
+        .replace(/\{\{RODAPE\}\}/g, indentar(montarRodape('../'), 4))
+        // função no lugar de string: nome de produto com $ viraria $& na saída
+        .replace(/\{\{APRESENTACAO\}\}/g, () => esc(apresentacao(p, cat)))
+        .replace(/\{\{RELACIONADOS\}\}/g, () => blocoRelacionados(p, cat));
 }
 
 module.exports = {
