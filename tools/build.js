@@ -296,17 +296,43 @@ function apresentacao(p, cat) {
     return frases.join(' ');
 }
 
+// Corta no limite sem partir palavra ao meio. O Google mostra ~60 caracteres
+// de título e ~155 de descrição; o que passa disso vira reticência dele.
+const cortar = (txt, max) => {
+    if (txt.length <= max) return txt;
+    const pedaco = txt.slice(0, max - 1);
+    const espaco = pedaco.lastIndexOf(' ');
+    return (espaco > max * 0.6 ? pedaco.slice(0, espaco) : pedaco).replace(/[\s,;:.\-\u2014]+$/, '') + '\u2026';
+};
+
 function paginaProduto(p, tpl) {
     const cat = dados.categorias.find(c => c.id === p.categoria);
     const embal = (p.embalagens || []).join(' · ');
-    const titulo = p.nome + (p.marca ? ' — ' + p.marca : '') + ' | Distri Rio';
-    const descricao = [
-        p.nome,
+    const tituloCompleto = p.nome + (p.marca ? ' — ' + p.marca : '') + ' | Distri Rio';
+    // <title> curto para a busca; og:title inteiro, que o WhatsApp e o
+    // Facebook mostram bem mais texto.
+    const titulo = tituloCompleto.length <= 62
+        ? tituloCompleto
+        : cortar(p.nome, 62 - ' | Distri Rio'.length) + ' | Distri Rio';
+    // A descrição cabe em 158 caracteres cortando o NOME, nunca o final: quem
+    // lê o resultado da busca precisa chegar em "venda apenas para CNPJ", que é
+    // o que filtra visita inútil. Alguns nomes do catálogo têm 110 caracteres.
+    const fecho = [
+        p.marca ? 'da ' + p.marca : '',
+        'no atacado para comércios do Rio de Janeiro.',
+        'Pedido pelo WhatsApp, venda apenas para CNPJ.',
+    ].filter(Boolean).join(' ');
+    const fechoComEmbalagem = [
         p.marca ? 'da ' + p.marca : '',
         'no atacado para comércios do Rio de Janeiro.',
         embal ? 'Disponível em ' + embal + '.' : '',
         'Pedido pelo WhatsApp, venda apenas para CNPJ.',
     ].filter(Boolean).join(' ');
+    const descricao = p.nome + ' ' + fechoComEmbalagem;
+    let descricaoCurta;
+    if (descricao.length <= 158) descricaoCurta = descricao;
+    else if ((p.nome + ' ' + fecho).length <= 158) descricaoCurta = p.nome + ' ' + fecho;
+    else descricaoCurta = cortar(p.nome, 158 - fecho.length - 1) + ' ' + fecho;
 
     const msg = encodeURIComponent(
         'Olá! Tenho interesse em ' + p.nome + (embal ? ' (' + embal + ')' : '') + '. Podem me passar as condições?');
@@ -380,7 +406,8 @@ function paginaProduto(p, tpl) {
 
     return tpl
         .replace(/\{\{TITULO\}\}/g, esc(titulo))
-        .replace(/\{\{DESCRICAO\}\}/g, esc(descricao))
+        .replace(/\{\{DESCRICAO\}\}/g, esc(descricaoCurta))
+        .replace(/\{\{TITULO_OG\}\}/g, esc(tituloCompleto))
         .replace(/\{\{URL\}\}/g, SITE + '/produto/' + p.id + '.html')
         .replace(/\{\{IMG_ABS\}\}/g, imgAbs)
         .replace(/\{\{NOME\}\}/g, esc(p.nome))
@@ -501,7 +528,8 @@ function paginaMarca(marca, todas, tpl) {
 
     return tpl
         .replace(/\{\{TITULO\}\}/g, esc(titulo))
-        .replace(/\{\{DESCRICAO\}\}/g, esc(descricao))
+        .replace(/\{\{TITULO_OG\}\}/g, esc(titulo))
+        .replace(/\{\{DESCRICAO\}\}/g, esc(cortar(descricao, 158)))
         .replace(/\{\{URL\}\}/g, SITE + '/marca/' + marca.slug + '.html')
         .replace(/\{\{IMG_ABS\}\}/g, capa ? SITE + '/' + capa.img : SITE + '/assets/og-distririo.jpg')
         .replace(/\{\{RESUMO\}\}/g, esc(resumo))
