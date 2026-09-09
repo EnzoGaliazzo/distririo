@@ -1,0 +1,13 @@
+# Ferramentas de agente instaladas localmente (npx skills add).
+# Ficam de fora do repositório porque o GitHub Pages, com o .nojekyll, serve
+# arquivos e pastas iniciados por ponto — o conteúdo delas ficaria acessível
+# em distririo.com.br. São ferramenta de quem edita o site, não parte do site.
+.agents/
+.claude/skills/
+skills-lock.json
+
+# Dependências e temporários
+node_modules/
+*.log
+Thumbs.db
+desktop.ini

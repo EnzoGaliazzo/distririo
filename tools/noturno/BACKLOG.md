@@ -10,7 +10,7 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
 
 ## Privacidade e conformidade
 
-- [ ] **A política de privacidade não menciona a consulta de CNPJ.**
+- [x] **A política de privacidade não menciona a consulta de CNPJ.** FEITO em 09/09: cláusula nova na seção 3, dizendo que só o CNPJ é enviado, para quem, para quê, e que a resposta não é gravada.
   O campo de CNPJ em `quero-ser-cliente.html` envia o número digitado para
   `brasilapi.com.br` (ver `consultarCnpj` em `app.js`). Isso é compartilhamento
   com operador externo e precisa estar declarado na
@@ -18,7 +18,7 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
   e que a resposta não é armazenada pelo site. Acrescentar na seção de
   compartilhamento de dados, no mesmo tom das outras cláusulas.
 
-- [ ] **A política não menciona o campo Bairro nem a lista de bairros.**
+- [x] **A política não menciona o campo Bairro nem a lista de bairros.** FEITO em 09/09: a lista de dados coletados dizia "cidade"; passou a dizer bairro ou município.
   O formulário passou a coletar bairro. Conferir se a enumeração de dados
   coletados na política cobre isso e o CNPJ; completar o que faltar.
 
