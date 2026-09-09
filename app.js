@@ -1207,6 +1207,31 @@
         return d1 === parseInt(c[12], 10) && d2 === parseInt(c[13], 10);
     }
 
+    // Confere se o CNPJ existe de verdade, e nao so se os digitos fecham.
+    // A BrasilAPI le o cadastro publico da Receita. Se a consulta falhar (rede,
+    // limite, servico fora), o formulario segue valendo com a checagem local:
+    // e melhor deixar passar do que travar um cliente por causa de uma API.
+    var cacheCnpj = {};
+
+    function consultarCnpj(numero) {
+        if (cacheCnpj[numero]) return Promise.resolve(cacheCnpj[numero]);
+        return fetch('https://brasilapi.com.br/api/cnpj/v1/' + numero)
+            .then(function (r) {
+                if (r.status === 404) return { achou: false };
+                if (!r.ok) return { indisponivel: true };
+                return r.json().then(function (d) {
+                    return {
+                        achou: true,
+                        razao: d.razao_social || d.nome_fantasia || '',
+                        situacao: (d.descricao_situacao_cadastral || '').toUpperCase(),
+                        municipio: d.municipio || ''
+                    };
+                });
+            })
+            .catch(function () { return { indisponivel: true }; })
+            .then(function (r) { cacheCnpj[numero] = r; return r; });
+    }
+
     function ligarMascaras(form) {
         var cnpj = form.querySelector('input[name="cnpj"]');
         if (cnpj) {
@@ -1217,13 +1242,59 @@
                 if (pos) cnpj.setSelectionRange(cnpj.value.length, cnpj.value.length);
                 cnpj.setCustomValidity(!cnpj.value || cnpjValido(cnpj.value) ? '' : 'CNPJ inválido — confira os números.');
             });
+            // Tecla que nao e numero nem sai na tela.
+            cnpj.addEventListener('keypress', function (e) {
+                if (e.key.length === 1 && !/[0-9]/.test(e.key)) e.preventDefault();
+            });
+            cnpj.addEventListener('paste', function (e) {
+                var texto = (e.clipboardData || window.clipboardData).getData('text');
+                if (!/^[\d.\/\s-]+$/.test(texto)) e.preventDefault();
+            });
+
+            var retorno = document.getElementById('cnpjRetorno');
+            function dizer(msg, tipo) {
+                if (!retorno) return;
+                retorno.textContent = msg || '';
+                retorno.className = 'form-dica' + (tipo ? ' form-dica-' + tipo : '');
+            }
+
             cnpj.addEventListener('blur', function () {
-                cnpj.setCustomValidity(!cnpj.value || cnpjValido(cnpj.value) ? '' : 'CNPJ inválido — confira os números.');
+                var digitos = cnpj.value.replace(/\D/g, '');
+                if (!cnpj.value) { cnpj.setCustomValidity(''); dizer(''); return; }
+                if (!cnpjValido(cnpj.value)) {
+                    cnpj.setCustomValidity('CNPJ inválido — confira os números.');
+                    dizer('CNPJ inválido — confira os números.', 'erro');
+                    return;
+                }
+                cnpj.setCustomValidity('');
+                dizer('Conferindo na Receita...');
+                consultarCnpj(digitos).then(function (r) {
+                    if (cnpj.value.replace(/\D/g, '') !== digitos) return;
+                    if (r.indisponivel) { dizer(''); return; }
+                    if (!r.achou) {
+                        cnpj.setCustomValidity('Não encontramos esse CNPJ no cadastro da Receita.');
+                        dizer('Não encontramos esse CNPJ no cadastro da Receita.', 'erro');
+                        return;
+                    }
+                    if (r.situacao && r.situacao !== 'ATIVA') {
+                        cnpj.setCustomValidity('Esse CNPJ consta como ' + r.situacao.toLowerCase() + '. Vendemos só para CNPJ ativo.');
+                        dizer('Esse CNPJ consta como ' + r.situacao.toLowerCase() + '. Vendemos só para CNPJ ativo.', 'erro');
+                        return;
+                    }
+                    cnpj.setCustomValidity('');
+                    dizer(r.razao ? r.razao + ' — ativo' : 'CNPJ ativo', 'ok');
+                    // Preenche a razao social se a pessoa ainda nao escreveu.
+                    var empresa = form.querySelector('input[name="company"]');
+                    if (empresa && !empresa.value.trim() && r.razao) empresa.value = r.razao;
+                });
             });
         }
 
         form.querySelectorAll('input[name="phone"], input[type="tel"]').forEach(function (tel) {
-            tel.setAttribute('inputmode', 'tel');
+            tel.setAttribute('inputmode', 'numeric');
+            tel.addEventListener('keypress', function (e) {
+                if (e.key.length === 1 && !/[0-9]/.test(e.key)) e.preventDefault();
+            });
             tel.addEventListener('input', function () {
                 var fim = tel.selectionStart === tel.value.length;
                 tel.value = mascararTelefone(tel.value);
@@ -1253,7 +1324,7 @@
                 '*Responsável:* ' + form.name.value.trim(),
                 '*Telefone:* ' + form.phone.value.trim()
             ];
-            if (form.city.value.trim()) linhas.push('*Cidade:* ' + form.city.value.trim());
+            if (form.bairro && form.bairro.value) linhas.push('*Bairro:* ' + form.bairro.value);
             if (form.message.value.trim()) linhas.push('', form.message.value.trim());
 
             if (window.DR_GA_CARREGADO && typeof gtag === 'function') {
