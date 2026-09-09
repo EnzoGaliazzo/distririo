@@ -352,38 +352,6 @@ button {
 }
 
 /* Category quick links (loja.html) */
-.category-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    justify-content: center;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 1rem 1.5rem;
-}
-
-.category-chip {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.5rem 1.1rem;
-    background: var(--gray-100);
-    border: 1px solid var(--gray-300);
-    border-radius: 999px;
-    color: var(--dark);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease);
-}
-
-.category-chip:hover {
-    background: var(--red);
-    border-color: var(--red);
-    color: var(--white);
-    transform: translateY(-2px);
-}
-
 /* ===== Hero ===== */
 .hero {
     text-align: center;
@@ -1745,11 +1713,7 @@ main {
         font-size: 1.8rem;
     }
 
-    .category-bar {
-        justify-content: flex-start;
-        padding-bottom: 0.75rem;
     }
-}
 
 /* ---------- Documentos legais (politica de privacidade) ---------- */
 .legal-doc {
@@ -2095,42 +2059,6 @@ main {
 /* =====================================================================
    Catálogo — cartões clicáveis, placeholder e barra de categorias
    ===================================================================== */
-
-.category-bar {
-    position: sticky;
-    top: var(--header-total);
-    z-index: 20;
-    display: flex;
-    gap: 0.5rem;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    scroll-snap-type: x proximity;
-    padding: 0.7rem 1.5rem;
-    margin: 0 auto;
-    max-width: 1100px;
-    background: color-mix(in srgb, var(--gray-100) 92%, transparent);
-    backdrop-filter: blur(8px);
-    scrollbar-width: thin;
-    /* As duas pontas somem em gradiente: é a pista de que há mais categorias. */
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
-    mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
-}
-
-.category-chip {
-    scroll-snap-align: start;
-    white-space: nowrap;
-}
-
-.category-chip[aria-current="true"] {
-    background: var(--red);
-    border-color: var(--red);
-    color: var(--white);
-}
-
-.category-chip.sem-resultado {
-    opacity: 0.35;
-    pointer-events: none;
-}
 
 .category-count {
     margin: -1rem 0 1.25rem;
@@ -2928,31 +2856,74 @@ main {
    Painel de filtros do catálogo
    ===================================================================== */
 
+/* =====================================================================
+   Catálogo: filtros na coluna da esquerda
+   A faixa horizontal grudava no topo e comia altura de tela justamente na
+   página onde o visitante precisa dela para ver produto. Em coluna, fica à
+   vista o tempo todo sem disputar espaço com a grade.
+   ===================================================================== */
+
+.catalogo-layout {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 0;
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+}
+
 .filtros {
     position: sticky;
-    top: var(--header-total);
+    top: calc(var(--header-total) + 1rem);
     z-index: 21;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0.9rem 1.5rem;
-    background: color-mix(in srgb, var(--gray-100) 94%, transparent);
-    backdrop-filter: blur(10px);
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+    /* Se um dia entrar mais filtro do que cabe na tela, o painel rola por
+       dentro em vez de esconder o de baixo. */
+    max-height: calc(100vh - var(--header-total) - 2rem);
+    overflow-y: auto;
+}
+
+.filtros-titulo {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--texto-fraco);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--gray-300);
+}
+
+/* A grade já dá o respiro; a seção do catálogo não repete a margem nem o
+   limite de largura de uma seção solta. */
+.catalogo-layout .section-catalog {
+    max-width: none;
+    margin: 0;
+    padding: 0 0 3rem;
+}
+
+.catalogo-layout .category-section:first-of-type {
+    padding-top: 0;
 }
 
 .filtros-campos {
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 0.75rem 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
 }
 
 .filtro {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.35rem;
     min-width: 0;
-    flex: 1 1 200px;
 }
 
 .filtro > span {
@@ -2980,11 +2951,9 @@ main {
 }
 
 .filtro-marcavel {
-    flex: 0 0 auto;
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    padding-bottom: 0.6rem;
     cursor: pointer;
 }
 
@@ -3004,7 +2973,8 @@ main {
 }
 
 .filtro-limpar {
-    flex: 0 0 auto;
+    align-self: stretch;
+    text-align: center;
     font: inherit;
     font-size: 0.88rem;
     font-weight: 600;
@@ -3012,8 +2982,7 @@ main {
     background: transparent;
     border: 1px solid var(--gray-300);
     border-radius: 999px;
-    padding: 0.5rem 0.95rem;
-    margin-bottom: 0.35rem;
+    padding: 0.6rem 0.95rem;
     cursor: pointer;
 }
 
@@ -3028,20 +2997,57 @@ main {
 
 /* A barra de categorias deixa de ser sticky: quem fixa agora é o painel,
    e duas faixas grudadas no topo comiam metade da tela no celular. */
-.category-bar {
-    position: static;
-    backdrop-filter: none;
-    background: transparent;
-    padding-top: 0.35rem;
-    padding-bottom: 0.9rem;
+/* Abaixo de 1000 px não cabe coluna lateral: o painel volta para o topo,
+   compacto, e o catálogo ocupa a largura toda. */
+@media (max-width: 1000px) {
+    .catalogo-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.25rem;
+        max-width: 1100px;
+        padding-top: 1rem;
+    }
+
+    .filtros {
+        max-height: none;
+        overflow: visible;
+        padding: 1rem;
+    }
+
+    /* No topo da página o painel se explica sozinho, e cada pixel de altura
+       aqui é pixel a menos de produto na primeira tela. */
+    .filtros-titulo {
+        display: none;
+    }
+
+    .filtros-campos {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: 0.75rem 1rem;
+    }
+
+    .filtros-campos > .filtro {
+        flex: 1 1 200px;
+    }
+
+    .filtros-campos > .filtro-marcavel,
+    .filtros-campos > .filtro-limpar {
+        flex: 0 0 auto;
+        align-self: center;
+    }
 }
 
 @media (max-width: 720px) {
-    .filtros {
-        padding: 0.75rem 1rem;
+    .catalogo-layout {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
-    .filtro {
+    .filtros {
+        padding: 0.9rem 1rem;
+    }
+
+    .filtros-campos > .filtro {
         flex: 1 1 100%;
     }
 
@@ -3806,11 +3812,7 @@ body.lista-aberta {
         height: 44px;
     }
 
-    .category-chip {
-        min-height: 44px;
-    }
-
-    .filtro select,
+        .filtro select,
     .filtro input[type="text"],
     .filtro input[type="search"] {
         min-height: 44px;
@@ -3843,20 +3845,6 @@ body.lista-aberta {
     .hero-pausa,
     .hero-progresso,
     .marquee,
-    .category-bar,
-    .filtros,
-    .search-status,
-    .btn-lista,
-    .btn-lista-grande,
-    .skip-link,
-    .form-acoes,
-    .hero-acoes,
-    .marca-acoes,
-    .produto-acoes,
-    .cta-band {
-        display: none !important;
-    }
-
     /* 2. tinta: texto preto em papel branco */
     :root {
         --texto-suave: #000;

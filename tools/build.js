@@ -165,7 +165,8 @@ function montarFiltros() {
         .join('\n');
 
     return [
-        '        <section class="filtros" aria-label="Filtrar o catálogo">',
+        '        <aside class="filtros" aria-label="Filtrar o catálogo">',
+        '            <h2 class="filtros-titulo">Filtrar</h2>',
         '            <div class="filtros-campos">',
         '                <label class="filtro">',
         '                    <span>Marca</span>',
@@ -188,21 +189,17 @@ function montarFiltros() {
         '                <button type="button" class="filtro-limpar" id="limparFiltros" hidden>Limpar filtros</button>',
         '            </div>',
         '            <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>',
-        '        </section>',
+        '        </aside>',
     ].join('\n');
 }
 
 function montarCatalogo() {
-    const chips = dados.categorias
-        .map(c => '            <a href="#' + c.id + '" class="category-chip">' + esc(c.titulo) + '</a>')
-        .join('\n');
-
     let n = 0;
     const secoes = dados.categorias.map(c => {
         const itens = porCategoria.get(c.id) || [];
         const cartoes = itens.map(p => cartao(p, n++, '')).join('\n');
         // Altura estimada da seção, para o content-visibility não chutar 900px
-        // em toda seção e desalinhar as âncoras da barra de categorias.
+        // em toda seção e desalinhar as âncoras vindas das páginas de produto.
         const linhas = Math.ceil(itens.length / 4);
         const alturaEstimada = linhas * 330 + 200;
         return [
@@ -217,7 +214,7 @@ function montarCatalogo() {
         ].join('\n');
     }).join('\n\n');
 
-    return { chips, secoes };
+    return { secoes };
 }
 
 // =====================================================================

@@ -90,20 +90,20 @@ const MARCA_INI = '        <!-- catalogo:inicio (gerado por tools/gerar.js — n
 const MARCA_FIM = '        <!-- catalogo:fim -->';
 
 function trocarCatalogo(html) {
-    const { chips, secoes } = montarCatalogo();
+    const { secoes } = montarCatalogo();
+    // Painel de filtros à esquerda e catálogo à direita, na mesma grade. No
+    // celular a grade vira uma coluna só e o painel volta para o topo.
     const bloco = [
         MARCA_INI,
+        '        <div class="catalogo-layout">',
         montarFiltros(),
-        '',
-        '        <nav class="category-bar" aria-label="Ir para uma categoria">',
-        chips,
-        '        </nav>',
         '',
         '        <section class="section section-catalog">',
         '            <p class="no-results" id="noResults" hidden>Nenhum produto encontrado para essa busca.</p>',
         '',
         secoes,
         '        </section>',
+        '        </div>',
         '',
         B.montarNavMarcas(),
         MARCA_FIM,
@@ -113,7 +113,7 @@ function trocarCatalogo(html) {
     if (jaTemMarcas) {
         return html.replace(/[ \t]*<!-- catalogo:inicio[\s\S]*?<!-- catalogo:fim -->/, bloco);
     }
-    const re = /[ \t]*<nav class="category-bar"[\s\S]*?<\/section>/;
+    const re = /[ \t]*<section class="filtros"[\s\S]*?<\/section>/;
     if (!re.test(html)) throw new Error('bloco do catálogo não encontrado em loja.html');
     return html.replace(re, bloco);
 }

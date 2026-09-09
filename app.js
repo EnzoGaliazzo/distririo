@@ -925,7 +925,6 @@
         var status = document.getElementById('searchStatus');
         var semResultado = document.getElementById('noResults');
         var secoes = Array.prototype.slice.call(document.querySelectorAll('.category-section'));
-        var chips = Array.prototype.slice.call(document.querySelectorAll('.category-chip'));
 
         // O texto de busca já vem normalizado do build: nada de reprocessar
         // 400 produtos a cada tecla digitada.
@@ -995,9 +994,6 @@
                         contagem.textContent = contagem.dataset.total;
                     }
                 }
-
-                var chip = chips.find(function (c) { return c.getAttribute('href') === '#' + secao.id; });
-                if (chip) chip.classList.toggle('sem-resultado', !achou);
             });
 
             if (semResultado) semResultado.hidden = visiveis !== 0;
@@ -1077,19 +1073,6 @@
             });
         }
 
-        // Clicar num chip de categoria também alimenta o filtro, para os dois
-        // não contarem histórias diferentes.
-        chips.forEach(function (chip) {
-            chip.addEventListener('click', function () {
-                if (!selCategoria) return;
-                var id = (chip.getAttribute('href') || '').slice(1);
-                if (selCategoria.value && selCategoria.value !== id) {
-                    selCategoria.value = '';
-                    filtrar(campo ? campo.value : '', false);
-                }
-            });
-        });
-
         // Estado de "nada encontrado" com saída, em vez de um parágrafo solto.
         if (semResultado && !semResultado.querySelector('.no-results-acoes')) {
             var acoes = document.createElement('div');
@@ -1156,35 +1139,6 @@
         window.addEventListener('hashchange', corrigirAncora);
         window.addEventListener('load', corrigirAncora);
         corrigirAncora();
-
-        // Marca no chip a categoria que está passando pela tela.
-        if ('IntersectionObserver' in window && chips.length) {
-            var barra = document.querySelector('.category-bar');
-
-            // Centralizar o chip mexendo só no scrollLeft da barra.
-            // scrollIntoView aqui era um tiro no pé: ele rola TODOS os
-            // ancestrais roláveis, inclusive a página, e como isso disparava a
-            // cada seção que cruzava a tela, a página era puxada de volta no
-            // meio da rolagem do visitante.
-            function centralizarChip(chip) {
-                if (!barra) return;
-                var alvo = chip.offsetLeft - (barra.clientWidth - chip.offsetWidth) / 2;
-                var max = barra.scrollWidth - barra.clientWidth;
-                barra.scrollLeft = Math.max(0, Math.min(alvo, max));
-            }
-
-            var espia = new IntersectionObserver(function (entradas) {
-                entradas.forEach(function (e) {
-                    if (!e.isIntersecting) return;
-                    chips.forEach(function (c) {
-                        var alvo = c.getAttribute('href') === '#' + e.target.id;
-                        c.setAttribute('aria-current', alvo ? 'true' : 'false');
-                        if (alvo) centralizarChip(c);
-                    });
-                });
-            }, { rootMargin: '-30% 0px -60% 0px' });
-            secoes.forEach(function (s) { espia.observe(s); });
-        }
     });
 
     // =================================================================

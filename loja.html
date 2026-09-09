@@ -48,7 +48,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap"></noscript>
-    <link rel="stylesheet" href="style.css?v=1a005b06">
+    <link rel="stylesheet" href="style.css?v=453d5bec">
     <!-- jsonld:inicio -->
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://distririo.com.br/"},{"@type":"ListItem","position":2,"name":"Catálogo","item":"https://distririo.com.br/loja.html"}]}</script>
     <!-- jsonld:fim -->
@@ -106,7 +106,9 @@
         </section>
 
         <!-- catalogo:inicio (gerado por tools/gerar.js — não editar à mão) -->
-        <section class="filtros" aria-label="Filtrar o catálogo">
+        <div class="catalogo-layout">
+        <aside class="filtros" aria-label="Filtrar o catálogo">
+            <h2 class="filtros-titulo">Filtrar</h2>
             <div class="filtros-campos">
                 <label class="filtro">
                     <span>Marca</span>
@@ -182,43 +184,7 @@
                 <button type="button" class="filtro-limpar" id="limparFiltros" hidden>Limpar filtros</button>
             </div>
             <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>
-        </section>
-
-        <nav class="category-bar" aria-label="Ir para uma categoria">
-            <a href="#mdz-trident" class="category-chip">Trident</a>
-            <a href="#mdz-trident-xsenses" class="category-chip">Trident Xsenses</a>
-            <a href="#mdz-chiclets-adams" class="category-chip">Chiclets (Adams)</a>
-            <a href="#mdz-trident-max" class="category-chip">Trident Max</a>
-            <a href="#mdz-bubbaloo" class="category-chip">Bubbaloo</a>
-            <a href="#mdz-halls" class="category-chip">Halls</a>
-            <a href="#mdz-tang" class="category-chip">Tang</a>
-            <a href="#mdz-oreo" class="category-chip">Oreo</a>
-            <a href="#mdz-club-social" class="category-chip">Club Social</a>
-            <a href="#mdz-lacta" class="category-chip">Lacta</a>
-            <a href="#mdz-bis" class="category-chip">Bis</a>
-            <a href="#mdz-bis-xtra" class="category-chip">Bis Xtra</a>
-            <a href="#mdz-lacta-intense" class="category-chip">Lacta Intense</a>
-            <a href="#baly" class="category-chip">Baly Brasil</a>
-            <a href="#dr-aqua-coco" class="category-chip">Aqua Coco</a>
-            <a href="#dr-sumo" class="category-chip">Sumo</a>
-            <a href="#dr-marata" class="category-chip">Maratá</a>
-            <a href="#dr-mara-tinho" class="category-chip">Mara-tinho</a>
-            <a href="#dr-gota" class="category-chip">Gota</a>
-            <a href="#dr-rivoli" class="category-chip">Rivoli</a>
-            <a href="#dr-trio" class="category-chip">Trio</a>
-            <a href="#dr-kobber" class="category-chip">Kobber</a>
-            <a href="#dr-baldoni" class="category-chip">Baldoni</a>
-            <a href="#dr-ace" class="category-chip">Ace</a>
-            <a href="#dr-espumil" class="category-chip">Espumil</a>
-            <a href="#banana-brasil" class="category-chip">Banana Brasil</a>
-            <a href="#lauton" class="category-chip">Lauton</a>
-            <a href="#abelha-rainha" class="category-chip">Abelha Rainha</a>
-            <a href="#apisvida" class="category-chip">Apisvida</a>
-            <a href="#farma-barras" class="category-chip">Barras e snacks</a>
-            <a href="#farma-vitaminas" class="category-chip">Vitaminas e minerais</a>
-            <a href="#farma-fitoterapicos" class="category-chip">Fitoterápicos e naturais</a>
-            <a href="#farma-suplementos" class="category-chip">Suplementos</a>
-        </nav>
+        </aside>
 
         <section class="section section-catalog">
             <p class="no-results" id="noResults" hidden>Nenhum produto encontrado para essa busca.</p>
@@ -6811,6 +6777,7 @@
                 </div>
             </div>
         </section>
+        </div>
 
         <section class="section section-marcas">
             <h2>Marcas que distribuímos</h2>
@@ -6911,6 +6878,6 @@
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.47 1.29 4.92L2 22l5.31-1.39a9.87 9.87 0 0 0 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2Zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.15.83.84-3.07-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.53 3.69-8.22 8.23-8.22 2.2 0 4.26.86 5.82 2.41a8.18 8.18 0 0 1 2.41 5.82c0 4.53-3.69 8.22-8.19 8.22Zm4.51-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.99-1.22-.73-.66-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42-.14 0-.31-.02-.48-.02s-.44.06-.67.31c-.23.25-.87.85-.87 2.08s.89 2.42 1.01 2.58c.12.17 1.75 2.67 4.24 3.75.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29Z"/></svg>
 </a>
 
-<script src="app.js?v=53565c06"></script>
+<script src="app.js?v=dab7b7cd"></script>
 </body>
 </html>
