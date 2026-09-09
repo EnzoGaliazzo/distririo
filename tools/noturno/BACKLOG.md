@@ -76,14 +76,31 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
   Pronabol ficaram de fora do corte (menos de 4 itens) — publicar página de duas
   linhas é conteúdo raso e beco sem saída.
 
-- [ ] **12. Auditar Open Graph e meta description página a página.** Conferir se
+- [x] **12. Auditar Open Graph e meta description página a página.** FEITO
+  (commit `11928da`). Cada página já tinha meta própria — o medo do briefing
+  não se confirmou. O que estava errado: 94 títulos de produto acima de 62
+  caracteres (o pior com 140) e 94 descrições acima de 158 (a pior com 219),
+  a home com 175, a loja dizendo "centenas de produtos" e a 404 sem nenhuma
+  tag Open Graph. Tudo corrigido; `og:title` ficou com o nome inteiro.
+  **Sobrou:** as 9 páginas de raiz dividem a mesma `og:image` — precisa de
+  foto real de cada contexto, que depende do Enzo. Texto original: Conferir se
   cada página tem `og:title`, `og:description` e `<meta description>` próprios
   ou se repetem o texto da home. Descrição duplicada em 434 URLs é desperdício.
 
-- [ ] **13. `lastmod` real no sitemap.** Confirmado: **as 434 URLs têm a mesma
+- [x] **13. `lastmod` real no sitemap.** FEITO (commit `a5c72a0`). A data vem
+  do `git log` por arquivo; arquivo com alteração não commitada usa hoje,
+  porque mudou agora; sem git, cai para hoje e o build não quebra. Texto
+  original: Confirmado: **as 434 URLs têm a mesma
   data**. Gerar por arquivo a partir do histórico do git, no `tools/gerar.js`.
 
-- [ ] **14. Reforçar o structured data.** `LocalBusiness` com horário (item 5 do
+- [x] **14. Reforçar o structured data.** FEITO (commit `a5c72a0`). A ficha
+  `Wholesaler` saiu do `index.html` escrita à mão e passou para o
+  `tools/jsonld.js`, com `@id` — antes o `seller` dos produtos, o `provider`
+  de serviços e a empresa da home eram três organizações diferentes para o
+  Google. Entrou `WebSite` com `SearchAction` (a busca aceita
+  `loja.html?q=` de verdade). **Sem `openingHours`:** depende do item 5 do
+  PERGUNTAS. São 900 blocos JSON-LD no site, todos parseáveis. Texto
+  original: `LocalBusiness` com horário (item 5 do
   PERGUNTAS), `Organization`, `WebSite` com `SearchAction`, e `BreadcrumbList`
   onde faltar. Validar antes de commitar.
 

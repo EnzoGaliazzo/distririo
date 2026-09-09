@@ -306,3 +306,52 @@ outra janela na frente), então a partir daqui eu conferi layout medindo o DOM
 — largura, número de colunas, altura dos alvos de toque, overflow — em vez de
 olhar print. É medida direta do que o navegador calculou, mas não substitui o
 seu olho: vale você abrir uma página de produto e uma de marca no celular.
+
+### 06:30 — tarefas 14, 13 e 12: o que o Google lê (commits `a5c72a0`, `11928da`)
+
+Três tarefas de SEO técnico numa tacada, porque mexem no mesmo lugar.
+
+**A ficha da empresa estava solta dentro do `index.html`.** Um bloco JSON-LD
+escrito à mão, fora do gerador. Foi assim que "fundada em 1960" ficou meses no
+ar sem ninguém ver. Agora sai do `tools/jsonld.js`, com os mesmos valores, e
+ganhou um `@id`. Isso importa mais do que parece: sem `@id`, o vendedor das 426
+páginas de produto, o prestador da página de serviços e a empresa da home eram
+**três empresas diferentes** para o Google. Agora são a mesma.
+
+Entrou também um nó `WebSite` com `SearchAction`, que é o que habilita a caixa
+de busca do site dentro do resultado do Google. A busca aceita
+`loja.html?q=<termo>` de verdade, então não é promessa vazia.
+
+**Não coloquei horário de funcionamento.** É o item 5 das perguntas e continua
+sem resposta. Horário é fato comercial e eu não invento.
+
+**O sitemap jurava que tudo mudou hoje.** As 452 URLs saíam com a data do dia,
+toda vez que o gerador rodasse, mesmo sem nada ter mudado. Sitemap assim o
+Google aprende a ignorar, e aí a data perde a única função que tem. Agora vem
+do git: a data do último commit que tocou cada arquivo. Hoje todas marcam
+09/09 porque o turno mexeu em tudo, e isso está certo — daqui para frente elas
+se separam sozinhas.
+
+**A auditoria de meta encontrou outra coisa, não o que o briefing supunha.**
+O briefing temia descrição repetida nas 434 URLs. Não é o caso: cada página tem
+a sua. O problema real era tamanho. **94 dos 426 títulos de produto passavam de
+62 caracteres**, o pior com 140 — o catálogo tem nomes como "NutsBITES Vegano -
+Bombom de Castanhas, Amendoim, Nibs de Cacau e Canela com Cobertura de
+Chocolate Meio Amargo". O Google corta e mostra reticências.
+
+O detalhe que mudou a solução: **o corte não podia ser no fim da descrição.**
+Quem lê o resultado da busca precisa chegar em "venda apenas para CNPJ", que é
+a frase que evita a visita de consumidor final procurando comprar uma barrinha.
+Então o que encurta é o nome do produto, e a descrição sempre termina na frase
+do CNPJ. Conferi: as 426 terminam.
+
+A home caiu de 175 para 154 caracteres. A loja dizia "centenas de produtos" —
+agora diz 426, número que o build mantém em dia sozinho, e passou a citar
+suplementos e cuidados pessoais, que são metade do catálogo e não apareciam. A
+404 não tinha nenhuma tag Open Graph: link quebrado compartilhado no WhatsApp
+aparecia como caixa vazia. Ganhou as tags, menos `canonical` e `og:url`, que
+página de erro não deve declarar porque é servida em qualquer endereço.
+
+**Uma coisa fica anotada e não resolvida:** as 9 páginas de raiz dividem a mesma
+imagem de compartilhamento. Resolver pede foto real de cada contexto (o
+armazém, a entrega, o catálogo), e isso depende de você.
