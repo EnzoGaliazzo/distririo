@@ -3822,3 +3822,109 @@ body.lista-aberta {
         min-height: 44px;
     }
 }
+
+/* =====================================================================
+   Impressão
+   Distribuidor imprime catálogo: o vendedor leva no balcão, o comprador
+   rabisca ao lado do item. Sem isto o papel sai com cabeçalho fixo,
+   rodapé inteiro, botão flutuante e fundo escuro.
+   ===================================================================== */
+@media print {
+    /* 1. tira o que só serve na tela */
+    .site-header,
+    .footer,
+    .whatsapp-float,
+    .cookie-banner,
+    .lista-painel,
+    .lista-flutuante,
+    .hero-carousel-prev,
+    .hero-carousel-next,
+    .hero-dots,
+    .hero-pausa,
+    .hero-progresso,
+    .marquee,
+    .category-bar,
+    .filtros,
+    .search-status,
+    .btn-lista,
+    .btn-lista-grande,
+    .skip-link,
+    .form-acoes,
+    .hero-acoes,
+    .marca-acoes,
+    .produto-acoes,
+    .cta-band {
+        display: none !important;
+    }
+
+    /* 2. tinta: texto preto em papel branco */
+    :root {
+        --texto-suave: #000;
+        --texto-fraco: #333;
+    }
+
+    html,
+    body {
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    .page,
+    .section,
+    main {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    /* 3. o content-visibility esconderia do papel tudo que não foi rolado
+       na tela: a impressão sairia com páginas em branco. */
+    * {
+        content-visibility: visible !important;
+        contain-intrinsic-size: auto !important;
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* 4. nada de cartão ou seção partido no meio da folha */
+    .product-card,
+    .produto-ficha,
+    .faq-item,
+    .marca-numeros > div {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    h1, h2, h3 {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+
+    /* 5. grade mais densa: cabe mais item por folha */
+    .product-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.5rem !important;
+    }
+
+    .product-card {
+        box-shadow: none !important;
+        border: 1px solid #999 !important;
+    }
+
+    /* 6. no papel o link não é clicável; escreve o endereço ao lado, só
+       para link externo, que é o que a pessoa não consegue adivinhar. */
+    a[href^="http"]:not([href*="distririo.com.br"])::after {
+        content: " (" attr(href) ")";
+        font-size: 0.75em;
+        word-break: break-all;
+    }
+
+    @page {
+        margin: 1.5cm;
+    }
+}
