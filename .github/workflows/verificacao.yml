@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # O sitemap tira o lastmod de cada URL do histórico do git (veja
+          # datasDoGit em tools/gerar.js). O checkout padrão é raso, de
+          # profundidade 1: sem histórico, todas as datas sairiam como "hoje"
+          # e este job acusaria diferença que não existe.
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -23,13 +29,30 @@ jobs:
 
       - name: Conferir se nada ficou fora de sincronia
         run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "::error::O HTML gerado está diferente do que o build produz."
-            echo "Rode 'node tools/gerar.js' e comite o resultado."
-            git --no-pager diff --stat
-            exit 1
+          mudados="$(git status --porcelain)"
+          if [ -z "$mudados" ]; then
+            echo "Tudo em dia."
+            exit 0
           fi
-          echo "Tudo em dia."
+
+          # Exceção única e estreita: o lastmod de cada URL é a data do commit
+          # que tocou o arquivo, e o build local roda ANTES desse commit
+          # existir. Se a única diferença do repositório for o sitemap, e
+          # dentro dele só os lastmod, não é HTML fora de sincronia.
+          fora_do_sitemap="$(echo "$mudados" | grep -v ' sitemap\.xml$' || true)"
+          if [ -z "$fora_do_sitemap" ]; then
+            semdata() { sed 's|<lastmod>[^<]*</lastmod>||' "$1"; }
+            git show HEAD:sitemap.xml > /tmp/sitemap-commitado.xml
+            if diff <(semdata /tmp/sitemap-commitado.xml) <(semdata sitemap.xml) > /dev/null; then
+              echo "::warning::Só as datas de lastmod do sitemap mudaram. Aceito."
+              exit 0
+            fi
+          fi
+
+          echo "::error::O HTML gerado está diferente do que o build produz."
+          echo "Rode 'node tools/gerar.js' e comite o resultado."
+          git --no-pager diff --stat
+          exit 1
 
   imagens-e-links:
     name: Imagens e links internos
