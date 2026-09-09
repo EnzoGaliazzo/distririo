@@ -126,7 +126,15 @@ function cartao(p, indice, base) {
     detalhe.forEach((d, i) => {
         linhas.push('            <p class="' + (i === 0 ? 'product-desc' : 'product-pack') + '">' + esc(d) + '</p>');
     });
-    linhas.push('        </div>', '    </a>', '</article>');
+    // O botão fica FORA do <a>: botão dentro de link é HTML inválido e o
+    // clique vira navegação em vez de adicionar à lista.
+    linhas.push(
+        '        </div>',
+        '    </a>',
+        '    <button type="button" class="btn-lista" data-add="' + p.id + '"' +
+            ' data-nome="' + esc(p.nome) + '" data-marca="' + esc(p.marca || '') + '">' +
+            '<span class="btn-lista-mais" aria-hidden="true">+</span> <span class="btn-lista-rotulo">Adicionar à lista</span></button>',
+        '</article>');
     return indentar(linhas.join('\n'), 20);
 }
 
@@ -284,6 +292,8 @@ function paginaProduto(p, tpl) {
         .replace(/\{\{URL\}\}/g, SITE + '/produto/' + p.id + '.html')
         .replace(/\{\{IMG_ABS\}\}/g, imgAbs)
         .replace(/\{\{NOME\}\}/g, esc(p.nome))
+        .replace(/\{\{ID\}\}/g, p.id)
+        .replace(/\{\{MARCA\}\}/g, esc(p.marca || ''))
         .replace(/\{\{MIDIA\}\}/g, indentar(midia, 16).trimStart())
         .replace(/\{\{FICHA\}\}/g, ficha)
         .replace(/\{\{CAT_ID\}\}/g, cat ? cat.id : '')

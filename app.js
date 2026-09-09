@@ -165,6 +165,17 @@
         }
     });
 
+    // Registra um evento no GA4. Só dispara com consentimento: se o visitante
+    // recusou, o gtag.js nem foi carregado e a chamada morre aqui.
+    var ZAP = '5521992111843';
+
+    function medir(evento, dados) {
+        if (!window.DR_GA_CARREGADO || typeof gtag !== 'function') return;
+        var carga = dados || {};
+        carga.page_path = window.location.pathname;
+        gtag('event', evento, carga);
+    }
+
     // Mede cliques em links do WhatsApp (só reporta se o gtag existir de fato).
     document.addEventListener('click', function (e) {
         var link = e.target.closest && e.target.closest('a[href*="wa.me/"]');
@@ -1142,10 +1153,276 @@
     });
 
     // =================================================================
+    // Lista de pedido
+    // O site inteiro promete "você manda a lista e a gente confirma na
+    // conversa", mas até aqui o comerciante tinha que abrir produto por
+    // produto e digitar tudo à mão no WhatsApp. Agora ele monta a lista
+    // navegando, e o site escreve a mensagem por ele.
+    //
+    // Fica tudo no localStorage do próprio aparelho: nada é enviado para
+    // servidor nenhum, e a lista sobrevive a fechar o navegador — o
+    // comerciante monta hoje e manda amanhã.
+    // =================================================================
+    var CHAVE_LISTA = 'dr-lista-pedido';
+    var LIMITE_URL = 1800; // wa.me quebra por volta de 2000 caracteres
+
+    function lerLista() {
+        try {
+            var bruto = recuperar(CHAVE_LISTA);
+            var lista = bruto ? JSON.parse(bruto) : [];
+            return Array.isArray(lista) ? lista : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function gravarLista(lista) {
+        guardar(CHAVE_LISTA, JSON.stringify(lista));
+        atualizarTudo(lista);
+    }
+
+    function totalItens(lista) {
+        return lista.reduce(function (n, i) { return n + i.qtd; }, 0);
+    }
+
+    // ---- mensagem do WhatsApp ----
+    // Corta pelo número de caracteres da URL final, não do texto: acento vira
+    // três caracteres depois do encode e a conta erra feio sem isso.
+    function montarMensagem(lista) {
+        var cabecalho = 'Olá! Montei uma lista pelo site:\n\n';
+        var rodape = '\n\nPode confirmar disponibilidade e as condições?';
+        var linhas = lista.map(function (i) {
+            return '• ' + i.qtd + 'x ' + i.nome + (i.marca ? ' (' + i.marca + ')' : '');
+        });
+
+        var cabem = linhas.length;
+        while (cabem > 0) {
+            var corpo = linhas.slice(0, cabem).join('\n');
+            var sobra = cabem < linhas.length
+                ? '\n\n... e mais ' + (linhas.length - cabem) + ' ' +
+                  (linhas.length - cabem === 1 ? 'item' : 'itens') +
+                  '. Mando o resto aqui na conversa.'
+                : '';
+            var texto = cabecalho + corpo + sobra + rodape;
+            if (encodeURIComponent(texto).length <= LIMITE_URL) {
+                return { texto: texto, cortou: cabem < linhas.length, cabem: cabem };
+            }
+            cabem--;
+        }
+        return { texto: cabecalho + rodape, cortou: true, cabem: 0 };
+    }
+
+    // ---- painel ----
+    function montarPainel() {
+        var painel = document.createElement('div');
+        painel.className = 'lista-painel';
+        painel.id = 'listaPainel';
+        painel.setAttribute('role', 'dialog');
+        painel.setAttribute('aria-modal', 'false');
+        painel.setAttribute('aria-labelledby', 'listaTitulo');
+        painel.hidden = true;
+        painel.innerHTML =
+            '<div class="lista-topo">' +
+            '<h2 id="listaTitulo">Sua lista</h2>' +
+            '<button type="button" class="lista-fechar" aria-label="Fechar a lista">&times;</button>' +
+            '</div>' +
+            '<div class="lista-itens" id="listaItens"></div>' +
+            '<div class="lista-rodape">' +
+            '<p class="lista-aviso" id="listaAviso"></p>' +
+            '<a class="btn btn-zap" id="listaEnviar" target="_blank" rel="noopener">Enviar lista no WhatsApp</a>' +
+            '<button type="button" class="link-botao lista-limpar" id="listaLimpar">Esvaziar lista</button>' +
+            '</div>';
+        document.body.appendChild(painel);
+        return painel;
+    }
+
+    function montarBotaoFlutuante() {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'lista-flutuante';
+        b.id = 'listaFlutuante';
+        b.hidden = true;
+        b.innerHTML =
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+            '<path d="M4 6h16M4 12h16M4 18h10"/></svg>' +
+            '<span class="lista-flutuante-texto">Minha lista</span>' +
+            '<span class="lista-contador" id="listaContador">0</span>';
+        document.body.appendChild(b);
+        return b;
+    }
+
+    var painel, flutuante;
+
+    function atualizarTudo(lista) {
+        if (!flutuante) return;
+        var total = totalItens(lista);
+
+        flutuante.hidden = total === 0;
+        var contador = document.getElementById('listaContador');
+        if (contador) contador.textContent = String(total);
+        flutuante.setAttribute('aria-label',
+            total === 1 ? 'Abrir a lista, 1 item' : 'Abrir a lista, ' + total + ' itens');
+
+        // marca os botões dos produtos que já estão na lista
+        var dentro = {};
+        lista.forEach(function (i) { dentro[i.id] = i.qtd; });
+        document.querySelectorAll('[data-add]').forEach(function (btn) {
+            var qtd = dentro[btn.getAttribute('data-add')];
+            btn.classList.toggle('na-lista', !!qtd);
+            var rotulo = btn.querySelector('.btn-lista-rotulo');
+            if (!rotulo) return;
+            rotulo.textContent = qtd ? qtd + ' na lista' : 'Adicionar à lista';
+        });
+
+        if (!painel || painel.hidden) return;
+        desenharItens(lista);
+    }
+
+    function desenharItens(lista) {
+        var caixa = document.getElementById('listaItens');
+        var enviar = document.getElementById('listaEnviar');
+        var aviso = document.getElementById('listaAviso');
+        if (!caixa) return;
+
+        if (!lista.length) {
+            caixa.innerHTML = '<p class="lista-vazia">Sua lista está vazia. ' +
+                'Vá ao catálogo e toque em "Adicionar à lista" nos produtos que quiser.</p>';
+            if (enviar) enviar.hidden = true;
+            if (aviso) aviso.textContent = '';
+            var limpar = document.getElementById('listaLimpar');
+            if (limpar) limpar.hidden = true;
+            return;
+        }
+
+        caixa.innerHTML = '';
+        lista.forEach(function (item) {
+            var li = document.createElement('div');
+            li.className = 'lista-item';
+            li.innerHTML =
+                '<div class="lista-item-texto">' +
+                '<strong>' + escapar(item.nome) + '</strong>' +
+                (item.marca ? '<span>' + escapar(item.marca) + '</span>' : '') +
+                '</div>' +
+                '<div class="lista-qtd">' +
+                '<button type="button" class="lista-menos" aria-label="Diminuir a quantidade de ' + escapar(item.nome) + '">&minus;</button>' +
+                '<span class="lista-qtd-valor" aria-live="polite">' + item.qtd + '</span>' +
+                '<button type="button" class="lista-mais" aria-label="Aumentar a quantidade de ' + escapar(item.nome) + '">+</button>' +
+                '</div>' +
+                '<button type="button" class="lista-remover" aria-label="Tirar ' + escapar(item.nome) + ' da lista">&times;</button>';
+
+            li.querySelector('.lista-menos').addEventListener('click', function () { mudarQtd(item.id, -1); });
+            li.querySelector('.lista-mais').addEventListener('click', function () { mudarQtd(item.id, 1); });
+            li.querySelector('.lista-remover').addEventListener('click', function () { remover(item.id); });
+            caixa.appendChild(li);
+        });
+
+        var msg = montarMensagem(lista);
+        if (enviar) {
+            enviar.hidden = false;
+            enviar.href = 'https://wa.me/' + ZAP + '?text=' + encodeURIComponent(msg.texto);
+        }
+        var limparBtn = document.getElementById('listaLimpar');
+        if (limparBtn) limparBtn.hidden = false;
+        if (aviso) {
+            aviso.textContent = msg.cortou
+                ? 'A lista é longa: a mensagem leva os ' + msg.cabem + ' primeiros e avisa que o resto segue na conversa.'
+                : '';
+        }
+    }
+
+    function escapar(t) {
+        var d = document.createElement('div');
+        d.textContent = t == null ? '' : t;
+        return d.innerHTML;
+    }
+
+    function adicionar(id, nome, marca) {
+        var lista = lerLista();
+        var achou = lista.find(function (i) { return i.id === id; });
+        if (achou) {
+            achou.qtd++;
+        } else {
+            lista.push({ id: id, nome: nome, marca: marca, qtd: 1 });
+        }
+        gravarLista(lista);
+        medir('lista_adicionar', { item_id: id, item_name: nome });
+        return lista;
+    }
+
+    function mudarQtd(id, delta) {
+        var lista = lerLista();
+        var item = lista.find(function (i) { return i.id === id; });
+        if (!item) return;
+        item.qtd += delta;
+        if (item.qtd < 1) return remover(id);
+        gravarLista(lista);
+    }
+
+    function remover(id) {
+        var lista = lerLista().filter(function (i) { return i.id !== id; });
+        gravarLista(lista);
+        medir('lista_remover', { item_id: id });
+        if (!lista.length && painel && !painel.hidden) abrirPainel(false);
+    }
+
+    function abrirPainel(abrir) {
+        if (!painel) return;
+        painel.hidden = !abrir;
+        document.body.classList.toggle('lista-aberta', abrir);
+        if (abrir) {
+            desenharItens(lerLista());
+            var fechar = painel.querySelector('.lista-fechar');
+            if (fechar) fechar.focus();
+            medir('lista_abrir', { itens: totalItens(lerLista()) });
+        } else if (flutuante && !flutuante.hidden) {
+            flutuante.focus();
+        }
+    }
+
+    aoCarregar(function () {
+        // Só monta onde há algo para adicionar, ou onde já existe lista guardada.
+        var temBotao = document.querySelector('[data-add]');
+        if (!temBotao && !lerLista().length) return;
+
+        painel = montarPainel();
+        flutuante = montarBotaoFlutuante();
+
+        flutuante.addEventListener('click', function () { abrirPainel(painel.hidden); });
+        painel.querySelector('.lista-fechar').addEventListener('click', function () { abrirPainel(false); });
+        document.getElementById('listaLimpar').addEventListener('click', function () {
+            gravarLista([]);
+            abrirPainel(false);
+        });
+
+        document.getElementById('listaEnviar').addEventListener('click', function () {
+            medir('lista_enviar_whatsapp', { itens: totalItens(lerLista()) });
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && painel && !painel.hidden) abrirPainel(false);
+        });
+
+        // Um ouvinte só, delegado: a loja tem 426 botões.
+        document.addEventListener('click', function (e) {
+            var btn = e.target.closest && e.target.closest('[data-add]');
+            if (!btn) return;
+            e.preventDefault();
+            adicionar(btn.getAttribute('data-add'), btn.getAttribute('data-nome'), btn.getAttribute('data-marca'));
+            btn.classList.add('acabou-de-entrar');
+            setTimeout(function () { btn.classList.remove('acabou-de-entrar'); }, 600);
+        });
+
+        // Lista alterada em outra aba do mesmo navegador.
+        window.addEventListener('storage', function (e) {
+            if (e.key === CHAVE_LISTA) atualizarTudo(lerLista());
+        });
+
+        atualizarTudo(lerLista());
+    });
+
+    // =================================================================
     // Formulários que abrem o WhatsApp
     // =================================================================
-    var ZAP = '5521992111843';
-
     // O pop-up pode ser engolido em silêncio (bloqueador, navegador in-app do
     // Instagram, Safari restrito). Nesse caso o visitante preenchia tudo e não
     // acontecia nada — agora ele sempre recebe uma confirmação com o link.

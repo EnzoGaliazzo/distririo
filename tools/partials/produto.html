@@ -64,9 +64,12 @@
                 </dl>
                 <p class="produto-nota">Preço e pedido mínimo sob consulta. Vendemos apenas para pessoa jurídica com CNPJ ativo.</p>
                 <div class="produto-acoes">
-                    <a href="{{ZAP}}" class="btn btn-zap" target="_blank" rel="noopener">Pedir no WhatsApp</a>
-                    <a href="../quero-ser-cliente.html" class="btn btn-ghost">Quero ser cliente</a>
+                    <button type="button" class="btn btn-lista-grande" data-add="{{ID}}" data-nome="{{NOME}}" data-marca="{{MARCA}}">
+                        <span class="btn-lista-mais" aria-hidden="true">+</span> <span class="btn-lista-rotulo">Adicionar à lista</span>
+                    </button>
+                    <a href="{{ZAP}}" class="btn btn-ghost btn-zap" target="_blank" rel="noopener">Pedir só este no WhatsApp</a>
                 </div>
+                <p class="produto-nota-lista">Monte a lista inteira e mande de uma vez — é mais rápido para você e para a gente separar.</p>
                 <p class="produto-voltar"><a href="../loja.html#{{CAT_ID}}">‹ Voltar para {{CAT_TITULO}}</a></p>
             </div>
         </section>
