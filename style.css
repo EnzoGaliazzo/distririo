@@ -1796,25 +1796,11 @@ main {
 .cta-band {
     position: relative;
     overflow: hidden;
-    padding: 4.5rem 1.5rem;
-    background: var(--dark);
-    color: var(--white);
+    padding: 4rem 1.5rem;
+    background: var(--gray-100);
+    color: var(--dark);
     text-align: center;
-}
-
-/* brilho vermelho que respira devagar atras do texto */
-.cta-band::before {
-    content: "";
-    position: absolute;
-    inset: -40% -10%;
-    background: radial-gradient(circle at 50% 45%, rgba(224, 30, 36, 0.85), transparent 58%);
-    animation: ctaGlow 9s var(--ease) infinite;
-    pointer-events: none;
-}
-
-@keyframes ctaGlow {
-    0%, 100% { transform: scale(1) translateY(0); opacity: 0.75; }
-    50%      { transform: scale(1.18) translateY(-6%); opacity: 1; }
+    border-top: 3px solid var(--red);
 }
 
 .cta-band-inner {
@@ -1828,8 +1814,10 @@ main {
     display: inline-block;
     margin-bottom: 1rem;
     padding: 0.35rem 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid var(--red);
     border-radius: 999px;
+    color: var(--red-text);
+    background: var(--white);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -1837,7 +1825,7 @@ main {
 }
 
 .cta-band h2 {
-    color: var(--white);
+    color: var(--dark);
     font-size: clamp(1.5rem, 3.2vw, 2.2rem);
     margin-bottom: 0.85rem;
     line-height: 1.18;
@@ -1848,7 +1836,7 @@ main {
 }
 
 .cta-band p {
-    color: rgba(255, 255, 255, 0.82);
+    color: var(--texto-suave);
     max-width: 52ch;
     margin: 0 auto;
 }
@@ -1861,21 +1849,22 @@ main {
     margin: 1.85rem 0 1.1rem;
 }
 
+/* .btn-light nasceu para o fundo escuro da faixa. Com a faixa clara, o
+   botao principal volta a ser o vermelho da marca. */
 .btn-light {
-    background: var(--white);
-    color: var(--dark);
+    background: var(--red);
+    color: #ffffff;
 }
 
 .btn-light:hover {
-    background: var(--gray-100);
-    color: var(--dark);
+    background: var(--red-dark);
+    color: #ffffff;
 }
 
 /* .btn-ghost tem duas caras: contorno branco sobre fundo escuro e contorno
    vermelho sobre fundo claro. As duas ficavam sem escopo e a ultima do arquivo
    vencia — o botao "Falar no WhatsApp" saia vermelho em cima do brilho
    vermelho da faixa e nao dava para ler. Fundo escuro agora e escopado. */
-.cta-band .btn-ghost,
 .faixa-estrutura-texto .btn-ghost,
 .hero-invertido .btn-ghost {
     background: transparent;
@@ -1884,7 +1873,6 @@ main {
     box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.7);
 }
 
-.cta-band .btn-ghost:hover,
 .faixa-estrutura-texto .btn-ghost:hover,
 .hero-invertido .btn-ghost:hover {
     background: rgba(255, 255, 255, 0.14);
@@ -3248,4 +3236,9 @@ a.service-item {
 
 .form-regras .form-consent {
     margin: 0 0 0.7rem;
+}
+
+/* A nota do fim da faixa acompanha o fundo claro. */
+.cta-band-note {
+    color: var(--texto-fraco);
 }
