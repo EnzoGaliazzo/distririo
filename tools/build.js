@@ -364,7 +364,7 @@ function paginaProduto(p, tpl) {
                 valueAddedTaxIncluded: false,
                 description: 'Preço sob consulta. Venda somente para pessoa jurídica (CNPJ).',
             },
-            seller: { '@type': 'Organization', name: 'Distri Rio Comercial Ltda' },
+            seller: { '@id': SITE + '/#organizacao' },
         },
     };
     if (p.marca) jsonld.brand = { '@type': 'Brand', name: p.marca };

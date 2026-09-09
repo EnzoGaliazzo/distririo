@@ -10,6 +10,64 @@ const texto = h => h
     .replace(/&#39;|&#x27;/gi, "'")
     .replace(/\s+/g, ' ').trim();
 
+const ORG_ID = SITE + '/#organizacao';
+
+// Ficha da empresa. Estava escrita à mão dentro do index.html, que é como
+// "fundada em 1960" sobreviveu tanto tempo. Agora sai daqui.
+function blocoOrganizacao() {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Wholesaler',
+        '@id': ORG_ID,
+        name: 'Distri Rio Comercial Ltda.',
+        alternateName: 'Distri Rio',
+        url: SITE + '/',
+        logo: SITE + '/assets/logo.png',
+        image: SITE + '/assets/logo.png',
+        description: 'Distribuidora de doces, bebidas, energéticos, suplementos e produtos de ' +
+            'cuidados pessoais para comércios do Rio de Janeiro. Vendas exclusivamente para ' +
+            'pessoa jurídica (CNPJ).',
+        telephone: '+55-21-99211-1843',
+        email: 'recrutamento@distririo.com.br',
+        foundingDate: '2017',
+        address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'Rod. Washington Luiz, 2070 - Parque Boa Vista II',
+            addressLocality: 'Duque de Caxias',
+            addressRegion: 'RJ',
+            postalCode: '25055-009',
+            addressCountry: 'BR',
+        },
+        areaServed: { '@type': 'State', name: 'Rio de Janeiro' },
+        sameAs: [
+            'https://www.instagram.com/distririo01/',
+            'https://www.linkedin.com/company/distri-rio-comercial-ltda/',
+        ],
+    };
+}
+
+// A busca do site aceita loja.html?q=<termo> de verdade (o app.js lê o
+// parâmetro), então o SearchAction não está prometendo o que não existe.
+function blocoSite() {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        '@id': SITE + '/#site',
+        url: SITE + '/',
+        name: 'Distri Rio',
+        inLanguage: 'pt-BR',
+        publisher: { '@id': ORG_ID },
+        potentialAction: {
+            '@type': 'SearchAction',
+            target: {
+                '@type': 'EntryPoint',
+                urlTemplate: SITE + '/loja.html?q={search_term_string}',
+            },
+            'query-input': 'required name=search_term_string',
+        },
+    };
+}
+
 function extrairFaq(html) {
     const perguntas = [];
     const re = /<div class="faq-item">[\s\S]*?<span>([\s\S]*?)<\/span>[\s\S]*?<div class="faq-answer">([\s\S]*?)<\/div>/g;
@@ -46,12 +104,7 @@ function blocoServico(categorias) {
         '@context': 'https://schema.org',
         '@type': 'Service',
         serviceType: 'Distribuição atacadista de doces, bebidas, energéticos e suplementos',
-        provider: {
-            '@type': 'Organization',
-            name: 'Distri Rio Comercial Ltda',
-            url: SITE + '/',
-            telephone: '+55-21-99211-1843',
-        },
+        provider: { '@id': ORG_ID },
         areaServed: { '@type': 'State', name: 'Rio de Janeiro' },
         audience: { '@type': 'BusinessAudience', name: 'Comércios com CNPJ ativo' },
         availableChannel: {
@@ -84,4 +137,4 @@ function blocoMigalhas(nome, arquivo) {
     };
 }
 
-module.exports = { extrairFaq, blocoFaq, blocoServico, blocoMigalhas };
+module.exports = { ORG_ID, blocoOrganizacao, blocoSite, extrairFaq, blocoFaq, blocoServico, blocoMigalhas };

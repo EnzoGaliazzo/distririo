@@ -119,7 +119,7 @@ const relatorio = [];
 // ---------------------------------------------------------------------
 // JSON-LD por página, montado a partir do texto que está no próprio HTML
 // ---------------------------------------------------------------------
-const { extrairFaq, blocoFaq, blocoServico, blocoMigalhas } = require('./jsonld.js');
+const { blocoOrganizacao, blocoSite, extrairFaq, blocoFaq, blocoServico, blocoMigalhas } = require('./jsonld.js');
 
 const NOME_PAGINA = {
     'loja.html': 'Catálogo',
@@ -141,6 +141,10 @@ function aplicarJsonLd(html, arquivo) {
     if (faq.length) {
         var bf = blocoFaq(faq);
         if (bf) blocos.push(bf);
+    }
+    if (arquivo === 'index.html') {
+        blocos.push(blocoOrganizacao());
+        blocos.push(blocoSite());
     }
     if (arquivo === 'servicos.html') blocos.push(blocoServico(dados.categorias));
     if (NOME_PAGINA[arquivo]) blocos.push(blocoMigalhas(NOME_PAGINA[arquivo], arquivo));
@@ -278,6 +282,44 @@ gravar('assets/data/produtos.json', JSON.stringify({
 
 // 4. sitemap
 const hoje = new Date().toISOString().slice(0, 10);
+// ---------------------------------------------------------------------
+// lastmod de verdade: data do último commit que tocou cada arquivo.
+// Arquivo com mudança ainda não commitada usa hoje, porque mudou agora.
+// ---------------------------------------------------------------------
+const { execFileSync } = require('child_process');
+
+function datasDoGit() {
+    const mapa = new Map();
+    try {
+        const historico = execFileSync('git',
+            ['log', '--date=short', '--format=%x01%cd', '--name-only'],
+            { cwd: root, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+        for (const entrada of historico.split('\u0001')) {
+            const linhas = entrada.split('\n').filter(Boolean);
+            if (!linhas.length) continue;
+            const data = linhas[0].trim();
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(data)) continue;
+            // o histórico vem do mais novo para o mais velho: o primeiro que
+            // aparecer para um caminho é a data mais recente dele.
+            for (const caminho of linhas.slice(1)) {
+                if (!mapa.has(caminho)) mapa.set(caminho, data);
+            }
+        }
+        const sujos = execFileSync('git', ['status', '--porcelain'],
+            { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+        for (const linha of sujos.split('\n')) {
+            const caminho = linha.slice(3).trim();
+            if (caminho) mapa.set(caminho.replace(/^"|"$/g, ''), hoje);
+        }
+    } catch (e) {
+        console.warn('  (sem git: lastmod do sitemap sai com a data de hoje)');
+    }
+    return mapa;
+}
+
+const DATAS = datasDoGit();
+const lastmod = url => DATAS.get(url === '/' ? 'index.html' : url.replace(/^\//, '')) || hoje;
+
 const urls = [
     ['/', '1.0', 'weekly'],
     ['/loja.html', '0.9', 'weekly'],
@@ -294,7 +336,7 @@ gravar('sitemap.xml', [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     ...urls.map(([u, p, f]) =>
-        `  <url><loc>${SITE}${u}</loc><lastmod>${hoje}</lastmod><changefreq>${f}</changefreq><priority>${p}</priority></url>`),
+        `  <url><loc>${SITE}${u}</loc><lastmod>${lastmod(u)}</lastmod><changefreq>${f}</changefreq><priority>${p}</priority></url>`),
     '</urlset>',
 ].join('\n'));
 
