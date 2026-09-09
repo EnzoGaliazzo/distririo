@@ -145,3 +145,33 @@ e a lista atravessando da loja para a página de produto.
 **O que eu faria a seguir nisso:** um campo de observação por item ("me manda
 2 caixas se tiver da validade nova") e um jeito de o comerciante repetir o
 último pedido. Nenhum dos dois é necessário para a lista servir hoje.
+
+### 02:30 — tarefa 3: eventos no GA4 (commit `54770bf`)
+
+O GA4 estava instalado e media só pageview. Agora mede o funil inteiro.
+
+**O que passa a ser medido:** clique em WhatsApp **com a origem** (botão
+flutuante, lista, rodapé, faixa final, página de produto ou conteúdo — antes só
+registrava o texto do link, o que não dizia de onde a pessoa veio); clique em
+cartão de produto, com nome, marca e categoria; busca, com o termo e quantos
+resultados deu; uso de filtro, com qual, o valor e quantos resultados sobraram;
+envio de formulário, e o de cadastro leva o ramo e o bairro — que é o que
+interessa para saber de onde vem lead. A lista de pedido já media abrir,
+adicionar, remover e enviar.
+
+**Decisão que tomei:** unifiquei os três eventos antigos
+(`job_application_submit`, `client_signup_submit`, `contact_form_submit`) num
+`formulario_enviado` com parâmetro. Três nomes soltos são chatos de ler em
+relatório; um evento com dimensão você filtra e compara.
+
+A busca só mede 1,2 s depois da última tecla. Sem isso, "propolis" viraria oito
+eventos e o relatório ficaria inútil.
+
+**A trava do consentimento foi testada nos dois sentidos:** com
+`DR_GA_CARREGADO` falso, zero eventos disparam; ligando, voltam a sair. Nada é
+medido de quem recusou os cookies.
+
+**Onde isso te serve:** em uma semana você vai saber quais produtos as pessoas
+clicam, o que buscam e não acham (termo com zero resultados é pedido de compra
+que você está perdendo), de qual página sai mais WhatsApp, e quantas listas são
+montadas mas não enviadas.

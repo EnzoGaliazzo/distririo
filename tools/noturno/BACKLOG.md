@@ -48,11 +48,7 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
   razão social sozinha — e a segunda opcional. **O consentimento LGPD continua
   obrigatório na primeira etapa.** Documentar o que mudou.
 
-- [ ] **3. Eventos no GA4.** Instalado e não mede nada acionável. Eventos em:
-  clique em botão de WhatsApp (com a página de origem), envio de cada
-  formulário, clique em card de produto, uso da busca (com o termo), uso dos
-  filtros, e cada passo da lista de pedido. **Respeitar o Consent Mode que já
-  existe:** só dispara se `window.DR_GA_CARREGADO` for verdadeiro.
+- [x] **3. Eventos no GA4.** FEITO, commit `54770bf`. whatsapp_click com origem, produto_clique, busca com termo e resultados, filtro_usado, formulario_enviado e os quatro da lista. Trava do consentimento testada nos dois sentidos.
 
 - [ ] **4. FAQ com schema FAQPage.** Pedido mínimo, prazo, região, pagamento,
   exigência de CNPJ, pré-venda x pronta entrega. **As respostas dependem do
