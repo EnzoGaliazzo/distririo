@@ -417,3 +417,99 @@ BrasilAPI continua passando pela política.
 **O que eu não testei de propósito:** o envio do Web3Forms de ponta a ponta.
 Seria um e-mail de verdade na sua caixa. O destino está liberado pelo mesmo
 mecanismo que a BrasilAPI acabou de provar que funciona.
+
+---
+
+## 08:40 — fecho do turno
+
+### Onde está o trabalho
+
+Tudo na branch **`melhorias/noite-2026-09-09`**, já empurrada para o GitHub.
+**Nada foi para a `main`** — o site no ar continua exatamente como você deixou
+ontem à noite. Para revisar e publicar:
+
+1. Abra o Pull Request:
+   <https://github.com/EnzoGaliazzo/distririo/compare/main...melhorias/noite-2026-09-09>
+2. O CI roda três verificações no PR: build em dia, imagens e links, Lighthouse.
+3. Se estiver bom, *Merge*. O GitHub Pages publica em 20 a 60 segundos.
+
+Não abri o PR por linha de comando porque o `gh` não está instalado nesta
+máquina (item 15 das perguntas).
+
+### O que mudou, em uma linha cada
+
+| # | O quê | Commit |
+|---|---|---|
+| 1 | Lista de pedido: monta no catálogo, manda de uma vez no WhatsApp | `f439cf2` |
+| 2 | Contadores entregavam `0` no HTML; agora vão com o número real | `3f02f4b` |
+| 3 | GA4 medindo o que dá para agir (WhatsApp, busca, filtro, formulário) | `54770bf` |
+| 4 | Cadastro de 9 campos obrigatórios para 4, em duas etapas | `9a4a793` |
+| 5 | FAQ com as três perguntas que faltavam, sem vazar placeholder pro Google | `d83693f` |
+| 6 | 18 páginas de marca geradas do catálogo | `7dbf237` |
+| 7 | Página de produto com apresentação e produtos relacionados | `54d133c` |
+| 8 | Ficha da empresa e `WebSite` no JSON-LD; `lastmod` real no sitemap | `a5c72a0` |
+| 9 | Títulos e descrições no tamanho que a busca mostra | `11928da` |
+| 10 | CSP com hash, Referrer-Policy, honeypot, checagem de `noopener` | `3a755b4` |
+| 11 | 8 fotos saíram do caminho crítico da loja | `ad7d76c` |
+| 12 | Alvos de toque de 44 px e o pulo de nível nos títulos | `ca6397c` |
+| 13 | Folha de impressão | `c2ff116` |
+| 14 | Conserto do CI que o `lastmod` ia quebrar amanhã | `f2f26d3` |
+| 15 | `README.md` de manutenção | `24324dc` |
+| 16 | `tools/checar-css.js`: acha regra duplicada | `9364f4f` |
+| 17 | `servicos.html` passa a vender o serviço | `258cd36` |
+
+**25 tarefas fechadas, 3 recusadas com motivo, 6 abertas.** Das 6 abertas, duas
+dependem de informação que só você tem, uma eu não consegui medir esta noite, e
+três estão explicadas no `tools/noturno/BACKLOG.md`.
+
+### Três coisas que eu decidi NÃO fazer, e por quê
+
+Estavam na fila, e eu acho que fazer seria pior:
+
+- **`srcset` por largura nas fotos.** A crítica supunha imagem pesada. Os 320
+  WebP de produto têm **média de 12 KB**. Uma variante menor economizaria uns
+  6 KB por foto — em fotos que agora nem são baixadas na abertura. Custo: 320
+  arquivos a mais e outro passo no build.
+- **Quebrar o `app.js` em módulos ES.** São 18,5 KB depois do gzip, numa
+  requisição só. Módulos nativos trocam isso por várias requisições em cascata,
+  sem nada que o visitante perceba, com risco real de regressão.
+- **Refatorar as 12 regras duplicadas do `style.css`.** Conferi os dois
+  candidatos a bug no elemento renderizado e os dois estão certos. Mexer às
+  cegas em regra de layout num site no ar seria trocar dívida de manutenção por
+  risco. Em vez disso escrevi o `tools/checar-css.js`, que passou a listar isso
+  no `npm run checar`.
+
+### O que me limitou, para você saber ao revisar
+
+Por volta das 5h a janela do navegador embutido parou de conseguir desenhar a
+página — a máquina ficou com outra janela na frente. A partir dali eu conferi
+layout **medindo o DOM**: largura, número de colunas, altura de alvo de toque,
+overflow, cor computada, contraste. É medida direta do que o navegador
+calculou, e pegou coisa real (o contraste de 7,39:1, os 44 px, o `y = 1382 px`
+do primeiro cartão). Mas não substitui o seu olho.
+
+**Vale você abrir no celular, antes de fazer o merge:** a home, uma página de
+marca (`/marca/mondelez.html`), uma de produto e o rodapé de qualquer página —
+o rodapé no celular ficou 164 px mais alto de propósito, para os links caberem
+no dedo.
+
+E é por isso que a tarefa 30, "consistência visual", ficou sem começar: ela
+pede olho, não régua.
+
+### O que continua travado esperando você
+
+O `PERGUNTAS-PARA-O-ENZO.md` tem 17 itens. Os que mais destravam coisa:
+
+1. **Fotos de 125 produtos** — o placeholder desenhado segura a grade, mas
+   produto sem foto vende menos.
+2. **Prazo de entrega, pedido mínimo e formas de pagamento** — três respostas
+   do FAQ estão marcadas em amarelo esperando isso, e o JSON-LD as pula de
+   propósito para o Google não ler um placeholder.
+3. **Área de cobertura de verdade** — destrava a página local e melhora a
+   resposta "atendemos todo o Rio de Janeiro", que hoje é vaga.
+4. **Horário de funcionamento** — é o que falta para o `LocalBusiness` ficar
+   completo no Google.
+5. **Cloudflare** (item 17) — três cabeçalhos de segurança que só existem com o
+   proxy ligado. Não toquei em nada de DNS, como você pediu.
+
+Bom dia, Enzo.

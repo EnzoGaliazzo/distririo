@@ -222,12 +222,23 @@ de mexer em aparência, um redesenho por commit, registre o porquê em
   `loja.html`, páginas de produto e a lista de pedido. Entrega barata e
   genuinamente útil no balcão.
 
-- [ ] **29. Revisar `servicos.html`.** Conferir se vende o serviço — diferença
+- [x] **29. Revisar `servicos.html`.** FEITO (commit `258cd36`). Era texto
+  genérico, e pior: um cartão dizia "Atendimento pré e pronta entrega" no
+  título e falava de "9 anos de mercado" no corpo. Entraram duas seções —
+  a diferença entre pré-venda e pronta entrega, e o que o comerciante ganha
+  em concreto — sem prazo, pedido mínimo, frete nem condição de pagamento.
+  Texto original: Conferir se vende o serviço — diferença
   entre pré-venda e pronta entrega, logística, o que o comerciante ganha — ou se
   é texto genérico. Melhorar com o que já existe de verdade, sem inventar.
   Ontem a página perdeu duas seções repetidas e ficou curta.
 
-- [ ] **30. Consistência visual.** Só depois de tudo acima. Espaçamentos,
+- [ ] **30. Consistência visual.** NÃO FEITA, e é a única do briefing que
+  ficou sem nem começar. Ela pede olho: espaçamento, tamanho de fonte, raio
+  de canto, sombra. De madrugada a janela do navegador embutido parou de
+  desenhar a página, então eu passei a conferir layout medindo o DOM. Dá
+  para provar que nada estoura e que os alvos têm 44 px; não dá para julgar
+  se a página está bonita. Fica para quando o Enzo puder olhar junto.
+  Texto original: Só depois de tudo acima. Espaçamentos,
   hierarquia tipográfica, uso da cor de destaque.
 
 ## Herdados da fila anterior
