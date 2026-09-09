@@ -177,8 +177,15 @@ function aplicarJsonLd(html, arquivo) {
 // ---------------------------------------------------------------------
 const crypto = require('crypto');
 
-const versaoDe = arquivo =>
-    crypto.createHash('sha1').update(fs.readFileSync(path.join(root, arquivo))).digest('hex').slice(0, 8);
+// O hash sai do conteúdo com quebra de linha normalizada, e não dos bytes do
+// disco. Sem isso o mesmo arquivo dava hash diferente em cada máquina: aqui o
+// Windows entrega app.js com CRLF (core.autocrlf), o git guarda com LF, o
+// GitHub Pages serve o LF e o CI em Linux recalculava um terceiro valor —
+// reprovando o job "Build gerado está em dia" por uma diferença que não existe.
+const versaoDe = arquivo => {
+    const conteudo = fs.readFileSync(path.join(root, arquivo), 'utf8').replace(/\r?\n/g, '\n');
+    return crypto.createHash('sha1').update(conteudo, 'utf8').digest('hex').slice(0, 8);
+};
 
 const VERSOES = { 'style.css': versaoDe('style.css'), 'app.js': versaoDe('app.js') };
 
