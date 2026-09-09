@@ -1563,7 +1563,10 @@ main {
     align-items: start;
 }
 
-.footer-col h4 {
+/* Eram <h4> logo depois de um <h2>: pula um nível e quebra a navegação
+   por título do leitor de tela. Viraram <h2>, que é o nível certo para
+   seção dentro do rodapé, com a mesma aparência. */
+.footer-col h2 {
     color: var(--white);
     font-family: var(--font-body);
     font-size: 0.82rem;
@@ -3730,4 +3733,92 @@ body.lista-aberta {
 
 .relacionados-mais a:hover {
     text-decoration: underline;
+}
+
+/* =====================================================================
+   Alvos de toque (WCAG 2.2 / Android / iOS: 44 px)
+   Medido a 375 px. Onde dava, a área cresce sem mudar o desenho: um
+   retângulo invisível centrado no controle. Onde não dava, cresce de
+   verdade e só no celular.
+   ===================================================================== */
+
+.nav-toggle {
+    /* 34 -> 44 sem mexer nas barrinhas: o padding devolve os 34 px de
+       conteúdo, então o desenho fica idêntico. */
+    width: 44px;
+    height: 44px;
+    padding: 0 5px;
+}
+
+.header-logo,
+.search-toggle,
+.header-cta,
+.hero-dot {
+    position: relative;
+}
+
+.header-logo::after,
+.search-toggle::after,
+.header-cta::after,
+.hero-pausa::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    min-width: 44px;
+    height: 44px;
+    transform: translate(-50%, -50%);
+}
+
+/* A bolinha do carrossel tem 9 px e a vizinha fica a 16,2 px de distância:
+   passar de 16 px de largura roubaria o clique da vizinha. */
+.hero-dot::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 44px;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 768px) {
+    /* Rodapé: oito links de navegação com 16 px de altura, empilhados. São o
+       caminho para contato e política no celular, não link solto no meio de
+       um parágrafo. */
+    .footer-col ul li > a,
+    .footer-col ul li > .link-botao {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+    }
+
+    /* O espaço entre os itens agora vem do próprio alvo de 44 px. Manter o
+       gap por cima empurrava o rodapé 251 px para baixo; sem ele são 136 px,
+       para 12 links que passaram de 16 px de altura para 44. */
+    .footer-col ul {
+        gap: 0;
+    }
+
+    .footer-social a {
+        width: 44px;
+        height: 44px;
+    }
+
+    .category-chip {
+        min-height: 44px;
+    }
+
+    .filtro select,
+    .filtro input[type="text"],
+    .filtro input[type="search"] {
+        min-height: 44px;
+    }
+
+    /* "Só produtos com foto": a caixa tem 17 px, mas quem recebe o toque é o
+       rótulo inteiro. */
+    label.filtro {
+        min-height: 44px;
+    }
 }
