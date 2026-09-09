@@ -1,7 +1,14 @@
 # Relatório da noite — 09/09/2026
 
-Branch: `melhorias/noite-2026-09-09`. Nada foi publicado: a `main` está intocada
-e o site no ar é o mesmo de quando você foi dormir.
+Branch: `melhorias/noite-2026-09-09`, já empurrada para o GitHub. Nada foi
+publicado: o Pages constrói da `main`, que está intocada — o site no ar é o
+mesmo de quando você foi dormir.
+
+**Abrir o Pull Request com um clique:**
+<https://github.com/EnzoGaliazzo/distririo/compare/main...melhorias/noite-2026-09-09?expand=1>
+
+O `gh` não está instalado nesta máquina, então não consigo abrir o PR por linha
+de comando. O link acima já vem com o comparativo pronto.
 
 ---
 
