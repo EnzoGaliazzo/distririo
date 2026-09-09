@@ -28,13 +28,16 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
   primeiras linhas e avisar que a lista completa segue na conversa. JS puro.
   **Item grande: faça uma parte inteira e funcionando por execução.**
 
-- [ ] **8. Contadores entregam "0" no HTML.** *(subiu de prioridade — é bug de
+- [x] **8. Contadores entregam "0" no HTML.** FEITO, commit `3f02f4b`. Os dez contadores das tres paginas passam a sair do `data/produtos.json` no build, com o numero real escrito no HTML. De quebra, o total em texto corrido tambem: dizia 428 em seis lugares e o catalogo tem 426.
+
+<!-- original: -->
+<!-- **8. Contadores entregam "0" no HTML.** *(subiu de prioridade — é bug de
   SEO com dano desproporcional e conserto de minutos.)* `index.html` e
   `sobre.html` escrevem `<div class="stat-number" data-count-to="426">0</div>`.
   O Google, os previews de link e quem tem JS bloqueado leem "0 Produtos no
   catálogo", "0 Anos de mercado", "0 Marcas parceiras". Colocar o número real no
   HTML e fazer o JS animar de 0 até o valor que já está lá. O JS está em
-  `app.js`, seção "Contadores".
+  `app.js`, seção "Contadores". -->
 
 - [ ] **2. Enxugar o formulário de cadastro.** `quero-ser-cliente.html` tem 11
   campos obrigatórios (empresa, CNPJ, segmento, nome, telefone, bairro, mensagem

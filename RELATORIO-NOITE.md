@@ -76,3 +76,33 @@ build idempotente.
 ---
 
 *(cada execução acrescenta a sua seção aqui abaixo)*
+
+### 01:20 — tarefa 8: contadores entregando "0" no HTML (commit `3f02f4b`)
+
+Melhor achado do seu briefing, e eram **dois** bugs no mesmo lugar.
+
+**O que estava errado.** O HTML entregava `<div data-count-to="428">0</div>`. O
+número só aparecia depois que o JS animava — então o Google, os previews de link
+no WhatsApp e quem tem JS bloqueado liam "0 Produtos no catálogo", "0 Anos de
+mercado", "0 Marcas parceiras". E o 428 já estava velho: o catálogo tem 426
+desde a unificação das linhas duplicadas do ERP. O número aparecia à mão em seis
+lugares de texto corrido, além dos contadores.
+
+**O que fiz.** Cada contador agora diz o que conta (`data-stat="produtos"`), e o
+`tools/gerar.js` preenche o valor a partir do `data/produtos.json`, escrito no
+HTML. O total em texto corrido também. Produto novo no catálogo atualiza os dez
+contadores das três páginas sozinho — que era a parte da sua tarefa 20 que
+faltava.
+
+`marcas` e `anos` continuam à mão de propósito: 16 é o número de marcas
+parceiras do seletor da home, não as 22 marcas distintas do JSON (que inclui
+submarcas como Choklers e Mix Nutri), e 9 é a idade da empresa.
+
+**Um erro meu no caminho, para você saber.** A primeira versão zerava os
+contadores fora da tela, para a contagem subir bonito quando o visitante
+chegasse neles. Isso troca um bug por outro: se o observador não disparar, o
+visitante vê 0 onde o HTML trazia 426. Desfiz — agora quem zera é a própria
+animação, no quadro em que começa. Falhando o observador, fica o número certo.
+
+**Verificado** em 375 px: o HTML cru entrega 426/33/16, a tela mostra 426/33/16
+antes e depois de rolar, console limpo, sem overflow horizontal.
