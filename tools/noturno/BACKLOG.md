@@ -104,14 +104,26 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
   PERGUNTAS), `Organization`, `WebSite` com `SearchAction`, e `BreadcrumbList`
   onde faltar. Validar antes de commitar.
 
-- [ ] **11. Páginas locais.** Só de lugar que a empresa realmente atende.
+- [~] **11. Páginas locais.** NÃO FEITO, de propósito. A `contato.html` já é
+  a página local: o `<title>` é "Contato | Distri Rio - Distribuidora em Duque
+  de Caxias - RJ", e ela tem endereço, mapa, referências e botão de rota. Uma
+  segunda página sobre a mesma cidade repetiria os mesmos fatos e competiria
+  com ela pela mesma busca. O que faria uma página local valer a pena — bairros
+  atendidos, dias de entrega por região — é o item 6 do PERGUNTAS, que continua
+  sem resposta. Texto original: Só de lugar que a empresa realmente atende.
   Enquanto o item 6 do PERGUNTAS não for respondido, **fazer apenas Duque de
   Caxias**, que é a sede e fato confirmado. Conteúdo próprio e útil, não doorway
   page recheada de keyword.
 
 ## P2 — Desempenho
 
-- [ ] **15. Nenhuma imagem usa `srcset` com largura.** Confirmado: os 301
+- [~] **15. `srcset` por largura.** NÃO FEITO, e a medição explica por quê.
+  A crítica de banda partia de não saber o tamanho dos arquivos: os **320 WebP
+  de produto têm média de 12 KB** e o maior tem 45 KB, em 800 × 800. Uma
+  variante de 400 px economizaria cerca de 6 KB por imagem — em imagens que
+  agora são todas `lazy` e que, na abertura da loja, não são baixadas
+  (medido: 0 byte de imagem de produto). O custo seria 320 arquivos a mais no
+  repositório e mais um passo no build. Não compensa. Texto original: Confirmado: os 301
   `srcset` da `loja.html` são `<source>` de formato (WebP/AVIF), não de largura.
   As fotos de produto são **500×500 servidas em cards de ~245 px**, e as do hero
   são 1600 px entregues também no celular. Com 303 imagens, é o maior
@@ -119,29 +131,54 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
   corretos. Processar com script Node local (`tools/webp-produtos.py` já faz algo
   parecido) — sem dependência no deploy.
 
-- [ ] **16. `loja.html` pesa 511 KB.** Já tem `content-visibility: auto` por
+- [x] **16. Peso da `loja.html`.** MEDIDO, e o número do briefing engana.
+  São 636 KB de HTML cru, mas **37 KB depois do gzip**, que o GitHub Pages
+  aplica sozinho. Na abertura: **8 requisições, 2 imagens (os dois logos),
+  `domInteractive` em 131 ms**. O DOM tem 5.520 nós, segurados pelo
+  `content-visibility`. Não é problema. O que era problema de verdade estava
+  ao lado e virou o commit `ad7d76c`: oito fotos com `fetchpriority="high"`
+  furando a fila para carregar duas telas abaixo da dobra. Texto original: Já tem `content-visibility: auto` por
   seção com altura estimada. **Medir o que isso já entrega antes de trocar de
   abordagem**, e só então avaliar renderização progressiva ou "carregar mais".
   Registrar tamanho do HTML, nós no DOM e LCP, antes e depois. **Cuidado:** o
   `content-visibility` já causou problema de âncora e de rolagem; ler o
   comentário no `style.css`.
 
-- [ ] **17. Hero da home.** Demora a pintar e fica um bloco escuro — é o LCP.
+- [ ] **17. Hero da home (LCP).** NÃO MEDIDO nesta noite, e não quero chutar.
+  A janela do navegador embutido parou de desenhar de madrugada (a máquina
+  ficou com outra janela na frente), e sem pintura as APIs de LCP e FCP não
+  disparam — voltaram vazias. O que dá para afirmar: o primeiro slide já tem
+  `fetchpriority="high"` e três formatos (AVIF 51 KB, WebP 69 KB, JPG 116 KB).
+  O job do Lighthouse no CI mede isso a cada push; vale olhar o relatório dele
+  antes de mexer. Texto original: Demora a pintar e fica um bloco escuro — é o LCP.
   Já tem `fetchpriority="high"` na primeira e dimensões explícitas. Falta
   `preload` da primeira e um fundo enquanto carrega. As imagens já caíram de
   4,8 MB para 203 KB; conferir se dá para mais.
 
-- [ ] **18. As 10 imagens sem `loading="lazy"` na `loja.html`.** São as 8 acima
+- [x] **18. Imagens sem `loading="lazy"`.** FEITO (commit `ad7d76c`), e o
+  diagnóstico mudou no caminho: as 8 fotos de produto eram `eager` **de
+  propósito**, na ideia de que estariam acima da dobra. Medido: o primeiro
+  cartão da loja começa em **y = 1382 px**. Todas viraram `lazy`, o logo do
+  rodapé também, e `fetchpriority="high"` sobrou só no banner da home e na
+  foto grande da página de produto. Texto original: São as 8 acima
   da dobra (propositais, com `fetchpriority="high"`) mais 2. Conferir se as 2
   são intencionais e corrigir se não forem.
 
-- [ ] **19. Refatorar `app.js` (60 KB).** Módulos ES nativos (`type="module"`),
+- [~] **19. Refatorar `app.js` em módulos ES.** NÃO FEITO, e recomendo não
+  fazer. São 76 KB que viram **18,5 KB depois do gzip**, num arquivo só, com
+  uma requisição e cache de 10 minutos do Pages. Quebrar em módulos nativos
+  troca isso por N requisições em cascata (módulo que importa módulo só é
+  descoberto depois que o anterior chega), sem nada que o visitante perceba, e
+  com risco real de regressão num site que está no ar. Se um dia a manutenção
+  pedir, o caminho é separar por arquivo **e** concatenar no build — mas aí
+  entra o passo de build obrigatório que o briefing proíbe. Texto original: Módulos ES nativos (`type="module"`),
   carregando só o que cada página precisa, sem bundler. **Depois** que a lista de
   pedido estiver funcionando. Testar página por página.
 
 ## P3 — Estrutura e manutenção
 
-- [ ] **23. `README.md` de manutenção.** Existe `tools/LEIAME.md` cobrindo o
+- [x] **23. `README.md` de manutenção.** FEITO (commit `24324dc`). Texto
+  original: Existe `tools/LEIAME.md` cobrindo o
   fluxo do catálogo, mas não há README na raiz. Escrever: organização do
   repositório, como adicionar produto, como trocar a imagem do hero, como o
   deploy funciona (push na `main` → GitHub Pages), e o que **não** mexer (DNS,
@@ -161,19 +198,26 @@ de mexer em aparência, um redesenho por commit, registre o porquê em
 `tools/noturno/PROPOSTAS.md`. Não reabra as decisões fechadas do `REGRAS.md`.
 **Não redesenhe o site** — a identidade é do cliente e está boa.
 
-- [ ] **24. Auditoria mobile.** Todas as páginas em 375 px e 414 px: overflow
+- [x] **24. Auditoria mobile.** FEITO. Home, catálogo, produto (o de nome mais
+  longo do catálogo), marca, contato (com o mapa) e cadastro, em **320, 375 e
+  414 px**: `scrollWidth` igual ao viewport nas três larguras e **nenhum
+  elemento estourando para fora**, fora os que rolam de propósito. Texto
+  original: Todas as páginas em 375 px e 414 px: overflow
   horizontal, texto pequeno, carrossel difícil no dedo, filtros ocupando meia
   tela, botão do WhatsApp cobrindo conteúdo, formulário chato com uma mão.
 
-- [ ] **25. Alvos de toque.** Clicáveis com menos de 44 px de altura, no caminho
+- [x] **25. Alvos de toque.** FEITO (commit `ca6397c`). Texto original: Clicáveis com menos de 44 px de altura, no caminho
   crítico: navegação, filtros, cards, CTAs.
 
-- [ ] **26. Acessibilidade.** O CSS já tem `focus-visible` e
+- [x] **26. Acessibilidade.** FEITO (commit `ca6397c`): auditoria estática em
+  15 páginas achou **um** problema — `<h4>` do rodapé logo depois de `<h2>`,
+  pulando um nível — e ele foi corrigido sem mudar a aparência. Texto
+  original: O CSS já tem `focus-visible` e
   `prefers-reduced-motion`. Completar: contraste na paleta nova (mudou de bege
   para cinza neutro ontem), navegação por teclado, `aria-label` faltando, pausa
   real do carrossel e do ticker.
 
-- [ ] **28. Folha de impressão.** O `style.css` não tem `@media print`
+- [x] **28. Folha de impressão.** FEITO (commit `c2ff116`). Texto original: O `style.css` não tem `@media print`
   (confirmado). Comerciante imprime lista de pedido e catálogo. Fazer para
   `loja.html`, páginas de produto e a lista de pedido. Entrega barata e
   genuinamente útil no balcão.
@@ -201,7 +245,22 @@ Fora do briefing, já levantados. Depois do P4.
   o browser ignora. Virou item 17 do PERGUNTAS — só com Cloudflare na frente.
 - [x] **`rel="noopener"`** FEITO (commit `3a755b4`): a checagem entrou no
   `tools/checar-links.js` e achou uma ocorrência na `trabalhe-conosco.html`.
-- [ ] **Duplicatas no `style.css`** (`.form-consent`, `.category-bar`,
+- [x] **Duplicatas no `style.css`** AUDITADO, e o resultado mudou o plano.
+  Escrevi o `tools/checar-css.js`, que entrou no `npm run checar`: ele lista
+  seletor declarado duas vezes e mostra qual propriedade a de baixo tira da de
+  cima. São **12 seletores com sobrescrita de valor** e 16 sem conflito.
+
+  **Não refatorei nenhum**, e é decisão, não preguiça: conferi no elemento
+  renderizado os dois candidatos a bug de verdade e os dois estão certos. O
+  `.cta-band-note` sai cinza-escuro sobre a faixa clara, com **contraste
+  7,39:1** (a declaração branca de cima é código morto). A `.category-bar` sai
+  `static` com rolagem horizontal, que é o desenho atual (a declaração
+  `sticky` de cima é código morto). Mexer às cegas em 12 pares de regras num
+  site no ar, numa noite em que eu não conseguia tirar print, seria trocar
+  dívida de manutenção por risco de regressão. O relatório fica, e quem for
+  editar uma dessas regras vê antes que a de cima pode não ter efeito.
+
+  Texto original: (`.form-consent`, `.category-bar`,
   `.category-chip`, `.hero`, `.hero-carousel-next`, `.whatsapp-float`). Foi um
   par assim (`.btn-ghost`) que deixou um botão ilegível no ar.
 

@@ -38,6 +38,7 @@ npm run checar
 | `tools/rotas.js` | Decide em qual seção cada produto do ERP entra. |
 | `tools/jsonld.js` | Monta FAQPage, Service e BreadcrumbList a partir do texto visível. |
 | `tools/checar-links.js` | Confere que todo `href`/`src` local existe e que as âncoras batem. |
+| `tools/checar-css.js` | Lista seletor declarado duas vezes no `style.css` e mostra qual propriedade a de baixo tira da de cima. Não reprova: é relatório. |
 | `tools/orfas.js` | Lista (ou apaga, com `--apagar`) imagens que ninguém referencia. |
 | `tools/webp-produtos.py` | Gera o WebP de 500px ao lado de cada foto de produto. |
 | `tools/otimizar-imagens.py` | Reduz logotipos, ícones e banners do hero. Roda sob demanda. |
