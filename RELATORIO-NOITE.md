@@ -106,3 +106,42 @@ animação, no quadro em que começa. Falhando o observador, fica o número cert
 
 **Verificado** em 375 px: o HTML cru entrega 426/33/16, a tela mostra 426/33/16
 antes e depois de rolar, console limpo, sem overflow horizontal.
+
+### 02:05 — tarefa 1: lista de pedido no catálogo (commit `f439cf2`)
+
+A maior lacuna do site, e a que dá dinheiro. O site promete em todo lugar "você
+manda a lista e a gente confirma na conversa", mas o catálogo não deixava montar
+lista nenhuma — o comerciante tinha que abrir produto por produto e digitar tudo
+à mão no WhatsApp.
+
+**O que ficou pronto.** Botão "Adicionar à lista" nos 426 cartões e nas 426
+páginas de produto; botão flutuante com a contagem; painel lateral com ajuste de
+quantidade e remoção; tudo guardado no `localStorage` do próprio aparelho,
+seguindo o padrão `guardar`/`recuperar` que já existia. Nada sai para servidor
+nenhum, e a lista sobrevive a fechar o navegador: o comerciante monta hoje e
+manda amanhã. Sincroniza entre abas do mesmo navegador.
+
+**Duas decisões que tomei sozinho, para você discordar se quiser:**
+
+O botão fica **fora** do `<a>` do cartão. Botão dentro de link é HTML inválido e
+o clique viraria navegação em vez de adicionar. Isso mudou um pouco o cartão: o
+botão aparece embaixo, com borda, ocupando a largura toda.
+
+A mensagem é cortada pelo **tamanho da URL final**, não do texto. Acento vira
+três caracteres depois do encode, e cortar por número de letras erraria feio.
+Testado com 60 produtos de nomes longos e acentuados: a URL fica em 1810
+caracteres, leva os 32 primeiros e avisa que o resto segue na conversa. O painel
+diz isso na tela antes de o comerciante enviar, para ele não ser pego de
+surpresa.
+
+**Entrou junto** um `medir()` que só dispara evento se houve consentimento — a
+lista já usa em abrir, adicionar, remover e enviar. O resto dos eventos do GA4 é
+a tarefa 3, a próxima da fila.
+
+**Verificado** em 375 px: 426 botões, nenhum dentro de link, console limpo, sem
+overflow horizontal, quantidade acumulando, painel abrindo, remoção funcionando,
+e a lista atravessando da loja para a página de produto.
+
+**O que eu faria a seguir nisso:** um campo de observação por item ("me manda
+2 caixas se tiver da validade nova") e um jeito de o comerciante repetir o
+último pedido. Nenhum dos dois é necessário para a lista servir hoje.

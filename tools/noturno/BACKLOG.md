@@ -18,7 +18,9 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
 
 ## P0 — Conversão
 
-- [ ] **1. Lista de pedido no catálogo.** A maior lacuna: o site promete "você
+- [x] **1. Lista de pedido no catálogo.** FEITO, commit `f439cf2`. Botão nos 426 cartões e nas 426 páginas de produto, contador flutuante, painel com quantidade e remoção, localStorage, e mensagem de WhatsApp cortada pelo tamanho da URL. **Falta:** medir com gente de verdade e avaliar se o painel deveria ter campo de observação por item.
+
+<!-- original: **1. Lista de pedido no catálogo.** A maior lacuna: o site promete "você
   manda a lista e a gente confirma na conversa", e o catálogo não deixa montar
   lista nenhuma. Botão "+ Adicionar à lista" em cada card da `loja.html` e na
   página de produto; contador flutuante; painel com quantidade e remoção;
@@ -26,7 +28,7 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
   botão "Enviar lista no WhatsApp" montando mensagem em `wa.me` com produto,
   marca e quantidade. Limite ~2000 caracteres: passando disso, mandar as
   primeiras linhas e avisar que a lista completa segue na conversa. JS puro.
-  **Item grande: faça uma parte inteira e funcionando por execução.**
+  **Item grande: faça uma parte inteira e funcionando por execução.** -->
 
 - [x] **8. Contadores entregam "0" no HTML.** FEITO, commit `3f02f4b`. Os dez contadores das tres paginas passam a sair do `data/produtos.json` no build, com o numero real escrito no HTML. De quebra, o total em texto corrido tambem: dizia 428 em seis lugares e o catalogo tem 426.
 
