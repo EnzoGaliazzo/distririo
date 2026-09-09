@@ -327,6 +327,13 @@
         var contadores = document.querySelectorAll('.stat-number[data-count-to]');
         if (!contadores.length) return;
 
+        // O número real vem escrito no HTML, para o Google e para quem tem JS
+        // bloqueado lerem "426 Produtos no catálogo" e não "0".
+        //
+        // Não zeramos nada aqui de propósito: se o observador não disparar por
+        // qualquer motivo, o visitante continua vendo o número certo em vez de
+        // um zero. Quem zera é a própria animação, no quadro em que começa.
+
         function animar(el) {
             if (el.dataset.pronto) return;
             el.dataset.pronto = '1';
@@ -364,6 +371,9 @@
 
         // Mesma correção do reveal: o atalho de 2,5s só vale para quem já está
         // na tela; quem está lá embaixo continua ganhando a animação ao chegar.
+        // Rede de segurança: se o observador não disparar para quem já está na
+        // tela, anima na marra. Quem está fora da tela fica com o número que já
+        // está escrito no HTML — que é o certo.
         setTimeout(function () {
             contadores.forEach(function (el) {
                 if (!el.dataset.pronto && noViewport(el)) { obs.unobserve(el); animar(el); }

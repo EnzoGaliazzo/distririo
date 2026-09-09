@@ -174,10 +174,48 @@ const versionar = html =>
     html.replace(/(href|src)="((?:\.\.\/|\/)?(style\.css|app\.js))"/g,
         (_, attr, caminho, base) => `${attr}="${caminho}?v=${VERSOES[base]}"`);
 
+// ---------------------------------------------------------------------
+// Contadores de estatística
+// Dois problemas de uma vez. O HTML entregava `<div data-count-to="428">0</div>`,
+// então o Google, os previews de link e quem tem JS bloqueado liam "0 Produtos
+// no catálogo". E o 428 já estava velho: o catálogo tem 426 desde a unificação.
+// Agora o número sai do próprio catálogo, no build, e vai escrito no HTML.
+//
+// "marcas" e "anos" continuam à mão de propósito: 16 é o número de marcas
+// parceiras do seletor da home, não as 22 marcas distintas do JSON (que inclui
+// submarcas como Choklers e Mix Nutri), e 9 é a idade da empresa.
+// ---------------------------------------------------------------------
+const NUMEROS = {
+    produtos: dados.total,
+    categorias: dados.categorias.length,
+};
+
+// O total também aparece escrito em texto corrido ("428 produtos de 16 marcas
+// parceiras"). Escrito à mão, desatualiza no primeiro produto novo — foi o que
+// aconteceu: dizia 428 depois que o catálogo caiu para 426.
+function arrumarTotalNoTexto(html) {
+    return html.replace(/\b\d{3}(?= produtos\b)/g, String(dados.total));
+}
+
+function arrumarContadores(html) {
+    return html.replace(
+        /<div class="stat-number" data-stat="([a-z]+)"([^>]*)>([^<]*)<\/div>/g,
+        (inteiro, chave, resto, textoAtual) => {
+            // o valor vem do catálogo quando dá; senão mantém o que já estava
+            const doCatalogo = NUMEROS[chave];
+            const atual = (resto.match(/data-count-to="(\d+)"/) || [])[1];
+            const valor = doCatalogo != null ? String(doCatalogo) : (atual || textoAtual.trim() || '0');
+            const attrs = resto.replace(/\s*data-count-to="\d+"/, '');
+            return `<div class="stat-number" data-stat="${chave}" data-count-to="${valor}"${attrs}>${valor}</div>`;
+        });
+}
+
 // 1. páginas normais
 for (const [arquivo, chave] of Object.entries(PAGINAS)) {
     let html = limparVersao(ler(arquivo));
     html = arrumarHead(html, arquivo);
+    html = arrumarContadores(html);
+    html = arrumarTotalNoTexto(html);
     html = aplicarJsonLd(html, arquivo);
     html = aplicarPartials(html, '', chave);
     if (!/id="conteudo"/.test(html)) {

@@ -101,5 +101,31 @@ O que continua valendo:
 
 ## Se travar
 
-Sem item claro no backlog, ou item que precisa de decisão do dono: escreva a
-dúvida no `RELATORIO.md` e encerre a execução. Não invente escopo.
+O dono autorizou decidir sozinho: "se você ficar em dúvida em algo, só faça o
+que você acha o recomendado". Então **decida e siga** em toda escolha técnica ou
+de design — qual abordagem usar, como organizar uma seção, que nome dar a uma
+classe. Registre a decisão e o porquê no relatório, para ele discordar de forma
+específica de manhã.
+
+**Isso não vale para fato comercial.** Preço, pedido mínimo, prazo de entrega,
+forma de pagamento, depoimento, nome de cliente, número de comércios atendidos,
+unidades por caixa, EAN, peso, validade, cidade atendida. Aqui a ação
+recomendada **é** deixar `[FALTA: ...]` e registrar a pergunta — não é fugir da
+decisão, é a decisão certa. O próprio dono escreveu a regra duas vezes:
+distribuidora vive de confiança e informação errada custa cliente. O site já
+teve depoimento inventado uma vez e foi removido por isso.
+
+Item que dependa inteiramente de dado que não existe: monte a estrutura, marque
+o que falta, e siga para o próximo.
+
+## Duas execuções ao mesmo tempo
+
+Antes de começar, confira se a branch de trabalho tem alteração não commitada:
+
+```bash
+git status --porcelain
+```
+
+Se tiver, outra execução pode estar no meio de uma tarefa. Espere a próxima
+rodada: anote no relatório que pulou por isso e encerre. Dois turnos editando os
+mesmos arquivos se atropelam.
