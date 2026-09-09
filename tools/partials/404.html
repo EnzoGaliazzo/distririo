@@ -21,7 +21,7 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap"></noscript>
     <link rel="stylesheet" href="/style.css">
     <script>
@@ -34,6 +34,13 @@
       });
       gtag('js', new Date());
       window.DR_GA_ID = 'G-8MYVJZMB64';
+      // O preload da fonte vira folha de estilo aqui, e não num
+      // onload="" no próprio <link>: atributo on* exigiria
+      // 'unsafe-hashes' na CSP, que browser antigo ignora.
+      document.addEventListener('DOMContentLoaded', function () {
+        var f = document.querySelector('link[rel="preload"][as="style"]');
+        if (f) f.rel = 'stylesheet';
+      });
     </script>
 </head>
 <body data-base="/">

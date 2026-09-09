@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' https://www.googletagmanager.com 'sha256-te0gcx2qOxli1PZdSiEaT5YpVgruA5oSksv/ZqdXJQ4='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://api.web3forms.com https://brasilapi.com.br https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; frame-src 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Página não encontrada | Distri Rio</title>
     <meta name="description" content="A página que você procurou não existe mais ou mudou de endereço. Volte para o catálogo da Distri Rio ou fale com a gente no WhatsApp.">
@@ -21,7 +23,7 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap"></noscript>
     <link rel="stylesheet" href="/style.css?v=d9c578c2">
     <script>
@@ -34,6 +36,13 @@
       });
       gtag('js', new Date());
       window.DR_GA_ID = 'G-8MYVJZMB64';
+      // O preload da fonte vira folha de estilo aqui, e não num
+      // onload="" no próprio <link>: atributo on* exigiria
+      // 'unsafe-hashes' na CSP, que browser antigo ignora.
+      document.addEventListener('DOMContentLoaded', function () {
+        var f = document.querySelector('link[rel="preload"][as="style"]');
+        if (f) f.rel = 'stylesheet';
+      });
     </script>
 </head>
 <body data-base="/">
@@ -150,6 +159,6 @@
     </footer>
 </div>
 
-<script src="/app.js?v=529139ea"></script>
+<script src="/app.js?v=3c655c09"></script>
 </body>
 </html>

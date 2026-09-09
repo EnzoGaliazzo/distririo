@@ -23,6 +23,13 @@ const STUB_CONSENTIMENTO = `    <script>
       });
       gtag('js', new Date());
       window.DR_GA_ID = '${GA_ID}';
+      // O preload da fonte vira folha de estilo aqui, e não num
+      // onload="" no próprio <link>: atributo on* exigiria
+      // 'unsafe-hashes' na CSP, que browser antigo ignora.
+      document.addEventListener('DOMContentLoaded', function () {
+        var f = document.querySelector('link[rel="preload"][as="style"]');
+        if (f) f.rel = 'stylesheet';
+      });
     </script>`;
 
 const RE_GA_ANTIGO = /[ \t]*<!-- Google tag \(gtag\.js\) -->\r?\n[ \t]*<script async src="https:\/\/www\.googletagmanager\.com[^"]*"><\/script>\r?\n[ \t]*<script>[\s\S]*?<\/script>\r?\n/;
@@ -219,6 +226,59 @@ function arrumarContadores(html) {
         });
 }
 
+// ---------------------------------------------------------------------
+// Referrer-Policy e Content-Security-Policy
+//
+// O caminho fácil seria script-src 'unsafe-inline', que passa a existir sem
+// proteger de nada. Aqui o build calcula o hash do bloco inline de cada
+// página e põe só ele na política.
+//
+// frame-ancestors NÃO entra: em <meta> o browser ignora essa diretiva, e o
+// GitHub Pages não deixa mandar cabeçalho. Só com Cloudflare na frente.
+// ---------------------------------------------------------------------
+const RE_SEGURANCA = /[ \t]*<meta (?:http-equiv="Content-Security-Policy"|name="referrer")[^>]*>\r?\n/g;
+
+function hashesInline(html) {
+    const achados = new Set();
+    const re = /<script(?![^>]*\bsrc=)([^>]*)>([\s\S]*?)<\/script>/g;
+    let m;
+    while ((m = re.exec(html)) !== null) {
+        if (/application\/ld\+json/i.test(m[1])) continue;
+        achados.add("'sha256-" + crypto.createHash('sha256').update(m[2], 'utf8').digest('base64') + "'");
+    }
+    return [...achados];
+}
+
+function aplicarSeguranca(html) {
+    const h = html.replace(RE_SEGURANCA, '');
+    const politica = [
+        "default-src 'self'",
+        "base-uri 'self'",
+        "object-src 'none'",
+        "form-action 'self'",
+        // googletagmanager: o gtag.js só é carregado depois do aceite
+        "script-src 'self' https://www.googletagmanager.com " + hashesInline(h).join(' '),
+        // 'unsafe-inline' aqui é por causa dos style="contain-intrinsic-size"
+        // que o próprio build escreve nas seções do catálogo
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+        "font-src 'self' https://fonts.gstatic.com",
+        "img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com",
+        // web3forms: formulários; brasilapi: consulta de CNPJ na Receita
+        "connect-src 'self' https://api.web3forms.com https://brasilapi.com.br " +
+            "https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com",
+        /<iframe/.test(h) ? "frame-src https://www.google.com" : "frame-src 'none'",
+        'upgrade-insecure-requests',
+    ].join('; ');
+
+    const metas =
+        '    <meta http-equiv="Content-Security-Policy" content="' + politica + '">\n' +
+        '    <meta name="referrer" content="strict-origin-when-cross-origin">\n';
+
+    // Depois do viewport e ANTES do bloco inline, senão a política não governa
+    // o bloco que ela mesma libera por hash.
+    return h.replace(/([ \t]*<meta name="viewport"[^>]*>\r?\n)/, m => m + metas);
+}
+
 // 1. páginas normais
 for (const [arquivo, chave] of Object.entries(PAGINAS)) {
     let html = limparVersao(ler(arquivo));
@@ -231,16 +291,17 @@ for (const [arquivo, chave] of Object.entries(PAGINAS)) {
         html = html.replace(/<main(\s|>)/, '<main id="conteudo"$1');
     }
     if (arquivo === 'loja.html') html = trocarCatalogo(html);
+    html = aplicarSeguranca(html);
     gravar(arquivo, versionar(html));
     relatorio.push(`  ${arquivo}`);
 }
 
 // 1b. página de erro (o GitHub Pages serve /404.html em qualquer profundidade,
 // então ela usa caminhos absolutos)
-gravar('404.html', versionar(ler('tools/partials/404.html')
+gravar('404.html', versionar(aplicarSeguranca(ler('tools/partials/404.html')
     .replace(/\r?\n/g, '\n')
     .replace('{{CABECALHO}}', B.montarCabecalho('/', ''))
-    .replace('{{RODAPE}}', indentar(B.montarRodape('/'), 4))));
+    .replace('{{RODAPE}}', indentar(B.montarRodape('/'), 4)))));
 relatorio.push('  404.html');
 
 // 2. páginas de produto
@@ -251,7 +312,7 @@ if (fs.existsSync(dirProduto)) {
         if (f.endsWith('.html')) fs.unlinkSync(path.join(dirProduto, f));
     }
 }
-dados.produtos.forEach(p => gravar(`produto/${p.id}.html`, versionar(paginaProduto(p, tplProduto))));
+dados.produtos.forEach(p => gravar(`produto/${p.id}.html`, versionar(aplicarSeguranca(paginaProduto(p, tplProduto)))));
 
 // 2b. páginas de marca (18 marcas com 4+ produtos)
 const tplMarca = ler('tools/partials/marca.html').replace(/\r?\n/g, '\n');
@@ -262,7 +323,7 @@ if (fs.existsSync(dirMarca)) {
         if (f.endsWith('.html')) fs.unlinkSync(path.join(dirMarca, f));
     }
 }
-marcas.forEach(m => gravar(`marca/${m.slug}.html`, versionar(B.paginaMarca(m, marcas, tplMarca))));
+marcas.forEach(m => gravar(`marca/${m.slug}.html`, versionar(aplicarSeguranca(B.paginaMarca(m, marcas, tplMarca)))));
 relatorio.push(`  marca/*.html (${marcas.length} marcas)`);
 
 // 3. índice de busca (baixado sob demanda, não embutido no app.js)

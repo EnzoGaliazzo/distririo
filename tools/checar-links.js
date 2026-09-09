@@ -77,6 +77,22 @@ for (const pagina of paginas) {
     }
 }
 
+// target="_blank" sem rel="noopener": a página aberta ganha window.opener e
+// pode redirecionar a original para uma cópia falsa (reverse tabnabbing). Os
+// browsers atuais já aplicam noopener sozinhos, mas declarar é barato e vale
+// para quem está em navegador antigo.
+const RE_BLANK = /<a\s[^>]*target="_blank"[^>]*>/g;
+for (const pagina of paginas) {
+    const html = fs.readFileSync(pagina, 'utf8');
+    let m;
+    RE_BLANK.lastIndex = 0;
+    while ((m = RE_BLANK.exec(html)) !== null) {
+        if (/\srel="[^"]*noopener/.test(m[0])) continue;
+        const href = (m[0].match(/href="([^"]*)"/) || [])[1] || '?';
+        problemas.push(`${pagina}: target="_blank" sem rel="noopener" -> ${href}`);
+    }
+}
+
 console.log(`${paginas.length} páginas · ${conferidos} referências conferidas`);
 if (problemas.length) {
     console.error(`\n${problemas.length} problema(s):`);

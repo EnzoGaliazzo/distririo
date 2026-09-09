@@ -1669,6 +1669,11 @@
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             if (!form.reportValidity()) return;
+            // Honeypot: campo escondido que só um robô preenche. Não há o que
+            // proteger no envio (a mensagem só abre o WhatsApp de quem clicou),
+            // mas sem isso o robô dispara um formulario_enviado no GA4 e suja a
+            // conversão que o Enzo usa para decidir.
+            if (form.botcheck && form.botcheck.checked) return;
 
             var linhas = [
                 'Olá! Gostaria de me tornar cliente da Distri Rio.',
@@ -1728,6 +1733,11 @@
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             var rotulo = ROTULOS[assunto.value];
+            // Honeypot: campo escondido que só um robô preenche. Não há o que
+            // proteger no envio (a mensagem só abre o WhatsApp de quem clicou),
+            // mas sem isso o robô dispara um formulario_enviado no GA4 e suja a
+            // conversão que o Enzo usa para decidir.
+            if (form.botcheck && form.botcheck.checked) return;
             if (!rotulo || !form.reportValidity()) return;
 
             var linhas = [
