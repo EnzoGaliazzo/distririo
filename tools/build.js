@@ -100,7 +100,14 @@ function midiaCartao(p, eager, base) {
         ].join('\n');
     }
     const webp = p.img.replace(/\.jpe?g$/i, '.webp');
-    const carga = eager ? ' fetchpriority="high"' : ' loading="lazy"';
+    // Nenhum cartão fica acima da dobra: na loja a grade só começa em y=1380,
+    // depois do hero, dos filtros e da barra de categorias; na pagina de marca
+    // e de produto é parecido. Marcar os oito primeiros com fetchpriority=high
+    // fazia eles disputarem banda com o que a pessoa realmente vê na abertura.
+    // Todos lazy: o próprio navegador já busca sozinho o que está perto da
+    // janela. O parametro eager continua no lugar para o dia em que existir
+    // uma grade no topo de alguma pagina.
+    const carga = ' loading="lazy"';
     return [
         '<picture>',
         '    <source srcset="' + base + webp + '" type="image/webp">',
