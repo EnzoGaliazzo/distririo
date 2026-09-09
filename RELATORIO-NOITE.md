@@ -175,3 +175,30 @@ medido de quem recusou os cookies.
 clicam, o que buscam e não acham (termo com zero resultados é pedido de compra
 que você está perdendo), de qual página sai mais WhatsApp, e quantas listas são
 montadas mas não enviadas.
+
+### 03:05 — tarefa 2: formulário de cadastro em duas etapas (commit `9a4a793`)
+
+Eram **9 campos obrigatórios** para um lead B2B que quase sempre chega do
+celular, no balcão, com uma mão livre. Agora são **4**.
+
+**Etapa 1**, obrigatória: CNPJ, nome do responsável, WhatsApp e o consentimento
+LGPD. Quem parar aqui já vira lead com CNPJ conferido na Receita — mais
+qualificação do que o formulário antigo dava com o dobro dos campos.
+
+**Etapa 2**, opcional: razão social (que a consulta de CNPJ preenche sozinha),
+ramo, bairro e mensagem.
+
+**Duas decisões minhas, para você discordar se quiser.** Tirei as duas caixas de
+confirmação que eu mesmo tinha criado ontem. A de "Tenho CNPJ ativo" virou
+redundante quando o campo passou a consultar a Receita: pedir que a pessoa
+confirme o que o site já verificou é atrito sem contrapartida. A de "meu negócio
+é mercadinho, farmácia..." era o campo "Ramo de atividade" com outra roupa, e o
+campo captura melhor. O consentimento LGPD ficou — é base legal, não pode ser
+opcional.
+
+A mensagem do WhatsApp monta só com o que foi preenchido, sem "*Ramo:*" vazio
+para quem parou na etapa 1. O evento leva `completou_etapa2`, para você medir
+quantos param no meio.
+
+**Verificado** em 375 px: 4 obrigatórios visíveis, barra o avanço com campo
+vazio, avança preenchido, envia só com a etapa 1, console limpo, sem overflow.

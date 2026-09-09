@@ -41,12 +41,7 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
   HTML e fazer o JS animar de 0 até o valor que já está lá. O JS está em
   `app.js`, seção "Contadores". -->
 
-- [ ] **2. Enxugar o formulário de cadastro.** `quero-ser-cliente.html` tem 11
-  campos obrigatórios (empresa, CNPJ, segmento, nome, telefone, bairro, mensagem
-  e 3 checkboxes). É atrito demais para lead B2B no celular. Duas etapas: a
-  primeira só CNPJ + nome + WhatsApp — a consulta à BrasilAPI já preenche a
-  razão social sozinha — e a segunda opcional. **O consentimento LGPD continua
-  obrigatório na primeira etapa.** Documentar o que mudou.
+- [x] **2. Enxugar o formulário de cadastro.** FEITO, commit `9a4a793`. De 9 campos obrigatórios para 4. Etapa 1: CNPJ, nome, WhatsApp e consentimento. Etapa 2 opcional. As duas caixas de confirmação saíram — a de CNPJ ativo virou redundante com a consulta à Receita.
 
 - [x] **3. Eventos no GA4.** FEITO, commit `54770bf`. whatsapp_click com origem, produto_clique, busca com termo e resultados, filtro_usado, formulario_enviado e os quatro da lista. Trava do consentimento testada nos dois sentidos.
 
