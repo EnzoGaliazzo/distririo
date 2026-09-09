@@ -202,3 +202,23 @@ quantos param no meio.
 
 **Verificado** em 375 px: 4 obrigatórios visíveis, barra o avanço com campo
 vazio, avança preenchido, envia só com a etapa 1, console limpo, sem overflow.
+
+### 03:35 — tarefa 4: FAQ (commit `d83693f`) — estrutura pronta, esperando você
+
+O `contato.html` já tinha cinco perguntas com `FAQPage`. Faltavam as três do seu
+briefing: **prazo de entrega**, **formas de pagamento** e **pré-venda x pronta
+entrega**. Entraram, com a resposta marcada em amarelo, e as perguntas
+correspondentes estão nos itens 1 a 4 do `PERGUNTAS-PARA-O-ENZO.md`.
+
+**A parte que importa é o que eu impedi.** O gerador de JSON-LD agora pula
+pergunta cuja resposta ainda está pendente. Sem isso, o rich snippet do Google
+mostraria literalmente "[FALTA: prazo em dias úteis...]" para quem buscasse
+"prazo de entrega distribuidora Duque de Caxias" — pior do que não ter snippet
+nenhum. Oito perguntas aparecem na página, cinco vão para o schema, e as três
+entram sozinhas quando você responder.
+
+**Duas respostas que já estavam no ar continuam vagas** e eu não mexi porque
+dependem de você: "Qual a área de entrega?" responde "todo o Rio de Janeiro" e
+"Tem pedido mínimo?" responde "pode variar". São exatamente o atrito que o seu
+briefing quer tirar. Com os itens 1 e 6 do PERGUNTAS respondidos, viram resposta
+de verdade em cinco minutos.

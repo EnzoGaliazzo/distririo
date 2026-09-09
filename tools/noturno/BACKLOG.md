@@ -45,10 +45,7 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
 
 - [x] **3. Eventos no GA4.** FEITO, commit `54770bf`. whatsapp_click com origem, produto_clique, busca com termo e resultados, filtro_usado, formulario_enviado e os quatro da lista. Trava do consentimento testada nos dois sentidos.
 
-- [ ] **4. FAQ com schema FAQPage.** Pedido mínimo, prazo, região, pagamento,
-  exigência de CNPJ, pré-venda x pronta entrega. **As respostas dependem do
-  Enzo** — montar a estrutura, escrever as perguntas, deixar cada resposta como
-  `[FALTA: ...]`. Ver itens 1 a 4 do PERGUNTAS.
+- [?] **4. FAQ com schema FAQPage.** ESTRUTURA FEITA, commit `d83693f`. O contato.html ja tinha 5 perguntas; entraram as 3 que faltavam (prazo, pagamento, pre-venda x pronta entrega) com resposta marcada. O gerador de JSON-LD pula pergunta pendente, para nao vazar "[FALTA]" pro Google. **Travado nos itens 1 a 4 do PERGUNTAS.**
 
 - [ ] **5. Prova social.** Estrutura para depoimentos, fotos reais e números
   verificáveis. **Só material que já existe no repositório**: hoje são duas
