@@ -144,16 +144,16 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
   `content-visibility` já causou problema de âncora e de rolagem; ler o
   comentário no `style.css`.
 
-- [ ] **17. Hero da home (LCP).** NÃO MEDIDO nesta noite, e não quero chutar.
-  A janela do navegador embutido parou de desenhar de madrugada (a máquina
-  ficou com outra janela na frente), e sem pintura as APIs de LCP e FCP não
-  disparam — voltaram vazias. O que dá para afirmar: o primeiro slide já tem
-  `fetchpriority="high"` e três formatos (AVIF 51 KB, WebP 69 KB, JPG 116 KB).
-  O job do Lighthouse no CI mede isso a cada push; vale olhar o relatório dele
-  antes de mexer. Texto original: Demora a pintar e fica um bloco escuro — é o LCP.
-  Já tem `fetchpriority="high"` na primeira e dimensões explícitas. Falta
-  `preload` da primeira e um fundo enquanto carrega. As imagens já caíram de
-  4,8 MB para 203 KB; conferir se dá para mais.
+- [x] **17. Hero da home (LCP).** PARCIAL, commit `8245f52`. O fundo enquanto
+  carrega já existia (`background: var(--gray-800)` no `.hero-carousel`, com
+  `aspect-ratio` explícito — sem layout shift). Faltava só o `preload`: entrou
+  um por formato (AVIF e WebP) da primeira foto (`trident`), com o mesmo
+  `fetchpriority="high"` do `<img>`. **Não medido em número** — a janela do
+  navegador embutido continua sem pintar (mesmo problema da execução
+  anterior), então as APIs de LCP/FCP não disparam. Verificado por outra via:
+  console limpo, o preload aparece no DOM com o `type` certo, sem overflow em
+  375 px. Falta o Enzo confirmar o ganho numérico no Lighthouse do CI ou no
+  DevTools de verdade.
 
 - [x] **18. Imagens sem `loading="lazy"`.** FEITO (commit `ad7d76c`), e o
   diagnóstico mudou no caminho: as 8 fotos de produto eram `eager` **de

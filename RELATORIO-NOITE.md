@@ -513,3 +513,44 @@ O `PERGUNTAS-PARA-O-ENZO.md` tem 17 itens. Os que mais destravam coisa:
    proxy ligado. Não toquei em nada de DNS, como você pediu.
 
 Bom dia, Enzo.
+
+---
+
+## Execução adicional — tarefa 17: preload do hero (commit `8245f52`)
+
+Encontrei a `main` limpa e três commits a mais na branch além do que este
+relatório registrava (`ee785b9`, `fe2f540`, `4edff88` — cache-busting do `?v=`,
+quebra de linha do gerador e o layout de filtros em coluna). Não escrevo sobre
+eles aqui porque não fui eu quem fez: quem os commitou não atualizou este
+relatório nem o backlog, então não tenho como saber o que foi verificado.
+Sinalizando para você conferir esses três com atenção extra antes do merge.
+
+Pelo backlog, peguei o primeiro item não concluído e não bloqueado por
+resposta sua: a **tarefa 17, hero da home (LCP)**. Os itens 5 e 6 (prova
+social e área de cobertura) continuam travados nos itens 6 a 10 do
+`PERGUNTAS-PARA-O-ENZO.md`, que segue sem nenhuma resposta preenchida.
+
+**O que faltava.** O fundo enquanto carrega já existia
+(`.hero-carousel { background: var(--gray-800) }`, com `aspect-ratio`
+explícito — sem salto de layout). Faltava só o `preload`: sem ele, o
+navegador só descobre que precisa da primeira foto do carrossel quando chega
+no `<img>` durante o parse do HTML, em vez de começar a baixar assim que lê o
+`<head>`.
+
+Entrei com dois `<link rel="preload">`, um por formato (AVIF e WebP) da
+primeira foto (`trident`), com o mesmo `fetchpriority="high"` que o `<img>`
+já tinha. O navegador baixa só o formato que sabe decodificar; o outro fica
+sem efeito nenhum.
+
+**O que não deu para medir.** A janela do navegador embutido continua sem
+pintar — mesmo problema que a execução anterior já tinha relatado. As APIs de
+LCP e FCP não disparam sem pintura, então não tenho um número de antes e
+depois. O que verifiquei por outra via: o preload aparece no DOM com o `type`
+certo, console sem erro, sem overflow em 375 px. **Peço que você confira o
+ganho real no Lighthouse do CI** (roda a cada push) ou no DevTools de
+verdade — é a única forma confiável de saber se isso ajudou.
+
+Build idempotente, `checar-links` sem caminho quebrado nas 453 páginas,
+`orfas.js` em 0, `app.js` sem erro de sintaxe.
+
+Nenhuma pergunta nova para o `PERGUNTAS-PARA-O-ENZO.md` nesta execução.
