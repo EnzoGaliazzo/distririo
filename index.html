@@ -53,6 +53,11 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Wholesaler","@id":"https://distririo.com.br/#organizacao","name":"Distri Rio Comercial Ltda.","alternateName":"Distri Rio","url":"https://distririo.com.br/","logo":"https://distririo.com.br/assets/logo.png","image":"https://distririo.com.br/assets/logo.png","description":"Distribuidora de doces, bebidas, energéticos, suplementos e produtos de cuidados pessoais para comércios do Rio de Janeiro. Vendas exclusivamente para pessoa jurídica (CNPJ).","telephone":"+55-21-99211-1843","email":"recrutamento@distririo.com.br","foundingDate":"2017","address":{"@type":"PostalAddress","streetAddress":"Rod. Washington Luiz, 2070 - Parque Boa Vista II","addressLocality":"Duque de Caxias","addressRegion":"RJ","postalCode":"25055-009","addressCountry":"BR"},"areaServed":{"@type":"State","name":"Rio de Janeiro"},"sameAs":["https://www.instagram.com/distririo01/","https://www.linkedin.com/company/distri-rio-comercial-ltda/"]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://distririo.com.br/#site","url":"https://distririo.com.br/","name":"Distri Rio","inLanguage":"pt-BR","publisher":{"@id":"https://distririo.com.br/#organizacao"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://distririo.com.br/loja.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
     <!-- jsonld:fim -->
+    <!-- LCP é a primeira foto do carrossel do hero. Preload nos dois formatos
+         que ela é servida: o navegador baixa só o que ele sabe decodificar,
+         os outros dois links ficam sem efeito. -->
+    <link rel="preload" as="image" type="image/avif" href="assets/hero-slides/trident.avif" fetchpriority="high">
+    <link rel="preload" as="image" type="image/webp" href="assets/hero-slides/trident.webp" fetchpriority="high">
 </head>
 <body>
 <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
