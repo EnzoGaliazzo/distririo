@@ -20,7 +20,11 @@ Estas travam o FAQ, que é a tarefa P0 nº 3.
 
 2. **Prazo de entrega.** Quantos dias úteis para Duque de Caxias, para a
    Baixada e para o Rio capital? Tem dia fixo de rota por região?
-   → Resposta:
+   → Resposta (10/09): gira em torno de 48 horas. Pediu para o site **não
+   afirmar** isso como promessa, só dar indício — então o texto usa
+   "o normal é", "na maioria das rotas", "costuma", nunca "entregamos em
+   48h". Continua faltando: o prazo muda entre Caxias, Baixada e capital?
+   Tem dia fixo de rota?
 
 3. **Formas de pagamento aceitas.** Boleto? Prazo (7/14/28)? PIX? Cartão?
    Primeira compra tem regra diferente?

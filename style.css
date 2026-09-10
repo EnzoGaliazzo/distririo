@@ -97,6 +97,16 @@ button {
     white-space: nowrap;
 }
 
+/* Entre 901px e 1023px so cabem tres avisos na faixa: o quarto empurrava a
+   barra para duas linhas (62px), e --info-h, que posiciona o cabecalho fixo e
+   o scroll-padding das ancoras, assume 40px. Abaixo de 901px a faixa inteira
+   ja sai de cena, e o mesmo recado fica no marquee e na FAQ. */
+@media (max-width: 1023px) {
+    .header-info .header-info-entrega {
+        display: none;
+    }
+}
+
 .header-bar {
     display: flex;
     align-items: center;
