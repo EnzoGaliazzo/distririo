@@ -928,7 +928,7 @@
         "1 L",
         "300 ml"
       ],
-      "img": "assets/produtos/distririo/aqua-coco__agua-de-coco.jpg",
+      "img": "assets/produtos/aquacoco/agua-de-coco.jpg",
       "keywords": "agua de coco 1l aqua 300ml"
     },
     {
@@ -936,8 +936,8 @@
       "nome": "Água de Coco Garrafa Turma da Mônica",
       "categoria": "dr-aqua-coco",
       "marca": "Aqua Coco",
-      "descricao": "Água de coco Aqua Coco em garrafinha com os personagens da Turma da Mônica, tamanho de lancheira.",
-      "img": "assets/produtos/distririo/aqua-coco__agua-de-coco-garrafa-turma-da-monica.jpg",
+      "descricao": "Água de coco integral Aqua Coco em garrafinha de 200 ml com os personagens da Turma da Mônica.",
+      "img": "assets/produtos/aquacoco/agua-de-coco-garrafa-turma-da-monica.jpg",
       "keywords": "agua de coco garrafa turma da monica aqua"
     },
     {
@@ -950,7 +950,7 @@
         "300 ml",
         "1 L"
       ],
-      "img": "assets/produtos/distririo/sumo__suco-de-acerola-1l.jpg",
+      "img": "assets/produtos/aquacoco/suco-de-acerola.jpg",
       "keywords": "suco de acerola 300ml sumo 1l"
     },
     {
@@ -963,7 +963,7 @@
         "300 ml",
         "1 L"
       ],
-      "img": "assets/produtos/distririo/sumo__suco-de-caja-1l.jpg",
+      "img": "assets/produtos/aquacoco/suco-de-caja.jpg",
       "keywords": "suco de caja 300ml sumo 1l"
     },
     {
@@ -976,7 +976,7 @@
         "300 ml",
         "1 L"
       ],
-      "img": "assets/produtos/distririo/sumo__suco-de-caju-1l.jpg",
+      "img": "assets/produtos/aquacoco/suco-de-caju.jpg",
       "keywords": "suco de caju 300ml sumo 1l"
     },
     {
@@ -985,7 +985,7 @@
       "categoria": "dr-sumo",
       "marca": "Sumo",
       "descricao": "Suco de goiaba Sumo pronto para beber.",
-      "img": "assets/produtos/distririo/sumo__suco-de-goiaba.jpg",
+      "img": "assets/produtos/aquacoco/suco-de-goiaba.jpg",
       "keywords": "suco de goiaba sumo"
     },
     {
@@ -998,7 +998,7 @@
         "300 ml",
         "1 L"
       ],
-      "img": "assets/produtos/distririo/sumo__suco-de-graviola-1l.jpg",
+      "img": "assets/produtos/aquacoco/suco-de-graviola.jpg",
       "keywords": "suco de graviola 300ml sumo 1l"
     },
     {
@@ -1007,32 +1007,32 @@
       "categoria": "dr-sumo",
       "marca": "Sumo",
       "descricao": "Suco de uva Sumo pronto para beber.",
-      "img": "assets/produtos/distririo/sumo__suco-de-uva.jpg",
+      "img": "assets/produtos/aquacoco/suco-de-uva.jpg",
       "keywords": "suco de uva sumo"
     },
     {
       "id": "suco-sumo-acai",
-      "nome": "Suco Sumo Açaí",
+      "nome": "Bebida Mista de Açaí Sumo",
       "categoria": "dr-sumo",
       "marca": "Sumo",
-      "descricao": "Suco de açaí Sumo pronto para beber, em embalagem de 300 ml.",
+      "descricao": "Bebida mista de açaí Sumo, pronta para beber, em garrafa de 300 ml.",
       "embalagens": [
         "300 ml"
       ],
-      "img": "assets/produtos/distririo/sumo__suco-sumo-acai.jpg",
+      "img": "assets/produtos/aquacoco/suco-sumo-acai.jpg",
       "keywords": "suco sumo acai 300 ml 6unx300ml farma"
     },
     {
       "id": "nectar-marata-caju",
-      "nome": "Néctar Maratá Caju",
+      "nome": "Néctar Maratá Caju e Maçã",
       "categoria": "dr-marata",
       "marca": "Maratá",
-      "descricao": "Néctar de caju Maratá pronto para beber, em caixinha de 200 ml e embalagem de 1 litro.",
+      "descricao": "Néctar Maratá sabor caju e maçã, pronto para beber, sem glúten, em caixinha de 200 ml e embalagem de 1 litro.",
       "embalagens": [
         "1 L",
         "200 ml"
       ],
-      "img": "assets/produtos/distririo/marata__nectar-marata-caju.jpg",
+      "img": "assets/produtos/marata/nectar-marata-caju.jpg",
       "keywords": "nectar marata caju 1l 200ml farma"
     },
     {
@@ -1040,51 +1040,51 @@
       "nome": "Néctar Maratá Laranja",
       "categoria": "dr-marata",
       "marca": "Maratá",
-      "descricao": "Néctar de laranja Maratá pronto para beber, em caixinha de 200 ml e embalagem de 1 litro.",
+      "descricao": "Néctar Maratá sabor laranja, pronto para beber, sem glúten, em caixinha de 200 ml e embalagem de 1 litro.",
       "embalagens": [
         "1 L",
         "200 ml"
       ],
-      "img": "assets/produtos/distririo/marata__nectar-marata-laranja.jpg",
+      "img": "assets/produtos/marata/nectar-marata-laranja.jpg",
       "keywords": "nectar marata laranja 1l 200ml farma"
     },
     {
       "id": "nectar-marata-pessego",
-      "nome": "Néctar Maratá Pêssego",
+      "nome": "Néctar Maratá Pêssego e Maçã",
       "categoria": "dr-marata",
       "marca": "Maratá",
-      "descricao": "Néctar de pêssego Maratá pronto para beber, em caixinha de 200 ml e embalagem de 1 litro.",
+      "descricao": "Néctar Maratá sabor pêssego e maçã, pronto para beber, sem glúten, em caixinha de 200 ml e embalagem de 1 litro.",
       "embalagens": [
         "1 L",
         "200 ml"
       ],
-      "img": "assets/produtos/distririo/marata__nectar-marata-pessego.jpg",
+      "img": "assets/produtos/marata/nectar-marata-pessego.jpg",
       "keywords": "nectar marata pessego 1l 200ml farma"
     },
     {
       "id": "nectar-marata-uva",
-      "nome": "Néctar Maratá Uva",
+      "nome": "Néctar Maratá Uva e Maçã",
       "categoria": "dr-marata",
       "marca": "Maratá",
-      "descricao": "Néctar de uva Maratá pronto para beber, em caixinha de 200 ml e embalagem de 1 litro.",
+      "descricao": "Néctar Maratá sabor uva e maçã, pronto para beber, sem glúten, em caixinha de 200 ml e embalagem de 1 litro.",
       "embalagens": [
         "1 L",
         "200 ml"
       ],
-      "img": "assets/produtos/distririo/marata__nectar-marata-uva.jpg",
+      "img": "assets/produtos/marata/nectar-marata-uva.jpg",
       "keywords": "nectar marata uva 1l 200ml farma"
     },
     {
       "id": "nectar-marata-maracuja",
-      "nome": "Néctar Maratá Maracujá",
+      "nome": "Néctar Maratá Maracujá e Maçã",
       "categoria": "dr-marata",
       "marca": "Maratá",
-      "descricao": "Néctar de maracujá Maratá pronto para beber, em caixinha de 200 ml e embalagem de 1 litro.",
+      "descricao": "Néctar Maratá sabor maracujá e maçã, pronto para beber, sem glúten, em caixinha de 200 ml e embalagem de 1 litro.",
       "embalagens": [
         "200 ml",
         "1 L"
       ],
-      "img": "assets/produtos/distririo/marata__nectar-marata-maracuja.jpg",
+      "img": "assets/produtos/marata/nectar-marata-maracuja.jpg",
       "keywords": "nectar marata maracuja 200ml farma 1l"
     },
     {
@@ -1092,8 +1092,8 @@
       "nome": "Flocão de Milho Maratá",
       "categoria": "dr-marata",
       "marca": "Maratá",
-      "descricao": "Flocão de milho Maratá, farinha de milho em flocos para o preparo de cuscuz.",
-      "img": "assets/produtos/distririo/marata__flocao-de-milho-marata.jpg",
+      "descricao": "Flocão Maratá, farinha de milho flocada para cuscuz, de preparo rápido e sem glúten, em pacote de 500 g.",
+      "img": "assets/produtos/marata/flocao-de-milho-marata.jpg",
       "keywords": "flocao de milho marata"
     },
     {
@@ -1101,8 +1101,8 @@
       "nome": "Refresco Mara-tinho Abacaxi",
       "categoria": "dr-mara-tinho",
       "marca": "Mara-tinho",
-      "descricao": "Refresco líquido Mara-tinho sabor abacaxi, da Maratá, pronto para beber em caixinha de 200 ml, sem glúten.",
-      "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-abacaxi.jpg",
+      "descricao": "Refresco Mara-tinho sabor abacaxi, da Maratá, com vitaminas, pronto para beber em caixinha de 200 ml, sem glúten.",
+      "img": "assets/produtos/marata/refresco-mara-tinho-abacaxi.jpg",
       "keywords": "refresco mara tinho abacaxi"
     },
     {
@@ -1110,8 +1110,8 @@
       "nome": "Refresco Mara-tinho Laranja",
       "categoria": "dr-mara-tinho",
       "marca": "Mara-tinho",
-      "descricao": "Refresco líquido Mara-tinho sabor laranja, da Maratá, pronto para beber em caixinha de 200 ml, sem glúten.",
-      "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-laranja.jpg",
+      "descricao": "Refresco Mara-tinho sabor laranja, da Maratá, com vitaminas, pronto para beber em caixinha de 200 ml, sem glúten.",
+      "img": "assets/produtos/marata/refresco-mara-tinho-laranja.jpg",
       "keywords": "refresco mara tinho laranja"
     },
     {
@@ -1119,8 +1119,8 @@
       "nome": "Refresco Mara-tinho Maracujá",
       "categoria": "dr-mara-tinho",
       "marca": "Mara-tinho",
-      "descricao": "Refresco líquido Mara-tinho sabor maracujá, da Maratá, pronto para beber em caixinha de 200 ml, sem glúten.",
-      "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-maracuja.jpg",
+      "descricao": "Refresco Mara-tinho sabor maracujá, da Maratá, com vitaminas, pronto para beber em caixinha de 200 ml, sem glúten.",
+      "img": "assets/produtos/marata/refresco-mara-tinho-maracuja.jpg",
       "keywords": "refresco mara tinho maracuja"
     },
     {
@@ -1128,8 +1128,8 @@
       "nome": "Refresco Mara-tinho Morango",
       "categoria": "dr-mara-tinho",
       "marca": "Mara-tinho",
-      "descricao": "Refresco líquido Mara-tinho sabor morango, da Maratá, pronto para beber em caixinha de 200 ml, sem glúten.",
-      "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-morango.jpg",
+      "descricao": "Refresco Mara-tinho sabor morango, da Maratá, com vitaminas, pronto para beber em caixinha de 200 ml, sem glúten.",
+      "img": "assets/produtos/marata/refresco-mara-tinho-morango.jpg",
       "keywords": "refresco mara tinho morango"
     },
     {
@@ -1137,8 +1137,8 @@
       "nome": "Refresco Mara-tinho Uva",
       "categoria": "dr-mara-tinho",
       "marca": "Mara-tinho",
-      "descricao": "Refresco líquido Mara-tinho sabor uva, da Maratá, pronto para beber em caixinha de 200 ml, sem glúten.",
-      "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-uva.jpg",
+      "descricao": "Refresco Mara-tinho sabor uva, da Maratá, com vitaminas, pronto para beber em caixinha de 200 ml, sem glúten.",
+      "img": "assets/produtos/marata/refresco-mara-tinho-uva.jpg",
       "keywords": "refresco mara tinho uva"
     },
     {
@@ -1146,8 +1146,8 @@
       "nome": "Molho Gota Alho",
       "categoria": "dr-gota",
       "marca": "Gota",
-      "descricao": "Molho de alho Gota, para temperar carnes, saladas e pratos do dia a dia.",
-      "img": "assets/produtos/distririo/gota__molho-gota-alho.jpg",
+      "descricao": "Molho de alho Gota, da Maratá, sem glúten, em frasco PET de 150 ml.",
+      "img": "assets/produtos/marata/molho-gota-alho.jpg",
       "keywords": "molho gota alho"
     },
     {
@@ -1155,8 +1155,8 @@
       "nome": "Molho Gota Inglês",
       "categoria": "dr-gota",
       "marca": "Gota",
-      "descricao": "Molho inglês Gota, para temperar carnes, molhos e marinadas.",
-      "img": "assets/produtos/distririo/gota__molho-gota-ingles.jpg",
+      "descricao": "Molho inglês Gota, da Maratá, em frasco de 150 ml, para temperar carnes, molhos e marinadas.",
+      "img": "assets/produtos/marata/molho-gota-ingles.jpg",
       "keywords": "molho gota ingles"
     },
     {
@@ -1164,8 +1164,8 @@
       "nome": "Molho Gota Pimenta",
       "categoria": "dr-gota",
       "marca": "Gota",
-      "descricao": "Molho de pimenta vermelha Gota, para dar picância a pratos e petiscos.",
-      "img": "assets/produtos/distririo/gota__molho-gota-pimenta.jpg",
+      "descricao": "Molho de pimenta vermelha Gota, da Maratá, em frasco de 150 ml.",
+      "img": "assets/produtos/marata/molho-gota-pimenta.jpg",
       "keywords": "molho gota pimenta"
     },
     {
@@ -1173,8 +1173,8 @@
       "nome": "Molho Gota Pimenta Verde",
       "categoria": "dr-gota",
       "marca": "Gota",
-      "descricao": "Molho de pimenta verde Gota, para dar picância a pratos e petiscos.",
-      "img": "assets/produtos/distririo/gota__molho-gota-pimenta-verde.jpg",
+      "descricao": "Molho de pimenta verde Gota, da Maratá, feito com pimentas verdes e vinagre, sem glúten, em frasco PET de 150 ml.",
+      "img": "assets/produtos/marata/molho-gota-pimenta-verde.jpg",
       "keywords": "molho gota pimenta verde"
     },
     {
@@ -1187,7 +1187,7 @@
         "150 g",
         "80 g"
       ],
-      "img": "assets/produtos/distririo/rivoli__azeitona-verde-sache-fatiada.jpg",
+      "img": "assets/produtos/rivoli/azeitona-verde-sache-fatiada.jpg",
       "keywords": "azeitona verde sache fatiada 150g rivoli 80g"
     },
     {
@@ -1196,7 +1196,7 @@
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
       "descricao": "Azeitona preta fatiada Rivoli em sachê, prática para pizza, salada e recheio.",
-      "img": "assets/produtos/distririo/rivoli__azeitona-preta-sache-fatiada.jpg",
+      "img": "assets/produtos/rivoli/azeitona-preta-sache-fatiada.jpg",
       "keywords": "azeitona preta sache fatiada rivoli"
     },
     {
@@ -1205,7 +1205,7 @@
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
       "descricao": "Azeitona verde gordal com caroço Rivoli em vidro, variedade de fruto graúdo.",
-      "img": "assets/produtos/distririo/rivoli__azeitona-verde-gordal-vidro-c-caroco.jpg",
+      "img": "assets/produtos/rivoli/azeitona-verde-gordal-vidro-c-caroco.jpg",
       "keywords": "azeitona verde gordal vidro c caroco rivoli"
     },
     {
@@ -1214,7 +1214,7 @@
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
       "descricao": "Azeitona verde fatiada Rivoli em balde, embalagem para uso em cozinha profissional e food service.",
-      "img": "assets/produtos/distririo/rivoli__azeitonas-verde-fatiadas-balde.jpg",
+      "img": "assets/produtos/rivoli/azeitonas-verde-fatiadas-balde.jpg",
       "keywords": "azeitonas verde fatiadas balde rivoli"
     },
     {
@@ -1223,7 +1223,7 @@
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
       "descricao": "Azeitona verde sem caroço Rivoli em balde, embalagem para uso em cozinha profissional e food service.",
-      "img": "assets/produtos/distririo/rivoli__azeitonas-verde-sem-caroco-balde.jpg",
+      "img": "assets/produtos/rivoli/azeitonas-verde-sem-caroco-balde.jpg",
       "keywords": "azeitonas verde sem caroco balde rivoli"
     },
     {
@@ -1232,7 +1232,7 @@
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
       "descricao": "Azeitona verde média com caroço Rivoli em balde, embalagem para uso em cozinha profissional e food service.",
-      "img": "assets/produtos/distririo/rivoli__azeitonas-verde-media-balde.jpg",
+      "img": "assets/produtos/rivoli/azeitonas-verde-media-balde.jpg",
       "keywords": "azeitonas verde media balde rivoli"
     },
     {
@@ -1245,7 +1245,7 @@
         "100 g",
         "80 g"
       ],
-      "img": "assets/produtos/distririo/rivoli__azeitona-verde-sache-c-caroco.jpg",
+      "img": "assets/produtos/rivoli/azeitona-verde-sache-c-caroco.jpg",
       "keywords": "azeitona verde sache c caroco 100g rivoli 80g 160g farma"
     },
     {
@@ -1258,7 +1258,7 @@
         "120 g",
         "80 g"
       ],
-      "img": "assets/produtos/distririo/rivoli__azeitona-verde-sache-s-caroco.jpg",
+      "img": "assets/produtos/rivoli/azeitona-verde-sache-s-caroco.jpg",
       "keywords": "azeitona verde sache s caroco 120g rivoli 80g"
     },
     {
@@ -1270,7 +1270,7 @@
       "embalagens": [
         "Caixa com 12 × 20 g"
       ],
-      "img": "assets/produtos/distririo/trio__trio-avela-e-castanha-com-chocolate.jpg",
+      "img": "assets/produtos/trio/trio-avela-e-castanha-com-chocolate.jpg",
       "keywords": "trio avela e castanha com chocolate c 12x20g 12unx20g farma"
     },
     {
@@ -1282,7 +1282,7 @@
       "embalagens": [
         "Caixa com 12 × 20 g"
       ],
-      "img": "assets/produtos/distririo/trio__trio-banana-aveia-e-mel.jpg",
+      "img": "assets/produtos/trio/trio-banana-aveia-e-mel.jpg",
       "keywords": "trio banana aveia e mel 12x20g 12unx20g farma"
     },
     {
@@ -1294,7 +1294,7 @@
       "embalagens": [
         "Caixa com 12 × 20 g"
       ],
-      "img": "assets/produtos/distririo/trio__trio-brigadeiro.jpg",
+      "img": "assets/produtos/trio/trio-brigadeiro.jpg",
       "keywords": "trio brigadeiro 12x20g 12unx20g farma"
     },
     {
@@ -1306,7 +1306,7 @@
       "embalagens": [
         "Caixa com 12 × 20 g"
       ],
-      "img": "assets/produtos/distririo/trio__trio-coco-com-chocolate.jpg",
+      "img": "assets/produtos/trio/trio-coco-com-chocolate.jpg",
       "keywords": "trio coco com chocolate 12x20g 12unx20g farma"
     },
     {
@@ -1318,7 +1318,7 @@
       "embalagens": [
         "Caixa com 12 × 20 g"
       ],
-      "img": "assets/produtos/distririo/trio__trio-morango-com-chocolate.jpg",
+      "img": "assets/produtos/trio/trio-morango-com-chocolate.jpg",
       "keywords": "trio morango com chocolate 12x20g 12unx20g farma"
     },
     {
@@ -1363,7 +1363,7 @@
       "categoria": "dr-trio",
       "marca": "Trio",
       "descricao": "Barra de cereais Trio Zero sabor banana com chocolate, versão sem adição de açúcar.",
-      "img": "assets/produtos/distririo/trio__trio-zero-banana-com-chocolate.jpg",
+      "img": "assets/produtos/trio/trio-zero-banana-com-chocolate.jpg",
       "keywords": "trio zero banana com chocolate"
     },
     {
@@ -1372,16 +1372,16 @@
       "categoria": "dr-trio",
       "marca": "Trio",
       "descricao": "Barra de cereais Trio Zero sabor morango com chocolate, versão sem adição de açúcar.",
-      "img": "assets/produtos/distririo/trio__trio-zero-morango-com-chocolate.jpg",
+      "img": "assets/produtos/trio/trio-zero-morango-com-chocolate.jpg",
       "keywords": "trio zero morango com chocolate"
     },
     {
       "id": "granola-tradicional",
-      "nome": "Granola Tradicional",
+      "nome": "Granola Tradicional com Mel",
       "categoria": "dr-kobber",
       "marca": "Kobber",
-      "descricao": "Granola Kobber tradicional, mistura de cereais e flocos crocantes para o café da manhã e lanches.",
-      "img": "assets/produtos/distririo/kobber__granola-tradicional.jpg",
+      "descricao": "Granola Kobber tradicional com mel, em pacote de 800 g.",
+      "img": "assets/produtos/kobber/granola-tradicional.jpg",
       "keywords": "granola tradicional kobber"
     },
     {
@@ -1390,7 +1390,7 @@
       "categoria": "dr-kobber",
       "marca": "Kobber",
       "descricao": "Granola Kobber com frutas e mel.",
-      "img": "assets/produtos/distririo/kobber__granola-frutas-e-mel.jpg",
+      "img": "assets/produtos/kobber/granola-frutas-e-mel.jpg",
       "keywords": "granola frutas e mel kobber"
     },
     {
@@ -1399,7 +1399,7 @@
       "categoria": "dr-kobber",
       "marca": "Kobber",
       "descricao": "Granola Kobber com banana e mel.",
-      "img": "assets/produtos/distririo/kobber__granola-banana-e-mel.jpg",
+      "img": "assets/produtos/kobber/granola-banana-e-mel.jpg",
       "keywords": "granola banana e mel kobber"
     },
     {
@@ -1407,17 +1407,17 @@
       "nome": "Granola Chocolate e Amendoim",
       "categoria": "dr-kobber",
       "marca": "Kobber",
-      "descricao": "Granola Kobber com chocolate e amendoim.",
-      "img": "assets/produtos/distririo/kobber__granola-chocolate-e-amendoim.jpg",
+      "descricao": "Granola Kobber com chocolate e amendoim, feita com cereais integrais, em pacote de 800 g.",
+      "img": "assets/produtos/kobber/granola-chocolate-e-amendoim.jpg",
       "keywords": "granola chocolate e amendoim kobber"
     },
     {
       "id": "granola-castanha",
-      "nome": "Granola Castanha",
+      "nome": "Granola Castanhas e Mel",
       "categoria": "dr-kobber",
       "marca": "Kobber",
-      "descricao": "Granola Kobber com castanhas.",
-      "img": "assets/produtos/distririo/kobber__granola-castanha.jpg",
+      "descricao": "Granola Kobber com castanhas e mel, em pacote de 800 g.",
+      "img": "assets/produtos/kobber/granola-castanha.jpg",
       "keywords": "granola castanha kobber"
     },
     {
@@ -1425,8 +1425,8 @@
       "nome": "Granola Zero",
       "categoria": "dr-kobber",
       "marca": "Kobber",
-      "descricao": "Granola Kobber Zero, versão sem adição de açúcar.",
-      "img": "assets/produtos/distririo/kobber__granola-zero.jpg",
+      "descricao": "Granola Kobber Zero tradicional, sem adição de açúcar, em pacote de 800 g.",
+      "img": "assets/produtos/kobber/granola-zero.jpg",
       "keywords": "granola zero kobber"
     },
     {
@@ -1436,7 +1436,7 @@
       "marca": "Baldoni",
       "linha": "",
       "descricao": "Geleia Baldoni de abacaxi e pimenta com mel e pedaços de fruta, em pote de vidro de 270 g.",
-      "img": "assets/produtos/distririo/baldoni__geleia-baldoni-abacaxi-c-pimenta.jpg",
+      "img": "assets/produtos/baldoni/geleia-baldoni-abacaxi-c-pimenta.jpg",
       "keywords": "geleia baldoni abacaxi c pimenta pote 270g farma",
       "embalagens": [
         "270 g"
@@ -1447,11 +1447,11 @@
       "nome": "Geleia Baldoni Frutas Amarelas",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
-      "descricao": "Geleia Baldoni de frutas amarelas em pote de 270 g.",
+      "descricao": "Geleia Baldoni de frutas amarelas com mel, em pote de 270 g.",
       "embalagens": [
         "270 g"
       ],
-      "img": "assets/produtos/distririo/baldoni__geleia-baldoni-frutas-amarelas.jpg",
+      "img": "assets/produtos/baldoni/geleia-baldoni-frutas-amarelas.jpg",
       "keywords": "geleia baldoni frutas amarelas pote 270g farma"
     },
     {
@@ -1459,11 +1459,11 @@
       "nome": "Geleia Baldoni Frutas Vermelhas",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
-      "descricao": "Geleia Baldoni de frutas vermelhas em pote de 270 g.",
+      "descricao": "Geleia Baldoni de frutas vermelhas com mel, em pote de 270 g.",
       "embalagens": [
         "270 g"
       ],
-      "img": "assets/produtos/distririo/baldoni__geleia-baldoni-frutas-vermelhas.jpg",
+      "img": "assets/produtos/baldoni/geleia-baldoni-frutas-vermelhas.jpg",
       "keywords": "geleia baldoni frutas vermelhas pote 270 270g farma"
     },
     {
@@ -1471,11 +1471,11 @@
       "nome": "Geleia Baldoni Morango",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
-      "descricao": "Geleia Baldoni de morango em pote de 270 g.",
+      "descricao": "Geleia Baldoni de morango com mel, em pote de 270 g.",
       "embalagens": [
         "270 g"
       ],
-      "img": "assets/produtos/distririo/baldoni__geleia-baldoni-morango.jpg",
+      "img": "assets/produtos/baldoni/geleia-baldoni-morango.jpg",
       "keywords": "geleia baldoni morango pote 270g farma"
     },
     {
@@ -1487,7 +1487,7 @@
       "embalagens": [
         "300 g"
       ],
-      "img": "assets/produtos/distririo/baldoni__mel-turma-da-monica-organico.jpg",
+      "img": "assets/produtos/baldoni/mel-turma-da-monica-organico.jpg",
       "keywords": "mel turma da monica organico baldoni t 300g farma"
     },
     {
@@ -1499,7 +1499,7 @@
       "embalagens": [
         "300 g"
       ],
-      "img": "assets/produtos/distririo/baldoni__mel-turma-da-monica-laranjeira.jpg",
+      "img": "assets/produtos/baldoni/mel-turma-da-monica-laranjeira.jpg",
       "keywords": "mel turma da monica laranjeira baldoni t 300g farma"
     },
     {
@@ -1507,8 +1507,8 @@
       "nome": "Mel Chef Bisnaga (Chefão)",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
-      "descricao": "Mel Chef Baldoni na bisnaga grande, a versão Chefão.",
-      "img": "assets/produtos/distririo/baldoni__mel-chef-bisnaga-chefao.jpg",
+      "descricao": "Mel Baldoni Chef na bisnaga de 1,1 kg, a versão Chefão.",
+      "img": "assets/produtos/baldoni/mel-chef-bisnaga-chefao.jpg",
       "keywords": "mel chef bisnaga chefao baldoni"
     },
     {
@@ -1516,8 +1516,8 @@
       "nome": "Mel Chef Bisnaga",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
-      "descricao": "Mel Chef Baldoni em bisnaga.",
-      "img": "assets/produtos/distririo/baldoni__mel-chef-bisnaga.jpg",
+      "descricao": "Mel Baldoni Chef em bisnaga de 550 g.",
+      "img": "assets/produtos/baldoni/mel-chef-bisnaga.jpg",
       "keywords": "mel chef bisnaga baldoni"
     },
     {
@@ -1525,8 +1525,8 @@
       "nome": "Mel Orgânico Bisnaga",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
-      "descricao": "Mel orgânico Baldoni em bisnaga.",
-      "img": "assets/produtos/distririo/baldoni__mel-organico-bisnaga.jpg",
+      "descricao": "Mel orgânico Baldoni em bisnaga de 300 g.",
+      "img": "assets/produtos/baldoni/mel-organico-bisnaga.jpg",
       "keywords": "mel organico bisnaga baldoni"
     },
     {
@@ -1538,7 +1538,7 @@
       "embalagens": [
         "200 g"
       ],
-      "img": "assets/produtos/distririo/baldoni__mel-holanda-bisnaga.jpg",
+      "img": "assets/produtos/baldoni/mel-holanda-bisnaga.jpg",
       "keywords": "mel holanda bisnaga baldoni 200g farma"
     },
     {
@@ -1552,7 +1552,7 @@
         "1,5 kg",
         "2,4 kg"
       ],
-      "img": "assets/produtos/distririo/ace__detergente-em-po-ace-sache-2-4kg.jpg",
+      "img": "assets/produtos/ace/detergente-em-po-ace-sache.jpg",
       "keywords": "detergente em po ace sache 800g 1 5kg 2 4kg"
     },
     {
@@ -1565,7 +1565,7 @@
         "1,6 kg",
         "2,2 kg"
       ],
-      "img": "assets/produtos/distririo/ace__detergente-em-po-ace-cartucho-2-2kg.jpg",
+      "img": "assets/produtos/ace/detergente-em-po-ace-cartucho.jpg",
       "keywords": "detergente em po ace cartucho 1 6kg 2 2kg farma"
     },
     {
@@ -1587,7 +1587,7 @@
         "1 L",
         "3 L"
       ],
-      "img": "assets/produtos/distririo/espumil__lava-roupas-liquido-espumil.jpg",
+      "img": "assets/produtos/espumil/lava-roupas-liquido-espumil.jpg",
       "keywords": "lava roupas liquido espumil 1l 3l"
     },
     {
@@ -1595,8 +1595,8 @@
       "nome": "Sabão em Pedra Espumil Coco",
       "categoria": "dr-espumil",
       "marca": "Espumil",
-      "descricao": "Sabão em pedra Espumil de coco, para lavar roupas à mão e limpeza em geral.",
-      "img": "assets/produtos/distririo/espumil__sabao-em-pedra-espumil-coco.jpg",
+      "descricao": "Sabão de coco Espumil, feito à base de óleo de coco babaçu, para lavar roupas delicadas e infantis e também louças.",
+      "img": "assets/produtos/espumil/sabao-em-pedra-espumil-coco.jpg",
       "keywords": "sabao em pedra espumil coco"
     },
     {
@@ -1604,8 +1604,8 @@
       "nome": "Sabão em Pedra Espumil Glicerinado Neutro",
       "categoria": "dr-espumil",
       "marca": "Espumil",
-      "descricao": "Sabão em pedra Espumil glicerinado neutro, para lavar roupas à mão e limpeza em geral.",
-      "img": "assets/produtos/distririo/espumil__sabao-em-pedra-espumil-glicerinado-neutro.jpg",
+      "descricao": "Sabão em barra glicerinado neutro Espumil, com branqueador ativo e alto poder desengordurante, em pacote com 5 barras.",
+      "img": "assets/produtos/espumil/sabao-em-pedra-espumil-glicerinado-neutro.jpg",
       "keywords": "sabao em pedra espumil glicerinado neutro"
     },
     {
