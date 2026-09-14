@@ -1,7 +1,7 @@
 {
   "_leiame": "Fonte única do catálogo. Editar aqui e rodar \"node tools/build.js\" para regenerar loja.html, as páginas de produto, o índice de busca e o sitemap. Não editar o catálogo direto no HTML.",
   "atualizado": "2026-09-14",
-  "total": 344,
+  "total": 338,
   "categorias": [
     {
       "id": "mdz-trident",
@@ -139,7 +139,7 @@
       "id": "dr-baldoni",
       "titulo": "Baldoni",
       "marca": "Baldoni",
-      "total": 11
+      "total": 10
     },
     {
       "id": "dr-ace",
@@ -157,13 +157,13 @@
       "id": "banana-brasil",
       "titulo": "Banana Brasil",
       "marca": "Banana Brasil",
-      "total": 61
+      "total": 60
     },
     {
       "id": "lauton",
       "titulo": "Lauton",
       "marca": "Lauton",
-      "total": 55
+      "total": 59
     },
     {
       "id": "abelha-rainha",
@@ -175,25 +175,19 @@
       "id": "apisvida",
       "titulo": "Apisvida",
       "marca": "Apisvida",
-      "total": 29
+      "total": 24
     },
     {
       "id": "farma-barras",
       "titulo": "Barras e snacks",
       "marca": "",
-      "total": 12
-    },
-    {
-      "id": "farma-fitoterapicos",
-      "titulo": "Fitoterápicos e naturais",
-      "marca": "",
-      "total": 3
+      "total": 13
     },
     {
       "id": "farma-suplementos",
       "titulo": "Suplementos",
       "marca": "",
-      "total": 12
+      "total": 11
     }
   ],
   "produtos": [
@@ -836,23 +830,25 @@
     },
     {
       "id": "energetico-cereja-baly-sem-acucar",
-      "nome": "Energético Cereja Baly sem Açúcar",
+      "nome": "Baly Cereja Sem Açúcar",
       "categoria": "baly",
       "marca": "Baly Brasil",
       "embalagens": [
         "2 L"
       ],
-      "keywords": "energ cereja baly sem acucar 2l 2 litros farma"
+      "keywords": "energ cereja baly sem acucar 2l 2 litros farma",
+      "img": "assets/produtos/baly/energetico-cereja-baly-sem-acucar.jpg"
     },
     {
       "id": "energetico-baly-cereja",
-      "nome": "Energético Baly Cereja",
+      "nome": "Baly Cereja",
       "categoria": "baly",
       "marca": "Baly Brasil",
       "embalagens": [
         "473 ml"
       ],
-      "keywords": "energ baly cereja 473ml 473 ml farma"
+      "keywords": "energ baly cereja 473ml 473 ml farma",
+      "img": "assets/produtos/baly/energetico-baly-cereja.jpg"
     },
     {
       "id": "agua-de-coco",
@@ -1322,7 +1318,11 @@
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
       "img": "assets/produtos/distririo/baldoni__geleia-baldoni-abacaxi-c-pimenta.jpg",
-      "keywords": "geleia baldoni abacaxi c pimenta"
+      "keywords": "geleia baldoni abacaxi c pimenta pote 270g farma",
+      "embalagens": [
+        "270 g"
+      ],
+      "linha": ""
     },
     {
       "id": "geleia-baldoni-frutas-amarelas",
@@ -1413,16 +1413,6 @@
       ],
       "img": "assets/produtos/distririo/baldoni__mel-holanda-bisnaga.jpg",
       "keywords": "mel holanda bisnaga baldoni 200g farma"
-    },
-    {
-      "id": "geleia-baldoni-abacaxi-pote",
-      "nome": "Geleia Baldoni Abacaxi Pote",
-      "categoria": "dr-baldoni",
-      "marca": "Baldoni",
-      "embalagens": [
-        "270 g"
-      ],
-      "keywords": "geleia baldoni abacaxi pote 270g farma"
     },
     {
       "id": "detergente-em-po-ace-sache",
@@ -2102,7 +2092,9 @@
       "embalagens": [
         "30 g"
       ],
-      "keywords": "supino protein morango 30g 12x30g farma"
+      "keywords": "supino protein morango 30g 12x30g farma",
+      "img": "assets/produtos/banana-brasil/supino-protein-morango.jpg",
+      "linha": "Supino Protein"
     },
     {
       "id": "supino-protein-cookies",
@@ -2112,37 +2104,44 @@
       "embalagens": [
         "30 g"
       ],
-      "keywords": "supino protein cookies 30g 12x30g farma"
+      "keywords": "supino protein cookies 30g 12x30g farma",
+      "img": "assets/produtos/banana-brasil/supino-protein-cookies.jpg",
+      "linha": "Supino Protein"
     },
     {
       "id": "barra-mini-pouch-nuts-meio-amargo",
-      "nome": "Barra Mini Pouch Nuts Meio Amargo",
+      "nome": "Mini Nuts - Chocolate Meio Amargo (pouch)",
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "embalagens": [
         "60 g"
       ],
-      "keywords": "barra mini pouch nuts meio amargo 60g farma"
+      "keywords": "barra mini pouch nuts meio amargo 60g farma",
+      "img": "assets/produtos/banana-brasil/barra-mini-pouch-nuts-meio-amargo.jpg",
+      "linha": "Nuts"
     },
     {
       "id": "barra-mini-pouch-nuts-ao-leite",
-      "nome": "Barra Mini Pouch Nuts ao Leite",
+      "nome": "Mini Nuts - Chocolate ao Leite (pouch)",
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "embalagens": [
         "60 g"
       ],
-      "keywords": "barra mini pouch nuts ao leite 60g farma"
+      "keywords": "barra mini pouch nuts ao leite 60g farma",
+      "img": "assets/produtos/banana-brasil/barra-mini-pouch-nuts-ao-leite.jpg",
+      "linha": "Nuts"
     },
     {
       "id": "b-proteica-pistache-com-chocolate-branco",
-      "nome": "B. Proteica Pistache com Chocolate Branco",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
+      "nome": "Nutrata Bacio di Latte - Pistache com Chocolate Branco",
+      "categoria": "farma-barras",
+      "marca": "Nutrata",
       "embalagens": [
-        "70 g"
+        "Display com 9 barras de 70 g"
       ],
-      "keywords": "b proteica pistache c choco branco 70g 9unx70g farma"
+      "keywords": "b proteica pistache c choco branco 70g 9unx70g farma",
+      "img": "assets/produtos/nutrata/b-proteica-pistache-com-chocolate-branco.jpg"
     },
     {
       "id": "powerdrol",
@@ -2172,12 +2171,14 @@
       "marca": "Lauton",
       "linha": "Performance",
       "img": "assets/produtos/lauton/saude-integral__curcuma-premium.jpg",
-      "keywords": "curcuma premium performance lauton 9172 curcumina 60x500mg farma",
+      "keywords": "curcuma premium performance lauton 9172 curcumina 60x500mg farma 5075 30 caps 30x500mg",
       "embalagens": [
-        "60 unidades de 500 mg"
+        "30 cápsulas de 500 mg",
+        "60 cápsulas de 500 mg"
       ],
       "skus": [
-        "9172"
+        "9172",
+        "5075"
       ]
     },
     {
@@ -3346,11 +3347,15 @@
     },
     {
       "id": "nanopropolis-propolis-verde",
-      "nome": "Nanoprópolis Própolis Verde",
+      "nome": "Nanoprópolis Própolis Verde em Gotas",
       "categoria": "apisvida",
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/propolis__nanopropolis-propolis-verde.jpg",
-      "keywords": "nanopropolis propolis verde apisvida"
+      "keywords": "nanopropolis propolis verde apisvida ext 20ml farma em gotas",
+      "embalagens": [
+        "20 ml"
+      ],
+      "linha": ""
     },
     {
       "id": "mel-tradicional-bisnaga-tampa-cone",
@@ -3358,7 +3363,11 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/mel__mel-tradicional-bisnaga-tampa-cone.jpg",
-      "keywords": "mel tradicional bisnaga tampa cone apisvida"
+      "keywords": "mel tradicional bisnaga tampa cone apisvida puro 250g apis vida farma",
+      "embalagens": [
+        "250 g"
+      ],
+      "linha": ""
     },
     {
       "id": "propolis-2000-extrato-de-propolis-verde-em-capsulas",
@@ -3387,14 +3396,6 @@
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/propolis__propoflex-extrato-de-propolis-verde.jpg",
       "keywords": "propoflex extrato de propolis verde apisvida"
-    },
-    {
-      "id": "nanopropolis-propolis-verde-em-gotas",
-      "nome": "Nanoprópolis Própolis Verde em Gotas",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "img": "assets/produtos/apisvida/propolis__nanopropolis-propolis-verde-em-gotas.jpg",
-      "keywords": "nanopropolis propolis verde em gotas apisvida"
     },
     {
       "id": "nanopropolis-propolis-blend-em-gotas",
@@ -3561,74 +3562,51 @@
     },
     {
       "id": "mel-apisvida",
-      "nome": "Mel Apisvida",
+      "nome": "Mel Orgânico Apisvida",
       "categoria": "apisvida",
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/apisvida__mel-apisvida.jpg",
-      "keywords": "mel apisvida"
-    },
-    {
-      "id": "nanopropolis-extrato-propolis-verde",
-      "nome": "Nanoprópolis Extrato Própolis Verde",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
+      "keywords": "mel apisvida organico 300g farma",
       "embalagens": [
-        "20 ml"
+        "300 g"
       ],
-      "keywords": "nanopropolis ext propolis verde 20ml farma"
+      "linha": ""
     },
     {
       "id": "propoflex-kids-spray-tutti-frutti",
-      "nome": "Propoflex Kids Spray Tutti-frutti",
+      "nome": "Propoflex Kids Spray de Própolis Verde - Tutti-Frutti",
       "categoria": "apisvida",
       "marca": "Apisvida",
       "embalagens": [
         "35 ml"
       ],
-      "keywords": "propoflex kids spray tutti frutti 35ml farma"
-    },
-    {
-      "id": "mel-organico",
-      "nome": "Mel Orgânico",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "300 g"
-      ],
-      "keywords": "mel organico 300g farma"
-    },
-    {
-      "id": "mel-puro-bisnaga",
-      "nome": "Mel Puro Bisnaga",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "250 g"
-      ],
-      "keywords": "mel puro bisnaga 250g apis vida farma"
+      "keywords": "propoflex kids spray tutti frutti 35ml farma",
+      "img": "assets/produtos/apisvida/propoflex-kids-spray-tutti-frutti.jpg"
     },
     {
       "id": "extrato-de-propolis",
-      "nome": "Extrato de Própolis",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
+      "nome": "Extrato de Própolis Verde Liofilizado",
+      "categoria": "lauton",
+      "marca": "Lauton",
       "embalagens": [
         "60 unidades de 550 mg"
       ],
       "skus": [
         "6324"
       ],
-      "keywords": "6324 extrato de propolis 60x550mg farma"
+      "keywords": "6324 extrato de propolis 60x550mg farma",
+      "img": "assets/produtos/lauton/extrato-de-propolis.jpg"
     },
     {
       "id": "mel-organico-sache",
-      "nome": "Mel Orgânico Sachê",
+      "nome": "Mel Orgânico em Sachê",
       "categoria": "apisvida",
       "marca": "Apisvida",
       "embalagens": [
         "80 g"
       ],
-      "keywords": "mel organica sache 80g apis vida farma"
+      "keywords": "mel organica sache 80g apis vida farma",
+      "img": "assets/produtos/apisvida/mel-organico-sache.jpg"
     },
     {
       "id": "choklers-crisp-caramelo-com-chocolate",
@@ -3638,7 +3616,8 @@
       "embalagens": [
         "Caixa com 12 × 33 g"
       ],
-      "keywords": "choklers crisp caramelo c cho 12x33g farma"
+      "keywords": "choklers crisp caramelo c cho 12x33g farma",
+      "img": "assets/produtos/mixnutri/choklers-crisp-caramelo-com-chocolate.jpg"
     },
     {
       "id": "choklers-crisp-cookies",
@@ -3648,7 +3627,8 @@
       "embalagens": [
         "Caixa com 12 × 33 g"
       ],
-      "keywords": "choklers crisp cookies 12x33g farma"
+      "keywords": "choklers crisp cookies 12x33g farma",
+      "img": "assets/produtos/mixnutri/choklers-crisp-cookies.jpg"
     },
     {
       "id": "choklers-morango-com-nibs-de-cacau",
@@ -3658,7 +3638,8 @@
       "embalagens": [
         "Caixa com 12 × 40 g"
       ],
-      "keywords": "choklers morango c nibs de cacau 12x40g farma"
+      "keywords": "choklers morango c nibs de cacau 12x40g farma",
+      "img": "assets/produtos/mixnutri/choklers-morango-com-nibs-de-cacau.jpg"
     },
     {
       "id": "choklers-banoffe",
@@ -3668,37 +3649,41 @@
       "embalagens": [
         "Caixa com 12 × 40 g"
       ],
-      "keywords": "choklers banoffe 12x40g farma"
+      "keywords": "choklers banoffe 12x40g farma",
+      "img": "assets/produtos/mixnutri/choklers-banoffe.jpg"
     },
     {
       "id": "mix-nutri-snack-bacon",
-      "nome": "Mix Nutri Snack Bacon",
+      "nome": "Gooday Snack Proteico - Bacon",
       "categoria": "farma-barras",
       "marca": "Mix Nutri",
       "embalagens": [
         "50 g"
       ],
-      "keywords": "mix nutri snack bacon 50g farma"
+      "keywords": "mix nutri snack bacon 50g farma",
+      "img": "assets/produtos/mixnutri/mix-nutri-snack-bacon.jpg"
     },
     {
       "id": "mix-nutri-snack-4-queijos",
-      "nome": "Mix Nutri Snack 4 Queijos",
+      "nome": "Gooday Snack Proteico - Quatro Queijos",
       "categoria": "farma-barras",
       "marca": "Mix Nutri",
       "embalagens": [
         "50 g"
       ],
-      "keywords": "mix nutri snack 4 queijos 50g farma"
+      "keywords": "mix nutri snack 4 queijos 50g farma",
+      "img": "assets/produtos/mixnutri/mix-nutri-snack-4-queijos.jpg"
     },
     {
       "id": "mix-nutri-snack-requeijao",
-      "nome": "Mix Nutri Snack Requeijão",
+      "nome": "Gooday Snack Proteico - Requeijão",
       "categoria": "farma-barras",
       "marca": "Mix Nutri",
       "embalagens": [
         "50 g"
       ],
-      "keywords": "mix nutri snack requeijao 50g farma"
+      "keywords": "mix nutri snack requeijao 50g farma",
+      "img": "assets/produtos/mixnutri/mix-nutri-snack-requeijao.jpg"
     },
     {
       "id": "choklers-chocrante",
@@ -3708,7 +3693,8 @@
       "embalagens": [
         "Caixa com 12 × 40 g"
       ],
-      "keywords": "choklers chocrante 12x40g farma"
+      "keywords": "choklers chocrante 12x40g farma",
+      "img": "assets/produtos/mixnutri/choklers-chocrante.jpg"
     },
     {
       "id": "choklers-cookies",
@@ -3718,17 +3704,19 @@
       "embalagens": [
         "Caixa com 12 × 40 g"
       ],
-      "keywords": "choklers cookies 12x40g farma"
+      "keywords": "choklers cookies 12x40g farma",
+      "img": "assets/produtos/mixnutri/choklers-cookies.jpg"
     },
     {
       "id": "choklers-cheesecake",
-      "nome": "Choklers Cheesecake",
+      "nome": "Choklers Cheesecake de Frutas Vermelhas",
       "categoria": "farma-barras",
       "marca": "Choklers",
       "embalagens": [
         "Caixa com 12 × 40 g"
       ],
-      "keywords": "choklers cheesecake 12x40g farma"
+      "keywords": "choklers cheesecake 12x40g farma",
+      "img": "assets/produtos/mixnutri/choklers-cheesecake.jpg"
     },
     {
       "id": "choklers-pistache",
@@ -3738,7 +3726,8 @@
       "embalagens": [
         "Caixa com 12 × 40 g"
       ],
-      "keywords": "choklers pistache 12x40g farma"
+      "keywords": "choklers pistache 12x40g farma",
+      "img": "assets/produtos/mixnutri/choklers-pistache.jpg"
     },
     {
       "id": "mix-nutri-snack-barbecue",
@@ -3751,63 +3740,54 @@
       "keywords": "mix nutri snack barbecue 50g farma"
     },
     {
-      "id": "curcuma",
-      "nome": "Cúrcuma",
-      "categoria": "farma-fitoterapicos",
-      "marca": "",
-      "embalagens": [
-        "30 cápsulas de 500 mg"
-      ],
-      "skus": [
-        "5075"
-      ],
-      "keywords": "5075 curcuma 30 caps 30x500mg farma"
-    },
-    {
       "id": "oleo-de-semente-de-abobora",
       "nome": "Óleo de Semente de Abóbora",
-      "categoria": "farma-fitoterapicos",
-      "marca": "",
+      "categoria": "lauton",
+      "marca": "Lauton",
       "embalagens": [
         "1400 mg"
       ],
       "skus": [
         "2644"
       ],
-      "keywords": "2644 oleo de semente abobora 1400mg 60x1400mg farma"
+      "keywords": "2644 oleo de semente abobora 1400mg 60x1400mg farma",
+      "img": "assets/produtos/lauton/oleo-de-semente-de-abobora.jpg"
     },
     {
       "id": "cranberry",
-      "nome": "Cranberry",
-      "categoria": "farma-fitoterapicos",
-      "marca": "",
+      "nome": "Cranberry 1000 mg",
+      "categoria": "lauton",
+      "marca": "Lauton",
       "embalagens": [
         "60 unidades de 1100 mg"
       ],
       "skus": [
         "6348"
       ],
-      "keywords": "6348 cranberry 60x1100mg farma"
+      "keywords": "6348 cranberry 60x1100mg farma",
+      "img": "assets/produtos/lauton/cranberry.jpg"
     },
     {
       "id": "creatina-100",
-      "nome": "Creatina 100%",
+      "nome": "Creatina Monohidratada Mix Nutri",
       "categoria": "farma-suplementos",
       "marca": "Mix Nutri",
       "embalagens": [
         "300 g"
       ],
-      "keywords": "creatina 100 300g mix nutri farma"
+      "keywords": "creatina 100 300g mix nutri farma",
+      "img": "assets/produtos/mixnutri/creatina-100.jpg"
     },
     {
       "id": "creatina-100-monohidratada",
-      "nome": "Creatina 100% Monohidratada",
+      "nome": "Creatina 100% Monohidratada Pronabol",
       "categoria": "farma-suplementos",
       "marca": "Pronabol",
       "embalagens": [
         "300 g"
       ],
-      "keywords": "creatina 100 monohidra 300g pronabol farma"
+      "keywords": "creatina 100 monohidra 300g pronabol farma",
+      "img": "assets/produtos/mixnutri/creatina-100-monohidratada.jpg"
     },
     {
       "id": "diet-shake-baunilha-nutrilatina",
@@ -3817,7 +3797,8 @@
       "embalagens": [
         "420 g"
       ],
-      "keywords": "diet shake baunilha nutrilatina 420g farma"
+      "keywords": "diet shake baunilha nutrilatina 420g farma",
+      "img": "assets/produtos/nutrilatina/diet-shake-baunilha-nutrilatina.jpg"
     },
     {
       "id": "diet-shake-chocolate-nutrilatina",
@@ -3827,7 +3808,8 @@
       "embalagens": [
         "420 g"
       ],
-      "keywords": "diet shake chocolate nutrilatina 420g farma"
+      "keywords": "diet shake chocolate nutrilatina 420g farma",
+      "img": "assets/produtos/nutrilatina/diet-shake-chocolate-nutrilatina.jpg"
     },
     {
       "id": "diet-shake-banana-nutrilatina",
@@ -3837,7 +3819,8 @@
       "embalagens": [
         "420 g"
       ],
-      "keywords": "diet shake banana nutrilatina 420g farma"
+      "keywords": "diet shake banana nutrilatina 420g farma",
+      "img": "assets/produtos/nutrilatina/diet-shake-banana-nutrilatina.jpg"
     },
     {
       "id": "diet-shake-morango-nutrilatina",
@@ -3847,30 +3830,33 @@
       "embalagens": [
         "420 g"
       ],
-      "keywords": "diet shake morango nutrilatina 420g farma"
+      "keywords": "diet shake morango nutrilatina 420g farma",
+      "img": "assets/produtos/nutrilatina/diet-shake-morango-nutrilatina.jpg"
     },
     {
       "id": "total-efa",
-      "nome": "Total Efa",
-      "categoria": "farma-suplementos",
-      "marca": "",
+      "nome": "Total EFA Ômegas 3, 6 e 9",
+      "categoria": "lauton",
+      "marca": "Lauton",
       "embalagens": [
         "60 unidades de 1350 mg"
       ],
       "skus": [
         "6744"
       ],
-      "keywords": "6744 total efa 60x1350mg farma"
+      "keywords": "6744 total efa 60x1350mg farma",
+      "img": "assets/produtos/lauton/total-efa.jpg"
     },
     {
       "id": "whey-sache-baunilha-nutrilatina",
-      "nome": "Whey Sachê Baunilha Nutrilatina",
+      "nome": "100% Whey Nutrilatina em Sachê - Baunilha Bourbon",
       "categoria": "farma-suplementos",
       "marca": "Nutrilatina",
       "embalagens": [
-        "300 g"
+        "Display com 10 sachês de 30 g"
       ],
-      "keywords": "whey sache baunilha nutrilatina 300g 10unx30g farma"
+      "keywords": "whey sache baunilha nutrilatina 300g 10unx30g farma",
+      "img": "assets/produtos/nutrilatina/whey-sache-baunilha-nutrilatina.jpg"
     },
     {
       "id": "whey-sache-chocolate-belga-nutrilatina",
@@ -3884,33 +3870,36 @@
     },
     {
       "id": "100-whey-banoffe",
-      "nome": "100% Whey Banoffe",
+      "nome": "100% Whey Pronabol - Banoffe",
       "categoria": "farma-suplementos",
-      "marca": "",
+      "marca": "Pronabol",
       "embalagens": [
         "900 g"
       ],
-      "keywords": "100 whey banoffe 900g farma"
+      "keywords": "100 whey banoffe 900g farma",
+      "img": "assets/produtos/mixnutri/100-whey-banoffe.jpg"
     },
     {
       "id": "100-whey-cookies-and-cream",
-      "nome": "100% Whey Cookies And Cream",
+      "nome": "100% Whey Pronabol - Cookies and Cream",
       "categoria": "farma-suplementos",
-      "marca": "",
+      "marca": "Pronabol",
       "embalagens": [
         "900 g"
       ],
-      "keywords": "100 whey cookies and cream 900g farma"
+      "keywords": "100 whey cookies and cream 900g farma",
+      "img": "assets/produtos/mixnutri/100-whey-cookies-and-cream.jpg"
     },
     {
       "id": "100-whey-chocolate-e-avela",
-      "nome": "100% Whey Chocolate e Avelã",
+      "nome": "100% Whey Pronabol - Chocolate e Avelã",
       "categoria": "farma-suplementos",
-      "marca": "",
+      "marca": "Pronabol",
       "embalagens": [
         "900 g"
       ],
-      "keywords": "100 whey chocolate e avela 900g farma"
+      "keywords": "100 whey chocolate e avela 900g farma",
+      "img": "assets/produtos/mixnutri/100-whey-chocolate-e-avela.jpg"
     }
   ]
 }

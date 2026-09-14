@@ -26,6 +26,7 @@
   <url><loc>https://distririo.com.br/marca/mix-nutri.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://distririo.com.br/marca/gota.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://distririo.com.br/marca/espumil.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://distririo.com.br/marca/pronabol.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://distririo.com.br/produto/trident-5s.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/trident-14s.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/trident-bag.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -92,8 +93,8 @@
   <url><loc>https://distririo.com.br/produto/baly-kids-melancia.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/baly-kids-morango.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/baly-kids-uva.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/energetico-cereja-baly-sem-acucar.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/energetico-baly-cereja.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/energetico-cereja-baly-sem-acucar.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/energetico-baly-cereja.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/agua-de-coco.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/agua-de-coco-garrafa-turma-da-monica.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/suco-de-acerola.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -143,17 +144,16 @@
   <url><loc>https://distririo.com.br/produto/granola-chocolate-e-amendoim.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/granola-castanha.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/granola-zero.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/geleia-baldoni-abacaxi-c-pimenta.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/geleia-baldoni-frutas-amarelas.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/geleia-baldoni-frutas-vermelhas.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/geleia-baldoni-morango.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/mel-turma-da-monica-organico.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/mel-turma-da-monica-laranjeira.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/mel-chef-bisnaga-chefao.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/mel-chef-bisnaga.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/mel-organico-bisnaga.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/mel-holanda-bisnaga.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/geleia-baldoni-abacaxi-pote.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/geleia-baldoni-abacaxi-c-pimenta.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/geleia-baldoni-frutas-amarelas.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/geleia-baldoni-frutas-vermelhas.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/geleia-baldoni-morango.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/mel-turma-da-monica-organico.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/mel-turma-da-monica-laranjeira.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/mel-chef-bisnaga-chefao.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/mel-chef-bisnaga.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/mel-organico-bisnaga.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/mel-holanda-bisnaga.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/detergente-em-po-ace-sache.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/detergente-em-po-ace-cartucho.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/detergente-em-po-espumil-premium-cartucho.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -319,7 +319,6 @@
   <url><loc>https://distririo.com.br/produto/propolis-2000-extrato-de-propolis-verde-em-capsulas.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/propoflex-ap60-extrato-de-propolis-verde.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/propoflex-extrato-de-propolis-verde.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/nanopropolis-propolis-verde-em-gotas.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/nanopropolis-propolis-blend-em-gotas.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/relampago-energetico.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/protetor-labial-manteiga-de-cacau-com-propolis.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -337,25 +336,21 @@
   <url><loc>https://distririo.com.br/produto/propoflex-kids-propolis.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/propoflex-kids-propolis-morango.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/mel-apisvida.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/nanopropolis-extrato-propolis-verde.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/propoflex-kids-spray-tutti-frutti.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/mel-organico.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/mel-puro-bisnaga.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/extrato-de-propolis.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/mel-organico-sache.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/choklers-crisp-caramelo-com-chocolate.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/choklers-crisp-cookies.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/choklers-morango-com-nibs-de-cacau.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/choklers-banoffe.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/mix-nutri-snack-bacon.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/mix-nutri-snack-4-queijos.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/mix-nutri-snack-requeijao.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/choklers-chocrante.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/choklers-cookies.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/choklers-cheesecake.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/choklers-pistache.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/mix-nutri-snack-barbecue.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://distririo.com.br/produto/curcuma.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/choklers-crisp-caramelo-com-chocolate.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/choklers-crisp-cookies.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/choklers-morango-com-nibs-de-cacau.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/choklers-banoffe.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/mix-nutri-snack-bacon.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/mix-nutri-snack-4-queijos.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/mix-nutri-snack-requeijao.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/choklers-chocrante.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/choklers-cookies.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/choklers-cheesecake.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/choklers-pistache.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://distririo.com.br/produto/mix-nutri-snack-barbecue.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/oleo-de-semente-de-abobora.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/cranberry.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://distririo.com.br/produto/creatina-100.html</loc><lastmod>2026-09-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
