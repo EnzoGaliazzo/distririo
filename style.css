@@ -2164,10 +2164,40 @@ main {
 
 .product-pack {
     flex: 0 0 auto;
-    margin-top: 0.5rem;
+    /* margin auto encosta a embalagem no pé do cartão: numa linha da grade,
+       todas ficam alinhadas mesmo com descrições de tamanhos diferentes */
+    margin-top: auto;
+    padding-top: 0.5rem;
     font-size: 0.78rem;
     color: var(--texto-fraco);
     letter-spacing: 0.01em;
+}
+
+/* Sobretítulo com o nome da linha ("Supino", "Proteção Solar") */
+.product-card .product-linha {
+    flex: 0 0 auto;
+    margin-bottom: 0.2rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--texto-fraco);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Descrição curta: duas linhas, o resto na página do produto. Sem flex-grow -
+   caixa esticada pelo flex mostraria a terceira linha que o clamp escondeu. */
+.product-card .product-resumo {
+    flex: 0 0 auto;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--texto-suave);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .voltar-topo {
@@ -3719,6 +3749,15 @@ body.lista-aberta {
 
 /* Apresentação e relacionados da página de produto (tarefa 9): sem eles a
    página era ficha técnica e mais nada — conteúdo raso e beco sem saída. */
+
+/* O que o produto é, logo abaixo do nome: é a primeira coisa que o comprador lê */
+.produto-descricao {
+    margin: -0.5rem 0 1rem;
+    max-width: 60ch;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: var(--dark);
+}
 
 .produto-apresentacao {
     color: var(--texto-suave);

@@ -197,6 +197,7 @@
       "categoria": "mdz-trident",
       "marca": "Mondelez",
       "linha": "Menta, Hortelã, Tutti-Frutti, Melancia, Morango, Canela",
+      "descricao": "Goma de mascar sem açúcar Trident no pacote tradicional com 5 unidades, o formato de balcão da marca, em seis sabores.",
       "img": "assets/produtos/mondelez-novo/mondelez__trident-5s.jpg",
       "keywords": "trident 5s menta hortela tutti frutti melancia morango canela mondelez"
     },
@@ -206,6 +207,7 @@
       "categoria": "mdz-trident",
       "marca": "Mondelez",
       "linha": "Melancia, Hortelã, Intense, Blueberry, Menta, Tutti-Frutti",
+      "descricao": "Goma de mascar sem açúcar Trident no pacote com 14 unidades, que rende quase o triplo do tradicional, em seis sabores - incluindo a versão Intense.",
       "img": "assets/produtos/mondelez-novo/mondelez__trident-14s.jpg",
       "keywords": "trident 14s melancia hortela intense blueberry menta tutti frutti mondelez"
     },
@@ -215,6 +217,7 @@
       "categoria": "mdz-trident",
       "marca": "Mondelez",
       "linha": "Hortelã, Menta, Tutti-Frutti, Morango, Melancia",
+      "descricao": "Goma de mascar sem açúcar Trident na embalagem bag, em cinco sabores.",
       "img": "assets/produtos/mondelez-novo/mondelez__trident-bag.jpg",
       "keywords": "trident bag hortela menta tutti frutti morango melancia mondelez"
     },
@@ -224,6 +227,7 @@
       "categoria": "mdz-trident-xsenses",
       "marca": "Mondelez",
       "linha": "Morango Lime, Melancia Mint, Citrus, Spearmint, Peppermint, Blueberry",
+      "descricao": "Goma de mascar sem açúcar Trident Xsenses em pote no formato de garrafa, com tampa para guardar e levar, em seis sabores.",
       "img": "assets/produtos/mondelez-novo/mondelez__trident-xsenses-garrafa.jpg",
       "keywords": "trident xsenses garrafa morango lime melancia mint citrus spearmint peppermint blueberry mondelez"
     },
@@ -233,6 +237,7 @@
       "categoria": "mdz-trident-xsenses",
       "marca": "Mondelez",
       "linha": "Cereja Ice, Acid Blueberry, Intense, Herbal",
+      "descricao": "Goma de mascar sem açúcar Trident Xsenses no pacote com 5 unidades, a linha de sabores intensos da marca, como Cereja Ice e Acid Blueberry.",
       "img": "assets/produtos/mondelez-novo/mondelez__trident-xsenses-5s.jpg",
       "keywords": "trident xsenses 5s cereja ice acid blueberry intense herbal mondelez"
     },
@@ -242,6 +247,7 @@
       "categoria": "mdz-chiclets-adams",
       "marca": "Mondelez",
       "linha": "Chiclets Hortelã 100/2S, Chiclets Tutti-Frutti 100/2S",
+      "descricao": "Chiclets Adams, a goma de mascar em drágea no pacotinho com 2 unidades, vendida em display com 100 pacotes, nos sabores hortelã e tutti-frutti.",
       "img": "assets/produtos/mondelez-novo/mondelez__chiclets.jpg",
       "keywords": "chiclets hortela 100 2s tutti frutti mondelez"
     },
@@ -251,6 +257,7 @@
       "categoria": "mdz-trident-max",
       "marca": "Mondelez",
       "linha": "Hortelã Fresca, Menta Blueberry",
+      "descricao": "Trident Max, goma de mascar sem açúcar com pastilhas maiores e mais sabor por unidade, nas versões Hortelã Fresca e Menta Blueberry.",
       "img": "assets/produtos/mondelez-novo/mondelez__trident-max.jpg",
       "keywords": "trident max hortela fresca menta blueberry mondelez"
     },
@@ -260,6 +267,7 @@
       "categoria": "mdz-trident-max",
       "marca": "Mondelez",
       "linha": "Cool Raspberry",
+      "descricao": "Trident Max no sabor Cool Raspberry, framboesa com toque refrescante, goma de mascar sem açúcar com pastilhas maiores.",
       "img": "assets/produtos/mondelez-novo/mondelez__trident-max-2.jpg",
       "keywords": "trident max cool raspberry mondelez"
     },
@@ -269,6 +277,7 @@
       "categoria": "mdz-bubbaloo",
       "marca": "Mondelez",
       "linha": "Bubbaloo Gum DSP Hortelã/Menta, Bubbaloo Gum DSP Morango, Bubbaloo Gum DSP Tutti-Frutti, Bubbaloo Gum DSP Uva",
+      "descricao": "Bubbaloo, o chiclete com recheio líquido, em unidades avulsas vendidas em display, nos sabores hortelã/menta, morango, tutti-frutti e uva.",
       "img": "assets/produtos/mondelez-novo/mondelez__bubbaloo.jpg",
       "keywords": "bubbaloo gum dsp hortela menta morango tutti frutti uva mondelez"
     },
@@ -278,6 +287,7 @@
       "categoria": "mdz-bubbaloo",
       "marca": "Mondelez",
       "linha": "Bubbaloo Bala Mix 15G, Bubbaloo Bala Morango 15G, Bubbaloo Bala Tutti-Frutti 15G",
+      "descricao": "Bala mastigável Bubbaloo em pacote de 15 g, nos sabores mix, morango e tutti-frutti.",
       "img": "assets/produtos/mondelez-novo/mondelez__bubbaloo-balas.jpg",
       "keywords": "bubbaloo balas bala mix 15g morango tutti frutti mondelez"
     },
@@ -287,6 +297,7 @@
       "categoria": "mdz-bubbaloo",
       "marca": "Mondelez",
       "linha": "Bubbaloo Bala Tutti-Frutti 75G, Bubbaloo Bala Morango Azedinha 82.5G, Bubbaloo Bala Mix Azedinha 82.5G, Bubbaloo Bala Morango 75G, Bubbaloo Bala Citric Blueberry 82.5G, Bubbaloo Bala Mix 75G",
+      "descricao": "Balas mastigáveis Bubbaloo em pote, de 75 g e 82,5 g, com versões azedinhas e sabores como morango, tutti-frutti, mix e citric blueberry.",
       "img": "assets/produtos/mondelez-novo/mondelez__bubbaloo-balas-2.jpg",
       "keywords": "bubbaloo balas bala tutti frutti 75g morango azedinha 82 5g mix citric blueberry mondelez"
     },
@@ -296,6 +307,7 @@
       "categoria": "mdz-halls",
       "marca": "Mondelez",
       "linha": "Halls Base DSP Uva Verde, Halls Base DSP Extra Forte, Halls Base DSP Menta, Halls Base DSP Morango, Halls Base DSP Cereja, Halls Blueberry, Halls Base DSP Melancia, Halls Base DSP Mentol",
+      "descricao": "Pastilhas Halls no rolinho tradicional, em oito sabores entre frutas, menta, mentol e a versão Extra Forte, vendidas em display de balcão.",
       "img": "assets/produtos/mondelez-novo/mondelez__halls.jpg",
       "keywords": "halls base dsp uva verde extra forte menta morango cereja blueberry melancia mentol mondelez"
     },
@@ -305,6 +317,7 @@
       "categoria": "mdz-halls",
       "marca": "Mondelez",
       "linha": "Menta, Cereja, Morango, Extra Forte",
+      "descricao": "Pastilhas Halls na embalagem bag, nos sabores menta, cereja, morango e extra forte.",
       "img": "assets/produtos/mondelez-novo/mondelez__halls-bag.jpg",
       "keywords": "halls bag menta cereja morango extra forte mondelez"
     },
@@ -314,6 +327,7 @@
       "categoria": "mdz-tang",
       "marca": "Mondelez",
       "linha": "Uva, Tangerina, Joia da Ilha",
+      "descricao": "Refresco em pó Tang em sachê, para preparar com água, nos sabores uva, tangerina e joia da ilha.",
       "img": "assets/produtos/mondelez-novo/mondelez__tang.jpg",
       "keywords": "tang uva tangerina joia da ilha mondelez"
     },
@@ -323,6 +337,7 @@
       "categoria": "mdz-tang",
       "marca": "Mondelez",
       "linha": "Tang - Maracujá (Edição Limitada), Tang - Guaraná (Edição Limitada), Tang - Laranja com Mamão (Edição Limitada)",
+      "descricao": "Refresco em pó Tang em sachê, nos sabores de edição limitada maracujá, guaraná e laranja com mamão.",
       "img": "assets/produtos/mondelez-novo/mondelez__tang-edicao-limitada.jpg",
       "keywords": "tang edicao limitada maracuja guarana laranja com mamao mondelez"
     },
@@ -332,6 +347,7 @@
       "categoria": "mdz-oreo",
       "marca": "Mondelez",
       "linha": "Original",
+      "descricao": "Biscoito recheado Oreo sabor original em pacote individual de 18 g, formato para venda unitária no balcão.",
       "embalagens": [
         "18 g"
       ],
@@ -344,6 +360,7 @@
       "categoria": "mdz-oreo",
       "marca": "Mondelez",
       "linha": "Oreo",
+      "descricao": "Mini Oreo, os biscoitos recheados da marca em tamanho reduzido, em pacote de 35 g.",
       "embalagens": [
         "35 g"
       ],
@@ -356,6 +373,7 @@
       "categoria": "mdz-oreo",
       "marca": "Mondelez",
       "linha": "Oreo",
+      "descricao": "Biscoito Oreo com recheio sabor baunilha, o original da marca, em pacote de 90 g.",
       "embalagens": [
         "90 g"
       ],
@@ -368,6 +386,7 @@
       "categoria": "mdz-oreo",
       "marca": "Mondelez",
       "linha": "Oreo",
+      "descricao": "Biscoito Oreo com recheio sabor chocolate em pacote de 90 g.",
       "embalagens": [
         "90 g"
       ],
@@ -380,6 +399,7 @@
       "categoria": "mdz-club-social",
       "marca": "Mondelez",
       "linha": "Parmesão 115G, Parmesão 68G, Marguerita 68G, American Barbecue 68G, Cebola e Salsa 68G, Cebola e Salsa 115G, Churras na Brasa 68G, Churras na Brasa 115G",
+      "descricao": "Club Social Snack, biscoito salgado assado em formato de salgadinho, em pacotes de 68 g e 115 g e cinco sabores, de parmesão a churras na brasa.",
       "img": "assets/produtos/mondelez-novo/mondelez__club-social-snack.jpg",
       "keywords": "club social snack parmesao 115g 68g marguerita american barbecue cebola e salsa churras na brasa mondelez"
     },
@@ -389,6 +409,7 @@
       "categoria": "mdz-club-social",
       "marca": "Mondelez",
       "linha": "Original, Pizza, Pão de Alho, Presunto, Cebola Caramelizada",
+      "descricao": "Biscoito salgado Club Social em pacotinhos individuais, nos sabores original, pizza, pão de alho, presunto e cebola caramelizada.",
       "img": "assets/produtos/mondelez-novo/mondelez__club-social-regular.jpg",
       "keywords": "club social regular original pizza pao de alho presunto cebola caramelizada mondelez"
     },
@@ -398,6 +419,7 @@
       "categoria": "mdz-club-social",
       "marca": "Mondelez",
       "linha": "Integral Tradicional",
+      "descricao": "Biscoito salgado Club Social Integral Tradicional, feito com farinha integral, em pacotinhos individuais.",
       "img": "assets/produtos/mondelez-novo/mondelez__club-social-integral.jpg",
       "keywords": "club social integral tradicional mondelez"
     },
@@ -407,6 +429,7 @@
       "categoria": "mdz-club-social",
       "marca": "Mondelez",
       "linha": "Club Social Snack - Cebola e Salsa 68G (Sul/SP), Club Social Snack - Cebola e Salsa 115G (Sul/SP), Club Social Snack - Churras na Brasa 68G (Sul/SP), Club Social Snack - Churras na Brasa 115G (Sul/SP), Club Social Snack - Parmesão 115G (Sul/SP), Club Social Snack - Parmesão 68G (Sul/SP), Club Social Snack - Marguerita 68G (Sul/SP), Club Social Snack - American Barbecue 68G (Sul/SP)",
+      "descricao": "Club Social Snack na embalagem de venda exclusiva para Sul e São Paulo, em pacotes de 68 g e 115 g e cinco sabores.",
       "img": "assets/produtos/mondelez-novo/mondelez__club-social-snack-sul-sp.jpg",
       "keywords": "club social snack sul sp cebola e salsa 68g 115g churras na brasa parmesao marguerita american barbecue mondelez"
     },
@@ -416,6 +439,7 @@
       "categoria": "mdz-lacta",
       "marca": "Mondelez",
       "linha": "Lacta",
+      "descricao": "Chocolate 5Star Lacta, barra de chocolate ao leite com recheio de caramelo e nougat.",
       "img": "assets/produtos/mondelez-novo/mondelez__5star.jpg",
       "keywords": "5star lacta mondelez"
     },
@@ -425,6 +449,7 @@
       "categoria": "mdz-lacta",
       "marca": "Mondelez",
       "linha": "Lacta",
+      "descricao": "Wafer Lacta com Oreo em unidade individual, vendido em display para balcão.",
       "img": "assets/produtos/mondelez-novo/mondelez__wafer-lacta-oreo.jpg",
       "keywords": "wafer lacta oreo mondelez"
     },
@@ -434,6 +459,7 @@
       "categoria": "mdz-lacta",
       "marca": "Mondelez",
       "linha": "Sonho de Valsa Unitário, Ouro Branco Unitário, Wafer Recheado Sonho de Valsa, Wafer Recheado Ouro Branco",
+      "descricao": "Bombons Sonho de Valsa e Ouro Branco em unidade avulsa, e as versões em wafer recheado das duas marcas.",
       "img": "assets/produtos/mondelez-novo/mondelez__sonho-de-valsa-e-ouro-branco.jpg",
       "keywords": "sonho de valsa e ouro branco unitario wafer recheado mondelez"
     },
@@ -443,6 +469,7 @@
       "categoria": "mdz-lacta",
       "marca": "Mondelez",
       "linha": "Lacta",
+      "descricao": "Chocolate ao leite Lacta da linha Obrigado.",
       "img": "assets/produtos/mondelez-novo/mondelez__lacta-obrigado.jpg",
       "keywords": "lacta obrigado mondelez"
     },
@@ -452,6 +479,7 @@
       "categoria": "mdz-lacta",
       "marca": "Mondelez",
       "linha": "Ao Leite, Laka, Diamante Negro, Shot, Diamante Negro/Laka, Amaro",
+      "descricao": "Tabletes de chocolate Lacta de 80 g nas versões ao leite, Laka, Diamante Negro, Shot, Diamante Negro/Laka e Amaro.",
       "embalagens": [
         "80 g"
       ],
@@ -464,6 +492,7 @@
       "categoria": "mdz-lacta",
       "marca": "Mondelez",
       "linha": "Lacta Oreo, Lacta Ouro Branco, Lacta Sonho de Valsa, Laka Caramelo",
+      "descricao": "Tabletes de chocolate Lacta recheados nas versões Oreo, Ouro Branco, Sonho de Valsa e Laka Caramelo.",
       "img": "assets/produtos/mondelez-novo/mondelez__lacta-recheados.jpg",
       "keywords": "lacta recheados oreo ouro branco sonho de valsa laka caramelo mondelez"
     },
@@ -473,6 +502,7 @@
       "categoria": "mdz-bis",
       "marca": "Mondelez",
       "linha": "Bis Original, Bis Branco",
+      "descricao": "Bis, o wafer com cobertura de chocolate da Lacta, nas versões original e branco.",
       "img": "assets/produtos/mondelez-novo/mondelez__bis-2.jpg",
       "keywords": "bis original branco mondelez"
     },
@@ -482,6 +512,7 @@
       "categoria": "mdz-bis",
       "marca": "Mondelez",
       "linha": "Bis 10 ao Leite, Bis 10 Laka",
+      "descricao": "Bis no pacote com 10 unidades, nas versões ao leite e Laka.",
       "img": "assets/produtos/mondelez-novo/mondelez__bis.jpg",
       "keywords": "bis 10 ao leite laka mondelez"
     },
@@ -491,6 +522,7 @@
       "categoria": "mdz-bis-xtra",
       "marca": "Mondelez",
       "linha": "Bis Xtra Original, Bis Xtra Oreo, Bis Xtra Black, Bis Xtra Branco",
+      "descricao": "Bis Xtra, a versão maior do Bis, com wafer e cobertura de chocolate, nos sabores original, Oreo, Black e branco.",
       "img": "assets/produtos/mondelez-novo/mondelez__bis-xtra.jpg",
       "keywords": "bis xtra original oreo black branco mondelez"
     },
@@ -500,6 +532,7 @@
       "categoria": "mdz-lacta-intense",
       "marca": "Mondelez",
       "linha": "70% Cacau Original, 60% Cacau Original, 40% Cacau Original, 60% Cacau Mix Nuts, 60% Cacau Café, Tábuas Intense Nuts - 40% Cacau Avelã & Crocante de Cacau, Tábuas Intense Nuts - 40% Cacau Amêndoas & Caramelo Salgado, Tábuas Intense Nuts - 40% Cacau Amêndoas & Framboesa",
+      "descricao": "Tabletes de chocolate Lacta Intense com 40%, 60% e 70% de cacau, e versões com castanhas, amêndoas, café e frutas.",
       "img": "assets/produtos/mondelez-novo/mondelez__tabuas-intense.jpg",
       "keywords": "tabuas intense 70 cacau original 60 40 mix nuts cafe avela crocante de amendoas caramelo salgado framboesa mondelez"
     },
@@ -508,6 +541,7 @@
       "nome": "Baly Tradicional",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly no sabor tradicional, o original da marca, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
       "embalagens": [
         "473 ml",
         "250 ml",
@@ -521,6 +555,7 @@
       "nome": "Baly Tropical",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor frutas tropicais, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
       "embalagens": [
         "473 ml",
         "2 L"
@@ -533,6 +568,7 @@
       "nome": "Baly Maçã Verde",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor maçã verde, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
       "embalagens": [
         "473 ml",
         "2 L"
@@ -545,6 +581,7 @@
       "nome": "Baly Melancia",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor melancia, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
       "embalagens": [
         "473 ml",
         "2 L"
@@ -557,6 +594,7 @@
       "nome": "Baly Morango e Pêssego",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor morango e pêssego, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
       "embalagens": [
         "473 ml",
         "2 L"
@@ -569,6 +607,7 @@
       "nome": "Baly Coco e Açaí",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor coco e açaí, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
       "embalagens": [
         "473 ml"
       ],
@@ -580,6 +619,7 @@
       "nome": "Baly Tadaly",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly Tadaly, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
       "embalagens": [
         "473 ml",
         "2 L"
@@ -592,6 +632,7 @@
       "nome": "Baly Uva Verde",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor uva verde, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
       "img": "assets/produtos/baly/energy__uva-verde.jpg",
       "keywords": "baly uva verde brasil"
     },
@@ -600,6 +641,7 @@
       "nome": "Baly Abacaxi com Hortelã",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor abacaxi com hortelã, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
       "img": "assets/produtos/baly/energy__abacaxi-com-hortela.jpg",
       "keywords": "baly abacaxi com hortela brasil"
     },
@@ -608,6 +650,7 @@
       "nome": "Baly Amora com Hortelã",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor amora com hortelã, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
       "img": "assets/produtos/baly/energy__amora-com-hortela.jpg",
       "keywords": "baly amora com hortela brasil"
     },
@@ -616,6 +659,7 @@
       "nome": "Baly Freegells",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly Freegells, parceria com a bala Freegells no sabor cereja, com cafeína, taurina e vitaminas do complexo B.",
       "img": "assets/produtos/baly/energy__freegells.jpg",
       "keywords": "baly freegells brasil"
     },
@@ -624,6 +668,7 @@
       "nome": "Baly Summer Loko",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly Summer Loko, combinação tropical e doce inspirada nos drinks de verão, com cafeína, taurina e vitaminas do complexo B.",
       "img": "assets/produtos/baly/energy__summer-loko.jpg",
       "keywords": "baly summer loko brasil"
     },
@@ -632,6 +677,7 @@
       "nome": "Baly Celebre Champagne",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly Celebre sabor champanhe, da linha inspirada em drinks, sem álcool, em lata de 250 ml.",
       "embalagens": [
         "250 ml"
       ],
@@ -643,6 +689,7 @@
       "nome": "Baly Celebre Floripa",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly Celebre sabor Floripa Spritz, da linha inspirada em drinks, sem álcool, em lata de 250 ml.",
       "embalagens": [
         "250 ml"
       ],
@@ -654,6 +701,7 @@
       "nome": "Baly Celebre Caipirinha",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly Celebre sabor caipirinha, da linha inspirada em drinks, sem álcool.",
       "img": "assets/produtos/baly/energy__celebre-caipirinha.jpg",
       "keywords": "baly celebre caipirinha brasil"
     },
@@ -662,6 +710,7 @@
       "nome": "Baly Tradicional Sem Açúcar",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor tradicional sem açúcar, com cafeína, taurina e vitaminas do complexo B.",
       "embalagens": [
         "473 ml"
       ],
@@ -673,6 +722,7 @@
       "nome": "Baly Tropical Sem Açúcar",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor frutas tropicais sem açúcar, com cafeína, taurina e vitaminas do complexo B.",
       "embalagens": [
         "473 ml"
       ],
@@ -684,6 +734,7 @@
       "nome": "Baly Maçã Verde Sem Açúcar",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor maçã verde sem açúcar, com cafeína, taurina e vitaminas do complexo B.",
       "embalagens": [
         "473 ml"
       ],
@@ -695,6 +746,7 @@
       "nome": "Baly Uva Verde Sem Açúcar",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor uva verde sem açúcar, com cafeína, taurina e vitaminas do complexo B.",
       "img": "assets/produtos/baly/energy__uva-verde-sem-acucar.jpg",
       "keywords": "baly uva verde sem acucar brasil"
     },
@@ -703,6 +755,7 @@
       "nome": "Baly Melancia Sem Açúcar",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor melancia sem açúcar, com cafeína, taurina e vitaminas do complexo B.",
       "embalagens": [
         "473 ml"
       ],
@@ -714,6 +767,7 @@
       "nome": "Baly Morango e Pêssego Sem Açúcar",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor morango e pêssego sem açúcar, com cafeína, taurina e vitaminas do complexo B.",
       "embalagens": [
         "473 ml"
       ],
@@ -725,6 +779,7 @@
       "nome": "Baly Amora com Hortelã Sem Açúcar",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor amora com hortelã sem açúcar, com cafeína, taurina e vitaminas do complexo B.",
       "img": "assets/produtos/baly/energy__amora-com-hortela-sem-acucar.jpg",
       "keywords": "baly amora com hortela sem acucar brasil"
     },
@@ -733,6 +788,7 @@
       "nome": "Baly Redragon",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Baly Gamer Redragon, energético sem açúcar criado com a marca gamer Redragon, com 20% a mais de cafeína, taurina, inositol e vitaminas do complexo B, em lata de 473 ml.",
       "img": "assets/produtos/baly/energy__redragon.jpg",
       "keywords": "baly redragon brasil"
     },
@@ -741,6 +797,7 @@
       "nome": "Baly Pro Tropical",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Baly Pro sabor tropical, bebida energética com 15 g de proteína de colágeno, sem açúcar e sem glúten, em lata de 250 ml.",
       "img": "assets/produtos/baly/energy__pro-tropical.jpg",
       "keywords": "baly pro tropical brasil"
     },
@@ -749,6 +806,7 @@
       "nome": "Baly Pro Morango e Pêssego",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Baly Pro sabor morango e pêssego, bebida energética com 15 g de proteína de colágeno, sem açúcar e sem glúten, em lata de 250 ml.",
       "img": "assets/produtos/baly/energy__pro-morango-e-pessego.jpg",
       "keywords": "baly pro morango e pessego brasil"
     },
@@ -757,6 +815,7 @@
       "nome": "Baly Pro Banana",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Baly Pro sabor banana, bebida energética com 15 g de proteína de colágeno, sem açúcar e sem glúten, em lata de 250 ml.",
       "img": "assets/produtos/baly/energy__pro-banana.jpg",
       "keywords": "baly pro banana brasil"
     },
@@ -765,6 +824,7 @@
       "nome": "Baly Free Tradicional",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Baly Free sabor tradicional, a versão \"3x zero\" da marca: sem açúcar, sem cafeína e sem taurina.",
       "img": "assets/produtos/baly/energy__free-tradicional.jpg",
       "keywords": "baly free tradicional brasil"
     },
@@ -773,6 +833,7 @@
       "nome": "Baly Free Maçã Verde",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Baly Free sabor maçã verde, a versão \"3x zero\" da marca: sem açúcar, sem cafeína e sem taurina.",
       "img": "assets/produtos/baly/energy__free-maca-verde.jpg",
       "keywords": "baly free maca verde brasil"
     },
@@ -781,6 +842,7 @@
       "nome": "Baly Kids Tutti Frutti",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Baly Kids sabor tutti-frutti, bebida vitaminada para crianças com ferro, magnésio, zinco e vitaminas A e do complexo B, em embalagem de 220 ml.",
       "embalagens": [
         "220 ml"
       ],
@@ -792,6 +854,7 @@
       "nome": "Baly Kids Laranja",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Baly Kids sabor laranja, bebida vitaminada para crianças com ferro, magnésio, zinco e vitaminas A e do complexo B, em embalagem de 220 ml.",
       "embalagens": [
         "220 ml"
       ],
@@ -803,6 +866,7 @@
       "nome": "Baly Kids Melancia",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Baly Kids sabor melancia, bebida vitaminada para crianças com ferro, magnésio, zinco e vitaminas A e do complexo B, em embalagem de 220 ml.",
       "embalagens": [
         "220 ml"
       ],
@@ -814,6 +878,7 @@
       "nome": "Baly Kids Morango",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Baly Kids sabor morango, bebida vitaminada para crianças com ferro, magnésio, zinco e vitaminas A e do complexo B, em embalagem de 220 ml.",
       "embalagens": [
         "220 ml"
       ],
@@ -825,6 +890,7 @@
       "nome": "Baly Kids Uva",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Baly Kids sabor uva, bebida vitaminada para crianças com ferro, magnésio, zinco e vitaminas A e do complexo B.",
       "img": "assets/produtos/baly/kids__uva.jpg",
       "keywords": "baly kids uva brasil"
     },
@@ -833,6 +899,7 @@
       "nome": "Baly Cereja Sem Açúcar",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor cereja sem açúcar em garrafa PET de 2 litros, lançado em 2026, com cafeína, taurina e vitaminas do complexo B.",
       "embalagens": [
         "2 L"
       ],
@@ -844,6 +911,7 @@
       "nome": "Baly Cereja",
       "categoria": "baly",
       "marca": "Baly Brasil",
+      "descricao": "Energético Baly sabor cereja em lata de 473 ml, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
       "embalagens": [
         "473 ml"
       ],
@@ -855,6 +923,7 @@
       "nome": "Água de Coco",
       "categoria": "dr-aqua-coco",
       "marca": "Aqua Coco",
+      "descricao": "Água de coco Aqua Coco pronta para beber, nas embalagens de 1 litro e 300 ml.",
       "embalagens": [
         "1 L",
         "300 ml"
@@ -867,6 +936,7 @@
       "nome": "Água de Coco Garrafa Turma da Mônica",
       "categoria": "dr-aqua-coco",
       "marca": "Aqua Coco",
+      "descricao": "Água de coco Aqua Coco em garrafinha com os personagens da Turma da Mônica, tamanho de lancheira.",
       "img": "assets/produtos/distririo/aqua-coco__agua-de-coco-garrafa-turma-da-monica.jpg",
       "keywords": "agua de coco garrafa turma da monica aqua"
     },
@@ -875,6 +945,7 @@
       "nome": "Suco de Acerola",
       "categoria": "dr-sumo",
       "marca": "Sumo",
+      "descricao": "Suco de acerola Sumo pronto para beber, nas embalagens de 300 ml e 1 litro.",
       "embalagens": [
         "300 ml",
         "1 L"
@@ -887,6 +958,7 @@
       "nome": "Suco de Cajá",
       "categoria": "dr-sumo",
       "marca": "Sumo",
+      "descricao": "Suco de cajá Sumo pronto para beber, nas embalagens de 300 ml e 1 litro.",
       "embalagens": [
         "300 ml",
         "1 L"
@@ -899,6 +971,7 @@
       "nome": "Suco de Caju",
       "categoria": "dr-sumo",
       "marca": "Sumo",
+      "descricao": "Suco de caju Sumo pronto para beber, nas embalagens de 300 ml e 1 litro.",
       "embalagens": [
         "300 ml",
         "1 L"
@@ -911,6 +984,7 @@
       "nome": "Suco de Goiaba",
       "categoria": "dr-sumo",
       "marca": "Sumo",
+      "descricao": "Suco de goiaba Sumo pronto para beber.",
       "img": "assets/produtos/distririo/sumo__suco-de-goiaba.jpg",
       "keywords": "suco de goiaba sumo"
     },
@@ -919,6 +993,7 @@
       "nome": "Suco de Graviola",
       "categoria": "dr-sumo",
       "marca": "Sumo",
+      "descricao": "Suco de graviola Sumo pronto para beber, nas embalagens de 300 ml e 1 litro.",
       "embalagens": [
         "300 ml",
         "1 L"
@@ -931,6 +1006,7 @@
       "nome": "Suco de Uva",
       "categoria": "dr-sumo",
       "marca": "Sumo",
+      "descricao": "Suco de uva Sumo pronto para beber.",
       "img": "assets/produtos/distririo/sumo__suco-de-uva.jpg",
       "keywords": "suco de uva sumo"
     },
@@ -939,6 +1015,7 @@
       "nome": "Suco Sumo Açaí",
       "categoria": "dr-sumo",
       "marca": "Sumo",
+      "descricao": "Suco de açaí Sumo pronto para beber, em embalagem de 300 ml.",
       "embalagens": [
         "300 ml"
       ],
@@ -950,6 +1027,7 @@
       "nome": "Néctar Maratá Caju",
       "categoria": "dr-marata",
       "marca": "Maratá",
+      "descricao": "Néctar de caju Maratá pronto para beber, em caixinha de 200 ml e embalagem de 1 litro.",
       "embalagens": [
         "1 L",
         "200 ml"
@@ -962,6 +1040,7 @@
       "nome": "Néctar Maratá Laranja",
       "categoria": "dr-marata",
       "marca": "Maratá",
+      "descricao": "Néctar de laranja Maratá pronto para beber, em caixinha de 200 ml e embalagem de 1 litro.",
       "embalagens": [
         "1 L",
         "200 ml"
@@ -974,6 +1053,7 @@
       "nome": "Néctar Maratá Pêssego",
       "categoria": "dr-marata",
       "marca": "Maratá",
+      "descricao": "Néctar de pêssego Maratá pronto para beber, em caixinha de 200 ml e embalagem de 1 litro.",
       "embalagens": [
         "1 L",
         "200 ml"
@@ -986,6 +1066,7 @@
       "nome": "Néctar Maratá Uva",
       "categoria": "dr-marata",
       "marca": "Maratá",
+      "descricao": "Néctar de uva Maratá pronto para beber, em caixinha de 200 ml e embalagem de 1 litro.",
       "embalagens": [
         "1 L",
         "200 ml"
@@ -998,6 +1079,7 @@
       "nome": "Néctar Maratá Maracujá",
       "categoria": "dr-marata",
       "marca": "Maratá",
+      "descricao": "Néctar de maracujá Maratá pronto para beber, em caixinha de 200 ml e embalagem de 1 litro.",
       "embalagens": [
         "200 ml",
         "1 L"
@@ -1010,6 +1092,7 @@
       "nome": "Flocão de Milho Maratá",
       "categoria": "dr-marata",
       "marca": "Maratá",
+      "descricao": "Flocão de milho Maratá, farinha de milho em flocos para o preparo de cuscuz.",
       "img": "assets/produtos/distririo/marata__flocao-de-milho-marata.jpg",
       "keywords": "flocao de milho marata"
     },
@@ -1018,6 +1101,7 @@
       "nome": "Refresco Mara-tinho Abacaxi",
       "categoria": "dr-mara-tinho",
       "marca": "Mara-tinho",
+      "descricao": "Refresco líquido Mara-tinho sabor abacaxi, da Maratá, pronto para beber em caixinha de 200 ml, sem glúten.",
       "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-abacaxi.jpg",
       "keywords": "refresco mara tinho abacaxi"
     },
@@ -1026,6 +1110,7 @@
       "nome": "Refresco Mara-tinho Laranja",
       "categoria": "dr-mara-tinho",
       "marca": "Mara-tinho",
+      "descricao": "Refresco líquido Mara-tinho sabor laranja, da Maratá, pronto para beber em caixinha de 200 ml, sem glúten.",
       "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-laranja.jpg",
       "keywords": "refresco mara tinho laranja"
     },
@@ -1034,6 +1119,7 @@
       "nome": "Refresco Mara-tinho Maracujá",
       "categoria": "dr-mara-tinho",
       "marca": "Mara-tinho",
+      "descricao": "Refresco líquido Mara-tinho sabor maracujá, da Maratá, pronto para beber em caixinha de 200 ml, sem glúten.",
       "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-maracuja.jpg",
       "keywords": "refresco mara tinho maracuja"
     },
@@ -1042,6 +1128,7 @@
       "nome": "Refresco Mara-tinho Morango",
       "categoria": "dr-mara-tinho",
       "marca": "Mara-tinho",
+      "descricao": "Refresco líquido Mara-tinho sabor morango, da Maratá, pronto para beber em caixinha de 200 ml, sem glúten.",
       "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-morango.jpg",
       "keywords": "refresco mara tinho morango"
     },
@@ -1050,6 +1137,7 @@
       "nome": "Refresco Mara-tinho Uva",
       "categoria": "dr-mara-tinho",
       "marca": "Mara-tinho",
+      "descricao": "Refresco líquido Mara-tinho sabor uva, da Maratá, pronto para beber em caixinha de 200 ml, sem glúten.",
       "img": "assets/produtos/distririo/mara-tinho__refresco-mara-tinho-uva.jpg",
       "keywords": "refresco mara tinho uva"
     },
@@ -1058,6 +1146,7 @@
       "nome": "Molho Gota Alho",
       "categoria": "dr-gota",
       "marca": "Gota",
+      "descricao": "Molho de alho Gota, para temperar carnes, saladas e pratos do dia a dia.",
       "img": "assets/produtos/distririo/gota__molho-gota-alho.jpg",
       "keywords": "molho gota alho"
     },
@@ -1066,6 +1155,7 @@
       "nome": "Molho Gota Inglês",
       "categoria": "dr-gota",
       "marca": "Gota",
+      "descricao": "Molho inglês Gota, para temperar carnes, molhos e marinadas.",
       "img": "assets/produtos/distririo/gota__molho-gota-ingles.jpg",
       "keywords": "molho gota ingles"
     },
@@ -1074,6 +1164,7 @@
       "nome": "Molho Gota Pimenta",
       "categoria": "dr-gota",
       "marca": "Gota",
+      "descricao": "Molho de pimenta vermelha Gota, para dar picância a pratos e petiscos.",
       "img": "assets/produtos/distririo/gota__molho-gota-pimenta.jpg",
       "keywords": "molho gota pimenta"
     },
@@ -1082,6 +1173,7 @@
       "nome": "Molho Gota Pimenta Verde",
       "categoria": "dr-gota",
       "marca": "Gota",
+      "descricao": "Molho de pimenta verde Gota, para dar picância a pratos e petiscos.",
       "img": "assets/produtos/distririo/gota__molho-gota-pimenta-verde.jpg",
       "keywords": "molho gota pimenta verde"
     },
@@ -1090,6 +1182,7 @@
       "nome": "Azeitona Verde Sachê Fatiada",
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
+      "descricao": "Azeitona verde fatiada Rivoli em sachê, prática para pizza, salada e recheio, nas embalagens de 80 g e 150 g.",
       "embalagens": [
         "150 g",
         "80 g"
@@ -1102,6 +1195,7 @@
       "nome": "Azeitona Preta Sachê Fatiada",
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
+      "descricao": "Azeitona preta fatiada Rivoli em sachê, prática para pizza, salada e recheio.",
       "img": "assets/produtos/distririo/rivoli__azeitona-preta-sache-fatiada.jpg",
       "keywords": "azeitona preta sache fatiada rivoli"
     },
@@ -1110,6 +1204,7 @@
       "nome": "Azeitona Verde Gordal Vidro c/ Caroço",
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
+      "descricao": "Azeitona verde gordal com caroço Rivoli em vidro, variedade de fruto graúdo.",
       "img": "assets/produtos/distririo/rivoli__azeitona-verde-gordal-vidro-c-caroco.jpg",
       "keywords": "azeitona verde gordal vidro c caroco rivoli"
     },
@@ -1118,6 +1213,7 @@
       "nome": "Azeitonas Verde Fatiadas Balde",
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
+      "descricao": "Azeitona verde fatiada Rivoli em balde, embalagem para uso em cozinha profissional e food service.",
       "img": "assets/produtos/distririo/rivoli__azeitonas-verde-fatiadas-balde.jpg",
       "keywords": "azeitonas verde fatiadas balde rivoli"
     },
@@ -1126,6 +1222,7 @@
       "nome": "Azeitonas Verde Sem Caroço Balde",
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
+      "descricao": "Azeitona verde sem caroço Rivoli em balde, embalagem para uso em cozinha profissional e food service.",
       "img": "assets/produtos/distririo/rivoli__azeitonas-verde-sem-caroco-balde.jpg",
       "keywords": "azeitonas verde sem caroco balde rivoli"
     },
@@ -1134,6 +1231,7 @@
       "nome": "Azeitonas Verde Média Balde",
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
+      "descricao": "Azeitona verde média com caroço Rivoli em balde, embalagem para uso em cozinha profissional e food service.",
       "img": "assets/produtos/distririo/rivoli__azeitonas-verde-media-balde.jpg",
       "keywords": "azeitonas verde media balde rivoli"
     },
@@ -1142,6 +1240,7 @@
       "nome": "Azeitona Verde Sachê c/ Caroço",
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
+      "descricao": "Azeitona verde com caroço Rivoli em sachê, nas embalagens de 80 g e 100 g.",
       "embalagens": [
         "100 g",
         "80 g"
@@ -1154,6 +1253,7 @@
       "nome": "Azeitona Verde Sachê s/ Caroço",
       "categoria": "dr-rivoli",
       "marca": "Rivoli",
+      "descricao": "Azeitona verde sem caroço Rivoli em sachê, nas embalagens de 80 g e 120 g.",
       "embalagens": [
         "120 g",
         "80 g"
@@ -1166,6 +1266,7 @@
       "nome": "Trio Avelã e Castanha com Chocolate",
       "categoria": "dr-trio",
       "marca": "Trio",
+      "descricao": "Barra de cereais Trio sabor avelã e castanha com chocolate, em caixa com 12 unidades de 20 g.",
       "embalagens": [
         "Caixa com 12 × 20 g"
       ],
@@ -1177,6 +1278,7 @@
       "nome": "Trio Banana Aveia e Mel",
       "categoria": "dr-trio",
       "marca": "Trio",
+      "descricao": "Barra de cereais Trio sabor banana, aveia e mel, em caixa com 12 unidades de 20 g.",
       "embalagens": [
         "Caixa com 12 × 20 g"
       ],
@@ -1188,6 +1290,7 @@
       "nome": "Trio Brigadeiro",
       "categoria": "dr-trio",
       "marca": "Trio",
+      "descricao": "Barra de cereais Trio sabor brigadeiro, em caixa com 12 unidades de 20 g.",
       "embalagens": [
         "Caixa com 12 × 20 g"
       ],
@@ -1199,6 +1302,7 @@
       "nome": "Trio Coco com Chocolate",
       "categoria": "dr-trio",
       "marca": "Trio",
+      "descricao": "Barra de cereais Trio sabor coco com chocolate, em caixa com 12 unidades de 20 g.",
       "embalagens": [
         "Caixa com 12 × 20 g"
       ],
@@ -1210,6 +1314,7 @@
       "nome": "Trio Morango com Chocolate",
       "categoria": "dr-trio",
       "marca": "Trio",
+      "descricao": "Barra de cereais Trio sabor morango com chocolate, em caixa com 12 unidades de 20 g.",
       "embalagens": [
         "Caixa com 12 × 20 g"
       ],
@@ -1221,6 +1326,7 @@
       "nome": "Trio Original Avelã e Castanha com Chocolate",
       "categoria": "dr-trio",
       "marca": "Trio",
+      "descricao": "Barra de cereais Trio Original sabor avelã e castanha com chocolate.",
       "img": "assets/produtos/distririo/trio__trio-original-avela-e-castanha-com-chocolate.jpg",
       "keywords": "trio original avela e castanha com chocolate"
     },
@@ -1229,6 +1335,7 @@
       "nome": "Trio Original Banana Aveia e Mel",
       "categoria": "dr-trio",
       "marca": "Trio",
+      "descricao": "Barra de cereais Trio Original sabor banana, aveia e mel.",
       "img": "assets/produtos/distririo/trio__trio-original-banana-aveia-e-mel.jpg",
       "keywords": "trio original banana aveia e mel"
     },
@@ -1237,6 +1344,7 @@
       "nome": "Trio Original Brigadeiro",
       "categoria": "dr-trio",
       "marca": "Trio",
+      "descricao": "Barra de cereais Trio Original sabor brigadeiro.",
       "img": "assets/produtos/distririo/trio__trio-original-brigadeiro.jpg",
       "keywords": "trio original brigadeiro"
     },
@@ -1245,6 +1353,7 @@
       "nome": "Trio Original Morango com Chocolate",
       "categoria": "dr-trio",
       "marca": "Trio",
+      "descricao": "Barra de cereais Trio Original sabor morango com chocolate.",
       "img": "assets/produtos/distririo/trio__trio-original-morango-com-chocolate.jpg",
       "keywords": "trio original morango com chocolate"
     },
@@ -1253,6 +1362,7 @@
       "nome": "Trio Zero Banana com Chocolate",
       "categoria": "dr-trio",
       "marca": "Trio",
+      "descricao": "Barra de cereais Trio Zero sabor banana com chocolate, versão sem adição de açúcar.",
       "img": "assets/produtos/distririo/trio__trio-zero-banana-com-chocolate.jpg",
       "keywords": "trio zero banana com chocolate"
     },
@@ -1261,6 +1371,7 @@
       "nome": "Trio Zero Morango com Chocolate",
       "categoria": "dr-trio",
       "marca": "Trio",
+      "descricao": "Barra de cereais Trio Zero sabor morango com chocolate, versão sem adição de açúcar.",
       "img": "assets/produtos/distririo/trio__trio-zero-morango-com-chocolate.jpg",
       "keywords": "trio zero morango com chocolate"
     },
@@ -1269,6 +1380,7 @@
       "nome": "Granola Tradicional",
       "categoria": "dr-kobber",
       "marca": "Kobber",
+      "descricao": "Granola Kobber tradicional, mistura de cereais e flocos crocantes para o café da manhã e lanches.",
       "img": "assets/produtos/distririo/kobber__granola-tradicional.jpg",
       "keywords": "granola tradicional kobber"
     },
@@ -1277,6 +1389,7 @@
       "nome": "Granola Frutas e Mel",
       "categoria": "dr-kobber",
       "marca": "Kobber",
+      "descricao": "Granola Kobber com frutas e mel.",
       "img": "assets/produtos/distririo/kobber__granola-frutas-e-mel.jpg",
       "keywords": "granola frutas e mel kobber"
     },
@@ -1285,6 +1398,7 @@
       "nome": "Granola Banana e Mel",
       "categoria": "dr-kobber",
       "marca": "Kobber",
+      "descricao": "Granola Kobber com banana e mel.",
       "img": "assets/produtos/distririo/kobber__granola-banana-e-mel.jpg",
       "keywords": "granola banana e mel kobber"
     },
@@ -1293,6 +1407,7 @@
       "nome": "Granola Chocolate e Amendoim",
       "categoria": "dr-kobber",
       "marca": "Kobber",
+      "descricao": "Granola Kobber com chocolate e amendoim.",
       "img": "assets/produtos/distririo/kobber__granola-chocolate-e-amendoim.jpg",
       "keywords": "granola chocolate e amendoim kobber"
     },
@@ -1301,6 +1416,7 @@
       "nome": "Granola Castanha",
       "categoria": "dr-kobber",
       "marca": "Kobber",
+      "descricao": "Granola Kobber com castanhas.",
       "img": "assets/produtos/distririo/kobber__granola-castanha.jpg",
       "keywords": "granola castanha kobber"
     },
@@ -1309,6 +1425,7 @@
       "nome": "Granola Zero",
       "categoria": "dr-kobber",
       "marca": "Kobber",
+      "descricao": "Granola Kobber Zero, versão sem adição de açúcar.",
       "img": "assets/produtos/distririo/kobber__granola-zero.jpg",
       "keywords": "granola zero kobber"
     },
@@ -1317,18 +1434,20 @@
       "nome": "Geleia Baldoni Abacaxi c/ Pimenta",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
+      "linha": "",
+      "descricao": "Geleia Baldoni de abacaxi e pimenta com mel e pedaços de fruta, em pote de vidro de 270 g.",
       "img": "assets/produtos/distririo/baldoni__geleia-baldoni-abacaxi-c-pimenta.jpg",
       "keywords": "geleia baldoni abacaxi c pimenta pote 270g farma",
       "embalagens": [
         "270 g"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "geleia-baldoni-frutas-amarelas",
       "nome": "Geleia Baldoni Frutas Amarelas",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
+      "descricao": "Geleia Baldoni de frutas amarelas em pote de 270 g.",
       "embalagens": [
         "270 g"
       ],
@@ -1340,6 +1459,7 @@
       "nome": "Geleia Baldoni Frutas Vermelhas",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
+      "descricao": "Geleia Baldoni de frutas vermelhas em pote de 270 g.",
       "embalagens": [
         "270 g"
       ],
@@ -1351,6 +1471,7 @@
       "nome": "Geleia Baldoni Morango",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
+      "descricao": "Geleia Baldoni de morango em pote de 270 g.",
       "embalagens": [
         "270 g"
       ],
@@ -1362,6 +1483,7 @@
       "nome": "Mel Turma da Mônica Orgânico",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
+      "descricao": "Mel orgânico Baldoni com embalagem da Turma da Mônica, em pote de 300 g.",
       "embalagens": [
         "300 g"
       ],
@@ -1373,6 +1495,7 @@
       "nome": "Mel Turma da Mônica Laranjeira",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
+      "descricao": "Mel de flor de laranjeira Baldoni com embalagem da Turma da Mônica, em pote de 300 g.",
       "embalagens": [
         "300 g"
       ],
@@ -1384,6 +1507,7 @@
       "nome": "Mel Chef Bisnaga (Chefão)",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
+      "descricao": "Mel Chef Baldoni na bisnaga grande, a versão Chefão.",
       "img": "assets/produtos/distririo/baldoni__mel-chef-bisnaga-chefao.jpg",
       "keywords": "mel chef bisnaga chefao baldoni"
     },
@@ -1392,6 +1516,7 @@
       "nome": "Mel Chef Bisnaga",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
+      "descricao": "Mel Chef Baldoni em bisnaga.",
       "img": "assets/produtos/distririo/baldoni__mel-chef-bisnaga.jpg",
       "keywords": "mel chef bisnaga baldoni"
     },
@@ -1400,6 +1525,7 @@
       "nome": "Mel Orgânico Bisnaga",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
+      "descricao": "Mel orgânico Baldoni em bisnaga.",
       "img": "assets/produtos/distririo/baldoni__mel-organico-bisnaga.jpg",
       "keywords": "mel organico bisnaga baldoni"
     },
@@ -1408,6 +1534,7 @@
       "nome": "Mel Holanda Bisnaga",
       "categoria": "dr-baldoni",
       "marca": "Baldoni",
+      "descricao": "Mel Holanda Baldoni, multifloral silvestre da Mata Atlântica, em bisnaga de 200 g com válvula que controla o fluxo e evita desperdício.",
       "embalagens": [
         "200 g"
       ],
@@ -1419,6 +1546,7 @@
       "nome": "Detergente em Pó Ace Sachê",
       "categoria": "dr-ace",
       "marca": "Ace",
+      "descricao": "Detergente em pó Ace para lavar roupas, em sachê de 800 g, 1,5 kg e 2,4 kg.",
       "embalagens": [
         "800 g",
         "1,5 kg",
@@ -1432,6 +1560,7 @@
       "nome": "Detergente em Pó Ace Cartucho",
       "categoria": "dr-ace",
       "marca": "Ace",
+      "descricao": "Detergente em pó Ace para lavar roupas, em cartucho de 1,6 kg e 2,2 kg.",
       "embalagens": [
         "1,6 kg",
         "2,2 kg"
@@ -1444,6 +1573,7 @@
       "nome": "Detergente em Pó Espumil Premium Cartucho",
       "categoria": "dr-espumil",
       "marca": "Espumil",
+      "descricao": "Detergente em pó Espumil Premium para lavar roupas, em cartucho.",
       "img": "assets/produtos/distririo/espumil__detergente-em-po-espumil-premium-cartucho.jpg",
       "keywords": "detergente em po espumil premium cartucho"
     },
@@ -1452,6 +1582,7 @@
       "nome": "Lava Roupas Líquido Espumil",
       "categoria": "dr-espumil",
       "marca": "Espumil",
+      "descricao": "Lava-roupas líquido Espumil, nas embalagens de 1 litro e 3 litros.",
       "embalagens": [
         "1 L",
         "3 L"
@@ -1464,6 +1595,7 @@
       "nome": "Sabão em Pedra Espumil Coco",
       "categoria": "dr-espumil",
       "marca": "Espumil",
+      "descricao": "Sabão em pedra Espumil de coco, para lavar roupas à mão e limpeza em geral.",
       "img": "assets/produtos/distririo/espumil__sabao-em-pedra-espumil-coco.jpg",
       "keywords": "sabao em pedra espumil coco"
     },
@@ -1472,6 +1604,7 @@
       "nome": "Sabão em Pedra Espumil Glicerinado Neutro",
       "categoria": "dr-espumil",
       "marca": "Espumil",
+      "descricao": "Sabão em pedra Espumil glicerinado neutro, para lavar roupas à mão e limpeza em geral.",
       "img": "assets/produtos/distririo/espumil__sabao-em-pedra-espumil-glicerinado-neutro.jpg",
       "keywords": "sabao em pedra espumil glicerinado neutro"
     },
@@ -1481,6 +1614,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
+      "descricao": "Barra Supino com recheio de banana desidratada e cobertura de chocolate ao leite, a receita clássica da Banana Brasil, em unidade de 24 g.",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg",
       "keywords": "supino barra de banana com cobertura chocolate ao leite brasil orig 24g 20x24g farma",
       "embalagens": [
@@ -1493,6 +1627,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
+      "descricao": "Barra Supino com recheio de banana desidratada e cobertura de chocolate branco, em unidade de 24 g.",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-com-cobertura-de-chocolate-branco.jpg",
       "keywords": "supino barra de banana com cobertura chocolate branco brasil original 24g 20x24g farma",
       "embalagens": [
@@ -1505,6 +1640,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
+      "descricao": "Barra Supino Zero com recheio de banana desidratada e cobertura de chocolate ao leite, sem adição de açúcares, em unidade de 24 g.",
       "img": "assets/produtos/banana-brasil/supino__supino-zero-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg",
       "keywords": "supino zero barra de banana com cobertura chocolate ao leite brasil 24g 20x24g farma",
       "embalagens": [
@@ -1517,6 +1653,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
+      "descricao": "Barra Supino Zero com recheio de banana e cobertura de chocolate branco, sem adição de açúcares, em unidade de 24 g.",
       "img": "assets/produtos/banana-brasil/supino__supino-zero-barra-de-banana-com-cobertura-de-chocolate-branco.jpg",
       "keywords": "supino zero barra de banana com cobertura chocolate branco brasil 24g 20x24g farma",
       "embalagens": [
@@ -1529,6 +1666,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
+      "descricao": "Barra Supino Zero de banana-passa e ameixa com cobertura de chocolate, sem adição de açúcares e sem glúten, em unidade de 24 g.",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-ameixa.jpg",
       "keywords": "supino barra de banana e ameixa brasil zero 24g 20x24g farma",
       "embalagens": [
@@ -1541,6 +1679,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
+      "descricao": "Barra Supino Zero de banana com nozes e damasco, sem adição de açúcares, em unidade de 24 g.",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-nozes-e-damasco.jpg",
       "keywords": "supino barra de banana nozes e damasco brasil zero damasco24g 20x24g farma",
       "embalagens": [
@@ -1553,6 +1692,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
+      "descricao": "Barra Supino Zero com recheio de banana e maçã desidratada, canela e cobertura de chocolate ao leite, sem adição de açúcares, em unidade de 24 g.",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-maca-e-canela.jpg",
       "keywords": "supino barra de banana maca e canela brasil zero 24g 20x24g farma",
       "embalagens": [
@@ -1565,6 +1705,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
+      "descricao": "Barra Supino Zero com recheio de banana e açaí desidratados e cobertura de chocolate ao leite, sem adição de açúcares, em unidade de 24 g.",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-acai.jpg",
       "keywords": "supino barra de banana e acai brasil zero 24g 20x24g farma",
       "embalagens": [
@@ -1577,6 +1718,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
+      "descricao": "Barra Supino Zero com recheio de banana e morango desidratados e cobertura de morango, sem adição de açúcares, em unidade de 24 g.",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-morango.jpg",
       "keywords": "supino barra de banana e morango brasil zero 24g 20x24g farma",
       "embalagens": [
@@ -1589,6 +1731,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
+      "descricao": "Barra Supino Zero com recheio de banana e abacaxi desidratados e cobertura de chocolate branco, sem adição de açúcares, em unidade de 24 g.",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-abacaxi.jpg",
       "keywords": "supino barra de banana e abacaxi brasil zero 24g 20x24g farma",
       "embalagens": [
@@ -1601,6 +1744,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Nuts",
+      "descricao": "Barra Nuts de castanhas selecionadas, amendoim e abacaxi desidratado, crocante e levemente adocicada, em unidade de 25 g.",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-abacaxi.jpg",
       "keywords": "nuts barra de castanhas amendoim e abacaxi banana brasil 25g 12x25g farma",
       "embalagens": [
@@ -1613,6 +1757,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Nuts",
+      "descricao": "Barra Nuts de castanhas e amendoim com frutas vermelhas desidratadas, adoçada com melado, em unidade de 25 g.",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-frutas-vermelhas.jpg",
       "keywords": "nuts barra de castanhas amendoim e frutas vermelhas banana brasil 25g 12x25g farma",
       "embalagens": [
@@ -1625,6 +1770,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Nuts",
+      "descricao": "Barra Nuts de castanhas e amendoim com banana e canela, em unidade de 25 g.",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-banana-e-canela.jpg",
       "keywords": "nuts barra de castanhas amendoim banana e canela brasil 25g 12x25g farma",
       "embalagens": [
@@ -1637,6 +1783,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Nuts",
+      "descricao": "Barra Nuts de castanhas e amendoim com mix de sementes, em unidade de 25 g.",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-sementes.jpg",
       "keywords": "nuts barra de castanhas amendoim e sementes banana brasil 25g 12x25g farma",
       "embalagens": [
@@ -1649,6 +1796,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Nuts",
+      "descricao": "Barra Nuts de castanhas e amendoim tostado com frutas, em unidade de 25 g.",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-frutas.jpg",
       "keywords": "nuts barra de castanhas amendoim e frutas banana brasil 25g 12x25g farma",
       "embalagens": [
@@ -1661,6 +1809,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Nuts",
+      "descricao": "Barra Nuts de castanhas e amendoim com cobertura de chocolate, em unidade de 25 g.",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-e-amendoim-com-cobertura-de-chocolate.jpg",
       "keywords": "nuts barra de castanhas e amendoim com cobertura chocolate banana brasil 25g 12x25g farma",
       "embalagens": [
@@ -1673,6 +1822,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Nuts",
+      "descricao": "Barra Nuts de castanhas, amendoim e coco com cobertura de chocolate, de textura macia, em unidade de 25 g.",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-coco-com-cobertura-de-chocolate.jpg",
       "keywords": "nuts barra de castanhas amendoim e coco com cobertura chocolate banana brasil 25g 12x25g farma",
       "embalagens": [
@@ -1685,6 +1835,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Nuts",
+      "descricao": "Barra Nuts de castanhas e amendoim com cobertura sabor morango, em unidade de 25 g.",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-e-amendoim-com-cobertura-de-morango.jpg",
       "keywords": "nuts barra de castanhas e amendoim com cobertura morango banana brasil 25g 12x25g farma",
       "embalagens": [
@@ -1697,6 +1848,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Nuts",
+      "descricao": "Barra Nuts de castanhas e pasta de amendoim com cobertura de chocolate, em unidade de 25 g.",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-e-pasta-de-amendoim-com-cobertura-de-chocolate.jpg",
       "keywords": "nuts barra de castanhas e pasta amendoim com cobertura chocolate banana brasil 25g 12x25g farma",
       "embalagens": [
@@ -1709,6 +1861,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Pé de Moleque",
+      "descricao": "Pé de moleque Banana Brasil em barra crocante de amendoim tostado, sem adição de açúcares, em unidade de 20 g.",
       "img": "assets/produtos/banana-brasil/pe-de-moleque__pe-de-moleque-barra-crocante-de-amendoim-tradicional.jpg",
       "keywords": "pe de moleque barra crocante amendoim tradicional banana brasil 20g 16x20g farma",
       "embalagens": [
@@ -1721,6 +1874,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Pé de Moleque",
+      "descricao": "Pé de moleque Banana Brasil em barra crocante de amendoim com caramelo salgado, sem adição de açúcares, em unidade de 20 g.",
       "img": "assets/produtos/banana-brasil/pe-de-moleque__pe-de-moleque-barra-crocante-de-amendoim-caramelo-salgado.jpg",
       "keywords": "pe de moleque barra crocante amendoim caramelo salgado banana brasil 20g 16x20g farma",
       "embalagens": [
@@ -1733,6 +1887,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Protein+",
+      "descricao": "Barra proteica Protein+ sabor napolitano, com morango, baunilha e chocolate e 16 g de proteína, em unidade de 50 g.",
       "embalagens": [
         "50 g"
       ],
@@ -1745,6 +1900,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Protein+",
+      "descricao": "Barra proteica Protein+ sabor torta de limão, com alto teor de proteína e baixo teor de açúcar, em unidade de 50 g.",
       "embalagens": [
         "50 g"
       ],
@@ -1757,6 +1913,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Protein+",
+      "descricao": "Barra proteica Protein+ Cookies & Cream, com recheio de chocolate branco, biscoito de cacau e cobertura de chocolate ao leite, em unidade de 50 g.",
       "img": "assets/produtos/banana-brasil/protein__protein-cookies-cream.jpg",
       "keywords": "protein cookies cream banana brasil barra n 50g 9x50g farma",
       "embalagens": [
@@ -1769,6 +1926,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Protein+",
+      "descricao": "Barra proteica Protein+ Banoffee, com banana, recheio de doce de leite, biscoito de baunilha e cobertura de chocolate branco, em unidade de 50 g.",
       "embalagens": [
         "50 g"
       ],
@@ -1781,6 +1939,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Protein+",
+      "descricao": "Barra proteica Protein+ Vegano de pasta de amendoim e caramelo salgado, sem ingredientes de origem animal, em unidade de 50 g.",
       "img": "assets/produtos/banana-brasil/protein__protein-vegano-pasta-de-amendoim-e-caramelo-salgado.jpg",
       "keywords": "protein vegano pasta de amendoim e caramelo salgado banana brasil barra 50g 9x50g farma",
       "embalagens": [
@@ -1793,6 +1952,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino Protein",
+      "descricao": "Barra de proteína Supino Protein sabor baunilha com crispies, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/supino-protein__supino-protein-baunilha-com-crispies.jpg",
       "keywords": "supino protein baunilha com crispies banana brasil"
     },
@@ -1802,6 +1962,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino Protein",
+      "descricao": "Barra de proteína Supino Protein de chocolate branco e coco, com cobertura de chocolate branco, 10 g de proteína de whey e colágeno e sem adição de açúcares, em unidade de 30 g.",
       "img": "assets/produtos/banana-brasil/supino-protein__supino-protein-coco.jpg",
       "keywords": "supino protein coco banana brasil c choc branco 30g 12x30g farma",
       "embalagens": [
@@ -1814,6 +1975,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino Protein",
+      "descricao": "Barra de proteína Supino Protein sabor cappuccino com cobertura de chocolate ao leite, 10 g de proteína de whey e colágeno e sem adição de açúcares, em unidade de 30 g.",
       "embalagens": [
         "30 g"
       ],
@@ -1826,6 +1988,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino Protein",
+      "descricao": "Barra de proteína Supino Protein sabor chocolate com cobertura de chocolate ao leite, 10 g de proteína de whey e colágeno e sem adição de açúcares, em unidade de 30 g.",
       "embalagens": [
         "30 g"
       ],
@@ -1838,6 +2001,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino Protein",
+      "descricao": "Barra de proteína Supino Protein Max de amendoim e caramelo, o formato maior da linha, em unidade de 46 g.",
       "embalagens": [
         "46 g"
       ],
@@ -1850,6 +2014,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Levittá",
+      "descricao": "Barra crocante Levittá de gergelim e linhaça, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/levitta__levitta-barra-crocante-de-gergelim-e-linhaca.jpg",
       "keywords": "levitta barra crocante de gergelim e linhaca banana brasil"
     },
@@ -1859,6 +2024,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Levittá",
+      "descricao": "Barra crocante Levittá de gergelim, quinoa e cacau, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/levitta__levitta-barra-crocante-de-gergelim-quinoa-e-cacau.jpg",
       "keywords": "levitta barra crocante de gergelim quinoa e cacau banana brasil"
     },
@@ -1868,6 +2034,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Levittá",
+      "descricao": "Barra crocante Levittá de gergelim e chia, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/levitta__levitta-barra-crocante-de-gergelim-e-chia.jpg",
       "keywords": "levitta barra crocante de gergelim e chia banana brasil"
     },
@@ -1877,6 +2044,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Levittá",
+      "descricao": "Barra crocante Levittá de gergelim e castanha-de-caju, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/levitta__levitta-barra-crocante-de-gergelim-e-castanha-de-caju.jpg",
       "keywords": "levitta barra crocante de gergelim e castanha caju banana brasil"
     },
@@ -1886,6 +2054,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Só Frutas",
+      "descricao": "Barra Só Frutas original, feita só com frutas, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/so-frutas__so-frutas-original.jpg",
       "keywords": "so frutas original banana brasil"
     },
@@ -1895,6 +2064,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Só Frutas",
+      "descricao": "Barra Só Frutas com coco, feita com frutas, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/so-frutas__so-frutas-coco.jpg",
       "keywords": "so frutas coco banana brasil"
     },
@@ -1904,6 +2074,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Só Frutas",
+      "descricao": "Barra Só Frutas com cacau e especiarias, feita com frutas, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/so-frutas__so-frutas-cacau-e-especiarias.jpg",
       "keywords": "so frutas cacau e especiarias banana brasil"
     },
@@ -1913,6 +2084,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Banana Passa",
+      "descricao": "Banana-passa Banana Brasil, feita com bananas selecionadas e desidratadas, macia e naturalmente doce, em embalagem de 86 g.",
       "embalagens": [
         "86 g"
       ],
@@ -1925,6 +2097,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "NutsBITES",
+      "descricao": "Bombom NutsBITES de castanhas, pasta de amendoim e caramelo com cobertura de chocolate ao leite.",
       "img": "assets/produtos/banana-brasil/nutsbites__nutsbites-bombom-de-castanhas-pasta-de-amendoim-e-caramelo-com-cobertura-de-chocolate-ao-leite.jpg",
       "keywords": "nutsbites bombom de castanhas pasta amendoim e caramelo com cobertura chocolate ao leite banana brasil"
     },
@@ -1934,6 +2107,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "NutsBITES",
+      "descricao": "Bombom NutsBITES de castanhas, amendoim e frutas com cobertura de chocolate branco.",
       "img": "assets/produtos/banana-brasil/nutsbites__nutsbites-bombom-de-castanhas-amendoim-e-frutas-com-cobertura-de-chocolate-branco.jpg",
       "keywords": "nutsbites bombom de castanhas amendoim e frutas com cobertura chocolate branco banana brasil"
     },
@@ -1943,6 +2117,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "NutsBITES",
+      "descricao": "Bombom NutsBITES Vegano de castanhas, amendoim, nibs de cacau e canela com cobertura de chocolate meio amargo.",
       "img": "assets/produtos/banana-brasil/nutsbites__nutsbites-vegano-bombom-de-castanhas-amendoim-nibs-de-cacau-e-canela-com-cobertura-de-chocolate-meio-amargo.jpg",
       "keywords": "nutsbites vegano bombom de castanhas amendoim nibs cacau e canela com cobertura chocolate meio amargo banana brasil"
     },
@@ -1952,6 +2127,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra infantil Banana Brasil Kids de banana e melancia com cobertura sabor melancia.",
       "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-e-melancia-com-cobertura-de-melancia.jpg",
       "keywords": "banana brasil kids barra de e melancia com cobertura"
     },
@@ -1961,6 +2137,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra infantil Banana Brasil Kids de banana com cobertura de chocolate ao leite, em unidade de 22 g.",
       "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg",
       "keywords": "banana brasil kids barra de com cobertura chocolate ao leite frutas choc 22g 20x22g farma",
       "embalagens": [
@@ -1973,6 +2150,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra infantil Banana Brasil Kids de banana com cobertura de chocolate branco, em unidade de 22 g.",
       "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-com-cobertura-de-chocolate-branco.jpg",
       "keywords": "banana brasil kids barra de com cobertura chocolate branco frutas choc 22g 20x22g farma",
       "embalagens": [
@@ -1985,6 +2163,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra infantil Banana Brasil Kids de banana e uva com cobertura sabor uva, em unidade de 22 g.",
       "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-e-uva-com-cobertura-de-uva.jpg",
       "keywords": "banana brasil kids barra de e uva com cobertura frutas 22g 20x22g farma",
       "embalagens": [
@@ -1997,6 +2176,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra infantil Banana Brasil Kids de banana e morango com cobertura sabor morango, em unidade de 22 g.",
       "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-e-morango-com-cobertura-de-morango.jpg",
       "keywords": "banana brasil kids barra de e morango com cobertura frutas 22g 20x22g farma",
       "embalagens": [
@@ -2009,6 +2189,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra de frutas infantil Frutalalá de maçã e morango, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/kids__frutalala-barra-de-frutas-maca-e-morango.jpg",
       "keywords": "frutalala barra de frutas maca e morango kids banana brasil"
     },
@@ -2018,6 +2199,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra de frutas infantil Frutalalá de banana e maçã, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/kids__frutalala-barra-de-frutas-banana-e-maca.jpg",
       "keywords": "frutalala barra de frutas banana e maca kids brasil"
     },
@@ -2027,6 +2209,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra de frutas infantil Frutalalá sabor salada de frutas, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/kids__frutalala-barra-de-frutas-salada-de-frutas.jpg",
       "keywords": "frutalala barra de frutas salada kids banana brasil"
     },
@@ -2036,6 +2219,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra de granola infantil Granobá com morango e cobertura sabor iogurte, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/kids__granoba-barra-de-granola-e-morango-com-cobertura-de-iogurte.jpg",
       "keywords": "granoba barra de granola e morango com cobertura iogurte kids banana brasil"
     },
@@ -2045,6 +2229,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra de granola infantil Granobá com cobertura de chocolate, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/kids__granoba-barra-de-granola-com-cobertura-de-chocolate.jpg",
       "keywords": "granoba barra de granola com cobertura chocolate kids banana brasil"
     },
@@ -2054,6 +2239,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra de granola infantil Granobá com banana, maçã e cobertura sabor iogurte, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/kids__granoba-barra-de-granola-banana-e-maca-com-cobertura-de-iogurte.jpg",
       "keywords": "granoba barra de granola banana e maca com cobertura iogurte kids brasil"
     },
@@ -2063,6 +2249,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra de proteína infantil Proteyá sabor leitinho com cookies, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/kids__proteya-barra-de-proteina-leitinho-com-cookies.jpg",
       "keywords": "proteya barra de proteina leitinho com cookies kids banana brasil"
     },
@@ -2072,6 +2259,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra de proteína infantil Proteyá sabor chocolate, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/kids__proteya-barra-de-proteina-chocolate.jpg",
       "keywords": "proteya barra de proteina chocolate kids banana brasil"
     },
@@ -2081,6 +2269,7 @@
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Kids",
+      "descricao": "Barra de proteína infantil Proteyá sabor iogurte de morango, da Banana Brasil.",
       "img": "assets/produtos/banana-brasil/kids__proteya-barra-de-proteina-iogurte-de-morango.jpg",
       "keywords": "proteya barra de proteina iogurte morango kids banana brasil"
     },
@@ -2089,59 +2278,52 @@
       "nome": "Supino Protein Morango",
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
+      "linha": "Supino Protein",
+      "descricao": "Barra de proteína Supino Protein sabor morango com cobertura de chocolate branco, 10 g de proteína de whey e colágeno e sem adição de açúcares, em unidade de 30 g.",
       "embalagens": [
         "30 g"
       ],
       "keywords": "supino protein morango 30g 12x30g farma",
-      "img": "assets/produtos/banana-brasil/supino-protein-morango.jpg",
-      "linha": "Supino Protein"
+      "img": "assets/produtos/banana-brasil/supino-protein-morango.jpg"
     },
     {
       "id": "supino-protein-cookies",
       "nome": "Supino Protein Cookies",
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
+      "linha": "Supino Protein",
+      "descricao": "Barra de proteína Supino Protein sabor cookies, de chocolate branco e baunilha com cobertura de chocolate branco, 10 g de proteína e sem adição de açúcares, em unidade de 30 g.",
       "embalagens": [
         "30 g"
       ],
       "keywords": "supino protein cookies 30g 12x30g farma",
-      "img": "assets/produtos/banana-brasil/supino-protein-cookies.jpg",
-      "linha": "Supino Protein"
+      "img": "assets/produtos/banana-brasil/supino-protein-cookies.jpg"
     },
     {
       "id": "barra-mini-pouch-nuts-meio-amargo",
       "nome": "Mini Nuts - Chocolate Meio Amargo (pouch)",
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
+      "linha": "Nuts",
+      "descricao": "Mini Nuts Banana Brasil de amendoim com chocolate meio amargo, em pouch de 60 g.",
       "embalagens": [
         "60 g"
       ],
       "keywords": "barra mini pouch nuts meio amargo 60g farma",
-      "img": "assets/produtos/banana-brasil/barra-mini-pouch-nuts-meio-amargo.jpg",
-      "linha": "Nuts"
+      "img": "assets/produtos/banana-brasil/barra-mini-pouch-nuts-meio-amargo.jpg"
     },
     {
       "id": "barra-mini-pouch-nuts-ao-leite",
       "nome": "Mini Nuts - Chocolate ao Leite (pouch)",
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
+      "linha": "Nuts",
+      "descricao": "Mini Nuts Banana Brasil de amendoim com chocolate ao leite, em pouch de 60 g.",
       "embalagens": [
         "60 g"
       ],
       "keywords": "barra mini pouch nuts ao leite 60g farma",
-      "img": "assets/produtos/banana-brasil/barra-mini-pouch-nuts-ao-leite.jpg",
-      "linha": "Nuts"
-    },
-    {
-      "id": "b-proteica-pistache-com-chocolate-branco",
-      "nome": "Nutrata Bacio di Latte - Pistache com Chocolate Branco",
-      "categoria": "farma-barras",
-      "marca": "Nutrata",
-      "embalagens": [
-        "Display com 9 barras de 70 g"
-      ],
-      "keywords": "b proteica pistache c choco branco 70g 9unx70g farma",
-      "img": "assets/produtos/nutrata/b-proteica-pistache-com-chocolate-branco.jpg"
+      "img": "assets/produtos/banana-brasil/barra-mini-pouch-nuts-ao-leite.jpg"
     },
     {
       "id": "powerdrol",
@@ -2149,6 +2331,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance",
+      "descricao": "Suplemento alimentar Powerdrol, da linha Performance da Lauton.",
       "img": "assets/produtos/lauton/saude-integral__powerdrol.jpg",
       "keywords": "powerdrol performance lauton"
     },
@@ -2158,6 +2341,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance",
+      "descricao": "L-arginina Lauton com 1.000 mg por dose, em cápsulas.",
       "img": "assets/produtos/lauton/performance__l-arginina-plus.jpg",
       "keywords": "l arginina plus performance lauton 60x625mg farma",
       "embalagens": [
@@ -2170,6 +2354,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance",
+      "descricao": "Cúrcuma Premium Lauton em cápsulas de 500 mg, com extrato padronizado em 95% de curcumina, nas embalagens com 30 e 60 cápsulas.",
       "img": "assets/produtos/lauton/saude-integral__curcuma-premium.jpg",
       "keywords": "curcuma premium performance lauton 9172 curcumina 60x500mg farma 5075 30 caps 30x500mg",
       "embalagens": [
@@ -2187,6 +2372,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance",
+      "descricao": "Colágeno tipo II Moviflex Lauton, com MSM e ácido hialurônico, em comprimidos.",
       "img": "assets/produtos/lauton/performance__colageno-tipo-ii.jpg",
       "keywords": "colageno tipo ii performance lauton 6553 moviflex 2 60x650mg farma",
       "embalagens": [
@@ -2202,6 +2388,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance",
+      "descricao": "Feno-grego Premium Lauton com Testofen, saponinas, ZMA e boro, em cápsulas.",
       "img": "assets/produtos/lauton/performance__feno-grego-premium.jpg",
       "keywords": "feno grego premium performance lauton"
     },
@@ -2211,6 +2398,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance",
+      "descricao": "Tri Maca Peruana Premium Lauton em pó, 100% pura, sem lactose, sem glúten e sem açúcares, em pote de 100 g.",
       "img": "assets/produtos/lauton/performance__maca-peruana-premium.jpg",
       "keywords": "maca peruana premium performance lauton 1377 trimaca em po 100g farma",
       "embalagens": [
@@ -2226,6 +2414,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance",
+      "descricao": "Extrato de laranja moro Premium Lauton em cápsulas.",
       "img": "assets/produtos/lauton/performance__extrato-de-laranja-moro-premium.jpg",
       "keywords": "extrato de laranja moro premium performance lauton 0776 60x500mg farma",
       "embalagens": [
@@ -2241,6 +2430,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance",
+      "descricao": "Multivitamínico vegano Hemovital A-Z, da Lauton, com 22 vitaminas e minerais em 100% da IDR, em comprimidos.",
       "img": "assets/produtos/lauton/performance__multi-vitaminico-hemovital-a-z.jpg",
       "keywords": "multi vitaminico hemovital a z performance lauton 6522 60x750mg farma",
       "embalagens": [
@@ -2256,6 +2446,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance",
+      "descricao": "Boro decahidratado Lauton com 8 mg por dose, em comprimidos.",
       "img": "assets/produtos/lauton/performance__boro-decahidratado.jpg",
       "keywords": "boro decahidratado performance lauton"
     },
@@ -2265,6 +2456,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Corpo e beleza",
+      "descricao": "Complexo B Max Lauton, suplemento com as vitaminas do complexo B em comprimidos.",
       "embalagens": [
         "60 unidades de 500 mg"
       ],
@@ -2280,6 +2472,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Corpo e beleza",
+      "descricao": "Biotina Plus Lauton, suplemento de biotina em cápsulas.",
       "embalagens": [
         "60 unidades de 500 mg"
       ],
@@ -2295,6 +2488,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Corpo e beleza",
+      "descricao": "Coenzima Q10 PRO Lauton com 100 mg por dose, em comprimidos.",
       "embalagens": [
         "60 comprimidos",
         "100 mg"
@@ -2311,6 +2505,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Corpo e beleza",
+      "descricao": "Hialux Skincare Lauton, ácido hialurônico com associações, em cápsulas.",
       "img": "assets/produtos/lauton/corpo-e-beleza__hialux-skincare.jpg",
       "keywords": "hialux skincare corpo e beleza lauton"
     },
@@ -2320,6 +2515,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Corpo e beleza",
+      "descricao": "Procran Lauton, cranberry com vitaminas C e E, zinco e selênio, em cápsulas.",
       "embalagens": [
         "30 unidades de 500 mg"
       ],
@@ -2335,6 +2531,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Corpo e beleza",
+      "descricao": "Colágeno hidrolisado Lauton com 1.000 mg por dose e vitamina C na fórmula, em comprimidos.",
       "embalagens": [
         "60 unidades de 1100 mg"
       ],
@@ -2350,6 +2547,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Corpo e beleza",
+      "descricao": "Coenzima Q10 ULTRA Lauton com 200 mg de coenzima Q10 por dose, em comprimidos.",
       "embalagens": [
         "60 comprimidos",
         "500 mg"
@@ -2366,6 +2564,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Corpo e beleza",
+      "descricao": "Cromo picolinato Lauton com 250 mcg por dose, em comprimidos.",
       "embalagens": [
         "60 unidades de 500 mg"
       ],
@@ -2381,6 +2580,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Corpo e beleza",
+      "descricao": "Luteína com zeaxantina Lauton, carotenoides com vitamina A na fórmula, em comprimidos.",
       "embalagens": [
         "60 unidades de 500 mg"
       ],
@@ -2396,6 +2596,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Mente e bem estar",
+      "descricao": "Triptoflex Lauton, triptofano 215 mg com vitaminas B6 e B3 e magnésio, em comprimidos.",
       "embalagens": [
         "60 unidades de 600 mg"
       ],
@@ -2411,6 +2612,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Mente e bem estar",
+      "descricao": "Melatonina Premium Lauton em gotas, com 210 mcg por dose, sabor maracujá.",
       "img": "assets/produtos/lauton/mente-e-bem-estar__melatonina-liquida.jpg",
       "keywords": "melatonina liquida mente e bem estar lauton 0820 gotas sab maracuja 20ml 30ml farma",
       "embalagens": [
@@ -2426,6 +2628,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Mente e bem estar",
+      "descricao": "Melatonina Premium Lauton com 210 mcg por dose, em pote com 120 comprimidos.",
       "img": "assets/produtos/lauton/mente-e-bem-estar__melatonina-premium.jpg",
       "keywords": "melatonina premium mente e bem estar lauton 9158 120x500mg farma",
       "embalagens": [
@@ -2441,6 +2644,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Mente e bem estar",
+      "descricao": "Amora Miúra Amorine Lauton em comprimidos mastigáveis.",
       "embalagens": [
         "60 unidades de 1000 mg"
       ],
@@ -2456,6 +2660,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Mente e bem estar",
+      "descricao": "Óleo de prímula Lauton em cápsulas de 1.340 mg.",
       "embalagens": [
         "60 unidades de 1340 mg"
       ],
@@ -2471,6 +2676,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Mente e bem estar",
+      "descricao": "Magnésio dimalato Lauton em comprimidos.",
       "embalagens": [
         "60 unidades de 650 mg"
       ],
@@ -2486,6 +2692,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Mente e bem estar",
+      "descricao": "Ômega 3 Ultra Lauton, alta concentração com 1.000 mg de EPA e 400 mg de DHA na porção e vitamina E, com selo MEG-3, em cápsulas.",
       "img": "assets/produtos/lauton/mente-e-bem-estar__omega-3-ultra.jpg",
       "keywords": "omega 3 ultra mente e bem estar lauton 9554 50 20 60x1350mg farma",
       "embalagens": [
@@ -2501,6 +2708,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Mente e bem estar",
+      "descricao": "Ômega 3 PRO Lauton, na proporção 18/12, com 360 mg de EPA e 240 mg de DHA na porção, em cápsulas.",
       "img": "assets/produtos/lauton/mente-e-bem-estar__omega-3-pro.jpg",
       "keywords": "omega 3 pro mente e bem estar lauton 6720 18 12 60x1350mg farma",
       "embalagens": [
@@ -2516,6 +2724,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Própolis Defense Lauton, extrato de própolis verde de alecrim com vitamina C, vitamina D3 e zinco, em comprimidos.",
       "embalagens": [
         "60 unidades de 550 mg"
       ],
@@ -2531,6 +2740,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Vitamina C 500 mg com zinco quelato, da Lauton, em cápsulas.",
       "img": "assets/produtos/lauton/saude-integral__vitamina-c-500.jpg",
       "keywords": "vitamina c 500 saude integral lauton zinco quelato 60x750mg farma",
       "embalagens": [
@@ -2543,6 +2753,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Vitamina K2 na forma MK-7 Lauton, com 149 mcg por dose, em comprimidos.",
       "img": "assets/produtos/lauton/saude-integral__vitamina-k2-mk7.jpg",
       "keywords": "vitamina k2 mk7 saude integral lauton 0479 vitam menaquinona 60x500mg farma",
       "embalagens": [
@@ -2558,6 +2769,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "MSM (metilsulfonilmetano, o enxofre orgânico) Lauton com 450 mg por cápsula e 900 mg na porção diária.",
       "embalagens": [
         "60 unidades de 600 mg"
       ],
@@ -2573,6 +2785,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Vitamina B12 Lauton na forma metilcobalamina, com 9,94 mcg por dose, em comprimidos.",
       "embalagens": [
         "60 unidades de 500 mg"
       ],
@@ -2588,6 +2801,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Cobre quelato na forma bisglicinato, da Lauton.",
       "embalagens": [
         "60 unidades de 500 mg"
       ],
@@ -2603,6 +2817,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Vitaminas D3 e K2 Lauton em gotas, em frasco de 20 ml.",
       "img": "assets/produtos/lauton/saude-integral__vitamina-d3-k2.jpg",
       "keywords": "vitamina d3 k2 saude integral lauton 1773 em gotas 20ml farma",
       "embalagens": [
@@ -2618,6 +2833,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Vitamina D3 Lauton com 2.000 UI por dose, em comprimidos.",
       "img": "assets/produtos/lauton/saude-integral__vitamina-d3-2-000-ui.jpg",
       "keywords": "vitamina d3 2 000 ui saude integral lauton 6157 colecalciferol 60x500mg farma",
       "embalagens": [
@@ -2633,6 +2849,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Ferro quelato na forma bisglicinato Lauton, com 34 mg por dose, em comprimidos.",
       "embalagens": [
         "60 unidades de 500 mg"
       ],
@@ -2648,6 +2865,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Ora-pro-nóbis Lauton em pó, 100% pura, em pote de 150 g.",
       "img": "assets/produtos/lauton/saude-integral__ora-pro-nobis.jpg",
       "keywords": "ora pro nobis saude integral lauton 1391 sabor limao 150g farma",
       "embalagens": [
@@ -2663,6 +2881,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Metilfolax Lauton, metilfolato de cálcio com 600 mcg por dose, em comprimidos.",
       "img": "assets/produtos/lauton/saude-integral__metilfolax-600mcg.jpg",
       "keywords": "metilfolax 600mcg saude integral lauton 0721 metil folax 60x500mg farma",
       "embalagens": [
@@ -2678,6 +2897,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Óleo de alho desodorizado Lauton em cápsulas de 500 mg.",
       "img": "assets/produtos/lauton/saude-integral__oleo-de-alho-cru.jpg",
       "keywords": "oleo de alho cru saude integral lauton 9424 desodorizado 60x500mg farma",
       "embalagens": [
@@ -2693,6 +2913,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Zinco quelato na forma bisglicinato Lauton, com 29 mg por dose, em comprimidos.",
       "embalagens": [
         "60 unidades de 500 mg"
       ],
@@ -2708,6 +2929,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Resveratrol Lauton na forma trans-resveratrol, com 165 mg por dose, em comprimidos.",
       "img": "assets/produtos/lauton/saude-integral__resveratrol.jpg",
       "keywords": "resveratrol saude integral lauton 0806 trans 30x500mg farma",
       "embalagens": [
@@ -2723,6 +2945,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Beta-glucana Premium Lauton, de Saccharomyces cerevisiae, com 250 mg por dose, em cápsulas.",
       "img": "assets/produtos/lauton/saude-integral__beta-glucana-premium.jpg",
       "keywords": "beta glucana premium saude integral lauton 0790 30 caps 30x500mg farma",
       "embalagens": [
@@ -2738,6 +2961,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Magnésio com inositol Lauton em pó, em pote de 330 g.",
       "embalagens": [
         "330 g"
       ],
@@ -2753,6 +2977,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Cálcio MDK Calcitrax Lauton, cálcio na forma citrato malato, em comprimidos.",
       "embalagens": [
         "60 unidades de 1200 mg"
       ],
@@ -2768,6 +2993,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Cloreto de magnésio P.A. Lauton em cápsulas de 500 mg.",
       "img": "assets/produtos/lauton/saude-integral__cloreto-de-magnesio-p-a.jpg",
       "keywords": "cloreto de magnesio p a saude integral lauton 6560 60x650mg farma",
       "embalagens": [
@@ -2783,6 +3009,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Vitamina A Lauton com 8.000 UI por dose, em comprimidos.",
       "embalagens": [
         "60 unidades de 500 mg"
       ],
@@ -2798,6 +3025,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Licopeno de tomate Lauton com 5 mg por dose, em cápsulas.",
       "embalagens": [
         "60 unidades de 500 mg"
       ],
@@ -2813,6 +3041,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Vitamina B12 Lauton em gotas, na forma metilcobalamina, sabor uva, em frasco de 20 ml.",
       "img": "assets/produtos/lauton/saude-integral__vitamina-b12-liquida.jpg",
       "keywords": "vitamina b12 liquida saude integral lauton 1292 gotas sabor uva 20ml farma",
       "embalagens": [
@@ -2828,6 +3057,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "NAC (N-acetil L-cisteína) Lauton com 600 mg por dose, em cápsulas.",
       "embalagens": [
         "60 unidades de 550 mg"
       ],
@@ -2843,6 +3073,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Vitamina D3 Lauton em gotas, sabor neutro, com 2.000 UI por gota, em frasco de 20 ml.",
       "img": "assets/produtos/lauton/saude-integral__vitamina-d3-liquida.jpg",
       "keywords": "vitamina d3 liquida saude integral lauton 1780 20ml farma",
       "embalagens": [
@@ -2858,6 +3089,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Quadrimag Quadri4Tech Lauton, suplemento com quatro formas de magnésio, em cápsulas.",
       "img": "assets/produtos/lauton/saude-integral__quadrimag-quadri4tech.jpg",
       "keywords": "quadrimag quadri4tech saude integral lauton 1728 4 60x700mg farma",
       "embalagens": [
@@ -2873,6 +3105,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
+      "descricao": "Treonato Treotech Lauton, treonato de magnésio com treonina, em cápsulas.",
       "img": "assets/produtos/lauton/saude-integral__treonato-treotech.jpg",
       "keywords": "treonato treotech saude integral lauton 1735 magn treonina 60x650mg farma",
       "embalagens": [
@@ -2888,6 +3121,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance series",
+      "descricao": "FiberLiv Lauton, prebiótico em pó com 7 fontes de fibra, em pote de 250 g.",
       "img": "assets/produtos/lauton/performance-series__fiberliv-7-fontes-de-fibra.jpg",
       "keywords": "fiberliv 7 fontes de fibra performance series lauton 0998 fibras 250g farma",
       "embalagens": [
@@ -2903,6 +3137,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance series",
+      "descricao": "Cafeína Lauton da linha Performance Series, com 400 mg por dose, em comprimidos.",
       "img": "assets/produtos/lauton/performance-series__cafeina-caffeine-performance.jpg",
       "keywords": "cafeina caffeine performance series lauton 0813 60x500mg farma",
       "embalagens": [
@@ -2918,6 +3153,7 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance series / Creatina e Glutamina",
+      "descricao": "Creatina monohidratada Lauton da linha Performance Series, 100% pura com 99,7% de pureza garantida, em pote de 300 g.",
       "img": "assets/produtos/lauton/performance-series-creatina-e-glutamina__creatina-monohidratada.jpg",
       "keywords": "creatina monohidratada performance series e glutamina lauton 0882 300g farma",
       "embalagens": [
@@ -2933,8 +3169,69 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance series / Creatina e Glutamina",
+      "descricao": "Glutamina Ultrapure Lauton da linha Performance Series, 100% pura, em pó.",
       "img": "assets/produtos/lauton/performance-series-creatina-e-glutamina__glutamina-100-pura.jpg",
       "keywords": "glutamina 100 pura performance series creatina e lauton"
+    },
+    {
+      "id": "extrato-de-propolis",
+      "nome": "Extrato de Própolis Verde Liofilizado",
+      "categoria": "lauton",
+      "marca": "Lauton",
+      "descricao": "Extrato de própolis verde liofilizado Lauton em comprimidos.",
+      "embalagens": [
+        "60 unidades de 550 mg"
+      ],
+      "skus": [
+        "6324"
+      ],
+      "keywords": "6324 extrato de propolis 60x550mg farma",
+      "img": "assets/produtos/lauton/extrato-de-propolis.jpg"
+    },
+    {
+      "id": "oleo-de-semente-de-abobora",
+      "nome": "Óleo de Semente de Abóbora",
+      "categoria": "lauton",
+      "marca": "Lauton",
+      "descricao": "Óleo de semente de abóbora (Cucurbita pepo) Lauton com vitamina E, em cápsulas.",
+      "embalagens": [
+        "1400 mg"
+      ],
+      "skus": [
+        "2644"
+      ],
+      "keywords": "2644 oleo de semente abobora 1400mg 60x1400mg farma",
+      "img": "assets/produtos/lauton/oleo-de-semente-de-abobora.jpg"
+    },
+    {
+      "id": "cranberry",
+      "nome": "Cranberry 3 em 1",
+      "categoria": "lauton",
+      "marca": "Lauton",
+      "descricao": "Cranberry Lauton 3 em 1, com cranberry, vitamina C e zinco, em comprimidos.",
+      "embalagens": [
+        "60 unidades de 1100 mg"
+      ],
+      "skus": [
+        "6348"
+      ],
+      "keywords": "6348 cranberry 60x1100mg farma",
+      "img": "assets/produtos/lauton/cranberry.jpg"
+    },
+    {
+      "id": "total-efa",
+      "nome": "Total EFA Ômegas 3, 6 e 9",
+      "categoria": "lauton",
+      "marca": "Lauton",
+      "descricao": "Total EFA Lauton, mix de óleos com ômegas 3, 6 e 9 e vitamina E, em cápsulas.",
+      "embalagens": [
+        "60 unidades de 1350 mg"
+      ],
+      "skus": [
+        "6744"
+      ],
+      "keywords": "6744 total efa 60x1350mg farma",
+      "img": "assets/produtos/lauton/total-efa.jpg"
     },
     {
       "id": "kit-scudo-p",
@@ -2942,6 +3239,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Antipiolhos",
+      "descricao": "Kit antipiolho Scudo, da Abelha Rainha, com arruda e citronela: shampoo, condicionador, spray e pente fino.",
       "img": "assets/produtos/abelha-rainha/lancamentos-antipiolhos__kit-scudo-p.jpg",
       "keywords": "kit scudo p lancamentos antipiolhos abelha rainha piolho arruda e citronela 437ml farma",
       "embalagens": [
@@ -2954,6 +3252,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Body Splash / Perfumaria",
+      "descricao": "Body splash Abelha Rainha com fragrância de vanilla, perfume corporal leve em spray.",
       "img": "assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-vanilla.jpg",
       "keywords": "body splash vanilla lancamentos perfumaria abelha rainha"
     },
@@ -2963,6 +3262,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Body Splash / Perfumaria",
+      "descricao": "Body splash Abelha Rainha com fragrância de melancia, perfume corporal leve em spray.",
       "img": "assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-melancia.jpg",
       "keywords": "body splash melancia lancamentos perfumaria abelha rainha"
     },
@@ -2972,6 +3272,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Body Splash / Perfumaria",
+      "descricao": "Body splash Abelha Rainha com fragrância de maracujá, perfume corporal leve em spray.",
       "img": "assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-maracuja.jpg",
       "keywords": "body splash maracuja lancamentos perfumaria abelha rainha"
     },
@@ -2981,6 +3282,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Body Splash / Perfumaria",
+      "descricao": "Body splash Abelha Rainha com fragrância de pitaya, perfume corporal leve em spray.",
       "img": "assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-pitaya.jpg",
       "keywords": "body splash pitaya lancamentos perfumaria abelha rainha"
     },
@@ -2990,6 +3292,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Esfoliantes Corporais",
+      "descricao": "Esfoliante corporal Abelha Rainha com fragrância de vanilla, em pote.",
       "img": "assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-vanilla.jpg",
       "keywords": "esfoliante corporal vanilla lancamentos esfoliantes corporais abelha rainha"
     },
@@ -2999,6 +3302,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Esfoliantes Corporais",
+      "descricao": "Esfoliante corporal Abelha Rainha com fragrância de melancia, em pote de 200 g.",
       "embalagens": [
         "200 g"
       ],
@@ -3011,6 +3315,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Esfoliantes Corporais",
+      "descricao": "Esfoliante corporal Abelha Rainha com fragrância de maracujá, em pote.",
       "img": "assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-maracuja.jpg",
       "keywords": "esfoliante corporal maracuja lancamentos esfoliantes corporais abelha rainha"
     },
@@ -3020,6 +3325,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Esfoliantes Corporais",
+      "descricao": "Esfoliante corporal Abelha Rainha com fragrância de pitaya, em pote.",
       "img": "assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-pitaya.jpg",
       "keywords": "esfoliante corporal pitaya lancamentos esfoliantes corporais abelha rainha"
     },
@@ -3029,6 +3335,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Hidratantes",
+      "descricao": "Creme hidratante facial e corporal Abelha Rainha para pele extrasseca, em pote de 60 g.",
       "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-facial-e-corporal-para-pele-extrasseca.jpg",
       "keywords": "hidratante facial e corporal para pele extrasseca hidratantes abelha rainha hidra corp 60g farma",
       "embalagens": [
@@ -3041,6 +3348,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Hidratantes",
+      "descricao": "Hidratante corporal Abelha Rainha para pele extrasseca, com hidratação de 72 horas, em frasco de 400 ml.",
       "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-extrasseca.jpg",
       "keywords": "hidratante corporal para pele extrasseca hidratantes abelha rainha corp 400ml farma",
       "embalagens": [
@@ -3053,6 +3361,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Hidratantes",
+      "descricao": "Hidratante corporal Abelha Rainha para pele seca, com hidratação de 72 horas, em frasco de 400 ml.",
       "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-seca.jpg",
       "keywords": "hidratante corporal para pele seca hidratantes abelha rainha corp 400ml farma",
       "embalagens": [
@@ -3065,6 +3374,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Hidratantes",
+      "descricao": "Hidratante corporal Abelha Rainha com coenzima Q10 e vitamina C, em frasco de 400 ml.",
       "embalagens": [
         "400 ml"
       ],
@@ -3077,6 +3387,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Hidratantes",
+      "descricao": "Hidratante corporal Abelha Rainha com rosa mosqueta, em frasco de 400 ml.",
       "embalagens": [
         "400 ml"
       ],
@@ -3089,6 +3400,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Rosa Mosqueta",
+      "descricao": "Óleo de rosa mosqueta 100% puro Abelha Rainha, em frasco conta-gotas de 20 ml.",
       "img": "assets/produtos/abelha-rainha/rosa-mosqueta__oleo-de-rosa-mosqueta-puro.jpg",
       "keywords": "oleo de rosa mosqueta puro abelha rainha"
     },
@@ -3098,6 +3410,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Rosa Mosqueta",
+      "descricao": "Óleo de rosa mosqueta Abelha Rainha, em frascos de 20 ml e 30 ml.",
       "embalagens": [
         "20 ml",
         "30 ml"
@@ -3111,6 +3424,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Rosa Mosqueta",
+      "descricao": "Creme facial clareador para marcas Abelha Rainha, com óleo de rosa mosqueta, em pote de 50 g.",
       "img": "assets/produtos/abelha-rainha/rosa-mosqueta__creme-facial-clareador-de-rosa-mosqueta.jpg",
       "keywords": "creme facial clareador de rosa mosqueta abelha rainha para marcas 50g farma",
       "embalagens": [
@@ -3123,6 +3437,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Rosa Mosqueta",
+      "descricao": "Creme facial preventivo às rugas Abelha Rainha, com óleo de rosa mosqueta, em pote de 50 g.",
       "img": "assets/produtos/abelha-rainha/rosa-mosqueta__creme-facial-preventivo-as-rugas-de-rosa-mosqueta.jpg",
       "keywords": "creme facial preventivo as rugas de rosa mosqueta abelha rainha 50g farma",
       "embalagens": [
@@ -3135,6 +3450,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Vitamina C",
+      "descricao": "Sabonete líquido facial Abelha Rainha com vitamina C e ácido hialurônico.",
       "img": "assets/produtos/abelha-rainha/vitamina-c__sabonete-facial-vitamina-c-e-acido-hialuronico.jpg",
       "keywords": "sabonete facial vitamina c e acido hialuronico abelha rainha"
     },
@@ -3144,6 +3460,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Vitamina C",
+      "descricao": "Sérum facial Abelha Rainha com 20% de vitamina C, para face e área dos olhos, em frasco conta-gotas de 30 ml.",
       "img": "assets/produtos/abelha-rainha/vitamina-c__serum-facial-vitamina-c.jpg",
       "keywords": "serum facial vitamina c abelha rainha 20 face e olhos 30ml farma",
       "embalagens": [
@@ -3156,6 +3473,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Vitamina C / Proteção Solar",
+      "descricao": "Protetor solar facial Abelha Rainha com vitamina C, FPS 80.",
       "img": "assets/produtos/abelha-rainha/vitamina-c-protecao-solar__protetor-solar-facial-vitamina-c.jpg",
       "keywords": "protetor solar facial vitamina c protecao abelha rainha"
     },
@@ -3165,6 +3483,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Proteção Solar",
+      "descricao": "Protetor solar facial Abelha Rainha FPS 80 em creme, sem cor, em bisnaga de 60 g.",
       "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-em-creme.jpg",
       "keywords": "protetor solar facial em creme protecao abelha rainha sol fps 80 sem cor 60g farma",
       "embalagens": [
@@ -3177,6 +3496,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Proteção Solar",
+      "descricao": "Protetor solar corporal Abelha Rainha em spray, FPS 60.",
       "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-corporal-em-spray.jpg",
       "keywords": "protetor solar corporal em spray protecao abelha rainha"
     },
@@ -3186,6 +3506,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Proteção Solar",
+      "descricao": "Protetor solar facial Abelha Rainha FPS 80 com cor de base, no tom bege natural, em bisnaga de 40 g.",
       "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-fps-80-cor-de-base-bege-natural.jpg",
       "keywords": "protetor solar facial fps 80 cor de base bege natural protecao abelha rainha sol nat 40g farma",
       "embalagens": [
@@ -3198,6 +3519,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Proteção Solar",
+      "descricao": "Protetor solar facial Abelha Rainha FPS 80 com cor de base, no tom bege médio, em bisnaga de 40 g.",
       "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-fps-80-cor-de-base-bege-medio.jpg",
       "keywords": "protetor solar facial fps 80 cor de base bege medio protecao abelha rainha sol med 40g farma",
       "embalagens": [
@@ -3210,6 +3532,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Proteção Solar",
+      "descricao": "Gel refrescante pós-sol Abelha Rainha, para aplicar na pele depois da exposição ao sol.",
       "img": "assets/produtos/abelha-rainha/protecao-solar__gel-refrescante-pos-sol.jpg",
       "keywords": "gel refrescante pos sol protecao solar abelha rainha"
     },
@@ -3219,6 +3542,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Acne",
+      "descricao": "Sabonete líquido facial antibacteriano da linha Acne, da Abelha Rainha, em frasco de 110 ml.",
       "img": "assets/produtos/abelha-rainha/acne__sabonete-facial-antibacteriano.jpg",
       "keywords": "sabonete facial antibacteriano acne abelha rainha liquido 110ml farma",
       "embalagens": [
@@ -3231,6 +3555,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Acne",
+      "descricao": "Loção tônica adstringente da linha Acne, da Abelha Rainha, em spray.",
       "img": "assets/produtos/abelha-rainha/acne__locao-tonica-adstringente.jpg",
       "keywords": "locao tonica adstringente acne abelha rainha"
     },
@@ -3240,6 +3565,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Acne",
+      "descricao": "Gel secativo para espinhas com aplicador roll-on, da linha Acne da Abelha Rainha.",
       "img": "assets/produtos/abelha-rainha/acne__gel-secativo-para-espinhas-roll-on.jpg",
       "keywords": "gel secativo para espinhas roll on acne abelha rainha"
     },
@@ -3249,6 +3575,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Acne",
+      "descricao": "Bastão secativo para espinhas da linha Acne, da Abelha Rainha, de 5 g.",
       "img": "assets/produtos/abelha-rainha/acne__bastao-secativo-para-espinhas.jpg",
       "keywords": "bastao secativo para espinhas acne abelha rainha 5g farma",
       "embalagens": [
@@ -3261,11 +3588,10 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Acne",
+      "descricao": "Kit de tratamento em casa da linha Acne, da Abelha Rainha, com sabonete facial, loção tônica, gel secativo e bastão secativo.",
       "img": "assets/produtos/abelha-rainha/acne__kit-antiacne.jpg",
       "keywords": "kit antiacne acne abelha rainha tratamento em casa 230ml 5g farma",
-      "embalagens": [
-        "5 g"
-      ]
+      "embalagens": []
     },
     {
       "id": "locao-para-afinar-os-pes-milagre-dos-pes",
@@ -3273,6 +3599,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Dermopés",
+      "descricao": "Loção Milagre dos Pés, da linha Dermopés da Abelha Rainha, para afinar os pés, em frasco de 30 ml.",
       "img": "assets/produtos/abelha-rainha/dermopes__locao-para-afinar-os-pes-milagre-dos-pes.jpg",
       "keywords": "locao para afinar os pes milagre dos dermopes abelha rainha p 30ml farma",
       "embalagens": [
@@ -3285,6 +3612,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Dermopés",
+      "descricao": "Creme ultra-hidratante para os pés Dermopés, da Abelha Rainha, com ureia 10% e D-pantenol, em pote de 100 g.",
       "embalagens": [
         "100 g"
       ],
@@ -3297,6 +3625,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Dermopés",
+      "descricao": "Creme para hidratar e afinar os pés Dermopés, da Abelha Rainha, em pote de 100 g.",
       "embalagens": [
         "100 g"
       ],
@@ -3309,6 +3638,7 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Dermopés",
+      "descricao": "Gel esfoliante para os pés Dermopés, da Abelha Rainha, com açúcar mascavo, em pote de 100 g.",
       "embalagens": [
         "100 g"
       ],
@@ -3350,30 +3680,33 @@
       "nome": "Nanoprópolis Própolis Verde em Gotas",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "linha": "",
+      "descricao": "Nanoprópolis Apisvida, extrato de própolis verde em gotas feito com nanotecnologia, sem álcool, em frasco de 20 ml.",
       "img": "assets/produtos/apisvida/propolis__nanopropolis-propolis-verde.jpg",
       "keywords": "nanopropolis propolis verde apisvida ext 20ml farma em gotas",
       "embalagens": [
         "20 ml"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "mel-tradicional-bisnaga-tampa-cone",
       "nome": "Mel Tradicional Bisnaga Tampa Cone",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "linha": "",
+      "descricao": "Mel puro Apisvida, 100% natural, em bisnaga de 250 g com tampa cone.",
       "img": "assets/produtos/apisvida/mel__mel-tradicional-bisnaga-tampa-cone.jpg",
       "keywords": "mel tradicional bisnaga tampa cone apisvida puro 250g apis vida farma",
       "embalagens": [
         "250 g"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "propolis-2000-extrato-de-propolis-verde-em-capsulas",
       "nome": "Própolis 2000 Extrato de Própolis Verde em Cápsulas",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "descricao": "Própolis 2000 Apisvida, extrato de própolis verde em cápsulas de 500 mg.",
       "img": "assets/produtos/apisvida/propolis__propolis-2000-extrato-de-propolis-verde-em-capsulas.jpg",
       "keywords": "propolis 2000 extrato de verde em capsulas apisvida"
     },
@@ -3382,18 +3715,20 @@
       "nome": "Propoflex AP60 Extrato de Própolis Verde",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "linha": "",
+      "descricao": "Extrato de própolis verde AP60 Propoflex, da Apisvida, com concentração padronizada, em frasco de 30 ml.",
       "img": "assets/produtos/apisvida/propolis__propoflex-ap60-extrato-de-propolis-verde.jpg",
       "keywords": "propoflex ap60 extrato de propolis verde apisvida ext prop 15 30ml farma",
       "embalagens": [
         "30 ml"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "propoflex-extrato-de-propolis-verde",
       "nome": "Propoflex Extrato de Própolis Verde",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "descricao": "Extrato de própolis verde Propoflex, da Apisvida, com concentração padronizada, em frasco de 20 ml.",
       "img": "assets/produtos/apisvida/propolis__propoflex-extrato-de-propolis-verde.jpg",
       "keywords": "propoflex extrato de propolis verde apisvida"
     },
@@ -3402,6 +3737,7 @@
       "nome": "Nanoprópolis Própolis Blend em Gotas",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "descricao": "Nanoprópolis Blend Apisvida, extrato de própolis em gotas feito com nanotecnologia.",
       "img": "assets/produtos/apisvida/propolis__nanopropolis-propolis-blend-em-gotas.jpg",
       "keywords": "nanopropolis propolis blend em gotas apisvida"
     },
@@ -3410,33 +3746,36 @@
       "nome": "Relâmpago Energético",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "linha": "",
+      "descricao": "Energético Relâmpago Apisvida em unidades de 10 ml, vendido em display com 24 ou 48 unidades.",
       "img": "assets/produtos/apisvida/energeticos__relampago-energetico.jpg",
       "keywords": "relampago energetico apisvida 10ml display c 24u 240ml farma 48 480ml",
       "embalagens": [
         "Display com 24 unidades de 10 ml",
         "Display com 48 unidades de 10 ml"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "protetor-labial-manteiga-de-cacau-com-propolis",
       "nome": "Protetor Labial Manteiga de Cacau com Própolis",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "linha": "",
+      "descricao": "Protetor labial Apisvida de manteiga de cacau com própolis, em bastão de 3,5 g, avulso ou em displays com 12 e 50 unidades.",
       "img": "assets/produtos/apisvida/cuidado-pessoal__protetor-labial-manteiga-de-cacau-com-propolis.jpg",
       "keywords": "protetor labial manteiga de cacau com propolis apisvida c 3 5g farma 12un 42g 50un 175g",
       "embalagens": [
         "Unidade de 3,5 g",
         "Display com 12 unidades",
         "Display com 50 unidades"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "mantex-manteiga-de-cacau-com-acido-hialuronico",
       "nome": "Mantex Manteiga de Cacau com Ácido Hialurônico",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "descricao": "Protetor labial Mantex, da Apisvida, de manteiga de cacau com ácido hialurônico.",
       "img": "assets/produtos/apisvida/cuidado-pessoal__mantex-manteiga-de-cacau-com-acido-hialuronico.jpg",
       "keywords": "mantex manteiga de cacau com acido hialuronico apisvida"
     },
@@ -3445,30 +3784,33 @@
       "nome": "Spray para Garganta Extrato de Própolis (Mel, Menta, Malva e Gengibre)",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "linha": "",
+      "descricao": "Spray para garganta Apisvida com extrato de própolis, mel, menta, malva e gengibre, em frasco de 30 ml.",
       "img": "assets/produtos/apisvida/propolis__spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-gengibre.jpg",
       "keywords": "spray para garganta extrato de propolis mel menta malva e gengibre apisvida c 30ml farma",
       "embalagens": [
         "30 ml"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-ro",
       "nome": "Spray para Garganta Extrato de Própolis (Mel, Menta, Malva e Romã)",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "linha": "",
+      "descricao": "Spray para garganta Apisvida com extrato de própolis, mel, menta, malva e romã, em frasco de 30 ml.",
       "img": "assets/produtos/apisvida/propolis__spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-roma.jpg",
       "keywords": "spray para garganta extrato de propolis mel menta malva e roma apisvida c 30ml farma",
       "embalagens": [
         "30 ml"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "propoflex-kids-spray-para-garganta-mel-malva-e-roma",
       "nome": "Propoflex Kids Spray para Garganta (Mel, Malva e Romã)",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "descricao": "Spray infantil para garganta Propoflex Kids, da Apisvida, com própolis, mel, malva e romã.",
       "img": "assets/produtos/apisvida/propolis-kids__propoflex-kids-spray-para-garganta-mel-malva-e-roma.jpg",
       "keywords": "propoflex kids spray para garganta mel malva e roma apisvida"
     },
@@ -3477,42 +3819,46 @@
       "nome": "Balas Diet Halfresh Morango com Nanoprópolis",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "linha": "",
+      "descricao": "Bala para garganta zero açúcar Hallfresh sabor morango, da Apisvida, com nanoprópolis e vitamina C, em display com 6 pacotes de 32 g.",
       "img": "assets/produtos/apisvida/balas-diet__balas-diet-halfresh-morango-com-nanopropolis.jpg",
       "keywords": "balas diet halfresh morango com nanopropolis apisvida sabor morango192g 192g farma",
       "embalagens": [
         "192 g"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "balas-diet-halfresh-mentol-com-nanopropolis",
       "nome": "Balas Diet Halfresh Mentol com Nanoprópolis",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "linha": "",
+      "descricao": "Bala para garganta zero açúcar Hallfresh sabor mentol extra forte, da Apisvida, com nanoprópolis e vitamina C, em display com 6 pacotes de 32 g.",
       "img": "assets/produtos/apisvida/balas-diet__balas-diet-halfresh-mentol-com-nanopropolis.jpg",
       "keywords": "balas diet halfresh mentol com nanopropolis apisvida sabor 192g farma",
       "embalagens": [
         "192 g"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "balas-diet-halfresh-gengibre-com-nanopropolis",
       "nome": "Balas Diet Halfresh Gengibre com Nanoprópolis",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "linha": "",
+      "descricao": "Bala para garganta zero açúcar Hallfresh sabor gengibre, da Apisvida, com nanoprópolis e vitamina C, em display com 6 pacotes de 32 g.",
       "img": "assets/produtos/apisvida/balas-diet__balas-diet-halfresh-gengibre-com-nanopropolis.jpg",
       "keywords": "balas diet halfresh gengibre com nanopropolis apisvida sabor 192g farma",
       "embalagens": [
         "192 g"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "propoflex-extrato-aquoso-de-propolis",
       "nome": "Propoflex Extrato Aquoso de Própolis",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "descricao": "Extrato aquoso de própolis verde Propoflex, da Apisvida, sem álcool, em frasco de 30 ml.",
       "img": "assets/produtos/apisvida/apisvida__propoflex-extrato-aquoso-de-propolis.jpg",
       "keywords": "propoflex extrato aquoso de propolis apisvida"
     },
@@ -3521,6 +3867,7 @@
       "nome": "Propoflex Extrato de Própolis",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "descricao": "Extrato de própolis Propoflex, da Apisvida.",
       "img": "assets/produtos/apisvida/apisvida__propoflex-extrato-de-propolis.jpg",
       "keywords": "propoflex extrato de propolis apisvida"
     },
@@ -3529,18 +3876,20 @@
       "nome": "Nanoprópolis Extrato de Própolis Vermelho",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "linha": "",
+      "descricao": "Nanoprópolis Apisvida, extrato de própolis vermelha em gotas feito com nanotecnologia, em frasco de 20 ml.",
       "img": "assets/produtos/apisvida/apisvida__nanopropolis-extrato-de-propolis-vermelho.jpg",
       "keywords": "nanopropolis extrato de propolis vermelho apisvida ext vermelha 20ml farma",
       "embalagens": [
         "20 ml"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "propoflex-kids-xarope-mel-propolis",
       "nome": "Propoflex Kids Xarope Mel + Própolis",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "descricao": "Xarope Propoflex Kids de mel e própolis, da Apisvida, sabor tutti-frutti, em frasco de 150 ml.",
       "img": "assets/produtos/apisvida/apisvida__propoflex-kids-xarope-mel-propolis.jpg",
       "keywords": "propoflex kids xarope mel propolis apisvida"
     },
@@ -3549,6 +3898,7 @@
       "nome": "Propoflex Kids Própolis",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "descricao": "Extrato de própolis infantil Propoflex Kids, da Apisvida.",
       "img": "assets/produtos/apisvida/apisvida__propoflex-kids-propolis.jpg",
       "keywords": "propoflex kids propolis apisvida"
     },
@@ -3557,6 +3907,7 @@
       "nome": "Propoflex Kids Própolis + Morango",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "descricao": "Propoflex Kids, extrato aquoso de própolis e mel sabor morango, sem álcool, da Apisvida, em frasco de 30 ml.",
       "img": "assets/produtos/apisvida/apisvida__propoflex-kids-propolis-morango.jpg",
       "keywords": "propoflex kids propolis morango apisvida"
     },
@@ -3565,18 +3916,20 @@
       "nome": "Mel Orgânico Apisvida",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "linha": "",
+      "descricao": "Mel orgânico certificado Apisvida, 100% puro e natural, em pote de 300 g.",
       "img": "assets/produtos/apisvida/apisvida__mel-apisvida.jpg",
       "keywords": "mel apisvida organico 300g farma",
       "embalagens": [
         "300 g"
-      ],
-      "linha": ""
+      ]
     },
     {
       "id": "propoflex-kids-spray-tutti-frutti",
       "nome": "Propoflex Kids Spray de Própolis Verde - Tutti-Frutti",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "descricao": "Spray oral infantil Propoflex Kids de própolis verde sabor tutti-frutti, da Apisvida.",
       "embalagens": [
         "35 ml"
       ],
@@ -3584,24 +3937,11 @@
       "img": "assets/produtos/apisvida/propoflex-kids-spray-tutti-frutti.jpg"
     },
     {
-      "id": "extrato-de-propolis",
-      "nome": "Extrato de Própolis Verde Liofilizado",
-      "categoria": "lauton",
-      "marca": "Lauton",
-      "embalagens": [
-        "60 unidades de 550 mg"
-      ],
-      "skus": [
-        "6324"
-      ],
-      "keywords": "6324 extrato de propolis 60x550mg farma",
-      "img": "assets/produtos/lauton/extrato-de-propolis.jpg"
-    },
-    {
       "id": "mel-organico-sache",
       "nome": "Mel Orgânico em Sachê",
       "categoria": "apisvida",
       "marca": "Apisvida",
+      "descricao": "Mel orgânico certificado Apisvida em sachês individuais.",
       "embalagens": [
         "80 g"
       ],
@@ -3609,10 +3949,23 @@
       "img": "assets/produtos/apisvida/mel-organico-sache.jpg"
     },
     {
+      "id": "b-proteica-pistache-com-chocolate-branco",
+      "nome": "Nutrata Bacio di Latte - Pistache com Chocolate Branco",
+      "categoria": "farma-barras",
+      "marca": "Nutrata",
+      "descricao": "Barra de proteína Nutrata Bacio di Latte com pistache italiano e cobertura de chocolate branco, 19 g de proteína e sem glúten, em display com 9 barras de 70 g.",
+      "embalagens": [
+        "Display com 9 barras de 70 g"
+      ],
+      "keywords": "b proteica pistache c choco branco 70g 9unx70g farma",
+      "img": "assets/produtos/nutrata/b-proteica-pistache-com-chocolate-branco.jpg"
+    },
+    {
       "id": "choklers-crisp-caramelo-com-chocolate",
       "nome": "Choklers Crisp Caramelo com Chocolate",
       "categoria": "farma-barras",
       "marca": "Choklers",
+      "descricao": "Barra de proteína Choklers Crisp, versão crocante, sabor caramelo com chocolate, em caixa com 12 unidades de 33 g.",
       "embalagens": [
         "Caixa com 12 × 33 g"
       ],
@@ -3624,6 +3977,7 @@
       "nome": "Choklers Crisp Cookies",
       "categoria": "farma-barras",
       "marca": "Choklers",
+      "descricao": "Barra de proteína Choklers Crisp, versão crocante, sabor cookies, em caixa com 12 unidades de 33 g.",
       "embalagens": [
         "Caixa com 12 × 33 g"
       ],
@@ -3635,6 +3989,7 @@
       "nome": "Choklers Morango com Nibs de Cacau",
       "categoria": "farma-barras",
       "marca": "Choklers",
+      "descricao": "Barra de proteína Choklers sabor morango com nibs de cacau, 12 g de proteína de leite e whey por barra e sem adição de açúcares, em caixa com 12 unidades de 40 g.",
       "embalagens": [
         "Caixa com 12 × 40 g"
       ],
@@ -3646,6 +4001,7 @@
       "nome": "Choklers Banoffe",
       "categoria": "farma-barras",
       "marca": "Choklers",
+      "descricao": "Barra de proteína Choklers sabor banoffee, 12 g de proteína de leite e whey por barra e sem adição de açúcares, em caixa com 12 unidades de 40 g.",
       "embalagens": [
         "Caixa com 12 × 40 g"
       ],
@@ -3657,6 +4013,7 @@
       "nome": "Gooday Snack Proteico - Bacon",
       "categoria": "farma-barras",
       "marca": "Mix Nutri",
+      "descricao": "Snack assado Gooday sabor bacon, da Mix Nutri, com 8 g de proteína, sem glúten e sem lactose, em pacote de 50 g.",
       "embalagens": [
         "50 g"
       ],
@@ -3668,6 +4025,7 @@
       "nome": "Gooday Snack Proteico - Quatro Queijos",
       "categoria": "farma-barras",
       "marca": "Mix Nutri",
+      "descricao": "Snack assado Gooday sabor quatro queijos, da Mix Nutri, com 8 g de proteína, sem glúten e sem lactose, em pacote de 50 g.",
       "embalagens": [
         "50 g"
       ],
@@ -3679,6 +4037,7 @@
       "nome": "Gooday Snack Proteico - Requeijão",
       "categoria": "farma-barras",
       "marca": "Mix Nutri",
+      "descricao": "Snack assado Gooday sabor requeijão, da Mix Nutri, com 8 g de proteína, sem glúten e sem lactose, em pacote de 50 g.",
       "embalagens": [
         "50 g"
       ],
@@ -3690,6 +4049,7 @@
       "nome": "Choklers Chocrante",
       "categoria": "farma-barras",
       "marca": "Choklers",
+      "descricao": "Barra de proteína Choklers sabor Chocrante, 12 g de proteína de leite e whey por barra e sem adição de açúcares, em caixa com 12 unidades de 40 g.",
       "embalagens": [
         "Caixa com 12 × 40 g"
       ],
@@ -3701,6 +4061,7 @@
       "nome": "Choklers Cookies",
       "categoria": "farma-barras",
       "marca": "Choklers",
+      "descricao": "Barra de proteína Choklers sabor cookies, 12 g de proteína de leite e whey por barra e sem adição de açúcares, em caixa com 12 unidades de 40 g.",
       "embalagens": [
         "Caixa com 12 × 40 g"
       ],
@@ -3712,6 +4073,7 @@
       "nome": "Choklers Cheesecake de Frutas Vermelhas",
       "categoria": "farma-barras",
       "marca": "Choklers",
+      "descricao": "Barra de proteína Choklers sabor cheesecake de frutas vermelhas, 12 g de proteína de leite e whey por barra e sem adição de açúcares, em caixa com 12 unidades de 40 g.",
       "embalagens": [
         "Caixa com 12 × 40 g"
       ],
@@ -3723,6 +4085,7 @@
       "nome": "Choklers Pistache",
       "categoria": "farma-barras",
       "marca": "Choklers",
+      "descricao": "Barra de proteína Choklers sabor pistache, 12 g de proteína de leite e whey por barra e sem adição de açúcares, em caixa com 12 unidades de 40 g.",
       "embalagens": [
         "Caixa com 12 × 40 g"
       ],
@@ -3731,47 +4094,21 @@
     },
     {
       "id": "mix-nutri-snack-barbecue",
-      "nome": "Mix Nutri Snack Barbecue",
+      "nome": "Gooday Snack Proteico - Barbecue",
       "categoria": "farma-barras",
       "marca": "Mix Nutri",
+      "descricao": "Snack assado Gooday sabor barbecue, da Mix Nutri, com 8 g de proteína, sem glúten e sem lactose, em pacote de 50 g.",
       "embalagens": [
         "50 g"
       ],
       "keywords": "mix nutri snack barbecue 50g farma"
     },
     {
-      "id": "oleo-de-semente-de-abobora",
-      "nome": "Óleo de Semente de Abóbora",
-      "categoria": "lauton",
-      "marca": "Lauton",
-      "embalagens": [
-        "1400 mg"
-      ],
-      "skus": [
-        "2644"
-      ],
-      "keywords": "2644 oleo de semente abobora 1400mg 60x1400mg farma",
-      "img": "assets/produtos/lauton/oleo-de-semente-de-abobora.jpg"
-    },
-    {
-      "id": "cranberry",
-      "nome": "Cranberry 1000 mg",
-      "categoria": "lauton",
-      "marca": "Lauton",
-      "embalagens": [
-        "60 unidades de 1100 mg"
-      ],
-      "skus": [
-        "6348"
-      ],
-      "keywords": "6348 cranberry 60x1100mg farma",
-      "img": "assets/produtos/lauton/cranberry.jpg"
-    },
-    {
       "id": "creatina-100",
       "nome": "Creatina Monohidratada Mix Nutri",
       "categoria": "farma-suplementos",
       "marca": "Mix Nutri",
+      "descricao": "Creatina monohidratada Mix Nutri em pó, com 5.000 mg de creatina por porção e selo de garantia de pureza Eurofins, em pote de 300 g.",
       "embalagens": [
         "300 g"
       ],
@@ -3783,6 +4120,7 @@
       "nome": "Creatina 100% Monohidratada Pronabol",
       "categoria": "farma-suplementos",
       "marca": "Pronabol",
+      "descricao": "Creatina 100% monohidratada Pronabol em pó, com 3.000 mg por porção e selo de garantia de pureza Eurofins, em pote de 300 g.",
       "embalagens": [
         "300 g"
       ],
@@ -3794,6 +4132,7 @@
       "nome": "Diet Shake Baunilha Nutrilatina",
       "categoria": "farma-suplementos",
       "marca": "Nutrilatina",
+      "descricao": "Diet Shake Nutrilatina sabor baunilha, substituto de refeição com 15 g de whey protein e 25 vitaminas e minerais, preparado só com água; a embalagem de 420 g rende 7 porções.",
       "embalagens": [
         "420 g"
       ],
@@ -3805,6 +4144,7 @@
       "nome": "Diet Shake Chocolate Nutrilatina",
       "categoria": "farma-suplementos",
       "marca": "Nutrilatina",
+      "descricao": "Diet Shake Nutrilatina sabor chocolate, substituto de refeição com 15 g de whey protein e 25 vitaminas e minerais, preparado só com água; a embalagem de 420 g rende 7 porções.",
       "embalagens": [
         "420 g"
       ],
@@ -3816,6 +4156,7 @@
       "nome": "Diet Shake Banana Nutrilatina",
       "categoria": "farma-suplementos",
       "marca": "Nutrilatina",
+      "descricao": "Diet Shake Nutrilatina sabor banana, substituto de refeição com 15 g de whey protein e 25 vitaminas e minerais, preparado só com água; a embalagem de 420 g rende 7 porções.",
       "embalagens": [
         "420 g"
       ],
@@ -3827,6 +4168,7 @@
       "nome": "Diet Shake Morango Nutrilatina",
       "categoria": "farma-suplementos",
       "marca": "Nutrilatina",
+      "descricao": "Diet Shake Nutrilatina sabor morango, substituto de refeição com 15 g de whey protein e 25 vitaminas e minerais, preparado só com água; a embalagem de 420 g rende 7 porções.",
       "embalagens": [
         "420 g"
       ],
@@ -3834,24 +4176,11 @@
       "img": "assets/produtos/nutrilatina/diet-shake-morango-nutrilatina.jpg"
     },
     {
-      "id": "total-efa",
-      "nome": "Total EFA Ômegas 3, 6 e 9",
-      "categoria": "lauton",
-      "marca": "Lauton",
-      "embalagens": [
-        "60 unidades de 1350 mg"
-      ],
-      "skus": [
-        "6744"
-      ],
-      "keywords": "6744 total efa 60x1350mg farma",
-      "img": "assets/produtos/lauton/total-efa.jpg"
-    },
-    {
       "id": "whey-sache-baunilha-nutrilatina",
       "nome": "100% Whey Nutrilatina em Sachê - Baunilha Bourbon",
       "categoria": "farma-suplementos",
       "marca": "Nutrilatina",
+      "descricao": "100% Whey concentrado Nutrilatina sabor baunilha bourbon em sachês individuais de 30 g, com 20 g de proteína por dose, em display com 10 sachês.",
       "embalagens": [
         "Display com 10 sachês de 30 g"
       ],
@@ -3860,9 +4189,10 @@
     },
     {
       "id": "whey-sache-chocolate-belga-nutrilatina",
-      "nome": "Whey Sachê Chocolate Belga Nutrilatina",
+      "nome": "100% Whey Nutrilatina em Sachê - Chocolate Belga",
       "categoria": "farma-suplementos",
       "marca": "Nutrilatina",
+      "descricao": "100% Whey Nutrilatina sabor chocolate belga em sachês individuais, em display.",
       "embalagens": [
         "310 g"
       ],
@@ -3873,6 +4203,7 @@
       "nome": "100% Whey Pronabol - Banoffe",
       "categoria": "farma-suplementos",
       "marca": "Pronabol",
+      "descricao": "100% Whey Pronabol sabor banoffee, whey protein concentrado com 16 g de proteína por porção, em pouch de 900 g.",
       "embalagens": [
         "900 g"
       ],
@@ -3884,6 +4215,7 @@
       "nome": "100% Whey Pronabol - Cookies and Cream",
       "categoria": "farma-suplementos",
       "marca": "Pronabol",
+      "descricao": "100% Whey Pronabol sabor cookies and cream, whey protein concentrado com 16 g de proteína por porção, em pouch de 900 g.",
       "embalagens": [
         "900 g"
       ],
@@ -3895,6 +4227,7 @@
       "nome": "100% Whey Pronabol - Chocolate e Avelã",
       "categoria": "farma-suplementos",
       "marca": "Pronabol",
+      "descricao": "100% Whey Pronabol sabor chocolate com avelã, whey protein concentrado com 16 g de proteína por porção, em pouch de 900 g.",
       "embalagens": [
         "900 g"
       ],

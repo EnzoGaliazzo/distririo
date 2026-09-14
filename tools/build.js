@@ -121,7 +121,15 @@ function midiaCartao(p, eager, base) {
 }
 
 function cartao(p, indice, base) {
-    const detalhe = [p.linha, (p.embalagens || []).join(' · ')].filter(Boolean);
+    const pacote = (p.embalagens || []).join(' · ');
+    // "linha" com vírgula é lista de sabores; sem vírgula é nome de linha
+    // ("Supino", "Proteção Solar"), que vira o sobretítulo do cartão.
+    const nomeDeLinha = p.linha && !/,/.test(p.linha) ? p.linha : '';
+    // Com descrição, o cartão diz o que o produto é; a lista de sabores fica
+    // na página do produto, onde cabe inteira. Sem descrição, vale o que havia.
+    const detalhe = p.descricao
+        ? [p.descricao, pacote].filter(Boolean)
+        : [p.linha, pacote].filter(Boolean);
     const linhas = [
         '<article class="product-card" data-name="' + esc(p.nome) + '" data-desc="' + esc(textoBusca(p)) + '"' +
             ' data-marca="' + esc(p.marca || '') + '" data-cat="' + esc(p.categoria) + '"' +
@@ -132,10 +140,12 @@ function cartao(p, indice, base) {
         indentar(midiaCartao(p, indice < 8, base), 12),
         '        </div>',
         '        <div class="product-info">',
-        '            <h3>' + esc(p.nome) + '</h3>',
     ];
+    if (nomeDeLinha && p.descricao) linhas.push('            <p class="product-linha">' + esc(nomeDeLinha) + '</p>');
+    linhas.push('            <h3>' + esc(p.nome) + '</h3>');
     detalhe.forEach((d, i) => {
-        linhas.push('            <p class="' + (i === 0 ? 'product-desc' : 'product-pack') + '">' + esc(d) + '</p>');
+        const classe = i === 0 && d !== pacote ? (p.descricao ? 'product-resumo' : 'product-desc') : 'product-pack';
+        linhas.push('            <p class="' + classe + '">' + esc(d) + '</p>');
     });
     // O botão fica FORA do <a>: botão dentro de link é HTML inválido e o
     // clique vira navegação em vez de adicionar à lista.
@@ -149,7 +159,7 @@ function cartao(p, indice, base) {
     return indentar(linhas.join('\n'), 20);
 }
 
-// Painel de filtros: marca, categoria e "só com foto", montados a partir do
+// Painel de filtros: marca e categoria, montados a partir do
 // próprio catálogo para nunca desencontrar dele.
 function montarFiltros() {
     const marcas = [...new Set(dados.produtos.map(p => p.marca).filter(Boolean))]
@@ -182,10 +192,9 @@ function montarFiltros() {
         opcoesCategoria.replace(/^ {20}/gm, '                        '),
         '                    </select>',
         '                </label>',
-        '                <label class="filtro filtro-marcavel">',
-        '                    <input type="checkbox" id="filtroComFoto">',
-        '                    <span>Só produtos com foto</span>',
-        '                </label>',
+        // O "Só produtos com foto" saiu quando o catálogo passou a ter foto em
+        // quase tudo: filtrava 5 de 338 cartões. O app.js já trata o campo
+        // ausente, então voltar com ele é só recolocar o label aqui.
         '                <button type="button" class="filtro-limpar" id="limparFiltros" hidden>Limpar filtros</button>',
         '            </div>',
         '            <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>',
@@ -288,6 +297,13 @@ function apresentacao(p, cat) {
         'Janeiro e da Baixada Fluminense.');
 
     const pacotes = p.embalagens || [];
+    // Com descrição do produto na página, embalagem e sabores ficam só na
+    // ficha logo abaixo: repetir em texto corrido era a mesma informação duas vezes.
+    if (p.descricao) {
+        frases.push('Preço e quantidade mínima saem pelo WhatsApp; a venda é só para pessoa ' +
+            'jurídica com CNPJ ativo.');
+        return frases.join(' ');
+    }
     if (pacotes.length === 1) {
         frases.push('A embalagem é de ' + pacotes[0] + '.');
     } else if (pacotes.length > 1) {
@@ -336,9 +352,19 @@ function paginaProduto(p, tpl) {
         embal ? 'Disponível em ' + embal + '.' : '',
         'Pedido pelo WhatsApp, venda apenas para CNPJ.',
     ].filter(Boolean).join(' ');
-    const descricao = p.nome + ' ' + fechoComEmbalagem;
+    const descricao = p.descricao
+        ? p.descricao + ' ' + fechoComEmbalagem.replace(/^(da [^.]*? )?no atacado/, 'No atacado')
+        : p.nome + ' ' + fechoComEmbalagem;
     let descricaoCurta;
-    if (descricao.length <= 158) descricaoCurta = descricao;
+    if (p.descricao) {
+        // A descrição do produto já diz o que ele é; o fecho só precisa do
+        // filtro de público. Nunca corta o "CNPJ" do final.
+        const fechos = [' Atacado para comércios do RJ, só para CNPJ.', ' Venda só para CNPJ.'];
+        const cabe = fechos.find(f => (p.descricao + f).length <= 158);
+        descricaoCurta = cabe
+            ? p.descricao + cabe
+            : cortar(p.descricao, 158 - fechos[1].length) + fechos[1];
+    } else if (descricao.length <= 158) descricaoCurta = descricao;
     else if ((p.nome + ' ' + fecho).length <= 158) descricaoCurta = p.nome + ' ' + fecho;
     else descricaoCurta = cortar(p.nome, 158 - fecho.length - 1) + ' ' + fecho;
 
@@ -431,6 +457,9 @@ function paginaProduto(p, tpl) {
         .replace(/\{\{CABECALHO\}\}/g, montarCabecalho('../', 'loja'))
         .replace(/\{\{RODAPE\}\}/g, indentar(montarRodape('../'), 4))
         // função no lugar de string: nome de produto com $ viraria $& na saída
+        .replace(/\{\{DESCRICAO_PRODUTO\}\}/g, () => p.descricao
+            ? '<p class="produto-descricao">' + esc(p.descricao) + '</p>'
+            : '')
         .replace(/\{\{APRESENTACAO\}\}/g, () => esc(apresentacao(p, cat)))
         .replace(/\{\{RELACIONADOS\}\}/g, () => blocoRelacionados(p, cat));
 }

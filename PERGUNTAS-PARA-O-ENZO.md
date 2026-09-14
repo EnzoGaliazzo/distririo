@@ -85,13 +85,26 @@ Estas travam o FAQ, que é a tarefa P0 nº 3.
 
 ## Catálogo
 
-11. **As fotos dos 125 produtos sem imagem.** Segue travado. O CSV
-    `produtos-sem-foto.csv` (na pasta acima do repositório) tem a lista por
-    marca. Por qual caminho: pedir ao fornecedor, press kit oficial, você
-    manda o que já tem, ou fotografa?
+11. **As fotos dos 125 produtos sem imagem.**
+    → Resposta (14/09): pode pegar do site da própria marca, é distribuidor.
+    Resolvido: 82 eram cadastro duplicado (nome da planilha x nome do catálogo
+    da marca) e foram unificados, com a URL antiga redirecionando; 6 mais
+    apareceram na conferência; 34 ganharam foto da loja oficial. Sobram 5, e
+    nenhum por falta de procura:
+    - **Fitas de Clareamento Dental Roxa (5, 7 e 12 aplicações)** — ver 11a.
+    - **Gooday Snack Barbecue** — saiu da loja da Mix Nutri e dos varejistas.
+      Ainda vendem? Se saiu de linha, melhor tirar do catálogo.
+    - **Whey Sachê Chocolate Belga Nutrilatina** — a Nutrilatina não publica
+      mais esse display. Mesma pergunta.
+
+11a. **Fitas de Clareamento Dental Roxa.** O nome é idêntico ao da Oi White
+    nas farmácias, e a Resolução Anvisa 976/2026 (16/03/2026) mandou recolher
+    e proibiu comercialização, distribuição e propaganda das fitas Oiwhite. Na
+    planilha elas vieram sem marca e o site as colocou em Abelha Rainha. De
+    qual fabricante são? Se forem Oi White, o recomendado é tirar do site.
     → Resposta:
 
-12. **Preço e pedido mínimo por produto.** As 426 páginas dizem "sob consulta".
+12. **Preço e pedido mínimo por produto.** As páginas de produto dizem "sob consulta".
     Quer publicar faixa de preço, quantidade por caixa, ou manter como está?
     → Resposta:
 
