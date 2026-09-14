@@ -1,7 +1,7 @@
 {
   "_leiame": "Fonte única do catálogo. Editar aqui e rodar \"node tools/build.js\" para regenerar loja.html, as páginas de produto, o índice de busca e o sitemap. Não editar o catálogo direto no HTML.",
-  "atualizado": "2026-09-08",
-  "total": 426,
+  "atualizado": "2026-09-14",
+  "total": 344,
   "categorias": [
     {
       "id": "mdz-trident",
@@ -157,25 +157,25 @@
       "id": "banana-brasil",
       "titulo": "Banana Brasil",
       "marca": "Banana Brasil",
-      "total": 89
+      "total": 61
     },
     {
       "id": "lauton",
       "titulo": "Lauton",
       "marca": "Lauton",
-      "total": 56
+      "total": 55
     },
     {
       "id": "abelha-rainha",
       "titulo": "Abelha Rainha",
       "marca": "Abelha Rainha",
-      "total": 52
+      "total": 38
     },
     {
       "id": "apisvida",
       "titulo": "Apisvida",
       "marca": "Apisvida",
-      "total": 41
+      "total": 29
     },
     {
       "id": "farma-barras",
@@ -184,22 +184,16 @@
       "total": 12
     },
     {
-      "id": "farma-vitaminas",
-      "titulo": "Vitaminas e minerais",
-      "marca": "",
-      "total": 11
-    },
-    {
       "id": "farma-fitoterapicos",
       "titulo": "Fitoterápicos e naturais",
       "marca": "",
-      "total": 9
+      "total": 3
     },
     {
       "id": "farma-suplementos",
       "titulo": "Suplementos",
       "marca": "",
-      "total": 22
+      "total": 12
     }
   ],
   "produtos": [
@@ -1498,7 +1492,10 @@
       "marca": "Banana Brasil",
       "linha": "Supino",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg",
-      "keywords": "supino barra de banana com cobertura chocolate ao leite brasil"
+      "keywords": "supino barra de banana com cobertura chocolate ao leite brasil orig 24g 20x24g farma",
+      "embalagens": [
+        "24 g"
+      ]
     },
     {
       "id": "supino-barra-de-banana-com-cobertura-de-chocolate-branco",
@@ -1507,7 +1504,10 @@
       "marca": "Banana Brasil",
       "linha": "Supino",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-com-cobertura-de-chocolate-branco.jpg",
-      "keywords": "supino barra de banana com cobertura chocolate branco brasil"
+      "keywords": "supino barra de banana com cobertura chocolate branco brasil original 24g 20x24g farma",
+      "embalagens": [
+        "24 g"
+      ]
     },
     {
       "id": "supino-zero-barra-de-banana-com-cobertura-de-chocolate-ao-le",
@@ -1516,7 +1516,10 @@
       "marca": "Banana Brasil",
       "linha": "Supino",
       "img": "assets/produtos/banana-brasil/supino__supino-zero-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg",
-      "keywords": "supino zero barra de banana com cobertura chocolate ao leite brasil"
+      "keywords": "supino zero barra de banana com cobertura chocolate ao leite brasil 24g 20x24g farma",
+      "embalagens": [
+        "24 g"
+      ]
     },
     {
       "id": "supino-zero-barra-de-banana-com-cobertura-de-chocolate-branc",
@@ -1525,61 +1528,82 @@
       "marca": "Banana Brasil",
       "linha": "Supino",
       "img": "assets/produtos/banana-brasil/supino__supino-zero-barra-de-banana-com-cobertura-de-chocolate-branco.jpg",
-      "keywords": "supino zero barra de banana com cobertura chocolate branco brasil"
+      "keywords": "supino zero barra de banana com cobertura chocolate branco brasil 24g 20x24g farma",
+      "embalagens": [
+        "24 g"
+      ]
     },
     {
       "id": "supino-barra-de-banana-e-ameixa",
-      "nome": "Supino - Barra de Banana e Ameixa",
+      "nome": "Supino Zero - Barra de Banana e Ameixa",
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-ameixa.jpg",
-      "keywords": "supino barra de banana e ameixa brasil"
+      "keywords": "supino barra de banana e ameixa brasil zero 24g 20x24g farma",
+      "embalagens": [
+        "24 g"
+      ]
     },
     {
       "id": "supino-barra-de-banana-nozes-e-damasco",
-      "nome": "Supino - Barra de Banana, Nozes e Damasco",
+      "nome": "Supino Zero - Barra de Banana, Nozes e Damasco",
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-nozes-e-damasco.jpg",
-      "keywords": "supino barra de banana nozes e damasco brasil"
+      "keywords": "supino barra de banana nozes e damasco brasil zero damasco24g 20x24g farma",
+      "embalagens": [
+        "24 g"
+      ]
     },
     {
       "id": "supino-barra-de-banana-maca-e-canela",
-      "nome": "Supino - Barra de Banana, Maçã e Canela",
+      "nome": "Supino Zero - Barra de Banana, Maçã e Canela",
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-maca-e-canela.jpg",
-      "keywords": "supino barra de banana maca e canela brasil"
+      "keywords": "supino barra de banana maca e canela brasil zero 24g 20x24g farma",
+      "embalagens": [
+        "24 g"
+      ]
     },
     {
       "id": "supino-barra-de-banana-e-acai",
-      "nome": "Supino - Barra de Banana e Açaí",
+      "nome": "Supino Zero - Barra de Banana e Açaí",
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-acai.jpg",
-      "keywords": "supino barra de banana e acai brasil"
+      "keywords": "supino barra de banana e acai brasil zero 24g 20x24g farma",
+      "embalagens": [
+        "24 g"
+      ]
     },
     {
       "id": "supino-barra-de-banana-e-morango",
-      "nome": "Supino - Barra de Banana e Morango",
+      "nome": "Supino Zero - Barra de Banana e Morango",
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-morango.jpg",
-      "keywords": "supino barra de banana e morango brasil"
+      "keywords": "supino barra de banana e morango brasil zero 24g 20x24g farma",
+      "embalagens": [
+        "24 g"
+      ]
     },
     {
       "id": "supino-barra-de-banana-e-abacaxi",
-      "nome": "Supino - Barra de Banana e Abacaxi",
+      "nome": "Supino Zero - Barra de Banana e Abacaxi",
       "categoria": "banana-brasil",
       "marca": "Banana Brasil",
       "linha": "Supino",
       "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-e-abacaxi.jpg",
-      "keywords": "supino barra de banana e abacaxi brasil"
+      "keywords": "supino barra de banana e abacaxi brasil zero 24g 20x24g farma",
+      "embalagens": [
+        "24 g"
+      ]
     },
     {
       "id": "nuts-barra-de-castanhas-amendoim-e-abacaxi",
@@ -1588,7 +1612,10 @@
       "marca": "Banana Brasil",
       "linha": "Nuts",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-abacaxi.jpg",
-      "keywords": "nuts barra de castanhas amendoim e abacaxi banana brasil"
+      "keywords": "nuts barra de castanhas amendoim e abacaxi banana brasil 25g 12x25g farma",
+      "embalagens": [
+        "25 g"
+      ]
     },
     {
       "id": "nuts-barra-de-castanhas-amendoim-e-frutas-vermelhas",
@@ -1597,7 +1624,10 @@
       "marca": "Banana Brasil",
       "linha": "Nuts",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-frutas-vermelhas.jpg",
-      "keywords": "nuts barra de castanhas amendoim e frutas vermelhas banana brasil"
+      "keywords": "nuts barra de castanhas amendoim e frutas vermelhas banana brasil 25g 12x25g farma",
+      "embalagens": [
+        "25 g"
+      ]
     },
     {
       "id": "nuts-barra-de-castanhas-amendoim-banana-e-canela",
@@ -1606,7 +1636,10 @@
       "marca": "Banana Brasil",
       "linha": "Nuts",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-banana-e-canela.jpg",
-      "keywords": "nuts barra de castanhas amendoim banana e canela brasil"
+      "keywords": "nuts barra de castanhas amendoim banana e canela brasil 25g 12x25g farma",
+      "embalagens": [
+        "25 g"
+      ]
     },
     {
       "id": "nuts-barra-de-castanhas-amendoim-e-sementes",
@@ -1615,7 +1648,10 @@
       "marca": "Banana Brasil",
       "linha": "Nuts",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-sementes.jpg",
-      "keywords": "nuts barra de castanhas amendoim e sementes banana brasil"
+      "keywords": "nuts barra de castanhas amendoim e sementes banana brasil 25g 12x25g farma",
+      "embalagens": [
+        "25 g"
+      ]
     },
     {
       "id": "nuts-barra-de-castanhas-amendoim-e-frutas",
@@ -1624,7 +1660,10 @@
       "marca": "Banana Brasil",
       "linha": "Nuts",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-frutas.jpg",
-      "keywords": "nuts barra de castanhas amendoim e frutas banana brasil"
+      "keywords": "nuts barra de castanhas amendoim e frutas banana brasil 25g 12x25g farma",
+      "embalagens": [
+        "25 g"
+      ]
     },
     {
       "id": "nuts-barra-de-castanhas-e-amendoim-com-cobertura-de-chocolat",
@@ -1633,7 +1672,10 @@
       "marca": "Banana Brasil",
       "linha": "Nuts",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-e-amendoim-com-cobertura-de-chocolate.jpg",
-      "keywords": "nuts barra de castanhas e amendoim com cobertura chocolate banana brasil"
+      "keywords": "nuts barra de castanhas e amendoim com cobertura chocolate banana brasil 25g 12x25g farma",
+      "embalagens": [
+        "25 g"
+      ]
     },
     {
       "id": "nuts-barra-de-castanhas-amendoim-e-coco-com-cobertura-de-cho",
@@ -1642,7 +1684,10 @@
       "marca": "Banana Brasil",
       "linha": "Nuts",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-amendoim-e-coco-com-cobertura-de-chocolate.jpg",
-      "keywords": "nuts barra de castanhas amendoim e coco com cobertura chocolate banana brasil"
+      "keywords": "nuts barra de castanhas amendoim e coco com cobertura chocolate banana brasil 25g 12x25g farma",
+      "embalagens": [
+        "25 g"
+      ]
     },
     {
       "id": "nuts-barra-de-castanhas-e-amendoim-com-cobertura-de-morango",
@@ -1651,7 +1696,10 @@
       "marca": "Banana Brasil",
       "linha": "Nuts",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-e-amendoim-com-cobertura-de-morango.jpg",
-      "keywords": "nuts barra de castanhas e amendoim com cobertura morango banana brasil"
+      "keywords": "nuts barra de castanhas e amendoim com cobertura morango banana brasil 25g 12x25g farma",
+      "embalagens": [
+        "25 g"
+      ]
     },
     {
       "id": "nuts-barra-de-castanhas-e-pasta-de-amendoim-com-cobertura-de",
@@ -1660,7 +1708,10 @@
       "marca": "Banana Brasil",
       "linha": "Nuts",
       "img": "assets/produtos/banana-brasil/nuts__nuts-barra-de-castanhas-e-pasta-de-amendoim-com-cobertura-de-chocolate.jpg",
-      "keywords": "nuts barra de castanhas e pasta amendoim com cobertura chocolate banana brasil"
+      "keywords": "nuts barra de castanhas e pasta amendoim com cobertura chocolate banana brasil 25g 12x25g farma",
+      "embalagens": [
+        "25 g"
+      ]
     },
     {
       "id": "pe-de-moleque-barra-crocante-de-amendoim-tradicional",
@@ -1669,7 +1720,10 @@
       "marca": "Banana Brasil",
       "linha": "Pé de Moleque",
       "img": "assets/produtos/banana-brasil/pe-de-moleque__pe-de-moleque-barra-crocante-de-amendoim-tradicional.jpg",
-      "keywords": "pe de moleque barra crocante amendoim tradicional banana brasil"
+      "keywords": "pe de moleque barra crocante amendoim tradicional banana brasil 20g 16x20g farma",
+      "embalagens": [
+        "20 g"
+      ]
     },
     {
       "id": "pe-de-moleque-barra-crocante-de-amendoim-caramelo-salgado",
@@ -1678,7 +1732,10 @@
       "marca": "Banana Brasil",
       "linha": "Pé de Moleque",
       "img": "assets/produtos/banana-brasil/pe-de-moleque__pe-de-moleque-barra-crocante-de-amendoim-caramelo-salgado.jpg",
-      "keywords": "pe de moleque barra crocante amendoim caramelo salgado banana brasil"
+      "keywords": "pe de moleque barra crocante amendoim caramelo salgado banana brasil 20g 16x20g farma",
+      "embalagens": [
+        "20 g"
+      ]
     },
     {
       "id": "protein-napolitano",
@@ -1711,7 +1768,10 @@
       "marca": "Banana Brasil",
       "linha": "Protein+",
       "img": "assets/produtos/banana-brasil/protein__protein-cookies-cream.jpg",
-      "keywords": "protein cookies cream banana brasil"
+      "keywords": "protein cookies cream banana brasil barra n 50g 9x50g farma",
+      "embalagens": [
+        "50 g"
+      ]
     },
     {
       "id": "protein-banoffee",
@@ -1732,7 +1792,10 @@
       "marca": "Banana Brasil",
       "linha": "Protein+",
       "img": "assets/produtos/banana-brasil/protein__protein-vegano-pasta-de-amendoim-e-caramelo-salgado.jpg",
-      "keywords": "protein vegano pasta de amendoim e caramelo salgado banana brasil"
+      "keywords": "protein vegano pasta de amendoim e caramelo salgado banana brasil barra 50g 9x50g farma",
+      "embalagens": [
+        "50 g"
+      ]
     },
     {
       "id": "supino-protein-baunilha-com-crispies",
@@ -1750,7 +1813,10 @@
       "marca": "Banana Brasil",
       "linha": "Supino Protein",
       "img": "assets/produtos/banana-brasil/supino-protein__supino-protein-coco.jpg",
-      "keywords": "supino protein coco banana brasil"
+      "keywords": "supino protein coco banana brasil c choc branco 30g 12x30g farma",
+      "embalagens": [
+        "30 g"
+      ]
     },
     {
       "id": "supino-protein-cappuccino",
@@ -1906,7 +1972,10 @@
       "marca": "Banana Brasil",
       "linha": "Kids",
       "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg",
-      "keywords": "banana brasil kids barra de com cobertura chocolate ao leite"
+      "keywords": "banana brasil kids barra de com cobertura chocolate ao leite frutas choc 22g 20x22g farma",
+      "embalagens": [
+        "22 g"
+      ]
     },
     {
       "id": "banana-brasil-kids-barra-de-banana-com-cobertura-de-chocolat-2",
@@ -1915,7 +1984,10 @@
       "marca": "Banana Brasil",
       "linha": "Kids",
       "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-com-cobertura-de-chocolate-branco.jpg",
-      "keywords": "banana brasil kids barra de com cobertura chocolate branco"
+      "keywords": "banana brasil kids barra de com cobertura chocolate branco frutas choc 22g 20x22g farma",
+      "embalagens": [
+        "22 g"
+      ]
     },
     {
       "id": "banana-brasil-kids-barra-de-banana-e-uva-com-cobertura-de-uv",
@@ -1924,7 +1996,10 @@
       "marca": "Banana Brasil",
       "linha": "Kids",
       "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-e-uva-com-cobertura-de-uva.jpg",
-      "keywords": "banana brasil kids barra de e uva com cobertura"
+      "keywords": "banana brasil kids barra de e uva com cobertura frutas 22g 20x22g farma",
+      "embalagens": [
+        "22 g"
+      ]
     },
     {
       "id": "banana-brasil-kids-barra-de-banana-e-morango-com-cobertura-d",
@@ -1933,7 +2008,10 @@
       "marca": "Banana Brasil",
       "linha": "Kids",
       "img": "assets/produtos/banana-brasil/kids__banana-brasil-kids-barra-de-banana-e-morango-com-cobertura-de-morango.jpg",
-      "keywords": "banana brasil kids barra de e morango com cobertura"
+      "keywords": "banana brasil kids barra de e morango com cobertura frutas 22g 20x22g farma",
+      "embalagens": [
+        "22 g"
+      ]
     },
     {
       "id": "frutalala-barra-de-frutas-maca-e-morango",
@@ -2017,96 +2095,6 @@
       "keywords": "proteya barra de proteina iogurte morango kids banana brasil"
     },
     {
-      "id": "barra-supino-zero-nozes-e-damasco",
-      "nome": "Barra Supino Zero Nozes e Damasco",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "24 g"
-      ],
-      "keywords": "barra supino zero nozes e damasco24g 20x24g farma"
-    },
-    {
-      "id": "barra-supino-zero-banana-e-ameixa",
-      "nome": "Barra Supino Zero Banana e Ameixa",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "24 g"
-      ],
-      "keywords": "barra supino zero banana e ameixa 24g 20x24g farma"
-    },
-    {
-      "id": "barra-supino-zero-banana-ao-leite",
-      "nome": "Barra Supino Zero Banana ao Leite",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "24 g"
-      ],
-      "keywords": "barra supino zero banana ao leite 24g 20x24g farma"
-    },
-    {
-      "id": "barra-supino-zero-banana-e-acai",
-      "nome": "Barra Supino Zero Banana e Açaí",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "24 g"
-      ],
-      "keywords": "barra supino zero banana e acai 24g 20x24g farma"
-    },
-    {
-      "id": "barra-nuts-e-chocolate",
-      "nome": "Barra Nuts e Chocolate",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "25 g"
-      ],
-      "keywords": "barra nuts e chocolate 25g 12x25g farma"
-    },
-    {
-      "id": "barra-supino-zero-banana-branco",
-      "nome": "Barra Supino Zero Banana Branco",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "24 g"
-      ],
-      "keywords": "barra supino zero banana branco 24g 20x24g farma"
-    },
-    {
-      "id": "barra-supino-zero-banana-maca-canela",
-      "nome": "Barra Supino Zero Banana Maçã Canela",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "24 g"
-      ],
-      "keywords": "barra supino zero banana maca canela 24g 20x24g farma"
-    },
-    {
-      "id": "barra-supino-original-banana-ao-leite",
-      "nome": "Barra Supino Original Banana ao Leite",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "24 g"
-      ],
-      "keywords": "barra supino orig banana ao leite 24g 20x24g farma"
-    },
-    {
-      "id": "barra-nuts-e-sementes",
-      "nome": "Barra Nuts e Sementes",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "25 g"
-      ],
-      "keywords": "barra nuts e sementes 25g 12x25g farma"
-    },
-    {
       "id": "supino-protein-morango",
       "nome": "Supino Protein Morango",
       "categoria": "banana-brasil",
@@ -2115,66 +2103,6 @@
         "30 g"
       ],
       "keywords": "supino protein morango 30g 12x30g farma"
-    },
-    {
-      "id": "barra-supino-zero-banana-e-abacaxi",
-      "nome": "Barra Supino Zero Banana e Abacaxi",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "24 g"
-      ],
-      "keywords": "barra supino zero banana e abacaxi 24g 20x24g farma"
-    },
-    {
-      "id": "barra-nuts-frutas",
-      "nome": "Barra Nuts Frutas",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "25 g"
-      ],
-      "keywords": "barra nuts frutas 25g 12x25g farma"
-    },
-    {
-      "id": "barra-nuts-e-morango",
-      "nome": "Barra Nuts e Morango",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "25 g"
-      ],
-      "keywords": "barra nuts e morango 25g 12x25g farma"
-    },
-    {
-      "id": "barra-nuts-banana-e-canela",
-      "nome": "Barra Nuts Banana e Canela",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "25 g"
-      ],
-      "keywords": "barra nuts banana e canela 25g 12x25g farma"
-    },
-    {
-      "id": "barra-de-frutas-kids-chocolate-branco",
-      "nome": "Barra de Frutas Kids Chocolate Branco",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "22 g"
-      ],
-      "keywords": "barra de frutas kids choc branco 22g 20x22g farma"
-    },
-    {
-      "id": "barra-supino-zero-banana-e-morango",
-      "nome": "Barra Supino Zero Banana e Morango",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "24 g"
-      ],
-      "keywords": "barra supino zero banana e morango 24g 20x24g farma"
     },
     {
       "id": "supino-protein-cookies",
@@ -2187,46 +2115,6 @@
       "keywords": "supino protein cookies 30g 12x30g farma"
     },
     {
-      "id": "barra-protein-cookies-n-cream",
-      "nome": "Barra Protein + Cookies N' Cream",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "50 g"
-      ],
-      "keywords": "barra protein cookies n cream 50g 9x50g farma"
-    },
-    {
-      "id": "barra-de-frutas-kids-morango",
-      "nome": "Barra de Frutas Kids Morango",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "22 g"
-      ],
-      "keywords": "barra de frutas kids morango 22g 20x22g farma"
-    },
-    {
-      "id": "barra-de-frutas-kids-chocolate-ao-leite",
-      "nome": "Barra de Frutas Kids Chocolate ao Leite",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "22 g"
-      ],
-      "keywords": "barra de frutas kids choc ao leite 22g 20x22g farma"
-    },
-    {
-      "id": "supino-protein-coco-com-chocolate-branco",
-      "nome": "Supino Protein Coco com Chocolate Branco",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "30 g"
-      ],
-      "keywords": "supino protein coco c choc branco 30g 12x30g farma"
-    },
-    {
       "id": "barra-mini-pouch-nuts-meio-amargo",
       "nome": "Barra Mini Pouch Nuts Meio Amargo",
       "categoria": "banana-brasil",
@@ -2235,36 +2123,6 @@
         "60 g"
       ],
       "keywords": "barra mini pouch nuts meio amargo 60g farma"
-    },
-    {
-      "id": "barra-de-frutas-kids-uva",
-      "nome": "Barra de Frutas Kids Uva",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "22 g"
-      ],
-      "keywords": "barra de frutas kids uva 22g 20x22g farma"
-    },
-    {
-      "id": "barra-protein-caramelo-salgado",
-      "nome": "Barra Protein + Caramelo Salgado",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "50 g"
-      ],
-      "keywords": "barra protein caramelo salgado 50g 9x50g farma"
-    },
-    {
-      "id": "barra-supino-original-banana-branco",
-      "nome": "Barra Supino Original Banana Branco",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "24 g"
-      ],
-      "keywords": "barra supino original banana branco 24g 20x24g farma"
     },
     {
       "id": "barra-mini-pouch-nuts-ao-leite",
@@ -2277,66 +2135,6 @@
       "keywords": "barra mini pouch nuts ao leite 60g farma"
     },
     {
-      "id": "barra-nuts-e-abacaxi",
-      "nome": "Barra Nuts e Abacaxi",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "25 g"
-      ],
-      "keywords": "barra nuts e abacaxi 25g 12x25g farma"
-    },
-    {
-      "id": "barra-nuts-e-frutas-vermelhas",
-      "nome": "Barra Nuts e Frutas Vermelhas",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "25 g"
-      ],
-      "keywords": "barra nuts e frutas vermelhas 25g 12x25g farma"
-    },
-    {
-      "id": "barra-nuts-e-pasta-de-amendoim",
-      "nome": "Barra Nuts e Pasta de Amendoim",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "25 g"
-      ],
-      "keywords": "barra nuts e pasta de amendoim 25g 12x25g farma"
-    },
-    {
-      "id": "barra-pe-de-moleque-caramelo-salgado",
-      "nome": "Barra Pe de Moleque Caramelo Salgado",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "20 g"
-      ],
-      "keywords": "barra pe de moleque caramelo salgado 20g 16x20g farma"
-    },
-    {
-      "id": "barra-nuts-coco-e-chocolate",
-      "nome": "Barra Nuts Coco e Chocolate",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "25 g"
-      ],
-      "keywords": "barra nuts coco e chocolate 25g 12x25g farma"
-    },
-    {
-      "id": "barra-pe-de-moleque",
-      "nome": "Barra Pe de Moleque",
-      "categoria": "banana-brasil",
-      "marca": "Banana Brasil",
-      "embalagens": [
-        "20 g"
-      ],
-      "keywords": "barra pe de moleque 20g 16x20g farma"
-    },
-    {
       "id": "b-proteica-pistache-com-chocolate-branco",
       "nome": "B. Proteica Pistache com Chocolate Branco",
       "categoria": "banana-brasil",
@@ -2345,15 +2143,6 @@
         "70 g"
       ],
       "keywords": "b proteica pistache c choco branco 70g 9unx70g farma"
-    },
-    {
-      "id": "cafeina-performance",
-      "nome": "Cafeína Performance",
-      "categoria": "lauton",
-      "marca": "Lauton",
-      "linha": "Performance",
-      "img": "assets/produtos/lauton/performance__cafeina-performance.jpg",
-      "keywords": "cafeina performance lauton"
     },
     {
       "id": "powerdrol",
@@ -2371,7 +2160,10 @@
       "marca": "Lauton",
       "linha": "Performance",
       "img": "assets/produtos/lauton/performance__l-arginina-plus.jpg",
-      "keywords": "l arginina plus performance lauton"
+      "keywords": "l arginina plus performance lauton 60x625mg farma",
+      "embalagens": [
+        "60 unidades de 625 mg"
+      ]
     },
     {
       "id": "curcuma-premium",
@@ -2380,7 +2172,13 @@
       "marca": "Lauton",
       "linha": "Performance",
       "img": "assets/produtos/lauton/saude-integral__curcuma-premium.jpg",
-      "keywords": "curcuma premium performance lauton"
+      "keywords": "curcuma premium performance lauton 9172 curcumina 60x500mg farma",
+      "embalagens": [
+        "60 unidades de 500 mg"
+      ],
+      "skus": [
+        "9172"
+      ]
     },
     {
       "id": "colageno-tipo-ii",
@@ -2389,7 +2187,13 @@
       "marca": "Lauton",
       "linha": "Performance",
       "img": "assets/produtos/lauton/performance__colageno-tipo-ii.jpg",
-      "keywords": "colageno tipo ii performance lauton"
+      "keywords": "colageno tipo ii performance lauton 6553 moviflex 2 60x650mg farma",
+      "embalagens": [
+        "60 unidades de 650 mg"
+      ],
+      "skus": [
+        "6553"
+      ]
     },
     {
       "id": "feno-grego-premium",
@@ -2407,7 +2211,13 @@
       "marca": "Lauton",
       "linha": "Performance",
       "img": "assets/produtos/lauton/performance__maca-peruana-premium.jpg",
-      "keywords": "maca peruana premium performance lauton"
+      "keywords": "maca peruana premium performance lauton 1377 trimaca em po 100g farma",
+      "embalagens": [
+        "100 g"
+      ],
+      "skus": [
+        "1377"
+      ]
     },
     {
       "id": "extrato-de-laranja-moro-premium",
@@ -2416,16 +2226,28 @@
       "marca": "Lauton",
       "linha": "Performance",
       "img": "assets/produtos/lauton/performance__extrato-de-laranja-moro-premium.jpg",
-      "keywords": "extrato de laranja moro premium performance lauton"
+      "keywords": "extrato de laranja moro premium performance lauton 0776 60x500mg farma",
+      "embalagens": [
+        "60 unidades de 500 mg"
+      ],
+      "skus": [
+        "0776"
+      ]
     },
     {
       "id": "multi-vitaminainico-hemovital-a-z",
-      "nome": "Multi Vitaminaínico Hemovital A-Z",
+      "nome": "Multivitamínico Hemovital A-Z",
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance",
       "img": "assets/produtos/lauton/performance__multi-vitaminico-hemovital-a-z.jpg",
-      "keywords": "multi vitaminico hemovital a z performance lauton"
+      "keywords": "multi vitaminico hemovital a z performance lauton 6522 60x750mg farma",
+      "embalagens": [
+        "60 unidades de 750 mg"
+      ],
+      "skus": [
+        "6522"
+      ]
     },
     {
       "id": "boro-decahidratado",
@@ -2589,7 +2411,13 @@
       "marca": "Lauton",
       "linha": "Mente e bem estar",
       "img": "assets/produtos/lauton/mente-e-bem-estar__melatonina-liquida.jpg",
-      "keywords": "melatonina liquida mente e bem estar lauton"
+      "keywords": "melatonina liquida mente e bem estar lauton 0820 gotas sab maracuja 20ml 30ml farma",
+      "embalagens": [
+        "20 ml"
+      ],
+      "skus": [
+        "0820"
+      ]
     },
     {
       "id": "melatonina-premium",
@@ -2598,7 +2426,13 @@
       "marca": "Lauton",
       "linha": "Mente e bem estar",
       "img": "assets/produtos/lauton/mente-e-bem-estar__melatonina-premium.jpg",
-      "keywords": "melatonina premium mente e bem estar lauton"
+      "keywords": "melatonina premium mente e bem estar lauton 9158 120x500mg farma",
+      "embalagens": [
+        "120 unidades de 500 mg"
+      ],
+      "skus": [
+        "9158"
+      ]
     },
     {
       "id": "amora-miura-amorine",
@@ -2652,7 +2486,13 @@
       "marca": "Lauton",
       "linha": "Mente e bem estar",
       "img": "assets/produtos/lauton/mente-e-bem-estar__omega-3-ultra.jpg",
-      "keywords": "omega 3 ultra mente e bem estar lauton"
+      "keywords": "omega 3 ultra mente e bem estar lauton 9554 50 20 60x1350mg farma",
+      "embalagens": [
+        "60 unidades de 1350 mg"
+      ],
+      "skus": [
+        "9554"
+      ]
     },
     {
       "id": "omega-3-pro",
@@ -2661,7 +2501,13 @@
       "marca": "Lauton",
       "linha": "Mente e bem estar",
       "img": "assets/produtos/lauton/mente-e-bem-estar__omega-3-pro.jpg",
-      "keywords": "omega 3 pro mente e bem estar lauton"
+      "keywords": "omega 3 pro mente e bem estar lauton 6720 18 12 60x1350mg farma",
+      "embalagens": [
+        "60 unidades de 1350 mg"
+      ],
+      "skus": [
+        "6720"
+      ]
     },
     {
       "id": "propolis-defense",
@@ -2680,12 +2526,15 @@
     },
     {
       "id": "vitamina-c-500",
-      "nome": "Vitamina C 500",
+      "nome": "Vitamina C 500 + Zinco Quelato",
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__vitamina-c-500.jpg",
-      "keywords": "vitamina c 500 saude integral lauton"
+      "keywords": "vitamina c 500 saude integral lauton zinco quelato 60x750mg farma",
+      "embalagens": [
+        "60 unidades de 750 mg"
+      ]
     },
     {
       "id": "vitamina-k2-mk7",
@@ -2694,7 +2543,13 @@
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__vitamina-k2-mk7.jpg",
-      "keywords": "vitamina k2 mk7 saude integral lauton"
+      "keywords": "vitamina k2 mk7 saude integral lauton 0479 vitam menaquinona 60x500mg farma",
+      "embalagens": [
+        "60 unidades de 500 mg"
+      ],
+      "skus": [
+        "0479"
+      ]
     },
     {
       "id": "msm-enxofre-organico",
@@ -2743,12 +2598,18 @@
     },
     {
       "id": "vitamina-d3-k2",
-      "nome": "Vitamina D3+K2",
+      "nome": "Vitamina D3 + K2 em Gotas",
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__vitamina-d3-k2.jpg",
-      "keywords": "vitamina d3 k2 saude integral lauton"
+      "keywords": "vitamina d3 k2 saude integral lauton 1773 em gotas 20ml farma",
+      "embalagens": [
+        "20 ml"
+      ],
+      "skus": [
+        "1773"
+      ]
     },
     {
       "id": "vitamina-d3-2-000-ui",
@@ -2757,7 +2618,13 @@
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__vitamina-d3-2-000-ui.jpg",
-      "keywords": "vitamina d3 2 000 ui saude integral lauton"
+      "keywords": "vitamina d3 2 000 ui saude integral lauton 6157 colecalciferol 60x500mg farma",
+      "embalagens": [
+        "60 unidades de 500 mg"
+      ],
+      "skus": [
+        "6157"
+      ]
     },
     {
       "id": "ferro-quelato-bisglicinato",
@@ -2781,7 +2648,13 @@
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__ora-pro-nobis.jpg",
-      "keywords": "ora pro nobis saude integral lauton"
+      "keywords": "ora pro nobis saude integral lauton 1391 sabor limao 150g farma",
+      "embalagens": [
+        "150 g"
+      ],
+      "skus": [
+        "1391"
+      ]
     },
     {
       "id": "metilfolax-600mcg",
@@ -2790,16 +2663,28 @@
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__metilfolax-600mcg.jpg",
-      "keywords": "metilfolax 600mcg saude integral lauton"
+      "keywords": "metilfolax 600mcg saude integral lauton 0721 metil folax 60x500mg farma",
+      "embalagens": [
+        "60 unidades de 500 mg"
+      ],
+      "skus": [
+        "0721"
+      ]
     },
     {
-      "id": "oleo-de-alho-cru",
-      "nome": "Óleo de Alho Cru",
+      "id": "oleo-de-alho-desodorizado",
+      "nome": "Óleo de Alho Desodorizado",
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__oleo-de-alho-cru.jpg",
-      "keywords": "oleo de alho cru saude integral lauton"
+      "keywords": "oleo de alho cru saude integral lauton 9424 desodorizado 60x500mg farma",
+      "embalagens": [
+        "60 unidades de 500 mg"
+      ],
+      "skus": [
+        "9424"
+      ]
     },
     {
       "id": "zinco-quelato-bisglicinato",
@@ -2823,7 +2708,13 @@
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__resveratrol.jpg",
-      "keywords": "resveratrol saude integral lauton"
+      "keywords": "resveratrol saude integral lauton 0806 trans 30x500mg farma",
+      "embalagens": [
+        "30 unidades de 500 mg"
+      ],
+      "skus": [
+        "0806"
+      ]
     },
     {
       "id": "beta-glucana-premium",
@@ -2832,7 +2723,13 @@
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__beta-glucana-premium.jpg",
-      "keywords": "beta glucana premium saude integral lauton"
+      "keywords": "beta glucana premium saude integral lauton 0790 30 caps 30x500mg farma",
+      "embalagens": [
+        "30 cápsulas de 500 mg"
+      ],
+      "skus": [
+        "0790"
+      ]
     },
     {
       "id": "magnesio-inositol",
@@ -2871,7 +2768,13 @@
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__cloreto-de-magnesio-p-a.jpg",
-      "keywords": "cloreto de magnesio p a saude integral lauton"
+      "keywords": "cloreto de magnesio p a saude integral lauton 6560 60x650mg farma",
+      "embalagens": [
+        "60 unidades de 650 mg"
+      ],
+      "skus": [
+        "6560"
+      ]
     },
     {
       "id": "vitamina-a",
@@ -2910,7 +2813,13 @@
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__vitamina-b12-liquida.jpg",
-      "keywords": "vitamina b12 liquida saude integral lauton"
+      "keywords": "vitamina b12 liquida saude integral lauton 1292 gotas sabor uva 20ml farma",
+      "embalagens": [
+        "20 ml"
+      ],
+      "skus": [
+        "1292"
+      ]
     },
     {
       "id": "nac-n-acetil-l-cisteina",
@@ -2934,7 +2843,13 @@
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__vitamina-d3-liquida.jpg",
-      "keywords": "vitamina d3 liquida saude integral lauton"
+      "keywords": "vitamina d3 liquida saude integral lauton 1780 20ml farma",
+      "embalagens": [
+        "20 ml"
+      ],
+      "skus": [
+        "1780"
+      ]
     },
     {
       "id": "quadrimag-quadri4tech",
@@ -2943,7 +2858,13 @@
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__quadrimag-quadri4tech.jpg",
-      "keywords": "quadrimag quadri4tech saude integral lauton"
+      "keywords": "quadrimag quadri4tech saude integral lauton 1728 4 60x700mg farma",
+      "embalagens": [
+        "60 unidades de 700 mg"
+      ],
+      "skus": [
+        "1728"
+      ]
     },
     {
       "id": "treonato-treotech",
@@ -2952,7 +2873,13 @@
       "marca": "Lauton",
       "linha": "Saúde integral",
       "img": "assets/produtos/lauton/saude-integral__treonato-treotech.jpg",
-      "keywords": "treonato treotech saude integral lauton"
+      "keywords": "treonato treotech saude integral lauton 1735 magn treonina 60x650mg farma",
+      "embalagens": [
+        "60 unidades de 650 mg"
+      ],
+      "skus": [
+        "1735"
+      ]
     },
     {
       "id": "fiberliv-7-fontes-de-fibra",
@@ -2961,7 +2888,13 @@
       "marca": "Lauton",
       "linha": "Performance series",
       "img": "assets/produtos/lauton/performance-series__fiberliv-7-fontes-de-fibra.jpg",
-      "keywords": "fiberliv 7 fontes de fibra performance series lauton"
+      "keywords": "fiberliv 7 fontes de fibra performance series lauton 0998 fibras 250g farma",
+      "embalagens": [
+        "250 g"
+      ],
+      "skus": [
+        "0998"
+      ]
     },
     {
       "id": "cafeina-caffeine-performance",
@@ -2970,7 +2903,13 @@
       "marca": "Lauton",
       "linha": "Performance series",
       "img": "assets/produtos/lauton/performance-series__cafeina-caffeine-performance.jpg",
-      "keywords": "cafeina caffeine performance series lauton"
+      "keywords": "cafeina caffeine performance series lauton 0813 60x500mg farma",
+      "embalagens": [
+        "60 unidades de 500 mg"
+      ],
+      "skus": [
+        "0813"
+      ]
     },
     {
       "id": "creatina-monohidratada",
@@ -2979,7 +2918,13 @@
       "marca": "Lauton",
       "linha": "Performance series / Creatina e Glutamina",
       "img": "assets/produtos/lauton/performance-series-creatina-e-glutamina__creatina-monohidratada.jpg",
-      "keywords": "creatina monohidratada performance series e glutamina lauton"
+      "keywords": "creatina monohidratada performance series e glutamina lauton 0882 300g farma",
+      "embalagens": [
+        "300 g"
+      ],
+      "skus": [
+        "0882"
+      ]
     },
     {
       "id": "glutamina-100-pura",
@@ -2992,12 +2937,15 @@
     },
     {
       "id": "kit-scudo-p",
-      "nome": "Kit Scudo P.",
+      "nome": "Kit Scudo Antipiolho - Arruda e Citronela",
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Antipiolhos",
       "img": "assets/produtos/abelha-rainha/lancamentos-antipiolhos__kit-scudo-p.jpg",
-      "keywords": "kit scudo p lancamentos antipiolhos abelha rainha"
+      "keywords": "kit scudo p lancamentos antipiolhos abelha rainha piolho arruda e citronela 437ml farma",
+      "embalagens": [
+        "437 ml"
+      ]
     },
     {
       "id": "body-splash-vanilla",
@@ -3081,7 +3029,10 @@
       "marca": "Abelha Rainha",
       "linha": "Hidratantes",
       "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-facial-e-corporal-para-pele-extrasseca.jpg",
-      "keywords": "hidratante facial e corporal para pele extrasseca hidratantes abelha rainha"
+      "keywords": "hidratante facial e corporal para pele extrasseca hidratantes abelha rainha hidra corp 60g farma",
+      "embalagens": [
+        "60 g"
+      ]
     },
     {
       "id": "hidratante-corporal-para-pele-extrasseca",
@@ -3090,7 +3041,10 @@
       "marca": "Abelha Rainha",
       "linha": "Hidratantes",
       "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-extrasseca.jpg",
-      "keywords": "hidratante corporal para pele extrasseca hidratantes abelha rainha"
+      "keywords": "hidratante corporal para pele extrasseca hidratantes abelha rainha corp 400ml farma",
+      "embalagens": [
+        "400 ml"
+      ]
     },
     {
       "id": "hidratante-corporal-para-pele-seca",
@@ -3099,7 +3053,10 @@
       "marca": "Abelha Rainha",
       "linha": "Hidratantes",
       "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-seca.jpg",
-      "keywords": "hidratante corporal para pele seca hidratantes abelha rainha"
+      "keywords": "hidratante corporal para pele seca hidratantes abelha rainha corp 400ml farma",
+      "embalagens": [
+        "400 ml"
+      ]
     },
     {
       "id": "hidratante-corporal-q10-e-vitamina-c",
@@ -3154,7 +3111,10 @@
       "marca": "Abelha Rainha",
       "linha": "Rosa Mosqueta",
       "img": "assets/produtos/abelha-rainha/rosa-mosqueta__creme-facial-clareador-de-rosa-mosqueta.jpg",
-      "keywords": "creme facial clareador de rosa mosqueta abelha rainha"
+      "keywords": "creme facial clareador de rosa mosqueta abelha rainha para marcas 50g farma",
+      "embalagens": [
+        "50 g"
+      ]
     },
     {
       "id": "creme-facial-preventivo-as-rugas-de-rosa-mosqueta",
@@ -3163,7 +3123,10 @@
       "marca": "Abelha Rainha",
       "linha": "Rosa Mosqueta",
       "img": "assets/produtos/abelha-rainha/rosa-mosqueta__creme-facial-preventivo-as-rugas-de-rosa-mosqueta.jpg",
-      "keywords": "creme facial preventivo as rugas de rosa mosqueta abelha rainha"
+      "keywords": "creme facial preventivo as rugas de rosa mosqueta abelha rainha 50g farma",
+      "embalagens": [
+        "50 g"
+      ]
     },
     {
       "id": "sabonete-facial-vitamina-c-e-acido-hialuronico",
@@ -3176,12 +3139,15 @@
     },
     {
       "id": "serum-facial-vitamina-c",
-      "nome": "Sérum Facial Vitamina C",
+      "nome": "Sérum Facial Vitamina C 20% Face e Olhos",
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Vitamina C",
       "img": "assets/produtos/abelha-rainha/vitamina-c__serum-facial-vitamina-c.jpg",
-      "keywords": "serum facial vitamina c abelha rainha"
+      "keywords": "serum facial vitamina c abelha rainha 20 face e olhos 30ml farma",
+      "embalagens": [
+        "30 ml"
+      ]
     },
     {
       "id": "protetor-solar-facial-vitamina-c",
@@ -3194,12 +3160,15 @@
     },
     {
       "id": "protetor-solar-facial-em-creme",
-      "nome": "Protetor Solar Facial em Creme",
+      "nome": "Protetor Solar Facial FPS 80 em Creme - sem Cor",
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Proteção Solar",
       "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-em-creme.jpg",
-      "keywords": "protetor solar facial em creme protecao abelha rainha"
+      "keywords": "protetor solar facial em creme protecao abelha rainha sol fps 80 sem cor 60g farma",
+      "embalagens": [
+        "60 g"
+      ]
     },
     {
       "id": "protetor-solar-corporal-em-spray",
@@ -3217,7 +3186,10 @@
       "marca": "Abelha Rainha",
       "linha": "Proteção Solar",
       "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-fps-80-cor-de-base-bege-natural.jpg",
-      "keywords": "protetor solar facial fps 80 cor de base bege natural protecao abelha rainha"
+      "keywords": "protetor solar facial fps 80 cor de base bege natural protecao abelha rainha sol nat 40g farma",
+      "embalagens": [
+        "40 g"
+      ]
     },
     {
       "id": "protetor-solar-facial-fps-80-cor-de-base-bege-medio",
@@ -3226,7 +3198,10 @@
       "marca": "Abelha Rainha",
       "linha": "Proteção Solar",
       "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-fps-80-cor-de-base-bege-medio.jpg",
-      "keywords": "protetor solar facial fps 80 cor de base bege medio protecao abelha rainha"
+      "keywords": "protetor solar facial fps 80 cor de base bege medio protecao abelha rainha sol med 40g farma",
+      "embalagens": [
+        "40 g"
+      ]
     },
     {
       "id": "gel-refrescante-pos-sol",
@@ -3244,7 +3219,10 @@
       "marca": "Abelha Rainha",
       "linha": "Acne",
       "img": "assets/produtos/abelha-rainha/acne__sabonete-facial-antibacteriano.jpg",
-      "keywords": "sabonete facial antibacteriano acne abelha rainha"
+      "keywords": "sabonete facial antibacteriano acne abelha rainha liquido 110ml farma",
+      "embalagens": [
+        "110 ml"
+      ]
     },
     {
       "id": "locao-tonica-adstringente",
@@ -3271,7 +3249,10 @@
       "marca": "Abelha Rainha",
       "linha": "Acne",
       "img": "assets/produtos/abelha-rainha/acne__bastao-secativo-para-espinhas.jpg",
-      "keywords": "bastao secativo para espinhas acne abelha rainha"
+      "keywords": "bastao secativo para espinhas acne abelha rainha 5g farma",
+      "embalagens": [
+        "5 g"
+      ]
     },
     {
       "id": "kit-antiacne",
@@ -3280,7 +3261,10 @@
       "marca": "Abelha Rainha",
       "linha": "Acne",
       "img": "assets/produtos/abelha-rainha/acne__kit-antiacne.jpg",
-      "keywords": "kit antiacne acne abelha rainha"
+      "keywords": "kit antiacne acne abelha rainha tratamento em casa 230ml 5g farma",
+      "embalagens": [
+        "5 g"
+      ]
     },
     {
       "id": "locao-para-afinar-os-pes-milagre-dos-pes",
@@ -3289,7 +3273,10 @@
       "marca": "Abelha Rainha",
       "linha": "Dermopés",
       "img": "assets/produtos/abelha-rainha/dermopes__locao-para-afinar-os-pes-milagre-dos-pes.jpg",
-      "keywords": "locao para afinar os pes milagre dos dermopes abelha rainha"
+      "keywords": "locao para afinar os pes milagre dos dermopes abelha rainha p 30ml farma",
+      "embalagens": [
+        "30 ml"
+      ]
     },
     {
       "id": "creme-ultra-hidratante-para-os-pes",
@@ -3328,16 +3315,6 @@
       "keywords": "gel esfoliante para os pes dermopes abelha rainha 100g farma"
     },
     {
-      "id": "hidratante-corporal-pele-extrasseca",
-      "nome": "Hidratante Corporal Pele Extrasseca",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "400 ml"
-      ],
-      "keywords": "hidratante corp pele extrasseca 400ml farma"
-    },
-    {
       "id": "fitas-de-clareamento-dental-roxa-5-aplicacoes",
       "nome": "Fitas de Clareamento Dental Roxa - 5 Aplicações",
       "categoria": "abelha-rainha",
@@ -3346,16 +3323,6 @@
         "5 g"
       ],
       "keywords": "fitas de clar dental roxa 5 aplicacoes 5g farma"
-    },
-    {
-      "id": "hidratante-corporal-pele-seca",
-      "nome": "Hidratante Corporal Pele Seca",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "400 ml"
-      ],
-      "keywords": "hidratante corp pele seca 400ml farma"
     },
     {
       "id": "fitas-de-clareamento-dental-roxa-7-aplicacoes",
@@ -3368,76 +3335,6 @@
       "keywords": "fitas de clar dental roxa 7 aplicacoes 2g farma"
     },
     {
-      "id": "protetor-sol-facial-fps-80-sem-cor",
-      "nome": "Protetor Sol Facial Fps 80 - sem Cor",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "60 g"
-      ],
-      "keywords": "protetor sol facial fps 80 sem cor 60g farma"
-    },
-    {
-      "id": "vitamina-c-20-serum-face-e-olhos",
-      "nome": "Vitamina C 20% Serum Face e Olhos",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "30 ml"
-      ],
-      "keywords": "vitamina c 20 serum face e olhos 30ml farma"
-    },
-    {
-      "id": "locao-para-afinar-os-pes",
-      "nome": "Loção Para Afinar Os Pés",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "30 ml"
-      ],
-      "keywords": "locao p afinar os pes 30ml farma"
-    },
-    {
-      "id": "kit-scudo-para-piolho-arruda-e-citronela",
-      "nome": "Kit Scudo Para Piolho - Arruda e Citronela",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "437 ml"
-      ],
-      "keywords": "kit scudo p piolho arruda e citronela 437ml farma"
-    },
-    {
-      "id": "creme-facial-clareador-para-marcas",
-      "nome": "Creme Facial Clareador Para Marcas",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "50 g"
-      ],
-      "keywords": "creme facial clareador para marcas 50g farma"
-    },
-    {
-      "id": "bastao-acne-secativo",
-      "nome": "Bastão Acne Secativo",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "5 g"
-      ],
-      "keywords": "bastao acne secativo 5g farma"
-    },
-    {
-      "id": "hidra-facial-e-corporal-pele-extrasseca",
-      "nome": "Hidra Facial e Corporal Pele Extrasseca",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "60 g"
-      ],
-      "keywords": "hidra facial e corp pele extrasseca 60g farma"
-    },
-    {
       "id": "fitas-de-clareamento-dental-roxa-12-aplicacoes",
       "nome": "Fitas de Clareamento Dental Roxa 12 Aplicações",
       "categoria": "abelha-rainha",
@@ -3446,56 +3343,6 @@
         "12 g"
       ],
       "keywords": "fitas de clar dental roxa 12 aplicacoes 12g farma"
-    },
-    {
-      "id": "creme-facial-preventivo-as-rugas",
-      "nome": "Creme Facial Preventivo As Rugas",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "50 g"
-      ],
-      "keywords": "creme facial preventivo as rugas 50g farma"
-    },
-    {
-      "id": "kit-acne-tratamento-em-casa-230-ml",
-      "nome": "Kit Acne Tratamento em Casa 230 ml /",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "5 g"
-      ],
-      "keywords": "kit acne tratamento em casa 230ml 5g farma"
-    },
-    {
-      "id": "protetor-sol-facial-fps-80-bege-medio",
-      "nome": "Protetor Sol Facial Fps 80 -bege Médio",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "40 g"
-      ],
-      "keywords": "protetor sol facial fps 80 bege med 40g farma"
-    },
-    {
-      "id": "protetor-sol-facial-fps-80-bege-natural",
-      "nome": "Protetor Sol Facial Fps 80 -bege Natural",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "40 g"
-      ],
-      "keywords": "protetor sol facial fps 80 bege nat 40g farma"
-    },
-    {
-      "id": "sabonete-acne-liquido-facial",
-      "nome": "Sabonete Acne Liquido Facial",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "110 ml"
-      ],
-      "keywords": "sabonete acne liquido facial 110ml farma"
     },
     {
       "id": "nanopropolis-propolis-verde",
@@ -3527,7 +3374,11 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/propolis__propoflex-ap60-extrato-de-propolis-verde.jpg",
-      "keywords": "propoflex ap60 extrato de propolis verde apisvida"
+      "keywords": "propoflex ap60 extrato de propolis verde apisvida ext prop 15 30ml farma",
+      "embalagens": [
+        "30 ml"
+      ],
+      "linha": ""
     },
     {
       "id": "propoflex-extrato-de-propolis-verde",
@@ -3559,7 +3410,12 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/energeticos__relampago-energetico.jpg",
-      "keywords": "relampago energetico apisvida"
+      "keywords": "relampago energetico apisvida 10ml display c 24u 240ml farma 48 480ml",
+      "embalagens": [
+        "Display com 24 unidades de 10 ml",
+        "Display com 48 unidades de 10 ml"
+      ],
+      "linha": ""
     },
     {
       "id": "protetor-labial-manteiga-de-cacau-com-propolis",
@@ -3567,7 +3423,13 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/cuidado-pessoal__protetor-labial-manteiga-de-cacau-com-propolis.jpg",
-      "keywords": "protetor labial manteiga de cacau com propolis apisvida"
+      "keywords": "protetor labial manteiga de cacau com propolis apisvida c 3 5g farma 12un 42g 50un 175g",
+      "embalagens": [
+        "Unidade de 3,5 g",
+        "Display com 12 unidades",
+        "Display com 50 unidades"
+      ],
+      "linha": ""
     },
     {
       "id": "mantex-manteiga-de-cacau-com-acido-hialuronico",
@@ -3583,7 +3445,11 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/propolis__spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-gengibre.jpg",
-      "keywords": "spray para garganta extrato de propolis mel menta malva e gengibre apisvida"
+      "keywords": "spray para garganta extrato de propolis mel menta malva e gengibre apisvida c 30ml farma",
+      "embalagens": [
+        "30 ml"
+      ],
+      "linha": ""
     },
     {
       "id": "spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-ro",
@@ -3591,7 +3457,11 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/propolis__spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-roma.jpg",
-      "keywords": "spray para garganta extrato de propolis mel menta malva e roma apisvida"
+      "keywords": "spray para garganta extrato de propolis mel menta malva e roma apisvida c 30ml farma",
+      "embalagens": [
+        "30 ml"
+      ],
+      "linha": ""
     },
     {
       "id": "propoflex-kids-spray-para-garganta-mel-malva-e-roma",
@@ -3607,7 +3477,11 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/balas-diet__balas-diet-halfresh-morango-com-nanopropolis.jpg",
-      "keywords": "balas diet halfresh morango com nanopropolis apisvida"
+      "keywords": "balas diet halfresh morango com nanopropolis apisvida sabor morango192g 192g farma",
+      "embalagens": [
+        "192 g"
+      ],
+      "linha": ""
     },
     {
       "id": "balas-diet-halfresh-mentol-com-nanopropolis",
@@ -3615,7 +3489,11 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/balas-diet__balas-diet-halfresh-mentol-com-nanopropolis.jpg",
-      "keywords": "balas diet halfresh mentol com nanopropolis apisvida"
+      "keywords": "balas diet halfresh mentol com nanopropolis apisvida sabor 192g farma",
+      "embalagens": [
+        "192 g"
+      ],
+      "linha": ""
     },
     {
       "id": "balas-diet-halfresh-gengibre-com-nanopropolis",
@@ -3623,7 +3501,11 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/balas-diet__balas-diet-halfresh-gengibre-com-nanopropolis.jpg",
-      "keywords": "balas diet halfresh gengibre com nanopropolis apisvida"
+      "keywords": "balas diet halfresh gengibre com nanopropolis apisvida sabor 192g farma",
+      "embalagens": [
+        "192 g"
+      ],
+      "linha": ""
     },
     {
       "id": "propoflex-extrato-aquoso-de-propolis",
@@ -3647,7 +3529,11 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "img": "assets/produtos/apisvida/apisvida__nanopropolis-extrato-de-propolis-vermelho.jpg",
-      "keywords": "nanopropolis extrato de propolis vermelho apisvida"
+      "keywords": "nanopropolis extrato de propolis vermelho apisvida ext vermelha 20ml farma",
+      "embalagens": [
+        "20 ml"
+      ],
+      "linha": ""
     },
     {
       "id": "propoflex-kids-xarope-mel-propolis",
@@ -3682,46 +3568,6 @@
       "keywords": "mel apisvida"
     },
     {
-      "id": "balas-diet-halfresh-sabor-gengibre",
-      "nome": "Balas Diet Halfresh Sabor Gengibre",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "192 g"
-      ],
-      "keywords": "balas diet halfresh sabor gengibre 192g farma"
-    },
-    {
-      "id": "spray-propolis-com-gengibre",
-      "nome": "Spray Própolis com Gengibre",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "30 ml"
-      ],
-      "keywords": "spray propolis c gengibre 30ml farma"
-    },
-    {
-      "id": "spray-propolis-com-menta-e-roma",
-      "nome": "Spray Própolis com Menta e Romã",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "30 ml"
-      ],
-      "keywords": "spray propolis c menta e roma 30ml farma"
-    },
-    {
-      "id": "propoflex-ap60-extrato-de-propolis-15",
-      "nome": "Propoflex Ap60-Extrato de Própolis 15%",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "30 ml"
-      ],
-      "keywords": "propoflex ap60 ext de prop 15 30ml farma"
-    },
-    {
       "id": "nanopropolis-extrato-propolis-verde",
       "nome": "Nanoprópolis Extrato Própolis Verde",
       "categoria": "apisvida",
@@ -3740,66 +3586,6 @@
         "35 ml"
       ],
       "keywords": "propoflex kids spray tutti frutti 35ml farma"
-    },
-    {
-      "id": "manteiga-de-cacau-com-propolis-12un",
-      "nome": "Manteiga de Cacau com Própolis 12UN",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "42 g"
-      ],
-      "keywords": "manteiga de cacau c propolis 12un 42g farma"
-    },
-    {
-      "id": "relampago-energetico-10-ml-display-com-24-unidades",
-      "nome": "Relâmpago Energético 10 ml display com 24 unidades",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "240 ml"
-      ],
-      "keywords": "relampago energetico 10ml display c 24u 240ml farma"
-    },
-    {
-      "id": "nanopropolis-extrato-propolis-vermelha",
-      "nome": "Nanoprópolis Extrato Própolis Vermelha",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "20 ml"
-      ],
-      "keywords": "nanopropolis ext propolis vermelha 20ml farma"
-    },
-    {
-      "id": "manteiga-de-cacau-com-propolis-50un",
-      "nome": "Manteiga de Cacau com Própolis 50UN",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "175 g"
-      ],
-      "keywords": "manteiga de cacau c propolis 50un 175g farma"
-    },
-    {
-      "id": "balas-diet-halfresh-sabor-mentol",
-      "nome": "Balas Diet Halfresh Sabor Mentol",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "192 g"
-      ],
-      "keywords": "balas diet halfresh sabor mentol 192g farma"
-    },
-    {
-      "id": "manteiga-de-cacau-com-propolis",
-      "nome": "Manteiga de Cacau com Própolis",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "3,5 g"
-      ],
-      "keywords": "manteiga de cacau c propolis 3 5g farma"
     },
     {
       "id": "mel-organico",
@@ -3822,16 +3608,6 @@
       "keywords": "mel puro bisnaga 250g apis vida farma"
     },
     {
-      "id": "balas-diet-halfresh-sabor-morango",
-      "nome": "Balas Diet Halfresh Sabor Morango",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "192 g"
-      ],
-      "keywords": "balas diet halfresh sabor morango192g 192g farma"
-    },
-    {
       "id": "extrato-de-propolis",
       "nome": "Extrato de Própolis",
       "categoria": "apisvida",
@@ -3843,16 +3619,6 @@
         "6324"
       ],
       "keywords": "6324 extrato de propolis 60x550mg farma"
-    },
-    {
-      "id": "relampago-energetico-10-ml-display-com-48-unidades",
-      "nome": "Relâmpago Energético 10 ml display com 48 unidades",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "embalagens": [
-        "480 ml"
-      ],
-      "keywords": "relampago energetico 10ml display c 48 480ml farma"
     },
     {
       "id": "mel-organico-sache",
@@ -3985,159 +3751,6 @@
       "keywords": "mix nutri snack barbecue 50g farma"
     },
     {
-      "id": "treonato-magnesio-treonina",
-      "nome": "Treonato Magnésio + Treonina",
-      "categoria": "farma-vitaminas",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 650 mg"
-      ],
-      "skus": [
-        "1735"
-      ],
-      "keywords": "1735 treonato magn treonina 60x650mg farma"
-    },
-    {
-      "id": "quadrimag-4",
-      "nome": "Quadrimag 4",
-      "categoria": "farma-vitaminas",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 700 mg"
-      ],
-      "skus": [
-        "1728"
-      ],
-      "keywords": "1728 quadrimag 4 60x700mg farma"
-    },
-    {
-      "id": "vitamina-k2-mk7-menaquinona",
-      "nome": "Vitamina K2 Mk7 Menaquinona",
-      "categoria": "farma-vitaminas",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 500 mg"
-      ],
-      "skus": [
-        "0479"
-      ],
-      "keywords": "0479 vitam k2 mk7 menaquinona 60x500mg farma"
-    },
-    {
-      "id": "vitamina-b12-gotas-sabor-uva",
-      "nome": "Vitamina B12 Gotas Sabor Uva",
-      "categoria": "farma-vitaminas",
-      "marca": "",
-      "embalagens": [
-        "20 ml"
-      ],
-      "skus": [
-        "1292"
-      ],
-      "keywords": "1292 vitamina b12 gotas sabor uva 20ml farma"
-    },
-    {
-      "id": "multi-vitaminico-hemovital",
-      "nome": "Multi Vitamínico Hemovital",
-      "categoria": "farma-vitaminas",
-      "marca": "Hemovital",
-      "embalagens": [
-        "60 unidades de 750 mg"
-      ],
-      "skus": [
-        "6522"
-      ],
-      "keywords": "6522 multi vitaminico hemovital 60x750mg farma"
-    },
-    {
-      "id": "cloreto-de-magnesio",
-      "nome": "Cloreto de Magnésio",
-      "categoria": "farma-vitaminas",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 650 mg"
-      ],
-      "skus": [
-        "6560"
-      ],
-      "keywords": "6560 cloreto de magnesio 60x650mg farma"
-    },
-    {
-      "id": "vitamina-c-zinco-quelato",
-      "nome": "Vitamina C + Zinco Quelato",
-      "categoria": "farma-vitaminas",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 750 mg"
-      ],
-      "keywords": "vitamina c zinco quelato 60x750mg farma"
-    },
-    {
-      "id": "vitamina-d3-k2-em-gotas",
-      "nome": "Vitamina D3 + K2 em Gotas",
-      "categoria": "farma-vitaminas",
-      "marca": "",
-      "embalagens": [
-        "20 ml"
-      ],
-      "skus": [
-        "1773"
-      ],
-      "keywords": "1773 vitamina d3 k2 em gotas 20ml farma"
-    },
-    {
-      "id": "vitamina-d3",
-      "nome": "Vitamina D3",
-      "categoria": "farma-vitaminas",
-      "marca": "",
-      "embalagens": [
-        "20 ml"
-      ],
-      "skus": [
-        "1780"
-      ],
-      "keywords": "1780 vitamina d3 20ml farma"
-    },
-    {
-      "id": "vitamina-d3-colecalciferol",
-      "nome": "Vitamina D3 Colecalciferol",
-      "categoria": "farma-vitaminas",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 500 mg"
-      ],
-      "skus": [
-        "6157"
-      ],
-      "keywords": "6157 vitamina d3 colecalciferol 60x500mg farma"
-    },
-    {
-      "id": "metil-folax",
-      "nome": "Metil Folax",
-      "categoria": "farma-vitaminas",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 500 mg"
-      ],
-      "skus": [
-        "0721"
-      ],
-      "keywords": "0721 metil folax 60x500mg farma"
-    },
-    {
-      "id": "trimaca-peruana-em-po",
-      "nome": "Trimaca Peruana em Pó",
-      "categoria": "farma-fitoterapicos",
-      "marca": "",
-      "embalagens": [
-        "100 g"
-      ],
-      "skus": [
-        "1377"
-      ],
-      "keywords": "1377 trimaca peruana em po 100g farma"
-    },
-    {
       "id": "curcuma",
       "nome": "Cúrcuma",
       "categoria": "farma-fitoterapicos",
@@ -4151,58 +3764,6 @@
       "keywords": "5075 curcuma 30 caps 30x500mg farma"
     },
     {
-      "id": "laranja-moro",
-      "nome": "Laranja Moro",
-      "categoria": "farma-fitoterapicos",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 500 mg"
-      ],
-      "skus": [
-        "0776"
-      ],
-      "keywords": "0776 laranja moro 60x500mg farma"
-    },
-    {
-      "id": "curcuma-curcumina",
-      "nome": "Cúrcuma Curcumina",
-      "categoria": "farma-fitoterapicos",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 500 mg"
-      ],
-      "skus": [
-        "9172"
-      ],
-      "keywords": "9172 curcuma curcumina 60x500mg farma"
-    },
-    {
-      "id": "oleo-de-alho-desodorizado",
-      "nome": "Óleo de Alho Desodorizado",
-      "categoria": "farma-fitoterapicos",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 500 mg"
-      ],
-      "skus": [
-        "9424"
-      ],
-      "keywords": "9424 oleo de alho desodorizado 60x500mg farma"
-    },
-    {
-      "id": "ora-pro-nobis-sabor-limao",
-      "nome": "Ora Pro Nóbis Sabor Limão",
-      "categoria": "farma-fitoterapicos",
-      "marca": "",
-      "embalagens": [
-        "150 g"
-      ],
-      "skus": [
-        "1391"
-      ],
-      "keywords": "1391 ora pro nobis sabor limao 150g farma"
-    },
-    {
       "id": "oleo-de-semente-de-abobora",
       "nome": "Óleo de Semente de Abóbora",
       "categoria": "farma-fitoterapicos",
@@ -4214,19 +3775,6 @@
         "2644"
       ],
       "keywords": "2644 oleo de semente abobora 1400mg 60x1400mg farma"
-    },
-    {
-      "id": "beta-glucana",
-      "nome": "Beta Glucana",
-      "categoria": "farma-fitoterapicos",
-      "marca": "",
-      "embalagens": [
-        "30 cápsulas de 500 mg"
-      ],
-      "skus": [
-        "0790"
-      ],
-      "keywords": "0790 beta glucana 30 caps 30x500mg farma"
     },
     {
       "id": "cranberry",
@@ -4252,19 +3800,6 @@
       "keywords": "creatina 100 300g mix nutri farma"
     },
     {
-      "id": "creatina",
-      "nome": "Creatina",
-      "categoria": "farma-suplementos",
-      "marca": "",
-      "embalagens": [
-        "300 g"
-      ],
-      "skus": [
-        "0882"
-      ],
-      "keywords": "0882 creatina 300g farma"
-    },
-    {
       "id": "creatina-100-monohidratada",
       "nome": "Creatina 100% Monohidratada",
       "categoria": "farma-suplementos",
@@ -4285,32 +3820,6 @@
       "keywords": "diet shake baunilha nutrilatina 420g farma"
     },
     {
-      "id": "moviflex-colageno-tipo-2",
-      "nome": "Moviflex Colágeno Tipo 2",
-      "categoria": "farma-suplementos",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 650 mg"
-      ],
-      "skus": [
-        "6553"
-      ],
-      "keywords": "6553 moviflex colageno tipo 2 60x650mg farma"
-    },
-    {
-      "id": "resveratrol-trans",
-      "nome": "Resveratrol Trans",
-      "categoria": "farma-suplementos",
-      "marca": "",
-      "embalagens": [
-        "30 unidades de 500 mg"
-      ],
-      "skus": [
-        "0806"
-      ],
-      "keywords": "0806 resveratrol trans 30x500mg farma"
-    },
-    {
       "id": "diet-shake-chocolate-nutrilatina",
       "nome": "Diet Shake Chocolate Nutrilatina",
       "categoria": "farma-suplementos",
@@ -4329,19 +3838,6 @@
         "420 g"
       ],
       "keywords": "diet shake banana nutrilatina 420g farma"
-    },
-    {
-      "id": "melatonina-gotas-sabor-maracuja",
-      "nome": "Melatonina Gotas Sabor Maracujá",
-      "categoria": "farma-suplementos",
-      "marca": "",
-      "embalagens": [
-        "20 ml"
-      ],
-      "skus": [
-        "0820"
-      ],
-      "keywords": "0820 melatonina gotas sab maracuja 20ml 30ml farma"
     },
     {
       "id": "diet-shake-morango-nutrilatina",
@@ -4367,55 +3863,6 @@
       "keywords": "6744 total efa 60x1350mg farma"
     },
     {
-      "id": "omega-3-pro-18-12",
-      "nome": "Ômega 3 Pro 18/12",
-      "categoria": "farma-suplementos",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 1350 mg"
-      ],
-      "skus": [
-        "6720"
-      ],
-      "keywords": "6720 omega 3 pro 18 12 60x1350mg farma"
-    },
-    {
-      "id": "omega-3-ultra-50-20",
-      "nome": "Ômega 3 Ultra 50/20",
-      "categoria": "farma-suplementos",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 1350 mg"
-      ],
-      "skus": [
-        "9554"
-      ],
-      "keywords": "9554 omega 3 ultra 50 20 60x1350mg farma"
-    },
-    {
-      "id": "l-arginina-performance",
-      "nome": "L - Arginina Performance",
-      "categoria": "farma-suplementos",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 625 mg"
-      ],
-      "keywords": "l arginina performance 60x625mg farma"
-    },
-    {
-      "id": "fiberliv-7-fibras",
-      "nome": "Fiberliv 7 Fibras",
-      "categoria": "farma-suplementos",
-      "marca": "",
-      "embalagens": [
-        "250 g"
-      ],
-      "skus": [
-        "0998"
-      ],
-      "keywords": "0998 fiberliv 7 fibras 250g farma"
-    },
-    {
       "id": "whey-sache-baunilha-nutrilatina",
       "nome": "Whey Sachê Baunilha Nutrilatina",
       "categoria": "farma-suplementos",
@@ -4426,19 +3873,6 @@
       "keywords": "whey sache baunilha nutrilatina 300g 10unx30g farma"
     },
     {
-      "id": "melatonina",
-      "nome": "Melatonina",
-      "categoria": "farma-suplementos",
-      "marca": "",
-      "embalagens": [
-        "120 unidades de 500 mg"
-      ],
-      "skus": [
-        "9158"
-      ],
-      "keywords": "9158 melatonina 120x500mg farma"
-    },
-    {
       "id": "whey-sache-chocolate-belga-nutrilatina",
       "nome": "Whey Sachê Chocolate Belga Nutrilatina",
       "categoria": "farma-suplementos",
@@ -4447,19 +3881,6 @@
         "310 g"
       ],
       "keywords": "whey sache choco belga nutrilatina 310g 10unx31g farma"
-    },
-    {
-      "id": "cafeina",
-      "nome": "Cafeína",
-      "categoria": "farma-suplementos",
-      "marca": "",
-      "embalagens": [
-        "60 unidades de 500 mg"
-      ],
-      "skus": [
-        "0813"
-      ],
-      "keywords": "0813 cafeina 60x500mg farma"
     },
     {
       "id": "100-whey-banoffe",

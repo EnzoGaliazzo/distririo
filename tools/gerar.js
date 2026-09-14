@@ -321,6 +321,41 @@ if (fs.existsSync(dirProduto)) {
 }
 dados.produtos.forEach(p => gravar(`produto/${p.id}.html`, versionar(aplicarSeguranca(paginaProduto(p, tplProduto)))));
 
+// 2a. endereços antigos de produtos que foram unificados. O mesmo item estava
+// cadastrado duas vezes (nome da planilha do ERP e nome do catálogo da marca);
+// a página antiga pode estar no Google ou num WhatsApp já enviado, então ela
+// continua existindo e leva para o cadastro que ficou. GitHub Pages não faz
+// redirect de servidor: vai meta refresh, com canonical e noindex para o
+// buscador trocar o endereço em vez de indexar os dois.
+const arqRedir = path.join(root, 'data', 'redirecionamentos.json');
+const redirecionamentos = fs.existsSync(arqRedir) ? JSON.parse(ler('data/redirecionamentos.json')) : {};
+const idsAtivos = new Set(dados.produtos.map(p => p.id));
+let nRedir = 0;
+for (const [antigo, novo] of Object.entries(redirecionamentos)) {
+    if (idsAtivos.has(antigo)) continue;   // o id voltou a existir: a página real vence
+    const destino = dados.produtos.find(p => p.id === novo);
+    if (!destino) throw new Error(`redirecionamentos.json: ${antigo} aponta para ${novo}, que não existe`);
+    const nome = esc(destino.nome);
+    gravar(`produto/${antigo}.html`, aplicarSeguranca([
+        '<!DOCTYPE html>',
+        '<html lang="pt-br">',
+        '<head>',
+        '    <meta charset="UTF-8">',
+        '    <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+        '    <meta name="robots" content="noindex, follow">',
+        `    <title>${nome} | Distri Rio</title>`,
+        `    <link rel="canonical" href="${SITE}/produto/${novo}.html">`,
+        `    <meta http-equiv="refresh" content="0; url=${novo}.html">`,
+        '</head>',
+        '<body>',
+        `    <p>Este produto mudou de endereço: <a href="${novo}.html">${nome}</a>.</p>`,
+        '</body>',
+        '</html>',
+        '',
+    ].join('\n')));
+    nRedir++;
+}
+
 // 2b. páginas de marca (18 marcas com 4+ produtos)
 const tplMarca = ler('tools/partials/marca.html').replace(/\r?\n/g, '\n');
 const marcas = B.marcasComProduto();
@@ -435,6 +470,6 @@ gravar('site.webmanifest', JSON.stringify({
 
 console.log('páginas regeneradas:');
 relatorio.forEach(l => console.log(l));
-console.log(`páginas de produto: ${dados.produtos.length}`);
+console.log(`páginas de produto: ${dados.produtos.length} (+ ${nRedir} endereços antigos redirecionados)`);
 console.log(`índice de busca: assets/data/produtos.json (${(fs.statSync(path.join(root, 'assets/data/produtos.json')).size / 1024).toFixed(0)} KB)`);
 console.log('sitemap.xml, robots.txt e site.webmanifest atualizados');
