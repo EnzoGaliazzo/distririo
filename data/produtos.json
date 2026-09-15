@@ -547,7 +547,7 @@
         "250 ml",
         "2 L"
       ],
-      "img": "assets/produtos/baly/energy__tradicional.jpg",
+      "img": "assets/produtos/baly/baly-tradicional.jpg",
       "keywords": "baly tradicional brasil energ 473ml 473 ml farma 250ml lata 2l 2 litros"
     },
     {
@@ -560,7 +560,7 @@
         "473 ml",
         "2 L"
       ],
-      "img": "assets/produtos/baly/energy__tropical.jpg",
+      "img": "assets/produtos/baly/baly-tropical.jpg",
       "keywords": "baly tropical brasil energ frutas tropicais 473ml 473 ml farma 2l 2 litros"
     },
     {
@@ -573,7 +573,7 @@
         "473 ml",
         "2 L"
       ],
-      "img": "assets/produtos/baly/energy__maca-verde.jpg",
+      "img": "assets/produtos/baly/baly-maca-verde.jpg",
       "keywords": "baly maca verde brasil energ 473ml 473 ml farma 2l 2 litros"
     },
     {
@@ -586,7 +586,7 @@
         "473 ml",
         "2 L"
       ],
-      "img": "assets/produtos/baly/energy__melancia.jpg",
+      "img": "assets/produtos/baly/baly-melancia.jpg",
       "keywords": "baly melancia brasil energ 473ml 473 ml farma 2l 2 litros"
     },
     {
@@ -599,7 +599,7 @@
         "473 ml",
         "2 L"
       ],
-      "img": "assets/produtos/baly/energy__morango-e-pessego.jpg",
+      "img": "assets/produtos/baly/baly-morango-e-pessego.jpg",
       "keywords": "baly morango e pessego brasil energ 473ml 473 ml farma 2l 2 litros"
     },
     {
@@ -611,7 +611,7 @@
       "embalagens": [
         "473 ml"
       ],
-      "img": "assets/produtos/baly/energy__coco-e-acai.jpg",
+      "img": "assets/produtos/baly/baly-coco-e-acai.jpg",
       "keywords": "baly coco e acai brasil energ 473ml 473 ml farma"
     },
     {
@@ -624,7 +624,7 @@
         "473 ml",
         "2 L"
       ],
-      "img": "assets/produtos/baly/energy__tadaly.jpg",
+      "img": "assets/produtos/baly/baly-tadaly.jpg",
       "keywords": "baly tadaly brasil energ 473ml 473 ml farma 2l 2 litros"
     },
     {
@@ -633,7 +633,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Energético Baly sabor uva verde, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
-      "img": "assets/produtos/baly/energy__uva-verde.jpg",
+      "img": "assets/produtos/baly/baly-uva-verde.jpg",
       "keywords": "baly uva verde brasil"
     },
     {
@@ -642,7 +642,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Energético Baly sabor abacaxi com hortelã, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
-      "img": "assets/produtos/baly/energy__abacaxi-com-hortela.jpg",
+      "img": "assets/produtos/baly/baly-abacaxi-com-hortela.jpg",
       "keywords": "baly abacaxi com hortela brasil"
     },
     {
@@ -651,7 +651,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Energético Baly sabor amora com hortelã, com cafeína, taurina e vitaminas do complexo B, sem álcool.",
-      "img": "assets/produtos/baly/energy__amora-com-hortela.jpg",
+      "img": "assets/produtos/baly/baly-amora-com-hortela.jpg",
       "keywords": "baly amora com hortela brasil"
     },
     {
@@ -660,7 +660,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Energético Baly Freegells, parceria com a bala Freegells no sabor cereja, com cafeína, taurina e vitaminas do complexo B.",
-      "img": "assets/produtos/baly/energy__freegells.jpg",
+      "img": "assets/produtos/baly/baly-freegells.jpg",
       "keywords": "baly freegells brasil"
     },
     {
@@ -669,7 +669,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Energético Baly Summer Loko, combinação tropical e doce inspirada nos drinks de verão, com cafeína, taurina e vitaminas do complexo B.",
-      "img": "assets/produtos/baly/energy__summer-loko.jpg",
+      "img": "assets/produtos/baly/baly-summer-loko.jpg",
       "keywords": "baly summer loko brasil"
     },
     {
@@ -681,7 +681,7 @@
       "embalagens": [
         "250 ml"
       ],
-      "img": "assets/produtos/baly/energy__celebre-champagne.jpg",
+      "img": "assets/produtos/baly/baly-celebre-champagne.jpg",
       "keywords": "baly celebre champagne brasil energ champanhe 250ml lata farma"
     },
     {
@@ -693,7 +693,7 @@
       "embalagens": [
         "250 ml"
       ],
-      "img": "assets/produtos/baly/energy__celebre-floripa.jpg",
+      "img": "assets/produtos/baly/baly-celebre-floripa.jpg",
       "keywords": "baly celebre floripa brasil energ spritz 250ml lata farma"
     },
     {
@@ -702,7 +702,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Energético Baly Celebre sabor caipirinha, da linha inspirada em drinks, sem álcool.",
-      "img": "assets/produtos/baly/energy__celebre-caipirinha.jpg",
+      "img": "assets/produtos/baly/baly-celebre-caipirinha.jpg",
       "keywords": "baly celebre caipirinha brasil"
     },
     {
@@ -714,7 +714,7 @@
       "embalagens": [
         "473 ml"
       ],
-      "img": "assets/produtos/baly/energy__tradicional-sem-acucar.jpg",
+      "img": "assets/produtos/baly/baly-tradicional-sem-acucar.jpg",
       "keywords": "baly tradicional sem acucar brasil energ 473ml 473 ml farma"
     },
     {
@@ -726,7 +726,7 @@
       "embalagens": [
         "473 ml"
       ],
-      "img": "assets/produtos/baly/energy__tropical-sem-acucar.jpg",
+      "img": "assets/produtos/baly/baly-tropical-sem-acucar.jpg",
       "keywords": "baly tropical sem acucar brasil energ s 473ml 473 ml farma"
     },
     {
@@ -738,7 +738,7 @@
       "embalagens": [
         "473 ml"
       ],
-      "img": "assets/produtos/baly/energy__maca-verde-sem-acucar.jpg",
+      "img": "assets/produtos/baly/baly-maca-verde-sem-acucar.jpg",
       "keywords": "baly maca verde sem acucar brasil energ 473ml 473 ml farma"
     },
     {
@@ -747,7 +747,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Energético Baly sabor uva verde sem açúcar, com cafeína, taurina e vitaminas do complexo B.",
-      "img": "assets/produtos/baly/energy__uva-verde-sem-acucar.jpg",
+      "img": "assets/produtos/baly/baly-uva-verde-sem-acucar.jpg",
       "keywords": "baly uva verde sem acucar brasil"
     },
     {
@@ -759,7 +759,7 @@
       "embalagens": [
         "473 ml"
       ],
-      "img": "assets/produtos/baly/energy__melancia-sem-acucar.jpg",
+      "img": "assets/produtos/baly/baly-melancia-sem-acucar.jpg",
       "keywords": "baly melancia sem acucar brasil energ 473ml 473 ml farma"
     },
     {
@@ -771,7 +771,7 @@
       "embalagens": [
         "473 ml"
       ],
-      "img": "assets/produtos/baly/energy__morango-e-pessego-sem-acucar.jpg",
+      "img": "assets/produtos/baly/baly-morango-e-pessego-sem-acucar.jpg",
       "keywords": "baly morango e pessego sem acucar brasil energ mor pess s 473ml 473 ml farma"
     },
     {
@@ -780,7 +780,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Energético Baly sabor amora com hortelã sem açúcar, com cafeína, taurina e vitaminas do complexo B.",
-      "img": "assets/produtos/baly/energy__amora-com-hortela-sem-acucar.jpg",
+      "img": "assets/produtos/baly/baly-amora-com-hortela-sem-acucar.jpg",
       "keywords": "baly amora com hortela sem acucar brasil"
     },
     {
@@ -789,7 +789,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Baly Gamer Redragon, energético sem açúcar criado com a marca gamer Redragon, com 20% a mais de cafeína, taurina, inositol e vitaminas do complexo B, em lata de 473 ml.",
-      "img": "assets/produtos/baly/energy__redragon.jpg",
+      "img": "assets/produtos/baly/baly-redragon.jpg",
       "keywords": "baly redragon brasil"
     },
     {
@@ -798,7 +798,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Baly Pro sabor tropical, bebida energética com 15 g de proteína de colágeno, sem açúcar e sem glúten, em lata de 250 ml.",
-      "img": "assets/produtos/baly/energy__pro-tropical.jpg",
+      "img": "assets/produtos/baly/baly-pro-tropical.jpg",
       "keywords": "baly pro tropical brasil"
     },
     {
@@ -807,7 +807,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Baly Pro sabor morango e pêssego, bebida energética com 15 g de proteína de colágeno, sem açúcar e sem glúten, em lata de 250 ml.",
-      "img": "assets/produtos/baly/energy__pro-morango-e-pessego.jpg",
+      "img": "assets/produtos/baly/baly-pro-morango-e-pessego.jpg",
       "keywords": "baly pro morango e pessego brasil"
     },
     {
@@ -816,7 +816,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Baly Pro sabor banana, bebida energética com 15 g de proteína de colágeno, sem açúcar e sem glúten, em lata de 250 ml.",
-      "img": "assets/produtos/baly/energy__pro-banana.jpg",
+      "img": "assets/produtos/baly/baly-pro-banana.jpg",
       "keywords": "baly pro banana brasil"
     },
     {
@@ -825,7 +825,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Baly Free sabor tradicional, a versão \"3x zero\" da marca: sem açúcar, sem cafeína e sem taurina.",
-      "img": "assets/produtos/baly/energy__free-tradicional.jpg",
+      "img": "assets/produtos/baly/baly-free-tradicional.jpg",
       "keywords": "baly free tradicional brasil"
     },
     {
@@ -834,7 +834,7 @@
       "categoria": "baly",
       "marca": "Baly Brasil",
       "descricao": "Baly Free sabor maçã verde, a versão \"3x zero\" da marca: sem açúcar, sem cafeína e sem taurina.",
-      "img": "assets/produtos/baly/energy__free-maca-verde.jpg",
+      "img": "assets/produtos/baly/baly-free-maca-verde.jpg",
       "keywords": "baly free maca verde brasil"
     },
     {
