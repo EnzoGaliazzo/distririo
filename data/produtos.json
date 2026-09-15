@@ -198,7 +198,7 @@
       "marca": "Mondelez",
       "linha": "Menta, Hortelã, Tutti-Frutti, Melancia, Morango, Canela",
       "descricao": "Goma de mascar sem açúcar Trident no pacote tradicional com 5 unidades, o formato de balcão da marca, em seis sabores.",
-      "img": "assets/produtos/mondelez-novo/mondelez__trident-5s.jpg",
+      "img": "assets/produtos/mondelez/trident-5s.jpg",
       "keywords": "trident 5s menta hortela tutti frutti melancia morango canela mondelez"
     },
     {
@@ -208,7 +208,7 @@
       "marca": "Mondelez",
       "linha": "Melancia, Hortelã, Intense, Blueberry, Menta, Tutti-Frutti",
       "descricao": "Goma de mascar sem açúcar Trident no pacote com 14 unidades, que rende quase o triplo do tradicional, em seis sabores - incluindo a versão Intense.",
-      "img": "assets/produtos/mondelez-novo/mondelez__trident-14s.jpg",
+      "img": "assets/produtos/mondelez/trident-14s.jpg",
       "keywords": "trident 14s melancia hortela intense blueberry menta tutti frutti mondelez"
     },
     {
@@ -217,8 +217,8 @@
       "categoria": "mdz-trident",
       "marca": "Mondelez",
       "linha": "Hortelã, Menta, Tutti-Frutti, Morango, Melancia",
-      "descricao": "Goma de mascar sem açúcar Trident na embalagem bag, em cinco sabores.",
-      "img": "assets/produtos/mondelez-novo/mondelez__trident-bag.jpg",
+      "descricao": "Goma de mascar sem açúcar Trident na embalagem bag, com 4 pacotes de 8 g, em cinco sabores.",
+      "img": "assets/produtos/mondelez/trident-bag.jpg",
       "keywords": "trident bag hortela menta tutti frutti morango melancia mondelez"
     },
     {
@@ -228,7 +228,7 @@
       "marca": "Mondelez",
       "linha": "Morango Lime, Melancia Mint, Citrus, Spearmint, Peppermint, Blueberry",
       "descricao": "Goma de mascar sem açúcar Trident Xsenses em pote no formato de garrafa, com tampa para guardar e levar, em seis sabores.",
-      "img": "assets/produtos/mondelez-novo/mondelez__trident-xsenses-garrafa.jpg",
+      "img": "assets/produtos/mondelez/trident-xsenses-garrafa.jpg",
       "keywords": "trident xsenses garrafa morango lime melancia mint citrus spearmint peppermint blueberry mondelez"
     },
     {
@@ -238,7 +238,7 @@
       "marca": "Mondelez",
       "linha": "Cereja Ice, Acid Blueberry, Intense, Herbal",
       "descricao": "Goma de mascar sem açúcar Trident Xsenses no pacote com 5 unidades, a linha de sabores intensos da marca, como Cereja Ice e Acid Blueberry.",
-      "img": "assets/produtos/mondelez-novo/mondelez__trident-xsenses-5s.jpg",
+      "img": "assets/produtos/mondelez/trident-xsenses-5s.jpg",
       "keywords": "trident xsenses 5s cereja ice acid blueberry intense herbal mondelez"
     },
     {
@@ -248,7 +248,7 @@
       "marca": "Mondelez",
       "linha": "Chiclets Hortelã 100/2S, Chiclets Tutti-Frutti 100/2S",
       "descricao": "Chiclets Adams, a goma de mascar em drágea no pacotinho com 2 unidades, vendida em display com 100 pacotes, nos sabores hortelã e tutti-frutti.",
-      "img": "assets/produtos/mondelez-novo/mondelez__chiclets.jpg",
+      "img": "assets/produtos/mondelez/chiclets.jpg",
       "keywords": "chiclets hortela 100 2s tutti frutti mondelez"
     },
     {
@@ -258,7 +258,7 @@
       "marca": "Mondelez",
       "linha": "Hortelã Fresca, Menta Blueberry",
       "descricao": "Trident Max, goma de mascar sem açúcar com pastilhas maiores e mais sabor por unidade, nas versões Hortelã Fresca e Menta Blueberry.",
-      "img": "assets/produtos/mondelez-novo/mondelez__trident-max.jpg",
+      "img": "assets/produtos/mondelez/trident-max.jpg",
       "keywords": "trident max hortela fresca menta blueberry mondelez"
     },
     {
@@ -268,7 +268,7 @@
       "marca": "Mondelez",
       "linha": "Cool Raspberry",
       "descricao": "Trident Max no sabor Cool Raspberry, framboesa com toque refrescante, goma de mascar sem açúcar com pastilhas maiores.",
-      "img": "assets/produtos/mondelez-novo/mondelez__trident-max-2.jpg",
+      "img": "assets/produtos/mondelez/trident-max-cool-raspberry.jpg",
       "keywords": "trident max cool raspberry mondelez"
     },
     {
@@ -278,7 +278,7 @@
       "marca": "Mondelez",
       "linha": "Bubbaloo Gum DSP Hortelã/Menta, Bubbaloo Gum DSP Morango, Bubbaloo Gum DSP Tutti-Frutti, Bubbaloo Gum DSP Uva",
       "descricao": "Bubbaloo, o chiclete com recheio líquido, em unidades avulsas vendidas em display, nos sabores hortelã/menta, morango, tutti-frutti e uva.",
-      "img": "assets/produtos/mondelez-novo/mondelez__bubbaloo.jpg",
+      "img": "assets/produtos/mondelez/bubbaloo-gum.jpg",
       "keywords": "bubbaloo gum dsp hortela menta morango tutti frutti uva mondelez"
     },
     {
@@ -287,18 +287,18 @@
       "categoria": "mdz-bubbaloo",
       "marca": "Mondelez",
       "linha": "Bubbaloo Bala Mix 15G, Bubbaloo Bala Morango 15G, Bubbaloo Bala Tutti-Frutti 15G",
-      "descricao": "Bala mastigável Bubbaloo em pacote de 15 g, nos sabores mix, morango e tutti-frutti.",
-      "img": "assets/produtos/mondelez-novo/mondelez__bubbaloo-balas.jpg",
+      "descricao": "Bala macia Bubbaloo em pacote de 15 g, nos sabores mix, morango e tutti-frutti.",
+      "img": "assets/produtos/mondelez/bubbaloo-balas.jpg",
       "keywords": "bubbaloo balas bala mix 15g morango tutti frutti mondelez"
     },
     {
       "id": "bubbaloo-balas-pote",
-      "nome": "Bubbaloo Balas Pote",
+      "nome": "Bubbaloo Balas 75 g e 82,5 g",
       "categoria": "mdz-bubbaloo",
       "marca": "Mondelez",
       "linha": "Bubbaloo Bala Tutti-Frutti 75G, Bubbaloo Bala Morango Azedinha 82.5G, Bubbaloo Bala Mix Azedinha 82.5G, Bubbaloo Bala Morango 75G, Bubbaloo Bala Citric Blueberry 82.5G, Bubbaloo Bala Mix 75G",
-      "descricao": "Balas mastigáveis Bubbaloo em pote, de 75 g e 82,5 g, com versões azedinhas e sabores como morango, tutti-frutti, mix e citric blueberry.",
-      "img": "assets/produtos/mondelez-novo/mondelez__bubbaloo-balas-2.jpg",
+      "descricao": "Balas macias Bubbaloo em pacotes de 75 g (morango, tutti-frutti e mix) e de 82,5 g (morango azedinha, mix azedinha e citric blueberry).",
+      "img": "assets/produtos/mondelez/bubbaloo-balas-pote.jpg",
       "keywords": "bubbaloo balas bala tutti frutti 75g morango azedinha 82 5g mix citric blueberry mondelez"
     },
     {
@@ -308,7 +308,7 @@
       "marca": "Mondelez",
       "linha": "Halls Base DSP Uva Verde, Halls Base DSP Extra Forte, Halls Base DSP Menta, Halls Base DSP Morango, Halls Base DSP Cereja, Halls Blueberry, Halls Base DSP Melancia, Halls Base DSP Mentol",
       "descricao": "Pastilhas Halls no rolinho tradicional, em oito sabores entre frutas, menta, mentol e a versão Extra Forte, vendidas em display de balcão.",
-      "img": "assets/produtos/mondelez-novo/mondelez__halls.jpg",
+      "img": "assets/produtos/mondelez/halls.jpg",
       "keywords": "halls base dsp uva verde extra forte menta morango cereja blueberry melancia mentol mondelez"
     },
     {
@@ -317,8 +317,8 @@
       "categoria": "mdz-halls",
       "marca": "Mondelez",
       "linha": "Menta, Cereja, Morango, Extra Forte",
-      "descricao": "Pastilhas Halls na embalagem bag, nos sabores menta, cereja, morango e extra forte.",
-      "img": "assets/produtos/mondelez-novo/mondelez__halls-bag.jpg",
+      "descricao": "Pastilhas Halls na embalagem bag com 3 rolinhos, nos sabores menta, cereja, morango e extra forte.",
+      "img": "assets/produtos/mondelez/halls-bag.jpg",
       "keywords": "halls bag menta cereja morango extra forte mondelez"
     },
     {
@@ -328,7 +328,7 @@
       "marca": "Mondelez",
       "linha": "Uva, Tangerina, Joia da Ilha",
       "descricao": "Refresco em pó Tang em sachê, para preparar com água, nos sabores uva, tangerina e joia da ilha.",
-      "img": "assets/produtos/mondelez-novo/mondelez__tang.jpg",
+      "img": "assets/produtos/mondelez/tang.jpg",
       "keywords": "tang uva tangerina joia da ilha mondelez"
     },
     {
@@ -338,7 +338,7 @@
       "marca": "Mondelez",
       "linha": "Tang - Maracujá (Edição Limitada), Tang - Guaraná (Edição Limitada), Tang - Laranja com Mamão (Edição Limitada)",
       "descricao": "Refresco em pó Tang em sachê, nos sabores de edição limitada maracujá, guaraná e laranja com mamão.",
-      "img": "assets/produtos/mondelez-novo/mondelez__tang-edicao-limitada.jpg",
+      "img": "assets/produtos/mondelez/tang-edicao-limitada.jpg",
       "keywords": "tang edicao limitada maracuja guarana laranja com mamao mondelez"
     },
     {
@@ -351,7 +351,7 @@
       "embalagens": [
         "18 g"
       ],
-      "img": "assets/produtos/mondelez-novo/mondelez__oreo-18g.jpg",
+      "img": "assets/produtos/mondelez/oreo.jpg",
       "keywords": "oreo 18g original mondelez"
     },
     {
@@ -364,7 +364,7 @@
       "embalagens": [
         "35 g"
       ],
-      "img": "assets/produtos/mondelez-novo/mondelez__mini-oreo-35g.jpg",
+      "img": "assets/produtos/mondelez/mini-oreo.jpg",
       "keywords": "mini oreo 35g mondelez"
     },
     {
@@ -377,7 +377,7 @@
       "embalagens": [
         "90 g"
       ],
-      "img": "assets/produtos/mondelez-novo/mondelez__oreo-original-90g.jpg",
+      "img": "assets/produtos/mondelez/oreo-original.jpg",
       "keywords": "oreo original 90g mondelez"
     },
     {
@@ -390,7 +390,7 @@
       "embalagens": [
         "90 g"
       ],
-      "img": "assets/produtos/mondelez-novo/mondelez__oreo-chocolate-90g.jpg",
+      "img": "assets/produtos/mondelez/oreo-chocolate.jpg",
       "keywords": "oreo chocolate 90g mondelez"
     },
     {
@@ -400,7 +400,7 @@
       "marca": "Mondelez",
       "linha": "Parmesão 115G, Parmesão 68G, Marguerita 68G, American Barbecue 68G, Cebola e Salsa 68G, Cebola e Salsa 115G, Churras na Brasa 68G, Churras na Brasa 115G",
       "descricao": "Club Social Snack, biscoito salgado assado em formato de salgadinho, em pacotes de 68 g e 115 g e cinco sabores, de parmesão a churras na brasa.",
-      "img": "assets/produtos/mondelez-novo/mondelez__club-social-snack.jpg",
+      "img": "assets/produtos/mondelez/club-social-snack.jpg",
       "keywords": "club social snack parmesao 115g 68g marguerita american barbecue cebola e salsa churras na brasa mondelez"
     },
     {
@@ -410,7 +410,7 @@
       "marca": "Mondelez",
       "linha": "Original, Pizza, Pão de Alho, Presunto, Cebola Caramelizada",
       "descricao": "Biscoito salgado Club Social em pacotinhos individuais, nos sabores original, pizza, pão de alho, presunto e cebola caramelizada.",
-      "img": "assets/produtos/mondelez-novo/mondelez__club-social-regular.jpg",
+      "img": "assets/produtos/mondelez/club-social-regular.jpg",
       "keywords": "club social regular original pizza pao de alho presunto cebola caramelizada mondelez"
     },
     {
@@ -420,7 +420,7 @@
       "marca": "Mondelez",
       "linha": "Integral Tradicional",
       "descricao": "Biscoito salgado Club Social Integral Tradicional, feito com farinha integral, em pacotinhos individuais.",
-      "img": "assets/produtos/mondelez-novo/mondelez__club-social-integral.jpg",
+      "img": "assets/produtos/mondelez/club-social-integral.jpg",
       "keywords": "club social integral tradicional mondelez"
     },
     {
@@ -430,7 +430,7 @@
       "marca": "Mondelez",
       "linha": "Club Social Snack - Cebola e Salsa 68G (Sul/SP), Club Social Snack - Cebola e Salsa 115G (Sul/SP), Club Social Snack - Churras na Brasa 68G (Sul/SP), Club Social Snack - Churras na Brasa 115G (Sul/SP), Club Social Snack - Parmesão 115G (Sul/SP), Club Social Snack - Parmesão 68G (Sul/SP), Club Social Snack - Marguerita 68G (Sul/SP), Club Social Snack - American Barbecue 68G (Sul/SP)",
       "descricao": "Club Social Snack na embalagem de venda exclusiva para Sul e São Paulo, em pacotes de 68 g e 115 g e cinco sabores.",
-      "img": "assets/produtos/mondelez-novo/mondelez__club-social-snack-sul-sp.jpg",
+      "img": "assets/produtos/mondelez/club-social-snack-sul-sp.jpg",
       "keywords": "club social snack sul sp cebola e salsa 68g 115g churras na brasa parmesao marguerita american barbecue mondelez"
     },
     {
@@ -439,8 +439,8 @@
       "categoria": "mdz-lacta",
       "marca": "Mondelez",
       "linha": "Lacta",
-      "descricao": "Chocolate 5Star Lacta, barra de chocolate ao leite com recheio de caramelo e nougat.",
-      "img": "assets/produtos/mondelez-novo/mondelez__5star.jpg",
+      "descricao": "Chocolate 5Star, da Lacta, barra de 40 g recheada com caramelo e biscoito.",
+      "img": "assets/produtos/mondelez/5star.jpg",
       "keywords": "5star lacta mondelez"
     },
     {
@@ -449,8 +449,8 @@
       "categoria": "mdz-lacta",
       "marca": "Mondelez",
       "linha": "Lacta",
-      "descricao": "Wafer Lacta com Oreo em unidade individual, vendido em display para balcão.",
-      "img": "assets/produtos/mondelez-novo/mondelez__wafer-lacta-oreo.jpg",
+      "descricao": "Wafer Lacta Oreo, bombom recheado com biscoito Oreo, de 20,1 g cada, vendido no pacote de 540 g.",
+      "img": "assets/produtos/mondelez/wafer-lacta-oreo.jpg",
       "keywords": "wafer lacta oreo mondelez"
     },
     {
@@ -459,8 +459,8 @@
       "categoria": "mdz-lacta",
       "marca": "Mondelez",
       "linha": "Sonho de Valsa Unitário, Ouro Branco Unitário, Wafer Recheado Sonho de Valsa, Wafer Recheado Ouro Branco",
-      "descricao": "Bombons Sonho de Valsa e Ouro Branco em unidade avulsa, e as versões em wafer recheado das duas marcas.",
-      "img": "assets/produtos/mondelez-novo/mondelez__sonho-de-valsa-e-ouro-branco.jpg",
+      "descricao": "Bombons Sonho de Valsa e Ouro Branco embalados um a um, no pacote de 1 kg, e as versões em wafer recheado de 25 g das duas marcas.",
+      "img": "assets/produtos/mondelez/sonho-de-valsa-e-ouro-branco.jpg",
       "keywords": "sonho de valsa e ouro branco unitario wafer recheado mondelez"
     },
     {
@@ -469,8 +469,8 @@
       "categoria": "mdz-lacta",
       "marca": "Mondelez",
       "linha": "Lacta",
-      "descricao": "Chocolate ao leite Lacta da linha Obrigado.",
-      "img": "assets/produtos/mondelez-novo/mondelez__lacta-obrigado.jpg",
+      "descricao": "Tablete de chocolate ao leite Lacta de 80 g na embalagem com a mensagem Obrigado.",
+      "img": "assets/produtos/mondelez/lacta-obrigado.jpg",
       "keywords": "lacta obrigado mondelez"
     },
     {
@@ -483,7 +483,7 @@
       "embalagens": [
         "80 g"
       ],
-      "img": "assets/produtos/mondelez-novo/mondelez__lacta-80g.jpg",
+      "img": "assets/produtos/mondelez/lacta.jpg",
       "keywords": "lacta 80g ao leite laka diamante negro shot amaro mondelez"
     },
     {
@@ -493,7 +493,7 @@
       "marca": "Mondelez",
       "linha": "Lacta Oreo, Lacta Ouro Branco, Lacta Sonho de Valsa, Laka Caramelo",
       "descricao": "Tabletes de chocolate Lacta recheados nas versões Oreo, Ouro Branco, Sonho de Valsa e Laka Caramelo.",
-      "img": "assets/produtos/mondelez-novo/mondelez__lacta-recheados.jpg",
+      "img": "assets/produtos/mondelez/lacta-recheados.jpg",
       "keywords": "lacta recheados oreo ouro branco sonho de valsa laka caramelo mondelez"
     },
     {
@@ -503,7 +503,7 @@
       "marca": "Mondelez",
       "linha": "Bis Original, Bis Branco",
       "descricao": "Bis, o wafer com cobertura de chocolate da Lacta, nas versões original e branco.",
-      "img": "assets/produtos/mondelez-novo/mondelez__bis-2.jpg",
+      "img": "assets/produtos/mondelez/bis.jpg",
       "keywords": "bis original branco mondelez"
     },
     {
@@ -512,8 +512,8 @@
       "categoria": "mdz-bis",
       "marca": "Mondelez",
       "linha": "Bis 10 ao Leite, Bis 10 Laka",
-      "descricao": "Bis no pacote com 10 unidades, nas versões ao leite e Laka.",
-      "img": "assets/produtos/mondelez-novo/mondelez__bis.jpg",
+      "descricao": "Bis no pacote com 10 unidades, de 65 g, nas versões ao leite e Laka.",
+      "img": "assets/produtos/mondelez/bis-10.jpg",
       "keywords": "bis 10 ao leite laka mondelez"
     },
     {
@@ -523,7 +523,7 @@
       "marca": "Mondelez",
       "linha": "Bis Xtra Original, Bis Xtra Oreo, Bis Xtra Black, Bis Xtra Branco",
       "descricao": "Bis Xtra, a versão maior do Bis, com wafer e cobertura de chocolate, nos sabores original, Oreo, Black e branco.",
-      "img": "assets/produtos/mondelez-novo/mondelez__bis-xtra.jpg",
+      "img": "assets/produtos/mondelez/bis-xtra.jpg",
       "keywords": "bis xtra original oreo black branco mondelez"
     },
     {
@@ -533,7 +533,7 @@
       "marca": "Mondelez",
       "linha": "70% Cacau Original, 60% Cacau Original, 40% Cacau Original, 60% Cacau Mix Nuts, 60% Cacau Café, Tábuas Intense Nuts - 40% Cacau Avelã & Crocante de Cacau, Tábuas Intense Nuts - 40% Cacau Amêndoas & Caramelo Salgado, Tábuas Intense Nuts - 40% Cacau Amêndoas & Framboesa",
       "descricao": "Tabletes de chocolate Lacta Intense com 40%, 60% e 70% de cacau, e versões com castanhas, amêndoas, café e frutas.",
-      "img": "assets/produtos/mondelez-novo/mondelez__tabuas-intense.jpg",
+      "img": "assets/produtos/mondelez/tabuas-intense.jpg",
       "keywords": "tabuas intense 70 cacau original 60 40 mix nuts cafe avela crocante de amendoas caramelo salgado framboesa mondelez"
     },
     {
