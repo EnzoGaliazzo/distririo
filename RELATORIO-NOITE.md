@@ -554,3 +554,38 @@ Build idempotente, `checar-links` sem caminho quebrado nas 453 páginas,
 `orfas.js` em 0, `app.js` sem erro de sintaxe.
 
 Nenhuma pergunta nova para o `PERGUNTAS-PARA-O-ENZO.md` nesta execução.
+
+---
+
+## Execução — 15/09, sem item concluído
+
+`main` estava limpa e a branch de trabalho sem alteração pendente — nenhuma
+outra execução no meio de uma tarefa. Reli `REGRAS.md`, `PERGUNTAS-PARA-O-ENZO.md`,
+este relatório e o `BACKLOG.md` antes de mexer em qualquer coisa, como manda o
+protocolo.
+
+**O que restava na fila:** só as tarefas **5** (prova social) e **6** (área de
+cobertura), travadas nos itens 6 a 10 do `PERGUNTAS-PARA-O-ENZO.md` — que
+seguem sem nenhuma resposta preenchida —, e a **30** (consistência visual), que
+por natureza pede olho humano, não régua.
+
+**Por que não toquei na 30 mesmo sem as outras duas disponíveis.** Esta
+execução rodou sem o painel do navegador: a ferramenta de preview recusou
+abrir por ser sessão automática sem ninguém para aprovar o comando ("Dev
+servers can't be started from unattended sessions"). Sem conseguir ver o
+elemento renderizado nem medir o DOM, eu não tinha como cumprir a regra do
+`REGRAS.md` — "nunca dê um item por resolvido só porque a propriedade que você
+mudou está no arquivo". Considerei fazer uma auditoria estática do
+`style.css` (raio de borda, sombra, espaçamento) sem depender do navegador,
+mas os valores que não seguem `var(--radius)` (2px, 4px, 6px, 10px, 14px, 50%,
+999px) formam uma escala visivelmente proposital — cartão pequeno, chip,
+avatar redondo, pílula — e não uma inconsistência. Mexer nisso às cegas seria
+repetir o erro que o turno de 09/09 já evitou uma vez com as 12 regras
+duplicadas do CSS: trocar dívida de manutenção por risco de regressão num
+site no ar, numa noite em que eu não consigo olhar o resultado.
+
+**Resultado desta execução: nenhum commit de código.** Melhor registrar o
+bloqueio do que chutar. As tarefas 5, 6 e 30 continuam exatamente como o
+turno de 09/09 as deixou — nenhuma delas piorou nem foi tocada.
+
+Este próprio registro é o único commit da execução.
