@@ -1,7 +1,7 @@
 {
   "_leiame": "Fonte única do catálogo. Editar aqui e rodar \"node tools/build.js\" para regenerar loja.html, as páginas de produto, o índice de busca e o sitemap. Não editar o catálogo direto no HTML.",
-  "atualizado": "2026-09-14",
-  "total": 338,
+  "atualizado": "2026-09-15",
+  "total": 337,
   "categorias": [
     {
       "id": "mdz-trident",
@@ -175,7 +175,7 @@
       "id": "apisvida",
       "titulo": "Apisvida",
       "marca": "Apisvida",
-      "total": 24
+      "total": 23
     },
     {
       "id": "farma-barras",
@@ -3240,7 +3240,7 @@
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Antipiolhos",
       "descricao": "Kit antipiolho Scudo, da Abelha Rainha, com arruda e citronela: shampoo, condicionador, spray e pente fino.",
-      "img": "assets/produtos/abelha-rainha/lancamentos-antipiolhos__kit-scudo-p.jpg",
+      "img": "assets/produtos/abelha-rainha/kit-scudo-p.jpg",
       "keywords": "kit scudo p lancamentos antipiolhos abelha rainha piolho arruda e citronela 437ml farma",
       "embalagens": [
         "437 ml"
@@ -3253,7 +3253,7 @@
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Body Splash / Perfumaria",
       "descricao": "Body splash Abelha Rainha com fragrância de vanilla, perfume corporal leve em spray.",
-      "img": "assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-vanilla.jpg",
+      "img": "assets/produtos/abelha-rainha/body-splash-vanilla.jpg",
       "keywords": "body splash vanilla lancamentos perfumaria abelha rainha"
     },
     {
@@ -3263,7 +3263,7 @@
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Body Splash / Perfumaria",
       "descricao": "Body splash Abelha Rainha com fragrância de melancia, perfume corporal leve em spray.",
-      "img": "assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-melancia.jpg",
+      "img": "assets/produtos/abelha-rainha/body-splash-melancia.jpg",
       "keywords": "body splash melancia lancamentos perfumaria abelha rainha"
     },
     {
@@ -3273,7 +3273,7 @@
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Body Splash / Perfumaria",
       "descricao": "Body splash Abelha Rainha com fragrância de maracujá, perfume corporal leve em spray.",
-      "img": "assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-maracuja.jpg",
+      "img": "assets/produtos/abelha-rainha/body-splash-maracuja.jpg",
       "keywords": "body splash maracuja lancamentos perfumaria abelha rainha"
     },
     {
@@ -3283,7 +3283,7 @@
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Body Splash / Perfumaria",
       "descricao": "Body splash Abelha Rainha com fragrância de pitaya, perfume corporal leve em spray.",
-      "img": "assets/produtos/abelha-rainha/lancamentos-body-splash-perfumaria__body-splash-pitaya.jpg",
+      "img": "assets/produtos/abelha-rainha/body-splash-pitaya.jpg",
       "keywords": "body splash pitaya lancamentos perfumaria abelha rainha"
     },
     {
@@ -3293,7 +3293,7 @@
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Esfoliantes Corporais",
       "descricao": "Esfoliante corporal Abelha Rainha com fragrância de vanilla, em pote.",
-      "img": "assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-vanilla.jpg",
+      "img": "assets/produtos/abelha-rainha/esfoliante-corporal-vanilla.jpg",
       "keywords": "esfoliante corporal vanilla lancamentos esfoliantes corporais abelha rainha"
     },
     {
@@ -3306,7 +3306,7 @@
       "embalagens": [
         "200 g"
       ],
-      "img": "assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-melancia.jpg",
+      "img": "assets/produtos/abelha-rainha/esfoliante-corporal-melancia.jpg",
       "keywords": "esfoliante corporal melancia lancamentos esfoliantes corporais abelha rainha 200g farma"
     },
     {
@@ -3316,7 +3316,7 @@
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Esfoliantes Corporais",
       "descricao": "Esfoliante corporal Abelha Rainha com fragrância de maracujá, em pote.",
-      "img": "assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-maracuja.jpg",
+      "img": "assets/produtos/abelha-rainha/esfoliante-corporal-maracuja.jpg",
       "keywords": "esfoliante corporal maracuja lancamentos esfoliantes corporais abelha rainha"
     },
     {
@@ -3326,7 +3326,7 @@
       "marca": "Abelha Rainha",
       "linha": "Lançamentos - Esfoliantes Corporais",
       "descricao": "Esfoliante corporal Abelha Rainha com fragrância de pitaya, em pote.",
-      "img": "assets/produtos/abelha-rainha/lancamentos-esfoliantes-corporais__esfoliante-corporal-pitaya.jpg",
+      "img": "assets/produtos/abelha-rainha/esfoliante-corporal-pitaya.jpg",
       "keywords": "esfoliante corporal pitaya lancamentos esfoliantes corporais abelha rainha"
     },
     {
@@ -3336,7 +3336,7 @@
       "marca": "Abelha Rainha",
       "linha": "Hidratantes",
       "descricao": "Creme hidratante facial e corporal Abelha Rainha para pele extrasseca, em pote de 60 g.",
-      "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-facial-e-corporal-para-pele-extrasseca.jpg",
+      "img": "assets/produtos/abelha-rainha/hidratante-facial-e-corporal-para-pele-extrasseca.jpg",
       "keywords": "hidratante facial e corporal para pele extrasseca hidratantes abelha rainha hidra corp 60g farma",
       "embalagens": [
         "60 g"
@@ -3349,7 +3349,7 @@
       "marca": "Abelha Rainha",
       "linha": "Hidratantes",
       "descricao": "Hidratante corporal Abelha Rainha para pele extrasseca, com hidratação de 72 horas, em frasco de 400 ml.",
-      "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-extrasseca.jpg",
+      "img": "assets/produtos/abelha-rainha/hidratante-corporal-para-pele-extrasseca.jpg",
       "keywords": "hidratante corporal para pele extrasseca hidratantes abelha rainha corp 400ml farma",
       "embalagens": [
         "400 ml"
@@ -3362,7 +3362,7 @@
       "marca": "Abelha Rainha",
       "linha": "Hidratantes",
       "descricao": "Hidratante corporal Abelha Rainha para pele seca, com hidratação de 72 horas, em frasco de 400 ml.",
-      "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-seca.jpg",
+      "img": "assets/produtos/abelha-rainha/hidratante-corporal-para-pele-seca.jpg",
       "keywords": "hidratante corporal para pele seca hidratantes abelha rainha corp 400ml farma",
       "embalagens": [
         "400 ml"
@@ -3378,7 +3378,7 @@
       "embalagens": [
         "400 ml"
       ],
-      "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-q10-e-vitamina-c.jpg",
+      "img": "assets/produtos/abelha-rainha/hidratante-corporal-q10-e-vitamina-c.jpg",
       "keywords": "hidratante corporal q10 e vitamina c hidratantes abelha rainha corp 400ml farma"
     },
     {
@@ -3391,7 +3391,7 @@
       "embalagens": [
         "400 ml"
       ],
-      "img": "assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-rosa-mosqueta.jpg",
+      "img": "assets/produtos/abelha-rainha/hidratante-corporal-rosa-mosqueta.jpg",
       "keywords": "hidratante corporal rosa mosqueta hidratantes abelha rainha corp 400ml farma"
     },
     {
@@ -3401,7 +3401,7 @@
       "marca": "Abelha Rainha",
       "linha": "Rosa Mosqueta",
       "descricao": "Óleo de rosa mosqueta 100% puro Abelha Rainha, em frasco conta-gotas de 20 ml.",
-      "img": "assets/produtos/abelha-rainha/rosa-mosqueta__oleo-de-rosa-mosqueta-puro.jpg",
+      "img": "assets/produtos/abelha-rainha/oleo-de-rosa-mosqueta-puro.jpg",
       "keywords": "oleo de rosa mosqueta puro abelha rainha"
     },
     {
@@ -3415,7 +3415,7 @@
         "20 ml",
         "30 ml"
       ],
-      "img": "assets/produtos/abelha-rainha/rosa-mosqueta__oleo-de-rosa-mosqueta.jpg",
+      "img": "assets/produtos/abelha-rainha/oleo-de-rosa-mosqueta.jpg",
       "keywords": "oleo de rosa mosqueta abelha rainha 20ml farma 30ml"
     },
     {
@@ -3425,7 +3425,7 @@
       "marca": "Abelha Rainha",
       "linha": "Rosa Mosqueta",
       "descricao": "Creme facial clareador para marcas Abelha Rainha, com óleo de rosa mosqueta, em pote de 50 g.",
-      "img": "assets/produtos/abelha-rainha/rosa-mosqueta__creme-facial-clareador-de-rosa-mosqueta.jpg",
+      "img": "assets/produtos/abelha-rainha/creme-facial-clareador-de-rosa-mosqueta.jpg",
       "keywords": "creme facial clareador de rosa mosqueta abelha rainha para marcas 50g farma",
       "embalagens": [
         "50 g"
@@ -3437,8 +3437,8 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Rosa Mosqueta",
-      "descricao": "Creme facial preventivo às rugas Abelha Rainha, com óleo de rosa mosqueta, em pote de 50 g.",
-      "img": "assets/produtos/abelha-rainha/rosa-mosqueta__creme-facial-preventivo-as-rugas-de-rosa-mosqueta.jpg",
+      "descricao": "Creme facial preventivo às rugas Abelha Rainha com FPS 15, óleo de rosa mosqueta, ácido hialurônico e vitamina E, em pote de 50 g.",
+      "img": "assets/produtos/abelha-rainha/creme-facial-preventivo-as-rugas-de-rosa-mosqueta.jpg",
       "keywords": "creme facial preventivo as rugas de rosa mosqueta abelha rainha 50g farma",
       "embalagens": [
         "50 g"
@@ -3450,8 +3450,8 @@
       "categoria": "abelha-rainha",
       "marca": "Abelha Rainha",
       "linha": "Vitamina C",
-      "descricao": "Sabonete líquido facial Abelha Rainha com vitamina C e ácido hialurônico.",
-      "img": "assets/produtos/abelha-rainha/vitamina-c__sabonete-facial-vitamina-c-e-acido-hialuronico.jpg",
+      "descricao": "Sabonete facial em gel Abelha Rainha com vitamina C, ácido hialurônico e vitamina E, em frasco de 190 ml.",
+      "img": "assets/produtos/abelha-rainha/sabonete-facial-vitamina-c-e-acido-hialuronico.jpg",
       "keywords": "sabonete facial vitamina c e acido hialuronico abelha rainha"
     },
     {
@@ -3461,7 +3461,7 @@
       "marca": "Abelha Rainha",
       "linha": "Vitamina C",
       "descricao": "Sérum facial Abelha Rainha com 20% de vitamina C, para face e área dos olhos, em frasco conta-gotas de 30 ml.",
-      "img": "assets/produtos/abelha-rainha/vitamina-c__serum-facial-vitamina-c.jpg",
+      "img": "assets/produtos/abelha-rainha/serum-facial-vitamina-c.jpg",
       "keywords": "serum facial vitamina c abelha rainha 20 face e olhos 30ml farma",
       "embalagens": [
         "30 ml"
@@ -3484,7 +3484,7 @@
       "marca": "Abelha Rainha",
       "linha": "Proteção Solar",
       "descricao": "Protetor solar facial Abelha Rainha FPS 80 em creme, sem cor, em bisnaga de 60 g.",
-      "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-em-creme.jpg",
+      "img": "assets/produtos/abelha-rainha/protetor-solar-facial-em-creme.jpg",
       "keywords": "protetor solar facial em creme protecao abelha rainha sol fps 80 sem cor 60g farma",
       "embalagens": [
         "60 g"
@@ -3497,7 +3497,7 @@
       "marca": "Abelha Rainha",
       "linha": "Proteção Solar",
       "descricao": "Protetor solar corporal Abelha Rainha em spray, FPS 60.",
-      "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-corporal-em-spray.jpg",
+      "img": "assets/produtos/abelha-rainha/protetor-solar-corporal-em-spray.jpg",
       "keywords": "protetor solar corporal em spray protecao abelha rainha"
     },
     {
@@ -3507,7 +3507,7 @@
       "marca": "Abelha Rainha",
       "linha": "Proteção Solar",
       "descricao": "Protetor solar facial Abelha Rainha FPS 80 com cor de base, no tom bege natural, em bisnaga de 40 g.",
-      "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-fps-80-cor-de-base-bege-natural.jpg",
+      "img": "assets/produtos/abelha-rainha/protetor-solar-facial-fps-80-cor-de-base-bege-natural.jpg",
       "keywords": "protetor solar facial fps 80 cor de base bege natural protecao abelha rainha sol nat 40g farma",
       "embalagens": [
         "40 g"
@@ -3520,7 +3520,7 @@
       "marca": "Abelha Rainha",
       "linha": "Proteção Solar",
       "descricao": "Protetor solar facial Abelha Rainha FPS 80 com cor de base, no tom bege médio, em bisnaga de 40 g.",
-      "img": "assets/produtos/abelha-rainha/protecao-solar__protetor-solar-facial-fps-80-cor-de-base-bege-medio.jpg",
+      "img": "assets/produtos/abelha-rainha/protetor-solar-facial-fps-80-cor-de-base-bege-medio.jpg",
       "keywords": "protetor solar facial fps 80 cor de base bege medio protecao abelha rainha sol med 40g farma",
       "embalagens": [
         "40 g"
@@ -3543,7 +3543,7 @@
       "marca": "Abelha Rainha",
       "linha": "Acne",
       "descricao": "Sabonete líquido facial antibacteriano da linha Acne, da Abelha Rainha, em frasco de 110 ml.",
-      "img": "assets/produtos/abelha-rainha/acne__sabonete-facial-antibacteriano.jpg",
+      "img": "assets/produtos/abelha-rainha/sabonete-facial-antibacteriano.jpg",
       "keywords": "sabonete facial antibacteriano acne abelha rainha liquido 110ml farma",
       "embalagens": [
         "110 ml"
@@ -3556,7 +3556,7 @@
       "marca": "Abelha Rainha",
       "linha": "Acne",
       "descricao": "Loção tônica adstringente da linha Acne, da Abelha Rainha, em spray.",
-      "img": "assets/produtos/abelha-rainha/acne__locao-tonica-adstringente.jpg",
+      "img": "assets/produtos/abelha-rainha/locao-tonica-adstringente.jpg",
       "keywords": "locao tonica adstringente acne abelha rainha"
     },
     {
@@ -3566,7 +3566,7 @@
       "marca": "Abelha Rainha",
       "linha": "Acne",
       "descricao": "Gel secativo para espinhas com aplicador roll-on, da linha Acne da Abelha Rainha.",
-      "img": "assets/produtos/abelha-rainha/acne__gel-secativo-para-espinhas-roll-on.jpg",
+      "img": "assets/produtos/abelha-rainha/gel-secativo-para-espinhas-roll-on.jpg",
       "keywords": "gel secativo para espinhas roll on acne abelha rainha"
     },
     {
@@ -3576,7 +3576,7 @@
       "marca": "Abelha Rainha",
       "linha": "Acne",
       "descricao": "Bastão secativo para espinhas da linha Acne, da Abelha Rainha, de 5 g.",
-      "img": "assets/produtos/abelha-rainha/acne__bastao-secativo-para-espinhas.jpg",
+      "img": "assets/produtos/abelha-rainha/bastao-secativo-para-espinhas.jpg",
       "keywords": "bastao secativo para espinhas acne abelha rainha 5g farma",
       "embalagens": [
         "5 g"
@@ -3600,7 +3600,7 @@
       "marca": "Abelha Rainha",
       "linha": "Dermopés",
       "descricao": "Loção Milagre dos Pés, da linha Dermopés da Abelha Rainha, para afinar os pés, em frasco de 30 ml.",
-      "img": "assets/produtos/abelha-rainha/dermopes__locao-para-afinar-os-pes-milagre-dos-pes.jpg",
+      "img": "assets/produtos/abelha-rainha/locao-para-afinar-os-pes-milagre-dos-pes.jpg",
       "keywords": "locao para afinar os pes milagre dos dermopes abelha rainha p 30ml farma",
       "embalagens": [
         "30 ml"
@@ -3616,7 +3616,7 @@
       "embalagens": [
         "100 g"
       ],
-      "img": "assets/produtos/abelha-rainha/dermopes__creme-ultra-hidratante-para-os-pes.jpg",
+      "img": "assets/produtos/abelha-rainha/creme-ultra-hidratante-para-os-pes.jpg",
       "keywords": "creme ultra hidratante para os pes dermopes abelha rainha 100g farma"
     },
     {
@@ -3629,7 +3629,7 @@
       "embalagens": [
         "100 g"
       ],
-      "img": "assets/produtos/abelha-rainha/dermopes__creme-para-hidratar-e-afinar-os-pes.jpg",
+      "img": "assets/produtos/abelha-rainha/creme-para-hidratar-e-afinar-os-pes.jpg",
       "keywords": "creme para hidratar e afinar os pes dermopes abelha rainha 100g farma"
     },
     {
@@ -3642,7 +3642,7 @@
       "embalagens": [
         "100 g"
       ],
-      "img": "assets/produtos/abelha-rainha/dermopes__gel-esfoliante-para-os-pes.jpg",
+      "img": "assets/produtos/abelha-rainha/gel-esfoliante-para-os-pes.jpg",
       "keywords": "gel esfoliante para os pes dermopes abelha rainha 100g farma"
     },
     {
@@ -3682,7 +3682,7 @@
       "marca": "Apisvida",
       "linha": "",
       "descricao": "Nanoprópolis Apisvida, extrato de própolis verde em gotas feito com nanotecnologia, sem álcool, em frasco de 20 ml.",
-      "img": "assets/produtos/apisvida/propolis__nanopropolis-propolis-verde.jpg",
+      "img": "assets/produtos/apisvida/nanopropolis-propolis-verde.jpg",
       "keywords": "nanopropolis propolis verde apisvida ext 20ml farma em gotas",
       "embalagens": [
         "20 ml"
@@ -3695,7 +3695,7 @@
       "marca": "Apisvida",
       "linha": "",
       "descricao": "Mel puro Apisvida, 100% natural, em bisnaga de 250 g com tampa cone.",
-      "img": "assets/produtos/apisvida/mel__mel-tradicional-bisnaga-tampa-cone.jpg",
+      "img": "assets/produtos/apisvida/mel-tradicional-bisnaga-tampa-cone.jpg",
       "keywords": "mel tradicional bisnaga tampa cone apisvida puro 250g apis vida farma",
       "embalagens": [
         "250 g"
@@ -3707,7 +3707,7 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "descricao": "Própolis 2000 Apisvida, extrato de própolis verde em cápsulas de 500 mg.",
-      "img": "assets/produtos/apisvida/propolis__propolis-2000-extrato-de-propolis-verde-em-capsulas.jpg",
+      "img": "assets/produtos/apisvida/propolis-2000-extrato-de-propolis-verde-em-capsulas.jpg",
       "keywords": "propolis 2000 extrato de verde em capsulas apisvida"
     },
     {
@@ -3717,7 +3717,7 @@
       "marca": "Apisvida",
       "linha": "",
       "descricao": "Extrato de própolis verde AP60 Propoflex, da Apisvida, com concentração padronizada, em frasco de 30 ml.",
-      "img": "assets/produtos/apisvida/propolis__propoflex-ap60-extrato-de-propolis-verde.jpg",
+      "img": "assets/produtos/apisvida/propoflex-ap60-extrato-de-propolis-verde.jpg",
       "keywords": "propoflex ap60 extrato de propolis verde apisvida ext prop 15 30ml farma",
       "embalagens": [
         "30 ml"
@@ -3729,17 +3729,8 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "descricao": "Extrato de própolis verde Propoflex, da Apisvida, com concentração padronizada, em frasco de 20 ml.",
-      "img": "assets/produtos/apisvida/propolis__propoflex-extrato-de-propolis-verde.jpg",
+      "img": "assets/produtos/apisvida/propoflex-extrato-de-propolis-verde.jpg",
       "keywords": "propoflex extrato de propolis verde apisvida"
-    },
-    {
-      "id": "nanopropolis-propolis-blend-em-gotas",
-      "nome": "Nanoprópolis Própolis Blend em Gotas",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "descricao": "Nanoprópolis Blend Apisvida, extrato de própolis em gotas feito com nanotecnologia.",
-      "img": "assets/produtos/apisvida/propolis__nanopropolis-propolis-blend-em-gotas.jpg",
-      "keywords": "nanopropolis propolis blend em gotas apisvida"
     },
     {
       "id": "relampago-energetico",
@@ -3762,7 +3753,7 @@
       "marca": "Apisvida",
       "linha": "",
       "descricao": "Protetor labial Apisvida de manteiga de cacau com própolis, em bastão de 3,5 g, avulso ou em displays com 12 e 50 unidades.",
-      "img": "assets/produtos/apisvida/cuidado-pessoal__protetor-labial-manteiga-de-cacau-com-propolis.jpg",
+      "img": "assets/produtos/apisvida/protetor-labial-manteiga-de-cacau-com-propolis.jpg",
       "keywords": "protetor labial manteiga de cacau com propolis apisvida c 3 5g farma 12un 42g 50un 175g",
       "embalagens": [
         "Unidade de 3,5 g",
@@ -3775,8 +3766,8 @@
       "nome": "Mantex Manteiga de Cacau com Ácido Hialurônico",
       "categoria": "apisvida",
       "marca": "Apisvida",
-      "descricao": "Protetor labial Mantex, da Apisvida, de manteiga de cacau com ácido hialurônico.",
-      "img": "assets/produtos/apisvida/cuidado-pessoal__mantex-manteiga-de-cacau-com-acido-hialuronico.jpg",
+      "descricao": "Protetor labial Mantex, da Apisvida, de manteiga de cacau com própolis e ácido hialurônico.",
+      "img": "assets/produtos/apisvida/mantex-manteiga-de-cacau-com-acido-hialuronico.jpg",
       "keywords": "mantex manteiga de cacau com acido hialuronico apisvida"
     },
     {
@@ -3786,7 +3777,7 @@
       "marca": "Apisvida",
       "linha": "",
       "descricao": "Spray para garganta Apisvida com extrato de própolis, mel, menta, malva e gengibre, em frasco de 30 ml.",
-      "img": "assets/produtos/apisvida/propolis__spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-gengibre.jpg",
+      "img": "assets/produtos/apisvida/spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-ge.jpg",
       "keywords": "spray para garganta extrato de propolis mel menta malva e gengibre apisvida c 30ml farma",
       "embalagens": [
         "30 ml"
@@ -3799,7 +3790,7 @@
       "marca": "Apisvida",
       "linha": "",
       "descricao": "Spray para garganta Apisvida com extrato de própolis, mel, menta, malva e romã, em frasco de 30 ml.",
-      "img": "assets/produtos/apisvida/propolis__spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-roma.jpg",
+      "img": "assets/produtos/apisvida/spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-ro.jpg",
       "keywords": "spray para garganta extrato de propolis mel menta malva e roma apisvida c 30ml farma",
       "embalagens": [
         "30 ml"
@@ -3821,7 +3812,7 @@
       "marca": "Apisvida",
       "linha": "",
       "descricao": "Bala para garganta zero açúcar Hallfresh sabor morango, da Apisvida, com nanoprópolis e vitamina C, em display com 6 pacotes de 32 g.",
-      "img": "assets/produtos/apisvida/balas-diet__balas-diet-halfresh-morango-com-nanopropolis.jpg",
+      "img": "assets/produtos/apisvida/balas-diet-halfresh-morango-com-nanopropolis.jpg",
       "keywords": "balas diet halfresh morango com nanopropolis apisvida sabor morango192g 192g farma",
       "embalagens": [
         "192 g"
@@ -3834,7 +3825,7 @@
       "marca": "Apisvida",
       "linha": "",
       "descricao": "Bala para garganta zero açúcar Hallfresh sabor mentol extra forte, da Apisvida, com nanoprópolis e vitamina C, em display com 6 pacotes de 32 g.",
-      "img": "assets/produtos/apisvida/balas-diet__balas-diet-halfresh-mentol-com-nanopropolis.jpg",
+      "img": "assets/produtos/apisvida/balas-diet-halfresh-mentol-com-nanopropolis.jpg",
       "keywords": "balas diet halfresh mentol com nanopropolis apisvida sabor 192g farma",
       "embalagens": [
         "192 g"
@@ -3847,7 +3838,7 @@
       "marca": "Apisvida",
       "linha": "",
       "descricao": "Bala para garganta zero açúcar Hallfresh sabor gengibre, da Apisvida, com nanoprópolis e vitamina C, em display com 6 pacotes de 32 g.",
-      "img": "assets/produtos/apisvida/balas-diet__balas-diet-halfresh-gengibre-com-nanopropolis.jpg",
+      "img": "assets/produtos/apisvida/balas-diet-halfresh-gengibre-com-nanopropolis.jpg",
       "keywords": "balas diet halfresh gengibre com nanopropolis apisvida sabor 192g farma",
       "embalagens": [
         "192 g"
@@ -3859,7 +3850,7 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "descricao": "Extrato aquoso de própolis verde Propoflex, da Apisvida, sem álcool, em frasco de 30 ml.",
-      "img": "assets/produtos/apisvida/apisvida__propoflex-extrato-aquoso-de-propolis.jpg",
+      "img": "assets/produtos/apisvida/propoflex-extrato-aquoso-de-propolis.jpg",
       "keywords": "propoflex extrato aquoso de propolis apisvida"
     },
     {
@@ -3877,9 +3868,9 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "linha": "",
-      "descricao": "Nanoprópolis Apisvida, extrato de própolis vermelha em gotas feito com nanotecnologia, em frasco de 20 ml.",
-      "img": "assets/produtos/apisvida/apisvida__nanopropolis-extrato-de-propolis-vermelho.jpg",
-      "keywords": "nanopropolis extrato de propolis vermelho apisvida ext vermelha 20ml farma",
+      "descricao": "Nanoprópolis Apisvida, extrato de própolis vermelha e própolis verde em gotas, feito com nanotecnologia, sem álcool, em frasco de 20 ml.",
+      "img": "assets/produtos/apisvida/nanopropolis-extrato-de-propolis-vermelho.jpg",
+      "keywords": "nanopropolis extrato de propolis vermelho apisvida ext vermelha 20ml farma blend em gotas",
       "embalagens": [
         "20 ml"
       ]
@@ -3890,16 +3881,16 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "descricao": "Xarope Propoflex Kids de mel e própolis, da Apisvida, sabor tutti-frutti, em frasco de 150 ml.",
-      "img": "assets/produtos/apisvida/apisvida__propoflex-kids-xarope-mel-propolis.jpg",
+      "img": "assets/produtos/apisvida/propoflex-kids-xarope-mel-propolis.jpg",
       "keywords": "propoflex kids xarope mel propolis apisvida"
     },
     {
       "id": "propoflex-kids-propolis",
-      "nome": "Propoflex Kids Própolis",
+      "nome": "Propoflex Kids Spray de Própolis Verde - Maçã Verde",
       "categoria": "apisvida",
       "marca": "Apisvida",
-      "descricao": "Extrato de própolis infantil Propoflex Kids, da Apisvida.",
-      "img": "assets/produtos/apisvida/apisvida__propoflex-kids-propolis.jpg",
+      "descricao": "Spray oral infantil Propoflex Kids de própolis verde sabor maçã verde, da Apisvida.",
+      "img": "assets/produtos/apisvida/propoflex-kids-propolis.jpg",
       "keywords": "propoflex kids propolis apisvida"
     },
     {
@@ -3908,7 +3899,7 @@
       "categoria": "apisvida",
       "marca": "Apisvida",
       "descricao": "Propoflex Kids, extrato aquoso de própolis e mel sabor morango, sem álcool, da Apisvida, em frasco de 30 ml.",
-      "img": "assets/produtos/apisvida/apisvida__propoflex-kids-propolis-morango.jpg",
+      "img": "assets/produtos/apisvida/propoflex-kids-propolis-morango.jpg",
       "keywords": "propoflex kids propolis morango apisvida"
     },
     {
@@ -3918,7 +3909,7 @@
       "marca": "Apisvida",
       "linha": "",
       "descricao": "Mel orgânico certificado Apisvida, 100% puro e natural, em pote de 300 g.",
-      "img": "assets/produtos/apisvida/apisvida__mel-apisvida.jpg",
+      "img": "assets/produtos/apisvida/mel-apisvida.jpg",
       "keywords": "mel apisvida organico 300g farma",
       "embalagens": [
         "300 g"
