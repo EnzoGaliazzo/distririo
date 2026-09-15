@@ -104,6 +104,22 @@ Estas travam o FAQ, que é a tarefa P0 nº 3.
     qual fabricante são? Se forem Oi White, o recomendado é tirar do site.
     → Resposta:
 
+11b. **Fotos refeitas (15/09): o que vale confirmar.** Mondelez, Baly, Apisvida,
+    Abelha Rainha e mais sete cards trocaram o recorte do PDF por foto de
+    produto. No caminho apareceram quatro pontos que só vocês sabem:
+    - **Dois cards unificados.** "Nanoprópolis Blend" tinha a mesma caixa da
+      Nanoprópolis Vermelha ("própolis vermelha e própolis verde"), e "Propoflex
+      Kids Spray (Mel, Malva e Romã)" era o spray tutti-frutti. Se na planilha
+      forem códigos que vocês vendem separado, eu desfaço.
+    - **Protetor Solar Facial Vitamina C Abelha Rainha.** O card é FPS 80 (como
+      no catálogo), mas as lojas mostram a caixa FPS 40. Qual dos dois vocês
+      vendem? Por isso a foto dele não foi trocada.
+    - **Trio Original 60 g (4 sabores).** A foto é da embalagem antiga "Trio
+      Original"; a marca hoje vende como "Trio Cereais". Ainda existe esse item?
+    - **Bubbaloo Balas "Pote".** O nome veio da migração, mas a lâmina mostra
+      pacote de 75 g e 82,5 g. Renomeei para o que a lâmina diz.
+    → Resposta:
+
 12. **Preço e pedido mínimo por produto.** As páginas de produto dizem "sob consulta".
     Quer publicar faixa de preço, quantidade por caixa, ou manter como está?
     → Resposta:
