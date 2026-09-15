@@ -1,7 +1,7 @@
 {
   "_leiame": "Fonte única do catálogo. Editar aqui e rodar \"node tools/build.js\" para regenerar loja.html, as páginas de produto, o índice de busca e o sitemap. Não editar o catálogo direto no HTML.",
   "atualizado": "2026-09-15",
-  "total": 337,
+  "total": 336,
   "categorias": [
     {
       "id": "mdz-trident",
@@ -175,7 +175,7 @@
       "id": "apisvida",
       "titulo": "Apisvida",
       "marca": "Apisvida",
-      "total": 23
+      "total": 22
     },
     {
       "id": "farma-barras",
@@ -1615,7 +1615,7 @@
       "marca": "Banana Brasil",
       "linha": "Supino",
       "descricao": "Barra Supino com recheio de banana desidratada e cobertura de chocolate ao leite, a receita clássica da Banana Brasil, em unidade de 24 g.",
-      "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg",
+      "img": "assets/produtos/banana-brasil/supino-barra-de-banana-com-cobertura-de-chocolate-ao-leite.jpg",
       "keywords": "supino barra de banana com cobertura chocolate ao leite brasil orig 24g 20x24g farma",
       "embalagens": [
         "24 g"
@@ -1628,7 +1628,7 @@
       "marca": "Banana Brasil",
       "linha": "Supino",
       "descricao": "Barra Supino com recheio de banana desidratada e cobertura de chocolate branco, em unidade de 24 g.",
-      "img": "assets/produtos/banana-brasil/supino__supino-barra-de-banana-com-cobertura-de-chocolate-branco.jpg",
+      "img": "assets/produtos/banana-brasil/supino-barra-de-banana-com-cobertura-de-chocolate-branco.jpg",
       "keywords": "supino barra de banana com cobertura chocolate branco brasil original 24g 20x24g farma",
       "embalagens": [
         "24 g"
@@ -2398,8 +2398,8 @@
       "categoria": "lauton",
       "marca": "Lauton",
       "linha": "Performance",
-      "descricao": "Tri Maca Peruana Premium Lauton em pó, 100% pura, sem lactose, sem glúten e sem açúcares, em pote de 100 g.",
-      "img": "assets/produtos/lauton/performance__maca-peruana-premium.jpg",
+      "descricao": "Tri Maca Peruana Premium Lauton, farinha de maca peruana amarela, negra e vermelha, sem glúten, sem lactose e sem açúcares, em caixa de 100 g que acompanha dosador.",
+      "img": "assets/produtos/lauton/maca-peruana-premium.jpg",
       "keywords": "maca peruana premium performance lauton 1377 trimaca em po 100g farma",
       "embalagens": [
         "100 g"
@@ -3739,7 +3739,7 @@
       "marca": "Apisvida",
       "linha": "",
       "descricao": "Energético Relâmpago Apisvida em unidades de 10 ml, vendido em display com 24 ou 48 unidades.",
-      "img": "assets/produtos/apisvida/energeticos__relampago-energetico.jpg",
+      "img": "assets/produtos/apisvida/relampago-energetico.jpg",
       "keywords": "relampago energetico apisvida 10ml display c 24u 240ml farma 48 480ml",
       "embalagens": [
         "Display com 24 unidades de 10 ml",
@@ -3795,15 +3795,6 @@
       "embalagens": [
         "30 ml"
       ]
-    },
-    {
-      "id": "propoflex-kids-spray-para-garganta-mel-malva-e-roma",
-      "nome": "Propoflex Kids Spray para Garganta (Mel, Malva e Romã)",
-      "categoria": "apisvida",
-      "marca": "Apisvida",
-      "descricao": "Spray infantil para garganta Propoflex Kids, da Apisvida, com própolis, mel, malva e romã.",
-      "img": "assets/produtos/apisvida/propolis-kids__propoflex-kids-spray-para-garganta-mel-malva-e-roma.jpg",
-      "keywords": "propoflex kids spray para garganta mel malva e roma apisvida"
     },
     {
       "id": "balas-diet-halfresh-morango-com-nanopropolis",
@@ -3920,12 +3911,13 @@
       "nome": "Propoflex Kids Spray de Própolis Verde - Tutti-Frutti",
       "categoria": "apisvida",
       "marca": "Apisvida",
-      "descricao": "Spray oral infantil Propoflex Kids de própolis verde sabor tutti-frutti, da Apisvida.",
+      "descricao": "Spray oral infantil Propoflex Kids de própolis verde com mel, malva e romã, sabor tutti-frutti, da Apisvida.",
       "embalagens": [
         "35 ml"
       ],
-      "keywords": "propoflex kids spray tutti frutti 35ml farma",
-      "img": "assets/produtos/apisvida/propoflex-kids-spray-tutti-frutti.jpg"
+      "keywords": "propoflex kids spray tutti frutti 35ml farma para garganta mel malva e roma apisvida",
+      "img": "assets/produtos/apisvida/propoflex-kids-spray-tutti-frutti.jpg",
+      "linha": ""
     },
     {
       "id": "mel-organico-sache",
