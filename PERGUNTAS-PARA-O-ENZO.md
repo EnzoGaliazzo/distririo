@@ -29,10 +29,16 @@ Estas travam o FAQ, que é a tarefa P0 nº 3.
 3. **Formas de pagamento aceitas.** Boleto? Prazo (7/14/28)? PIX? Cartão?
    Primeira compra tem regra diferente?
    → Resposta:
+   → **Status (15/09):** a pergunta saiu do FAQ da página de contato. Ela estava
+   publicada com o marcador `[FALTA: ...]` aparecendo para o cliente. Volta ao ar
+   assim que você responder: o bloco está comentado em `contato.html`, é só
+   descomentar e trocar o texto.
 
 4. **Pré-venda x pronta entrega.** Qual a diferença na prática para o
    comerciante, e quando ele cai em cada uma?
    → Resposta:
+   → **Status (15/09):** mesma coisa da pergunta 3 — fora do ar até ter resposta,
+   comentada em `contato.html`.
 
 5. **Horário de funcionamento** do armazém e do atendimento comercial. Preciso
    disso para o schema `LocalBusiness` (tarefa P1 nº 9).
@@ -91,7 +97,8 @@ Estas travam o FAQ, que é a tarefa P0 nº 3.
     da marca) e foram unificados, com a URL antiga redirecionando; 6 mais
     apareceram na conferência; 34 ganharam foto da loja oficial. Sobram 5, e
     nenhum por falta de procura:
-    - **Fitas de Clareamento Dental Roxa (5, 7 e 12 aplicações)** — ver 11a.
+    - ~~**Fitas de Clareamento Dental Roxa (5, 7 e 12 aplicações)**~~ — saíram do
+      catálogo em 15/09, ver 11a. Sobram 2 produtos sem foto.
     - **Gooday Snack Barbecue** — saiu da loja da Mix Nutri e dos varejistas.
       Ainda vendem? Se saiu de linha, melhor tirar do catálogo.
     - **Whey Sachê Chocolate Belga Nutrilatina** — a Nutrilatina não publica
@@ -102,7 +109,12 @@ Estas travam o FAQ, que é a tarefa P0 nº 3.
     e proibiu comercialização, distribuição e propaganda das fitas Oiwhite. Na
     planilha elas vieram sem marca e o site as colocou em Abelha Rainha. De
     qual fabricante são? Se forem Oi White, o recomendado é tirar do site.
-    → Resposta:
+    → **Resolvido em 15/09 (commit `c01aafd`):** você autorizou tirar. Os três
+    cadastros saíram do catálogo (336 → 333 produtos) e os endereços antigos
+    viraram redirecionamento para a loja, com `noindex`. **Se o fabricante for
+    outro e o produto for regular, me avise que eu devolvo os três cadastros** —
+    eles continuam no histórico do git.
+    → Resposta (fabricante):
 
 11b. **Fotos refeitas (15/09): o que vale confirmar.** Mondelez, Baly, Apisvida,
     Abelha Rainha e mais sete cards trocaram o recorte do PDF por foto de
@@ -160,6 +172,51 @@ Estas travam o FAQ, que é a tarefa P0 nº 3.
 16. **Anexo de currículo do Web3Forms.** Continua sem teste. O plano gratuito
     historicamente ignora arquivo; se for o caso, o candidato lê "enviado" e o
     currículo se perde.
+    → Resposta:
+
+## Depois da auditoria de 15/09
+
+18. **O que só você pode fazer.** A auditoria completa está no laudo que te
+    mandei; estes itens dependem de acesso ou de informação que não está no
+    repositório. Em ordem de urgência:
+
+    - **HTTPS obrigatório (S-01).** GitHub → repositório `distririo` → Settings →
+      Pages → marcar **Enforce HTTPS**. Hoje `http://distririo.com.br` abre sem
+      criptografia. Um clique.
+    - **Publicar só o site (S-02) e proteger a `main` (P-02).** Deixei pronto o
+      fluxo de publicação por GitHub Actions. Para ligar: Settings → Pages →
+      Source → **GitHub Actions**. Depois, Settings → Branches → Add rule em
+      `main` exigindo a verificação. Enquanto não ligar, `robots.txt` já pede ao
+      Google para não indexar `/tools/`, `/data/` e os `.md`.
+    - **E-mail difícil de falsificar (S-03).** No painel de DNS (Cloudflare):
+      trocar o registro TXT do SPF de `?all` para `~all`
+      (`v=spf1 include:spf.whservidor.com ~all`) e, depois de uma semana lendo os
+      relatórios, mudar `_dmarc` de `p=none` para `p=quarantine`.
+    - **Cabeçalhos de segurança (S-04).** Ligar o proxy da Cloudflare (nuvem
+      laranja) nos registros do site e criar uma Transform Rule de resposta com
+      `Strict-Transport-Security: max-age=31536000`, `X-Content-Type-Options: nosniff`,
+      `X-Frame-Options: SAMEORIGIN` e `Permissions-Policy: geolocation=(), camera=(), microphone=()`.
+      Não mexi em nada de DNS, como combinado.
+    - **CNPJ e porte da empresa (L-03, L-04).** Preciso do número para publicar no
+      rodapé e na política, e saber se é ME/EPP para dizer certo quem cuida dos
+      dados.
+    - **Teste do currículo (F-03).** Mande uma candidatura de teste com PDF em
+      `trabalhe-conosco.html` e confirme se o anexo chega no e-mail. Pelo que
+      encontrei, o plano gratuito do Web3Forms não manda anexo.
+    - **Monitoramento e medição (R-01, N-01).** Criar conta no UptimeRobot (grátis)
+      apontando para a home, a loja e o cadastro, e ligar o Cloudflare Web
+      Analytics, que mede sem cookie e sem depender do aceite do banner.
+    - **Conta do GitHub (R-02).** Ligar verificação em duas etapas e guardar os
+      códigos de recuperação. Quem entra nessa conta publica no site em 60 s.
+    - **Prova social (item 8) e cidades atendidas (item 6).** Continuam sendo o
+      maior ganho de conversão que falta.
+    → Resposta:
+
+19. **Cópia do cadastro por e-mail.** "Quero ser cliente" passou a mandar uma
+    cópia do cadastro (CNPJ, responsável, telefone, empresa, ramo e bairro) para
+    o e-mail, além de abrir o WhatsApp — antes, quem desistia na tela do WhatsApp
+    sumia sem deixar contato. A política de privacidade foi atualizada. Se você
+    preferir que volte a ser só WhatsApp, é uma linha para desfazer.
     → Resposta:
 
 ---

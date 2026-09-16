@@ -70,6 +70,9 @@ function blocoSite() {
 
 function extrairFaq(html) {
     const perguntas = [];
+    // Pergunta comentada no HTML está fora do ar: não pode entrar no schema.
+    // Sem isto, o Google leria uma resposta que o visitante não vê.
+    html = html.replace(/<!--[\s\S]*?-->/g, ' ');
     const re = /<div class="faq-item">[\s\S]*?<span>([\s\S]*?)<\/span>[\s\S]*?<div class="faq-answer">([\s\S]*?)<\/div>/g;
     let m;
     while ((m = re.exec(html)) !== null) {
