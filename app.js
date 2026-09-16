@@ -1677,7 +1677,7 @@
         caixa.innerHTML = '';
         lista.forEach(function (item) {
             var li = document.createElement('div');
-            li.className = 'lista-item';
+            li.className = 'lista-item' + (item.id === recemEntrou ? ' acabou-de-entrar' : '');
             li.innerHTML =
                 '<div class="lista-item-texto">' +
                 '<strong>' + escapar(item.nome) + '</strong>' +
@@ -1705,6 +1705,7 @@
             campo.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); campo.blur(); } });
             caixa.appendChild(li);
         });
+        recemEntrou = null;
 
         var msg = montarMensagem(lista);
         if (enviar) {
@@ -1733,7 +1734,12 @@
         return d.innerHTML;
     }
 
+    // Qual item acabou de entrar. Serve só para a linha dele nascer carimbada
+    // na próxima desenhada do painel; é limpo logo depois de usar.
+    var recemEntrou = null;
+
     function adicionar(id, nome, marca) {
+        recemEntrou = id;
         var lista = lerLista();
         var achou = lista.find(function (i) { return i.id === id; });
         if (achou) {
