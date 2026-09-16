@@ -48,7 +48,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@48,700&family=Instrument+Sans:wght@400;600&family=Martian+Mono:wght@600&display=swap">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@48,700&family=Instrument+Sans:wght@400;600&family=Martian+Mono:wght@600&display=swap"></noscript>
-    <link rel="stylesheet" href="style.css?v=fc72f00e">
+    <link rel="stylesheet" href="style.css?v=2a94e7e0">
     <!-- jsonld:inicio -->
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quais são as áreas com vagas na Distri Rio?","acceptedAnswer":{"@type":"Answer","text":"As oportunidades variam entre Comercial, Vendas, Logística, Expedição, Financeiro, Administrativo e Atendimento ao Cliente, conforme a necessidade de cada área. Fique de olho nas nossas redes pra acompanhar as vagas abertas."}},{"@type":"Question","name":"Como faço pra me candidatar a uma vaga?","acceptedAnswer":{"@type":"Answer","text":"É só preencher o formulário acima com seus dados e anexar seu currículo atualizado. Nossa equipe analisa e entra em contato se o seu perfil combinar com uma oportunidade."}},{"@type":"Question","name":"Não tem vaga aberta no meu perfil. Posso enviar o currículo mesmo assim?","acceptedAnswer":{"@type":"Answer","text":"Pode sim! Seu currículo fica no nosso banco de talentos e, assim que surgir uma vaga compatível, a gente entra em contato."}},{"@type":"Question","name":"A Distri Rio oferece vaga de estágio ou primeiro emprego?","acceptedAnswer":{"@type":"Answer","text":"Conforme a necessidade de cada área, sim. Fique de olho nas nossas redes sociais e nesta página pra acompanhar as próximas seleções."}},{"@type":"Question","name":"Como funciona o processo seletivo?","acceptedAnswer":{"@type":"Answer","text":"Costuma incluir triagem de currículo e uma conversa com a nossa equipe. O processo pode variar um pouco dependendo da vaga."}}]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://distririo.com.br/"},{"@type":"ListItem","position":2,"name":"Trabalhe conosco","item":"https://distririo.com.br/trabalhe-conosco.html"}]}</script>
@@ -106,123 +106,123 @@
             <p>Faça parte do time da Distri Rio. Preencha o formulário abaixo, anexe seu currículo e conte pra gente onde você quer atuar.</p>
         </section>
 
-        <section class="section">
-            <div class="job-form-card">
-                <form id="jobForm" class="job-form">
-                    <input type="hidden" name="access_key" value="7e36d83f-e2b1-45cd-a948-b94cd71fa7ec">
-                    <input type="hidden" name="subject" value="Nova candidatura - Trabalhe Conosco Distri Rio">
-                    <input type="checkbox" name="botcheck" class="job-form-honeypot"
-                        tabindex="-1" autocomplete="off" aria-hidden="true">
+        <section class="section candidatura">
+                <div class="job-form-card">
+                    <form id="jobForm" class="job-form">
+                        <input type="hidden" name="access_key" value="7e36d83f-e2b1-45cd-a948-b94cd71fa7ec">
+                        <input type="hidden" name="subject" value="Nova candidatura - Trabalhe Conosco Distri Rio">
+                        <input type="checkbox" name="botcheck" class="job-form-honeypot"
+                            tabindex="-1" autocomplete="off" aria-hidden="true">
 
-                    <div class="form-field">
-                        <label for="jobName">Nome</label>
-                        <input type="text" id="jobName" name="name" autocomplete="name" placeholder="Seu nome completo" required>
-                    </div>
-
-                    <div class="form-field">
-                        <label for="jobSector">Setor de interesse</label>
-                        <select id="jobSector" name="setor" required>
-                            <option value="" disabled selected>Selecione um...</option>
-                            <option>Comercial / Vendas</option>
-                            <option>Logística / Expedição</option>
-                            <option>Financeiro</option>
-                            <option>Administrativo / RH</option>
-                            <option>Estoque / Almoxarifado</option>
-                            <option>Atendimento ao Cliente</option>
-                            <option>Marketing</option>
-                            <option>Outro</option>
-                        </select>
-                    </div>
-
-                    <div class="form-row">
                         <div class="form-field">
-                            <label for="jobPhone">Telefone</label>
-                            <input type="tel" id="jobPhone" name="phone" autocomplete="tel" placeholder="(21) 99999-9999" required>
+                            <label for="jobName">Nome</label>
+                            <input type="text" id="jobName" name="name" autocomplete="name" placeholder="Seu nome completo" required>
                         </div>
+
                         <div class="form-field">
-                            <label for="jobEmail">E-mail</label>
-                            <input type="email" id="jobEmail" name="email" autocomplete="email" placeholder="seuemail@exemplo.com" required>
+                            <label for="jobSector">Setor de interesse</label>
+                            <select id="jobSector" name="setor" required>
+                                <option value="" disabled selected>Selecione um...</option>
+                                <option>Comercial / Vendas</option>
+                                <option>Logística / Expedição</option>
+                                <option>Financeiro</option>
+                                <option>Administrativo / RH</option>
+                                <option>Estoque / Almoxarifado</option>
+                                <option>Atendimento ao Cliente</option>
+                                <option>Marketing</option>
+                                <option>Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="jobPhone">Telefone</label>
+                                <input type="tel" id="jobPhone" name="phone" autocomplete="tel" placeholder="(21) 99999-9999" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="jobEmail">E-mail</label>
+                                <input type="email" id="jobEmail" name="email" autocomplete="email" placeholder="seuemail@exemplo.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="jobMessage">Mensagem</label>
+                            <textarea id="jobMessage" name="message" rows="4" placeholder="Conte um pouco sobre você e sua experiência"></textarea>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="jobResume">Anexe seu currículo</label>
+                            <input type="file" id="jobResume" name="attachment" accept=".pdf,.doc,.docx">
+                        </div>
+
+                        <div class="form-field">
+                            <label for="jobLink">Link do LinkedIn ou portfólio (opcional)</label>
+                            <input type="url" id="jobLink" name="link" autocomplete="url" placeholder="https://linkedin.com/in/seu-perfil">
+                            <p class="form-dica">Se o anexo não chegar, é por aqui que a gente encontra você.</p>
+                        </div>
+
+                        <!-- O aceite vai junto no e-mail (name + value): a LGPD põe no
+                             controlador o ônus de provar que o consentimento existiu. -->
+                        <label class="form-consent">
+                            <input type="checkbox" name="consentimento" value="Autorizou o uso dos dados e do curriculo para recrutamento e selecao" required>
+                            <span>Autorizo o uso dos meus dados e currículo pela Distri Rio exclusivamente para fins de recrutamento e seleção, nos termos da <a href="politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+                        </label>
+
+                        <button type="submit" class="btn job-submit">Enviar candidatura</button>
+                        <p class="job-form-status" id="jobFormStatus" role="status" aria-live="polite" hidden></p>
+                    </form>
+                </div>
+
+            <aside class="faq-section candidatura-duvidas" aria-labelledby="duvidasTitulo">
+                <h2 id="duvidasTitulo">Antes de enviar</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button type="button" class="faq-question" aria-expanded="false">
+                            <span>Quais são as áreas com vagas na Distri Rio?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>As oportunidades variam entre Comercial, Vendas, Logística, Expedição, Financeiro, Administrativo e Atendimento ao Cliente, conforme a necessidade de cada área. Fique de olho nas nossas redes pra acompanhar as vagas abertas.</p>
                         </div>
                     </div>
-
-                    <div class="form-field">
-                        <label for="jobMessage">Mensagem</label>
-                        <textarea id="jobMessage" name="message" rows="4" placeholder="Conte um pouco sobre você e sua experiência"></textarea>
+                    <div class="faq-item">
+                        <button type="button" class="faq-question" aria-expanded="false">
+                            <span>Como faço pra me candidatar a uma vaga?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>É só preencher o formulário acima com seus dados e anexar seu currículo atualizado. Nossa equipe analisa e entra em contato se o seu perfil combinar com uma oportunidade.</p>
+                        </div>
                     </div>
-
-                    <div class="form-field">
-                        <label for="jobResume">Anexe seu currículo</label>
-                        <input type="file" id="jobResume" name="attachment" accept=".pdf,.doc,.docx">
+                    <div class="faq-item">
+                        <button type="button" class="faq-question" aria-expanded="false">
+                            <span>Não tem vaga aberta no meu perfil. Posso enviar o currículo mesmo assim?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Pode sim! Seu currículo fica no nosso banco de talentos e, assim que surgir uma vaga compatível, a gente entra em contato.</p>
+                        </div>
                     </div>
-
-                    <div class="form-field">
-                        <label for="jobLink">Link do LinkedIn ou portfólio (opcional)</label>
-                        <input type="url" id="jobLink" name="link" autocomplete="url" placeholder="https://linkedin.com/in/seu-perfil">
-                        <p class="form-dica">Se o anexo não chegar, é por aqui que a gente encontra você.</p>
+                    <div class="faq-item">
+                        <button type="button" class="faq-question" aria-expanded="false">
+                            <span>A Distri Rio oferece vaga de estágio ou primeiro emprego?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Conforme a necessidade de cada área, sim. Fique de olho nas nossas redes sociais e nesta página pra acompanhar as próximas seleções.</p>
+                        </div>
                     </div>
-
-                    <!-- O aceite vai junto no e-mail (name + value): a LGPD põe no
-                         controlador o ônus de provar que o consentimento existiu. -->
-                    <label class="form-consent">
-                        <input type="checkbox" name="consentimento" value="Autorizou o uso dos dados e do curriculo para recrutamento e selecao" required>
-                        <span>Autorizo o uso dos meus dados e currículo pela Distri Rio exclusivamente para fins de recrutamento e seleção, nos termos da <a href="politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
-                    </label>
-
-                    <button type="submit" class="btn job-submit">Enviar candidatura</button>
-                    <p class="job-form-status" id="jobFormStatus" role="status" aria-live="polite" hidden></p>
-                </form>
-            </div>
-        </section>
-
-        <section class="section faq-section">
-            <h2>Perguntas frequentes</h2>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button type="button" class="faq-question" aria-expanded="false">
-                        <span>Quais são as áreas com vagas na Distri Rio?</span>
-                        <span class="faq-icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>As oportunidades variam entre Comercial, Vendas, Logística, Expedição, Financeiro, Administrativo e Atendimento ao Cliente, conforme a necessidade de cada área. Fique de olho nas nossas redes pra acompanhar as vagas abertas.</p>
+                    <div class="faq-item">
+                        <button type="button" class="faq-question" aria-expanded="false">
+                            <span>Como funciona o processo seletivo?</span>
+                            <span class="faq-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Costuma incluir triagem de currículo e uma conversa com a nossa equipe. O processo pode variar um pouco dependendo da vaga.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <button type="button" class="faq-question" aria-expanded="false">
-                        <span>Como faço pra me candidatar a uma vaga?</span>
-                        <span class="faq-icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>É só preencher o formulário acima com seus dados e anexar seu currículo atualizado. Nossa equipe analisa e entra em contato se o seu perfil combinar com uma oportunidade.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button type="button" class="faq-question" aria-expanded="false">
-                        <span>Não tem vaga aberta no meu perfil. Posso enviar o currículo mesmo assim?</span>
-                        <span class="faq-icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Pode sim! Seu currículo fica no nosso banco de talentos e, assim que surgir uma vaga compatível, a gente entra em contato.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button type="button" class="faq-question" aria-expanded="false">
-                        <span>A Distri Rio oferece vaga de estágio ou primeiro emprego?</span>
-                        <span class="faq-icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Conforme a necessidade de cada área, sim. Fique de olho nas nossas redes sociais e nesta página pra acompanhar as próximas seleções.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button type="button" class="faq-question" aria-expanded="false">
-                        <span>Como funciona o processo seletivo?</span>
-                        <span class="faq-icon" aria-hidden="true"></span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Costuma incluir triagem de currículo e uma conversa com a nossa equipe. O processo pode variar um pouco dependendo da vaga.</p>
-                    </div>
-                </div>
-            </div>
+            </aside>
         </section>
     </main>
 

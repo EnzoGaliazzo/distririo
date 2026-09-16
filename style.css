@@ -1706,92 +1706,90 @@ main {
 }
 
 /* ===== FAQ (accordion) ===== */
+/* Perguntas como linhas de documento, na largura da seção. Antes eram caixas
+   soltas numa coluna de 760px centralizada, mais estreita que a placa da seção
+   acima — a lista parecia deslocada. */
 .faq-list {
-    max-width: 760px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    border-top: 1px solid var(--linha);
 }
 
 .faq-item {
-    border: 1px solid var(--gray-300);
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--white);
+    border-bottom: 1px solid var(--linha);
 }
 
 .faq-question {
     width: 100%;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    padding: 1.1rem 1.4rem;
+    gap: var(--e-4);
+    padding: var(--e-4) 0;
     background: none;
     border: none;
     text-align: left;
+    font-family: var(--font-body);
     font-weight: 600;
-    font-size: 0.98rem;
+    font-size: var(--t-300);
+    line-height: 1.35;
     color: var(--dark);
     cursor: pointer;
 }
 
+.faq-question:hover {
+    color: var(--red-text);
+}
+
+/* O sinal de mais gira 45 graus e vira ×: um gesto só, no lugar de trocar a
+   cor do círculo inteiro. */
 .faq-icon {
     flex-shrink: 0;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--gray-100);
+    width: 14px;
+    height: 14px;
     position: relative;
-    transition: transform 0.25s var(--ease), background 0.25s var(--ease);
+    transition: transform var(--ms-2) var(--ease-firme);
 }
 
 .faq-icon::before,
 .faq-icon::after {
     content: "";
     position: absolute;
-    background: var(--red);
+    background: var(--red-text);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 .faq-icon::before {
-    width: 10px;
+    width: 14px;
     height: 2px;
 }
 
 .faq-icon::after {
     width: 2px;
-    height: 10px;
-    transition: opacity 0.2s var(--ease);
-}
-
-.faq-item.is-open .faq-icon::after {
-    opacity: 0;
+    height: 14px;
 }
 
 .faq-item.is-open .faq-icon {
-    background: var(--red);
-}
-
-.faq-item.is-open .faq-icon::before,
-.faq-item.is-open .faq-icon::after {
-    background: var(--white);
+    transform: rotate(45deg);
 }
 
 .faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s var(--ease);
+    transition: max-height var(--ms-3) var(--ease-firme);
 }
 
 .faq-answer p {
-    padding: 0 1.4rem 1.1rem;
+    padding: 0 var(--e-6) var(--e-4) 0;
     color: var(--texto-suave);
-    font-size: 0.92rem;
+    font-size: var(--t-200);
+    line-height: 1.55;
+    max-width: 46em;
 }
+
 
 /* ===== Missao / Visao / Valores / Proposito (Sobre) ===== */
 /* Declarações da casa: rótulo em mono, texto ao lado, fio entre as linhas.
@@ -3644,6 +3642,47 @@ main {
     .ficha-lateral {
         position: static;
         order: 2;
+    }
+}
+
+
+/* =====================================================================
+   Trabalhe conosco — formulário e dúvidas lado a lado
+   ===================================================================== */
+.candidatura {
+    display: grid;
+    grid-template-columns: minmax(0, 38rem) minmax(0, 22rem);
+    gap: var(--e-7);
+    justify-content: center;
+    align-items: start;
+}
+
+.candidatura .job-form-card {
+    max-width: none;
+    margin: 0;
+    border-top: 5px solid var(--red);
+    border-radius: var(--r-1);
+    box-shadow: none;
+}
+
+.candidatura-duvidas {
+    padding: 0;
+    position: sticky;
+    top: calc(var(--header-total) + var(--e-5));
+}
+
+.candidatura-duvidas h2 {
+    font-size: var(--t-500);
+}
+
+@media (max-width: 960px) {
+    .candidatura {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--e-6);
+    }
+
+    .candidatura-duvidas {
+        position: static;
     }
 }
 
