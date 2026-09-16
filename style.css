@@ -2997,8 +2997,25 @@ main {
 }
 
 @media (max-width: 640px) {
+    /* A faixa cresce e o texto desce: a cortina só precisa ser opaca na metade
+       de baixo, e o terço de cima finalmente mostra o armazém. Antes o texto
+       ocupava a faixa inteira e a foto virava um borrão escuro. */
+    .faixa-estrutura {
+        min-height: 470px;
+        align-items: end;
+    }
+
+    .faixa-estrutura picture,
+    .faixa-estrutura img {
+        object-position: center 38%;
+    }
+
     .faixa-estrutura::after {
-        background: linear-gradient(180deg, rgba(18, 19, 26, 0.62) 0%, rgba(18, 19, 26, 0.93) 55%);
+        background: linear-gradient(180deg, rgba(18, 19, 26, 0.18) 0%, rgba(18, 19, 26, 0.34) 20%, rgba(18, 19, 26, 0.96) 33%);
+    }
+
+    .faixa-estrutura-texto {
+        padding-top: 1.5rem;
     }
 
     .faixa-estrutura-texto h2 {

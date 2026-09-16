@@ -68,7 +68,7 @@ function arrumarHead(html, arquivo) {
         `<meta property="og:image" content="${SITE}/assets/og-distririo.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Armazém da Distri Rio em Duque de Caxias">`);
+    <meta property="og:image:alt" content="Corredor de porta-paletes carregados num armazém de distribuição">`);
 
     // 7. ícones, cor de tema e manifesto
     h = h.replace(/[ \t]*<link rel="apple-touch-icon"[^>]*>\r?\n/, '')
