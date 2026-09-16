@@ -719,3 +719,64 @@ autorização — e o pedido chega por e-mail com **o termo que a pessoa digitou
 `npm run testar` foi para 17 casos: o novo cobre o formulário aparecendo só na
 busca vazia, o telefone curto barrado, o envio com termo e consentimento, e o
 formulário voltando para um termo diferente.
+
+---
+
+## Execução — 16/09, madrugada: redesign da camada visual
+
+O Enzo pediu para refazer o design gráfico do zero, com duas skills obrigatórias
+(`/frontend-design` e 21st) e liberou aplicar direto na `main`. A
+`/frontend-design` estava no próprio projeto (`.claude/skills/`, link para
+`.agents/skills/`) e o 21st passou a responder depois que o `mcp-remote` entrou
+no lugar da chave de API.
+
+**Diagnóstico: 4,0/10.** Não era um site quebrado — era um site higienizado e sem
+autoria. Inter em 2.620 elementos, 29 tamanhos de fonte distintos (campeões
+quebrados como 14.08px), uma sombra só em 435 elementos, dois sistemas de raio
+convivendo (999px em 476 e 16px em 445), a mesma receita de seção repetida
+página após página, o easing padrão do Material em quase todas as transições, e
+nenhum tema escuro — o CSS o desligava de propósito.
+
+**Direção escolhida: "bloco de pedido".** O site é o estoque à vista, e a peça
+que ele existe para produzir é a lista. A interface fala a língua impressa do
+balcão — etiqueta, código, nota — com a estrutura pesada de um depósito. Está
+documentada em `DESIGN.md`, que é o lugar para consultar antes de mexer no
+`style.css`.
+
+**O que mudou de estrutura, não só de pele:**
+
+| Era | Virou |
+|---|---|
+| título centralizado com tracinho, igual em toda seção | placa de corredor: barra estrutural, rótulo à esquerda |
+| hero centralizado + fileira de números grandes | peça assimétrica com a coluna de razão na margem |
+| três cards iguais (home ×2, serviços ×3, sobre ×1) | diretório de corredor, folha de dados, comparação de duas colunas, declarações, tira de dados |
+| cartão de produto que flutua 6px | ficha que assenta, com tarja de categoria |
+| gaveta branca da lista | bloco de pedido com pauta pontilhada, picote e carimbo |
+| 50 emojis como ícone | marcador de etiqueta em vermelho |
+| sem tema escuro | tema escuro nativo, por token |
+
+**Duas armadilhas que apareceram no caminho** e que valem para quem for mexer:
+
+1. A folha antiga usava `--ink`/`--dark` ao mesmo tempo como TINTA (43 usos) e
+   como FUNDO de barra escura (10 usos). Enquanto só existia tema claro isso
+   nunca doeu; com tema escuro, o cabeçalho clareou junto com o texto e virou
+   creme com letra creme. Por isso existem agora `--superficie-escura` e
+   `--sobre-escuro`, que são escuros/claros nos **dois** temas.
+2. Pedir eixo variável no Google Fonts faz o navegador baixar a fonte inteira:
+   130 KB de fonte, sendo 76 KB só da Bricolage para usar dois pesos. Com
+   instância fixa e só os pesos que a folha usa, caiu para 63 KB.
+
+**Medições, antes → depois:** CLS home celular 0,0104 → 0,0090; produto 0,0015 →
+0,0007; cadastro 0,0018 → 0,0010; sobre 0,0006 → 0,0013; loja celular 0,0001 →
+0,0038. Duas regressões foram consertadas antes de subir (a coluna de razão sem
+largura reservada e a fileira de ações quebrando quando a fonte chega).
+Contraste AA medido por sonda automática nos dois temas, zero texto abaixo do
+mínimo — o `--texto-fraco` precisou escurecer de `#7c776e` para `#767166`.
+
+**O que ficou pendente:** contato, cadastro e trabalhe-conosco ainda com a
+estrutura antiga; a Fase 4 de movimento só até os tokens e o carimbo (faltam
+skeletons, toasts e transição entre páginas); nenhum detalhe autoral de textura;
+Firefox e Safari não testados (só há Chrome na máquina); e o banner do topo da
+home continua sendo criativo publicitário da Trident, não material da Distri
+Rio — mesma razão pela qual as prévias de marca foram trocadas.
+
