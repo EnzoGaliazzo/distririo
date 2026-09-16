@@ -6,6 +6,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+# O fluxo só lê o repositório: nada aqui precisa de permissão de escrita.
+permissions:
+  contents: read
+
 jobs:
   build-em-dia:
     name: Build gerado está em dia
@@ -71,6 +75,22 @@ jobs:
       - name: Nenhum caminho de imagem quebrado
         run: node tools/checar-links.js
 
+  testes:
+    name: Testes de fumaça (navegador)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # O runner do GitHub já vem com o Chrome instalado.
+      - name: Rodar npm run testar
+        run: |
+          export CHROME_PATH="$(which google-chrome || which google-chrome-stable || which chromium)"
+          echo "Chrome: $CHROME_PATH"
+          npm run testar
+
   lighthouse:
     name: Lighthouse (home e catálogo)
     runs-on: ubuntu-latest
@@ -81,14 +101,14 @@ jobs:
           node-version: '20'
 
       - name: Subir servidor estático
-        run: npx --yes http-server . -p 4173 --silent &
+        run: npx --yes http-server@14.1.1 . -p 4173 --silent &
 
       - name: Esperar o servidor
-        run: npx --yes wait-on http://127.0.0.1:4173/index.html
+        run: npx --yes wait-on@9.1.0 http://127.0.0.1:4173/index.html
 
       - name: Rodar Lighthouse
         run: |
-          npx --yes @lhci/cli@0.14.x autorun \
+          npx --yes @lhci/cli@0.15.1 autorun \
             --collect.url=http://127.0.0.1:4173/index.html \
             --collect.url=http://127.0.0.1:4173/loja.html \
             --collect.numberOfRuns=1 \

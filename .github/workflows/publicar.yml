@@ -1,0 +1,82 @@
+name: Publicar só o site
+
+# Hoje o GitHub Pages publica o repositório inteiro, e por isso
+# distririo.com.br/PERGUNTAS-PARA-O-ENZO.md, /RELATORIO-NOITE.md, /data/,
+# /tools/ e /.claude/ abrem para qualquer pessoa. Este fluxo monta uma pasta só
+# com o que é site e publica ela.
+#
+# Para ligar, uma vez:
+#   1. Settings -> Pages -> Source: "GitHub Actions"
+#   2. trocar o gatilho abaixo de workflow_dispatch para push na main
+#      (as duas linhas comentadas)
+#
+# Enquanto o Source continuar em "Deploy from a branch", este fluxo só roda
+# quando alguém aperta "Run workflow", e a publicação segue como está.
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    name: Montar a pasta pública e publicar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publicacao.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # O sitemap tira o lastmod de cada URL do histórico do git.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: O build tem de estar em dia
+        run: |
+          node tools/gerar.js
+          fora="$(git status --porcelain | grep -v ' sitemap\.xml$' || true)"
+          if [ -n "$fora" ]; then
+            echo "::error::HTML gerado diferente do que o build produz. Rode 'node tools/gerar.js' e comite."
+            git --no-pager diff --stat
+            exit 1
+          fi
+
+      - name: Links e imagens
+        run: |
+          node tools/checar-links.js
+          node tools/orfas.js | tee /tmp/orfas.txt
+          grep -q 'órfãs: 0' /tmp/orfas.txt || { echo "::error::Há imagens sem referência."; exit 1; }
+
+      - name: Separar o que é site
+        run: |
+          mkdir -p publicar
+          # páginas e pastas servidas
+          cp -r assets marca produto publicar/
+          cp ./*.html ./*.css ./*.js ./*.xml ./*.txt ./*.webmanifest publicar/
+          cp favicon.ico CNAME .nojekyll publicar/
+          # nada de data/, tools/, .claude/, .github/, *.md, package.json
+          echo "Publicando:"
+          ls -A publicar
+          du -sh publicar
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: publicar
+
+      - id: publicacao
+        uses: actions/deploy-pages@v4

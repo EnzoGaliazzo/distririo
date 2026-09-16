@@ -460,9 +460,19 @@ gravar('sitemap.xml', [
 ].join('\n'));
 
 // 5. robots.txt
+// Enquanto o GitHub Pages publicar o repositório inteiro, estes caminhos
+// existem no domínio (ver .github/workflows/publicar.yml, que corta isso de
+// vez). O Disallow não esconde nada de quem sabe o endereço, mas mantém a
+// anotação interna e a exportação do ERP fora da busca do Google.
 gravar('robots.txt', [
     'User-agent: *',
     'Allow: /',
+    'Disallow: /tools/',
+    'Disallow: /data/',
+    'Disallow: /.claude/',
+    'Disallow: /README.md',
+    'Disallow: /RELATORIO-NOITE.md',
+    'Disallow: /PERGUNTAS-PARA-O-ENZO.md',
     '',
     `Sitemap: ${SITE}/sitemap.xml`,
 ].join('\n'));

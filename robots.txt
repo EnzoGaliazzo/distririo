@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /tools/
+Disallow: /data/
+Disallow: /.claude/
+Disallow: /README.md
+Disallow: /RELATORIO-NOITE.md
+Disallow: /PERGUNTAS-PARA-O-ENZO.md
 
 Sitemap: https://distririo.com.br/sitemap.xml
