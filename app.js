@@ -503,17 +503,50 @@
         carrossel.appendChild(botaoPausa);
         carrossel.appendChild(progresso);
 
+        // Slide empilhado conta como "dentro da tela", então loading="lazy" não
+        // segurava nada: os três banners seguintes desciam junto com a home.
+        // Agora o endereço mora em data-src e entra quando o slide vai aparecer.
+        function garantirImagem(img) {
+            if (!img || img.dataset.pronta) return;
+            img.dataset.pronta = '1';
+            var pai = img.parentElement;
+            if (pai && pai.tagName === 'PICTURE') {
+                pai.querySelectorAll('source[data-srcset]').forEach(function (s) {
+                    s.srcset = s.getAttribute('data-srcset');
+                    s.removeAttribute('data-srcset');
+                });
+            }
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            }
+        }
+
+        // Só o slide visível é clicável e alcançável pelo Tab: os outros ficam
+        // empilhados em cima e roubariam o clique.
+        function aplicarEstadoDosLinks() {
+            slides.forEach(function (img, i) {
+                var link = img.closest ? img.closest('.hero-slide') : null;
+                if (!link) return;
+                var ativo = i === atual;
+                link.classList.toggle('is-active', ativo);
+                link.tabIndex = ativo ? 0 : -1;
+                link.setAttribute('aria-hidden', ativo ? 'false' : 'true');
+            });
+        }
+
         function irPara(i) {
             slides[atual].classList.remove('is-active');
             pontos[atual].setAttribute('aria-selected', 'false');
             atual = (i + slides.length) % slides.length;
+            garantirImagem(slides[atual]);
             slides[atual].classList.add('is-active');
             pontos[atual].setAttribute('aria-selected', 'true');
+            aplicarEstadoDosLinks();
             // Marca a hora da troca: o zoom lento do slide lê esse carimbo.
             window.DR_SLIDE_EM = Date.now();
             // Carrega o próximo só quando ele passa a fazer sentido.
-            var proximo = slides[(atual + 1) % slides.length];
-            if (proximo.loading === 'lazy') proximo.loading = 'eager';
+            garantirImagem(slides[(atual + 1) % slides.length]);
             animarBarra();
         }
 
@@ -572,16 +605,33 @@
 
         // Arrastar com o dedo — no celular ninguém acha setas de 30px.
         var x0 = null;
-        carrossel.addEventListener('pointerdown', function (e) { x0 = e.clientX; parar(); });
+        var arrastou = false;
+        carrossel.addEventListener('pointerdown', function (e) { x0 = e.clientX; arrastou = false; parar(); });
         carrossel.addEventListener('pointerup', function (e) {
             if (x0 === null) return;
             var d = e.clientX - x0;
             x0 = null;
-            if (Math.abs(d) > 40) irPara(atual + (d < 0 ? 1 : -1));
+            if (Math.abs(d) > 40) { arrastou = true; irPara(atual + (d < 0 ? 1 : -1)); }
             if (!pausado) comecar();
         });
         carrossel.addEventListener('pointercancel', function () { x0 = null; if (!pausado) comecar(); });
+        // Quem arrastou para trocar de banner não queria abrir o link do banner.
+        carrossel.addEventListener('click', function (e) {
+            if (!arrastou) return;
+            arrastou = false;
+            e.preventDefault();
+        }, true);
 
+        // O segundo slide entra quando o navegador estiver ocioso: assim ele já
+        // está pronto na primeira troca, sem disputar banda com a abertura.
+        var prepararSegundo = function () { garantirImagem(slides[1]); };
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(prepararSegundo, { timeout: 3000 });
+        } else {
+            setTimeout(prepararSegundo, 2000);
+        }
+
+        aplicarEstadoDosLinks();
         pontos[0].setAttribute('aria-selected', 'true');
         window.DR_SLIDE_EM = Date.now();
         window.DR_SLIDE_MS = INTERVALO;

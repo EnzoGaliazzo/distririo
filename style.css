@@ -432,6 +432,19 @@ button {
     }
 }
 
+/* Cada banner é um link para o catálogo. Só o visível recebe clique: os outros
+   ficam empilhados no mesmo lugar e roubariam o toque. */
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    display: block;
+    pointer-events: none;
+}
+
+.hero-slide.is-active {
+    pointer-events: auto;
+}
+
 .hero-carousel img {
     position: absolute;
     inset: 0;

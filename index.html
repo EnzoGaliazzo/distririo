@@ -48,16 +48,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap"></noscript>
-    <link rel="stylesheet" href="style.css?v=72ece825">
+    <link rel="stylesheet" href="style.css?v=af12242d">
     <!-- jsonld:inicio -->
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Wholesaler","@id":"https://distririo.com.br/#organizacao","name":"Distri Rio Comercial Ltda.","alternateName":"Distri Rio","url":"https://distririo.com.br/","logo":"https://distririo.com.br/assets/logo.png","image":"https://distririo.com.br/assets/logo.png","description":"Distribuidora de doces, bebidas, energéticos, suplementos e produtos de cuidados pessoais para comércios do Rio de Janeiro. Vendas exclusivamente para pessoa jurídica (CNPJ).","telephone":"+55-21-99211-1843","email":"recrutamento@distririo.com.br","foundingDate":"2017","address":{"@type":"PostalAddress","streetAddress":"Rod. Washington Luiz, 2070 - Parque Boa Vista II","addressLocality":"Duque de Caxias","addressRegion":"RJ","postalCode":"25055-009","addressCountry":"BR"},"areaServed":{"@type":"State","name":"Rio de Janeiro"},"sameAs":["https://www.instagram.com/distririo01/","https://www.linkedin.com/company/distri-rio-comercial-ltda/"]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://distririo.com.br/#site","url":"https://distririo.com.br/","name":"Distri Rio","inLanguage":"pt-BR","publisher":{"@id":"https://distririo.com.br/#organizacao"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://distririo.com.br/loja.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
     <!-- jsonld:fim -->
-    <!-- LCP é a primeira foto do carrossel do hero. Preload nos dois formatos
-         que ela é servida: o navegador baixa só o que ele sabe decodificar,
-         os outros dois links ficam sem efeito. -->
+    <!-- LCP é a primeira foto do carrossel do hero. Um preload só: navegador
+         que entende AVIF e WebP baixa os dois, e o segundo arquivo (49 KB)
+         chegava sem nunca ser usado. Quem não decodifica AVIF continua pegando
+         o WebP pelo <picture>, só sem a corrida na frente. -->
     <link rel="preload" as="image" type="image/avif" href="assets/hero-slides/trident.avif" fetchpriority="high">
-    <link rel="preload" as="image" type="image/webp" href="assets/hero-slides/trident.webp" fetchpriority="high">
 </head>
 <body>
 <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -107,26 +107,40 @@
 <div class="page">
     <main id="conteudo">
         <section class="hero-carousel" id="heroCarousel" aria-label="Campanhas das marcas parceiras" aria-roledescription="carrossel">
-            <picture>
-                <source srcset="assets/hero-slides/trident.avif" type="image/avif">
-                <source srcset="assets/hero-slides/trident.webp" type="image/webp">
-                <img src="assets/hero-slides/trident.jpg" alt="Campanha Trident X Gamers" width="1600" height="467" class="is-active" fetchpriority="high" decoding="async">
-            </picture>
-            <picture>
-                <source srcset="assets/hero-slides/baly-pro.avif" type="image/avif">
-                <source srcset="assets/hero-slides/baly-pro.webp" type="image/webp">
-                <img src="assets/hero-slides/baly-pro.jpg" alt="Campanha Baly Pro" width="1600" height="467" loading="lazy" decoding="async">
-            </picture>
-            <picture>
-                <source srcset="assets/hero-slides/halls.avif" type="image/avif">
-                <source srcset="assets/hero-slides/halls.webp" type="image/webp">
-                <img src="assets/hero-slides/halls.jpg" alt="Campanha Halls Blueberry" width="1600" height="467" loading="lazy" decoding="async">
-            </picture>
-            <picture>
-                <source srcset="assets/hero-slides/baly-lineup.avif" type="image/avif">
-                <source srcset="assets/hero-slides/baly-lineup.webp" type="image/webp">
-                <img src="assets/hero-slides/baly-lineup.jpg" alt="Linha de energéticos Baly" width="1600" height="467" loading="lazy" decoding="async">
-            </picture>
+            <!-- Cada banner leva ao produto no catálogo: antes era só imagem, e
+                 quem clicava no botão desenhado na arte não ia a lugar nenhum.
+                 Só o slide visível é clicável e alcançável pelo teclado (app.js).
+                 Do segundo em diante a imagem entra em data-src e só é baixada
+                 quando o carrossel precisa dela: empilhados no mesmo lugar, eles
+                 contam como "na tela" e o loading=lazy não segurava nada. -->
+            <a class="hero-slide is-active" href="loja.html#mdz-trident">
+                <picture>
+                    <source srcset="assets/hero-slides/trident.avif" type="image/avif">
+                    <source srcset="assets/hero-slides/trident.webp" type="image/webp">
+                    <img src="assets/hero-slides/trident.jpg" alt="Campanha Trident X Gamers" width="1600" height="467" class="is-active" fetchpriority="high" decoding="async">
+                </picture>
+            </a>
+            <a class="hero-slide" href="marca/baly-brasil.html" tabindex="-1" aria-hidden="true">
+                <picture>
+                    <source data-srcset="assets/hero-slides/baly-pro.avif" type="image/avif">
+                    <source data-srcset="assets/hero-slides/baly-pro.webp" type="image/webp">
+                    <img data-src="assets/hero-slides/baly-pro.jpg" alt="Campanha Baly Pro" width="1600" height="467" decoding="async">
+                </picture>
+            </a>
+            <a class="hero-slide" href="loja.html#mdz-halls" tabindex="-1" aria-hidden="true">
+                <picture>
+                    <source data-srcset="assets/hero-slides/halls.avif" type="image/avif">
+                    <source data-srcset="assets/hero-slides/halls.webp" type="image/webp">
+                    <img data-src="assets/hero-slides/halls.jpg" alt="Campanha Halls Blueberry" width="1600" height="467" decoding="async">
+                </picture>
+            </a>
+            <a class="hero-slide" href="marca/baly-brasil.html" tabindex="-1" aria-hidden="true">
+                <picture>
+                    <source data-srcset="assets/hero-slides/baly-lineup.avif" type="image/avif">
+                    <source data-srcset="assets/hero-slides/baly-lineup.webp" type="image/webp">
+                    <img data-src="assets/hero-slides/baly-lineup.jpg" alt="Linha de energéticos Baly" width="1600" height="467" decoding="async">
+                </picture>
+            </a>
             <button type="button" class="hero-carousel-prev" aria-label="Banner anterior">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
@@ -251,22 +265,67 @@
                     <button type="button" class="brand-select-btn" data-brand="apisvida">Apisvida</button>
                 </div>
                 <div class="brand-selector-preview">
-                    <img src="assets/produtos/oreo.jpg" alt="Produtos Mondelez Internacional" class="brand-preview-img is-active" data-brand="mondelez" width="785" height="535" fetchpriority="low">
+                    <picture>
+                        <source srcset="assets/produtos/oreo.webp" type="image/webp">
+                        <img src="assets/produtos/oreo.jpg" alt="Produtos Mondelez Internacional" class="brand-preview-img is-active" data-brand="mondelez" width="785" height="535" fetchpriority="low">
+                    </picture>
                     <img src="assets/hero-slides/baly-pro.webp" alt="Produtos BALY Brasil" class="brand-preview-img" loading="lazy" data-brand="baly">
-                    <img src="assets/produtos/aquacoco.jpg" alt="Produtos Aqua Coco" class="brand-preview-img" loading="lazy" data-brand="aquacoco">
-                    <img src="assets/produtos/sumo.jpg" alt="Produtos Sucos Sumo" class="brand-preview-img" loading="lazy" data-brand="sumo">
-                    <img src="assets/produtos/marata-molhos.jpg" alt="Produtos Maratá" class="brand-preview-img" loading="lazy" data-brand="marata">
-                    <img src="assets/produtos/rivoli.jpg" alt="Produtos Rivoli" class="brand-preview-img" loading="lazy" data-brand="rivoli">
-                    <img src="assets/produtos/trio.jpg" alt="Produtos Trio" class="brand-preview-img" loading="lazy" data-brand="trio">
-                    <img src="assets/produtos/bananabrasil.jpg" alt="Produtos Banana Brasil" class="brand-preview-img" loading="lazy" data-brand="bananabrasil">
-                    <img src="assets/produtos/kobber.jpg" alt="Produtos Kobber" class="brand-preview-img" loading="lazy" data-brand="kobber">
-                    <img src="assets/produtos/baldoni.jpg" alt="Produtos Baldoni" class="brand-preview-img" loading="lazy" data-brand="baldoni">
-                    <img src="assets/produtos/ace.jpg" alt="Produtos ACE" class="brand-preview-img" loading="lazy" data-brand="ace">
-                    <img src="assets/produtos/espumil.jpg" alt="Produtos Espumil" class="brand-preview-img" loading="lazy" data-brand="espumil">
-                    <img src="assets/produtos/distririo/gota__molho-gota-pimenta.jpg" alt="Molhos Gota" class="brand-preview-img brand-preview-produto" data-brand="gota" loading="lazy" width="800" height="800">
-                    <img src="assets/produtos/lauton/performance-series-creatina-e-glutamina__creatina-monohidratada.jpg" alt="Suplementos Lauton" class="brand-preview-img brand-preview-produto" data-brand="lauton" loading="lazy" width="800" height="800">
-                    <img src="assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-extrasseca.jpg" alt="Cuidados pessoais Abelha Rainha" class="brand-preview-img brand-preview-produto" data-brand="abelharainha" loading="lazy" width="800" height="800">
-                    <img src="assets/produtos/apisvida/apisvida__mel-apisvida.jpg" alt="Mel e própolis Apisvida" class="brand-preview-img brand-preview-produto" data-brand="apisvida" loading="lazy" width="800" height="800">
+                    <picture>
+                        <source srcset="assets/produtos/aquacoco.webp" type="image/webp">
+                        <img width="900" height="619" src="assets/produtos/aquacoco.jpg" alt="Produtos Aqua Coco" class="brand-preview-img" loading="lazy" data-brand="aquacoco">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/sumo.webp" type="image/webp">
+                        <img width="900" height="420" src="assets/produtos/sumo.jpg" alt="Produtos Sucos Sumo" class="brand-preview-img" loading="lazy" data-brand="sumo">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/marata-molhos.webp" type="image/webp">
+                        <img width="900" height="407" src="assets/produtos/marata-molhos.jpg" alt="Produtos Maratá" class="brand-preview-img" loading="lazy" data-brand="marata">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/rivoli.webp" type="image/webp">
+                        <img width="900" height="675" src="assets/produtos/rivoli.jpg" alt="Produtos Rivoli" class="brand-preview-img" loading="lazy" data-brand="rivoli">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/trio.webp" type="image/webp">
+                        <img width="900" height="738" src="assets/produtos/trio.jpg" alt="Produtos Trio" class="brand-preview-img" loading="lazy" data-brand="trio">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/bananabrasil.webp" type="image/webp">
+                        <img width="900" height="445" src="assets/produtos/bananabrasil.jpg" alt="Produtos Banana Brasil" class="brand-preview-img" loading="lazy" data-brand="bananabrasil">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/kobber.webp" type="image/webp">
+                        <img width="900" height="382" src="assets/produtos/kobber.jpg" alt="Produtos Kobber" class="brand-preview-img" loading="lazy" data-brand="kobber">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/baldoni.webp" type="image/webp">
+                        <img width="900" height="751" src="assets/produtos/baldoni.jpg" alt="Produtos Baldoni" class="brand-preview-img" loading="lazy" data-brand="baldoni">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/ace.webp" type="image/webp">
+                        <img width="900" height="929" src="assets/produtos/ace.jpg" alt="Produtos ACE" class="brand-preview-img" loading="lazy" data-brand="ace">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/espumil.webp" type="image/webp">
+                        <img width="900" height="1018" src="assets/produtos/espumil.jpg" alt="Produtos Espumil" class="brand-preview-img" loading="lazy" data-brand="espumil">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/distririo/gota__molho-gota-pimenta.webp" type="image/webp">
+                        <img src="assets/produtos/distririo/gota__molho-gota-pimenta.jpg" alt="Molhos Gota" class="brand-preview-img brand-preview-produto" data-brand="gota" loading="lazy" width="800" height="800">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/lauton/performance-series-creatina-e-glutamina__creatina-monohidratada.webp" type="image/webp">
+                        <img src="assets/produtos/lauton/performance-series-creatina-e-glutamina__creatina-monohidratada.jpg" alt="Suplementos Lauton" class="brand-preview-img brand-preview-produto" data-brand="lauton" loading="lazy" width="800" height="800">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-extrasseca.webp" type="image/webp">
+                        <img src="assets/produtos/abelha-rainha/hidratantes__hidratante-corporal-para-pele-extrasseca.jpg" alt="Cuidados pessoais Abelha Rainha" class="brand-preview-img brand-preview-produto" data-brand="abelharainha" loading="lazy" width="800" height="800">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/produtos/apisvida/apisvida__mel-apisvida.webp" type="image/webp">
+                        <img src="assets/produtos/apisvida/apisvida__mel-apisvida.jpg" alt="Mel e própolis Apisvida" class="brand-preview-img brand-preview-produto" data-brand="apisvida" loading="lazy" width="800" height="800">
+                    </picture>
                 </div>
             </div>
             <p class="brands-cta">
@@ -382,6 +441,6 @@
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.47 1.29 4.92L2 22l5.31-1.39a9.87 9.87 0 0 0 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2Zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.15.83.84-3.07-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.53 3.69-8.22 8.23-8.22 2.2 0 4.26.86 5.82 2.41a8.18 8.18 0 0 1 2.41 5.82c0 4.53-3.69 8.22-8.19 8.22Zm4.51-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.99-1.22-.73-.66-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42-.14 0-.31-.02-.48-.02s-.44.06-.67.31c-.23.25-.87.85-.87 2.08s.89 2.42 1.01 2.58c.12.17 1.75 2.67 4.24 3.75.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29Z"/></svg>
 </a>
 
-<script src="app.js?v=e5135d64"></script>
+<script src="app.js?v=bb94f5a4"></script>
 </body>
 </html>
