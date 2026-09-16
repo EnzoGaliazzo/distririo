@@ -1,3 +1,32 @@
+/* =====================================================================
+   Fontes de reserva com a mesma métrica das definitivas
+
+   As fontes vêm do Google e chegam depois do HTML. Quando a Inter entrava, o
+   texto mudava de tamanho e a página andava: o salto medido (CLS) ia a 0,16 no
+   desktop e 0,079 no celular, e sumia inteiro quando a fonte era bloqueada.
+   Estas duas faces não baixam nada — elas usam a fonte que já está no aparelho
+   e a esticam para ocupar exatamente o mesmo espaço da fonte final.
+   Números medidos no próprio navegador (largura e altura da caixa de texto da
+   Inter contra a Arial, e da Archivo Black contra a Arial Black).
+   ===================================================================== */
+@font-face {
+    font-family: "Inter reserva";
+    src: local("Arial"), local("Helvetica"), local("Liberation Sans");
+    size-adjust: 106.1%;
+    ascent-override: 91.4%;
+    descent-override: 22.6%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: "Archivo reserva";
+    src: local("Arial Black");
+    size-adjust: 100%;
+    ascent-override: 104%;
+    descent-override: 31%;
+    line-gap-override: 0%;
+}
+
 :root {
     /* Campos, barras de rolagem e menus nativos tambem em claro. */
     color-scheme: light;
@@ -25,9 +54,12 @@
     --shadow: 0 1px 2px rgba(16, 19, 24, 0.06), 0 4px 16px rgba(16, 19, 24, 0.07);
     --shadow-lg: 0 2px 4px rgba(16, 19, 24, 0.06), 0 14px 32px rgba(16, 19, 24, 0.13);
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
-    --font-display: 'Archivo Black', Arial, sans-serif;
-    --font-body: 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
-    --header-h: 76px;
+    --font-display: 'Archivo Black', 'Archivo reserva', 'Arial Black', Arial, sans-serif;
+    --font-body: 'Inter', 'Inter reserva', 'Segoe UI', Arial, Helvetica, sans-serif;
+    /* Altura real medida no navegador: barra de 65 px + faixa de avisos de 40.
+       O valor antigo (76 + 40) fazia o conteúdo descer 12 px assim que o
+       app.js media o cabeçalho de verdade. */
+    --header-h: 65px;
     --info-h: 40px;
     /* --header-total: escrito por app.js a partir da altura real do cabeçalho. */
     --header-total: calc(var(--header-h) + var(--info-h));
@@ -1135,7 +1167,10 @@ main {
 /* ===== Prova social factual (home) ===== */
 .section-lead {
     text-align: center;
-    max-width: 56ch;
+    /* Medida da linha em em, não em ch: a unidade ch é a largura do "0" da
+       fonte, então cada bloco mudava de largura quando a Inter chegava e a
+       página inteira reposicionava. */
+    max-width: 35.33em;
     margin: -1.2rem auto 2rem;
     color: var(--texto-suave);
 }
@@ -1624,7 +1659,7 @@ main {
 
 .footer-about {
     line-height: 1.65;
-    max-width: 34ch;
+    max-width: 21.45em;
     margin-bottom: 1.25rem;
 }
 
@@ -1869,7 +1904,7 @@ main {
 
 .cta-band p {
     color: var(--texto-suave);
-    max-width: 52ch;
+    max-width: 32.81em;
     margin: 0 auto;
 }
 
@@ -2062,6 +2097,14 @@ main {
     /* A faixa de avisos repete o que já está no marquee e na FAQ. */
     .header-info {
         display: none;
+    }
+
+    /* Sem a faixa, o cabeçalho tem 63 px, não 116. O valor de partida errado
+       fazia o conteúdo pular meia dezena de centímetros quando o app.js media a
+       altura real: era o maior salto de layout que sobrava no celular. */
+    :root {
+        --header-h: 63px;
+        --info-h: 0px;
     }
 
     .header-bar {
@@ -2341,6 +2384,15 @@ main {
     justify-content: center;
 }
 
+/* O <picture> é inline e nascia com tamanho zero no meio do quadro: quando a
+   foto chegava, ele pulava para o tamanho final e isso contava como salto de
+   layout. Ocupando o quadro desde o começo, nada se mexe. */
+.produto-foto picture {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
 .produto-foto img {
     width: 100%;
     height: 100%;
@@ -2480,7 +2532,7 @@ main {
     line-height: 1.45;
     color: var(--texto-suave);
     margin: 0;
-    max-width: 62ch;
+    max-width: 39.11em;
 }
 
 .cookie-banner a {
@@ -2757,7 +2809,7 @@ main {
     color: var(--dark);
     /* Sem <br> fixo: o navegador equilibra as linhas em cada largura. */
     text-wrap: balance;
-    max-width: 22ch;
+    max-width: 14.67em;
     margin: 0 auto;
     opacity: 0;
     animation: hero-intro 0.6s var(--ease) 0.05s both;
@@ -2771,7 +2823,7 @@ main {
     margin: 0.85rem auto 0;
     font-size: 1.08rem;
     color: var(--texto-suave);
-    max-width: 56ch;
+    max-width: 35.33em;
     text-wrap: pretty;
     opacity: 0;
     animation: hero-intro 0.6s var(--ease) 0.18s both;
@@ -2874,14 +2926,14 @@ main {
     font-family: var(--font-display);
     font-size: clamp(1.4rem, 3.2vw, 2rem);
     line-height: 1.15;
-    max-width: 18ch;
+    max-width: 12.01em;
     text-wrap: balance;
     margin-bottom: 0.8rem;
     color: #ffffff;
 }
 
 .faixa-estrutura-texto p {
-    max-width: 46ch;
+    max-width: 29.02em;
     margin-bottom: 1.4rem;
     color: rgba(255, 255, 255, 0.88);
 }
@@ -2931,7 +2983,7 @@ main {
 }
 
 .erro-404-texto {
-    max-width: 50ch;
+    max-width: 31.54em;
     margin: 0 auto 1.75rem;
     color: var(--texto-suave);
 }
@@ -3220,7 +3272,7 @@ main {
 }
 
 .hero > p {
-    max-width: 58ch;
+    max-width: 36.57em;
     margin: 0.8rem auto 0;
     color: var(--texto-suave);
 }
@@ -3596,7 +3648,7 @@ a.service-item {
 }
 
 .lista-qtd-valor {
-    min-width: 1.6ch;
+    min-width: 1.01em;
     text-align: center;
     font-weight: 700;
     font-size: 0.92rem;
@@ -3836,7 +3888,7 @@ body.lista-aberta {
 /* O que o produto é, logo abaixo do nome: é a primeira coisa que o comprador lê */
 .produto-descricao {
     margin: -0.5rem 0 1rem;
-    max-width: 60ch;
+    max-width: 37.85em;
     font-size: 1.08rem;
     line-height: 1.6;
     color: var(--dark);
@@ -3846,7 +3898,7 @@ body.lista-aberta {
     color: var(--texto-suave);
     line-height: 1.65;
     margin-bottom: 1.5rem;
-    max-width: 62ch;
+    max-width: 39.11em;
 }
 
 .section-relacionados {
