@@ -281,6 +281,64 @@ teste('lista de pedido soma item e monta a mensagem do WhatsApp', async (nav) =>
     if (!r.zap.includes('wa.me') || !r.zap.includes('text=')) throw new Error('link do WhatsApp sem mensagem');
 });
 
+teste('busca sem resultado oferece o "avise-me" e manda o termo junto', async (nav) => {
+    const aba = await novaAba(nav);
+    // O envio é capturado dentro da página: nenhum teste sai da máquina.
+    await aba.cmd('Page.addScriptToEvaluateOnNewDocument', { source: `(() => {
+        const real = window.fetch;
+        window.__enviado = null;
+        window.fetch = function (url, opc) {
+            if (String(url).includes('web3forms')) {
+                const d = {};
+                if (opc && opc.body && opc.body.forEach) opc.body.forEach((v, k) => { d[k] = String(v); });
+                window.__enviado = d;
+                return Promise.resolve({ ok: true, json: () => Promise.resolve({ success: true }) });
+            }
+            return real.apply(this, arguments);
+        };
+    })()` });
+    await ir(aba, '/loja.html');
+    if (!await avaliar(aba, `document.getElementById('aviseMe').hidden`)) throw new Error('o avise-me apareceu antes de qualquer busca');
+
+    await avaliar(aba, `(() => { const i = document.querySelector('.header-search input');
+        i.value = 'guarana jesus lata'; i.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+    await espera(900);
+    if (await avaliar(aba, `document.getElementById('aviseMe').hidden`)) throw new Error('o avise-me não apareceu na busca sem resultado');
+
+    // Telefone sem DDD não sai do lugar.
+    const curto = await avaliar(aba, `(() => { const f = document.getElementById('aviseMe');
+        f.telefone.value = '9211'; f.telefone.dispatchEvent(new Event('input', { bubbles: true }));
+        f.consentimento.checked = true;
+        f.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+        return { aviso: f.querySelector('.avise-me-aviso').textContent, enviado: !!window.__enviado }; })()`);
+    if (curto.enviado) throw new Error('telefone curto foi enviado');
+    if (!curto.aviso) throw new Error('telefone curto passou sem aviso nenhum');
+
+    const r = await avaliar(aba, `(() => { const f = document.getElementById('aviseMe');
+        f.telefone.value = '21992111843'; f.telefone.dispatchEvent(new Event('input', { bubbles: true }));
+        const mascarado = f.telefone.value;
+        f.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+        return { mascarado, enviado: window.__enviado,
+                 pronto: document.querySelector('.avise-me-pronto').textContent,
+                 camposEscondidos: document.querySelector('.avise-me-campos').hidden }; })()`);
+    if (r.mascarado !== '(21) 99211-1843') throw new Error('máscara do telefone: ' + r.mascarado);
+    if (!r.enviado) throw new Error('o pedido não foi enviado');
+    if (r.enviado.procurou !== 'guarana jesus lata') throw new Error('foi sem o termo procurado: ' + JSON.stringify(r.enviado));
+    if (r.enviado.consentimento !== 'sim') throw new Error('foi sem o consentimento marcado');
+    if (!r.camposEscondidos || !/Anotado/.test(r.pronto)) throw new Error('não confirmou para quem pediu: ' + JSON.stringify(r));
+
+    // Outro termo sem resultado traz o formulário de volta: pode ser mais de um produto.
+    await avaliar(aba, `(() => { const i = document.querySelector('.header-search input');
+        i.value = 'cerveja artesanal'; i.dispatchEvent(new Event('input', { bubbles: true })); })()`);
+    await espera(900);
+    const v = await avaliar(aba, `({ campos: !document.querySelector('.avise-me-campos').hidden,
+        pronto: document.querySelector('.avise-me-pronto').hidden,
+        telefone: document.getElementById('aviseMeTelefone').value })`);
+    if (!v.campos || !v.pronto) throw new Error('o formulário não voltou para o termo novo: ' + JSON.stringify(v));
+    if (!v.telefone) throw new Error('fez a pessoa digitar o telefone de novo');
+    if (aba.erros.length) throw new Error('console com erro: ' + aba.erros[0]);
+});
+
 teste('quantidade digitada na lista entra no total e na mensagem', async (nav) => {
     const aba = await novaAba(nav);
     await ir(aba, '/loja.html');

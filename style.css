@@ -2759,6 +2759,76 @@ main {
     margin-top: 1.25rem;
 }
 
+/* "Avise-me": aparece junto com o "nenhum produto encontrado". Busca sem
+   resultado é pedido de produto — sem este bloco, a demanda some junto com
+   o visitante. */
+.avise-me {
+    max-width: 30em;
+    margin: 0 auto 3rem;
+    padding: 1.25rem;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius);
+    background: var(--white);
+}
+
+.avise-me[hidden] {
+    display: none;
+}
+
+.avise-me-chamada {
+    margin: 0 0 0.9rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.avise-me-linha {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-end;
+}
+
+.avise-me-linha .form-field {
+    flex: 1 1 auto;
+    margin: 0;
+}
+
+.avise-me-enviar {
+    flex: 0 0 auto;
+    /* Mesma altura do campo ao lado, sem depender de line-height herdado. */
+    min-height: 44px;
+}
+
+.avise-me-consentimento {
+    margin-top: 0.9rem;
+}
+
+.avise-me-aviso {
+    margin: 0.6rem 0 0;
+    font-size: 0.85rem;
+    color: var(--texto-fraco);
+    min-height: 1.2em;
+}
+
+.avise-me-pronto {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink);
+    font-weight: 600;
+}
+
+/* No celular o campo e o botão empilham: lado a lado sobra menos de 9 caracteres
+   visíveis para o telefone. */
+@media (max-width: 560px) {
+    .avise-me-linha {
+        display: block;
+    }
+
+    .avise-me-enviar {
+        width: 100%;
+        margin-top: 0.75rem;
+    }
+}
+
 /* =====================================================================
    Home — a proposta de valor no topo, o banner do fornecedor abaixo
    ===================================================================== */

@@ -63,7 +63,10 @@ Dependem do Enzo: O-01 (condições comerciais), O-02 (prova social), O-07
 (painel do dono), O-08 (resumo semanal), O-09 (cobertura), O-14 (perfil no
 Google), O-15 (CNPJ e horário), O-21 (indicação), O-22 (quem atende).
 
-Na fila, sem depender de ninguém: O-11 (avise-me quando voltar), O-12 (catálogo
+Fechado depois, no mesmo dia: O-11 (avise-me na busca sem resultado — o pedido
+chega por e-mail com o termo procurado).
+
+Na fila, sem depender de ninguém: O-12 (catálogo
 em PDF), O-13 (transmissão), O-17 (código de barras), O-18 (catálogo offline —
 mesmo motivo do W-01: cache velho em catálogo de distribuidora gera pedido
 errado).

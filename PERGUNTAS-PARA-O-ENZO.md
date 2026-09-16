@@ -17,6 +17,14 @@ pronta e desligada. Ligar é escrever os `id` em `data/ofertas.json` e rodar
 `npm run build` — leva um minuto. O que preciso de você: quais produtos
 destacar e até quando vale (o texto do "até" é livre: "até sexta, 26/09").
 Não invento destaque, e a faixa não mostra preço.
+→ Resposta (16/09): deixar como está por enquanto; você pediu para eu lembrar
+   depois, para avaliarmos de novo. **Lembrete registrado aqui** — quando
+   voltarmos ao site, esta é a primeira coisa a revisitar.
+
+**B. Chegou algum "avise-me"?** Desde 16/09, quem busca no catálogo e não acha
+nada pode deixar o WhatsApp. O pedido cai no seu e-mail pelo Web3Forms, com o
+assunto "procuraram um produto que nao esta no catalogo" e o termo que a pessoa
+digitou. Vale olhar de vez em quando: é o mercado dizendo o que falta no mix.
 → Resposta:
 
 ---

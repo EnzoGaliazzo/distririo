@@ -1112,6 +1112,21 @@
         var campo = document.querySelector('.header-search input');
         var status = document.getElementById('searchStatus');
         var semResultado = document.getElementById('noResults');
+        var aviseMe = document.getElementById('aviseMe');
+        var aviseCampos = aviseMe && aviseMe.querySelector('.avise-me-campos');
+        var avisePronto = aviseMe && aviseMe.querySelector('.avise-me-pronto');
+
+        // Depois de enviado, o formulário vira recado. Se a pessoa procurar
+        // outra coisa que também não existe, ele volta — pode ser mais de um
+        // produto, e o recado da busca anterior não serve para a nova.
+        function aviseRestaurar() {
+            if (!aviseMe || !aviseCampos) return;
+            aviseMe.removeAttribute('data-enviado-para');
+            aviseCampos.hidden = false;
+            if (avisePronto) avisePronto.hidden = true;
+            var aviso = aviseMe.querySelector('.avise-me-aviso');
+            if (aviso) aviso.textContent = '';
+        }
         var secoes = Array.prototype.slice.call(document.querySelectorAll('.category-section:not(.catalogo-ordenado)'));
 
         // O texto de busca já vem normalizado do build: nada de reprocessar
@@ -1240,6 +1255,11 @@
             }
 
             if (semResultado) semResultado.hidden = visiveis !== 0;
+            // O "avise-me" acompanha o estado de nada encontrado.
+            if (aviseMe) {
+                if (aviseMe.dataset.enviadoPara && aviseMe.dataset.enviadoPara !== termo.trim()) aviseRestaurar();
+                aviseMe.hidden = visiveis !== 0 || !temFiltro;
+            }
             if (status) {
                 var descricao = descreverFiltros(f, termo.trim());
                 var emOrdem = !ordem ? '' : ordem === 'za' ? ' em ordem alfabética (Z–A)' : ' em ordem alfabética (A–Z)';
@@ -1378,6 +1398,44 @@
             };
             if (campo) campo.addEventListener('input', debounce(atualizarZap, 140));
             atualizarZap();
+        }
+
+        // "Avise-me": busca sem resultado é pedido de produto que não está no
+        // catálogo. Vai pelo mesmo caminho da cópia do cadastro por e-mail,
+        // levando junto o termo procurado — é o dado que interessa.
+        if (aviseMe) {
+            var aviseTermo = document.getElementById('aviseMeTermo');
+            var aviseAviso = aviseMe.querySelector('.avise-me-aviso');
+            var aviseTelefone = aviseMe.querySelector('#aviseMeTelefone');
+            if (aviseTelefone) {
+                aviseTelefone.addEventListener('input', function () {
+                    aviseTelefone.value = mascararTelefone(aviseTelefone.value);
+                });
+            }
+            aviseMe.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (aviseMe.botcheck && aviseMe.botcheck.checked) return;
+                var digitos = (aviseTelefone.value || '').replace(/\D/g, '');
+                if (digitos.length < 10) {
+                    if (aviseAviso) aviseAviso.textContent = 'Falta o DDD ou um número. Exemplo: (21) 90000-0000.';
+                    aviseTelefone.focus();
+                    return;
+                }
+                var termo = campo ? campo.value.trim() : '';
+                if (aviseTermo) aviseTermo.value = termo || '(sem termo)';
+                enviarCopiaPorEmail(aviseMe);
+                aviseMe.dataset.enviadoPara = termo;
+                // A confirmação fica no lugar dos campos. Nada de prometer
+                // prazo: o site não sabe quando, nem se, o produto entra.
+                if (aviseCampos) aviseCampos.hidden = true;
+                if (avisePronto) {
+                    avisePronto.textContent = 'Anotado'
+                        + (termo ? ' — você procurou por "' + termo + '".' : '.')
+                        + ' Se este produto entrar no catálogo, a gente chama você no WhatsApp.';
+                    avisePronto.hidden = false;
+                }
+                medir('avise_me', { termo: /\d{6,}/.test(termo.replace(/\D/g, '')) ? '(número)' : termo.toLowerCase() });
+            });
         }
 
         // As seções usam content-visibility, então na primeira carga o navegador

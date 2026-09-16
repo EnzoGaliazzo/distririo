@@ -695,3 +695,27 @@ no JSON — se alguém ligar a faixa e esquecer de rodar o build, o teste reprov
 
 **O que continua com o Enzo, agora incluindo:** quais produtos vão para a faixa
 de ofertas (pergunta A). O resto da lista não mudou.
+
+### 16/09, depois: "avise-me" na busca sem resultado (O-11)
+
+Perguntado o que fazer em seguida, o Enzo escolheu a O-11 e pediu para manter a
+faixa de ofertas como está por enquanto, com um lembrete para reavaliar depois.
+
+Busca sem resultado é pedido de produto. Antes, a demanda evaporava: sumia o
+visitante e sumia a informação de que alguém procurou aquilo. Agora, junto do
+"nenhum produto encontrado", aparece um campo de uma linha — WhatsApp mais
+autorização — e o pedido chega por e-mail com **o termo que a pessoa digitou**.
+
+- Telefone sem DDD não sai do lugar: avisa e não envia.
+- Depois de enviado, os campos viram um recado. Se a pessoa procurar **outra**
+  coisa que também não existe, o formulário volta (com o telefone já
+  preenchido): pode ser mais de um produto.
+- A confirmação não promete prazo: "se este produto entrar no catálogo, a gente
+  chama você no WhatsApp". O site não sabe se, nem quando.
+- Vai pelo mesmo Web3Forms do cadastro, com honeypot, e a política de
+  privacidade ganhou o que é coletado, para quê, com que base (consentimento) e
+  por quanto tempo fica.
+
+`npm run testar` foi para 17 casos: o novo cobre o formulário aparecendo só na
+busca vazia, o telefone curto barrado, o envio com termo e consentimento, e o
+formulário voltando para um termo diferente.
