@@ -331,11 +331,27 @@ const arqRedir = path.join(root, 'data', 'redirecionamentos.json');
 const redirecionamentos = fs.existsSync(arqRedir) ? JSON.parse(ler('data/redirecionamentos.json')) : {};
 const idsAtivos = new Set(dados.produtos.map(p => p.id));
 let nRedir = 0;
+// O destino pode ser outro produto (id) ou, quando o item saiu do catálogo de
+// vez, uma página da raiz ("loja.html", "marca/abelha-rainha.html"). O stub mora
+// em produto/, então caminho de raiz entra com "../" no href.
+const PAGINAS_DESTINO = {
+    'loja.html': { titulo: 'Produto fora do catálogo', texto: 'Este produto saiu do catálogo.', rotulo: 'Ver o catálogo completo' },
+};
 for (const [antigo, novo] of Object.entries(redirecionamentos)) {
     if (idsAtivos.has(antigo)) continue;   // o id voltou a existir: a página real vence
-    const destino = dados.produtos.find(p => p.id === novo);
-    if (!destino) throw new Error(`redirecionamentos.json: ${antigo} aponta para ${novo}, que não existe`);
-    const nome = esc(destino.nome);
+    const ehPagina = novo.includes('/') || novo.endsWith('.html');
+    const destino = ehPagina ? null : dados.produtos.find(p => p.id === novo);
+    if (!ehPagina && !destino) throw new Error(`redirecionamentos.json: ${antigo} aponta para ${novo}, que não existe`);
+    if (ehPagina && !PAGINAS_DESTINO[novo] && !fs.existsSync(path.join(root, novo))) {
+        throw new Error(`redirecionamentos.json: ${antigo} aponta para a página ${novo}, que não existe`);
+    }
+    const pagina = ehPagina ? (PAGINAS_DESTINO[novo] || { titulo: 'Página mudou de endereço', texto: 'Esta página mudou de endereço.', rotulo: 'Continuar' }) : null;
+    const nome = ehPagina ? esc(pagina.titulo) : esc(destino.nome);
+    const href = ehPagina ? `../${novo}` : `${novo}.html`;
+    const canonical = ehPagina ? `${SITE}/${novo}` : `${SITE}/produto/${novo}.html`;
+    const corpo = ehPagina
+        ? `${pagina.texto} <a href="${href}">${esc(pagina.rotulo)}</a>.`
+        : `Este produto mudou de endereço: <a href="${href}">${nome}</a>.`;
     gravar(`produto/${antigo}.html`, aplicarSeguranca([
         '<!DOCTYPE html>',
         '<html lang="pt-br">',
@@ -344,11 +360,11 @@ for (const [antigo, novo] of Object.entries(redirecionamentos)) {
         '    <meta name="viewport" content="width=device-width, initial-scale=1.0">',
         '    <meta name="robots" content="noindex, follow">',
         `    <title>${nome} | Distri Rio</title>`,
-        `    <link rel="canonical" href="${SITE}/produto/${novo}.html">`,
-        `    <meta http-equiv="refresh" content="0; url=${novo}.html">`,
+        `    <link rel="canonical" href="${canonical}">`,
+        `    <meta http-equiv="refresh" content="0; url=${href}">`,
         '</head>',
         '<body>',
-        `    <p>Este produto mudou de endereço: <a href="${novo}.html">${nome}</a>.</p>`,
+        `    <p>${corpo}</p>`,
         '</body>',
         '</html>',
         '',

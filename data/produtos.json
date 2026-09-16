@@ -1,7 +1,7 @@
 {
   "_leiame": "Fonte única do catálogo. Editar aqui e rodar \"node tools/build.js\" para regenerar loja.html, as páginas de produto, o índice de busca e o sitemap. Não editar o catálogo direto no HTML.",
   "atualizado": "2026-09-15",
-  "total": 336,
+  "total": 333,
   "categorias": [
     {
       "id": "mdz-trident",
@@ -3644,36 +3644,6 @@
       ],
       "img": "assets/produtos/abelha-rainha/gel-esfoliante-para-os-pes.jpg",
       "keywords": "gel esfoliante para os pes dermopes abelha rainha 100g farma"
-    },
-    {
-      "id": "fitas-de-clareamento-dental-roxa-5-aplicacoes",
-      "nome": "Fitas de Clareamento Dental Roxa - 5 Aplicações",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "5 g"
-      ],
-      "keywords": "fitas de clar dental roxa 5 aplicacoes 5g farma"
-    },
-    {
-      "id": "fitas-de-clareamento-dental-roxa-7-aplicacoes",
-      "nome": "Fitas de Clareamento Dental Roxa - 7 Aplicações",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "2 g"
-      ],
-      "keywords": "fitas de clar dental roxa 7 aplicacoes 2g farma"
-    },
-    {
-      "id": "fitas-de-clareamento-dental-roxa-12-aplicacoes",
-      "nome": "Fitas de Clareamento Dental Roxa 12 Aplicações",
-      "categoria": "abelha-rainha",
-      "marca": "Abelha Rainha",
-      "embalagens": [
-        "12 g"
-      ],
-      "keywords": "fitas de clar dental roxa 12 aplicacoes 12g farma"
     },
     {
       "id": "nanopropolis-propolis-verde",
