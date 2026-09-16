@@ -180,9 +180,10 @@
         --carbono: #f2efe8;
         --carbono-2: #e3dfd6;
 
-        /* preenchimento: texto claro em cima precisa de 4,5:1, então o
-           vermelho do botão NÃO clareia. Quem clareia é o vermelho de texto. */
-        --sinal: #e12329;
+        /* preenchimento: texto claro em cima precisa de 4,5:1, e o vermelho
+           clareado dava 4,19. Fica o vermelho da marca, que dá 4,56. Quem
+           clareia no tema escuro é só o vermelho de TEXTO (--red-text). */
+        --sinal: #d81e24;
         --sinal-forte: #f1454b;
         --sinal-fraco: #2a1618;
 
@@ -2079,7 +2080,9 @@ main {
 }
 
 .footer a {
-    color: var(--gray-300);
+    /* Barra escura nos dois temas: a cor do link tem de ser clara nos dois.
+       Com --gray-300 ele virava #32353b no tema escuro — 1,6:1, ilegível. */
+    color: var(--sobre-escuro);
     text-decoration: none;
 }
 
