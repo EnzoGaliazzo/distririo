@@ -44,6 +44,32 @@ distribuidora gera pedido errado).
 
 ---
 
+## Oportunidades de 16/09 — o que já foi aplicado
+
+Segunda rodada: em vez de defeito, o que está faltando. 22 oportunidades
+(O-01 a O-22) no documento de oportunidades. O Enzo liberou tudo que dependesse
+só de código. **Não refaça** estes:
+
+Fechados: O-03 (repetir pedido), O-04 (mandar a página), O-05 (quantidade
+digitável), O-06 (faixa de ofertas — mecanismo pronto, desligado até o Enzo
+escolher os produtos), O-10 (`Ctrl+K` e `/`), O-16 (número de pedido), O-20
+("pular para os resultados" e ordem alfabética).
+
+Revertido de propósito: O-19 (comparar tamanhos). O campo `linha` do catálogo
+mistura tamanho e sabor, então a fileira listaria sabor como se fosse tamanho.
+Volta quando existir campo de tamanho no `data/produtos.json`.
+
+Dependem do Enzo: O-01 (condições comerciais), O-02 (prova social), O-07
+(painel do dono), O-08 (resumo semanal), O-09 (cobertura), O-14 (perfil no
+Google), O-15 (CNPJ e horário), O-21 (indicação), O-22 (quem atende).
+
+Na fila, sem depender de ninguém: O-11 (avise-me quando voltar), O-12 (catálogo
+em PDF), O-13 (transmissão), O-17 (código de barras), O-18 (catálogo offline —
+mesmo motivo do W-01: cache velho em catálogo de distribuidora gera pedido
+errado).
+
+---
+
 ## P0 — Conversão
 
 - [x] **1. Lista de pedido no catálogo.** FEITO, commit `f439cf2`. Botão nos 426 cartões e nas 426 páginas de produto, contador flutuante, painel com quantidade e remoção, localStorage, e mensagem de WhatsApp cortada pelo tamanho da URL. **Falta:** medir com gente de verdade e avaliar se o painel deveria ter campo de observação por item.

@@ -98,10 +98,22 @@ function trocarCatalogo(html) {
         '        <div class="catalogo-layout">',
         montarFiltros(),
         '',
-        '        <section class="section section-catalog">',
+        // O id e o tabindex existem para o "Pular para os resultados" do painel:
+        // sem tabindex o foco continua no link e o leitor de tela não muda de assunto.
+        '        <section class="section section-catalog" id="resultados" tabindex="-1">',
         '            <p class="no-results" id="noResults" hidden>Nenhum produto encontrado para essa busca.</p>',
         '',
         secoes,
+        '',
+        // Grade única usada quando o visitante escolhe ordem alfabética: os
+        // cartões são movidos para cá e as seções por linha ficam escondidas.
+        // Fica depois das seções para não roubar o :first-of-type da primeira
+        // linha de produto, que é quem dispensa o respiro do topo.
+        '            <div class="category-section catalogo-ordenado" id="catalogoOrdenado" hidden>',
+        '                <h2>Todos os produtos, de A a Z</h2>',
+        '                <p class="category-count"></p>',
+        '                <div class="product-grid" id="gradeOrdenada"></div>',
+        '            </div>',
         '        </section>',
         '        </div>',
         '',
@@ -286,12 +298,66 @@ function aplicarSeguranca(html) {
     return h.replace(/([ \t]*<meta name="viewport"[^>]*>\r?\n)/, m => m + metas);
 }
 
+// ---------------------------------------------------------------------
+// Faixa de ofertas da semana na home
+// Sai de data/ofertas.json e some sozinha quando a lista está vazia — é o
+// jeito de o Enzo anunciar o que quer girar sem mexer em HTML. Sem data como
+// condição de propósito: o site é estático e o CI compara o HTML commitado
+// com o que o build produz; uma faixa que expira sozinha reprovaria o build
+// no dia seguinte. Para tirar do ar, esvazie "produtos" e rode o build.
+// ---------------------------------------------------------------------
+const RE_OFERTAS = /[ \t]*<!-- ofertas:inicio[\s\S]*?<!-- ofertas:fim -->/;
+
+function blocoOfertas() {
+    const arq = path.join(root, 'data', 'ofertas.json');
+    if (!fs.existsSync(arq)) return '';
+    let oferta;
+    try {
+        oferta = JSON.parse(ler('data/ofertas.json'));
+    } catch (e) {
+        throw new Error('data/ofertas.json não é um JSON válido: ' + e.message);
+    }
+    const escolhidos = (oferta.produtos || [])
+        .map(id => dados.produtos.find(p => p.id === id))
+        .filter(Boolean);
+    const perdidos = (oferta.produtos || []).filter(id => !dados.produtos.some(p => p.id === id));
+    if (perdidos.length) throw new Error('data/ofertas.json aponta para produto que não existe: ' + perdidos.join(', '));
+    if (!escolhidos.length) return '';
+
+    return [
+        '        <!-- ofertas:inicio (gerado por tools/gerar.js a partir de data/ofertas.json) -->',
+        '        <section class="section section-ofertas" aria-labelledby="ofertasTitulo">',
+        '            <div class="ofertas-topo">',
+        '                <h2 id="ofertasTitulo">' + esc(oferta.chamada || 'Ofertas da semana') + '</h2>',
+        oferta.ate ? '                <p class="ofertas-ate">' + esc(oferta.ate) + '</p>' : '',
+        '            </div>',
+        '            <div class="product-grid">',
+        escolhidos.map((p, i) => B.cartao(p, i, '')).join('\n'),
+        '            </div>',
+        '            <p class="ofertas-nota">Condição especial combinada no WhatsApp. Venda somente para pessoa jurídica com CNPJ ativo.</p>',
+        '        </section>',
+        '        <!-- ofertas:fim -->',
+    ].filter(l => l !== '').join('\n');
+}
+
+function aplicarOfertas(html, arquivo) {
+    if (arquivo !== 'index.html') return html;
+    if (!RE_OFERTAS.test(html)) return html;
+    const bloco = blocoOfertas();
+    return html.replace(RE_OFERTAS, bloco || [
+        '        <!-- ofertas:inicio (gerado por tools/gerar.js a partir de data/ofertas.json) -->',
+        '        <!-- sem oferta no ar: escreva os ids em data/ofertas.json e rode npm run build -->',
+        '        <!-- ofertas:fim -->',
+    ].join('\n'));
+}
+
 // 1. páginas normais
 for (const [arquivo, chave] of Object.entries(PAGINAS)) {
     let html = limparVersao(ler(arquivo));
     html = arrumarHead(html, arquivo);
     html = arrumarContadores(html);
     html = arrumarTotalNoTexto(html);
+    html = aplicarOfertas(html, arquivo);
     html = aplicarJsonLd(html, arquivo);
     html = aplicarPartials(html, '', chave);
     if (!/id="conteudo"/.test(html)) {

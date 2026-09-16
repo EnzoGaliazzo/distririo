@@ -10,6 +10,17 @@ confiança — informação errada custa cliente.
 
 ---
 
+## Esperando só uma escolha sua
+
+**A. Quais produtos entram na "Ofertas da semana"?** A faixa da home está
+pronta e desligada. Ligar é escrever os `id` em `data/ofertas.json` e rodar
+`npm run build` — leva um minuto. O que preciso de você: quais produtos
+destacar e até quando vale (o texto do "até" é livre: "até sexta, 26/09").
+Não invento destaque, e a faixa não mostra preço.
+→ Resposta:
+
+---
+
 ## Bloqueando conteúdo que já está escrito no site
 
 Estas travam o FAQ, que é a tarefa P0 nº 3.

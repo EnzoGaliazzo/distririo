@@ -645,3 +645,53 @@ a `main` no fim; a tarefa ficou pausada até haver item destravado no backlog.
 Cloudflare, troca do Source do Pages, CNPJ, prova social, condições comerciais,
 cidades atendidas, teste real do anexo de currículo e as contas de medição sem
 cookie e de monitoramento. Tudo no item 18 do `PERGUNTAS-PARA-O-ENZO.md`.
+
+---
+
+## Execução — 16/09: as oportunidades que dependiam só de código
+
+Depois do laudo, o Enzo pediu o exercício inverso: em vez de listar defeito,
+olhar o site como produto e dizer o que está faltando. Saíram 22 oportunidades
+(O-01 a O-22), com sete personas andando pelo site e comparação com quatro
+distribuidoras. Ele respondeu "faça e aplique tudo o que você quer" — então
+entrou tudo o que **não** depende de dado comercial que só ele tem. O resto
+continua no documento, esperando resposta.
+
+**O que passou a existir:**
+
+| Código | O que é | Onde |
+|---|---|---|
+| O-03 | Repetir um pedido anterior: os cinco últimos ficam no aparelho e voltam com um clique | painel da lista |
+| O-04 | "Mandar": leva a página no menu do celular, na área de transferência do computador, ou pelo WhatsApp | produto, marca e lista |
+| O-05 | Quantidade digitável na lista (de 1 a 999), em vez de clicar 12 vezes no "+" | painel da lista |
+| O-06 | Faixa "Ofertas da semana" na home, ligada por `data/ofertas.json` | `index.html` |
+| O-10 | `Ctrl+K` e `/` abrem a busca | site inteiro |
+| O-16 | Número de pedido (`DR-1609-01`) na mensagem do WhatsApp e no histórico | painel da lista |
+| O-20 | "Pular para os resultados" e ordem alfabética (A–Z e Z–A) no catálogo | `loja.html` |
+
+**A faixa de ofertas sobe desligada, de propósito.** O mecanismo está pronto e
+testado; escolher produto para promover é decisão comercial. `data/ofertas.json`
+está com a lista vazia, e o README explica em cinco linhas como ligar. A
+pergunta A do `PERGUNTAS-PARA-O-ENZO.md` é só isso: quais produtos e até quando.
+
+**A ordem alfabética não reordena as seções** — ela tira as seções do caminho e
+monta uma grade única com os 333 produtos, porque reordenar "Trident" e "Bis"
+dentro das linhas deles não responde à pergunta de quem procura um nome. O
+"Limpar filtros" devolve cada cartão para a seção de onde saiu, e o teste de
+fumaça confere isso.
+
+**O-19 foi revertido depois de pronto.** A ideia era uma fileira "Outros
+tamanhos" na página de produto, tirada da mesma linha do catálogo. Só que
+`linha` também guarda sabor: o Baly Tropical aparecia como "outro tamanho" do
+Baly Maçã Verde. Sem campo de tamanho no `data/produtos.json`, a fileira
+mentiria — ficou o comentário no `tools/build.js` explicando, para ninguém
+tentar de novo sem o dado.
+
+**Testes:** o `npm run testar` foi de 10 para 16 casos. Os seis novos cobrem
+ordem alfabética (ida e volta), o link de pular foco, quantidade digitada
+(inclusive o "0" que não pode passar), código de pedido e repetição, o botão de
+mandar sem Web Share, e a faixa de ofertas conferida contra o que está escrito
+no JSON — se alguém ligar a faixa e esquecer de rodar o build, o teste reprova.
+
+**O que continua com o Enzo, agora incluindo:** quais produtos vão para a faixa
+de ofertas (pergunta A). O resto da lista não mudou.

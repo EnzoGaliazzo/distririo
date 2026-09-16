@@ -77,6 +77,13 @@
                         <span class="btn-lista-mais" aria-hidden="true">+</span> <span class="btn-lista-rotulo">Adicionar à lista</span>
                     </button>
                     <a href="{{ZAP}}" class="btn btn-ghost btn-zap" target="_blank" rel="noopener">Pedir só este no WhatsApp</a>
+                    <button type="button" class="btn-compartilhar" data-compartilhar data-origem="produto"
+                            data-titulo="{{NOME}} | Distri Rio"
+                            data-texto="{{NOME}} no catálogo da Distri Rio:"
+                            data-url="{{URL}}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>
+                        <span class="btn-compartilhar-rotulo">Mandar</span>
+                    </button>
                 </div>
                 <p class="produto-nota-lista">Monte a lista inteira e mande de uma vez — é mais rápido para você e para a gente separar.</p>
                 <p class="produto-voltar"><a href="../loja.html#{{CAT_ID}}">‹ Voltar para {{CAT_TITULO}}</a></p>

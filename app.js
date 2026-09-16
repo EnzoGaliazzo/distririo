@@ -853,6 +853,85 @@
     });
 
     // =================================================================
+    // Atalho de teclado para a busca
+    // Quem monta pedido grande no computador passa a tarde procurando produto.
+    // Ctrl+K (ou "/") põe o cursor na busca de qualquer página.
+    // =================================================================
+    aoCarregar(function () {
+        var campo = document.querySelector('.header-search input');
+        if (!campo) return;
+
+        document.addEventListener('keydown', function (e) {
+            var atalhoK = (e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K');
+            var barra = e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey;
+            if (!atalhoK && !barra) return;
+
+            var alvo = e.target;
+            var digitando = alvo && (alvo.tagName === 'INPUT' || alvo.tagName === 'TEXTAREA' || alvo.tagName === 'SELECT' || alvo.isContentEditable);
+            if (barra && digitando) return;     // "/" dentro de um campo é barra mesmo
+
+            e.preventDefault();
+            var wrap = document.querySelector('.header-search-wrap');
+            var botao = document.querySelector('.search-toggle');
+            // No celular a busca fica escondida atrás do ícone.
+            if (wrap && botao && getComputedStyle(botao).display !== 'none' && !wrap.classList.contains('is-open')) {
+                botao.click();
+            }
+            campo.focus();
+            campo.select();
+        });
+
+        // Dica discreta do atalho, só onde existe teclado de verdade.
+        if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            var atalho = /Mac|iPhone|iPad/.test(navigator.platform || '') ? '⌘K' : 'Ctrl+K';
+            campo.setAttribute('placeholder', campo.getAttribute('placeholder') + '  (' + atalho + ')');
+        }
+    });
+
+    // =================================================================
+    // Mandar no WhatsApp (produto, marca e lista)
+    // O site também é ferramenta de quem vende: em vez de digitar produto
+    // por produto na conversa, manda a página. No celular abre o menu do
+    // sistema; no computador copia o link e avisa.
+    // =================================================================
+    function compartilhar(botao) {
+        var texto = botao.getAttribute('data-texto') || document.title;
+        var url = botao.getAttribute('data-url') || window.location.href;
+        var titulo = botao.getAttribute('data-titulo') || document.title;
+        var rotulo = botao.querySelector('.btn-compartilhar-rotulo');
+
+        function avisar(msg) {
+            if (!rotulo) return;
+            if (!botao.dataset.rotuloOriginal) botao.dataset.rotuloOriginal = rotulo.textContent;
+            rotulo.textContent = msg;
+            setTimeout(function () { rotulo.textContent = botao.dataset.rotuloOriginal; }, 2500);
+        }
+
+        medir('compartilhou', { origem: botao.getAttribute('data-origem') || 'pagina' });
+
+        if (navigator.share) {
+            navigator.share({ title: titulo, text: texto, url: url }).catch(function () { /* cancelou */ });
+            return;
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(texto + ' ' + url).then(function () {
+                avisar('Link copiado!');
+            }).catch(function () {
+                window.open('https://wa.me/?text=' + encodeURIComponent(texto + ' ' + url), '_blank', 'noopener');
+            });
+            return;
+        }
+        window.open('https://wa.me/?text=' + encodeURIComponent(texto + ' ' + url), '_blank', 'noopener');
+    }
+
+    document.addEventListener('click', function (e) {
+        var botao = e.target.closest && e.target.closest('[data-compartilhar]');
+        if (!botao) return;
+        e.preventDefault();
+        compartilhar(botao);
+    });
+
+    // =================================================================
     // Índice de busca — baixado sob demanda, não embutido em toda página
     // =================================================================
     var indicePromessa = null;
@@ -1033,7 +1112,7 @@
         var campo = document.querySelector('.header-search input');
         var status = document.getElementById('searchStatus');
         var semResultado = document.getElementById('noResults');
-        var secoes = Array.prototype.slice.call(document.querySelectorAll('.category-section'));
+        var secoes = Array.prototype.slice.call(document.querySelectorAll('.category-section:not(.catalogo-ordenado)'));
 
         // O texto de busca já vem normalizado do build: nada de reprocessar
         // 400 produtos a cada tecla digitada.
@@ -1046,6 +1125,48 @@
         var selCategoria = document.getElementById('filtroCategoria');
         var chkFoto = document.getElementById('filtroComFoto');
         var btnLimpar = document.getElementById('limparFiltros');
+
+        // Ordem alfabética: o catálogo nasce agrupado por linha de produto,
+        // que é como o depósito pensa. Quem procura um nome específico pensa
+        // em A-Z — então a ordem alfabética junta tudo numa grade só e as
+        // seções por linha saem da frente.
+        var selOrdem = document.getElementById('filtroOrdem');
+        var caixaOrdenada = document.getElementById('catalogoOrdenado');
+        var gradeOrdenada = document.getElementById('gradeOrdenada');
+        var tituloOrdenada = caixaOrdenada && caixaOrdenada.querySelector('h2');
+        var contagemOrdenada = caixaOrdenada && caixaOrdenada.querySelector('.category-count');
+        // De onde cada cartão saiu, para devolver na ordem do catálogo depois.
+        var bercos = Array.prototype.map.call(cartoes, function (c) {
+            return { el: c, pai: c.parentNode };
+        });
+
+        function ordemAtual() {
+            return selOrdem && gradeOrdenada ? selOrdem.value : '';
+        }
+
+        function aplicarOrdem() {
+            if (!gradeOrdenada) return;
+            var ordem = ordemAtual();
+            if (!ordem) {
+                // Cada cartão volta para a grade de onde saiu, na ordem original.
+                bercos.forEach(function (b) { b.pai.appendChild(b.el); });
+                if (caixaOrdenada) caixaOrdenada.hidden = true;
+                return;
+            }
+            var lista = bercos.map(function (b) { return b.el; }).sort(function (a, b) {
+                var r = (a.getAttribute('data-name') || '')
+                    .localeCompare(b.getAttribute('data-name') || '', 'pt', { sensitivity: 'base' });
+                return ordem === 'za' ? -r : r;
+            });
+            var fragmento = document.createDocumentFragment();
+            lista.forEach(function (el) { fragmento.appendChild(el); });
+            gradeOrdenada.appendChild(fragmento);
+            if (tituloOrdenada) {
+                tituloOrdenada.textContent = ordem === 'za'
+                    ? 'Todos os produtos, de Z a A'
+                    : 'Todos os produtos, de A a Z';
+            }
+        }
 
         function filtrosAtivos() {
             return {
@@ -1070,25 +1191,31 @@
         function filtrar(termo, rolar) {
             var t = normalizar(termo.trim());
             var f = filtrosAtivos();
+            var ordem = ordemAtual();
             var temFiltro = !!(t || f.marca || f.categoria || f.soComFoto);
+            // A ordem também é estado do catálogo: conta para o "Limpar" e
+            // para o aviso falado, mas não esconde produto nenhum.
+            var temEstado = temFiltro || !!ordem;
             var visiveis = 0;
             var primeiraSecao = null;
 
-            if (btnLimpar) btnLimpar.hidden = !temFiltro;
+            if (btnLimpar) btnLimpar.hidden = !temEstado;
+
+            // O cartão é testado onde quer que esteja: na seção da linha dele
+            // ou já movido para a grade em ordem alfabética.
+            itens.forEach(function (item) {
+                var card = item.el;
+                var bate = (!f.categoria || card.getAttribute('data-cat') === f.categoria)
+                    && (!t || item.texto.indexOf(t) !== -1)
+                    && (!f.marca || card.getAttribute('data-marca') === f.marca)
+                    && (!f.soComFoto || card.getAttribute('data-foto') === 'sim');
+                card.hidden = !bate;
+                if (bate) visiveis++;
+            });
 
             secoes.forEach(function (secao) {
-                var achou = false;
-                var foraDaCategoria = f.categoria && secao.id !== f.categoria;
-                secao.querySelectorAll('.product-card[data-name]').forEach(function (card) {
-                    var item = itens.find(function (i) { return i.el === card; });
-                    var bate = !foraDaCategoria
-                        && (!t || (item && item.texto.indexOf(t) !== -1))
-                        && (!f.marca || card.getAttribute('data-marca') === f.marca)
-                        && (!f.soComFoto || card.getAttribute('data-foto') === 'sim');
-                    card.hidden = !bate;
-                    if (bate) { achou = true; visiveis++; }
-                });
-                secao.hidden = !achou;
+                var achou = !!secao.querySelector('.product-card[data-name]:not([hidden])');
+                secao.hidden = !achou || !!ordem;
                 if (achou && !primeiraSecao) primeiraSecao = secao;
 
                 // A contagem da seção é do catálogo inteiro; durante a busca
@@ -1105,20 +1232,30 @@
                 }
             });
 
+            if (caixaOrdenada) {
+                caixaOrdenada.hidden = !ordem || visiveis === 0;
+                if (contagemOrdenada && ordem) {
+                    contagemOrdenada.textContent = visiveis + (visiveis === 1 ? ' produto' : ' produtos');
+                }
+            }
+
             if (semResultado) semResultado.hidden = visiveis !== 0;
             if (status) {
                 var descricao = descreverFiltros(f, termo.trim());
-                status.textContent = !temFiltro
+                var emOrdem = !ordem ? '' : ordem === 'za' ? ' em ordem alfabética (Z–A)' : ' em ordem alfabética (A–Z)';
+                status.textContent = !temEstado
                     ? ''
                     : visiveis === 0
                         ? 'Nenhum produto encontrado para ' + descricao + '.'
-                        : visiveis + (visiveis === 1 ? ' produto' : ' produtos') + ' para ' + descricao + '.';
+                        : visiveis + (visiveis === 1 ? ' produto' : ' produtos')
+                            + (descricao ? ' para ' + descricao : '') + emOrdem + '.';
             }
 
             // Filtrar sem rolar deixava o visitante olhando para a parte da
             // página que acabou de esvaziar.
-            if (rolar && temFiltro && primeiraSecao) {
-                rolarAte(primeiraSecao);
+            var destino = ordem ? caixaOrdenada : primeiraSecao;
+            if (rolar && temEstado && destino) {
+                rolarAte(destino);
             }
             return visiveis;
         }
@@ -1134,6 +1271,7 @@
             if (f.marca) p.set('marca', f.marca);
             if (f.categoria) p.set('cat', f.categoria);
             if (f.soComFoto) p.set('foto', '1');
+            if (ordemAtual()) p.set('ordem', ordemAtual());
             var busca = p.toString();
             history.replaceState(null, '', 'loja.html' + (busca ? '?' + busca : '') + window.location.hash);
         }
@@ -1150,7 +1288,13 @@
             selCategoria.value = categoriaInicial;
         }
         if (chkFoto && parametros.get('foto') === '1') chkFoto.checked = true;
-        if (consulta || selMarca && selMarca.value || selCategoria && selCategoria.value || chkFoto && chkFoto.checked) {
+        var ordemInicial = parametros.get('ordem') || '';
+        if (selOrdem && (ordemInicial === 'az' || ordemInicial === 'za')) {
+            selOrdem.value = ordemInicial;
+            aplicarOrdem();
+        }
+        if (consulta || selMarca && selMarca.value || selCategoria && selCategoria.value
+            || chkFoto && chkFoto.checked || ordemAtual()) {
             filtrar(consulta, true);
         }
 
@@ -1183,16 +1327,18 @@
 
         // Painel de filtros: qualquer mudança refaz a filtragem e leva o
         // visitante para o primeiro resultado.
-        [selMarca, selCategoria, chkFoto].forEach(function (ctrl) {
+        [selMarca, selCategoria, chkFoto, selOrdem].forEach(function (ctrl) {
             if (!ctrl) return;
             ctrl.addEventListener('change', function () {
+                if (ctrl === selOrdem) aplicarOrdem();
                 filtrar(campo ? campo.value : '', true);
                 sincronizarEndereco();
                 var f = filtrosAtivos();
                 medir('filtro_usado', {
                     filtro: ctrl.id === 'filtroMarca' ? 'marca'
-                        : ctrl.id === 'filtroCategoria' ? 'categoria' : 'so_com_foto',
-                    valor: ctrl.type === 'checkbox' ? String(ctrl.checked) : ctrl.value,
+                        : ctrl.id === 'filtroCategoria' ? 'categoria'
+                        : ctrl.id === 'filtroOrdem' ? 'ordem' : 'so_com_foto',
+                    valor: ctrl.type === 'checkbox' ? String(ctrl.checked) : (ctrl.value || 'catalogo'),
                     resultados: document.querySelectorAll('.product-card:not([hidden])').length,
                     marca: f.marca || null,
                     categoria: f.categoria || null
@@ -1205,6 +1351,7 @@
                 if (selMarca) selMarca.value = '';
                 if (selCategoria) selCategoria.value = '';
                 if (chkFoto) chkFoto.checked = false;
+                if (selOrdem) { selOrdem.value = ''; aplicarOrdem(); }
                 if (campo) campo.value = '';
                 filtrar('', false);
                 sincronizarEndereco();
@@ -1292,7 +1439,43 @@
     // comerciante monta hoje e manda amanhã.
     // =================================================================
     var CHAVE_LISTA = 'dr-lista-pedido';
+    var CHAVE_HISTORICO = 'dr-pedidos-enviados';
     var LIMITE_URL = 1800; // wa.me quebra por volta de 2000 caracteres
+
+    // Pedido enviado vira histórico no próprio aparelho: reposição é o que mais
+    // acontece numa distribuidora, e remontar 14 itens do zero toda semana era o
+    // maior atrito de quem já é cliente. Guarda os 5 últimos, nada sai daqui.
+    function lerHistorico() {
+        try {
+            var bruto = recuperar(CHAVE_HISTORICO);
+            var lista = bruto ? JSON.parse(bruto) : [];
+            return Array.isArray(lista) ? lista : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    // Código curto para os dois lados falarem do mesmo pedido na conversa.
+    function codigoDoPedido(quando) {
+        var d = quando || new Date();
+        var dois = function (n) { return (n < 10 ? '0' : '') + n; };
+        var doDia = lerHistorico().filter(function (p) {
+            return (p.codigo || '').indexOf('DR-' + dois(d.getDate()) + dois(d.getMonth() + 1)) === 0;
+        }).length;
+        return 'DR-' + dois(d.getDate()) + dois(d.getMonth() + 1) + '-' + dois(doDia + 1);
+    }
+
+    function guardarPedidoEnviado(lista) {
+        if (!lista.length) return null;
+        var agora = new Date();
+        var registro = { em: agora.toISOString(), codigo: codigoDoPedido(agora), itens: lista.map(function (i) {
+            return { id: i.id, nome: i.nome, marca: i.marca, qtd: i.qtd };
+        }) };
+        var anteriores = lerHistorico();
+        anteriores.unshift(registro);
+        guardar(CHAVE_HISTORICO, JSON.stringify(anteriores.slice(0, 5)));
+        return registro;
+    }
 
     function lerLista() {
         try {
@@ -1316,8 +1499,10 @@
     // ---- mensagem do WhatsApp ----
     // Corta pelo número de caracteres da URL final, não do texto: acento vira
     // três caracteres depois do encode e a conta erra feio sem isso.
-    function montarMensagem(lista) {
-        var cabecalho = 'Olá! Montei uma lista pelo site:\n\n';
+    function montarMensagem(lista, codigo) {
+        var cabecalho = codigo
+            ? 'Olá! Montei uma lista pelo site (pedido ' + codigo + '):\n\n'
+            : 'Olá! Montei uma lista pelo site:\n\n';
         var rodape = '\n\nPode confirmar disponibilidade e as condições?';
         var linhas = lista.map(function (i) {
             return '• ' + i.qtd + 'x ' + i.nome + (i.marca ? ' (' + i.marca + ')' : '');
@@ -1358,7 +1543,13 @@
             '<div class="lista-rodape">' +
             '<p class="lista-aviso" id="listaAviso"></p>' +
             '<a class="btn btn-zap" id="listaEnviar" target="_blank" rel="noopener">Enviar lista no WhatsApp</a>' +
+            '<div class="lista-rodape-secundario">' +
+            // Mandar a lista para o sócio, o gerente ou outro comerciante.
+            '<button type="button" class="link-botao lista-mandar" id="listaMandar" data-compartilhar data-origem="lista" ' +
+            'data-titulo="Lista de pedido - Distri Rio">' +
+            '<span class="btn-compartilhar-rotulo">Mandar para alguém</span></button>' +
             '<button type="button" class="link-botao lista-limpar" id="listaLimpar">Esvaziar lista</button>' +
+            '</div>' +
             '</div>';
         document.body.appendChild(painel);
         return painel;
@@ -1415,7 +1606,10 @@
         if (!lista.length) {
             caixa.innerHTML = '<p class="lista-vazia">Sua lista está vazia. ' +
                 'Vá ao catálogo e toque em "Adicionar à lista" nos produtos que quiser.</p>';
+            desenharHistorico(caixa);
             if (enviar) enviar.hidden = true;
+            var mandarVazio = document.getElementById('listaMandar');
+            if (mandarVazio) mandarVazio.hidden = true;
             if (aviso) aviso.textContent = '';
             var limpar = document.getElementById('listaLimpar');
             if (limpar) limpar.hidden = true;
@@ -1433,7 +1627,9 @@
                 '</div>' +
                 '<div class="lista-qtd">' +
                 '<button type="button" class="lista-menos" aria-label="Diminuir a quantidade de ' + escapar(item.nome) + '">&minus;</button>' +
-                '<span class="lista-qtd-valor" aria-live="polite">' + item.qtd + '</span>' +
+                // Campo digitável: quem pede 12 caixas tocava 12 vezes no "+".
+                '<input type="number" class="lista-qtd-valor" inputmode="numeric" min="1" max="999" step="1" ' +
+                'value="' + item.qtd + '" aria-label="Quantidade de ' + escapar(item.nome) + '">' +
                 '<button type="button" class="lista-mais" aria-label="Aumentar a quantidade de ' + escapar(item.nome) + '">+</button>' +
                 '</div>' +
                 '<button type="button" class="lista-remover" aria-label="Tirar ' + escapar(item.nome) + ' da lista">&times;</button>';
@@ -1441,6 +1637,14 @@
             li.querySelector('.lista-menos').addEventListener('click', function () { mudarQtd(item.id, -1); });
             li.querySelector('.lista-mais').addEventListener('click', function () { mudarQtd(item.id, 1); });
             li.querySelector('.lista-remover').addEventListener('click', function () { remover(item.id); });
+            var campo = li.querySelector('input.lista-qtd-valor');
+            campo.addEventListener('change', function () {
+                var n = Math.round(Number(campo.value));
+                if (!isFinite(n) || n < 1) { campo.value = item.qtd; return; }
+                definirQtd(item.id, Math.min(n, 999));
+            });
+            // Enter fecha o teclado do celular sem enviar nada.
+            campo.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); campo.blur(); } });
             caixa.appendChild(li);
         });
 
@@ -1448,6 +1652,13 @@
         if (enviar) {
             enviar.hidden = false;
             enviar.href = 'https://wa.me/' + ZAP + '?text=' + encodeURIComponent(msg.texto);
+        }
+        var mandar = document.getElementById('listaMandar');
+        if (mandar) {
+            mandar.hidden = false;
+            mandar.setAttribute('data-texto', msg.texto);
+            mandar.setAttribute('data-url', (document.body.getAttribute('data-base') || '') === '../'
+                ? 'https://distririo.com.br/loja.html' : window.location.origin + '/loja.html');
         }
         var limparBtn = document.getElementById('listaLimpar');
         if (limparBtn) limparBtn.hidden = false;
@@ -1484,6 +1695,48 @@
         item.qtd += delta;
         if (item.qtd < 1) return remover(id);
         gravarLista(lista);
+    }
+
+    function definirQtd(id, quantidade) {
+        var lista = lerLista();
+        var item = lista.find(function (i) { return i.id === id; });
+        if (!item) return;
+        if (quantidade < 1) return remover(id);
+        item.qtd = quantidade;
+        gravarLista(lista);
+        medir('lista_quantidade', { item_id: id, quantidade: quantidade });
+    }
+
+    // Pedidos anteriores, para repetir com dois toques.
+    function desenharHistorico(caixa) {
+        var anteriores = lerHistorico();
+        if (!anteriores.length) return;
+
+        var bloco = document.createElement('div');
+        bloco.className = 'lista-historico';
+        var titulo = document.createElement('h3');
+        titulo.textContent = 'Pedidos que você já mandou';
+        bloco.appendChild(titulo);
+
+        anteriores.forEach(function (pedido, i) {
+            var quando = new Date(pedido.em);
+            var data = isNaN(quando) ? '' : quando.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+            var itens = pedido.itens.reduce(function (n, it) { return n + it.qtd; }, 0);
+            var botao = document.createElement('button');
+            botao.type = 'button';
+            botao.className = 'lista-repetir';
+            botao.innerHTML = '<span class="lista-repetir-acao">Repetir</span> ' +
+                '<span class="lista-repetir-quando">' + escapar(data) + '</span> ' +
+                '<span class="lista-repetir-itens">' + itens + (itens === 1 ? ' item' : ' itens') + '</span>' +
+                (pedido.codigo ? '<span class="lista-repetir-codigo">' + escapar(pedido.codigo) + '</span>' : '');
+            botao.addEventListener('click', function () {
+                gravarLista(pedido.itens.map(function (it) { return { id: it.id, nome: it.nome, marca: it.marca, qtd: it.qtd }; }));
+                medir('repetiu_pedido', { posicao: i, itens: itens });
+            });
+            bloco.appendChild(botao);
+        });
+
+        caixa.appendChild(bloco);
     }
 
     function remover(id) {
@@ -1523,7 +1776,14 @@
         });
 
         document.getElementById('listaEnviar').addEventListener('click', function () {
-            medir('lista_enviar_whatsapp', { itens: totalItens(lerLista()) });
+            var lista = lerLista();
+            if (!lista.length) return;
+            // O código entra na mensagem e fica no histórico: serve para os dois
+            // lados falarem do mesmo pedido no meio da conversa.
+            var registro = guardarPedidoEnviado(lista);
+            var msg = montarMensagem(lista, registro && registro.codigo);
+            this.href = 'https://wa.me/' + ZAP + '?text=' + encodeURIComponent(msg.texto);
+            medir('lista_enviar_whatsapp', { itens: totalItens(lista), codigo: registro ? registro.codigo : null });
         });
 
         document.addEventListener('keydown', function (e) {

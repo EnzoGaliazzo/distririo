@@ -28,13 +28,14 @@ Publicado em <https://distririo.com.br>.
 | Caminho | O que é |
 |---|---|
 | `index.html`, `loja.html`, `sobre.html`, … | As 9 páginas de raiz. Editáveis à mão, fora das regiões geradas. |
-| `produto/*.html` | 426 páginas de produto. **Geradas.** Não editar. |
-| `marca/*.html` | 18 páginas de marca. **Geradas.** Não editar. |
+| `produto/*.html` | 333 páginas de produto. **Geradas.** Não editar. |
+| `marca/*.html` | 19 páginas de marca. **Geradas.** Não editar. |
 | `404.html` | Página de erro. **Gerada** a partir de `tools/partials/404.html`. |
 | `style.css` | Toda a folha de estilo, num arquivo só. Editável à mão. |
 | `app.js` | Todo o JavaScript, num arquivo só. Editável à mão. |
 | `data/produtos.json` | **Fonte única do catálogo.** É daqui que sai tudo. |
 | `data/catalogo-bruto.json` | Exportação crua do ERP. Só serve para reconstruir o anterior. |
+| `data/ofertas.json` | Quais produtos aparecem na faixa "Ofertas da semana" da home. Vazio = faixa fora do ar. |
 | `assets/produtos/<marca>/` | Fotos de produto: um `.jpg` e um `.webp` por foto. |
 | `assets/hero-slides/` | Banners do carrossel da home. |
 | `tools/` | Scripts de manutenção. Veja `tools/LEIAME.md`. |
@@ -102,6 +103,29 @@ arquivo mantendo o nome, ou edite os três `srcset` do slide.
 O primeiro slide leva `fetchpriority="high"` porque é o maior elemento visível
 na abertura da home. Se trocar a ordem, mova esse atributo junto.
 
+### Ligar (ou desligar) a faixa de ofertas da home
+
+A home tem uma faixa de destaque que **só aparece quando você escreve nela**.
+Ela sai de `data/ofertas.json`:
+
+```json
+{
+  "chamada": "Ofertas da semana",
+  "ate": "até sexta, 26/09",
+  "produtos": ["baly-tradicional", "trident-5s", "bis-10"]
+}
+```
+
+- `produtos` são os mesmos `id` de `data/produtos.json`. Id que não existe
+  reprova o build, em vez de publicar um cartão quebrado.
+- `ate` é texto livre e some quando fica vazio. Não escreva prazo que você não
+  vá cumprir: a faixa não tem data automática, ela fica no ar até você mudar.
+- **A faixa não fala de preço.** Ela diz "fale com a gente sobre estes", não
+  "R$ X". Preço continua sendo conversa de WhatsApp.
+
+Para desligar: esvazie `produtos` (`[]`) e rode `npm run build`. É assim que
+ela está hoje — o mecanismo existe, escolher o que promover é decisão sua.
+
 ### Criar uma página de marca
 
 Não se cria à mão. Toda marca com **4 ou mais produtos** no catálogo ganha
@@ -159,6 +183,7 @@ pega, por até dez minutos, o HTML novo com o CSS velho.
 | ID do GA4 (`G-8MYVJZMB64`, em `tools/gerar.js`) | Trocar zera o histórico de medição. |
 | O bloco de Consent Mode no `<head>` | É o que impede cookie de medição antes do aceite. É exigência da LGPD, e o hash dele está na política de segurança da página. |
 | `<!-- catalogo:inicio -->` … `<!-- catalogo:fim -->` | Região gerada dentro do `loja.html`. O que você escrever ali some no próximo build. |
+| `<!-- ofertas:inicio -->` … `<!-- ofertas:fim -->` | Idem, no `index.html`. Para mudar a faixa, edite `data/ofertas.json`. |
 | `<!-- jsonld:inicio -->` … `<!-- jsonld:fim -->` | Idem, para os dados estruturados. |
 | `<header>` e `<footer>` | Substituídos inteiros a cada build pelos arquivos de `tools/partials/`. Edite o partial. |
 
@@ -185,6 +210,7 @@ pega, por até dez minutos, o HTML novo com o CSS velho.
 ```bash
 npm run build      # regenera o site a partir de data/produtos.json
 npm run checar     # confere links internos, âncoras e imagens órfãs
+npm run testar     # abre o site num Chrome sem interface e confere os fluxos (precisa de Node 22+)
 npm run imagens    # gera o WebP de cada foto de produto (precisa de Python + Pillow)
 npm run catalogo   # reconstrói data/produtos.json a partir do ERP e regenera
 ```

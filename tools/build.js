@@ -176,6 +176,9 @@ function montarFiltros() {
 
     return [
         '        <aside class="filtros" aria-label="Filtrar o catálogo">',
+        // Quem navega por teclado cai no painel antes do catálogo e teria de
+        // passar por todos os campos para chegar no primeiro produto.
+        '            <a class="filtros-pular" href="#resultados">Pular para os resultados</a>',
         '            <h2 class="filtros-titulo">Filtrar</h2>',
         '            <div class="filtros-campos">',
         '                <label class="filtro">',
@@ -190,6 +193,16 @@ function montarFiltros() {
         '                    <select id="filtroCategoria">',
         '                        <option value="">Todas as categorias</option>',
         opcoesCategoria.replace(/^ {20}/gm, '                        '),
+        '                    </select>',
+        '                </label>',
+        // O catálogo nasce agrupado por linha de produto, que é como o depósito
+        // pensa. Quem procura um nome específico pensa em ordem alfabética.
+        '                <label class="filtro">',
+        '                    <span>Ordem</span>',
+        '                    <select id="filtroOrdem">',
+        '                        <option value="">Como no catálogo</option>',
+        '                        <option value="az">Nome (A–Z)</option>',
+        '                        <option value="za">Nome (Z–A)</option>',
         '                    </select>',
         '                </label>',
         // O "Só produtos com foto" saiu quando o catálogo passou a ter foto em
@@ -430,6 +443,11 @@ function paginaProduto(p, tpl) {
     const linkMarca = p.marca && paginasDeMarca.has(p.marca)
         ? '<a href="../marca/' + paginasDeMarca.get(p.marca) + '.html">' + esc(p.marca) + '</a>'
         : null;
+    // Tentei pôr aqui uma linha "Outros tamanhos" com os irmãos de categoria.
+    // Não vale: na maioria das categorias os irmãos são outros SABORES (Baly
+    // Tropical, Maçã Verde), não outros tamanhos — o rótulo mentiria — e o
+    // tamanho de cada produto já está no campo Embalagem logo acima. Quem quer
+    // ver a linha inteira tem o bloco de relacionados no fim da página.
     const ficha = [
         ['Marca', p.marca, linkMarca],
         ['Categoria', tituloCat],
@@ -496,7 +514,7 @@ function paginaProduto(p, tpl) {
 module.exports = {
     root, SITE, ZAP, dados, ler, gravar, esc, semAcento, indentar,
     PAGINAS, montarCabecalho, montarRodape, aplicarPartials,
-    montarCatalogo, montarFiltros, paginaProduto, textoBusca, porCategoria,
+    montarCatalogo, montarFiltros, paginaProduto, textoBusca, porCategoria, cartao,
 };
 
 // =====================================================================

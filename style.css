@@ -3051,6 +3051,51 @@ main {
     overflow-y: auto;
 }
 
+/* "Pular para os resultados": fica fora da tela até receber o foco, igual ao
+   "pular para o conteúdo" do topo. Quem usa teclado cai no painel de filtros
+   antes do catálogo e teria de passar por todos os campos para ver o primeiro
+   produto. */
+.filtros-pular {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.filtros-pular:focus {
+    position: static;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin-bottom: 0.75rem;
+    padding: 0.5rem 0.85rem;
+    clip-path: none;
+    background: var(--ink);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-radius: var(--radius);
+}
+
+/* Com a ordem alfabética ligada, esta é a única seção visível do catálogo:
+   não precisa da linha nem do respiro que separam uma linha de produto da
+   outra. E adiar o layout dela não economiza nada, já que ela é a lista
+   inteira — só faria a barra de rolagem pular quando entrasse na tela. */
+.catalogo-ordenado {
+    padding-top: 0;
+    border-top: 0;
+    content-visibility: visible;
+    contain-intrinsic-size: auto;
+}
+
+/* O foco no bloco de resultados existe para o leitor de tela mudar de assunto;
+   com mouse ele não precisa aparecer. */
+.section-catalog:focus:not(:focus-visible) {
+    outline: none;
+}
+
 .filtros-titulo {
     font-family: var(--font-body);
     font-size: 0.72rem;
@@ -4096,4 +4141,175 @@ body.lista-aberta {
     @page {
         margin: 1.5cm;
     }
+}
+
+/* =====================================================================
+   Mandar no WhatsApp, repetir pedido e quantidade digitável
+   Três coisas que faltavam para quem já é cliente: levar o catálogo para
+   a conversa, repetir o pedido da semana passada e digitar 12 em vez de
+   tocar doze vezes no "+".
+   ===================================================================== */
+
+.btn-compartilhar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    padding: 0.6rem 1.1rem;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--texto-suave);
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.btn-compartilhar:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+}
+
+.btn-compartilhar svg {
+    width: 17px;
+    height: 17px;
+    flex: none;
+}
+
+/* Campo de quantidade na lista */
+input.lista-qtd-valor {
+    width: 3.2rem;
+    min-height: 40px;
+    text-align: center;
+    font: inherit;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--dark);
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+    border-radius: 8px;
+    padding: 0.2rem;
+    -moz-appearance: textfield;
+}
+
+input.lista-qtd-valor::-webkit-outer-spin-button,
+input.lista-qtd-valor::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input.lista-qtd-valor:focus {
+    outline: none;
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(224, 30, 36, 0.14);
+}
+
+/* Pedidos anteriores */
+.lista-historico {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-300);
+    display: grid;
+    gap: 0.5rem;
+}
+
+.lista-historico h3 {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--dark);
+    margin: 0;
+}
+
+.lista-repetir {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.6rem;
+    width: 100%;
+    min-height: 44px;
+    padding: 0.6rem 0.85rem;
+    font: inherit;
+    font-size: 0.9rem;
+    text-align: left;
+    color: var(--dark);
+    background: var(--gray-100);
+    border: 1px solid var(--gray-300);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.lista-repetir:hover {
+    border-color: var(--red);
+    background: var(--white);
+}
+
+.lista-repetir-acao {
+    font-weight: 700;
+    color: var(--red-text);
+}
+
+.lista-repetir-itens {
+    color: var(--texto-suave);
+}
+
+.lista-repetir-codigo {
+    margin-left: auto;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--texto-fraco);
+}
+
+.lista-rodape-secundario {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-top: 0.6rem;
+}
+
+.lista-mandar {
+    color: var(--texto-suave);
+}
+
+/* =====================================================================
+   Ofertas da semana (data/ofertas.json)
+   A faixa só existe quando há produto escolhido. Sem preço: a condição é
+   combinada no WhatsApp, como o resto do site.
+   ===================================================================== */
+
+.section-ofertas {
+    background: var(--gray-100);
+    border-radius: var(--radius);
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.ofertas-topo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.4rem 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.ofertas-topo h2 {
+    margin: 0;
+}
+
+.ofertas-ate {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--red-text);
+    margin: 0;
+}
+
+.ofertas-nota {
+    margin: 1rem 0 0;
+    font-size: 0.85rem;
+    color: var(--texto-suave);
 }

@@ -11,6 +11,7 @@
 import { createServer } from 'node:http';
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
+import { setMaxListeners } from 'node:events';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -117,8 +118,9 @@ async function novaAba(nav, { largura = 1280, altura = 860, celular = false } = 
     const aba = { sessionId, targetId, browserContextId, erros: [] };
     aba.cmd = (m, p) => nav.envia(m, p || {}, sessionId);
     // Uma aba por teste, um ouvinte por aba: sem isto o Node avisa de vazamento
-    // a partir da décima.
-    if (typeof nav.ws.setMaxListeners === 'function') nav.ws.setMaxListeners(0);
+    // a partir da décima. O WebSocket global é um EventTarget, que não tem
+    // setMaxListeners próprio — quem tira o teto é o módulo events.
+    setMaxListeners(0, nav.ws);
     nav.ws.addEventListener('message', (ev) => {
         const msg = JSON.parse(typeof ev.data === 'string' ? ev.data : Buffer.from(ev.data).toString());
         if (msg.sessionId !== sessionId) return;
@@ -219,6 +221,52 @@ teste('filtro vai para o endereço e volta ao abrir o link', async (nav) => {
     if (!(r.visiveis > 0 && r.visiveis < r.total)) throw new Error('o link não filtrou: ' + JSON.stringify(r));
 });
 
+teste('ordem alfabética junta o catálogo numa grade só e o limpar desfaz', async (nav) => {
+    const aba = await novaAba(nav);
+    await ir(aba, '/loja.html?ordem=az');
+    const r = await avaliar(aba, `(() => { const g = [...document.querySelectorAll('#gradeOrdenada .product-card')];
+        const nomes = g.map(c => c.getAttribute('data-name'));
+        const ordenado = nomes.slice().sort((a, b) => a.localeCompare(b, 'pt', { sensitivity: 'base' }));
+        return { naGrade: g.length, total: document.querySelectorAll('.product-card').length,
+                 emOrdem: JSON.stringify(nomes) === JSON.stringify(ordenado),
+                 secoesVisiveis: document.querySelectorAll('.category-section:not(.catalogo-ordenado):not([hidden])').length,
+                 caixaVisivel: !document.getElementById('catalogoOrdenado').hidden,
+                 primeiroCatalogo: (document.querySelector('.category-section:not(.catalogo-ordenado) .product-card') || {}).id }; })()`);
+    if (r.naGrade !== r.total) throw new Error('nem todo cartão foi para a grade: ' + JSON.stringify(r));
+    if (!r.emOrdem) throw new Error('a grade não saiu em ordem alfabética');
+    if (!r.caixaVisivel || r.secoesVisiveis !== 0) throw new Error('as seções por linha continuaram na tela: ' + JSON.stringify(r));
+
+    // O "Limpar filtros" devolve cada cartão para a seção de onde saiu.
+    const nomesOriginais = await avaliar(aba, `(() => { document.getElementById('limparFiltros').click();
+        return [...document.querySelectorAll('.category-section:not(.catalogo-ordenado) .product-card')].slice(0, 3).map(c => c.getAttribute('data-name')); })()`);
+    await espera(400);
+    const v = await avaliar(aba, `({ naGrade: document.querySelectorAll('#gradeOrdenada .product-card').length,
+        caixaVisivel: !document.getElementById('catalogoOrdenado').hidden,
+        visiveis: document.querySelectorAll('.product-card:not([hidden])').length,
+        endereco: location.search })`);
+    if (v.naGrade !== 0 || v.caixaVisivel) throw new Error('a grade alfabética não saiu de cena: ' + JSON.stringify(v));
+    if (v.visiveis !== r.total) throw new Error('sumiu produto ao voltar para a ordem do catálogo: ' + JSON.stringify(v));
+    if (v.endereco.includes('ordem=')) throw new Error('a ordem ficou presa no endereço: ' + v.endereco);
+    if (nomesOriginais.length !== 3) throw new Error('catálogo voltou vazio');
+    if (aba.erros.length) throw new Error('console com erro: ' + aba.erros[0]);
+});
+
+teste('"pular para os resultados" leva o foco para o catálogo', async (nav) => {
+    const aba = await novaAba(nav);
+    await ir(aba, '/loja.html');
+    const r = await avaliar(aba, `(() => { const a = document.querySelector('.filtros-pular');
+        if (!a) return { falta: true };
+        a.focus();
+        const cx = a.getBoundingClientRect();
+        a.click();
+        return { destino: a.getAttribute('href'), visivelComFoco: cx.width > 20 && cx.height > 10,
+                 focado: document.activeElement ? document.activeElement.id : '' }; })()`);
+    if (r.falta) throw new Error('o link de pular sumiu do painel de filtros');
+    if (r.destino !== '#resultados') throw new Error('o link aponta para ' + r.destino);
+    if (!r.visivelComFoco) throw new Error('o link não aparece quando recebe o foco');
+    if (r.focado !== 'resultados') throw new Error('o foco não foi para os resultados: ' + r.focado);
+});
+
 teste('lista de pedido soma item e monta a mensagem do WhatsApp', async (nav) => {
     const aba = await novaAba(nav);
     await ir(aba, '/loja.html');
@@ -231,6 +279,90 @@ teste('lista de pedido soma item e monta a mensagem do WhatsApp', async (nav) =>
         zap: (document.getElementById('listaEnviar') || {}).href || '' })`);
     if (r.contador !== '1' || r.itens !== 1) throw new Error('lista não registrou o item: ' + JSON.stringify(r));
     if (!r.zap.includes('wa.me') || !r.zap.includes('text=')) throw new Error('link do WhatsApp sem mensagem');
+});
+
+teste('quantidade digitada na lista entra no total e na mensagem', async (nav) => {
+    const aba = await novaAba(nav);
+    await ir(aba, '/loja.html');
+    await avaliar(aba, `document.querySelector('[data-add]').click()`);
+    await espera(300);
+    await avaliar(aba, `document.getElementById('listaFlutuante').click()`);
+    await espera(300);
+    const r = await avaliar(aba, `(() => { const c = document.querySelector('input.lista-qtd-valor');
+        c.value = '12'; c.dispatchEvent(new Event('change', { bubbles: true }));
+        return { contador: document.getElementById('listaContador').textContent,
+                 campo: document.querySelector('input.lista-qtd-valor').value,
+                 msg: decodeURIComponent((document.getElementById('listaEnviar').href.split('text=')[1] || '')) }; })()`);
+    if (r.contador !== '12' || r.campo !== '12') throw new Error('a quantidade digitada não valeu: ' + JSON.stringify(r));
+    if (!/•\s*12x /.test(r.msg)) throw new Error('a mensagem não levou a quantidade: ' + r.msg);
+
+    // Quantidade sem sentido volta para o que estava.
+    const v = await avaliar(aba, `(() => { const c = document.querySelector('input.lista-qtd-valor');
+        c.value = '0'; c.dispatchEvent(new Event('change', { bubbles: true }));
+        return document.querySelector('input.lista-qtd-valor').value; })()`);
+    if (v !== '12') throw new Error('quantidade zero passou: ' + v);
+});
+
+teste('pedido enviado ganha código e volta no "repetir"', async (nav) => {
+    const aba = await novaAba(nav);
+    await ir(aba, '/loja.html');
+    // O clique no "Enviar" abriria o WhatsApp: aqui ele só não navega.
+    await avaliar(aba, `document.addEventListener('click', e => { if (e.target.closest('#listaEnviar')) e.preventDefault(); }, true)`);
+    await avaliar(aba, `document.querySelector('[data-add]').click()`);
+    await espera(300);
+    await avaliar(aba, `document.getElementById('listaFlutuante').click()`);
+    await espera(300);
+    const r = await avaliar(aba, `(() => { document.getElementById('listaEnviar').click();
+        const msg = decodeURIComponent((document.getElementById('listaEnviar').href.split('text=')[1] || ''));
+        return { msg, historico: JSON.parse(localStorage.getItem('dr-pedidos-enviados') || '[]') }; })()`);
+    if (!/DR-\d{4}-\d{2}/.test(r.msg)) throw new Error('a mensagem saiu sem código de pedido: ' + r.msg);
+    if (r.historico.length !== 1 || !r.historico[0].codigo) throw new Error('o pedido não entrou no histórico: ' + JSON.stringify(r.historico));
+
+    // Esvazia a lista e repete o pedido guardado.
+    const v = await avaliar(aba, `(() => { document.getElementById('listaLimpar').click();
+        document.getElementById('listaFlutuante').click();
+        const b = document.querySelector('.lista-repetir');
+        if (!b) return { falta: true };
+        b.click();
+        return { itens: document.querySelectorAll('.lista-item').length,
+                 contador: document.getElementById('listaContador').textContent }; })()`);
+    if (v.falta) throw new Error('não apareceu o botão de repetir pedido');
+    if (v.itens !== 1 || v.contador !== '1') throw new Error('o repetir não devolveu a lista: ' + JSON.stringify(v));
+    if (aba.erros.length) throw new Error('console com erro: ' + aba.erros[0]);
+});
+
+teste('botão de mandar copia o link quando o aparelho não tem menu de compartilhar', async (nav) => {
+    const aba = await novaAba(nav);
+    // Sem Web Share o caminho é a área de transferência; aqui ela é de mentira
+    // para o teste não depender de permissão do sistema.
+    await aba.cmd('Page.addScriptToEvaluateOnNewDocument', { source: `delete Navigator.prototype.share; delete navigator.share;
+        window.__copiado = null;
+        Object.defineProperty(navigator, 'clipboard', { configurable: true,
+            value: { writeText: (t) => { window.__copiado = t; return Promise.resolve(); } } });` });
+    await ir(aba, '/produto/bis-10.html');
+    const r = await avaliar(aba, `(() => { const b = document.querySelector('[data-compartilhar]');
+        if (!b) return { falta: true };
+        b.click();
+        return { url: b.getAttribute('data-url'), origem: b.getAttribute('data-origem') }; })()`);
+    if (r.falta) throw new Error('a página de produto não tem botão de mandar');
+    await espera(400);
+    const v = await avaliar(aba, `({ copiado: window.__copiado, rotulo: document.querySelector('.btn-compartilhar-rotulo').textContent })`);
+    if (!v.copiado || !v.copiado.includes(r.url)) throw new Error('não copiou o endereço da página: ' + JSON.stringify(v));
+    if (!/copiado/i.test(v.rotulo)) throw new Error('o botão não avisou que copiou: ' + v.rotulo);
+});
+
+teste('faixa de ofertas na home segue o que está escrito em data/ofertas.json', async (nav) => {
+    const arq = path.join(RAIZ, 'data', 'ofertas.json');
+    const ofertas = fs.existsSync(arq) ? JSON.parse(fs.readFileSync(arq, 'utf8')) : { produtos: [] };
+    const esperados = (ofertas.produtos || []).length;
+    const aba = await novaAba(nav);
+    await ir(aba, '/');
+    const r = await avaliar(aba, `({ existe: !!document.querySelector('.section-ofertas'),
+        cartoes: document.querySelectorAll('.section-ofertas .product-card').length,
+        marcador: document.documentElement.innerHTML.includes('ofertas:inicio') })`);
+    if (!r.marcador) throw new Error('sumiu o marcador da faixa de ofertas da home');
+    if (esperados === 0 && r.existe) throw new Error('faixa de ofertas no ar com data/ofertas.json vazio');
+    if (esperados > 0 && r.cartoes !== esperados) throw new Error(`ofertas escritas: ${esperados}, na home: ${r.cartoes}`);
 });
 
 teste('cadastro barra CNPJ inválido e telefone sem DDD', async (nav) => {

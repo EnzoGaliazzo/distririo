@@ -1,0 +1,6 @@
+{
+  "_leiame": "Ofertas da semana da home. Enquanto 'produtos' estiver vazio, a faixa não aparece no site. Para ligar: escreva os ids dos produtos (os mesmos de data/produtos.json), ajuste 'ate' e rode npm run build. Para desligar: esvazie 'produtos' e rode o build de novo.",
+  "chamada": "Ofertas da semana",
+  "ate": "",
+  "produtos": []
+}
