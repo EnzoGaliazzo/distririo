@@ -75,6 +75,11 @@ jobs:
       - name: Nenhum caminho de imagem quebrado
         run: node tools/checar-links.js
 
+      # <div> sem fechar não dá erro no navegador, só reaninha: foi assim que
+      # a etapa 2 do cadastro ficou uma semana dentro da etapa 1, invisível.
+      - name: Tags fecham na ordem em que abriram
+        run: node tools/checar-html.js
+
   testes:
     name: Testes de fumaça (navegador)
     runs-on: ubuntu-latest

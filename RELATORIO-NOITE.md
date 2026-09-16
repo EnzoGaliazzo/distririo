@@ -990,3 +990,25 @@ celular). Firefox 155 e WebKit 26.6 (o motor do Safari), desktop e celular:
 funil, máscaras de CNPJ e telefone, conferência na Receita e pedido com cópia,
 tudo passando. Nenhum teste manda nada para fora da máquina: Receita, Web3Forms
 e WhatsApp respondem de mentira dentro da página.
+
+## Execução — 16/09: cadastro sumia na etapa 2
+
+O Enzo avisou que o "Quero ser cliente" dava erro sempre que passava para a
+segunda etapa. **Causa:** faltavam quatro `</div>` no HTML do formulário desde
+09/09, quando ele virou duas etapas (commit `9a4a793a`). O navegador não acusa
+`<div>` sem fechar: ele reaninha em silêncio. A etapa 2 foi parar dentro da
+etapa 1, e o "Continuar", que esconde a primeira, escondia as duas — o cartão
+ficava vazio, com altura zero, e ninguém conseguia se cadastrar passando da
+etapa 1. O teste de fumaça nunca clicava em "Continuar", por isso passou a
+semana inteira verde.
+
+**Corrigido:** os quatro campos fecham, a etapa 2 é irmã da etapa 1, e o
+espaçamento entre os campos (que vinha, por acidente, do aninhamento errado)
+agora é da própria etapa. De quebra, a confirmação passou a dizer a verdade: com
+`noopener` o navegador responde como se tivesse bloqueado a janela, e a tela
+mostrava "Sua mensagem está pronta" com o WhatsApp já aberto do lado.
+
+**Para não voltar:** um teste percorre as duas etapas e envia, no computador e
+no celular (reprova com o HTML antigo), e `tools/checar-html.js` confere que as
+tags fecham na ordem nas 459 páginas — entrou no `npm run checar` e no CI.
+Nenhuma outra página tinha o mesmo problema.

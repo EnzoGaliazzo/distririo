@@ -814,6 +814,49 @@ teste('cadastro barra CNPJ inválido e telefone sem DDD', async (nav) => {
     if (!r.dica) throw new Error('telefone incompleto não avisou embaixo do campo');
 });
 
+teste('cadastro: "Continuar" mostra a etapa 2 e o envio leva tudo ao WhatsApp e à cópia por e-mail', async (nav) => {
+    // Até 16/09 faltavam quatro </div> e a etapa 2 ficava dentro da etapa 1:
+    // o "Continuar" escondia a primeira e o formulário sumia inteiro.
+    for (const perfil of [{}, { largura: 375, altura: 812, celular: true }]) {
+        const aba = await novaAba(nav, perfil);
+        await aba.cmd('Page.addScriptToEvaluateOnNewDocument', { source: FALSOS_PEDIDO });
+        await ir(aba, '/quero-ser-cliente.html');
+        const r = await avaliar(aba, `(() => {
+            const f = document.getElementById('clientForm');
+            const e1 = f.querySelector('[data-etapa="1"]'), e2 = f.querySelector('[data-etapa="2"]');
+            const aninhada = e1.contains(e2);
+            f.cnpj.value = '11222333000181'; f.cnpj.dispatchEvent(new Event('input', { bubbles: true }));
+            f.name.value = 'Joana Teste';
+            f.phone.value = '21992111843'; f.phone.dispatchEvent(new Event('input', { bubbles: true }));
+            f.consent.checked = true;
+            document.getElementById('clientProximo').click();
+            const visivel = (el) => !!el && el.getClientRects().length > 0;
+            return { aninhada, etapa1: visivel(e1), etapa2: visivel(e2), razao: visivel(f.company),
+                     enviar: visivel(f.querySelector('[type="submit"]')), foco: document.activeElement.id };
+        })()`);
+        const onde = perfil.celular ? 'celular' : 'desktop';
+        if (r.aninhada) throw new Error(onde + ': a etapa 2 está dentro da etapa 1 no HTML');
+        if (r.etapa1 || !r.etapa2 || !r.razao || !r.enviar) throw new Error(onde + ': o "Continuar" não mostrou a etapa 2: ' + JSON.stringify(r));
+        if (r.foco !== 'clientCompany') throw new Error(onde + ': o foco não foi para a etapa 2: ' + r.foco);
+
+        const v = await avaliar(aba, `(() => {
+            const f = document.getElementById('clientForm');
+            f.segmento.value = 'Farmácia'; f.bairro.value = 'Centro'; f.message.value = 'Quero conhecer o catálogo';
+            f.requestSubmit();
+            return { aberto: window.__aberto ? decodeURIComponent(window.__aberto.split('text=')[1] || '') : '', enviado: window.__enviado,
+                     confirmacao: (f.querySelector('.form-enviado') || {}).textContent || '' };
+        })()`);
+        for (const trecho of ['11.222.333/0001-81', 'Joana Teste', '(21) 99211-1843', 'Farmácia', 'Centro', 'Quero conhecer o catálogo']) {
+            if (!v.aberto.includes(trecho)) throw new Error(onde + ': a mensagem do WhatsApp saiu sem "' + trecho + '": ' + v.aberto);
+        }
+        if (!v.enviado || v.enviado.cnpj !== '11.222.333/0001-81' || v.enviado.segmento !== 'Farmácia') {
+            throw new Error(onde + ': a cópia por e-mail saiu incompleta: ' + JSON.stringify(v.enviado));
+        }
+        if (!/Abrimos o WhatsApp/.test(v.confirmacao)) throw new Error(onde + ': a confirmação não disse que abriu: ' + v.confirmacao);
+        if (aba.erros.length) throw new Error(onde + ': console com erro: ' + aba.erros[0]);
+    }
+});
+
 teste('faixa de cookies não aparece de cara, aparece ao rolar e a recusa vale', async (nav) => {
     const aba = await novaAba(nav, { largura: 375, altura: 812, celular: true });
     await ir(aba, '/');

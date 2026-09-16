@@ -55,6 +55,7 @@ adição de açúcares" ou "zero açúcar".
 | `tools/limpar-nome.js` | Tira código de SKU, separa embalagem, expande abreviação e devolve acento. |
 | `tools/rotas.js` | Decide em qual seção cada produto do ERP entra. |
 | `tools/jsonld.js` | Monta FAQPage, Service e BreadcrumbList a partir do texto visível. |
+| `tools/checar-html.js` | Confere que as tags fecham na ordem em que abriram. `<div>` sem fechar não dá erro no navegador — ele reaninha em silêncio, e foi assim que a etapa 2 do cadastro sumia. |
 | `tools/checar-links.js` | Confere que todo `href`/`src` local existe e que as âncoras batem. |
 | `tools/checar-css.js` | Lista seletor declarado duas vezes no `style.css` e mostra qual propriedade a de baixo tira da de cima. Não reprova: é relatório. |
 | `tools/orfas.js` | Lista (ou apaga, com `--apagar`) imagens que ninguém referencia. |

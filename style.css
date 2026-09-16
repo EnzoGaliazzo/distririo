@@ -5246,6 +5246,28 @@ body.lista-aberta {
 }
 
 /* Formulário de cadastro em duas etapas */
+/* Cada etapa é uma coluna com o mesmo respiro do formulário. Até 16/09 o
+   espaço entre os campos vinha, por acidente, de quatro <div> sem fechar: os
+   campos ficavam um dentro do outro — e a etapa 2 dentro da etapa 1, que
+   sumia junto quando o "Continuar" escondia a primeira. */
+.form-etapa {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-etapa > .form-passo {
+    margin-bottom: 0;
+}
+
+.form-etapa > .form-consent {
+    margin: 0;
+}
+
+.form-etapa > .form-acoes {
+    margin-top: 0.25rem;
+}
+
 .form-passo {
     margin-bottom: 1.1rem;
     font-size: 0.78rem;

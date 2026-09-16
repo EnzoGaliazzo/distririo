@@ -2647,12 +2647,9 @@
     // acontecia nada — agora ele sempre recebe uma confirmação com o link.
     function abrirWhatsApp(form, texto) {
         var url = 'https://wa.me/' + ZAP + '?text=' + encodeURIComponent(texto);
-        var janela = null;
-        try {
-            janela = window.open(url, '_blank', 'noopener');
-        } catch (e) {
-            janela = null;
-        }
+        // Com 'noopener' o window.open devolve null mesmo quando abre, e a tela
+        // dizia "Sua mensagem está pronta" com o WhatsApp já aberto do lado.
+        var janela = abrirJanelaWhatsApp(url);
 
         var caixa = form.querySelector('.form-enviado');
         if (!caixa) {
