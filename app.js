@@ -158,10 +158,22 @@
             '</div>';
         document.body.appendChild(banner);
 
+        // Os botões flutuantes (Minha lista, WhatsApp, voltar ao topo) ficam
+        // no pé da tela, que é justamente onde a faixa entra. Publica a altura
+        // dela para eles subirem — senão o toque em "Minha lista" caía no
+        // "Aceitar" e virava consentimento sem querer.
+        function publicarAltura() {
+            var altura = banner.isConnected ? banner.offsetHeight : 0;
+            document.documentElement.style.setProperty('--altura-cookie', altura + 'px');
+        }
+        window.addEventListener('resize', publicarAltura);
+
         function fechar(aceitou) {
             decidirMedicao(aceitou);
             banner.remove();
             document.body.classList.remove('com-cookie-banner');
+            window.removeEventListener('resize', publicarAltura);
+            document.documentElement.style.setProperty('--altura-cookie', '0px');
             // Quem reabriu pelo rodapé volta para lá; quem só respondeu a faixa
             // continua onde estava, sem a página pular para o fim.
             if (reabertoPeloRodape) {
@@ -170,6 +182,7 @@
             }
         }
         document.body.classList.add('com-cookie-banner');
+        publicarAltura();
         if (reabertoPeloRodape) banner.querySelector('.cookie-aceitar').focus();
         banner.querySelector('.cookie-aceitar').addEventListener('click', function () { fechar(true); });
         banner.querySelector('.cookie-recusar').addEventListener('click', function () { fechar(false); });

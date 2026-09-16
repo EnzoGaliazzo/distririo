@@ -157,6 +157,9 @@
     --info-h: 34px;
     --header-total: calc(var(--header-h) + var(--info-h));
     --footer-h: 132px;
+    /* altura da faixa de cookies enquanto ela está na tela; o app.js escreve,
+       os botões flutuantes sobem esse tanto para não ficarem embaixo dela */
+    --altura-cookie: 0px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1238,7 +1241,9 @@ main {
     opacity: 0;
     transform: translateY(16px) scale(0.9);
     pointer-events: none;
-    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), background 0.2s;
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), background 0.2s,
+                translate var(--ms-2) var(--ease-firme);
+    translate: 0 calc(-1 * var(--altura-cookie));
 }
 
 .whatsapp-float.is-visible {
@@ -2611,7 +2616,9 @@ main {
     opacity: 0;
     visibility: hidden;
     transform: translateY(8px);
-    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0.25s;
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0.25s,
+                translate var(--ms-2) var(--ease-firme);
+    translate: 0 calc(-1 * var(--altura-cookie));
 }
 
 .voltar-topo.is-visible {
@@ -4382,6 +4389,8 @@ a.service-item {
     box-shadow: var(--shadow-lg);
     cursor: pointer;
     min-height: 48px;
+    translate: 0 calc(-1 * var(--altura-cookie));
+    transition: translate var(--ms-2) var(--ease-firme);
 }
 
 .lista-flutuante svg {

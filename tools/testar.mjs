@@ -552,6 +552,32 @@ teste('site continua claro e com contraste AA mesmo com o sistema no escuro', as
     }
 });
 
+teste('com a faixa de cookies na tela, "Minha lista" e WhatsApp continuam tocáveis', async (nav) => {
+    // .click() por código ignora o que está por cima; um dedo não. Então a
+    // pergunta é ao navegador: o que está no ponto exato do toque?
+    for (const [rotulo, perfil] of [['celular', { largura: 375, altura: 812, celular: true }], ['desktop', {}]]) {
+        const aba = await novaAba(nav, perfil);
+        await ir(aba, '/loja.html');
+        await avaliar(aba, `document.querySelector('[data-add]').click()`);
+        await avaliar(aba, `window.scrollTo(0, 900)`);   // rolar faz a faixa aparecer
+        await espera(1300);
+        const r = await avaliar(aba, `(() => {
+            const faixa = document.querySelector('.cookie-banner');
+            const noPonto = (el) => {
+                if (!el) return 'ausente';
+                const b = el.getBoundingClientRect();
+                const alvo = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2);
+                return alvo === el || el.contains(alvo) ? 'livre' : 'coberto por ' + (alvo ? (alvo.className || alvo.tagName) : 'nada');
+            };
+            return { faixa: !!faixa, lista: noPonto(document.getElementById('listaFlutuante')),
+                     zap: noPonto(document.getElementById('whatsappFloat')) };
+        })()`);
+        if (!r.faixa) throw new Error(`${rotulo}: a faixa de cookies não apareceu depois de rolar — o teste não mediu nada`);
+        if (r.lista !== 'livre') throw new Error(`${rotulo}: "Minha lista" ${r.lista}`);
+        if (r.zap !== 'livre') throw new Error(`${rotulo}: WhatsApp ${r.zap}`);
+    }
+});
+
 teste('cadastro barra CNPJ inválido e telefone sem DDD', async (nav) => {
     const aba = await novaAba(nav);
     await ir(aba, '/quero-ser-cliente.html');
