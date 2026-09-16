@@ -1388,15 +1388,28 @@ main {
     flex: 1;
 }
 
-/* A linha de baixo da ficha é dado: embalagem e marca, em mono, como o rodapé
-   de uma etiqueta impressa. */
-.product-card .product-embalagem,
-.product-card .product-marca {
+/* Rodapé de etiqueta de gôndola: marca e embalagem em mono, encostado no pé
+   da ficha. O margin-top: auto alinha o rodapé de todas as fichas de uma linha
+   da grade, mesmo com resumos de tamanhos diferentes. */
+.product-card .product-etiqueta {
+    flex: 0 0 auto;
+    margin-top: auto;
+    padding-top: var(--e-2);
+    border-top: 1px dashed var(--linha);
     font-family: var(--font-dado);
     font-size: var(--t-50);
+    font-weight: 600;
+    line-height: 1.5;
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--texto-fraco);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-etiqueta-marca {
+    color: var(--dark);
 }
 
 
@@ -2464,7 +2477,7 @@ main {
    ===================================================================== */
 
 .category-count {
-    margin: calc(var(--e-4) * -1) 0 var(--e-5);
+    margin: var(--e-1) 0 var(--e-5);
 }
 
 .search-status {
@@ -2550,17 +2563,6 @@ main {
 .product-desc {
     color: var(--texto-suave);
     font-size: 0.88rem;
-}
-
-.product-pack {
-    flex: 0 0 auto;
-    /* margin auto encosta a embalagem no pé do cartão: numa linha da grade,
-       todas ficam alinhadas mesmo com descrições de tamanhos diferentes */
-    margin-top: auto;
-    padding-top: 0.5rem;
-    font-size: 0.78rem;
-    color: var(--texto-fraco);
-    letter-spacing: 0.01em;
 }
 
 /* Sobretítulo com o nome da linha ("Supino", "Proteção Solar") */

@@ -127,9 +127,10 @@ function cartao(p, indice, base) {
     const nomeDeLinha = p.linha && !/,/.test(p.linha) ? p.linha : '';
     // Com descrição, o cartão diz o que o produto é; a lista de sabores fica
     // na página do produto, onde cabe inteira. Sem descrição, vale o que havia.
+    // A embalagem saiu daqui: ela vai para o rodapé de etiqueta, junto da marca.
     const detalhe = p.descricao
-        ? [p.descricao, pacote].filter(Boolean)
-        : [p.linha, pacote].filter(Boolean);
+        ? [p.descricao].filter(Boolean)
+        : [p.linha].filter(Boolean);
     const linhas = [
         '<article class="product-card" data-name="' + esc(p.nome) + '" data-desc="' + esc(textoBusca(p)) + '"' +
             ' data-marca="' + esc(p.marca || '') + '" data-cat="' + esc(p.categoria) + '"' +
@@ -143,10 +144,18 @@ function cartao(p, indice, base) {
     ];
     if (nomeDeLinha && p.descricao) linhas.push('            <p class="product-linha">' + esc(nomeDeLinha) + '</p>');
     linhas.push('            <h3>' + esc(p.nome) + '</h3>');
-    detalhe.forEach((d, i) => {
-        const classe = i === 0 && d !== pacote ? (p.descricao ? 'product-resumo' : 'product-desc') : 'product-pack';
-        linhas.push('            <p class="' + classe + '">' + esc(d) + '</p>');
+    detalhe.forEach((d) => {
+        linhas.push('            <p class="' + (p.descricao ? 'product-resumo' : 'product-desc') + '">' + esc(d) + '</p>');
     });
+    // Rodapé de etiqueta de gôndola: marca e embalagem, no pé da ficha. Na
+    // busca e na ordem A–Z os cartões se misturam, e sem isto a marca sumia.
+    if (p.marca || pacote) {
+        linhas.push('            <p class="product-etiqueta">' +
+            (p.marca ? '<span class="product-etiqueta-marca">' + esc(p.marca) + '</span>' : '') +
+            (p.marca && pacote ? '<span class="product-etiqueta-sep" aria-hidden="true"> · </span>' : '') +
+            (pacote ? '<span class="product-etiqueta-pack">' + esc(pacote) + '</span>' : '') +
+            '</p>');
+    }
     // O botão fica FORA do <a>: botão dentro de link é HTML inválido e o
     // clique vira navegação em vez de adicionar à lista.
     linhas.push(
