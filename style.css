@@ -2400,33 +2400,32 @@ main {
    Consentimento de cookies
    ===================================================================== */
 
+/* Faixa curta presa no rodapé. A caixa anterior, centralizada e com 218 px de
+   altura, tomava 27% da primeira tela no celular e cobria os dois botões do
+   hero. Aqui o texto cabe em duas linhas e os botões ficam ao lado. */
 .cookie-banner {
     position: fixed;
-    left: 1rem;
-    right: 1rem;
-    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 120;
-    max-width: 560px;
-    margin: 0 auto;
-    padding: 1.1rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 1.25rem;
+    padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom, 0px));
     background: var(--white);
-    border: 1px solid var(--gray-300);
-    border-left: 5px solid var(--red);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-lg);
-}
-
-.cookie-banner h2 {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
-    color: var(--dark);
+    border-top: 3px solid var(--red);
+    box-shadow: 0 -6px 20px rgba(16, 19, 24, 0.14);
 }
 
 .cookie-banner p {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
+    line-height: 1.45;
     color: var(--texto-suave);
-    margin-bottom: 0.9rem;
+    margin: 0;
+    max-width: 62ch;
 }
 
 .cookie-banner a {
@@ -2435,28 +2434,43 @@ main {
 
 .cookie-acoes {
     display: flex;
-    flex-wrap: wrap;
     gap: 0.6rem;
+    flex: none;
 }
 
-.cookie-acoes button {
+/* Aceitar e Recusar com o mesmo peso: mesma altura, mesma borda, mesma fonte.
+   Quem recusa não deve precisar procurar o botão. */
+.cookie-botao {
     font: inherit;
     font-size: 0.88rem;
     font-weight: 600;
-    padding: 0.55rem 1.1rem;
+    min-height: 44px;
+    padding: 0.55rem 1.4rem;
     border-radius: 999px;
     cursor: pointer;
     border: 2px solid var(--red);
-}
-
-.cookie-aceitar {
-    background: var(--red);
-    color: var(--white);
-}
-
-.cookie-recusar {
-    background: transparent;
+    background: var(--white);
     color: var(--red-text);
+}
+
+.cookie-botao:hover {
+    background: var(--gray-100);
+}
+
+@media (max-width: 640px) {
+    .cookie-banner {
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+
+    .cookie-acoes {
+        width: 100%;
+    }
+
+    .cookie-botao {
+        flex: 1;
+        padding: 0.55rem 0.8rem;
+    }
 }
 
 /* =====================================================================

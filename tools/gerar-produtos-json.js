@@ -128,7 +128,35 @@ const saida = {
     })),
 };
 
-fs.writeFileSync(path.join(root, 'data', 'produtos.json'), JSON.stringify(saida, null, 2).replace(/\n/g, '\r\n'), 'utf8');
+// ---------- trava: este script REESCREVE o catálogo do zero ----------
+// Ele parte da exportação do ERP, e a exportação não tem descrição escrita à
+// mão, foto escolhida nem cadastro duplicado unificado. Rodar sem querer
+// devolve o catálogo para o estado bruto: em 15/09 a simulação numa cópia
+// mostrou 336 produtos com 333 descrições virando 426 produtos com nenhuma.
+const arqAtual = path.join(root, 'data', 'produtos.json');
+if (fs.existsSync(arqAtual) && !process.argv.includes('--sobrescrever')) {
+    const atual = JSON.parse(fs.readFileSync(arqAtual, 'utf8'));
+    const comDescricao = atual.produtos.filter(p => p.descricao).length;
+    const comFoto = atual.produtos.filter(p => p.img).length;
+    const redir = path.join(root, 'data', 'redirecionamentos.json');
+    const nRedir = fs.existsSync(redir) ? Object.keys(JSON.parse(fs.readFileSync(redir, 'utf8'))).length : 0;
+    console.error([
+        '',
+        'PAREI: isto reescreve data/produtos.json a partir da exportação do ERP.',
+        '',
+        `  hoje:   ${atual.produtos.length} produtos · ${comDescricao} com descrição · ${comFoto} com foto · ${nRedir} endereços redirecionados`,
+        `  viraria: ${finais.length} produtos · 0 com descrição · ${finais.filter(p => p.img).length} com foto · cadastros duplicados de volta`,
+        '',
+        'Só faz sentido quando a exportação do ERP for refeita, e mesmo assim a',
+        'curadoria precisa ser reaplicada depois. Se é isso mesmo:',
+        '',
+        '  node tools/gerar-produtos-json.js --sobrescrever',
+        '',
+    ].join('\n'));
+    process.exit(1);
+}
+
+fs.writeFileSync(arqAtual, JSON.stringify(saida, null, 2).replace(/\n/g, '\r\n'), 'utf8');
 console.log('data/produtos.json:', saida.total, 'produtos em', categorias.length, 'categorias');
 console.log('sem foto:', finais.filter(p => !p.img).length);
 console.log();

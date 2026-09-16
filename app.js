@@ -117,36 +117,84 @@
         }
     }
 
-    function decidirMedicao(aceitou) {
-        guardar(CHAVE_CONSENTIMENTO, aceitou ? 'sim' : 'nao');
-        if (aceitou) carregarAnalytics();
+    // Recusar depois de ter aceitado precisa valer na hora: a LGPD fala em
+    // revogação por procedimento facilitado, e guardar "nao" sem desligar nada
+    // deixaria a medição rodando até a próxima página.
+    function desligarMedicao() {
+        if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'denied' });
+        window['ga-disable-' + window.DR_GA_ID] = true;
+        var dominio = location.hostname.replace(/^www\./, '');
+        document.cookie.split(';').forEach(function (c) {
+            var nome = c.split('=')[0].trim();
+            if (!/^_ga/.test(nome)) return;
+            ['/', location.pathname].forEach(function (caminho) {
+                ['', '.' + dominio, dominio].forEach(function (d) {
+                    document.cookie = nome + '=; Max-Age=0; path=' + caminho + (d ? '; domain=' + d : '');
+                });
+            });
+        });
     }
 
-    function montarBannerCookies() {
+    function decidirMedicao(aceitou) {
+        guardar(CHAVE_CONSENTIMENTO, aceitou ? 'sim' : 'nao');
+        if (aceitou) carregarAnalytics(); else desligarMedicao();
+    }
+
+    // Faixa curta no rodapé, não caixa no meio da tela: a versão anterior
+    // cobria 27% da primeira tela no celular, justamente onde ficam os botões
+    // "Quero ser cliente" e "Ver o catálogo". Aceitar e Recusar têm o mesmo
+    // peso visual e o foco não é roubado de quem está navegando pelo teclado.
+    function montarBannerCookies(reabertoPeloRodape) {
         var banner = document.createElement('div');
         banner.className = 'cookie-banner';
-        banner.setAttribute('role', 'dialog');
-        banner.setAttribute('aria-labelledby', 'cookieTitulo');
-        banner.setAttribute('aria-describedby', 'cookieTexto');
+        banner.setAttribute('role', 'region');
+        banner.setAttribute('aria-label', 'Aviso de cookies de medição');
         banner.innerHTML =
-            '<h2 id="cookieTitulo">Cookies de medição</h2>' +
-            '<p id="cookieTexto">Usamos o Google Analytics só para entender quais páginas as pessoas visitam. ' +
-            'Nada é carregado antes de você escolher. Veja a ' +
-            '<a href="' + (document.body.getAttribute('data-base') || '') + 'politica-de-privacidade.html">política de privacidade</a>.</p>' +
+            '<p id="cookieTexto">Cookies de medição: nada carrega antes de você escolher. ' +
+            '<a href="' + (document.body.getAttribute('data-base') || '') + 'politica-de-privacidade.html">Política de privacidade</a>.</p>' +
             '<div class="cookie-acoes">' +
-            '<button type="button" class="cookie-aceitar">Aceitar</button>' +
-            '<button type="button" class="cookie-recusar">Recusar</button>' +
+            '<button type="button" class="cookie-botao cookie-aceitar">Aceitar</button>' +
+            '<button type="button" class="cookie-botao cookie-recusar">Recusar</button>' +
             '</div>';
         document.body.appendChild(banner);
 
         function fechar(aceitou) {
             decidirMedicao(aceitou);
             banner.remove();
+            document.body.classList.remove('com-cookie-banner');
+            // Quem reabriu pelo rodapé volta para lá; quem só respondeu a faixa
+            // continua onde estava, sem a página pular para o fim.
+            if (reabertoPeloRodape) {
+                var reabrir = document.getElementById('abrirPreferenciasCookies');
+                if (reabrir) reabrir.focus();
+            }
         }
+        document.body.classList.add('com-cookie-banner');
+        if (reabertoPeloRodape) banner.querySelector('.cookie-aceitar').focus();
         banner.querySelector('.cookie-aceitar').addEventListener('click', function () { fechar(true); });
         banner.querySelector('.cookie-recusar').addEventListener('click', function () { fechar(false); });
-        banner.querySelector('.cookie-aceitar').focus();
         return banner;
+    }
+
+    // A faixa entra depois da primeira rolagem (ou de 8 segundos parado). Mesmo
+    // com 137 px ela cobria os botões "Quero ser cliente" e "Ver o catálogo" no
+    // celular, e os primeiros segundos da visita são para o negócio, não para
+    // cookies. Nada de medição carrega enquanto ela não aparece e é respondida.
+    function quandoFizerSentido(mostrar) {
+        var jaFoi = false;
+        function disparar() {
+            if (jaFoi) return;
+            jaFoi = true;
+            window.removeEventListener('scroll', aoRolar);
+            clearTimeout(relogio);
+            mostrar();
+        }
+        function aoRolar() {
+            if (window.scrollY > 120) disparar();
+        }
+        var relogio = setTimeout(disparar, 8000);
+        window.addEventListener('scroll', aoRolar, { passive: true });
+        aoRolar();
     }
 
     aoCarregar(function () {
@@ -154,13 +202,13 @@
         if (escolha === 'sim') {
             carregarAnalytics();
         } else if (escolha !== 'nao') {
-            montarBannerCookies();
+            quandoFizerSentido(function () { montarBannerCookies(); });
         }
 
         var reabrir = document.getElementById('abrirPreferenciasCookies');
         if (reabrir) {
             reabrir.addEventListener('click', function () {
-                if (!document.querySelector('.cookie-banner')) montarBannerCookies();
+                if (!document.querySelector('.cookie-banner')) montarBannerCookies(true);
             });
         }
     });
@@ -769,13 +817,23 @@
     // =================================================================
     var indicePromessa = null;
 
+    // A falha não pode virar resposta: guardar uma promessa resolvida com lista
+    // vazia fazia a busca responder "nenhum produto encontrado" até recarregar a
+    // página, mesmo depois da internet voltar. No balcão, com sinal oscilando,
+    // isso faz o comerciante concluir que a Distri Rio não tem o produto.
     function carregarIndice() {
         if (indicePromessa) return indicePromessa;
         var base = document.body.getAttribute('data-base') || '';
         indicePromessa = fetch(base + 'assets/data/produtos.json')
-            .then(function (r) { return r.json(); })
+            .then(function (r) {
+                if (!r.ok) throw new Error('resposta ' + r.status);
+                return r.json();
+            })
             .then(function (d) { return d.produtos || []; })
-            .catch(function () { return []; });
+            .catch(function (e) {
+                indicePromessa = null;   // a próxima digitação tenta de novo
+                throw e;
+            });
         return indicePromessa;
     }
 
@@ -794,7 +852,9 @@
         var base = document.body.getAttribute('data-base') || '';
         var ativo = -1;
 
-        campo.addEventListener('focus', carregarIndice, { once: true });
+        campo.addEventListener('focus', function () {
+            carregarIndice().catch(function () { /* a busca avisa quando o visitante digitar */ });
+        }, { once: true });
 
         function marcar(itens) {
             itens.forEach(function (el, i) {
@@ -881,6 +941,15 @@
                         lista.appendChild(li2);
                     }
                 }
+                lista.hidden = false;
+                campo.setAttribute('aria-expanded', 'true');
+            }).catch(function () {
+                if (normalizar(campo.value.trim()) !== t) return;
+                lista.innerHTML = '';
+                var erro = document.createElement('li');
+                erro.className = 'search-suggestion-empty';
+                erro.textContent = 'Não deu para carregar a busca agora. Confira a conexão e digite de novo.';
+                lista.appendChild(erro);
                 lista.hidden = false;
                 campo.setAttribute('aria-expanded', 'true');
             });
@@ -1037,8 +1106,12 @@
             campo.addEventListener('input', debounce(function () {
                 var termo = campo.value.trim();
                 if (termo.length < 3) return;
+                // Alguém digita CNPJ ou telefone no campo de busca de vez em
+                // quando. Dado pessoal não pode ir para o GA4 (é regra do
+                // próprio Google), então sequência longa de dígitos não sobe.
+                var termoMedido = /\d{6,}/.test(termo.replace(/\D/g, '')) ? '(número)' : termo.toLowerCase();
                 medir('busca', {
-                    search_term: termo.toLowerCase(),
+                    search_term: termoMedido,
                     resultados: document.querySelectorAll('.product-card:not([hidden])').length
                 });
             }, 1200));
@@ -1451,6 +1524,24 @@
         if (!janela) link.focus();
     }
 
+    // Cópia do cadastro por e-mail, em paralelo ao WhatsApp.
+    // O formulário continua terminando no WhatsApp; isto é só a rede de
+    // segurança para quem preenche tudo e desiste na tela do WhatsApp — antes,
+    // esse lead sumia sem deixar CNPJ nem telefone. Falha em silêncio de
+    // propósito: o visitante não pode ser barrado porque um serviço caiu.
+    // keepalive mantém o envio vivo mesmo quando a aba vai para o WhatsApp.
+    function enviarCopiaPorEmail(form) {
+        if (!form.querySelector('input[name="access_key"]')) return;
+        try {
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { Accept: 'application/json' },
+                keepalive: true
+            }).catch(function () { /* o WhatsApp continua sendo o caminho principal */ });
+        } catch (e) { /* ok */ }
+    }
+
     // --- máscaras e validação ---
     function mascararCnpj(v) {
         var d = v.replace(/\D/g, '').slice(0, 14);
@@ -1643,12 +1734,16 @@
             if (val('bairro')) linhas.push('*Bairro:* ' + val('bairro'));
             if (val('message')) linhas.push('', val('message'));
 
-            medir('formulario_enviado', {
+            // "formulario_enviado" media o clique, não o lead: o pedido só existe
+            // depois que a pessoa aperta enviar dentro do WhatsApp. O nome agora
+            // diz o que aconteceu de verdade.
+            medir('whatsapp_aberto', {
                 formulario: 'quero_ser_cliente',
                 ramo: val('segmento') || null,
                 bairro: val('bairro') || null,
                 completou_etapa2: !etapa2 || !etapa2.hidden
             });
+            enviarCopiaPorEmail(form);
             abrirWhatsApp(form, linhas.join('\n'));
         });
     });
@@ -1703,7 +1798,7 @@
             if (form.company.value.trim()) linhas.push('*Empresa:* ' + form.company.value.trim());
             linhas.push('', form.message.value.trim());
 
-            medir('formulario_enviado', { formulario: 'contato', assunto: assunto.value });
+            medir('whatsapp_aberto', { formulario: 'contato', assunto: assunto.value });
             abrirWhatsApp(form, linhas.join('\n'));
         });
     });
