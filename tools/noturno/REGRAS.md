@@ -37,8 +37,16 @@ erradas ou que algum documento de auditoria diga o contrário:
 - **A faixa de CTA é clara**, como o resto da página.
 - **Nada de gráfico de marketing montado à mão** (colagem, composição). Use
   os arquivos reais como estão, recortados de forma limpa quando precisar.
-- **Não baixar foto de produto da internet.** São imagens com dono e o risco
-  cai no CNPJ da Distri Rio.
+- **Foto de produto: só do site oficial da marca.** Em 14/09 o Enzo liberou usar
+  a foto da própria marca que a Distri Rio distribui — ele é distribuidor e tem
+  essa permissão. Vale a loja oficial da marca primeiro e, quando a marca não
+  publica, o varejo que vende o mesmo SKU, sempre conferindo embalagem e
+  gramatura na imagem. **Continua proibido** pegar foto de banco de imagens, de
+  concorrente ou de qualquer site sem relação com o fabricante: são imagens com
+  dono e o risco cai no CNPJ da Distri Rio.
+- **Padrão da foto:** JPG quadrado 800 × 800 em `assets/produtos/<marca>/`, fundo
+  branco, 7% de margem, e `npm run imagens` para gerar o WebP. Os scripts estão
+  em `tools/fotos/`.
 - Não mexer no conteúdo de `data/produtos.json` sem instrução explícita.
 
 ## Como trabalhar
