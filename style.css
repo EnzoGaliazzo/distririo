@@ -1,69 +1,215 @@
 /* =====================================================================
-   Fontes de reserva com a mesma métrica das definitivas
+   Fontes de reserva com a métrica das definitivas
 
-   As fontes vêm do Google e chegam depois do HTML. Quando a Inter entrava, o
-   texto mudava de tamanho e a página andava: o salto medido (CLS) ia a 0,16 no
-   desktop e 0,079 no celular, e sumia inteiro quando a fonte era bloqueada.
-   Estas duas faces não baixam nada — elas usam a fonte que já está no aparelho
-   e a esticam para ocupar exatamente o mesmo espaço da fonte final.
-   Números medidos no próprio navegador (largura e altura da caixa de texto da
-   Inter contra a Arial, e da Archivo Black contra a Arial Black).
+   As fontes vêm do Google e chegam depois do HTML. Sem isto, quando a fonte
+   final entra o texto muda de tamanho e a página anda: o salto medido (CLS)
+   chegava a 0,16 no desktop. Estas três faces não baixam nada — pegam a fonte
+   que já está no aparelho e a esticam para ocupar exatamente o mesmo espaço da
+   fonte final. Números medidos no próprio navegador, comparando a caixa de
+   texto de cada família com a da reserva (tools de medição em scratchpad).
    ===================================================================== */
 @font-face {
-    font-family: "Inter reserva";
-    src: local("Arial"), local("Helvetica"), local("Liberation Sans");
-    size-adjust: 106.1%;
-    ascent-override: 91.4%;
-    descent-override: 22.6%;
+    font-family: "Bricolage reserva";
+    src: local("Arial Black"), local("Archivo Black");
+    size-adjust: 88%;
+    ascent-override: 105.7%;
+    descent-override: 30.7%;
     line-gap-override: 0%;
 }
 
 @font-face {
-    font-family: "Archivo reserva";
-    src: local("Arial Black");
-    size-adjust: 100%;
-    ascent-override: 104%;
-    descent-override: 31%;
+    font-family: "Instrument reserva";
+    src: local("Arial"), local("Helvetica"), local("Liberation Sans");
+    size-adjust: 101.1%;
+    ascent-override: 96%;
+    descent-override: 24.7%;
     line-gap-override: 0%;
 }
 
+@font-face {
+    font-family: "Martian reserva";
+    src: local("Courier New"), local("Liberation Mono");
+    size-adjust: 116.6%;
+    ascent-override: 85.7%;
+    descent-override: 17.1%;
+    line-gap-override: 0%;
+}
+
+/* =====================================================================
+   Sistema visual — "bloco de pedido"
+
+   A direção: o site é o estoque à vista, e a peça que ele existe para produzir
+   é a lista de pedido. Então a interface fala a língua impressa do balcão —
+   etiqueta de gôndola, código, nota — com a estrutura pesada de um depósito.
+   Consequências que explicam os valores abaixo:
+
+   - documento não flutua. A elevação padrão é um assentamento de 1px, não uma
+     sombra difusa. Sombra de verdade só no que é sobreposição (o painel).
+   - raio pequeno. Papel e etiqueta têm canto vivo; 16px em tudo era o que
+     dava cara de template.
+   - o vermelho é cor de SINAL: marca e alerta, não texto corrido.
+   - o azul de carimbo carrega dado e estado, para a tela parecer documento de
+     trabalho em vez de página de venda.
+   ===================================================================== */
 :root {
-    /* Campos, barras de rolagem e menus nativos tambem em claro. */
     color-scheme: light;
 
-    --red: #e01e24;
-    --red-dark: #b3151a;
-    /* --red-text: vermelho aprovado em AA para texto pequeno sobre os neutros claros. */
-    --red-text: #b3151a;
-    --texto-suave: #4a5059;
-    --texto-fraco: #656d78;
-    /* Texto secundário sobre fundo escuro. O --texto-fraco é aprovado em AA
-       sobre os neutros claros, mas dava 3,39:1 no rodapé — reprovando o 1.4.3
-       em todas as páginas. Este dá 6,8:1 sobre o --dark. */
-    --texto-fraco-escuro: #9aa1ac;
-    --focus: #12131a;
-    --focus-claro: #ffd166;
-    --dark: #16181d;
-    --ink: #12131a;
+    /* --- neutros: papel quente, não cinza de framework --- */
+    --papel: #fbfaf7;
+    --papel-2: #f3f0e9;
+    --papel-3: #e7e2d7;
+    --linha: #d9d3c6;
+    --linha-forte: #b9b1a0;
+    --grafite: #5d5952;
+    /* 4,70:1 sobre o papel. O tom anterior (#7c776e) dava 4,26 e reprovava o
+       1.4.3 em texto pequeno — rotulo de contagem, nota de rodape do hero. */
+    --grafite-claro: #767166;
+    --carbono: #1b1d21;
+    --carbono-2: #24262b;
+
+    /* --- sinal (a marca) --- */
+    --sinal: #d81e24;
+    --sinal-forte: #a91116;
+    --sinal-fraco: #fbe9e6;
+
+    /* --- carimbo: dado, estado, código --- */
+    --carimbo: #1f4fa8;
+    --carimbo-forte: #163b7e;
+    --carimbo-fraco: #e8eef9;
+
+    /* --- faixa: marcador de seção, herdado do piso de armazém --- */
+    --faixa: #e8a600;
+
+    /* --- nomes antigos, redefinidos: a folha inteira depende deles --- */
+    --red: var(--sinal);
+    --red-dark: var(--sinal-forte);
+    --red-text: var(--sinal-forte);
+    --texto-suave: var(--grafite);
+    --texto-fraco: var(--grafite-claro);
+    --texto-fraco-escuro: #a9a396;
+    --focus: var(--carimbo);
+    --focus-claro: #ffc94d;
+    --dark: var(--carbono);
+    --ink: var(--carbono);
     --stamp: #1f6b4a;
-    --gray-800: #23262b;
-    --gray-100: #f3f4f6;
-    --gray-300: #e3e6ea;
-    --white: #ffffff;
-    --radius: 16px;
-    --shadow: 0 1px 2px rgba(16, 19, 24, 0.06), 0 4px 16px rgba(16, 19, 24, 0.07);
-    --shadow-lg: 0 2px 4px rgba(16, 19, 24, 0.06), 0 14px 32px rgba(16, 19, 24, 0.13);
-    --ease: cubic-bezier(0.4, 0, 0.2, 1);
-    --font-display: 'Archivo Black', 'Archivo reserva', 'Arial Black', Arial, sans-serif;
-    --font-body: 'Inter', 'Inter reserva', 'Segoe UI', Arial, Helvetica, sans-serif;
-    /* Altura real medida no navegador: barra de 65 px + faixa de avisos de 40.
-       O valor antigo (76 + 40) fazia o conteúdo descer 12 px assim que o
-       app.js media o cabeçalho de verdade. */
-    --header-h: 65px;
-    --info-h: 40px;
-    /* --header-total: escrito por app.js a partir da altura real do cabeçalho. */
+    --gray-800: var(--carbono-2);
+    --gray-100: var(--papel-2);
+    --gray-300: var(--linha);
+    --white: var(--papel);
+    --branco-puro: #ffffff;
+    /* barra escura (cabeçalho, marquee, rodapé) e o texto que anda nela:
+       escuras nos DOIS temas, senão o cabeçalho clareava junto com a tinta */
+    --superficie-escura: #14161a;
+    --sobre-escuro: #f4f2ec;
+
+    /* --- raio: canto de etiqueta, não de cápsula --- */
+    --r-0: 0px;
+    --r-1: 3px;
+    --r-2: 6px;
+    --r-pilula: 999px;
+    --radius: var(--r-1);
+
+    /* --- elevação: as coisas assentam, não pairam --- */
+    --el-1: 0 1px 0 var(--linha);
+    --el-2: 0 2px 0 0 var(--carbono);
+    --el-3: 0 18px 40px -12px rgba(20, 22, 26, 0.34);
+    --shadow: var(--el-1);
+    --shadow-lg: var(--el-3);
+
+    /* --- escala tipográfica modular, em degraus de verdade --- */
+    --t-50: 0.6875rem;
+    --t-100: 0.8125rem;
+    --t-200: 0.9375rem;
+    --t-300: 1rem;
+    --t-400: 1.125rem;
+    --t-500: 1.375rem;
+    --t-600: 1.75rem;
+    --t-700: clamp(2rem, 1.4rem + 2.2vw, 2.625rem);
+    --t-800: clamp(2.5rem, 1.4rem + 4.6vw, 4.25rem);
+
+    /* --- espaço: base 4, sem valor solto --- */
+    --e-1: 0.25rem;
+    --e-2: 0.5rem;
+    --e-3: 0.75rem;
+    --e-4: 1rem;
+    --e-5: 1.5rem;
+    --e-6: 2rem;
+    --e-7: 3rem;
+    --e-8: 4rem;
+    --e-9: 6rem;
+
+    /* --- movimento: curva própria, sem o padrão do Material --- */
+    --ms-1: 120ms;
+    --ms-2: 200ms;
+    --ms-3: 320ms;
+    --ease-firme: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --ease-saida: cubic-bezier(0.4, 0, 1, 1);
+    --ease-carimbo: cubic-bezier(0.34, 1.3, 0.64, 1);
+    --ease: var(--ease-firme);
+
+    /* --- famílias --- */
+    --font-display: "Bricolage Grotesque", "Bricolage reserva", "Arial Black", Arial, sans-serif;
+    --font-body: "Instrument Sans", "Instrument reserva", "Segoe UI", Arial, Helvetica, sans-serif;
+    --font-dado: "Martian Mono", "Martian reserva", "Courier New", ui-monospace, monospace;
+
+    /* 68 da barra + 3 da borda vermelha, que é o que o app.js mede depois. */
+    --header-h: 71px;
+    --info-h: 34px;
     --header-total: calc(var(--header-h) + var(--info-h));
     --footer-h: 132px;
+}
+
+/* =====================================================================
+   Tema escuro — o depósito à noite, não o claro invertido
+
+   O fundo é carbono quente e o papel vira papel de nota velha. O sinal
+   clareia para continuar legível sobre escuro; o carimbo vira azul de tinta
+   sobre papel escuro. Tudo por token: nenhum componente sabe que existe tema.
+   ===================================================================== */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-tema="claro"]) {
+        color-scheme: dark;
+
+        --papel: #16171a;
+        --papel-2: #1d1f23;
+        --papel-3: #26282d;
+        --linha: #32353b;
+        --linha-forte: #4a4e56;
+        --grafite: #b4b0a6;
+        --grafite-claro: #8e8a81;
+        --carbono: #f2efe8;
+        --carbono-2: #e3dfd6;
+
+        /* preenchimento: texto claro em cima precisa de 4,5:1, então o
+           vermelho do botão NÃO clareia. Quem clareia é o vermelho de texto. */
+        --sinal: #e12329;
+        --sinal-forte: #f1454b;
+        --sinal-fraco: #2a1618;
+
+        --carimbo: #7aa7f0;
+        --carimbo-forte: #a8c6f7;
+        --carimbo-fraco: #17203a;
+
+        --faixa: #ffc340;
+
+        --red-text: #ff8a8e;
+        --texto-fraco-escuro: #8e8a81;
+        --focus: var(--carimbo-forte);
+        /* --dark é TINTA em 33 lugares (título, texto forte) e só isso: as
+           barras escuras agora usam --superficie-escura. Aqui ele acompanha a
+           tinta, senão o título fica preto sobre preto. */
+        --dark: var(--carbono);
+        --ink: var(--carbono);
+        --gray-800: var(--papel-3);
+        --white: var(--papel-2);
+        --branco-puro: var(--papel-2);
+        --superficie-escura: #0e1013;
+        --sobre-escuro: #f4f2ec;
+
+        --el-1: 0 1px 0 var(--linha);
+        --el-2: 0 2px 0 0 var(--linha-forte);
+        --el-3: 0 18px 40px -12px rgba(0, 0, 0, 0.6);
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -110,7 +256,7 @@ button {
     left: 0;
     right: 0;
     z-index: 50;
-    background: var(--ink);
+    background: var(--superficie-escura);
     border-bottom: 3px solid var(--red);
 }
 
@@ -121,7 +267,7 @@ button {
     gap: 0.5rem 1.75rem;
     padding: 0.45rem 1.5rem;
     background: var(--red);
-    color: var(--white);
+    color: var(--sobre-escuro);
     font-size: 0.78rem;
     font-weight: 600;
 }
@@ -172,7 +318,7 @@ button {
 
 .header-logo-text {
     font-family: var(--font-display);
-    color: var(--white);
+    color: var(--sobre-escuro);
     font-size: 1.05rem;
     letter-spacing: 0.01em;
     white-space: nowrap;
@@ -188,7 +334,7 @@ button {
 .header-search {
     display: flex;
     background: var(--white);
-    border-radius: 999px;
+    border-radius: var(--r-1);
     overflow: hidden;
 }
 
@@ -209,7 +355,7 @@ button {
     width: 44px;
     background: var(--red);
     border: none;
-    color: var(--white);
+    color: var(--sobre-escuro);
     cursor: pointer;
     transition: background 0.2s;
 }
@@ -327,7 +473,7 @@ button {
 
 .header-nav a:hover,
 .header-nav a.is-active {
-    color: var(--white);
+    color: var(--sobre-escuro);
     border-color: var(--red);
 }
 
@@ -339,12 +485,12 @@ button {
     min-height: 44px;
     padding: 0.6rem 1.25rem;
     background: var(--red);
-    color: var(--white);
+    color: var(--sobre-escuro);
     text-decoration: none;
     font-weight: 700;
     font-size: 0.88rem;
     white-space: nowrap;
-    border-radius: 999px;
+    border-radius: var(--r-1);
     transition: background 0.2s var(--ease), transform 0.2s var(--ease);
 }
 
@@ -354,12 +500,12 @@ button {
 }
 
 .header-cta.is-active {
-    background: var(--dark);
+    background: var(--superficie-escura);
     cursor: default;
 }
 
 .header-cta.is-active:hover {
-    background: var(--dark);
+    background: var(--superficie-escura);
     transform: none;
 }
 
@@ -450,7 +596,7 @@ button {
     /* A faixa de destaques vem colada logo abaixo: o canto de baixo fica reto
        para os dois lerem como um bloco so. */
     border-radius: var(--radius) var(--radius) 0 0;
-    background: var(--gray-800);
+    background: var(--superficie-escura);
 }
 
 /* Abaixo de 720px a peça inteira aparece, sem corte e sem virar uma tarja:
@@ -521,7 +667,7 @@ button {
     border: none;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.4);
-    color: var(--white);
+    color: var(--sobre-escuro);
     cursor: pointer;
     transition: background 0.2s var(--ease), transform 0.2s var(--ease);
 }
@@ -581,7 +727,7 @@ button {
     margin-top: 1.5rem;
     padding: 0.75rem 1.75rem;
     background: var(--red);
-    color: var(--white);
+    color: var(--sobre-escuro);
     text-decoration: none;
     border: none;
     border-radius: var(--radius);
@@ -624,24 +770,45 @@ main {
     padding: 3rem 1.5rem;
 }
 
+/* Placa de corredor: a barra estrutural corre a largura do bloco e o rótulo
+   monta nela, alinhado à esquerda. Substitui o título centralizado com
+   tracinho vermelho, que era o mesmo gesto em toda seção de toda página. */
 .section h2 {
     font-family: var(--font-display);
-    text-align: center;
-    font-size: 1.6rem;
-    letter-spacing: -0.01em;
-    margin-bottom: 2rem;
+    font-size: var(--t-600);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--e-5);
+    padding-top: var(--e-3);
     color: var(--dark);
     position: relative;
+    text-wrap: balance;
+    border-top: 5px solid var(--dark);
 }
 
-.section h2::after {
+/* O naco de vermelho na ponta esquerda é o que faz a barra virar placa, e não
+   um divisor qualquer. Fica curto de propósito: é sinal, não enfeite. */
+.section h2::before {
     content: "";
-    display: block;
-    width: 56px;
-    height: 4px;
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 64px;
+    height: 5px;
     background: var(--red);
-    margin: 0.6rem auto 0;
-    border-radius: 2px;
+}
+
+/* Onde a seção é declaradamente centralizada (chamadas finais), o alinhamento
+   manda e a barra some — placa torta é pior que placa nenhuma. */
+.section[style*="text-align: center"] h2,
+.section-centro h2 {
+    border-top: none;
+    padding-top: 0;
+    text-align: center;
+}
+
+.section-centro h2::before {
+    display: none;
 }
 
 .services {
@@ -695,7 +862,7 @@ main {
 
 .service-item:hover .service-item-icon {
     background: var(--red);
-    color: var(--white);
+    color: var(--sobre-escuro);
     transform: translateY(-3px) rotate(-4deg);
 }
 
@@ -719,7 +886,7 @@ main {
 .brand-tag {
     background: var(--white);
     border: 1px solid var(--gray-300);
-    border-radius: 999px;
+    border-radius: var(--r-1);
     padding: 0.5rem 1.25rem;
     font-weight: 600;
     color: var(--dark);
@@ -835,7 +1002,7 @@ main {
 /* ===== Marquee (faixa de destaques em loop continuo) ===== */
 .marquee {
     overflow: hidden;
-    background: var(--dark);
+    background: var(--superficie-escura);
     padding: 0.7rem 0;
     margin-top: 0;
     border-radius: 0 0 var(--radius) var(--radius);
@@ -874,11 +1041,24 @@ main {
     }
 }
 
+/* Marcador de etiqueta no lugar do emoji: o emoji lia como enfeite e o leitor
+   de tela anunciava "caminhão de entrega" antes de cada frase. */
+.header-info span::before,
+.marquee-item::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 0.55em;
+    vertical-align: 0.12em;
+    background: var(--red);
+}
+
 .marquee-item {
     display: inline-flex;
     align-items: center;
     padding: 0 1.25rem;
-    color: var(--white);
+    color: var(--sobre-escuro);
     font-weight: 600;
     font-size: 0.88rem;
     white-space: nowrap;
@@ -1029,7 +1209,7 @@ main {
     height: 56px;
     border-radius: 50%;
     background: #25d366;
-    color: var(--white);
+    color: var(--sobre-escuro);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     opacity: 0;
     transform: translateY(16px) scale(0.9);
@@ -1078,12 +1258,27 @@ main {
 .category-section h2 {
     font-family: var(--font-display);
     text-align: left;
-    letter-spacing: -0.01em;
-    margin-bottom: 1.5rem;
+    font-size: var(--t-500);
+    letter-spacing: -0.015em;
+    margin-bottom: var(--e-2);
+    padding-top: var(--e-2);
+    border-top: 4px solid var(--dark);
 }
 
-.category-section h2::after {
-    margin: 0.6rem 0 0;
+.category-section h2::before {
+    top: -4px;
+    height: 4px;
+    width: 40px;
+}
+
+/* A contagem da linha anda com o rótulo, em mono: é dado, não frase. */
+.category-count {
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--texto-fraco);
+    margin-bottom: var(--e-5);
 }
 
 .product-grid {
@@ -1094,51 +1289,90 @@ main {
     gap: 1.5rem;
 }
 
+/* Ficha, não cartão: assenta na grade em vez de flutuar. A tarja de cima é o
+   que a etiqueta de gôndola tem, e só aparece de verdade quando o cursor
+   chega — no repouso ela é um fio, para a grade não virar zebra. */
 .product-card {
-    background: var(--white);
-    border: 1px solid var(--gray-300);
-    border-radius: var(--radius);
+    background: var(--branco-puro);
+    border: 1px solid var(--linha);
+    border-radius: var(--r-1);
     overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    position: relative;
+    box-shadow: none;
+    transition: border-color var(--ms-2) var(--ease-firme),
+                box-shadow var(--ms-2) var(--ease-firme);
     display: flex;
     flex-direction: column;
 }
 
+.product-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0.14);
+    transform-origin: left;
+    transition: transform var(--ms-2) var(--ease-firme);
+    z-index: 1;
+}
+
 @media (hover: hover) and (pointer: fine) {
     .product-card:hover {
-        transform: translateY(-6px);
-        box-shadow: var(--shadow-lg);
+        border-color: var(--linha-forte);
+        box-shadow: var(--el-2);
     }
+
+    .product-card:hover::before {
+        transform: scaleX(1);
+    }
+}
+
+.product-card:focus-within {
+    border-color: var(--linha-forte);
+}
+
+.product-card:focus-within::before {
+    transform: scaleX(1);
 }
 
 .product-card img {
     display: block;
     width: 100%;
-    transition: transform 0.35s var(--ease);
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .product-card:hover img {
-        transform: scale(1.06);
-    }
 }
 
 .product-card .product-info {
-    padding: 1.1rem 1.25rem;
+    padding: var(--e-4);
     display: flex;
     flex-direction: column;
     flex: 1;
+    gap: var(--e-1);
 }
 
 .product-card h3 {
-    margin-bottom: 0.4rem;
+    font-family: var(--font-display);
+    font-size: var(--t-200);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--e-1);
 }
 
 .product-card p {
     color: var(--texto-suave);
-    font-size: 0.88rem;
+    font-size: var(--t-100);
+    line-height: 1.45;
     flex: 1;
+}
+
+/* A linha de baixo da ficha é dado: embalagem e marca, em mono, como o rodapé
+   de uma etiqueta impressa. */
+.product-card .product-embalagem,
+.product-card .product-marca {
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--texto-fraco);
 }
 
 
@@ -1154,12 +1388,14 @@ main {
 
 /* ===== Prova social factual (home) ===== */
 .section-lead {
-    text-align: center;
+    /* Alinhado à esquerda, como a placa da seção. Centralizado, o parágrafo
+       brigava com o título alinhado e a página perdia a margem de leitura. */
+    text-align: left;
     /* Medida da linha em em, não em ch: a unidade ch é a largura do "0" da
        fonte, então cada bloco mudava de largura quando a Inter chegava e a
        página inteira reposicionava. */
     max-width: 35.33em;
-    margin: -1.2rem auto 2rem;
+    margin: calc(var(--e-5) * -1) 0 var(--e-6);
     color: var(--texto-suave);
 }
 
@@ -1191,7 +1427,7 @@ main {
     color: var(--red-dark);
     background: var(--gray-100);
     padding: 0.25rem 0.6rem;
-    border-radius: 999px;
+    border-radius: var(--r-1);
     margin-bottom: 0.8rem;
 }
 
@@ -1603,7 +1839,7 @@ main {
 
 /* ===== Footer ===== */
 .footer {
-    background: var(--dark);
+    background: var(--superficie-escura);
     color: var(--texto-fraco-escuro);
     border-top: 3px solid var(--red);
     padding: 3rem 1.5rem 1.5rem;
@@ -1623,7 +1859,7 @@ main {
    por título do leitor de tela. Viraram <h2>, que é o nível certo para
    seção dentro do rodapé, com a mesma aparência. */
 .footer-col h2 {
-    color: var(--white);
+    color: var(--sobre-escuro);
     font-family: var(--font-body);
     font-size: 0.82rem;
     font-weight: 700;
@@ -1706,7 +1942,7 @@ main {
     height: 38px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.08);
-    color: var(--white);
+    color: var(--sobre-escuro);
     text-decoration: none;
     transition: background 0.2s;
 }
@@ -1833,7 +2069,7 @@ main {
 .legal-updated {
     display: inline-block;
     background: var(--gray-100);
-    border-radius: 999px;
+    border-radius: var(--r-1);
     padding: 0.35rem 0.9rem;
     font-size: 0.82rem;
     color: var(--texto-fraco);
@@ -1863,7 +2099,7 @@ main {
     margin-bottom: 1rem;
     padding: 0.35rem 1rem;
     border: 1px solid var(--red);
-    border-radius: 999px;
+    border-radius: var(--r-1);
     color: var(--red-text);
     background: var(--white);
     font-size: 0.75rem;
@@ -2064,7 +2300,7 @@ main {
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 50%;
     background: transparent;
-    color: var(--white);
+    color: var(--sobre-escuro);
     cursor: pointer;
 }
 
@@ -2083,7 +2319,7 @@ main {
        fazia o conteúdo pular meia dezena de centímetros quando o app.js media a
        altura real: era o maior salto de layout que sobrava no celular. */
     :root {
-        --header-h: 63px;
+        --header-h: 60px;
         --info-h: 0px;
     }
 
@@ -2134,7 +2370,7 @@ main {
         left: 0;
         right: 0;
         top: 100%;
-        background: var(--ink);
+        background: var(--superficie-escura);
         border-bottom: 3px solid var(--red);
         padding: 0 1rem;
     }
@@ -2149,9 +2385,7 @@ main {
    ===================================================================== */
 
 .category-count {
-    margin: -1rem 0 1.25rem;
-    color: var(--texto-fraco);
-    font-size: 0.85rem;
+    margin: calc(var(--e-4) * -1) 0 var(--e-5);
 }
 
 .search-status {
@@ -2232,7 +2466,6 @@ main {
 
 .product-card h3 {
     color: var(--red-text);
-    font-size: 1rem;
 }
 
 .product-desc {
@@ -2437,10 +2670,17 @@ main {
 }
 
 .produto-acoes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
+    gap: var(--e-3);
+    margin-bottom: var(--e-5);
+    align-items: stretch;
+}
+
+.produto-acoes > * {
+    margin-top: 0;
+    width: 100%;
+    text-align: center;
 }
 
 .btn-ghost {
@@ -2451,7 +2691,7 @@ main {
 
 .btn-ghost:hover {
     background: var(--red);
-    color: var(--white);
+    color: var(--sobre-escuro);
 }
 
 .produto-voltar a {
@@ -2533,7 +2773,7 @@ main {
     font-weight: 600;
     min-height: 44px;
     padding: 0.55rem 1.4rem;
-    border-radius: 999px;
+    border-radius: var(--r-1);
     cursor: pointer;
     border: 2px solid var(--red);
     background: var(--white);
@@ -2600,12 +2840,6 @@ main {
 /* O site é claro, ponto. O modo escuro automático foi removido a pedido:
    quem está com o Windows no tema escuro via um site diferente do que a
    marca é, e a paleta clara é a que foi desenhada e conferida em AA. */
-@media (prefers-color-scheme: dark) {
-    :root {
-        color-scheme: light;
-    }
-}
-
 /* =====================================================================
    Carrossel: indicadores, pausa e barra de progresso
    ===================================================================== */
@@ -2833,12 +3067,82 @@ main {
    Home — a proposta de valor no topo, o banner do fornecedor abaixo
    ===================================================================== */
 
-.hero-principal {
-    max-width: 900px;
-    margin: 1.25rem auto 1.5rem;
-    padding: 0 1.5rem;
-    text-align: center;
+.hero-texto {
+    text-align: left;
 }
+
+.hero-texto .hero-sub,
+.hero-texto .hero-nota {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.hero-texto .hero-acoes {
+    justify-content: flex-start;
+}
+
+/* Abertura assimétrica: o texto ocupa a coluna larga e a razão do estoque
+   corre na margem direita, separada por uma barra estrutural. No celular a
+   razão vira uma tira horizontal acima do texto, que é onde ela funciona
+   como manchete de quantidade. */
+.hero-principal {
+    max-width: 1180px;
+    margin: var(--e-6) auto var(--e-7);
+    padding: 0 var(--e-5);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 15rem;
+    gap: var(--e-7);
+    align-items: start;
+}
+
+.hero-razao {
+    display: grid;
+    gap: 0;
+    border-top: 5px solid var(--dark);
+    padding-top: var(--e-3);
+}
+
+.hero-razao .stat-item {
+    display: grid;
+    grid-template-columns: 4.2em minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--e-3);
+    padding: var(--e-2) 0;
+    border-bottom: 1px dashed var(--linha);
+}
+
+.hero-razao .stat-number,
+.hero-razao .stat-fixo {
+    font-family: var(--font-dado);
+    font-size: var(--t-400);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    color: var(--dark);
+}
+
+.hero-razao .stat-label {
+    font-family: var(--font-body);
+    font-size: var(--t-100);
+    line-height: 1.25;
+    text-align: right;
+    color: var(--texto-fraco);
+}
+
+@media (max-width: 860px) {
+    .hero-principal {
+        grid-template-columns: 1fr;
+        gap: var(--e-5);
+    }
+
+    /* No celular a contagem vem primeiro: é a prova antes da promessa. */
+    .hero-razao {
+        order: -1;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: var(--e-5);
+    }
+}
+
 
 /* Num monitor de 900 px de altura, esses 20 px eram o que deixava "Quero ser
    cliente" e "Ver o catálogo" logo abaixo da primeira tela. */
@@ -2977,7 +3281,7 @@ main {
     width: 100%;
     margin: 0 auto;
     padding: 3rem 1.5rem;
-    color: var(--white);
+    color: var(--sobre-escuro);
 }
 
 .faixa-estrutura-texto h2 {
@@ -3159,8 +3463,8 @@ main {
     margin-bottom: 0.75rem;
     padding: 0.5rem 0.85rem;
     clip-path: none;
-    background: var(--ink);
-    color: var(--white);
+    background: var(--superficie-escura);
+    color: var(--sobre-escuro);
     font-weight: 700;
     font-size: 0.85rem;
     border-radius: var(--radius);
@@ -3276,7 +3580,7 @@ main {
     color: var(--red-text);
     background: transparent;
     border: 1px solid var(--gray-300);
-    border-radius: 999px;
+    border-radius: var(--r-1);
     padding: 0.6rem 0.95rem;
     cursor: pointer;
 }
@@ -3398,8 +3702,8 @@ main {
 
 /* A página de cadastro abre invertida: é a única cuja tarefa é o formulário. */
 .hero-invertido {
-    background: var(--dark);
-    color: var(--white);
+    background: var(--superficie-escura);
+    color: var(--sobre-escuro);
     padding: 3rem 1.5rem;
     margin-bottom: 2rem;
 }
@@ -3576,7 +3880,7 @@ a.service-item {
     color: var(--red-text);
     background: var(--white);
     border: 1.5px solid var(--gray-300);
-    border-radius: 999px;
+    border-radius: var(--r-1);
     cursor: pointer;
     transition: border-color 0.18s var(--ease), background 0.18s var(--ease), color 0.18s var(--ease);
     /* alvo de toque com no mínimo 44px */
@@ -3648,7 +3952,7 @@ a.service-item {
     font-size: 0.9rem;
     font-weight: 700;
     color: #ffffff;
-    background: var(--ink);
+    background: var(--superficie-escura);
     border: none;
     border-radius: 999px;
     box-shadow: var(--shadow-lg);
@@ -3676,33 +3980,50 @@ a.service-item {
 }
 
 /* --- painel --- */
+/* Bloco de pedido. É a única coisa do site que tem direito a sombra de
+   verdade — porque é a única que está de fato por cima da página. */
 .lista-painel {
     position: fixed;
     right: 0;
     top: 0;
     bottom: 0;
     z-index: 130;
-    width: min(400px, 100%);
+    width: min(420px, 100%);
     display: flex;
     flex-direction: column;
-    background: var(--white);
-    border-left: 1px solid var(--gray-300);
-    box-shadow: var(--shadow-lg);
+    background: var(--branco-puro);
+    border-left: 1px solid var(--linha-forte);
+    box-shadow: var(--el-3);
 }
 
+/* Cabeçalho de nota: tarja escura, rótulo em mono, número do pedido à direita.
+   A tarja é o que separa "documento" de "gaveta". */
 .lista-topo {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    padding: 1.1rem 1.25rem;
-    border-bottom: 1px solid var(--gray-300);
+    gap: var(--e-3);
+    padding: var(--e-4) var(--e-4) var(--e-3);
+    background: var(--superficie-escura);
+    color: var(--sobre-escuro);
+    border-bottom: 3px solid var(--red);
 }
 
 .lista-topo h2 {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    color: var(--dark);
+    font-family: var(--font-dado);
+    font-size: var(--t-100);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--sobre-escuro);
+}
+
+/* O código do pedido só aparece depois do primeiro envio; até lá a linha fica
+   vazia de propósito, em vez de inventar um número que não existe. */
+.lista-topo .lista-codigo {
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    letter-spacing: 0.04em;
+    color: var(--texto-fraco-escuro);
 }
 
 .lista-fechar {
@@ -3714,13 +4035,16 @@ a.service-item {
     border: none;
     border-radius: 50%;
     background: transparent;
-    color: var(--texto-fraco);
     cursor: pointer;
 }
 
+.lista-fechar {
+    color: var(--texto-fraco-escuro);
+}
+
 .lista-fechar:hover {
-    background: var(--gray-100);
-    color: var(--dark);
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--sobre-escuro);
 }
 
 .lista-itens {
@@ -3729,25 +4053,50 @@ a.service-item {
     padding: 0.5rem 1.25rem;
 }
 
+/* Linha de nota: fio pontilhado como pauta de bloco de pedido, e não o
+   divisor sólido de uma lista qualquer. */
 .lista-item {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto auto;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.85rem 0;
-    border-bottom: 1px solid var(--gray-300);
+    gap: var(--e-3);
+    padding: var(--e-3) 0;
+    border-bottom: 1px dashed var(--linha);
 }
 
 .lista-item-texto strong {
     display: block;
-    font-size: 0.92rem;
+    font-family: var(--font-display);
+    font-size: var(--t-200);
     color: var(--dark);
-    line-height: 1.3;
+    line-height: 1.25;
 }
 
 .lista-item-texto span {
-    font-size: 0.78rem;
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
     color: var(--texto-fraco);
+}
+
+/* O carimbo: quando um item entra na lista, a linha bate como carimbo em papel.
+   É o único movimento com overshoot no site inteiro — o "momento" da direção,
+   gasto num lugar só. */
+@keyframes carimbo {
+    0% { transform: scale(1.055); }
+    100% { transform: scale(1); }
+}
+
+.lista-item.acabou-de-entrar {
+    animation: carimbo var(--ms-1) var(--ease-carimbo);
+    transform-origin: left center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lista-item.acabou-de-entrar {
+        animation: none;
+    }
 }
 
 .lista-qtd {
@@ -3806,6 +4155,18 @@ a.service-item {
     color: var(--texto-fraco);
     text-align: center;
     font-size: 0.92rem;
+}
+
+/* Picote: a borda de baixo do bloco, que é onde a folha seria destacada.
+   Desenhado em gradiente cônico para não virar imagem nem depender de fonte. */
+.lista-rodape::before {
+    content: "";
+    display: block;
+    height: 8px;
+    margin: 0 calc(var(--e-4) * -1) var(--e-3);
+    background-image: radial-gradient(circle at 50% 0, transparent 4px, var(--linha) 4px, var(--linha) 5px, transparent 5px);
+    background-size: 14px 8px;
+    background-repeat: repeat-x;
 }
 
 .lista-rodape {
@@ -3968,7 +4329,7 @@ body.lista-aberta {
     gap: 0.45rem;
     min-height: 44px;
     padding: 0.55rem 0.95rem;
-    border-radius: 999px;
+    border-radius: var(--r-1);
     background: var(--white);
     border: 1px solid var(--gray-300);
     color: var(--ink);
@@ -3988,7 +4349,7 @@ body.lista-aberta {
     font-size: 0.76rem;
     color: var(--texto-fraco);
     background: var(--gray-100);
-    border-radius: 999px;
+    border-radius: var(--r-1);
     padding: 0.12rem 0.45rem;
 }
 
@@ -4250,7 +4611,7 @@ body.lista-aberta {
     color: var(--texto-suave);
     background: var(--white);
     border: 1px solid var(--gray-300);
-    border-radius: 999px;
+    border-radius: var(--r-1);
     cursor: pointer;
     transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
 }
