@@ -798,3 +798,50 @@ A transição entre páginas, pedida no mesmo prompt, **não** voltou: ela tamb�
 tinha sido removida de propósito, porque duplicava e deslocava os títulos de
 "Sobre" e "Contato".
 
+### 16/09, pendências do redesign resolvidas uma a uma
+
+**1. Contato, cadastro e trabalhe conosco** ganharam composição própria: o
+cadastro virou ficha com o "depois que você envia" ao lado; o trabalhe conosco
+pôs formulário e dúvidas lado a lado; e o título de todas as páginas internas
+passou a começar na mesma borda das seções, em vez de centralizado.
+
+**2. Movimento e estados.** Ganharam estado só os dois pontos em que o site
+espera a rede: linhas-fantasma na busca enquanto o índice chega (só depois de
+150 ms, para não piscar com o índice em cache) e a consulta de CNPJ com estado
+próprio. Toast e transição entre páginas ficaram de fora de propósito — o
+primeiro seria movimento por hábito, e a segunda já tinha sido removida porque
+duplicava os títulos. O modo escuro, religado pelo redesign, saiu de novo a
+pedido do Enzo (ver a correção acima).
+
+**3. Detalhe autoral.** Em vez de textura ou ilustração, o rodapé da etiqueta de
+gôndola: marca e embalagem em mono no pé de cada ficha. Resolve também um buraco
+real — na busca e na ordem A–Z a marca sumia do cartão.
+
+**4. Firefox e Safari.** Testado com o Playwright 1.63, nos motores Firefox 155 e
+WebKit 26.6 (o do Safari), contra o site publicado. As seis páginas principais
+abrem sem erro e sem rolagem lateral nos dois motores, no desktop e no celular,
+e todo o fluxo de pedido funciona. Dois achados:
+
+- **Bug real, em todo navegador:** a faixa de cookies cobria "Minha lista" e o
+  WhatsApp enquanto estava na tela, e no celular o ponto do "Minha lista" era o
+  botão **"Aceitar"** — quem tentava abrir a lista aceitava cookie de medição
+  sem querer. Corrigido (os botões flutuantes sobem a altura da faixa) e virou
+  teste: ele pergunta ao navegador o que está no ponto exato do toque, que é o
+  que os testes antigos, acionando botão por código, nunca verificavam.
+- **Falso alarme que vale anotar:** testando em `http://localhost`, o WebKit não
+  carrega nem CSS nem JS, porque a CSP tem `upgrade-insecure-requests` e ele,
+  diferente de Chrome e Firefox, não isenta localhost. Teste de WebKit tem de ser
+  contra o site em HTTPS.
+
+Limite honesto: o WebKit do Playwright no Windows pega problema de motor, não de
+aparelho — teclado virtual, área segura do notch e economia de bateria do Safari
+só num iPhone de verdade.
+
+No caminho, o teste de fumaça do CI ficou à prova da corrida que fazia ele
+reprovar de vez em quando sem motivo (a abertura do Chrome lia a porta de
+depuração antes de ela ser escrita), e toda queda agora vira anotação com o
+motivo. São 19 testes.
+
+**O que sobra depende do Enzo:** o banner do topo da home ainda é criativo
+publicitário da Trident, não material da Distri Rio.
+
