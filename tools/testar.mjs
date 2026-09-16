@@ -86,11 +86,15 @@ class Navegador {
 async function abrirNavegador() {
     const chrome = acharChrome();
     if (!chrome) {
-        console.error('Não achei o Chrome. Instale ou aponte: CHROME_PATH=/caminho/do/chrome npm run testar');
+        const aviso = 'Não achei o Chrome. Instale ou aponte: CHROME_PATH=/caminho/do/chrome npm run testar';
+        console.error(aviso);
+        if (process.env.GITHUB_ACTIONS) console.log(`::error title=Chrome não encontrado::${aviso}`);
         process.exit(2);
     }
     if (typeof WebSocket === 'undefined') {
-        console.error('Este Node não tem WebSocket (precisa da versão 22 ou mais nova). Rode com um Node atualizado.');
+        const aviso = `Este Node (${process.version}) não tem WebSocket: precisa da versão 22 ou mais nova.`;
+        console.error(aviso);
+        if (process.env.GITHUB_ACTIONS) console.log(`::error title=Node sem WebSocket::${aviso}`);
         process.exit(2);
     }
     const perfil = fs.mkdtempSync(path.join(os.tmpdir(), 'distririo-teste-'));
@@ -423,6 +427,70 @@ teste('faixa de ofertas na home segue o que está escrito em data/ofertas.json',
     if (esperados > 0 && r.cartoes !== esperados) throw new Error(`ofertas escritas: ${esperados}, na home: ${r.cartoes}`);
 });
 
+// Contraste é a regra que mais silenciosamente quebra: ninguém vê um texto
+// cinza sobre cinza até alguém reclamar. Mede o que o navegador realmente
+// pinta, nos dois temas, nas superfícies que mudam de cor entre eles.
+const SONDA_CONTRASTE = `(() => {
+  const nums = (c) => (c.match(/[0-9.]+/g) || []).map(Number);
+  const lum = (c) => {
+    const [r, g, b] = nums(c).slice(0, 3).map((v) => {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  // Sobe até achar um fundo opaco. Quem não achar (faixa com foto atrás) fica
+  // de fora: ali o fundo é imagem e a conta pediria amostragem de pixel.
+  const fundoDe = (el) => {
+    let n = el;
+    while (n && n !== document.documentElement) {
+      const bg = getComputedStyle(n).backgroundColor;
+      const v = nums(bg);
+      if (bg && bg !== 'transparent' && v.length >= 3 && v[3] !== 0) return bg;
+      n = n.parentElement;
+    }
+    return null;
+  };
+  const razao = (a, b) => { const l = [lum(a), lum(b)].sort((x, y) => y - x); return (l[0] + 0.05) / (l[1] + 0.05); };
+  const alvos = ['.footer a', '.footer p', '.header-info span', '.header-cta', '.header-nav a',
+                 '.marquee-item', '.hero-sub', '.hero-nota', '.section-lead', '.stat-label',
+                 '.product-card p', '.category-count', '.migalhas a', '.form-consent span'];
+  const ruins = [];
+  let medidos = 0;
+  for (const sel of alvos) {
+    for (const el of [...document.querySelectorAll(sel)].slice(0, 2)) {
+      if (!el.textContent.trim() || !el.getClientRects().length) continue;
+      const fundo = fundoDe(el);
+      if (!fundo) continue;
+      const cs = getComputedStyle(el);
+      // Texto semitransparente sobre fundo que a sonda não enxerga daria número
+      // falso; fica de fora, como a faixa do armazém.
+      if (nums(cs.color)[3] !== undefined && nums(cs.color)[3] < 1) continue;
+      const px = parseFloat(cs.fontSize);
+      const minimo = (px >= 24 || (px >= 18.66 && Number(cs.fontWeight) >= 700)) ? 3 : 4.5;
+      const r = razao(cs.color, fundo);
+      medidos++;
+      if (r < minimo) ruins.push(sel + ' ' + Math.round(px) + 'px ' + (Math.round(r * 100) / 100) + ':1 (minimo ' + minimo + ')');
+    }
+  }
+  return { medidos, ruins };
+})()`;
+
+teste('contraste do texto passa em AA no tema claro e no escuro', async (nav) => {
+    for (const tema of ['light', 'dark']) {
+        for (const pag of ['/', '/loja.html', '/quero-ser-cliente.html']) {
+            const aba = await novaAba(nav);
+            await aba.cmd('Emulation.setEmulatedMedia', {
+                features: [{ name: 'prefers-color-scheme', value: tema }],
+            });
+            await ir(aba, pag);
+            const r = await avaliar(aba, SONDA_CONTRASTE);
+            if (r.medidos < 4) throw new Error(`${pag} ${tema}: só ${r.medidos} elementos medidos — a sonda perdeu o alvo`);
+            if (r.ruins.length) throw new Error(`${pag} ${tema}: ` + r.ruins.join(' | '));
+        }
+    }
+});
+
 teste('cadastro barra CNPJ inválido e telefone sem DDD', async (nav) => {
     const aba = await novaAba(nav);
     await ir(aba, '/quero-ser-cliente.html');
@@ -477,10 +545,29 @@ teste('endereço antigo de produto redireciona em vez de dar erro', async (nav) 
     if (url !== esperado) throw new Error(`redirecionamento de ${antigo} foi para ${url}, esperava ${esperado}`);
 });
 
+// ------------------------------------------------------------- relatório CI
+// O GitHub exige login para ver log de Actions, mas anotação sai pela API sem
+// conta nenhuma. Então toda falha vira anotação, e o resumo vai para a aba
+// Summary da execução.
+const noGitHub = !!process.env.GITHUB_ACTIONS;
+
+function anotar(titulo, mensagem) {
+    if (!noGitHub) return;
+    const limpo = String(mensagem).replace(/\r?\n/g, '%0A').replace(/::/g, ':︓');
+    console.log(`::error title=${String(titulo).replace(/[\r\n]/g, ' ')}::${limpo}`);
+}
+
+function resumir(linhas) {
+    const arquivo = process.env.GITHUB_STEP_SUMMARY;
+    if (!arquivo) return;
+    try { fs.appendFileSync(arquivo, linhas.join('\n') + '\n'); } catch (e) { /* summary é bônus */ }
+}
+
 // ---------------------------------------------------------------- execução
 const servidor = await subirServidor();
 const nav = await abrirNavegador();
 let falhas = 0;
+const resultados = ['| | Teste | Motivo |', '|---|---|---|'];
 try {
     for (const t of testes) {
         const t0 = Date.now();
@@ -490,11 +577,22 @@ try {
         } catch (e) {
             falhas++;
             console.log(`  FALHOU ${t.nome}\n         ${e.message}`);
+            anotar(`Teste de fumaça: ${t.nome}`, e.message);
+            resultados.push(`| ❌ | ${t.nome} | ${String(e.message).slice(0, 300).replace(/\|/g, '/')} |`);
+            continue;
         }
+        resultados.push(`| ✅ | ${t.nome} | |`);
     }
 } finally {
     await nav.fechar();
     servidor.close();
 }
 console.log(falhas ? `\n${falhas} de ${testes.length} testes falharam.` : `\n${testes.length} testes passaram.`);
+resumir([
+    `### Testes de fumaça — ${falhas ? `${falhas} de ${testes.length} falharam` : `${testes.length} passaram`}`,
+    '',
+    `Chrome: \`${acharChrome() || '(não achei)'}\` · Node ${process.version}`,
+    '',
+    ...resultados,
+]);
 process.exit(falhas ? 1 : 0);
