@@ -3449,6 +3449,85 @@ main {
     padding: 1.5rem;
 }
 
+
+/* =====================================================================
+   Serviços — arranjos próprios, para a página não repetir o mesmo bloco
+   ===================================================================== */
+
+/* Comparação: duas opções que o comerciante pesa uma contra a outra ficam
+   lado a lado, com a divisa no meio. Fileira empilhada esconderia justamente
+   a comparação, que é o ponto da seção. */
+.services.comparacao {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 3px solid var(--dark);
+    column-gap: var(--e-6);
+}
+
+.services.comparacao .service-item {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--e-5) var(--e-4) var(--e-5) 0;
+    border-bottom: none;
+}
+
+.services.comparacao .service-item + .service-item {
+    padding-left: var(--e-6);
+    border-left: 1px solid var(--linha);
+}
+
+.services.comparacao .service-item h3,
+.services.comparacao .service-item p {
+    grid-column: 1;
+}
+
+.services.comparacao .service-item-icon {
+    grid-row: auto;
+    margin-bottom: var(--e-2);
+}
+
+@media (max-width: 720px) {
+    .services.comparacao {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .services.comparacao .service-item + .service-item {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid var(--linha);
+    }
+}
+
+/* Tira de dados: a mesma informação que era fileira de número grande, agora
+   como linha de dados sob o título — igual à tarja de peso numa caixa. */
+.tira-dados .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--e-6);
+    justify-content: flex-start;
+    border-top: 1px solid var(--linha);
+    border-bottom: 1px solid var(--linha);
+    padding: var(--e-3) 0;
+}
+
+.tira-dados .stat-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--e-2);
+}
+
+.tira-dados .stat-number {
+    font-family: var(--font-dado);
+    font-size: var(--t-300);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--dark);
+    min-width: 3.2em;
+}
+
+.tira-dados .stat-label {
+    font-size: var(--t-100);
+    color: var(--texto-fraco);
+}
+
 /* =====================================================================
    Página 404
    ===================================================================== */
