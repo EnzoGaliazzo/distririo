@@ -88,10 +88,18 @@ async function abrirNavegador() {
         console.error('Não achei o Chrome. Instale ou aponte: CHROME_PATH=/caminho/do/chrome npm run testar');
         process.exit(2);
     }
+    if (typeof WebSocket === 'undefined') {
+        console.error('Este Node não tem WebSocket (precisa da versão 22 ou mais nova). Rode com um Node atualizado.');
+        process.exit(2);
+    }
     const perfil = fs.mkdtempSync(path.join(os.tmpdir(), 'distririo-teste-'));
-    const proc = spawn(chrome, ['--headless=new', '--remote-debugging-port=0', '--user-data-dir=' + perfil,
+    const flags = ['--headless=new', '--remote-debugging-port=0', '--user-data-dir=' + perfil,
         '--no-first-run', '--no-default-browser-check', '--disable-extensions', '--mute-audio',
-        '--disable-background-networking', '--disable-component-update', 'about:blank'], { stdio: 'ignore' });
+        '--disable-background-networking', '--disable-component-update'];
+    // Em servidor de integração o sandbox do Chrome costuma não ter permissão,
+    // e /dev/shm é pequeno demais para ele.
+    if (process.env.CI) flags.push('--no-sandbox', '--disable-dev-shm-usage');
+    const proc = spawn(chrome, [...flags, 'about:blank'], { stdio: 'ignore' });
     const arq = path.join(perfil, 'DevToolsActivePort');
     for (let i = 0; i < 150 && !fs.existsSync(arq); i++) await espera(100);
     await espera(200);

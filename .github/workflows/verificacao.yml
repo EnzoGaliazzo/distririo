@@ -82,13 +82,17 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # O teste conversa com o Chrome por WebSocket, que só existe sem
+          # flag a partir do Node 22. No 20 ele quebra com "WebSocket is not
+          # defined" — foi assim que este job reprovou na primeira vez.
+          node-version: '22'
 
       # O runner do GitHub já vem com o Chrome instalado.
       - name: Rodar npm run testar
         run: |
-          export CHROME_PATH="$(which google-chrome || which google-chrome-stable || which chromium)"
-          echo "Chrome: $CHROME_PATH"
+          export CHROME_PATH="$(which google-chrome || which google-chrome-stable || which chromium || true)"
+          echo "Chrome: ${CHROME_PATH:-(não achei)}"
+          node --version
           npm run testar
 
   lighthouse:
