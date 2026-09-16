@@ -97,6 +97,22 @@ async function abrirNavegador() {
         if (process.env.GITHUB_ACTIONS) console.log(`::error title=Node sem WebSocket::${aviso}`);
         process.exit(2);
     }
+    // Abrir o Chrome é a parte frágil numa máquina de CI carregada. Tentar de
+    // novo a ABERTURA não esconde teste quebrado: os testes rodam uma vez só.
+    let ultimoErro;
+    for (let tentativa = 1; tentativa <= 3; tentativa++) {
+        try {
+            return await abrirChromeUmaVez(chrome);
+        } catch (e) {
+            ultimoErro = e;
+            console.log(`  (abertura do Chrome, tentativa ${tentativa} de 3: ${e.message})`);
+            await espera(1000 * tentativa);
+        }
+    }
+    throw new Error('Não consegui abrir o Chrome em 3 tentativas. Último erro: ' + ultimoErro.message);
+}
+
+async function abrirChromeUmaVez(chrome) {
     const perfil = fs.mkdtempSync(path.join(os.tmpdir(), 'distririo-teste-'));
     const flags = ['--headless=new', '--remote-debugging-port=0', '--user-data-dir=' + perfil,
         '--no-first-run', '--no-default-browser-check', '--disable-extensions', '--mute-audio',
@@ -104,13 +120,50 @@ async function abrirNavegador() {
     // Em servidor de integração o sandbox do Chrome costuma não ter permissão,
     // e /dev/shm é pequeno demais para ele.
     if (process.env.CI) flags.push('--no-sandbox', '--disable-dev-shm-usage');
-    const proc = spawn(chrome, [...flags, 'about:blank'], { stdio: 'ignore' });
+    const proc = spawn(chrome, [...flags, 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] });
+
+    // Guarda o fim do stderr e percebe se o Chrome morreu: sem isso, uma queda
+    // na abertura virava só "exit code 1".
+    let stderr = '';
+    let saiu = null;
+    proc.stderr.on('data', (b) => { stderr = (stderr + b.toString()).slice(-800); });
+    proc.on('exit', (codigo, sinal) => { saiu = { codigo, sinal }; });
+    const matar = () => {
+        try { proc.kill(); } catch (e) { /* já foi */ }
+        try { fs.rmSync(perfil, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 }); } catch (e) { /* ok */ }
+    };
+
+    // Espera o arquivo ter as DUAS linhas (porta e caminho), e não só existir:
+    // o Chrome cria o arquivo antes de terminar de escrever nele.
     const arq = path.join(perfil, 'DevToolsActivePort');
-    for (let i = 0; i < 150 && !fs.existsSync(arq); i++) await espera(100);
-    await espera(200);
-    const [porta, caminho] = fs.readFileSync(arq, 'utf8').trim().split(/\r?\n/);
+    let porta = '', caminho = '';
+    for (let i = 0; i < 200; i++) {
+        if (saiu) {
+            matar();
+            throw new Error(`o Chrome fechou na abertura (código ${saiu.codigo}, sinal ${saiu.sinal}). stderr: ${stderr.trim().slice(-300) || '(vazio)'}`);
+        }
+        if (fs.existsSync(arq)) {
+            const [p1, p2] = fs.readFileSync(arq, 'utf8').trim().split(/\r?\n/);
+            if (p1 && /^\d+$/.test(p1) && p2) { porta = p1; caminho = p2; break; }
+        }
+        await espera(100);
+    }
+    if (!porta) {
+        matar();
+        throw new Error(`o Chrome não publicou a porta de depuração em 20 s. stderr: ${stderr.trim().slice(-300) || '(vazio)'}`);
+    }
+
     const ws = new WebSocket('ws://127.0.0.1:' + porta + caminho);
-    await new Promise((ok, falhou) => { ws.addEventListener('open', ok); ws.addEventListener('error', falhou); });
+    try {
+        await new Promise((ok, falhou) => {
+            const limite = setTimeout(() => falhou(new Error('a conexão com o Chrome não abriu em 10 s')), 10000);
+            ws.addEventListener('open', () => { clearTimeout(limite); ok(); });
+            ws.addEventListener('error', () => { clearTimeout(limite); falhou(new Error('a conexão com o Chrome deu erro (porta ' + porta + ')')); });
+        });
+    } catch (e) {
+        matar();
+        throw e;
+    }
     return new Navegador(ws, proc, perfil);
 }
 
@@ -572,8 +625,27 @@ function resumir(linhas) {
 }
 
 // ---------------------------------------------------------------- execução
-const servidor = await subirServidor();
-const nav = await abrirNavegador();
+// Qualquer queda fora do laço dos testes (servidor, abertura do Chrome) vira
+// anotação com o motivo — foi a falta disto que deixou duas reprovações do CI
+// sem explicação.
+process.on('unhandledRejection', (e) => {
+    const msg = e && e.message ? e.message : String(e);
+    console.error('Erro não tratado:', msg);
+    anotar('Teste de fumaça: erro fora dos testes', msg);
+    process.exit(1);
+});
+
+let servidor, nav;
+try {
+    servidor = await subirServidor();
+    nav = await abrirNavegador();
+} catch (e) {
+    console.error('Não deu para começar os testes: ' + e.message);
+    anotar('Teste de fumaça: não deu para começar', e.message);
+    resumir([`### Testes de fumaça — não começaram`, '', `\`${e.message}\``]);
+    if (servidor) servidor.close();
+    process.exit(1);
+}
 let falhas = 0;
 const resultados = ['| | Teste | Motivo |', '|---|---|---|'];
 try {
