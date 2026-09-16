@@ -147,6 +147,16 @@
     --ease-carimbo: cubic-bezier(0.34, 1.3, 0.64, 1);
     --ease: var(--ease-firme);
 
+    /* --- descarga: subindo a página, o bloco que sai pela faixa de baixo
+       desfaz a própria entrada. As três primeiras o app.js lê; as outras
+       entram nas regras de saída, logo depois de cada entrada. --- */
+    --descarga-linha: 80%;     /* subindo, abaixo desta altura da tela o bloco descarrega */
+    --descarga-folga: 40px;    /* quanto rolar no sentido novo para valer como virada */
+    --descarga-rapida: 2.5;    /* px por ms: acima disso troca sem animar */
+    --descarga-fator: 0.65;    /* duração da saída sobre a da entrada */
+    --descarga-passo: 0.06s;   /* escalonamento da saída, do último card ao primeiro */
+    --descarga-traco: 0.6s;    /* a linha do "Como funciona" recolhendo (entra em 1,3s) */
+
     /* --- famílias --- */
     --font-display: "Bricolage Grotesque", "Bricolage reserva", "Arial Black", Arial, sans-serif;
     --font-body: "Instrument Sans", "Instrument reserva", "Segoe UI", Arial, Helvetica, sans-serif;
@@ -713,6 +723,25 @@ button {
     transform: translateY(0);
 }
 
+/* A volta: mesmo destino de antes da entrada, mais curta e acelerando, porque
+   quem sai não precisa mais ser lido. */
+.reveal.descarregado {
+    transition-duration: calc(0.6s * var(--descarga-fator));
+    transition-timing-function: var(--ease-saida);
+}
+
+/* Invisível não recebe toque: tocar no vazio não abre um link que ninguém vê. */
+.reveal:not(.is-visible) {
+    pointer-events: none;
+}
+
+/* Troca sem animação (rolagem rápida, âncora, voltar ao topo, recarregar no
+   meio da página): o app.js liga isto só pelo instante da troca. */
+.sem-transicao,
+.sem-transicao * {
+    transition: none !important;
+}
+
 /* ===== Main / sections ===== */
 main {
     flex: 1;
@@ -1202,6 +1231,22 @@ main {
 
 .how-step:nth-child(3) .how-step-icon { transition-delay: 0.15s; }
 .how-step:nth-child(4) .how-step-icon { transition-delay: 0.3s; }
+
+/* Saída: o último passo encolhe primeiro e a linha recolhe de volta ao
+   primeiro, mais depressa do que se desenhou. */
+.how-steps.descarregado .how-step-icon {
+    transition-duration: calc(0.5s * var(--descarga-fator));
+    transition-timing-function: var(--ease-saida);
+    transition-delay: 0s;
+}
+
+.how-steps.descarregado .how-step:nth-last-child(2) .how-step-icon { transition-delay: var(--descarga-passo); }
+.how-steps.descarregado .how-step:nth-last-child(3) .how-step-icon { transition-delay: calc(2 * var(--descarga-passo)); }
+
+.how-steps-line.descarregado line {
+    transition-duration: var(--descarga-traco);
+    transition-timing-function: var(--ease-saida);
+}
 
 .how-step h3 {
     color: var(--dark);
@@ -1845,6 +1890,15 @@ main {
 .timeline-item:nth-child(2) { transition-delay: 0.15s; }
 .timeline-item:nth-child(3) { transition-delay: 0.3s; }
 
+.section.descarregado .timeline-item {
+    transition-duration: calc(0.5s * var(--descarga-fator));
+    transition-timing-function: var(--ease-saida);
+    transition-delay: 0s;
+}
+
+.section.descarregado .timeline-item:nth-last-child(2) { transition-delay: var(--descarga-passo); }
+.section.descarregado .timeline-item:nth-last-child(3) { transition-delay: calc(2 * var(--descarga-passo)); }
+
 .timeline-year {
     flex-shrink: 0;
     width: 84px;
@@ -2303,6 +2357,32 @@ main {
 .reveal .stat-item:nth-child(5) { transition-delay: 0.4s; }
 
 .reveal .service-item:nth-child(6) { transition-delay: 0.5s; }
+
+/* Na saída a ordem inverte: o último card a entrar é o primeiro a sair. */
+.reveal.descarregado .service-item,
+.reveal.descarregado .stat-item,
+.reveal.descarregado .structure-card {
+    transition-duration: calc(0.55s * var(--descarga-fator));
+    transition-timing-function: var(--ease-saida);
+    transition-delay: 0s;
+}
+
+.reveal.descarregado .service-item:nth-last-child(2),
+.reveal.descarregado .stat-item:nth-last-child(2),
+.reveal.descarregado .structure-card:nth-last-child(2) { transition-delay: var(--descarga-passo); }
+
+.reveal.descarregado .service-item:nth-last-child(3),
+.reveal.descarregado .stat-item:nth-last-child(3),
+.reveal.descarregado .structure-card:nth-last-child(3) { transition-delay: calc(2 * var(--descarga-passo)); }
+
+.reveal.descarregado .service-item:nth-last-child(4),
+.reveal.descarregado .stat-item:nth-last-child(4),
+.reveal.descarregado .structure-card:nth-last-child(4) { transition-delay: calc(3 * var(--descarga-passo)); }
+
+.reveal.descarregado .service-item:nth-last-child(5),
+.reveal.descarregado .stat-item:nth-last-child(5) { transition-delay: calc(4 * var(--descarga-passo)); }
+
+.reveal.descarregado .service-item:nth-last-child(6) { transition-delay: calc(5 * var(--descarga-passo)); }
 
 /* =====================================================================
    Acessibilidade — foco visível, pular para o conteúdo, movimento reduzido
@@ -4980,9 +5060,18 @@ body.lista-aberta {
         transition: none !important;
     }
 
-    .reveal {
+    .reveal,
+    .reveal .service-item,
+    .reveal .stat-item,
+    .reveal .structure-card,
+    .timeline-item,
+    .how-step-icon {
         opacity: 1 !important;
         transform: none !important;
+    }
+
+    .how-steps-line line {
+        stroke-dashoffset: 0 !important;
     }
 
     /* 4. nada de cartão ou seção partido no meio da folha */

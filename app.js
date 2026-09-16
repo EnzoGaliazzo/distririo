@@ -59,6 +59,10 @@
     // "voltar ao topo" simplesmente não saía do lugar. Aqui cada quadro fixa a
     // posição com 'instant' e o alvo é recalculado, então mudança de layout no
     // caminho não quebra nada.
+    // Até quando a rolagem em curso é do próprio site (voltar ao topo, âncora,
+    // filtros), e não da mão de quem lê: a descarga não anima nesse trajeto.
+    var rolagemAutomaticaAte = 0;
+
     function rolarAte(alvo, aoTerminar) {
         var destino = function () {
             if (typeof alvo === 'number') return alvo;
@@ -81,6 +85,7 @@
         var inicio = window.scrollY;
         var t0 = null;
         var DURACAO = 520;
+        rolagemAutomaticaAte = performance.now() + DURACAO + 150;
 
         function passo(t) {
             if (t0 === null) t0 = t;
@@ -372,39 +377,282 @@
     });
 
     // =================================================================
-    // Revelação ao rolar
+    // Revelação reversível ao rolar
+    // Descendo, cada bloco carrega exatamente onde sempre carregou. Subindo,
+    // o bloco que sai pela faixa de baixo da tela descarrega: volta ao estado
+    // de antes da entrada, mais rápido, acelerando e na ordem inversa. Descer
+    // de novo carrega de novo, quantas vezes for.
+    //
+    // A direção vem de quanto a página andou, com folga: um tremor do dedo não
+    // liga e desliga nada. Rolagem rápida, âncora e "voltar ao topo" trocam o
+    // estado sem animar, para não virar cascata.
+    //
+    // Ajustes num lugar só, no :root do style.css (--descarga-*): a linha, a
+    // folga e a velocidade são lidas aqui; durações, curva e escalonamento
+    // ficam nas próprias regras de saída.
+    //
     // A rede de segurança antiga revelava TODAS as seções depois de 2,5s,
     // o que matava a animação em qualquer página com mais de duas dobras.
     // Agora ela só destrava o que já está na tela.
     // =================================================================
     aoCarregar(function () {
-        var alvos = document.querySelectorAll('.section:not(.section-catalog)');
+        var alvos = [];
+        document.querySelectorAll('.section:not(.section-catalog)').forEach(function (el) {
+            alvos.push({ el: el, pecas: [el] });
+        });
+        var passos = document.querySelector('.how-steps');
+        if (passos) {
+            var linhaPassos = passos.querySelector('.how-steps-line');
+            alvos.push({ el: passos, pecas: linhaPassos ? [passos, linhaPassos] : [passos], passos: true });
+        }
         if (!alvos.length) return;
 
         if (!('IntersectionObserver' in window)) {
-            alvos.forEach(function (el) { el.classList.add('is-visible'); });
+            alvos.forEach(function (a) {
+                a.pecas.forEach(function (p) { p.classList.add('is-visible'); });
+            });
             return;
         }
 
-        alvos.forEach(function (el) { el.classList.add('reveal'); });
+        alvos.forEach(function (a) {
+            if (!a.passos) a.el.classList.add('reveal');
+        });
 
-        var obs = new IntersectionObserver(function (entradas) {
-            entradas.forEach(function (e) {
-                if (e.isIntersecting) {
-                    e.target.classList.add('is-visible');
-                    obs.unobserve(e.target);
-                }
+        var raiz = getComputedStyle(document.documentElement);
+        function ajuste(nome, padrao) {
+            var v = parseFloat(raiz.getPropertyValue(nome));
+            return isNaN(v) ? padrao : v;
+        }
+        var LINHA = ajuste('--descarga-linha', 80);    // % da altura da tela
+        var FOLGA = ajuste('--descarga-folga', 40);    // px no sentido novo
+        var RAPIDA = ajuste('--descarga-rapida', 2.5); // px por ms
+
+        var sentido = 'desce';
+        var ancora = window.scrollY;
+        var ultimoY = window.scrollY;
+        var ultimoT = performance.now();
+        var velocidade = 0;
+        var viradaTravadaAte = 0;
+
+        function alvoDe(el) {
+            for (var i = 0; i < alvos.length; i++) {
+                if (alvos[i].el === el) return alvos[i];
+            }
+            return null;
+        }
+
+        // Sem animação, o estado novo entra com as transições desligadas e o
+        // estilo é lido na hora: ao religá-las não sobra transição pendente.
+        function trocar(a, carregar, animar) {
+            if (a.carregado === carregar) return;
+            a.carregado = carregar;
+            if (carregar) a.jaCarregou = true;
+            a.trocouEm = animar ? performance.now() : 0;
+            a.pecas.forEach(function (p) {
+                if (!animar) p.classList.add('sem-transicao');
+                p.classList.toggle('is-visible', carregar);
+                p.classList.toggle('descarregado', !carregar);
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            if (!animar) {
+                void a.el.offsetWidth;
+                a.pecas.forEach(function (p) { p.classList.remove('sem-transicao'); });
+            }
+        }
 
-        alvos.forEach(function (el) { obs.observe(el); });
+        // Um salto (restauração da rolagem, âncora) que joga para cima da tela
+        // um bloco no meio da entrada: a entrada termina na hora.
+        function concluir(a) {
+            if (!a.trocouEm || performance.now() - a.trocouEm > 1400) return;
+            a.trocouEm = 0;
+            a.pecas.forEach(function (p) { p.classList.add('sem-transicao'); });
+            void a.el.offsetWidth;
+            a.pecas.forEach(function (p) { p.classList.remove('sem-transicao'); });
+        }
+
+        // Foco de teclado dentro segura o bloco: ninguém perde o que está
+        // preenchendo ou navegando. Clique de mouse não conta.
+        function comFoco(a) {
+            try {
+                return !!a.el.querySelector(':focus-visible');
+            } catch (e) {
+                return a.el.contains(document.activeElement) && document.activeElement !== document.body;
+            }
+        }
+
+        // Descarga só com a página em movimento: uma imagem que carrega acima e
+        // empurra o conteúdo com a tela parada não apaga nada.
+        function rolandoAgora() {
+            return performance.now() - ultimoT < 300;
+        }
+
+        function rapido() {
+            return velocidade > RAPIDA || performance.now() < rolagemAutomaticaAte;
+        }
+
+        // O que aparece na primeira tela não descarrega: voltar ao topo é
+        // voltar à página de quando se chegou, e descarregar para carregar de
+        // novo ali só faria o bloco piscar. offsetTop, e não o retângulo, para
+        // o deslocamento da própria entrada não entrar na conta.
+        function naChegada(a) {
+            var topo = 0;
+            for (var el = a.el; el; el = el.offsetParent) topo += el.offsetTop;
+            return topo < window.innerHeight;
+        }
+
+        function decidir(a) {
+            if (a.carregado) {
+                if (sentido === 'sobe' && a.abaixo && rolandoAgora() && !menosMovimento() && !comFoco(a) && !naChegada(a)) {
+                    trocar(a, false, !rapido() && noViewport(a.el));
+                }
+                return;
+            }
+            if (a.acima) {
+                trocar(a, true, false);
+            } else if (a.entrou && (sentido === 'desce' || !a.abaixo)) {
+                trocar(a, true, true);
+            }
+        }
+
+        // Seção alta demais (a grade de uma marca com 120 produtos passa de
+        // 25 mil px no celular) nunca chega a 10% à vista: para ela, a entrada
+        // é o topo cruzar a linha de descarga.
+        function acertarEntrada(a) {
+            a.entrou = a.alto ? !!a.naFaixa : !!a.entrouPelaRazao;
+        }
+
+        // Entrada: os mesmos pontos de antes de existir a saída.
+        function aoEntrar(entradas) {
+            entradas.forEach(function (e) {
+                var a = alvoDe(e.target);
+                if (!a) return;
+                a.entrouPelaRazao = e.isIntersecting;
+                acertarEntrada(a);
+                decidir(a);
+            });
+        }
+
+        // Linha de descarga: onde o bloco está em relação a ela.
+        function aoCruzarLinha(entradas) {
+            entradas.forEach(function (e) {
+                var a = alvoDe(e.target);
+                if (!a) return;
+                var r = e.boundingClientRect;
+                var fundo = e.rootBounds ? e.rootBounds.bottom : window.innerHeight * LINHA / 100;
+                a.naFaixa = e.isIntersecting;
+                a.abaixo = !e.isIntersecting && r.top >= fundo - 1;
+                // Topo acima da tela é bloco já passado, mesmo que a ponta de
+                // baixo ainda apareça: a entrada por "10% à vista" é para quem
+                // chega por baixo, não para quem sobra em cima depois de um salto.
+                a.acima = r.top < 0;
+                a.alto = r.height > 4 * window.innerHeight;
+                if (a.carregado && r.bottom <= 1 && rapido()) concluir(a);
+                acertarEntrada(a);
+                decidir(a);
+            });
+        }
+
+        var obsSecao = new IntersectionObserver(aoEntrar, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        var obsPassos = new IntersectionObserver(aoEntrar, { threshold: 0.3 });
+        var obsLinha = new IntersectionObserver(aoCruzarLinha, {
+            threshold: 0,
+            rootMargin: '0px 0px -' + (100 - LINHA) + '% 0px'
+        });
+        alvos.forEach(function (a) {
+            (a.passos ? obsPassos : obsSecao).observe(a.el);
+            obsLinha.observe(a.el);
+        });
+
+        function virar(novo) {
+            sentido = novo;
+            alvos.forEach(decidir);
+        }
+
+        function aoRolar() {
+            var y = window.scrollY;
+            var t = performance.now();
+            var passou = t - ultimoT;
+            var instantanea = Math.abs(y - ultimoY) / Math.min(Math.max(passou, 8), 100);
+            velocidade = passou > 100 ? instantanea : velocidade * 0.5 + instantanea * 0.5;
+            ultimoY = y;
+            ultimoT = t;
+
+            if (t < viradaTravadaAte) { ancora = y; return; }
+
+            // No topo não há mais o que rebobinar: a página volta a ser a
+            // da chegada.
+            if (y <= 0) {
+                ancora = 0;
+                if (sentido !== 'desce') virar('desce');
+                return;
+            }
+            if (sentido === 'desce') {
+                if (y > ancora) ancora = y;
+                else if (ancora - y > FOLGA) { ancora = y; virar('sobe'); }
+            } else if (y < ancora) {
+                ancora = y;
+            } else if (y - ancora > FOLGA) {
+                ancora = y;
+                virar('desce');
+            }
+        }
+
+        window.addEventListener('scroll', aoRolar, { passive: true });
+
+        // Girar a tela reflui a página e mexe na rolagem sem ninguém rolar.
+        // Só a largura conta: no celular a barra do navegador muda a altura
+        // a toda hora durante a própria rolagem.
+        var largura = window.innerWidth;
+        window.addEventListener('resize', function () {
+            if (window.innerWidth === largura) return;
+            largura = window.innerWidth;
+            viradaTravadaAte = performance.now() + 400;
+        });
+
+        // Âncora nativa (rolagem suave do CSS) também é trajeto do site.
+        function marcarTrajeto() {
+            rolagemAutomaticaAte = Math.max(rolagemAutomaticaAte, performance.now() + 900);
+        }
+        document.addEventListener('click', function (e) {
+            if (e.target.closest && e.target.closest('a[href^="#"]')) marcarTrajeto();
+        });
+        window.addEventListener('hashchange', marcarTrajeto);
+
+        // Foco nunca fica num bloco invisível: quem chega pelo Tab vê na hora.
+        document.addEventListener('focusin', function (e) {
+            alvos.forEach(function (a) {
+                if (!a.carregado && a.el.contains(e.target)) trocar(a, true, false);
+            });
+        });
+
+        // Voltando pelo histórico (bfcache), a página reaparece como foi
+        // deixada: o que está na tela ou acima fica carregado.
+        window.addEventListener('pageshow', function (e) {
+            if (!e.persisted) return;
+            sentido = 'desce';
+            ancora = ultimoY = window.scrollY;
+            velocidade = 0;
+            alvos.forEach(function (a) {
+                if (!a.carregado && (a.acima || noViewport(a.el))) trocar(a, true, false);
+            });
+        });
+
+        // Quem liga "reduzir movimento" no meio da visita não fica com buraco
+        // na tela: com ele ligado nada mais descarrega.
+        if (window.matchMedia) {
+            var consulta = window.matchMedia('(prefers-reduced-motion: reduce)');
+            var aoMudar = function () {
+                if (!consulta.matches) return;
+                alvos.forEach(function (a) {
+                    if (!a.carregado && (a.acima || noViewport(a.el))) trocar(a, true, false);
+                });
+            };
+            if (consulta.addEventListener) consulta.addEventListener('change', aoMudar);
+            else if (consulta.addListener) consulta.addListener(aoMudar);
+        }
 
         setTimeout(function () {
-            alvos.forEach(function (el) {
-                if (!el.classList.contains('is-visible') && noViewport(el)) {
-                    el.classList.add('is-visible');
-                    obs.unobserve(el);
-                }
+            alvos.forEach(function (a) {
+                if (!a.jaCarregou && noViewport(a.el)) trocar(a, true, true);
             });
         }, 2500);
     });
@@ -705,29 +953,6 @@
                 });
             });
         });
-    });
-
-    // =================================================================
-    // "Como funciona"
-    // =================================================================
-    aoCarregar(function () {
-        var passos = document.querySelector('.how-steps');
-        if (!passos) return;
-        var linha = passos.querySelector('.how-steps-line');
-
-        function revelar() {
-            passos.classList.add('is-visible');
-            if (linha) linha.classList.add('is-visible');
-        }
-
-        if (!('IntersectionObserver' in window)) { revelar(); return; }
-
-        var obs = new IntersectionObserver(function (entradas) {
-            entradas.forEach(function (e) {
-                if (e.isIntersecting) { revelar(); obs.unobserve(e.target); }
-            });
-        }, { threshold: 0.3 });
-        obs.observe(passos);
     });
 
     // =================================================================

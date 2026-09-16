@@ -127,6 +127,30 @@ papel (escala 1.055 → 1). É o único movimento com overshoot no site inteiro,
 propósito: a ousadia é gasta num lugar só. Espalhar é o que faz parecer feito
 por IA.
 
+**A rolagem rebobina.** Descendo, cada bloco carrega onde sempre carregou: sobe
+24px com fade, os cards entram escalonados e a linha do "Como funciona" se
+desenha. Subindo, o bloco que sai pela faixa de baixo da tela descarrega pelo
+mesmo caminho ao contrário, em 65% do tempo, acelerando (`--ease-saida`) e na
+ordem inversa: o último card a entrar é o primeiro a sair. Descer de novo
+carrega de novo, quantas vezes for. É gatilho, não animação presa ao scroll:
+a entrada continua cronometrada como antes e funciona em todo navegador.
+
+| Parâmetro (`:root`) | Valor | O que faz |
+|---|---|---|
+| `--descarga-linha` | 80% | subindo, o bloco cujo topo passa desta altura da tela descarrega |
+| `--descarga-folga` | 40px | quanto rolar no sentido novo para valer como virada; tremor não pisca |
+| `--descarga-rapida` | 2,5 px/ms | acima disso a troca é sem animação (arremesso, barra, âncora) |
+| `--descarga-fator` | 0,65 | duração da saída sobre a da entrada |
+| `--descarga-passo` | 60ms | escalonamento da saída, do último card ao primeiro |
+| `--descarga-traco` | 600ms | a linha do "Como funciona" recolhendo (ela desenha em 1,3s) |
+
+Nunca descarrega: cabeçalho, marquee, abertura, botões flutuantes, o catálogo
+da loja, o que aparece na primeira tela (voltar ao topo é voltar à página de
+quando se chegou), bloco com foco de teclado dentro, e nada com movimento
+reduzido. Os contadores não voltam a zero. Bloco descarregado some da vista mas
+não do leitor de tela, não recebe toque, e focar algo dentro dele carrega na
+hora.
+
 Tudo respeita `prefers-reduced-motion`, que zera animação e transição.
 
 ---

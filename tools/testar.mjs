@@ -578,6 +578,79 @@ teste('com a faixa de cookies na tela, "Minha lista" e WhatsApp continuam tocáv
     }
 });
 
+// Rola até `destino` (expressão), `passo` px por quadro, sem a rolagem suave do
+// CSS no caminho. O destino é limitado ao fim da página para não girar à toa.
+const rolarAos = (destino, passo = 40) => `new Promise((ok) => {
+    const alvo = Math.max(0, Math.min(${destino}, document.documentElement.scrollHeight - innerHeight));
+    const anda = () => {
+        const falta = alvo - scrollY;
+        if (Math.abs(falta) <= ${passo}) { scrollTo({ top: alvo, behavior: 'instant' }); setTimeout(ok, 150); return; }
+        scrollTo({ top: scrollY + Math.sign(falta) * ${passo}, behavior: 'instant' });
+        requestAnimationFrame(anda);
+    };
+    requestAnimationFrame(anda);
+})`;
+
+// Nada preso: nenhum bloco descarregado acima da tela ou na metade de cima
+// dela, nenhuma troca sem transição pela metade, nenhum estado duplo.
+const BLOCOS_PRESOS = `(() => {
+    const erros = [];
+    if (document.querySelector('.sem-transicao')) erros.push('sobrou .sem-transicao na página');
+    document.querySelectorAll('.section.reveal').forEach((s) => {
+        const r = s.getBoundingClientRect();
+        const nome = ((s.querySelector('h2') || {}).textContent || s.className).trim().slice(0, 40);
+        const carregado = s.classList.contains('is-visible');
+        if (carregado && s.classList.contains('descarregado')) erros.push(nome + ': carregado e descarregado ao mesmo tempo');
+        if (!carregado && r.bottom <= 0) erros.push(nome + ': acima da tela e descarregado');
+        if (!carregado && r.bottom > 0 && r.top < innerHeight * 0.5) erros.push(nome + ': descarregado no meio da tela');
+    });
+    return erros;
+})()`;
+
+teste('subindo, o bloco que sai por baixo descarrega; descendo, carrega de novo e nada fica preso', async (nav) => {
+    for (const movimento of ['no-preference', 'reduce']) {
+        const aba = await novaAba(nav);
+        await aba.cmd('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: movimento }] });
+        await ir(aba, '/sobre.html');
+        await avaliar(aba, `(() => {
+            window.__trocas = { carrega: 0, descarrega: 0 };
+            new MutationObserver((ms) => ms.forEach((m) => {
+                if (!m.target.classList.contains('reveal')) return;
+                const antes = (m.oldValue || '').split(/\\s+/).includes('is-visible');
+                const agora = m.target.classList.contains('is-visible');
+                if (antes !== agora) __trocas[agora ? 'carrega' : 'descarrega']++;
+            })).observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'], attributeOldValue: true });
+        })()`);
+        for (const [rotulo, destino] of [['descendo', 'document.documentElement.scrollHeight'], ['subindo', '0'], ['descendo de novo', 'document.documentElement.scrollHeight']]) {
+            await avaliar(aba, rolarAos(destino));
+            await espera(900);
+            const erros = await avaliar(aba, BLOCOS_PRESOS);
+            if (erros.length) throw new Error(`${movimento === 'reduce' ? '(movimento reduzido) ' : ''}${rotulo}: ${erros[0]}`);
+            if (rotulo === 'subindo') {
+                const d = await avaliar(aba, '__trocas.descarrega');
+                if (movimento === 'reduce' && d) throw new Error(`com movimento reduzido, subir descarregou ${d} bloco(s)`);
+                if (movimento !== 'reduce' && !d) throw new Error('subir a página inteira não descarregou nenhum bloco');
+            }
+        }
+        if (aba.erros.length) throw new Error('console com erro: ' + aba.erros[0]);
+    }
+});
+
+teste('grade da marca com mais produtos aparece no celular, mesmo alta demais para "10% à vista"', async (nav) => {
+    const dir = path.join(RAIZ, 'marca');
+    const [maior] = fs.readdirSync(dir).filter((f) => f.endsWith('.html'))
+        .map((f) => [f, fs.statSync(path.join(dir, f)).size]).sort((a, b) => b[1] - a[1])[0];
+    const aba = await novaAba(nav, { largura: 375, altura: 812, celular: true });
+    await ir(aba, '/marca/' + maior);
+    await avaliar(aba, rolarAos('1600'));
+    await espera(900);
+    const r = await avaliar(aba, `(() => {
+        const s = document.querySelector('.product-card').closest('.section');
+        return { alt: Math.round(s.getBoundingClientRect().height), visivel: s.classList.contains('is-visible'), op: getComputedStyle(s).opacity };
+    })()`);
+    if (!r.visivel || r.op !== '1') throw new Error(`a grade de ${r.alt}px de marca/${maior} ficou invisível (opacidade ${r.op})`);
+});
+
 teste('cadastro barra CNPJ inválido e telefone sem DDD', async (nav) => {
     const aba = await novaAba(nav);
     await ir(aba, '/quero-ser-cliente.html');

@@ -845,3 +845,64 @@ motivo. São 19 testes.
 **O que sobra depende do Enzo:** o banner do topo da home ainda é criativo
 publicitário da Trident, não material da Distri Rio.
 
+
+## Execução — 16/09: a rolagem rebobina
+
+Pedido do Enzo: descendo, os blocos carregam como sempre; subindo, o que sai
+pela borda de baixo descarrega, como se o site rebobinasse. Estratégia escolhida
+por ele entre três: **saída por gatilho**, e não animação presa ao scroll, para
+as entradas continuarem idênticas e funcionarem em todo navegador.
+
+**Como ficou.** Um módulo só no `app.js` substituiu os dois observadores de mão
+única (seções e "Como funciona"). Subindo, o bloco cujo topo passa de 80% da
+altura da tela descarrega pelo caminho da entrada ao contrário: em 65% do tempo,
+acelerando, na ordem inversa e voltando pela origem (cards descem, linha do
+tempo volta para a esquerda, ícones encolhem, a linha recolhe). Descer de novo
+carrega de novo. Os contadores não voltam a zero. Os ajustes ficam no `:root` do
+`style.css` (`--descarga-*`), documentados no `DESIGN.md`.
+
+**Uma mudança em relação ao plano aprovado.** O plano dizia descarregar quando
+o topo do bloco passasse de ~96% da tela. Medido, isso não funciona: o texto de
+todo bloco começa 48px abaixo do topo dele, e a 96% só o respiro aparece. A
+saída aconteceria fora da vista e o efeito pedido não existiria. A linha foi
+para 80%, e a proteção contra tremor passou da posição para o sentido: é preciso
+rolar 40px para o outro lado para a virada valer.
+
+**Achados no caminho, todos corrigidos:**
+
+- **Bug que já estava no ar:** no celular, a grade de produtos das marcas com
+  mais itens (Lauton, 25 mil px; Banana Brasil, 26 mil px) **nunca aparecia**. O
+  gatilho de "10% à vista" não chega nunca numa seção desse tamanho. No desktop
+  ela ficava em branco 2,5s. Seção com mais de quatro telas agora entra quando o
+  topo cruza a linha. Virou teste.
+- **Recarregando no meio da página**, um bloco que sobrava com a ponta de baixo
+  no alto da tela ficava em branco até a rede de segurança de 2,5s. Bloco com o
+  topo acima da tela conta como já passado e carrega na hora.
+- **A volta ao topo piscava** no tablet: "Como funciona" descarregava nos
+  últimos 200px e carregava de novo ao chegar. O que aparece na primeira tela não
+  descarrega.
+- **Impressão:** o bloco saía visível no papel, mas os cards de dentro não.
+
+**Verificação.** Entradas idênticas: 72 medições de transição (propriedade,
+duração, atraso, curva, valor final) antes e depois, zero diferença. No Chrome, a
+1440, 768 e 375px, com gesto de rolagem de velocidade controlada: três ciclos de
+descer e subir (700 e 1.400 px/s), rolagem rápida a 7.000 px/s sem nenhuma
+transição, tremor de 24px sem troca, recarregar no meio, voltar pelo histórico
+(bfcache), girar a tela, foco de teclado, movimento reduzido, "voltar ao topo" da
+loja e todas as páginas de conteúdo. Firefox 155 e WebKit 26.6 (o motor do
+Safari), servindo o site local por HTTPS: tudo passou. Testes de fumaça: 21, e
+os dois novos reprovam o código antigo.
+
+**Quanto a saída aparece:** a 700 px/s, ela começa com 150 a 200px do bloco na
+tela, e ele sai da vista com opacidade entre 0,4 e 0,7. Mais devagar, a saída
+inteira fica visível; muito rápido, ela é pulada.
+
+**Custo**, no celular com CPU 4x mais lenta, em três passadas pela página
+inteira: na home, igual (2,83s de thread principal antes, 2,81s depois); no
+Sobre, +0,3s em ~15s de rolagem, de recálculo de estilo das transições.
+Quadros acima de 34ms, tarefas longas e CLS (zero) não mudaram.
+
+**Limites honestos:** o Chrome headless não mede FPS de tela de verdade, e o
+arremesso do dedo foi simulado com roda de velocidade controlada. Falta ver num
+celular físico. E é do desenho: quem sobe e para com um bloco na faixa de baixo
+vê essa faixa vazia até descer 40px.
