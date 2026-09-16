@@ -35,19 +35,23 @@ com papelão, etiqueta e nota fiscal.
 | `--carimbo` | `#1f4fa8` | dado, estado e foco |
 | `--faixa` | `#e8a600` | marcador de seção (piso de armazém) |
 
-**Dois pares que não podem ser confundidos**, e que foi o que quebrou quando o
-tema escuro entrou:
+**Dois pares que não podem ser confundidos** — misturá-los foi o que quebrou o
+site quando ele teve modo escuro:
 
 - `--superficie-escura` / `--sobre-escuro` — a barra escura (cabeçalho,
-  marquee, rodapé, topo do painel) e o texto que anda nela. **Ficam escuros e
-  claros nos dois temas.** Antes, `--ink` era ao mesmo tempo tinta e fundo de
-  barra; no tema escuro o cabeçalho clareava junto com o texto.
-- `--sinal` / `--red-text` — preenchimento e texto. O vermelho de botão **não
-  clareia** no tema escuro (texto claro em cima precisa de 4,5:1); quem clareia
-  é o vermelho de texto sobre fundo escuro.
+  marquee, rodapé, topo do painel) e o texto que anda nela. Antes, `--ink` era
+  ao mesmo tempo tinta e fundo de barra, e qualquer mudança na tinta mexia junto
+  no fundo do cabeçalho. Tinta é tinta, fundo de barra é fundo de barra.
+- `--sinal` / `--red-text` — preenchimento e texto. Botão usa o vermelho da
+  marca; texto vermelho pequeno usa o tom mais escuro, que passa em AA sobre o
+  papel.
 
-O tema escuro é nativo, por `prefers-color-scheme`, e redefine só os tokens.
-Nenhum componente sabe que existe tema.
+**O site é sempre claro.** Não existe modo escuro, por decisão do dono: em
+08/09 ele pediu para tirar (no escuro, o site não parecia o da marca), e em
+16/09, quando um redesign o religou seguindo um prompt genérico, a decisão foi
+reconfirmada. O `:root` declara `color-scheme: light`, e o teste de contraste
+reprova se o fundo escurecer com o sistema no tema escuro. Não religar sem
+falar com o dono.
 
 ---
 
@@ -145,7 +149,8 @@ Tudo respeita `prefers-reduced-motion`, que zera animação e transição.
 
 ## Piso que não se negocia
 
-Contraste AA medido por sonda automática nos dois temas. Foco visível.
+Contraste AA medido por teste automático, inclusive com o sistema no tema
+escuro (o site tem de continuar claro). Foco visível.
 Navegação por teclado. Alvo de toque ≥ 44px. HTML semântico. `prefers-reduced-motion`.
 CLS abaixo de 0,01 em todas as páginas medidas.
 

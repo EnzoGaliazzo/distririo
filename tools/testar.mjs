@@ -476,7 +476,10 @@ const SONDA_CONTRASTE = `(() => {
   return { medidos, ruins };
 })()`;
 
-teste('contraste do texto passa em AA no tema claro e no escuro', async (nav) => {
+// O site é sempre claro, por decisão do dono. Com o sistema no tema escuro ele
+// tem de continuar claro e legível — e se alguém religar um tema escuro por
+// engano, este teste reprova antes de chegar ao ar.
+teste('site continua claro e com contraste AA mesmo com o sistema no escuro', async (nav) => {
     for (const tema of ['light', 'dark']) {
         for (const pag of ['/', '/loja.html', '/quero-ser-cliente.html']) {
             const aba = await novaAba(nav);
@@ -484,6 +487,11 @@ teste('contraste do texto passa em AA no tema claro e no escuro', async (nav) =>
                 features: [{ name: 'prefers-color-scheme', value: tema }],
             });
             await ir(aba, pag);
+            const fundo = await avaliar(aba, `(() => {
+                const c = (getComputedStyle(document.body).backgroundColor.match(/[0-9.]+/g) || []).map(Number);
+                return (c[0] + c[1] + c[2]) / 3;
+            })()`);
+            if (fundo < 200) throw new Error(`${pag} com o sistema ${tema === 'dark' ? 'escuro' : 'claro'}: o fundo da página escureceu (média ${Math.round(fundo)}). O site é sempre claro.`);
             const r = await avaliar(aba, SONDA_CONTRASTE);
             if (r.medidos < 4) throw new Error(`${pag} ${tema}: só ${r.medidos} elementos medidos — a sonda perdeu o alvo`);
             if (r.ruins.length) throw new Error(`${pag} ${tema}: ` + r.ruins.join(' | '));

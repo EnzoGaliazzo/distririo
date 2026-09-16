@@ -159,60 +159,6 @@
     --footer-h: 132px;
 }
 
-/* =====================================================================
-   Tema escuro — o depósito à noite, não o claro invertido
-
-   O fundo é carbono quente e o papel vira papel de nota velha. O sinal
-   clareia para continuar legível sobre escuro; o carimbo vira azul de tinta
-   sobre papel escuro. Tudo por token: nenhum componente sabe que existe tema.
-   ===================================================================== */
-@media (prefers-color-scheme: dark) {
-    :root:not([data-tema="claro"]) {
-        color-scheme: dark;
-
-        --papel: #16171a;
-        --papel-2: #1d1f23;
-        --papel-3: #26282d;
-        --linha: #32353b;
-        --linha-forte: #4a4e56;
-        --grafite: #b4b0a6;
-        --grafite-claro: #8e8a81;
-        --carbono: #f2efe8;
-        --carbono-2: #e3dfd6;
-
-        /* preenchimento: texto claro em cima precisa de 4,5:1, e o vermelho
-           clareado dava 4,19. Fica o vermelho da marca, que dá 4,56. Quem
-           clareia no tema escuro é só o vermelho de TEXTO (--red-text). */
-        --sinal: #d81e24;
-        --sinal-forte: #f1454b;
-        --sinal-fraco: #2a1618;
-
-        --carimbo: #7aa7f0;
-        --carimbo-forte: #a8c6f7;
-        --carimbo-fraco: #17203a;
-
-        --faixa: #ffc340;
-
-        --red-text: #ff8a8e;
-        --texto-fraco-escuro: #8e8a81;
-        --focus: var(--carimbo-forte);
-        /* --dark é TINTA em 33 lugares (título, texto forte) e só isso: as
-           barras escuras agora usam --superficie-escura. Aqui ele acompanha a
-           tinta, senão o título fica preto sobre preto. */
-        --dark: var(--carbono);
-        --ink: var(--carbono);
-        --gray-800: var(--papel-3);
-        --white: var(--papel-2);
-        --branco-puro: var(--papel-2);
-        --superficie-escura: #0e1013;
-        --sobre-escuro: #f4f2ec;
-
-        --el-1: 0 1px 0 var(--linha);
-        --el-2: 0 2px 0 0 var(--linha-forte);
-        --el-3: 0 18px 40px -12px rgba(0, 0, 0, 0.6);
-    }
-}
-
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.001ms !important;
@@ -2083,7 +2029,8 @@ main {
 
 .footer a {
     /* Barra escura nos dois temas: a cor do link tem de ser clara nos dois.
-       Com --gray-300 ele virava #32353b no tema escuro — 1,6:1, ilegível. */
+       --gray-300 é token de FIO, não de texto: sobre fundo escuro ele fica
+       ilegível. */
     color: var(--sobre-escuro);
     text-decoration: none;
 }
@@ -2959,7 +2906,7 @@ main {
 }
 
 /* =====================================================================
-   Transição entre páginas e modo escuro
+   Transição entre páginas e modo escuro — os dois ficaram de fora
    ===================================================================== */
 
 /* @view-transition foi removido de proposito.
@@ -2969,9 +2916,13 @@ main {
    dos erros "Transition was skipped" no console. Transicao bonita nao vale um
    titulo tremido. */
 
-/* O site é claro, ponto. O modo escuro automático foi removido a pedido:
-   quem está com o Windows no tema escuro via um site diferente do que a
-   marca é, e a paleta clara é a que foi desenhada e conferida em AA. */
+/* O site é claro, ponto. O modo escuro automático foi removido a pedido do
+   Enzo em 08/09: quem está com o sistema no tema escuro via um site diferente
+   do que a marca é. Em 16/09 um redesign o religou seguindo um prompt genérico
+   que pedia "tema claro e escuro", e ele foi retirado de novo no mesmo dia,
+   com a decisão reconfirmada. Não religar sem falar com o dono antes — o
+   :root declara color-scheme: light justamente para campos, menus e barras de
+   rolagem nativas também ficarem claros. */
 /* =====================================================================
    Carrossel: indicadores, pausa e barra de progresso
    ===================================================================== */

@@ -780,3 +780,21 @@ Firefox e Safari não testados (só há Chrome na máquina); e o banner do topo 
 home continua sendo criativo publicitário da Trident, não material da Distri
 Rio — mesma razão pela qual as prévias de marca foram trocadas.
 
+### 16/09, correção: o site volta a ser sempre claro
+
+O redesign acima religou o modo escuro, porque o prompt pedia "tema claro e
+escuro nativos". Só que o modo escuro tinha sido tirado **a pedido do Enzo em
+08/09** — no tema escuro o site não parecia o da marca —, e isso estava escrito
+num comentário do CSS longe da regra, que passou despercebido. Perguntado sobre
+o conflito entre as duas instruções, ele escolheu voltar a ser sempre claro.
+
+Saiu o bloco de tokens do tema escuro. Ficou a separação entre
+`--superficie-escura`/`--sobre-escuro` e `--ink`/`--dark`, porque ela é correta
+mesmo num site só claro. E o teste de contraste passou a guardar a decisão: com
+o sistema no tema escuro, se o fundo da página escurecer, ele reprova — foi
+verificado religando o escuro de propósito.
+
+A transição entre páginas, pedida no mesmo prompt, **não** voltou: ela também
+tinha sido removida de propósito, porque duplicava e deslocava os títulos de
+"Sobre" e "Contato".
+
