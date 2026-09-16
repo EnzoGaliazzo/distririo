@@ -8,6 +8,10 @@
     --red-text: #b3151a;
     --texto-suave: #4a5059;
     --texto-fraco: #656d78;
+    /* Texto secundário sobre fundo escuro. O --texto-fraco é aprovado em AA
+       sobre os neutros claros, mas dava 3,39:1 no rodapé — reprovando o 1.4.3
+       em todas as páginas. Este dá 6,8:1 sobre o --dark. */
+    --texto-fraco-escuro: #9aa1ac;
     --focus: #12131a;
     --focus-claro: #ffd166;
     --dark: #16181d;
@@ -300,6 +304,7 @@ button {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    min-height: 44px;
     padding: 0.6rem 1.25rem;
     background: var(--red);
     color: var(--white);
@@ -433,12 +438,14 @@ button {
 }
 
 /* Cada banner é um link para o catálogo. Só o visível recebe clique: os outros
-   ficam empilhados no mesmo lugar e roubariam o toque. */
+   ficam empilhados no mesmo lugar e roubariam o toque. O parallax mora aqui,
+   numa variável que o app.js só atualiza enquanto a página rola. */
 .hero-slide {
     position: absolute;
     inset: 0;
     display: block;
     pointer-events: none;
+    transform: translateY(var(--hero-deslocamento, 0px));
 }
 
 .hero-slide.is-active {
@@ -457,8 +464,17 @@ button {
     transition: opacity 1s ease;
 }
 
+/* Zoom lento do banner ativo: era desenhado quadro a quadro pelo JavaScript e
+   agora é uma animação só, que o navegador roda na GPU e o "reduzir movimento"
+   desliga junto com o resto. */
 .hero-carousel img.is-active {
     opacity: 1;
+    animation: hero-zoom 6s var(--ease) forwards;
+}
+
+@keyframes hero-zoom {
+    from { transform: scale(1.06); }
+    to { transform: scale(1.11); }
 }
 
 .hero-carousel-prev,
@@ -470,8 +486,8 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
     border: none;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.4);
@@ -713,10 +729,11 @@ main {
     background: none;
     border: none;
     border-left: 3px solid transparent;
-    padding: 0.55rem 0 0.55rem 1rem;
+    min-height: 44px;
+    padding: 0.6rem 0 0.6rem 1rem;
     font-weight: 600;
     font-size: 1rem;
-    color: var(--texto-fraco);
+    color: var(--texto-suave);
     cursor: pointer;
     transition: color 0.2s var(--ease), border-color 0.2s var(--ease), padding-left 0.2s var(--ease);
 }
@@ -727,7 +744,9 @@ main {
 }
 
 .brand-select-btn.is-active {
-    color: var(--red);
+    /* --red puro dá 4,36:1 sobre o cinza claro do bloco, abaixo dos 4,5 de AA
+       para texto pequeno; o --red-text é o mesmo vermelho aprovado. */
+    color: var(--red-text);
     border-color: var(--red);
     padding-left: 1.3rem;
 }
@@ -804,6 +823,29 @@ main {
 
 .marquee:hover .marquee-track {
     animation-play-state: paused;
+}
+
+/* Sem mouse não existe hover, e a faixa ficava rodando sem nenhum jeito de
+   parar — é o que o critério 2.2.2 do WCAG cobra. No toque ela vira uma tira
+   que o próprio dedo arrasta, no ritmo de quem lê. */
+@media (hover: none) {
+    .marquee {
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .marquee::-webkit-scrollbar {
+        display: none;
+    }
+
+    .marquee-track {
+        animation: none;
+    }
+
+    .marquee-copia {
+        display: none;
+    }
 }
 
 .marquee-item {
@@ -1421,7 +1463,7 @@ main {
 
 .mv-card.is-missao { --mv-color: #1f4d8c; }
 .mv-card.is-valores { --mv-color: var(--stamp); }
-.mv-card.is-visao { --mv-color: #b8860b; }
+.mv-card.is-visao { --mv-color: #7a5a00; }
 .mv-card.is-proposito { --mv-color: var(--red); }
 
 /* ===== Timeline (Sobre - historia) ===== */
@@ -1539,7 +1581,7 @@ main {
 /* ===== Footer ===== */
 .footer {
     background: var(--dark);
-    color: var(--texto-fraco);
+    color: var(--texto-fraco-escuro);
     border-top: 3px solid var(--red);
     padding: 3rem 1.5rem 1.5rem;
     font-size: 0.85rem;
@@ -1603,7 +1645,7 @@ main {
 }
 
 .footer-note {
-    color: var(--texto-fraco);
+    color: var(--texto-fraco-escuro);
 }
 
 @media (max-width: 900px) {
@@ -2002,8 +2044,8 @@ main {
     display: none;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 50%;
     background: transparent;
@@ -2546,18 +2588,32 @@ main {
     gap: 0.45rem;
 }
 
+/* O ponto continua com 9 px, mas o alvo de toque tem 28: com 9 px de largura e
+   7 px de espaço, dois pontos vizinhos reprovavam o critério 2.5.8 do WCAG. */
 .hero-dot {
-    width: 9px;
-    height: 9px;
+    width: 28px;
+    height: 28px;
     padding: 0;
     border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-dot::before {
+    content: "";
+    display: block;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.45);
-    cursor: pointer;
     transition: background 0.2s var(--ease), width 0.2s var(--ease);
 }
 
-.hero-dot[aria-selected="true"] {
+.hero-dot[aria-current="true"]::before,
+.hero-dot[aria-selected="true"]::before {
     background: var(--white);
     width: 22px;
     border-radius: 999px;
@@ -2568,12 +2624,12 @@ main {
     right: 0.9rem;
     bottom: 0.75rem;
     z-index: 3;
-    width: 30px;
-    height: 30px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     line-height: 1;
     border: none;
     border-radius: 50%;

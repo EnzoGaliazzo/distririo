@@ -472,16 +472,17 @@
         var timer = null;
         var pausado = menosMovimento();
 
+        // Botões comuns, não "abas": role="tab" sem painel promete ao leitor de
+        // tela uma navegação por setas que não existe.
         var indicadores = document.createElement('div');
         indicadores.className = 'hero-dots';
-        indicadores.setAttribute('role', 'tablist');
+        indicadores.setAttribute('role', 'group');
         indicadores.setAttribute('aria-label', 'Escolher banner');
 
         var pontos = slides.map(function (_, i) {
             var b = document.createElement('button');
             b.type = 'button';
             b.className = 'hero-dot';
-            b.setAttribute('role', 'tab');
             b.setAttribute('aria-label', 'Banner ' + (i + 1) + ' de ' + slides.length);
             b.addEventListener('click', function () { irPara(i); reiniciar(); });
             indicadores.appendChild(b);
@@ -537,14 +538,12 @@
 
         function irPara(i) {
             slides[atual].classList.remove('is-active');
-            pontos[atual].setAttribute('aria-selected', 'false');
+            pontos[atual].setAttribute('aria-current', 'false');
             atual = (i + slides.length) % slides.length;
             garantirImagem(slides[atual]);
             slides[atual].classList.add('is-active');
-            pontos[atual].setAttribute('aria-selected', 'true');
+            pontos[atual].setAttribute('aria-current', 'true');
             aplicarEstadoDosLinks();
-            // Marca a hora da troca: o zoom lento do slide lê esse carimbo.
-            window.DR_SLIDE_EM = Date.now();
             // Carrega o próximo só quando ele passa a fazer sentido.
             garantirImagem(slides[(atual + 1) % slides.length]);
             animarBarra();
@@ -632,9 +631,7 @@
         }
 
         aplicarEstadoDosLinks();
-        pontos[0].setAttribute('aria-selected', 'true');
-        window.DR_SLIDE_EM = Date.now();
-        window.DR_SLIDE_MS = INTERVALO;
+        pontos[0].setAttribute('aria-current', 'true');
         comecar();
     });
 
@@ -643,40 +640,33 @@
     // Os dois escrevem no mesmo transform, então moram na mesma função:
     // separados, um sobrescreveria o outro a cada quadro.
     // =================================================================
+    // O zoom lento do slide agora é do CSS (uma animação por troca de banner).
+    // Aqui fica só o parallax, e só enquanto a pessoa rola: antes este laço
+    // desenhava a cada quadro com a home parada na tela — 307 mudanças de
+    // estilo em 3 segundos, esquentando celular à toa.
     aoCarregar(function () {
         var carrossel = document.getElementById('heroCarousel');
         if (!carrossel || menosMovimento()) return;
 
-        var rodando = false;
+        var pendente = false;
 
-        function desenhar() {
+        function aplicar() {
+            pendente = false;
             var r = carrossel.getBoundingClientRect();
-            var ativa = carrossel.querySelector('img.is-active');
-            var visivel = r.bottom > 0 && r.top < window.innerHeight;
-
-            if (ativa && visivel) {
-                var deslocamento = Math.max(-24, Math.min(24, r.top * -0.06));
-                var duracao = window.DR_SLIDE_MS || 5000;
-                var idade = Math.min(1, (Date.now() - (window.DR_SLIDE_EM || Date.now())) / duracao);
-                var escala = 1.06 + 0.05 * idade;
-                ativa.style.transform = 'translateY(' + deslocamento + 'px) scale(' + escala.toFixed(4) + ')';
-            }
-
-            if (visivel && !document.hidden) {
-                requestAnimationFrame(desenhar);
-            } else {
-                rodando = false;
-            }
+            if (r.bottom <= 0 || r.top >= window.innerHeight) return;
+            var deslocamento = Math.max(-24, Math.min(24, r.top * -0.06));
+            carrossel.style.setProperty('--hero-deslocamento', deslocamento.toFixed(1) + 'px');
         }
 
-        function ligar() {
-            if (!rodando) { rodando = true; requestAnimationFrame(desenhar); }
+        function aoRolar() {
+            if (pendente) return;
+            pendente = true;
+            requestAnimationFrame(aplicar);
         }
 
-        window.addEventListener('scroll', ligar, { passive: true });
-        window.addEventListener('resize', ligar);
-        document.addEventListener('visibilitychange', function () { if (!document.hidden) ligar(); });
-        ligar();
+        window.addEventListener('scroll', aoRolar, { passive: true });
+        window.addEventListener('resize', aoRolar);
+        aplicar();
     });
 
     // =================================================================
@@ -1718,6 +1708,23 @@
                 if (fim) tel.setSelectionRange(tel.value.length, tel.value.length);
                 var digitos = tel.value.replace(/\D/g, '').length;
                 tel.setCustomValidity(!tel.value || digitos >= 10 ? '' : 'Telefone incompleto — inclua o DDD.');
+                var dica = tel.parentElement.querySelector('.form-dica-telefone');
+                if (dica && digitos >= 10) dica.remove();
+            });
+            // O CNPJ avisava na hora e o telefone só no envio, com a borda
+            // vermelha e nenhuma explicação.
+            tel.addEventListener('blur', function () {
+                var digitos = tel.value.replace(/\D/g, '').length;
+                var incompleto = !!tel.value && digitos < 10;
+                var dica = tel.parentElement.querySelector('.form-dica-telefone');
+                if (incompleto && !dica) {
+                    dica = document.createElement('p');
+                    dica.className = 'form-dica form-dica-erro form-dica-telefone';
+                    dica.textContent = 'Telefone incompleto — inclua o DDD.';
+                    tel.insertAdjacentElement('afterend', dica);
+                } else if (!incompleto && dica) {
+                    dica.remove();
+                }
             });
         });
     }

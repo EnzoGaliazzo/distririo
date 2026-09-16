@@ -329,15 +329,51 @@ const cortar = (txt, max) => {
     return (espaco > max * 0.6 ? pedaco.slice(0, espaco) : pedaco).replace(/[\s,;:.\-\u2014]+$/, '') + '\u2026';
 };
 
+// Nome de produto costuma se diferenciar no FIM ("... ao Leite" x "... Branco"),
+// ent\u00e3o o corte tira o meio. Cortando o final, sete pares de produtos apareciam
+// na busca do Google com exatamente o mesmo t\u00edtulo.
+const encurtarMeio = (txt, max) => {
+    if (txt.length <= max) return txt;
+    const fim = Math.max(12, Math.round(max * 0.4));
+    const inicio = Math.max(8, max - fim - 2);
+    const cabeca = txt.slice(0, inicio).replace(/[\s,;:.\-\u2014]+$/, '');
+    let cauda = txt.slice(txt.length - fim);
+    const espaco = cauda.indexOf(' ');
+    if (espaco > 0 && espaco < fim * 0.5) cauda = cauda.slice(espaco + 1);
+    return cabeca + '\u2026 ' + cauda;
+};
+
+// Alguns nomes se diferenciam no meio ("Granola Banana e Maçã" x "Granola e
+// Morango"). Para esses, cortar o meio criaria títulos gêmeos; então a escolha
+// é feita olhando o catálogo inteiro, e quem colide volta a cortar pelo fim.
+let TITULOS_CURTOS = null;
+function tituloCurtoDoProduto(p) {
+    const max = 62 - ' | Distri Rio'.length;
+    if (!TITULOS_CURTOS) {
+        TITULOS_CURTOS = new Map();
+        const quantos = new Map();
+        for (const q of dados.produtos) {
+            const completo = q.nome + (q.marca ? ' — ' + q.marca : '');
+            const curto = (completo + ' | Distri Rio').length <= 62 ? completo : encurtarMeio(q.nome, max);
+            TITULOS_CURTOS.set(q.id, curto);
+            quantos.set(curto, (quantos.get(curto) || 0) + 1);
+        }
+        for (const q of dados.produtos) {
+            if ((quantos.get(TITULOS_CURTOS.get(q.id)) || 0) > 1) {
+                TITULOS_CURTOS.set(q.id, cortar(q.nome, max));
+            }
+        }
+    }
+    return TITULOS_CURTOS.get(p.id) || cortar(p.nome, max);
+}
+
 function paginaProduto(p, tpl) {
     const cat = dados.categorias.find(c => c.id === p.categoria);
     const embal = (p.embalagens || []).join(' · ');
     const tituloCompleto = p.nome + (p.marca ? ' — ' + p.marca : '') + ' | Distri Rio';
     // <title> curto para a busca; og:title inteiro, que o WhatsApp e o
     // Facebook mostram bem mais texto.
-    const titulo = tituloCompleto.length <= 62
-        ? tituloCompleto
-        : cortar(p.nome, 62 - ' | Distri Rio'.length) + ' | Distri Rio';
+    const titulo = tituloCurtoDoProduto(p) + ' | Distri Rio';
     // A descrição cabe em 158 caracteres cortando o NOME, nunca o final: quem
     // lê o resultado da busca precisa chegar em "venda apenas para CNPJ", que é
     // o que filtra visita inútil. Alguns nomes do catálogo têm 110 caracteres.
@@ -414,18 +450,11 @@ function paginaProduto(p, tpl) {
         image: imgAbs,
         description: descricao,
         category: cat ? cat.titulo : undefined,
-        offers: {
-            '@type': 'Offer',
-            url: SITE + '/produto/' + p.id + '.html',
-            availability: 'https://schema.org/InStock',
-            priceCurrency: 'BRL',
-            priceSpecification: {
-                '@type': 'PriceSpecification',
-                valueAddedTaxIncluded: false,
-                description: 'Preço sob consulta. Venda somente para pessoa jurídica (CNPJ).',
-            },
-            seller: { '@id': SITE + '/#organizacao' },
-        },
+        // Sem bloco "offers" de propósito. Ele afirmava availability: InStock
+        // para os 333 produtos, e o site nunca promete estoque — ele diz que
+        // confirma na conversa. E oferta sem preço é inválida para o resultado
+        // de produto do Google, que exige price. Melhor não declarar nada do que
+        // declarar o que não se pode sustentar.
     };
     if (p.marca) jsonld.brand = { '@type': 'Brand', name: p.marca };
     if (p.skus && p.skus.length) jsonld.sku = p.skus[0];
