@@ -500,13 +500,17 @@ button {
     transform: translateY(-1px);
 }
 
+/* Na própria página de cadastro o botão vira contorno: diz "você está aqui"
+   sem sumir. Antes ele ganhava fundo escuro sobre o cabeçalho escuro e virava
+   texto solto no canto. */
 .header-cta.is-active {
-    background: var(--superficie-escura);
+    background: transparent;
+    box-shadow: inset 0 0 0 2px var(--red);
     cursor: default;
 }
 
 .header-cta.is-active:hover {
-    background: var(--superficie-escura);
+    background: transparent;
     transform: none;
 }
 
@@ -3542,6 +3546,105 @@ main {
 .tira-dados .stat-label {
     font-size: var(--t-100);
     color: var(--texto-fraco);
+}
+
+
+/* =====================================================================
+   Cadastro — ficha cadastral com o "depois" ao lado
+   ===================================================================== */
+.ficha-cadastro {
+    display: grid;
+    grid-template-columns: 16rem minmax(0, 38rem);
+    gap: var(--e-7);
+    justify-content: center;
+    align-items: start;
+}
+
+.ficha-lateral {
+    border-top: 5px solid var(--dark);
+    padding-top: var(--e-3);
+    position: sticky;
+    top: calc(var(--header-total) + var(--e-5));
+}
+
+.ficha-rotulo {
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--texto-fraco);
+    margin: 0 0 var(--e-4);
+}
+
+.ficha-passos {
+    list-style: none;
+    counter-reset: passo;
+    display: grid;
+    gap: var(--e-4);
+    margin: 0;
+    padding: 0;
+}
+
+/* É uma sequência de verdade, então a numeração carrega informação.
+   O número fica na margem por posição, não por grade: em grade, o texto solto
+   depois do <strong> caía na coluna estreita do número, uma palavra por linha. */
+.ficha-passos li {
+    counter-increment: passo;
+    position: relative;
+    padding-left: 2.5rem;
+    font-size: var(--t-200);
+    line-height: 1.5;
+    color: var(--texto-suave);
+}
+
+.ficha-passos li::before {
+    content: counter(passo, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    font-family: var(--font-dado);
+    font-size: var(--t-100);
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--red-text);
+}
+
+.ficha-passos strong {
+    display: block;
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.ficha-nota {
+    margin: var(--e-5) 0 0;
+    padding-top: var(--e-3);
+    border-top: 1px dashed var(--linha);
+    font-size: var(--t-100);
+    color: var(--texto-fraco);
+}
+
+/* O formulário vira documento: assenta, com a tarja de sinal no topo. */
+.ficha-cadastro .job-form-card {
+    max-width: none;
+    margin: 0;
+    border-top: 5px solid var(--red);
+    border-radius: var(--r-1);
+    box-shadow: none;
+}
+
+@media (max-width: 860px) {
+    .ficha-cadastro {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--e-5);
+    }
+
+    /* No celular o formulário vem primeiro: é a tarefa. O "depois" fica
+       logo abaixo, como resposta para quem hesitar no botão. */
+    .ficha-lateral {
+        position: static;
+        order: 2;
+    }
 }
 
 /* =====================================================================
