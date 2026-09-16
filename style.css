@@ -3561,7 +3561,7 @@ main {
     color: var(--texto-suave);
     text-transform: none;
     letter-spacing: 0;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .filtro-marcavel input {
@@ -4345,7 +4345,7 @@ body.lista-aberta {
 }
 
 .marca-lista a > span {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.76rem;
     color: var(--texto-fraco);
     background: var(--gray-100);
