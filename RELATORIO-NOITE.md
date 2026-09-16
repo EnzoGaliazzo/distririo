@@ -589,3 +589,59 @@ bloqueio do que chutar. As tarefas 5, 6 e 30 continuam exatamente como o
 turno de 09/09 as deixou — nenhuma delas piorou nem foi tocada.
 
 Este próprio registro é o único commit da execução.
+
+---
+
+## Execução — 15/09, tarde: auditoria completa aplicada
+
+O Enzo pediu uma auditoria do site inteiro (segurança, funcionalidade,
+desempenho, UI, animação, UX, acessibilidade, SEO, código, LGPD, conversão,
+analytics, resiliência, PWA, idioma, conteúdo, peso e custo), sem alterar nada
+antes de aprovar. O laudo saiu com 59 achados — 2 críticos, 8 altos, 23 médios,
+26 baixos — e ele aprovou as três fases de uma vez, mais a retirada da Oi White.
+
+**Como foi medido.** O PageSpeed Insights recusou por cota diária esgotada
+(erro 429), então as medições saíram do Chrome 152 sem interface, controlado
+pelo protocolo de depuração, com o mesmo estrangulamento do Lighthouse
+(celular: 4x CPU, 150 ms de latência, 1,6 Mbps). Cada achado foi confirmado
+duas vezes: medida antes, medida depois.
+
+**Salto de layout (CLS), antes → depois:**
+
+| Página | Antes | Depois |
+|---|---|---|
+| Sobre (desktop) | 0,164 | 0,0006 |
+| Quero ser cliente (desktop) | 0,149 | 0,0018 |
+| Produto (desktop) | 0,078 | 0,0015 |
+| Home (celular) | 0,079 | 0,0104 |
+| Loja (celular) | 0,060 | 0,0001 |
+
+Três causas, isoladas uma a uma bloqueando a fonte, o banner de cookies e o
+JavaScript: fonte do Google sem reserva com a mesma métrica, larguras em `ch`
+(a unidade muda com a fonte) e a altura do cabeçalho chutada no CSS — 116 px
+contra 105 reais no desktop e 63 no celular.
+
+**Peso:** a home baixava o primeiro banner duas vezes (39 KB em AVIF + 49 KB em
+WebP, com o Chrome avisando no console) e os outros três de cara; a Sobre
+baixava 571 KB de JPG com AVIF de 180 KB parado na mesma pasta; a prévia da
+Mondelez na home, 103 KB com WebP de 43 KB ao lado. Tudo corrigido.
+
+**O que saiu do ar:** as três "Fitas de Clareamento Dental Roxa" (Anvisa
+proibiu comercialização, distribuição e propaganda da Oiwhite em 16/03/2026) e
+as duas perguntas do FAQ que mostravam `[FALTA: ...]` para o cliente.
+
+**O que passou a existir:** `npm run testar` (10 casos num Chrome sem
+interface, sem dependência), `tools/fotos/` (instalar foto no padrão e unificar
+cadastro), `.github/workflows/publicar.yml` (publicar só o site) e a trava do
+`npm run catalogo`, que apagava a curadoria inteira sem avisar.
+
+**Turno da noite:** a execução das 14h42 tinha deixado a pasta de trabalho na
+branch `melhorias/noite-2026-09-09`, 9 commits atrás da `main` — catálogo com
+426 produtos e sem as fotos de 14 e 15/09. As instruções da tarefa agendada
+passaram a recriar a branch a partir da `origin/main` e a devolver a pasta para
+a `main` no fim; a tarefa ficou pausada até haver item destravado no backlog.
+
+**O que continua com o Enzo:** HTTPS obrigatório, DNS (SPF/DMARC), proxy da
+Cloudflare, troca do Source do Pages, CNPJ, prova social, condições comerciais,
+cidades atendidas, teste real do anexo de currículo e as contas de medição sem
+cookie e de monitoramento. Tudo no item 18 do `PERGUNTAS-PARA-O-ENZO.md`.

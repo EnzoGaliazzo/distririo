@@ -16,6 +16,34 @@ Legenda: `[ ]` pendente · `[x]` feito · `[!]` tentado e falhou (com o motivo)
 
 ---
 
+## Auditoria de 15/09 — o que já foi aplicado
+
+O Enzo aprovou as três fases do laudo de 15/09 e elas foram aplicadas na `main`
+no mesmo dia. **Não refaça** estes itens; os códigos são os do laudo.
+
+Fechados: P-01 (turno da noite parte da `main` e volta para ela; tarefa pausada),
+P-02 e S-02 (fluxo `publicar.yml` pronto, esperando a troca do Source),
+L-01 (fitas de clareamento fora do ar), F-01 ([FALTA] fora do FAQ),
+F-02 (busca não morre com falha de rede), U-01/A-04/L-06/L-02 (faixa de cookies
+discreta, sem roubar foco, com recusa que vale na hora), U-02 (banner leva ao
+catálogo), U-03/N-02 (cópia do cadastro por e-mail e evento honesto), U-04
+(filtros no endereço), U-05, U-06, V-01, V-02, D-01 a D-04, A-01, A-02, A-03,
+A-05, A-06, M-01, E-01, E-02, N-03, L-03, L-05, L-07, Q-01 a Q-04, S-05, S-07.
+
+Continuam abertos e dependem do Enzo: S-01 (Enforce HTTPS), S-03 e S-04 (DNS e
+Cloudflare), S-06 (captcha no Web3Forms), L-04 (CNPJ), C-01 a C-04 (condições
+comerciais, prova social, número de marcas, cidades), E-03 e E-04 (Search
+Console e perfil no Google), F-03 (teste real do anexo de currículo), N-01 e
+R-01 (contas de medição sem cookie e de monitoramento), R-02 (2FA), K-01 (plano
+B de hospedagem). Estão descritos no item 18 do `PERGUNTAS-PARA-O-ENZO.md`.
+
+Adiados de propósito: D-05 (aliviar o DOM da loja — 4.801 elementos, mas a loja
+abre em 0,9 s no celular lento; mexer agora é risco sem ganho) e W-01 (service
+worker: o site publica 20 s depois do push, e cache velho em catálogo de
+distribuidora gera pedido errado).
+
+---
+
 ## P0 — Conversão
 
 - [x] **1. Lista de pedido no catálogo.** FEITO, commit `f439cf2`. Botão nos 426 cartões e nas 426 páginas de produto, contador flutuante, painel com quantidade e remoção, localStorage, e mensagem de WhatsApp cortada pelo tamanho da URL. **Falta:** medir com gente de verdade e avaliar se o painel deveria ter campo de observação por item.

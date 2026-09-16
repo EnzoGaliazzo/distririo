@@ -38,9 +38,12 @@ Publicado em <https://distririo.com.br>.
 | `assets/produtos/<marca>/` | Fotos de produto: um `.jpg` e um `.webp` por foto. |
 | `assets/hero-slides/` | Banners do carrossel da home. |
 | `tools/` | Scripts de manutenção. Veja `tools/LEIAME.md`. |
+| `tools/fotos/` | Instalar foto no padrão e unificar cadastro duplicado. Veja `tools/fotos/LEIAME.md`. |
+| `tools/testar.mjs` | `npm run testar`: abre o site num Chrome sem interface e confere os fluxos principais. |
 | `tools/partials/` | Cabeçalho, rodapé e moldes de produto, marca e 404. |
 | `sitemap.xml`, `robots.txt`, `site.webmanifest` | **Gerados.** |
-| `.github/workflows/verificacao.yml` | O CI que reprova build fora de sincronia, imagem órfã e link quebrado. |
+| `.github/workflows/verificacao.yml` | O CI que reprova build fora de sincronia, imagem órfã, link quebrado e teste de fumaça. |
+| `.github/workflows/publicar.yml` | Publica só os arquivos do site. Esperando o Enzo trocar Settings → Pages → Source. |
 
 ---
 
@@ -124,6 +127,15 @@ Três arquivos sustentam isso e **não podem sumir**:
   de sair sem dar erro visível**. Já aconteceu.
 - `.gitignore` — mantém fora do repositório as pastas de ferramenta iniciadas
   por ponto. Com `.nojekyll` ligado, o Pages serve arquivos com ponto na frente.
+
+### O que é publicado
+
+Hoje o GitHub Pages publica **o repositório inteiro** — por isso
+`distririo.com.br/PERGUNTAS-PARA-O-ENZO.md`, `/data/catalogo-bruto.json` e
+`/tools/` abrem no navegador. O `robots.txt` já pede que a busca ignore esses
+caminhos, e o `.github/workflows/publicar.yml` resolve de vez: ele monta uma
+pasta só com o site e publica por Actions. Para ligar, uma vez: Settings →
+Pages → Source → **GitHub Actions**, e destravar o gatilho `push` no arquivo.
 
 ### Cache
 
