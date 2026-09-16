@@ -229,6 +229,8 @@ exigem um servidor.
 
 ## Onde está o resto da documentação
 
+- `DESIGN.md` — o sistema visual: cor, tipografia, espaço, forma, movimento e
+  as regras de composição. Leia antes de mexer no `style.css`.
 - `tools/LEIAME.md` — o fluxo do catálogo em detalhe e o papel de cada script.
 - `PERGUNTAS-PARA-O-ENZO.md` — o que está travado esperando informação que só o
   dono tem (fotos, preços, horário, área de cobertura).

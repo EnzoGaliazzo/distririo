@@ -1,0 +1,152 @@
+# Sistema visual da Distri Rio
+
+Direção: **bloco de pedido**. O site é o estoque à vista, e a peça que ele
+existe para produzir é a lista. Então a interface fala a língua impressa do
+balcão — etiqueta de gôndola, código, nota — com a estrutura pesada de um
+depósito.
+
+Isso não é enfeite: é o que decide cada valor deste documento. Documento não
+flutua, etiqueta tem canto vivo, vermelho é sinal e não texto corrido.
+
+Tudo abaixo está implementado como variável CSS no topo do `style.css`. Nada de
+valor solto no meio da folha: se precisar de um número novo, ele entra como
+token antes de ser usado.
+
+---
+
+## Cor
+
+Os neutros são de **papel quente**, não cinza de framework. Isso é escolha: o
+cinza neutro é o que todo site gerado usa, e um papel levemente quente conversa
+com papelão, etiqueta e nota fiscal.
+
+| Token | Claro | O que é |
+|---|---|---|
+| `--papel` | `#fbfaf7` | fundo da página |
+| `--papel-2` | `#f3f0e9` | superfície secundária (faixas, painéis) |
+| `--papel-3` | `#e7e2d7` | superfície terciária |
+| `--linha` | `#d9d3c6` | fio de separação |
+| `--linha-forte` | `#b9b1a0` | fio em estado ativo |
+| `--grafite` | `#5d5952` | texto de apoio |
+| `--grafite-claro` | `#767166` | texto fraco — **4,70:1 sobre o papel** |
+| `--carbono` | `#1b1d21` | tinta |
+| `--sinal` | `#d81e24` | a marca. Cor de **sinal**: marca e alerta |
+| `--sinal-forte` | `#a91116` | vermelho de texto e hover |
+| `--carimbo` | `#1f4fa8` | dado, estado e foco |
+| `--faixa` | `#e8a600` | marcador de seção (piso de armazém) |
+
+**Dois pares que não podem ser confundidos**, e que foi o que quebrou quando o
+tema escuro entrou:
+
+- `--superficie-escura` / `--sobre-escuro` — a barra escura (cabeçalho,
+  marquee, rodapé, topo do painel) e o texto que anda nela. **Ficam escuros e
+  claros nos dois temas.** Antes, `--ink` era ao mesmo tempo tinta e fundo de
+  barra; no tema escuro o cabeçalho clareava junto com o texto.
+- `--sinal` / `--red-text` — preenchimento e texto. O vermelho de botão **não
+  clareia** no tema escuro (texto claro em cima precisa de 4,5:1); quem clareia
+  é o vermelho de texto sobre fundo escuro.
+
+O tema escuro é nativo, por `prefers-color-scheme`, e redefine só os tokens.
+Nenhum componente sabe que existe tema.
+
+---
+
+## Tipografia
+
+Três famílias, cada uma com um papel. Nenhuma delas é a Inter, que era o que o
+site usava em 2.620 elementos e é a fonte padrão de todo site gerado.
+
+| Papel | Família | Por quê |
+|---|---|---|
+| Display | **Bricolage Grotesque** 700 | tem inktrap e largura óptica: personalidade sem virar fonte de cartaz |
+| Corpo | **Instrument Sans** 400/600 | sóbria e muito legível em tela pequena sob sol forte, que é a condição real de quem lê atrás do balcão |
+| Dado | **Martian Mono** 600 | código, quantidade e etiqueta. É a voz do documento |
+
+Cada uma tem **face de reserva com métrica medida no navegador**
+(`size-adjust`, `ascent-override`, `descent-override`), usando a fonte que já
+está no aparelho. Sem isso, o texto muda de tamanho quando a fonte chega e a
+página anda — era assim que o CLS ia a 0,16.
+
+Só os pesos usados são baixados: 3, não 7. Pedir eixo variável trazia a fonte
+inteira (76 KB só da Bricolage).
+
+### Escala
+
+Modular, de degraus reais. Antes eram 29 tamanhos distintos, com campeões
+quebrados como `14.08px` e `12.48px` — resultado de multiplicador solto, não de
+escala.
+
+`--t-50` 11px · `--t-100` 13px · `--t-200` 15px · `--t-300` 16px ·
+`--t-400` 18px · `--t-500` 22px · `--t-600` 28px · `--t-700` 32–42px ·
+`--t-800` 40–68px
+
+---
+
+## Espaço
+
+Base 4, sem valor solto: `--e-1` 4px até `--e-9` 96px.
+
+---
+
+## Forma e elevação
+
+**Raio.** `--r-1: 3px` é o padrão — canto de etiqueta. Os 16px em 445 elementos
+e as 476 cápsulas de 999px eram o que mais dava cara de template. Cápsula
+sobrou em cinco lugares onde a forma redonda quer dizer alguma coisa: contador,
+bolha do WhatsApp, ponto do carrossel e o botão flutuante.
+
+**Elevação.** Documento assenta, não paira.
+
+- `--el-1` — assentamento de 1px. É o padrão
+- `--el-2` — deslocamento duro de 2px, como impresso. Estado ativo
+- `--el-3` — sombra de verdade. **Só no painel da lista**, que é a única coisa
+  que está de fato por cima da página
+
+---
+
+## Movimento
+
+Curva própria. Antes, quase todas as 18 combinações de transição usavam
+`cubic-bezier(.4, 0, .2, 1)` — o easing padrão do Material/Tailwind.
+
+| Token | Valor | Quando |
+|---|---|---|
+| `--ms-1` | 120ms | carimbo, pressão de botão |
+| `--ms-2` | 200ms | mudança de estado (hover, foco, filtro) |
+| `--ms-3` | 320ms | entrada de bloco |
+| `--ease-firme` | `cubic-bezier(.2, .8, .2, 1)` | padrão: decidido, sem sobra |
+| `--ease-saida` | `cubic-bezier(.4, 0, 1, 1)` | o que está saindo de cena |
+| `--ease-carimbo` | `cubic-bezier(.34, 1.3, .64, 1)` | **só o carimbo** |
+
+**O momento.** Quando um item entra na lista, a linha bate como carimbo em
+papel (escala 1.055 → 1). É o único movimento com overshoot no site inteiro, de
+propósito: a ousadia é gasta num lugar só. Espalhar é o que faz parecer feito
+por IA.
+
+Tudo respeita `prefers-reduced-motion`, que zera animação e transição.
+
+---
+
+## Composição
+
+- **Cabeçalho de seção é placa de corredor**: barra estrutural em cima, rótulo
+  à esquerda, naco de vermelho na ponta. Não é título centralizado com
+  tracinho, que era o mesmo gesto em toda seção de toda página.
+- **A home abre assimétrica**: texto na coluna larga, e na margem direita a
+  coluna de razão — o estoque contado em mono. No celular a contagem vem
+  primeiro: é a prova antes da promessa.
+- **Cartão de produto é ficha**: assenta na grade, canto de etiqueta, nome em
+  display, marca em mono maiúsculo, tarja de categoria crescendo da esquerda no
+  hover.
+- **O painel da lista é um bloco de pedido**: tarja escura no topo com rótulo
+  em mono, pauta pontilhada entre itens, picote antes do rodapé.
+
+---
+
+## Piso que não se negocia
+
+Contraste AA medido por sonda automática nos dois temas. Foco visível.
+Navegação por teclado. Alvo de toque ≥ 44px. HTML semântico. `prefers-reduced-motion`.
+CLS abaixo de 0,01 em todas as páginas medidas.
+
+Nada disso é opcional e nada disso aparece na tela como enfeite — é o chão.
