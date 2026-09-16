@@ -167,7 +167,17 @@ Tudo respeita `prefers-reduced-motion`, que zera animação e transição.
   display, marca em mono maiúsculo, tarja de categoria crescendo da esquerda no
   hover.
 - **O painel da lista é um bloco de pedido**: tarja escura no topo com rótulo
-  em mono, pauta pontilhada entre itens, picote antes do rodapé.
+  em mono, pauta pontilhada entre itens, picote antes do rodapé. Enviar passa
+  por três etapas na mesma gaveta — a lista, quem está pedindo (o cabeçalho da
+  nota, com CNPJ e WhatsApp em mono) e o pedido pronto, com o código carimbado
+  em azul. Quem já pediu no aparelho vê só o cartão "Pedido para" e envia.
+- **O filtro da loja é um funil que lê como índice de catálogo impresso**:
+  nome, pontilhado de sumário e quantidade em mono. Seção → tipo é dependência
+  real, então o tipo pende da seção por uma faixa âmbar (`--faixa`, o único uso
+  dela no painel); marca não depende de nada e não leva número. A opção
+  escolhida fica carimbada (`--carimbo`) e tocar de novo desfaz. No celular as
+  mesmas opções viram trilhos de etiquetas em linhas de altura fixa: abrir um
+  link já filtrado não empurra a grade.
 
 ---
 

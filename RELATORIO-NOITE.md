@@ -906,3 +906,87 @@ Quadros acima de 34ms, tarefas longas e CLS (zero) não mudaram.
 arremesso do dedo foi simulado com roda de velocidade controlada. Falta ver num
 celular físico. E é do desenho: quem sobe e para com um bloco na faixa de baixo
 vê essa faixa vazia até descer 40px.
+
+## Execução — 16/09: filtro em funil e pedido pelo formulário
+
+Dois pedidos do Enzo na mesma leva: uma filtragem "melhor e mais funilada" na
+loja, e a lista de pedido passar por um formulário em vez de só abrir o WhatsApp.
+
+### O funil
+
+**Por que o filtro antigo não funilava.** Das 31 "categorias" do catálogo, 29
+eram uma marca ou uma linha de marca (Trident, Baly, Lauton). Marca e Categoria
+repetiam quase a mesma coisa, e não havia como pedir "sucos" ou "balas" sem
+saber a marca.
+
+**A classificação.** Os 333 produtos ganharam **seção e tipo** pelo que são, não
+pela marca: Doces e gomas (34), Barras e snacks (84), Bebidas e energéticos
+(57), Mercearia (32), Nutrição e suplementos (83), Cuidados pessoais (37) e
+Limpeza (6), em 35 tipos. Os nomes das seções seguem o que a home já dizia
+("Doces e gomas", "Bebidas e energéticos"). A classificação mora em
+`data/tipos.json`, fora do `produtos.json`, para não se perder se a exportação
+do ERP for refeita, e o build reprova produto sem tipo.
+
+**"Sem açúcar adicionado"** (49 produtos) sai do próprio texto do produto: sem
+açúcar, sem adição de açúcares, zero açúcar. O nome não é "sem açúcar" porque a
+maioria é "sem adição" — numa barra de banana, dizer "sem açúcar" seria falso.
+Ficaram de fora, de propósito, "baixo teor de açúcar" e o Diet Shake, cuja
+descrição não diz sem açúcar.
+
+**Como funciona.** Seção → tipo → marca, uma escolha por etapa. Escolhida, a
+etapa encolhe para a opção marcada (tocar de novo desfaz), e as outras mostram
+só o que ainda tem produto, com a contagem refeita a cada escolha. Marca não
+depende de seção: quem pensa "quero Baly" começa por ela. O endereço guarda o
+funil (`loja.html?secao=bebidas&tipo=sucos`), os links antigos `?cat=` e
+`?marca=` continuam abrindo, e os três cartões da home ("Doces e gomas",
+"Nutrição", "Bebidas") agora abrem a loja já na seção — antes "Doces e gomas"
+buscava "chocolate", o que escondia gomas e biscoitos.
+
+**Desenho.** No computador, cada opção é uma linha de índice de catálogo
+impresso (nome, pontilhado, quantidade em mono), e o tipo pende da seção por uma
+faixa âmbar. No celular as opções viram trilhos de etiquetas em linhas de altura
+fixa, com a ordem na linha da contagem: o painel tem 240 px em qualquer estado.
+
+**Medido.** CLS ao abrir a loja já filtrada: no máximo 0,0006 no celular e no
+tablet, e 0,0008 no computador (a primeira versão dava 0,016 no computador,
+porque a coluna pintava aberta e encolhia; agora o funil só aparece depois que
+o estado do endereço é aplicado). As contagens de cada seção, tipo e marca batem
+com a grade — virou teste. No leitor de tela, cada opção é um botão com estado
+("Bebidas e energéticos, 57 produtos, pressionado").
+
+### O pedido pelo formulário
+
+**Antes:** "Enviar lista no WhatsApp" abria a conversa direto, sem saber quem
+estava pedindo. **Agora:** "Continuar para o pedido" leva a um formulário na
+mesma gaveta — CNPJ (conferido na Receita, com a razão social preenchida
+sozinha), nome, WhatsApp, bairro ou cidade da entrega e observação. "Enviar
+pedido" faz três coisas: manda a **cópia completa por e-mail** (Web3Forms, a
+mesma chave do cadastro), com o código do pedido e a lista inteira sem o corte
+de tamanho do WhatsApp; **abre o WhatsApp** com quem pede, os itens e a
+observação; e mostra o **pedido pronto** com o código carimbado e o resultado da
+cópia ("registrada" ou "não foi, envie pelo WhatsApp"). A lista esvazia e o
+pedido vai para o histórico, de onde sai com "Repetir".
+
+Quem marca "Guardar meus dados neste aparelho" (vem marcado) no próximo pedido
+vê só o cartão "Pedido para: MERCADINHO X" e envia com um toque. Os dados ficam
+no navegador do próprio aparelho; desmarcar num pedido apaga.
+
+**Política de privacidade atualizada:** o que o pedido coleta, a base legal
+(execução de contrato), o caminho por e-mail e WhatsApp e o que fica no
+aparelho. Ela dizia que a lista "não sai do aparelho", o que deixou de ser
+verdade no envio.
+
+**Ficou de fora de propósito:** o "Pedir só este no WhatsApp" da página de
+produto. A mensagem dele é pergunta de interessado ("Tenho interesse em Bis 10.
+Podem me passar as condições?"), não pedido montado, e exigir CNPJ ali faria
+perder o contato de quem ainda está sondando.
+
+### Verificação
+
+Testes de fumaça: 22 (os quatro de filtro e de lista reescritos para o fluxo
+novo, e três novos: contagens do funil contra a grade, pedido completo pelo
+formulário com CNPJ inválido barrado, e links filtrados sem a página pular no
+celular). Firefox 155 e WebKit 26.6 (o motor do Safari), desktop e celular:
+funil, máscaras de CNPJ e telefone, conferência na Receita e pedido com cópia,
+tudo passando. Nenhum teste manda nada para fora da máquina: Receita, Web3Forms
+e WhatsApp respondem de mentira dentro da página.

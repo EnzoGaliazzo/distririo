@@ -1395,16 +1395,19 @@
         var secoes = Array.prototype.slice.call(document.querySelectorAll('.category-section:not(.catalogo-ordenado)'));
 
         // O texto de busca já vem normalizado do build: nada de reprocessar
-        // 400 produtos a cada tecla digitada.
+        // 400 produtos a cada tecla digitada. Seção, tipo e marca também já
+        // vêm escritos no cartão.
         var itens = Array.prototype.map.call(cartoes, function (c) {
-            return { el: c, texto: (c.getAttribute('data-name') + ' ' + c.getAttribute('data-desc') + ' ' + (c.getAttribute('data-sku') || '')).toLowerCase() };
+            return {
+                el: c,
+                texto: (c.getAttribute('data-name') + ' ' + c.getAttribute('data-desc') + ' ' + (c.getAttribute('data-sku') || '')).toLowerCase(),
+                secao: c.getAttribute('data-secao') || '',
+                tipo: c.getAttribute('data-tipo') || '',
+                marca: c.getAttribute('data-marca') || '',
+                cat: c.getAttribute('data-cat') || '',
+                semAcucar: c.getAttribute('data-sem-acucar') === '1'
+            };
         });
-
-        // Os três filtros do painel, combinados entre si e com a busca por texto.
-        var selMarca = document.getElementById('filtroMarca');
-        var selCategoria = document.getElementById('filtroCategoria');
-        var chkFoto = document.getElementById('filtroComFoto');
-        var btnLimpar = document.getElementById('limparFiltros');
 
         // Ordem alfabética: o catálogo nasce agrupado por linha de produto,
         // que é como o depósito pensa. Quem procura um nome específico pensa
@@ -1448,31 +1451,142 @@
             }
         }
 
-        function filtrosAtivos() {
-            return {
-                marca: selMarca ? selMarca.value : '',
-                categoria: selCategoria ? selCategoria.value : '',
-                soComFoto: chkFoto ? chkFoto.checked : false
-            };
+        // ---- Funil: seção → tipo, marca e "sem açúcar adicionado" ----
+        // Uma escolha por etapa. Escolhida, a etapa encolhe para a opção marcada
+        // (tocar nela de novo desfaz) e as outras mostram só o que ainda tem
+        // produto, com a contagem refeita. Marca não depende de seção: quem
+        // pensa "quero Baly" começa por ela.
+        var funil = document.getElementById('funil');
+        var etapaTipo = funil && funil.querySelector('.funil-tipo');
+        var maisMarcas = document.getElementById('funilMaisMarcas');
+        var chkSemAcucar = document.getElementById('filtroSemAcucar');
+        var nSemAcucar = document.getElementById('semAcucarN');
+        var totalNaTela = document.getElementById('filtrosTotal');
+        var btnLimpar = document.getElementById('limparFiltros');
+        var MARCAS_FECHADO = 6;
+
+        var ETAPAS = {};
+        [['secao', 'data-secao'], ['tipo', 'data-tipo'], ['marca', 'data-marca']].forEach(function (par) {
+            var lista = funil ? Array.prototype.slice.call(funil.querySelectorAll('.funil-opcao[' + par[1] + ']')) : [];
+            var porValor = new Map();
+            lista.forEach(function (b) { porValor.set(b.getAttribute(par[1]), b); });
+            ETAPAS[par[0]] = { atributo: par[1], botoes: lista, porValor: porValor, visiveis: 0 };
+        });
+
+        var estado = { secao: '', tipo: '', marca: '', semAcucar: false };
+        var marcasAbertas = false;
+
+        // Só vale valor que existe num botão gerado pelo build. O que vem do
+        // endereço é comparado com esta lista e nada mais: nunca vira seletor,
+        // classe nem HTML.
+        function valido(etapa, valor) {
+            return !!valor && ETAPAS[etapa].porValor.has(valor);
         }
 
-        function descreverFiltros(f, termo) {
+        function nomeDe(etapa, valor) {
+            var b = ETAPAS[etapa].porValor.get(valor);
+            var n = b && b.querySelector('.funil-nome');
+            return n ? n.textContent : valor;
+        }
+
+        // Um item atravessa o funil ignorando uma das etapas: é assim que cada
+        // etapa sabe quantos produtos cada opção dela traria. O tipo mora dentro
+        // da seção, então quem ignora a seção ignora o tipo junto.
+        function passa(item, t, ignorar) {
+            if (t && item.texto.indexOf(t) === -1) return false;
+            if (ignorar !== 'secao') {
+                if (estado.secao && item.secao !== estado.secao) return false;
+                if (ignorar !== 'tipo' && estado.tipo && item.tipo !== estado.tipo) return false;
+            }
+            if (ignorar !== 'marca' && estado.marca && item.marca !== estado.marca) return false;
+            if (ignorar !== 'semAcucar' && estado.semAcucar && !item.semAcucar) return false;
+            return true;
+        }
+
+        function somar(mapa, chave) {
+            mapa.set(chave, (mapa.get(chave) || 0) + 1);
+        }
+
+        function desenharFunil(t) {
+            if (!funil) return;
+            var c = { secao: new Map(), tipo: new Map(), marca: new Map() };
+            var semAcucar = 0;
+            itens.forEach(function (item) {
+                if (passa(item, t, 'secao')) somar(c.secao, item.secao);
+                if (passa(item, t, 'tipo')) somar(c.tipo, item.tipo);
+                if (passa(item, t, 'marca')) somar(c.marca, item.marca);
+                if (item.semAcucar && passa(item, t, 'semAcucar')) semAcucar++;
+            });
+
+            Object.keys(ETAPAS).forEach(function (k) {
+                var etapa = ETAPAS[k];
+                var escolhido = estado[k];
+                var aparecem = [];
+                etapa.botoes.forEach(function (b) {
+                    var valor = b.getAttribute(etapa.atributo);
+                    var n = c[k].get(valor) || 0;
+                    var marcado = valor === escolhido;
+                    var mostra = escolhido ? marcado : n > 0;
+                    if (k === 'tipo') mostra = mostra && b.getAttribute('data-secao-do-tipo') === estado.secao;
+                    b.setAttribute('aria-pressed', marcado ? 'true' : 'false');
+                    var numero = b.querySelector('.funil-n-valor');
+                    if (numero) numero.textContent = String(n);
+                    var unidade = b.querySelector('.funil-n .so-leitor');
+                    if (unidade) unidade.textContent = n === 1 ? ' produto' : ' produtos';
+                    b.hidden = !mostra;
+                    b.classList.remove('funil-extra');
+                    if (mostra) aparecem.push(b);
+                });
+                etapa.visiveis = aparecem.length;
+                // Marcas: fechado, ficam as seis primeiras. Só esconde se sobrar
+                // mais de uma — esconder uma só atrás de um botão é pior que mostrar.
+                if (k === 'marca' && !escolhido && aparecem.length > MARCAS_FECHADO + 1) {
+                    aparecem.slice(MARCAS_FECHADO).forEach(function (b) { b.classList.add('funil-extra'); });
+                }
+            });
+
+            if (etapaTipo) etapaTipo.hidden = !estado.secao;
+            funil.classList.toggle('tem-secao', !!estado.secao);
+            funil.classList.toggle('marcas-abertas', marcasAbertas);
+            if (maisMarcas) {
+                maisMarcas.hidden = !!estado.marca || ETAPAS.marca.visiveis <= MARCAS_FECHADO + 1;
+                maisMarcas.setAttribute('aria-expanded', marcasAbertas ? 'true' : 'false');
+                maisMarcas.textContent = marcasAbertas ? 'Ver menos marcas' : 'Ver as ' + ETAPAS.marca.visiveis + ' marcas';
+            }
+            // Zerado, desabilita em vez de sumir: no celular sumir encolheria o
+            // painel e empurraria a grade.
+            if (chkSemAcucar) {
+                chkSemAcucar.checked = estado.semAcucar;
+                chkSemAcucar.disabled = !estado.semAcucar && semAcucar === 0;
+                if (nSemAcucar) {
+                    nSemAcucar.textContent = String(semAcucar);
+                    var unidadeSemAcucar = nSemAcucar.parentNode.querySelector('.so-leitor');
+                    if (unidadeSemAcucar) unidadeSemAcucar.textContent = semAcucar === 1 ? ' produto' : ' produtos';
+                }
+            }
+        }
+
+        function temFunil() {
+            return !!(estado.secao || estado.tipo || estado.marca || estado.semAcucar);
+        }
+
+        function descreverFiltros(termo) {
             var partes = [];
             if (termo) partes.push('"' + termo + '"');
-            if (f.marca) partes.push('marca ' + f.marca);
-            if (f.categoria && selCategoria) {
-                var op = selCategoria.options[selCategoria.selectedIndex];
-                partes.push('categoria ' + op.textContent.replace(/\s*\(\d+\)$/, ''));
-            }
-            if (f.soComFoto) partes.push('só com foto');
+            if (estado.secao) partes.push(nomeDe('secao', estado.secao));
+            if (estado.tipo) partes.push(nomeDe('tipo', estado.tipo));
+            if (estado.marca) partes.push('marca ' + estado.marca);
+            if (estado.semAcucar) partes.push('sem açúcar adicionado');
             return partes.join(' · ');
         }
 
+        // rolar: 'sempre' leva aos resultados (busca enviada); 'se-passou' só
+        // rola se os resultados ficaram para cima da tela. No celular o funil
+        // mora no topo, e rolar a cada toque tirava a próxima etapa da vista.
         function filtrar(termo, rolar) {
             var t = normalizar(termo.trim());
-            var f = filtrosAtivos();
             var ordem = ordemAtual();
-            var temFiltro = !!(t || f.marca || f.categoria || f.soComFoto);
+            var temFiltro = !!t || temFunil();
             // A ordem também é estado do catálogo: conta para o "Limpar" e
             // para o aviso falado, mas não esconde produto nenhum.
             var temEstado = temFiltro || !!ordem;
@@ -1484,14 +1598,13 @@
             // O cartão é testado onde quer que esteja: na seção da linha dele
             // ou já movido para a grade em ordem alfabética.
             itens.forEach(function (item) {
-                var card = item.el;
-                var bate = (!f.categoria || card.getAttribute('data-cat') === f.categoria)
-                    && (!t || item.texto.indexOf(t) !== -1)
-                    && (!f.marca || card.getAttribute('data-marca') === f.marca)
-                    && (!f.soComFoto || card.getAttribute('data-foto') === 'sim');
-                card.hidden = !bate;
+                var bate = passa(item, t, '');
+                item.el.hidden = !bate;
                 if (bate) visiveis++;
             });
+
+            desenharFunil(t);
+            if (totalNaTela) totalNaTela.textContent = String(visiveis);
 
             secoes.forEach(function (secao) {
                 var achou = !!secao.querySelector('.product-card[data-name]:not([hidden])');
@@ -1526,7 +1639,7 @@
                 aviseMe.hidden = visiveis !== 0 || !temFiltro;
             }
             if (status) {
-                var descricao = descreverFiltros(f, termo.trim());
+                var descricao = descreverFiltros(termo.trim());
                 var emOrdem = !ordem ? '' : ordem === 'za' ? ' em ordem alfabética (Z–A)' : ' em ordem alfabética (A–Z)';
                 status.textContent = !temEstado
                     ? ''
@@ -1536,58 +1649,113 @@
                             + (descricao ? ' para ' + descricao : '') + emOrdem + '.';
             }
 
-            // Filtrar sem rolar deixava o visitante olhando para a parte da
-            // página que acabou de esvaziar.
             var destino = ordem ? caixaOrdenada : primeiraSecao;
-            if (rolar && temEstado && destino) {
+            if (rolar && temEstado && destino
+                && (rolar === 'sempre' || destino.getBoundingClientRect().top < 0)) {
                 rolarAte(destino);
             }
             return visiveis;
         }
 
-        // O endereço guarda a busca e os filtros, então dá para mandar
-        // "loja.html?marca=Baly%20Brasil" para um cliente e ele abrir a loja já
-        // filtrada. Antes só a busca ia para a URL, e o resto se perdia.
+        // O endereço guarda a busca e o funil, então dá para mandar
+        // "loja.html?secao=bebidas&tipo=sucos" para um cliente e ele abrir a
+        // loja já filtrada.
         function sincronizarEndereco() {
-            var f = filtrosAtivos();
             var p = new URLSearchParams();
             var termo = campo ? campo.value.trim() : '';
             if (termo) p.set('q', termo);
-            if (f.marca) p.set('marca', f.marca);
-            if (f.categoria) p.set('cat', f.categoria);
-            if (f.soComFoto) p.set('foto', '1');
+            if (estado.secao) p.set('secao', estado.secao);
+            if (estado.tipo) p.set('tipo', estado.tipo);
+            if (estado.marca) p.set('marca', estado.marca);
+            if (estado.semAcucar) p.set('sem-acucar', '1');
             if (ordemAtual()) p.set('ordem', ordemAtual());
             var busca = p.toString();
             history.replaceState(null, '', 'loja.html' + (busca ? '?' + busca : '') + window.location.hash);
         }
 
+        // Trilho do celular: depois de uma escolha, volta para o começo, onde
+        // estão a etiqueta escolhida e as opções da etapa seguinte.
+        function voltarTrilhos() {
+            if (!funil) return;
+            funil.querySelectorAll('.funil-trilho, .funil-marca').forEach(function (t) { t.scrollLeft = 0; });
+        }
+
+        function medirFiltro(filtro, valor) {
+            medir('filtro_usado', {
+                filtro: filtro,
+                valor: valor || 'nenhum',
+                resultados: document.querySelectorAll('.product-card:not([hidden])').length,
+                secao: estado.secao || null,
+                tipo: estado.tipo || null,
+                marca: estado.marca || null
+            });
+        }
+
+        function escolher(etapa, valor) {
+            if (etapa === 'secao') {
+                estado.secao = estado.secao === valor ? '' : valor;
+                estado.tipo = '';
+            } else {
+                estado[etapa] = estado[etapa] === valor ? '' : valor;
+            }
+            filtrar(campo ? campo.value : '', 'se-passou');
+            sincronizarEndereco();
+            voltarTrilhos();
+            medirFiltro(etapa, estado[etapa]);
+        }
+
+        // Estado inicial vindo do endereço.
         var parametros = new URLSearchParams(window.location.search);
         var consulta = (parametros.get('q') || '').trim();
-        var marcaInicial = parametros.get('marca') || '';
-        var categoriaInicial = parametros.get('cat') || '';
         if (campo && consulta) campo.value = consulta;
-        if (selMarca && marcaInicial && [].some.call(selMarca.options, function (o) { return o.value === marcaInicial; })) {
-            selMarca.value = marcaInicial;
+        var tipoInicial = parametros.get('tipo') || '';
+        var secaoInicial = parametros.get('secao') || '';
+        if (valido('tipo', tipoInicial)) {
+            estado.tipo = tipoInicial;
+            estado.secao = ETAPAS.tipo.porValor.get(tipoInicial).getAttribute('data-secao-do-tipo');
+        } else if (valido('secao', secaoInicial)) {
+            estado.secao = secaoInicial;
         }
-        if (selCategoria && categoriaInicial && [].some.call(selCategoria.options, function (o) { return o.value === categoriaInicial; })) {
-            selCategoria.value = categoriaInicial;
+        if (valido('marca', parametros.get('marca'))) estado.marca = parametros.get('marca');
+        if (parametros.get('sem-acucar') === '1') estado.semAcucar = true;
+        // Endereço do tempo do filtro de categoria (?cat=lauton): vira a marca da
+        // categoria ou, se ela mistura marcas, a seção dela.
+        var catAntiga = parametros.get('cat') || '';
+        if (catAntiga && !estado.marca && !estado.secao) {
+            var marcasDaCat = new Set();
+            var secoesDaCat = new Set();
+            itens.forEach(function (i) {
+                if (i.cat !== catAntiga) return;
+                marcasDaCat.add(i.marca);
+                secoesDaCat.add(i.secao);
+            });
+            var unica = function (conjunto) { return conjunto.size === 1 ? conjunto.values().next().value : ''; };
+            if (valido('marca', unica(marcasDaCat))) estado.marca = unica(marcasDaCat);
+            else if (valido('secao', unica(secoesDaCat))) estado.secao = unica(secoesDaCat);
         }
-        if (chkFoto && parametros.get('foto') === '1') chkFoto.checked = true;
         var ordemInicial = parametros.get('ordem') || '';
         if (selOrdem && (ordemInicial === 'az' || ordemInicial === 'za')) {
             selOrdem.value = ordemInicial;
             aplicarOrdem();
         }
-        if (consulta || selMarca && selMarca.value || selCategoria && selCategoria.value
-            || chkFoto && chkFoto.checked || ordemAtual()) {
-            filtrar(consulta, true);
+        // Sempre desenha: é o que esconde os tipos e acerta as contagens. No
+        // computador o funil só aparece depois disso (ver .funil-pronto no CSS).
+        filtrar(consulta, false);
+        var painelFiltros = document.querySelector('.filtros');
+        if (painelFiltros) painelFiltros.classList.add('funil-pronto');
+        if (consulta || temFunil() || ordemAtual()) {
+            if (catAntiga) sincronizarEndereco();
+            // Chegando filtrado (link da home, link mandado por alguém), a página
+            // abre no catálogo: no celular o funil fica à vista, com os produtos
+            // logo abaixo.
+            rolarAte(document.querySelector('.catalogo-layout') || 0);
         }
 
         var form = document.querySelector('.header-search');
         if (form) {
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
-                filtrar(campo.value, true);
+                filtrar(campo.value, 'sempre');
                 sincronizarEndereco();
             });
         }
@@ -1610,36 +1778,54 @@
             }, 1200));
         }
 
-        // Painel de filtros: qualquer mudança refaz a filtragem e leva o
-        // visitante para o primeiro resultado.
-        [selMarca, selCategoria, chkFoto, selOrdem].forEach(function (ctrl) {
-            if (!ctrl) return;
-            ctrl.addEventListener('change', function () {
-                if (ctrl === selOrdem) aplicarOrdem();
-                filtrar(campo ? campo.value : '', true);
-                sincronizarEndereco();
-                var f = filtrosAtivos();
-                medir('filtro_usado', {
-                    filtro: ctrl.id === 'filtroMarca' ? 'marca'
-                        : ctrl.id === 'filtroCategoria' ? 'categoria'
-                        : ctrl.id === 'filtroOrdem' ? 'ordem' : 'so_com_foto',
-                    valor: ctrl.type === 'checkbox' ? String(ctrl.checked) : (ctrl.value || 'catalogo'),
-                    resultados: document.querySelectorAll('.product-card:not([hidden])').length,
-                    marca: f.marca || null,
-                    categoria: f.categoria || null
-                });
+        if (funil) {
+            funil.addEventListener('click', function (e) {
+                var botao = e.target.closest && e.target.closest('.funil-opcao, .funil-mais');
+                if (!botao || !funil.contains(botao)) return;
+                if (botao === maisMarcas) {
+                    marcasAbertas = !marcasAbertas;
+                    desenharFunil(normalizar((campo ? campo.value : '').trim()));
+                    return;
+                }
+                var etapa = botao.hasAttribute('data-secao') ? 'secao'
+                    : botao.hasAttribute('data-tipo') ? 'tipo' : 'marca';
+                escolher(etapa, botao.getAttribute(ETAPAS[etapa].atributo));
             });
-        });
+        }
+
+        if (chkSemAcucar) {
+            chkSemAcucar.addEventListener('change', function () {
+                estado.semAcucar = chkSemAcucar.checked;
+                filtrar(campo ? campo.value : '', 'se-passou');
+                sincronizarEndereco();
+                voltarTrilhos();
+                medirFiltro('sem_acucar', String(estado.semAcucar));
+            });
+        }
+
+        if (selOrdem) {
+            selOrdem.addEventListener('change', function () {
+                aplicarOrdem();
+                filtrar(campo ? campo.value : '', 'se-passou');
+                sincronizarEndereco();
+                medirFiltro('ordem', selOrdem.value || 'catalogo');
+            });
+        }
 
         if (btnLimpar) {
             btnLimpar.addEventListener('click', function () {
-                if (selMarca) selMarca.value = '';
-                if (selCategoria) selCategoria.value = '';
-                if (chkFoto) chkFoto.checked = false;
+                estado.secao = estado.tipo = estado.marca = '';
+                estado.semAcucar = false;
+                marcasAbertas = false;
                 if (selOrdem) { selOrdem.value = ''; aplicarOrdem(); }
                 if (campo) campo.value = '';
                 filtrar('', false);
                 sincronizarEndereco();
+                voltarTrilhos();
+                // O botão some quando não há mais o que limpar; o foco não pode
+                // sumir junto com ele.
+                var primeira = ETAPAS.secao.botoes[0];
+                if (primeira) primeira.focus({ preventScroll: true });
                 rolarAte(document.querySelector('.filtros') || 0);
             });
         }
@@ -1757,12 +1943,14 @@
     // produto e digitar tudo à mão no WhatsApp. Agora ele monta a lista
     // navegando, e o site escreve a mensagem por ele.
     //
-    // Fica tudo no localStorage do próprio aparelho: nada é enviado para
-    // servidor nenhum, e a lista sobrevive a fechar o navegador — o
-    // comerciante monta hoje e manda amanhã.
+    // A lista fica no localStorage do próprio aparelho e sobrevive a fechar o
+    // navegador — o comerciante monta hoje e manda amanhã. Ela só sai dali
+    // quando ele envia o pedido: aí passa pelo formulário de quem está
+    // pedindo, que registra uma cópia por e-mail e abre o WhatsApp.
     // =================================================================
     var CHAVE_LISTA = 'dr-lista-pedido';
     var CHAVE_HISTORICO = 'dr-pedidos-enviados';
+    var CHAVE_CLIENTE = 'dr-cliente-pedido';
     var LIMITE_URL = 1800; // wa.me quebra por volta de 2000 caracteres
 
     // Pedido enviado vira histórico no próprio aparelho: reposição é o que mais
@@ -1822,14 +2010,29 @@
     // ---- mensagem do WhatsApp ----
     // Corta pelo número de caracteres da URL final, não do texto: acento vira
     // três caracteres depois do encode e a conta erra feio sem isso.
-    function montarMensagem(lista, codigo) {
-        var cabecalho = codigo
-            ? 'Olá! Montei uma lista pelo site (pedido ' + codigo + '):\n\n'
-            : 'Olá! Montei uma lista pelo site:\n\n';
-        var rodape = '\n\nPode confirmar disponibilidade e as condições?';
-        var linhas = lista.map(function (i) {
-            return '• ' + i.qtd + 'x ' + i.nome + (i.marca ? ' (' + i.marca + ')' : '');
-        });
+    function linhaDoItem(i) {
+        return i.qtd + 'x ' + i.nome + (i.marca ? ' (' + i.marca + ')' : '');
+    }
+
+    // Lista para mandar a alguém (sócio, gerente): sem dados de quem pede.
+    function montarMensagem(lista) {
+        return cortarMensagem('Olá! Montei uma lista pelo site:\n\n', lista,
+            '\n\nPode confirmar disponibilidade e as condições?');
+    }
+
+    // O pedido que vai para o WhatsApp: quem pede, os itens e o código.
+    function montarMensagemPedido(lista, codigo, d) {
+        var topo = ['Olá! Pedido ' + codigo + ' pelo site.', ''];
+        if (d.company) topo.push('*Empresa:* ' + d.company);
+        topo.push('*CNPJ:* ' + d.cnpj, '*Responsável:* ' + d.name, '*WhatsApp:* ' + d.phone);
+        if (d.bairro) topo.push('*Entrega:* ' + d.bairro);
+        var fim = (d.observacao ? '\n\n*Observação:* ' + d.observacao : '') +
+            '\n\nPode confirmar disponibilidade e as condições?';
+        return cortarMensagem(topo.join('\n') + '\n\n', lista, fim);
+    }
+
+    function cortarMensagem(cabecalho, lista, rodape) {
+        var linhas = lista.map(function (i) { return '• ' + linhaDoItem(i); });
 
         var cabem = linhas.length;
         while (cabem > 0) {
@@ -1849,7 +2052,11 @@
     }
 
     // ---- painel ----
+    // Três etapas na mesma gaveta: a lista, quem está pedindo e o pedido
+    // pronto. Todo o HTML daqui é fixo; dado digitado ou guardado entra só
+    // por .value e .textContent.
     function montarPainel() {
+        var base = document.body.getAttribute('data-base') || '';
         var painel = document.createElement('div');
         painel.className = 'lista-painel';
         painel.id = 'listaPainel';
@@ -1862,16 +2069,101 @@
             '<h2 id="listaTitulo">Sua lista</h2>' +
             '<button type="button" class="lista-fechar" aria-label="Fechar a lista">&times;</button>' +
             '</div>' +
+
+            '<div class="lista-etapa" data-etapa="lista">' +
             '<div class="lista-itens" id="listaItens"></div>' +
             '<div class="lista-rodape">' +
-            '<p class="lista-aviso" id="listaAviso"></p>' +
-            '<a class="btn btn-zap" id="listaEnviar" target="_blank" rel="noopener">Enviar lista no WhatsApp</a>' +
+            '<button type="button" class="btn lista-continuar" id="listaContinuar">Continuar para o pedido</button>' +
             '<div class="lista-rodape-secundario">' +
             // Mandar a lista para o sócio, o gerente ou outro comerciante.
             '<button type="button" class="link-botao lista-mandar" id="listaMandar" data-compartilhar data-origem="lista" ' +
             'data-titulo="Lista de pedido - Distri Rio">' +
             '<span class="btn-compartilhar-rotulo">Mandar para alguém</span></button>' +
             '<button type="button" class="link-botao lista-limpar" id="listaLimpar">Esvaziar lista</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+
+            '<form class="lista-etapa pedido-form" data-etapa="dados" id="pedidoForm" hidden>' +
+            '<div class="pedido-corpo">' +
+            '<div class="pedido-resumo">' +
+            '<p class="pedido-resumo-texto" id="pedidoResumo"></p>' +
+            '<button type="button" class="link-botao pedido-link" id="pedidoVoltar">Mudar os itens</button>' +
+            '</div>' +
+            '<input type="checkbox" name="botcheck" class="job-form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+            '<input type="hidden" name="access_key" value="7e36d83f-e2b1-45cd-a948-b94cd71fa7ec">' +
+            '<input type="hidden" name="subject" value="">' +
+            '<input type="hidden" name="from_name" value="Site Distri Rio">' +
+            '<input type="hidden" name="pedido" value="">' +
+            '<input type="hidden" name="itens" value="">' +
+            '<input type="hidden" name="total_de_itens" value="">' +
+            '<input type="hidden" name="total_de_unidades" value="">' +
+            '<input type="hidden" name="pagina" value="">' +
+
+            // Quem já pediu neste aparelho só confere e envia.
+            '<div class="pedido-quem" id="pedidoQuem" hidden>' +
+            '<p class="pedido-quem-rotulo">Pedido para</p>' +
+            '<p class="pedido-quem-empresa" id="pedidoQuemEmpresa"></p>' +
+            '<p class="pedido-quem-detalhe" id="pedidoQuemDetalhe"></p>' +
+            '<button type="button" class="link-botao pedido-link" id="pedidoAlterar">Alterar dados</button>' +
+            '</div>' +
+
+            '<fieldset class="pedido-campos" id="pedidoCampos">' +
+            '<legend class="pedido-legenda">Quem está pedindo</legend>' +
+            '<div class="form-field">' +
+            '<label for="pedidoCnpj">CNPJ</label>' +
+            '<input type="text" id="pedidoCnpj" name="cnpj" placeholder="00.000.000/0000-00" inputmode="numeric" ' +
+            'autocomplete="off" maxlength="18" aria-describedby="pedidoCnpjRetorno" required>' +
+            '<p class="form-dica" id="pedidoCnpjRetorno" role="status" aria-live="polite"></p>' +
+            '</div>' +
+            '<div class="form-field">' +
+            '<label for="pedidoEmpresa">Razão social <span class="form-opcional">(vem do CNPJ)</span></label>' +
+            '<input type="text" id="pedidoEmpresa" name="company" autocomplete="organization" maxlength="120">' +
+            '</div>' +
+            '<div class="form-field">' +
+            '<label for="pedidoNome">Seu nome</label>' +
+            '<input type="text" id="pedidoNome" name="name" autocomplete="name" maxlength="80" required>' +
+            '</div>' +
+            '<div class="form-field">' +
+            '<label for="pedidoTelefone">WhatsApp</label>' +
+            '<input type="tel" id="pedidoTelefone" name="phone" placeholder="(21) 90000-0000" inputmode="numeric" ' +
+            'autocomplete="tel-national" maxlength="15" required>' +
+            '</div>' +
+            '<div class="form-field">' +
+            '<label for="pedidoBairro">Bairro ou cidade da entrega <span class="form-opcional">(opcional)</span></label>' +
+            '<input type="text" id="pedidoBairro" name="bairro" autocomplete="address-level2" maxlength="80">' +
+            '</div>' +
+            '</fieldset>' +
+
+            '<div class="form-field">' +
+            '<label for="pedidoObs">Observação <span class="form-opcional">(opcional)</span></label>' +
+            '<textarea id="pedidoObs" name="observacao" rows="2" maxlength="500"></textarea>' +
+            '</div>' +
+            '<label class="form-consent pedido-lembrar">' +
+            '<input type="checkbox" id="pedidoLembrar" checked>' +
+            '<span>Guardar meus dados neste aparelho para o próximo pedido</span>' +
+            '</label>' +
+            '</div>' +
+            '<div class="lista-rodape">' +
+            '<button type="submit" class="btn" id="pedidoEnviar">Enviar pedido</button>' +
+            '<p class="pedido-lgpd">Seus dados e o pedido chegam à Distri Rio por e-mail e pelo WhatsApp, como explica a ' +
+            '<a href="' + base + 'politica-de-privacidade.html">Política de Privacidade</a>.</p>' +
+            '</div>' +
+            '</form>' +
+
+            '<div class="lista-etapa pedido-pronto" data-etapa="enviado" hidden>' +
+            '<div class="pedido-corpo">' +
+            '<p class="pedido-codigo" id="pedidoCodigo"></p>' +
+            '<h3 class="pedido-pronto-titulo" id="pedidoProntoTitulo" tabindex="-1"></h3>' +
+            '<p class="pedido-pronto-texto" id="pedidoProntoTexto"></p>' +
+            '<p class="pedido-copia" id="pedidoCopia" role="status" aria-live="polite"></p>' +
+            '<ul class="pedido-pronto-itens" id="pedidoProntoItens"></ul>' +
+            '</div>' +
+            '<div class="lista-rodape">' +
+            '<a class="btn btn-zap" id="pedidoZap" target="_blank" rel="noopener">Abrir o pedido no WhatsApp</a>' +
+            '<div class="lista-rodape-secundario">' +
+            '<button type="button" class="link-botao pedido-link" id="pedidoNovo">Começar outra lista</button>' +
+            '</div>' +
             '</div>' +
             '</div>';
         document.body.appendChild(painel);
@@ -1922,8 +2214,7 @@
 
     function desenharItens(lista) {
         var caixa = document.getElementById('listaItens');
-        var enviar = document.getElementById('listaEnviar');
-        var aviso = document.getElementById('listaAviso');
+        var enviar = document.getElementById('listaContinuar');
         if (!caixa) return;
 
         if (!lista.length) {
@@ -1933,7 +2224,6 @@
             if (enviar) enviar.hidden = true;
             var mandarVazio = document.getElementById('listaMandar');
             if (mandarVazio) mandarVazio.hidden = true;
-            if (aviso) aviso.textContent = '';
             var limpar = document.getElementById('listaLimpar');
             if (limpar) limpar.hidden = true;
             return;
@@ -1973,10 +2263,7 @@
         recemEntrou = null;
 
         var msg = montarMensagem(lista);
-        if (enviar) {
-            enviar.hidden = false;
-            enviar.href = 'https://wa.me/' + ZAP + '?text=' + encodeURIComponent(msg.texto);
-        }
+        if (enviar) enviar.hidden = false;
         var mandar = document.getElementById('listaMandar');
         if (mandar) {
             mandar.hidden = false;
@@ -1986,11 +2273,6 @@
         }
         var limparBtn = document.getElementById('listaLimpar');
         if (limparBtn) limparBtn.hidden = false;
-        if (aviso) {
-            aviso.textContent = msg.cortou
-                ? 'A lista é longa: a mensagem leva os ' + msg.cabem + ' primeiros e avisa que o resto segue na conversa.'
-                : '';
-        }
     }
 
     function escapar(t) {
@@ -2080,6 +2362,7 @@
         painel.hidden = !abrir;
         document.body.classList.toggle('lista-aberta', abrir);
         if (abrir) {
+            mostrarEtapa('lista');
             desenharItens(lerLista());
             var fechar = painel.querySelector('.lista-fechar');
             if (fechar) fechar.focus();
@@ -2087,6 +2370,232 @@
         } else if (flutuante && !flutuante.hidden) {
             flutuante.focus();
         }
+    }
+
+    function mostrarEtapa(nome) {
+        if (!painel) return;
+        painel.querySelectorAll('.lista-etapa').forEach(function (etapa) {
+            etapa.hidden = etapa.getAttribute('data-etapa') !== nome;
+        });
+        var titulo = document.getElementById('listaTitulo');
+        if (titulo) titulo.textContent = nome === 'lista' ? 'Sua lista' : nome === 'dados' ? 'Dados do pedido' : 'Pedido';
+    }
+
+    // Quem já pediu neste aparelho. Lido com desconfiança: é texto que qualquer
+    // extensão ou pessoa pode ter mexido, então só volta o que tem forma de
+    // dado e com tamanho limitado.
+    function lerCliente() {
+        try {
+            var c = JSON.parse(recuperar(CHAVE_CLIENTE) || 'null');
+            if (!c || typeof c !== 'object') return null;
+            var texto = function (v, max) { return typeof v === 'string' ? v.slice(0, max) : ''; };
+            var limpo = {
+                cnpj: texto(c.cnpj, 18), company: texto(c.company, 120), name: texto(c.name, 80),
+                phone: texto(c.phone, 15), bairro: texto(c.bairro, 80)
+            };
+            var completo = cnpjValido(limpo.cnpj) && limpo.name.trim() && limpo.phone.replace(/\D/g, '').length >= 10;
+            return completo ? limpo : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function esquecerCliente() {
+        try { localStorage.removeItem(CHAVE_CLIENTE); } catch (e) { /* modo privado */ }
+    }
+
+    function plural(n, um, varios) {
+        return n + ' ' + (n === 1 ? um : varios);
+    }
+
+    function prepararPedido(lista) {
+        var form = document.getElementById('pedidoForm');
+        var resumo = document.getElementById('pedidoResumo');
+        if (resumo) resumo.textContent = plural(lista.length, 'item', 'itens') + ' · ' + plural(totalItens(lista), 'unidade', 'unidades');
+
+        var cliente = lerCliente();
+        var quem = document.getElementById('pedidoQuem');
+        var campos = document.getElementById('pedidoCampos');
+        if (cliente) {
+            ['cnpj', 'company', 'name', 'phone', 'bairro'].forEach(function (k) { form[k].value = cliente[k]; });
+            document.getElementById('pedidoQuemEmpresa').textContent = cliente.company || 'CNPJ ' + cliente.cnpj;
+            document.getElementById('pedidoQuemDetalhe').textContent =
+                [cliente.company ? 'CNPJ ' + cliente.cnpj : '', cliente.name, cliente.phone, cliente.bairro].filter(Boolean).join(' · ');
+        }
+        if (quem) quem.hidden = !cliente;
+        if (campos) campos.hidden = !!cliente;
+        var lembrar = document.getElementById('pedidoLembrar');
+        if (lembrar && cliente) lembrar.checked = true;
+        return cliente;
+    }
+
+    function mostrarCamposDoPedido() {
+        var quem = document.getElementById('pedidoQuem');
+        var campos = document.getElementById('pedidoCampos');
+        if (quem) quem.hidden = true;
+        if (campos) campos.hidden = false;
+    }
+
+    // O WhatsApp abre no mesmo toque do envio: fora dele o navegador bloqueia
+    // a janela. 'noopener' faria o window.open devolver null mesmo abrindo, e
+    // aí não daria para saber se abriu; o opener é cortado à mão logo depois.
+    function abrirJanelaWhatsApp(url) {
+        var janela = null;
+        try {
+            janela = window.open(url, '_blank');
+            if (janela) janela.opener = null;
+        } catch (e) {
+            janela = null;
+        }
+        return !!janela;
+    }
+
+    // Desta vez a cópia por e-mail é o registro do pedido, então o resultado
+    // aparece para quem pediu — sem travar nada se o serviço cair.
+    function enviarPedidoPorEmail(form) {
+        try {
+            return fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { Accept: 'application/json' },
+                keepalive: true
+            }).then(function (r) {
+                return r.json().then(function (j) { return !!(r.ok && j && j.success); }, function () { return r.ok; });
+            }).catch(function () { return false; });
+        } catch (e) {
+            return Promise.resolve(false);
+        }
+    }
+
+    function ligarPedido() {
+        var form = document.getElementById('pedidoForm');
+        if (!form) return;
+        ligarMascaras(form);
+        var enviando = false;
+
+        var val = function (campo) {
+            return form[campo] && form[campo].value ? String(form[campo].value).trim() : '';
+        };
+
+        document.getElementById('listaContinuar').addEventListener('click', function () {
+            var lista = lerLista();
+            if (!lista.length) return;
+            var cliente = prepararPedido(lista);
+            mostrarEtapa('dados');
+            var foco = cliente ? document.getElementById('pedidoEnviar') : form.cnpj;
+            if (foco) foco.focus();
+            medir('pedido_formulario', { itens: lista.length, unidades: totalItens(lista), cliente_lembrado: !!cliente });
+        });
+
+        document.getElementById('pedidoVoltar').addEventListener('click', function () {
+            mostrarEtapa('lista');
+            desenharItens(lerLista());
+            var continuar = document.getElementById('listaContinuar');
+            if (continuar) continuar.focus();
+        });
+
+        document.getElementById('pedidoAlterar').addEventListener('click', function () {
+            mostrarCamposDoPedido();
+            form.cnpj.focus();
+        });
+
+        document.getElementById('pedidoNovo').addEventListener('click', function () {
+            mostrarEtapa('lista');
+            desenharItens(lerLista());
+            var fechar = painel.querySelector('.lista-fechar');
+            if (fechar) fechar.focus();
+        });
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (enviando) return;
+            // Honeypot: só robô marca. Não abre WhatsApp nem manda e-mail.
+            if (form.botcheck && form.botcheck.checked) return;
+            if (!form.checkValidity()) {
+                // Dado lembrado que deixou de valer fica escondido no cartão:
+                // mostra os campos para a pessoa ver o que corrigir.
+                mostrarCamposDoPedido();
+                form.reportValidity();
+                return;
+            }
+            var lista = lerLista();
+            if (!lista.length) {
+                mostrarEtapa('lista');
+                return;
+            }
+            enviando = true;
+
+            var dados = {
+                cnpj: val('cnpj'), company: val('company'), name: val('name'),
+                phone: val('phone'), bairro: val('bairro'), observacao: val('observacao')
+            };
+            var registro = guardarPedidoEnviado(lista);
+            var codigo = registro ? registro.codigo : codigoDoPedido();
+            var msg = montarMensagemPedido(lista, codigo, dados);
+            var url = 'https://wa.me/' + ZAP + '?text=' + encodeURIComponent(msg.texto);
+            var abriu = abrirJanelaWhatsApp(url);
+
+            // A cópia leva a lista inteira, sem o corte de tamanho da mensagem.
+            form.subject.value = 'Pedido ' + codigo + ' pelo site - ' + (dados.company || dados.cnpj) +
+                ' (' + plural(lista.length, 'item', 'itens') + ')';
+            form.pedido.value = codigo;
+            form.itens.value = lista.map(linhaDoItem).join('\n');
+            form.total_de_itens.value = String(lista.length);
+            form.total_de_unidades.value = String(totalItens(lista));
+            form.pagina.value = window.location.origin + window.location.pathname;
+
+            var copia = document.getElementById('pedidoCopia');
+            copia.className = 'pedido-copia';
+            copia.textContent = 'Registrando a cópia do pedido…';
+            enviarPedidoPorEmail(form).then(function (ok) {
+                copia.className = 'pedido-copia ' + (ok ? 'pedido-copia-ok' : 'pedido-copia-erro');
+                copia.textContent = ok
+                    ? 'Cópia do pedido registrada com a Distri Rio.'
+                    : 'A cópia por e-mail não foi. Envie a mensagem no WhatsApp para o pedido chegar.';
+                medir('pedido_copia_email', { ok: ok });
+            });
+
+            var lembrar = document.getElementById('pedidoLembrar');
+            if (lembrar && lembrar.checked) {
+                guardar(CHAVE_CLIENTE, JSON.stringify({
+                    cnpj: dados.cnpj, company: dados.company, name: dados.name, phone: dados.phone, bairro: dados.bairro
+                }));
+            } else {
+                esquecerCliente();
+            }
+
+            // Tela de pedido pronto: código, o que foi e o caminho do WhatsApp.
+            document.getElementById('pedidoCodigo').textContent = codigo;
+            document.getElementById('pedidoProntoTitulo').textContent = abriu
+                ? 'Pedido aberto no WhatsApp'
+                : 'Pedido pronto para enviar';
+            document.getElementById('pedidoProntoTexto').textContent = (abriu
+                ? 'Confira a mensagem e toque em enviar no WhatsApp.'
+                : 'Toque no botão abaixo para abrir o WhatsApp com o pedido.') +
+                ' A gente confirma disponibilidade e condições na conversa.' +
+                (msg.cortou ? ' A mensagem leva os ' + msg.cabem + ' primeiros itens e avisa que o resto segue na conversa.' : '');
+            var itensPronto = document.getElementById('pedidoProntoItens');
+            itensPronto.textContent = '';
+            lista.forEach(function (i) {
+                var li = document.createElement('li');
+                li.textContent = linhaDoItem(i);
+                itensPronto.appendChild(li);
+            });
+            var zap = document.getElementById('pedidoZap');
+            zap.href = url;
+            zap.textContent = abriu ? 'Não abriu? Abrir no WhatsApp' : 'Abrir o pedido no WhatsApp';
+
+            gravarLista([]);
+            form.observacao.value = '';
+            mostrarEtapa('enviado');
+            document.getElementById('pedidoProntoTitulo').focus();
+            enviando = false;
+
+            medir('pedido_enviado', {
+                itens: lista.length, unidades: totalItens(lista), codigo: codigo,
+                whatsapp_abriu: abriu, dados_guardados: !!(lembrar && lembrar.checked)
+            });
+        });
     }
 
     aoCarregar(function () {
@@ -2104,16 +2613,9 @@
             abrirPainel(false);
         });
 
-        document.getElementById('listaEnviar').addEventListener('click', function () {
-            var lista = lerLista();
-            if (!lista.length) return;
-            // O código entra na mensagem e fica no histórico: serve para os dois
-            // lados falarem do mesmo pedido no meio da conversa.
-            var registro = guardarPedidoEnviado(lista);
-            var msg = montarMensagem(lista, registro && registro.codigo);
-            this.href = 'https://wa.me/' + ZAP + '?text=' + encodeURIComponent(msg.texto);
-            medir('lista_enviar_whatsapp', { itens: totalItens(lista), codigo: registro ? registro.codigo : null });
-        });
+        // O código do pedido entra na mensagem, na cópia por e-mail e no
+        // histórico: serve para os dois lados falarem do mesmo pedido.
+        ligarPedido();
 
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && painel && !painel.hidden) abrirPainel(false);
@@ -2235,9 +2737,11 @@
     // e melhor deixar passar do que travar um cliente por causa de uma API.
     var cacheCnpj = {};
 
+    // Guarda a consulta em andamento, não só a resposta: sair do campo duas
+    // vezes seguidas não pode disparar duas idas à Receita.
     function consultarCnpj(numero) {
-        if (cacheCnpj[numero]) return Promise.resolve(cacheCnpj[numero]);
-        return fetch('https://brasilapi.com.br/api/cnpj/v1/' + numero)
+        if (cacheCnpj[numero]) return cacheCnpj[numero];
+        cacheCnpj[numero] = fetch('https://brasilapi.com.br/api/cnpj/v1/' + numero)
             .then(function (r) {
                 if (r.status === 404) return { achou: false };
                 if (!r.ok) return { indisponivel: true };
@@ -2251,7 +2755,12 @@
                 });
             })
             .catch(function () { return { indisponivel: true }; })
-            .then(function (r) { cacheCnpj[numero] = r; return r; });
+            .then(function (r) {
+                // Falha de rede não fica guardada: a próxima saída do campo tenta de novo.
+                if (r.indisponivel) delete cacheCnpj[numero];
+                return r;
+            });
+        return cacheCnpj[numero];
     }
 
     function ligarMascaras(form) {
@@ -2273,7 +2782,9 @@
                 if (!/^[\d.\/\s-]+$/.test(texto)) e.preventDefault();
             });
 
-            var retorno = document.getElementById('cnpjRetorno');
+            // Cada formulário diz onde fica o retorno da Receita pelo
+            // aria-describedby do campo (cadastro e pedido convivem no site).
+            var retorno = document.getElementById(cnpj.getAttribute('aria-describedby') || 'cnpjRetorno');
             function dizer(msg, tipo) {
                 if (!retorno) return;
                 retorno.textContent = msg || '';

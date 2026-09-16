@@ -15,6 +15,23 @@ npm run build
 npm run checar
 ```
 
+## Quando adicionar um produto
+
+Todo produto precisa de um **tipo** em `data/tipos.json` — é o que o põe no
+funil de filtros da loja (seção → tipo). O build **reprova** se faltar:
+
+```json
+"produtos": {
+  "novo-produto-id": "sucos"
+}
+```
+
+O tipo diz o que o produto **é** (goma, suco, vitamina, protetor solar), não a
+marca. A lista de seções e tipos fica no mesmo arquivo, em `"secoes"`. Tipo novo
+entra ali antes de ser usado. O selo "sem açúcar adicionado" não se marca à mão:
+sai sozinho quando o nome ou a descrição do produto dizem "sem açúcar", "sem
+adição de açúcares" ou "zero açúcar".
+
 ## Quando adicionar uma foto de produto
 
 1. Coloque o JPG em `assets/produtos/<marca>/`, quadrado, 800×800.
@@ -32,6 +49,7 @@ npm run checar
 | `tools/gerar.js` | Runner do build: cabeçalho, rodapé, `<head>`, catálogo, páginas de produto, sitemap, robots, manifesto, 404. |
 | `tools/build.js` | Motor: monta os partials e o HTML dos cartões e das páginas de produto. |
 | `tools/partials/` | Fonte única do cabeçalho, do rodapé e dos moldes de produto e 404. |
+| `data/tipos.json` | Seção e tipo de cada produto, para o funil da loja. Fica fora do `produtos.json` para não se perder se a exportação do ERP for refeita. |
 | `tools/gerar-produtos-json.js` | Reconstrói `data/produtos.json` a partir de `data/catalogo-bruto.json`. Só é necessário se a exportação do ERP for refeita. |
 | `tools/normalizar-catalogo.js` | Unifica linhas duplicadas do ERP com os produtos curados. |
 | `tools/limpar-nome.js` | Tira código de SKU, separa embalagem, expande abreviação e devolve acento. |

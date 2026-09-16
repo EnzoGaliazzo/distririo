@@ -248,34 +248,104 @@ teste('busca da loja escapa HTML e mostra o estado de nada encontrado', async (n
     if (!r.status.includes('Nenhum produto')) throw new Error('aviso de busca sem texto');
 });
 
-teste('filtro de marca muda a contagem da loja', async (nav) => {
+teste('funil: cada seção mostra só os tipos e as marcas dela, e as contagens batem com a grade', async (nav) => {
     const aba = await novaAba(nav);
     await ir(aba, '/loja.html');
-    const r = await avaliar(aba, `(() => { const s = document.getElementById('filtroMarca');
-        const antes = document.querySelectorAll('.product-card:not([hidden])').length;
-        const op = [...s.options].find(o => o.value && o.value.length > 2);
-        s.value = op.value; s.dispatchEvent(new Event('change', { bubbles: true }));
-        return { antes, depois: document.querySelectorAll('.product-card:not([hidden])').length, marca: op.value }; })()`);
-    if (!(r.depois > 0 && r.depois < r.antes)) throw new Error('filtro não filtrou: ' + JSON.stringify(r));
+    const r = await avaliar(aba, `(() => {
+        const visiveis = () => document.querySelectorAll('.product-card:not([hidden])').length;
+        const soma = (sel) => [...document.querySelectorAll(sel)].filter((b) => !b.hidden)
+            .reduce((n, b) => n + Number(b.querySelector('.funil-n-valor').textContent), 0);
+        const total = visiveis();
+        const erros = [];
+        const secoes = [...document.querySelectorAll('.funil-opcao[data-secao]')];
+        let somaSecoes = 0;
+        secoes.forEach((b) => {
+            const id = b.getAttribute('data-secao');
+            const n = Number(b.querySelector('.funil-n-valor').textContent);
+            somaSecoes += n;
+            b.click();
+            const v = visiveis();
+            if (v !== n) erros.push(id + ': a opção dizia ' + n + ' e a grade mostrou ' + v);
+            if (b.getAttribute('aria-pressed') !== 'true') erros.push(id + ': não ficou marcada');
+            if (secoes.some((o) => o !== b && !o.hidden)) erros.push(id + ': outras seções continuaram à vista');
+            if (document.querySelector('.funil-tipo').hidden) erros.push(id + ': a etapa de tipo não apareceu');
+            const tiposForaDaSecao = [...document.querySelectorAll('.funil-opcao[data-tipo]')]
+                .filter((t) => !t.hidden && t.getAttribute('data-secao-do-tipo') !== id);
+            if (tiposForaDaSecao.length) erros.push(id + ': apareceu tipo de outra seção');
+            if (soma('.funil-opcao[data-tipo]') !== v) erros.push(id + ': soma dos tipos ' + soma('.funil-opcao[data-tipo]') + ' ≠ ' + v);
+            if (soma('.funil-opcao[data-marca]') !== v) erros.push(id + ': soma das marcas ' + soma('.funil-opcao[data-marca]') + ' ≠ ' + v);
+            const cartaoDeFora = [...document.querySelectorAll('.product-card:not([hidden])')].find((c) => c.getAttribute('data-secao') !== id);
+            if (cartaoDeFora) erros.push(id + ': ficou na tela ' + cartaoDeFora.getAttribute('data-name'));
+            b.click();
+            if (visiveis() !== total) erros.push(id + ': desmarcar não devolveu o catálogo');
+        });
+        if (somaSecoes !== total) erros.push('as seções somam ' + somaSecoes + ' e o catálogo tem ' + total);
+        return { erros, total };
+    })()`);
+    if (r.erros.length) throw new Error(r.erros.slice(0, 3).join(' | '));
+    if (aba.erros.length) throw new Error('console com erro: ' + aba.erros[0]);
 });
 
-teste('filtro vai para o endereço e volta ao abrir o link', async (nav) => {
+teste('funil vai para o endereço, volta ao abrir o link e o limpar desfaz', async (nav) => {
     const aba = await novaAba(nav);
     await ir(aba, '/loja.html');
-    const marca = await avaliar(aba, `(() => { const s = document.getElementById('filtroMarca');
-        const op = [...s.options].find(o => o.value && o.value.length > 2);
-        s.value = op.value; s.dispatchEvent(new Event('change', { bubbles: true })); return op.value; })()`);
-    await espera(700);
+    await avaliar(aba, `(() => { document.querySelector('.funil-opcao[data-secao="bebidas"]').click();
+        document.querySelector('.funil-opcao[data-tipo="sucos"]').click();
+        document.querySelector('.funil-opcao[data-marca="Maratá"]').click(); })()`);
+    await espera(400);
     const url = await avaliar(aba, 'location.search');
-    if (!url.includes('marca=')) throw new Error('filtro não foi para o endereço: ' + url);
+    for (const trecho of ['secao=bebidas', 'tipo=sucos', 'marca=Marat']) {
+        if (!url.includes(trecho)) throw new Error('faltou ' + trecho + ' no endereço: ' + url);
+    }
     const aba2 = await novaAba(nav);
     await ir(aba2, '/loja.html' + url);
-    await espera(900);
-    const r = await avaliar(aba2, `({ marca: document.getElementById('filtroMarca').value,
-        visiveis: document.querySelectorAll('.product-card:not([hidden])').length,
-        total: document.querySelectorAll('.product-card').length })`);
-    if (r.marca !== marca) throw new Error('o link não restaurou o filtro');
-    if (!(r.visiveis > 0 && r.visiveis < r.total)) throw new Error('o link não filtrou: ' + JSON.stringify(r));
+    await espera(700);
+    const r = await avaliar(aba2, `(() => {
+        const marcado = (sel) => document.querySelector(sel).getAttribute('aria-pressed') === 'true';
+        return { secao: marcado('.funil-opcao[data-secao="bebidas"]'), tipo: marcado('.funil-opcao[data-tipo="sucos"]'),
+                 marca: marcado('.funil-opcao[data-marca="Maratá"]'),
+                 nomes: [...document.querySelectorAll('.product-card:not([hidden])')].map((c) => c.getAttribute('data-name')),
+                 total: document.getElementById('filtrosTotal').textContent,
+                 falado: document.getElementById('searchStatus').textContent };
+    })()`);
+    if (!r.secao || !r.tipo || !r.marca) throw new Error('o link não restaurou o funil: ' + JSON.stringify(r));
+    if (!r.nomes.length || r.nomes.some((n) => !/Néctar Maratá/.test(n))) throw new Error('o link filtrou errado: ' + r.nomes.join(', '));
+    if (r.total !== String(r.nomes.length)) throw new Error('o número do topo não bate: ' + r.total);
+    if (!/Sucos e néctares/.test(r.falado)) throw new Error('o aviso falado não descreve o filtro: ' + r.falado);
+
+    const v = await avaliar(aba2, `(() => { document.getElementById('limparFiltros').click();
+        return { visiveis: document.querySelectorAll('.product-card:not([hidden])').length,
+                 total: document.querySelectorAll('.product-card').length, endereco: location.search,
+                 tipoEscondido: document.querySelector('.funil-tipo').hidden }; })()`);
+    if (v.visiveis !== v.total || v.endereco || !v.tipoEscondido) throw new Error('o limpar não desfez o funil: ' + JSON.stringify(v));
+    if (aba2.erros.length) throw new Error('console com erro: ' + aba2.erros[0]);
+});
+
+teste('links da home e o endereço antigo (?cat=) abrem a loja já no funil, sem a página pular no celular', async (nav) => {
+    const aba = await novaAba(nav);
+    await ir(aba, '/');
+    const hrefs = await avaliar(aba, `[...document.querySelectorAll('.service-item[href*="loja.html"]')].map((a) => a.getAttribute('href'))`);
+    if (!hrefs.length || hrefs.some((h) => !/[?&]secao=/.test(h))) throw new Error('cartão da home fora do funil: ' + hrefs.join(', '));
+
+    for (const [caminho, esperado] of [['/loja.html?secao=doces', { secao: 'doces' }], ['/loja.html?cat=lauton', { marca: 'Lauton' }],
+                                       ['/loja.html?tipo=sucos', { secao: 'bebidas', tipo: 'sucos' }]]) {
+        const cel = await novaAba(nav, { largura: 375, altura: 812, celular: true });
+        await cel.cmd('Page.addScriptToEvaluateOnNewDocument', { source: `window.__cls = 0;
+            new PerformanceObserver((l) => l.getEntries().forEach((e) => { if (!e.hadRecentInput) window.__cls += e.value; }))
+                .observe({ type: 'layout-shift', buffered: true });` });
+        await ir(cel, caminho);
+        await espera(900);
+        const r = await avaliar(cel, `(() => {
+            const marcado = (atr, v) => { const b = document.querySelector('.funil-opcao[' + atr + '="' + v + '"]'); return !!b && b.getAttribute('aria-pressed') === 'true'; };
+            const fora = (atr, v) => [...document.querySelectorAll('.product-card:not([hidden])')].some((c) => c.getAttribute(atr) !== v);
+            return { cls: window.__cls, ${Object.entries(esperado).map(([k, v]) => `${k}: marcado('data-${k}', ${JSON.stringify(v)}) && !fora('data-${k}', ${JSON.stringify(v)})`).join(', ')} };
+        })()`);
+        for (const k of Object.keys(esperado)) {
+            if (!r[k]) throw new Error(caminho + ': ' + k + ' não ficou aplicado');
+        }
+        if (r.cls > 0.02) throw new Error(caminho + ': a página pulou ao abrir (CLS ' + r.cls.toFixed(3) + ')');
+        if (cel.erros.length) throw new Error(caminho + ': console com erro: ' + cel.erros[0]);
+    }
 });
 
 teste('ordem alfabética junta o catálogo numa grade só e o limpar desfaz', async (nav) => {
@@ -324,18 +394,58 @@ teste('"pular para os resultados" leva o foco para o catálogo', async (nav) => 
     if (r.focado !== 'resultados') throw new Error('o foco não foi para os resultados: ' + r.focado);
 });
 
-teste('lista de pedido soma item e monta a mensagem do WhatsApp', async (nav) => {
+// Nada sai da máquina: Web3Forms e BrasilAPI respondem dentro da página e o
+// window.open só anota o endereço do WhatsApp.
+const FALSOS_PEDIDO = `(() => {
+    const real = window.fetch;
+    window.__enviado = null;
+    window.fetch = function (url, opc) {
+        const u = String(url);
+        if (u.includes('web3forms')) {
+            const d = {};
+            if (opc && opc.body && opc.body.forEach) opc.body.forEach((v, k) => { d[k] = String(v); });
+            window.__enviado = d;
+            return Promise.resolve({ ok: true, json: () => Promise.resolve({ success: true }) });
+        }
+        if (u.includes('brasilapi')) {
+            return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve({ razao_social: 'MERCADINHO TESTE LTDA', descricao_situacao_cadastral: 'ATIVA' }) });
+        }
+        return real.apply(this, arguments);
+    };
+    window.__aberto = null;
+    window.open = function (url) { window.__aberto = String(url); return {}; };
+})()`;
+
+// Preenche e envia o formulário do pedido (a lista já tem de estar montada).
+const ENVIAR_PEDIDO = `(() => {
+    document.getElementById('listaFlutuante').click();
+    document.getElementById('listaContinuar').click();
+    const f = document.getElementById('pedidoForm');
+    if (!document.getElementById('pedidoCampos').hidden) {
+        f.cnpj.value = '11222333000181'; f.cnpj.dispatchEvent(new Event('input', { bubbles: true }));
+        f.name.value = 'Joana Teste';
+        f.phone.value = '21992111843'; f.phone.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+    document.getElementById('pedidoEnviar').click();
+    return { aberto: window.__aberto ? decodeURIComponent(window.__aberto.split('text=')[1] || '') : '', enviado: window.__enviado };
+})()`;
+
+teste('lista de pedido soma item e leva ao formulário do pedido', async (nav) => {
     const aba = await novaAba(nav);
     await ir(aba, '/loja.html');
     await avaliar(aba, `document.querySelector('[data-add]').click()`);
     await espera(400);
     await avaliar(aba, `document.getElementById('listaFlutuante').click()`);
     await espera(400);
-    const r = await avaliar(aba, `({ contador: document.getElementById('listaContador').textContent,
-        itens: document.querySelectorAll('.lista-item').length,
-        zap: (document.getElementById('listaEnviar') || {}).href || '' })`);
+    const r = await avaliar(aba, `(() => { const c = document.getElementById('listaContinuar');
+        const antes = { contador: document.getElementById('listaContador').textContent, itens: document.querySelectorAll('.lista-item').length,
+                        continuar: !!c && !c.hidden, linkDireto: !!document.querySelector('#listaPainel a[href*="wa.me"]:not([hidden])') };
+        c.click();
+        return { ...antes, formulario: !document.getElementById('pedidoForm').hidden, foco: document.activeElement.id }; })()`);
     if (r.contador !== '1' || r.itens !== 1) throw new Error('lista não registrou o item: ' + JSON.stringify(r));
-    if (!r.zap.includes('wa.me') || !r.zap.includes('text=')) throw new Error('link do WhatsApp sem mensagem');
+    if (!r.continuar) throw new Error('sumiu o "Continuar para o pedido"');
+    if (r.linkDireto) throw new Error('a lista ainda tem link direto para o WhatsApp, sem passar pelo formulário');
+    if (!r.formulario || r.foco !== 'pedidoCnpj') throw new Error('o formulário do pedido não abriu no CNPJ: ' + JSON.stringify(r));
 });
 
 teste('busca sem resultado oferece o "avise-me" e manda o termo junto', async (nav) => {
@@ -396,8 +506,9 @@ teste('busca sem resultado oferece o "avise-me" e manda o termo junto', async (n
     if (aba.erros.length) throw new Error('console com erro: ' + aba.erros[0]);
 });
 
-teste('quantidade digitada na lista entra no total e na mensagem', async (nav) => {
+teste('quantidade digitada na lista entra no total e na mensagem do pedido', async (nav) => {
     const aba = await novaAba(nav);
+    await aba.cmd('Page.addScriptToEvaluateOnNewDocument', { source: FALSOS_PEDIDO });
     await ir(aba, '/loja.html');
     await avaliar(aba, `document.querySelector('[data-add]').click()`);
     await espera(300);
@@ -406,43 +517,83 @@ teste('quantidade digitada na lista entra no total e na mensagem', async (nav) =
     const r = await avaliar(aba, `(() => { const c = document.querySelector('input.lista-qtd-valor');
         c.value = '12'; c.dispatchEvent(new Event('change', { bubbles: true }));
         return { contador: document.getElementById('listaContador').textContent,
-                 campo: document.querySelector('input.lista-qtd-valor').value,
-                 msg: decodeURIComponent((document.getElementById('listaEnviar').href.split('text=')[1] || '')) }; })()`);
+                 campo: document.querySelector('input.lista-qtd-valor').value }; })()`);
     if (r.contador !== '12' || r.campo !== '12') throw new Error('a quantidade digitada não valeu: ' + JSON.stringify(r));
-    if (!/•\s*12x /.test(r.msg)) throw new Error('a mensagem não levou a quantidade: ' + r.msg);
 
     // Quantidade sem sentido volta para o que estava.
     const v = await avaliar(aba, `(() => { const c = document.querySelector('input.lista-qtd-valor');
         c.value = '0'; c.dispatchEvent(new Event('change', { bubbles: true }));
         return document.querySelector('input.lista-qtd-valor').value; })()`);
     if (v !== '12') throw new Error('quantidade zero passou: ' + v);
+
+    await avaliar(aba, `document.querySelector('.lista-fechar').click()`);
+    const envio = await avaliar(aba, ENVIAR_PEDIDO);
+    if (!/•\s*12x /.test(envio.aberto)) throw new Error('a mensagem não levou a quantidade: ' + envio.aberto);
+    if (!envio.enviado || !/^12x /.test(envio.enviado.itens)) throw new Error('a cópia por e-mail não levou a quantidade: ' + JSON.stringify(envio.enviado));
 });
 
-teste('pedido enviado ganha código e volta no "repetir"', async (nav) => {
+teste('pedido passa pelo formulário: barra CNPJ inválido, manda cópia completa, abre o WhatsApp e lembra o cliente', async (nav) => {
     const aba = await novaAba(nav);
+    await aba.cmd('Page.addScriptToEvaluateOnNewDocument', { source: FALSOS_PEDIDO });
     await ir(aba, '/loja.html');
-    // O clique no "Enviar" abriria o WhatsApp: aqui ele só não navega.
-    await avaliar(aba, `document.addEventListener('click', e => { if (e.target.closest('#listaEnviar')) e.preventDefault(); }, true)`);
-    await avaliar(aba, `document.querySelector('[data-add]').click()`);
+    await avaliar(aba, `(() => { const b = [...document.querySelectorAll('[data-add]')]; b[0].click(); b[0].click(); b[3].click(); })()`);
     await espera(300);
-    await avaliar(aba, `document.getElementById('listaFlutuante').click()`);
-    await espera(300);
-    const r = await avaliar(aba, `(() => { document.getElementById('listaEnviar').click();
-        const msg = decodeURIComponent((document.getElementById('listaEnviar').href.split('text=')[1] || ''));
-        return { msg, historico: JSON.parse(localStorage.getItem('dr-pedidos-enviados') || '[]') }; })()`);
-    if (!/DR-\d{4}-\d{2}/.test(r.msg)) throw new Error('a mensagem saiu sem código de pedido: ' + r.msg);
-    if (r.historico.length !== 1 || !r.historico[0].codigo) throw new Error('o pedido não entrou no histórico: ' + JSON.stringify(r.historico));
 
-    // Esvazia a lista e repete o pedido guardado.
-    const v = await avaliar(aba, `(() => { document.getElementById('listaLimpar').click();
+    // CNPJ que não fecha os dígitos: nada sai.
+    const barrado = await avaliar(aba, `(() => {
         document.getElementById('listaFlutuante').click();
+        document.getElementById('listaContinuar').click();
+        const f = document.getElementById('pedidoForm');
+        f.cnpj.value = '11.111.111/1111-11'; f.cnpj.dispatchEvent(new Event('input', { bubbles: true }));
+        f.name.value = 'Joana Teste';
+        f.phone.value = '21992111843'; f.phone.dispatchEvent(new Event('input', { bubbles: true }));
+        document.getElementById('pedidoEnviar').click();
+        return { abriu: !!window.__aberto, enviou: !!window.__enviado, aindaNoFormulario: !f.hidden };
+    })()`);
+    if (barrado.abriu || barrado.enviou || !barrado.aindaNoFormulario) throw new Error('CNPJ inválido passou: ' + JSON.stringify(barrado));
+    await avaliar(aba, `document.querySelector('.lista-fechar').click()`);
+
+    const r = await avaliar(aba, ENVIAR_PEDIDO);
+    await espera(300);
+    const depois = await avaliar(aba, `({
+        codigo: document.getElementById('pedidoCodigo').textContent,
+        pronto: !document.querySelector('[data-etapa="enviado"]').hidden,
+        copia: document.getElementById('pedidoCopia').textContent,
+        zap: document.getElementById('pedidoZap').getAttribute('href') || '',
+        lista: JSON.parse(localStorage.getItem('dr-lista-pedido') || '[]').length,
+        historico: JSON.parse(localStorage.getItem('dr-pedidos-enviados') || '[]'),
+        cliente: JSON.parse(localStorage.getItem('dr-cliente-pedido') || 'null') })`);
+    if (!/^DR-\d{4}-\d{2}$/.test(depois.codigo) || !depois.pronto) throw new Error('não mostrou o pedido pronto com código: ' + JSON.stringify(depois));
+    for (const trecho of [depois.codigo, '11.222.333/0001-81', 'Joana Teste', '(21) 99211-1843', '2x ']) {
+        if (!r.aberto.includes(trecho)) throw new Error('a mensagem do WhatsApp saiu sem "' + trecho + '": ' + r.aberto);
+    }
+    if (!r.enviado || r.enviado.pedido !== depois.codigo || r.enviado.cnpj !== '11.222.333/0001-81'
+        || r.enviado.total_de_itens !== '2' || r.enviado.itens.split('\n').length !== 2) {
+        throw new Error('a cópia por e-mail saiu incompleta: ' + JSON.stringify(r.enviado));
+    }
+    if (!r.enviado.access_key || r.enviado.botcheck) throw new Error('a cópia saiu sem chave ou com o honeypot marcado');
+    if (!/registrada/.test(depois.copia)) throw new Error('não confirmou a cópia: ' + depois.copia);
+    if (!depois.zap.includes('wa.me') || !depois.zap.includes('text=')) throw new Error('sem link de reserva para o WhatsApp');
+    if (depois.lista !== 0) throw new Error('a lista não esvaziou depois do pedido');
+    if (depois.historico.length !== 1 || depois.historico[0].codigo !== depois.codigo) throw new Error('o pedido não entrou no histórico');
+    if (!depois.cliente || depois.cliente.cnpj !== '11.222.333/0001-81' || depois.cliente.observacao !== undefined) {
+        throw new Error('o cliente não foi lembrado (ou levou a observação junto): ' + JSON.stringify(depois.cliente));
+    }
+
+    // Repetir o pedido e mandar de novo: os dados vêm lembrados.
+    const v = await avaliar(aba, `(() => {
+        document.getElementById('pedidoNovo').click();
         const b = document.querySelector('.lista-repetir');
         if (!b) return { falta: true };
         b.click();
-        return { itens: document.querySelectorAll('.lista-item').length,
-                 contador: document.getElementById('listaContador').textContent }; })()`);
+        const itens = document.querySelectorAll('.lista-item').length;
+        document.getElementById('listaContinuar').click();
+        return { itens, cartao: !document.getElementById('pedidoQuem').hidden, campos: document.getElementById('pedidoCampos').hidden,
+                 empresa: document.getElementById('pedidoQuemEmpresa').textContent, foco: document.activeElement.id };
+    })()`);
     if (v.falta) throw new Error('não apareceu o botão de repetir pedido');
-    if (v.itens !== 1 || v.contador !== '1') throw new Error('o repetir não devolveu a lista: ' + JSON.stringify(v));
+    if (v.itens !== 2) throw new Error('o repetir não devolveu a lista: ' + JSON.stringify(v));
+    if (!v.cartao || !v.campos || v.foco !== 'pedidoEnviar') throw new Error('o segundo pedido não veio com o cliente lembrado: ' + JSON.stringify(v));
     if (aba.erros.length) throw new Error('console com erro: ' + aba.erros[0]);
 });
 

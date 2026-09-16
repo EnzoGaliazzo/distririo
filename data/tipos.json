@@ -1,0 +1,522 @@
+{
+  "_leiame": "Seção e tipo de cada produto, para o funil de filtros da loja. Todo produto de data/produtos.json precisa aparecer em \"produtos\" com um tipo que exista em \"secoes\": o build reprova se faltar. O tipo diz o que o produto é (goma, suco, vitamina), não a marca.",
+  "secoes": [
+    {
+      "id": "doces",
+      "titulo": "Doces e gomas",
+      "tipos": [
+        {
+          "id": "gomas",
+          "titulo": "Gomas de mascar"
+        },
+        {
+          "id": "balas",
+          "titulo": "Balas e pastilhas"
+        },
+        {
+          "id": "chocolates",
+          "titulo": "Chocolates e bombons"
+        },
+        {
+          "id": "biscoitos",
+          "titulo": "Biscoitos"
+        }
+      ]
+    },
+    {
+      "id": "barras",
+      "titulo": "Barras e snacks",
+      "tipos": [
+        {
+          "id": "barras-cereais",
+          "titulo": "Barras de cereais"
+        },
+        {
+          "id": "frutas",
+          "titulo": "Frutas e barras de fruta"
+        },
+        {
+          "id": "castanhas",
+          "titulo": "Castanhas e crocantes"
+        },
+        {
+          "id": "barras-proteina",
+          "titulo": "Barras de proteína"
+        },
+        {
+          "id": "snacks-salgados",
+          "titulo": "Snacks salgados"
+        }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "titulo": "Bebidas e energéticos",
+      "tipos": [
+        {
+          "id": "energeticos",
+          "titulo": "Energéticos"
+        },
+        {
+          "id": "sucos",
+          "titulo": "Sucos e néctares"
+        },
+        {
+          "id": "refrescos",
+          "titulo": "Refrescos"
+        },
+        {
+          "id": "agua-de-coco",
+          "titulo": "Água de coco"
+        }
+      ]
+    },
+    {
+      "id": "mercearia",
+      "titulo": "Mercearia",
+      "tipos": [
+        {
+          "id": "mel",
+          "titulo": "Mel"
+        },
+        {
+          "id": "geleias",
+          "titulo": "Geleias"
+        },
+        {
+          "id": "azeitonas",
+          "titulo": "Azeitonas"
+        },
+        {
+          "id": "molhos",
+          "titulo": "Molhos"
+        },
+        {
+          "id": "cereais",
+          "titulo": "Cereais e granolas"
+        }
+      ]
+    },
+    {
+      "id": "nutricao",
+      "titulo": "Nutrição e suplementos",
+      "tipos": [
+        {
+          "id": "vitaminas",
+          "titulo": "Vitaminas e minerais"
+        },
+        {
+          "id": "propolis",
+          "titulo": "Própolis"
+        },
+        {
+          "id": "proteinas",
+          "titulo": "Proteínas e shakes"
+        },
+        {
+          "id": "esportivos",
+          "titulo": "Creatina e esportivos"
+        },
+        {
+          "id": "oleos",
+          "titulo": "Óleos e ômegas"
+        },
+        {
+          "id": "colageno",
+          "titulo": "Colágeno e ácido hialurônico"
+        },
+        {
+          "id": "extratos",
+          "titulo": "Extratos vegetais"
+        },
+        {
+          "id": "outros-suplementos",
+          "titulo": "Outros suplementos"
+        }
+      ]
+    },
+    {
+      "id": "cuidados",
+      "titulo": "Cuidados pessoais",
+      "tipos": [
+        {
+          "id": "hidratantes",
+          "titulo": "Hidratantes e óleos"
+        },
+        {
+          "id": "rosto",
+          "titulo": "Rosto e acne"
+        },
+        {
+          "id": "protecao-solar",
+          "titulo": "Proteção solar"
+        },
+        {
+          "id": "pes",
+          "titulo": "Pés"
+        },
+        {
+          "id": "body-splash",
+          "titulo": "Body splash e esfoliantes"
+        },
+        {
+          "id": "labial",
+          "titulo": "Protetor labial"
+        },
+        {
+          "id": "antipiolho",
+          "titulo": "Antipiolho"
+        }
+      ]
+    },
+    {
+      "id": "limpeza",
+      "titulo": "Limpeza",
+      "tipos": [
+        {
+          "id": "lava-roupas",
+          "titulo": "Lava-roupas"
+        },
+        {
+          "id": "sabao",
+          "titulo": "Sabão em barra"
+        }
+      ]
+    }
+  ],
+  "produtos": {
+    "trident-5s": "gomas",
+    "trident-14s": "gomas",
+    "trident-bag": "gomas",
+    "trident-xsenses-garrafa": "gomas",
+    "trident-xsenses-5s": "gomas",
+    "chiclets": "gomas",
+    "trident-max": "gomas",
+    "trident-max-cool-raspberry": "gomas",
+    "bubbaloo-gum": "gomas",
+    "bubbaloo-balas": "balas",
+    "bubbaloo-balas-pote": "balas",
+    "halls": "balas",
+    "halls-bag": "balas",
+    "tang": "refrescos",
+    "tang-edicao-limitada": "refrescos",
+    "oreo": "biscoitos",
+    "mini-oreo": "biscoitos",
+    "oreo-original": "biscoitos",
+    "oreo-chocolate": "biscoitos",
+    "club-social-snack": "biscoitos",
+    "club-social-regular": "biscoitos",
+    "club-social-integral": "biscoitos",
+    "club-social-snack-sul-sp": "biscoitos",
+    "5star": "chocolates",
+    "wafer-lacta-oreo": "chocolates",
+    "sonho-de-valsa-e-ouro-branco": "chocolates",
+    "lacta-obrigado": "chocolates",
+    "lacta": "chocolates",
+    "lacta-recheados": "chocolates",
+    "bis": "chocolates",
+    "bis-10": "chocolates",
+    "bis-xtra": "chocolates",
+    "tabuas-intense": "chocolates",
+    "baly-tradicional": "energeticos",
+    "baly-tropical": "energeticos",
+    "baly-maca-verde": "energeticos",
+    "baly-melancia": "energeticos",
+    "baly-morango-e-pessego": "energeticos",
+    "baly-coco-e-acai": "energeticos",
+    "baly-tadaly": "energeticos",
+    "baly-uva-verde": "energeticos",
+    "baly-abacaxi-com-hortela": "energeticos",
+    "baly-amora-com-hortela": "energeticos",
+    "baly-freegells": "energeticos",
+    "baly-summer-loko": "energeticos",
+    "baly-celebre-champagne": "energeticos",
+    "baly-celebre-floripa": "energeticos",
+    "baly-celebre-caipirinha": "energeticos",
+    "baly-tradicional-sem-acucar": "energeticos",
+    "baly-tropical-sem-acucar": "energeticos",
+    "baly-maca-verde-sem-acucar": "energeticos",
+    "baly-uva-verde-sem-acucar": "energeticos",
+    "baly-melancia-sem-acucar": "energeticos",
+    "baly-morango-e-pessego-sem-acucar": "energeticos",
+    "baly-amora-com-hortela-sem-acucar": "energeticos",
+    "baly-redragon": "energeticos",
+    "baly-pro-tropical": "energeticos",
+    "baly-pro-morango-e-pessego": "energeticos",
+    "baly-pro-banana": "energeticos",
+    "baly-free-tradicional": "energeticos",
+    "baly-free-maca-verde": "energeticos",
+    "baly-kids-tutti-frutti": "refrescos",
+    "baly-kids-laranja": "refrescos",
+    "baly-kids-melancia": "refrescos",
+    "baly-kids-morango": "refrescos",
+    "baly-kids-uva": "refrescos",
+    "energetico-cereja-baly-sem-acucar": "energeticos",
+    "energetico-baly-cereja": "energeticos",
+    "agua-de-coco": "agua-de-coco",
+    "agua-de-coco-garrafa-turma-da-monica": "agua-de-coco",
+    "suco-de-acerola": "sucos",
+    "suco-de-caja": "sucos",
+    "suco-de-caju": "sucos",
+    "suco-de-goiaba": "sucos",
+    "suco-de-graviola": "sucos",
+    "suco-de-uva": "sucos",
+    "suco-sumo-acai": "sucos",
+    "nectar-marata-caju": "sucos",
+    "nectar-marata-laranja": "sucos",
+    "nectar-marata-pessego": "sucos",
+    "nectar-marata-uva": "sucos",
+    "nectar-marata-maracuja": "sucos",
+    "flocao-de-milho-marata": "cereais",
+    "refresco-mara-tinho-abacaxi": "refrescos",
+    "refresco-mara-tinho-laranja": "refrescos",
+    "refresco-mara-tinho-maracuja": "refrescos",
+    "refresco-mara-tinho-morango": "refrescos",
+    "refresco-mara-tinho-uva": "refrescos",
+    "molho-gota-alho": "molhos",
+    "molho-gota-ingles": "molhos",
+    "molho-gota-pimenta": "molhos",
+    "molho-gota-pimenta-verde": "molhos",
+    "azeitona-verde-sache-fatiada": "azeitonas",
+    "azeitona-preta-sache-fatiada": "azeitonas",
+    "azeitona-verde-gordal-vidro-c-caroco": "azeitonas",
+    "azeitonas-verde-fatiadas-balde": "azeitonas",
+    "azeitonas-verde-sem-caroco-balde": "azeitonas",
+    "azeitonas-verde-media-balde": "azeitonas",
+    "azeitona-verde-sache-c-caroco": "azeitonas",
+    "azeitona-verde-sache-s-caroco": "azeitonas",
+    "trio-avela-e-castanha-com-chocolate": "barras-cereais",
+    "trio-banana-aveia-e-mel": "barras-cereais",
+    "trio-brigadeiro": "barras-cereais",
+    "trio-coco-com-chocolate": "barras-cereais",
+    "trio-morango-com-chocolate": "barras-cereais",
+    "trio-original-avela-e-castanha-com-chocolate": "barras-cereais",
+    "trio-original-banana-aveia-e-mel": "barras-cereais",
+    "trio-original-brigadeiro": "barras-cereais",
+    "trio-original-morango-com-chocolate": "barras-cereais",
+    "trio-zero-banana-com-chocolate": "barras-cereais",
+    "trio-zero-morango-com-chocolate": "barras-cereais",
+    "granola-tradicional": "cereais",
+    "granola-frutas-e-mel": "cereais",
+    "granola-banana-e-mel": "cereais",
+    "granola-chocolate-e-amendoim": "cereais",
+    "granola-castanha": "cereais",
+    "granola-zero": "cereais",
+    "geleia-baldoni-abacaxi-c-pimenta": "geleias",
+    "geleia-baldoni-frutas-amarelas": "geleias",
+    "geleia-baldoni-frutas-vermelhas": "geleias",
+    "geleia-baldoni-morango": "geleias",
+    "mel-turma-da-monica-organico": "mel",
+    "mel-turma-da-monica-laranjeira": "mel",
+    "mel-chef-bisnaga-chefao": "mel",
+    "mel-chef-bisnaga": "mel",
+    "mel-organico-bisnaga": "mel",
+    "mel-holanda-bisnaga": "mel",
+    "detergente-em-po-ace-sache": "lava-roupas",
+    "detergente-em-po-ace-cartucho": "lava-roupas",
+    "detergente-em-po-espumil-premium-cartucho": "lava-roupas",
+    "lava-roupas-liquido-espumil": "lava-roupas",
+    "sabao-em-pedra-espumil-coco": "sabao",
+    "sabao-em-pedra-espumil-glicerinado-neutro": "sabao",
+    "supino-barra-de-banana-com-cobertura-de-chocolate-ao-leite": "frutas",
+    "supino-barra-de-banana-com-cobertura-de-chocolate-branco": "frutas",
+    "supino-zero-barra-de-banana-com-cobertura-de-chocolate-ao-le": "frutas",
+    "supino-zero-barra-de-banana-com-cobertura-de-chocolate-branc": "frutas",
+    "supino-barra-de-banana-e-ameixa": "frutas",
+    "supino-barra-de-banana-nozes-e-damasco": "frutas",
+    "supino-barra-de-banana-maca-e-canela": "frutas",
+    "supino-barra-de-banana-e-acai": "frutas",
+    "supino-barra-de-banana-e-morango": "frutas",
+    "supino-barra-de-banana-e-abacaxi": "frutas",
+    "nuts-barra-de-castanhas-amendoim-e-abacaxi": "castanhas",
+    "nuts-barra-de-castanhas-amendoim-e-frutas-vermelhas": "castanhas",
+    "nuts-barra-de-castanhas-amendoim-banana-e-canela": "castanhas",
+    "nuts-barra-de-castanhas-amendoim-e-sementes": "castanhas",
+    "nuts-barra-de-castanhas-amendoim-e-frutas": "castanhas",
+    "nuts-barra-de-castanhas-e-amendoim-com-cobertura-de-chocolat": "castanhas",
+    "nuts-barra-de-castanhas-amendoim-e-coco-com-cobertura-de-cho": "castanhas",
+    "nuts-barra-de-castanhas-e-amendoim-com-cobertura-de-morango": "castanhas",
+    "nuts-barra-de-castanhas-e-pasta-de-amendoim-com-cobertura-de": "castanhas",
+    "pe-de-moleque-barra-crocante-de-amendoim-tradicional": "castanhas",
+    "pe-de-moleque-barra-crocante-de-amendoim-caramelo-salgado": "castanhas",
+    "protein-napolitano": "barras-proteina",
+    "protein-torta-de-limao": "barras-proteina",
+    "protein-cookies-cream": "barras-proteina",
+    "protein-banoffee": "barras-proteina",
+    "protein-vegano-pasta-de-amendoim-e-caramelo-salgado": "barras-proteina",
+    "supino-protein-baunilha-com-crispies": "barras-proteina",
+    "supino-protein-coco": "barras-proteina",
+    "supino-protein-cappuccino": "barras-proteina",
+    "supino-protein-chocolate": "barras-proteina",
+    "supino-protein-max-amendoim-e-caramelo": "barras-proteina",
+    "levitta-barra-crocante-de-gergelim-e-linhaca": "castanhas",
+    "levitta-barra-crocante-de-gergelim-quinoa-e-cacau": "castanhas",
+    "levitta-barra-crocante-de-gergelim-e-chia": "castanhas",
+    "levitta-barra-crocante-de-gergelim-e-castanha-de-caju": "castanhas",
+    "so-frutas-original": "frutas",
+    "so-frutas-coco": "frutas",
+    "so-frutas-cacau-e-especiarias": "frutas",
+    "banana-passa": "frutas",
+    "nutsbites-bombom-de-castanhas-pasta-de-amendoim-e-caramelo-c": "castanhas",
+    "nutsbites-bombom-de-castanhas-amendoim-e-frutas-com-cobertur": "castanhas",
+    "nutsbites-vegano-bombom-de-castanhas-amendoim-nibs-de-cacau-": "castanhas",
+    "banana-brasil-kids-barra-de-banana-e-melancia-com-cobertura-": "frutas",
+    "banana-brasil-kids-barra-de-banana-com-cobertura-de-chocolat": "frutas",
+    "banana-brasil-kids-barra-de-banana-com-cobertura-de-chocolat-2": "frutas",
+    "banana-brasil-kids-barra-de-banana-e-uva-com-cobertura-de-uv": "frutas",
+    "banana-brasil-kids-barra-de-banana-e-morango-com-cobertura-d": "frutas",
+    "frutalala-barra-de-frutas-maca-e-morango": "frutas",
+    "frutalala-barra-de-frutas-banana-e-maca": "frutas",
+    "frutalala-barra-de-frutas-salada-de-frutas": "frutas",
+    "granoba-barra-de-granola-e-morango-com-cobertura-de-iogurte": "barras-cereais",
+    "granoba-barra-de-granola-com-cobertura-de-chocolate": "barras-cereais",
+    "granoba-barra-de-granola-banana-e-maca-com-cobertura-de-iogu": "barras-cereais",
+    "proteya-barra-de-proteina-leitinho-com-cookies": "barras-proteina",
+    "proteya-barra-de-proteina-chocolate": "barras-proteina",
+    "proteya-barra-de-proteina-iogurte-de-morango": "barras-proteina",
+    "supino-protein-morango": "barras-proteina",
+    "supino-protein-cookies": "barras-proteina",
+    "barra-mini-pouch-nuts-meio-amargo": "castanhas",
+    "barra-mini-pouch-nuts-ao-leite": "castanhas",
+    "powerdrol": "esportivos",
+    "l-arginina-plus": "esportivos",
+    "curcuma-premium": "extratos",
+    "colageno-tipo-ii": "colageno",
+    "feno-grego-premium": "extratos",
+    "maca-peruana-premium": "extratos",
+    "extrato-de-laranja-moro-premium": "extratos",
+    "multi-vitaminainico-hemovital-a-z": "vitaminas",
+    "boro-decahidratado": "vitaminas",
+    "complexo-b-max": "vitaminas",
+    "biotina-plus": "vitaminas",
+    "coenzima-q10-pro": "outros-suplementos",
+    "hialux-skincare": "colageno",
+    "procran-cranberry": "extratos",
+    "colageno-hidrolisado": "colageno",
+    "coenzima-q10-ultra": "outros-suplementos",
+    "cromo-picolinato": "vitaminas",
+    "luteina-zeaxantina": "outros-suplementos",
+    "triptoflex": "outros-suplementos",
+    "melatonina-liquida": "outros-suplementos",
+    "melatonina-premium": "outros-suplementos",
+    "amora-miura-amorine": "extratos",
+    "oleo-de-primula": "oleos",
+    "magnesio-dimalato": "vitaminas",
+    "omega-3-ultra": "oleos",
+    "omega-3-pro": "oleos",
+    "propolis-defense": "propolis",
+    "vitamina-c-500": "vitaminas",
+    "vitamina-k2-mk7": "vitaminas",
+    "msm-enxofre-organico": "outros-suplementos",
+    "vitamina-b12": "vitaminas",
+    "cobre-quelato-bisglicinato": "vitaminas",
+    "vitamina-d3-k2": "vitaminas",
+    "vitamina-d3-2-000-ui": "vitaminas",
+    "ferro-quelato-bisglicinato": "vitaminas",
+    "ora-pro-nobis": "extratos",
+    "metilfolax-600mcg": "vitaminas",
+    "oleo-de-alho-desodorizado": "oleos",
+    "zinco-quelato-bisglicinato": "vitaminas",
+    "resveratrol": "extratos",
+    "beta-glucana-premium": "outros-suplementos",
+    "magnesio-inositol": "vitaminas",
+    "calcio-citrato-malato": "vitaminas",
+    "cloreto-de-magnesio-p-a": "vitaminas",
+    "vitamina-a": "vitaminas",
+    "licopeno-de-tomate": "extratos",
+    "vitamina-b12-liquida": "vitaminas",
+    "nac-n-acetil-l-cisteina": "outros-suplementos",
+    "vitamina-d3-liquida": "vitaminas",
+    "quadrimag-quadri4tech": "vitaminas",
+    "treonato-treotech": "vitaminas",
+    "fiberliv-7-fontes-de-fibra": "outros-suplementos",
+    "cafeina-caffeine-performance": "esportivos",
+    "creatina-monohidratada": "esportivos",
+    "glutamina-100-pura": "esportivos",
+    "extrato-de-propolis": "propolis",
+    "oleo-de-semente-de-abobora": "oleos",
+    "cranberry": "extratos",
+    "total-efa": "oleos",
+    "kit-scudo-p": "antipiolho",
+    "body-splash-vanilla": "body-splash",
+    "body-splash-melancia": "body-splash",
+    "body-splash-maracuja": "body-splash",
+    "body-splash-pitaya": "body-splash",
+    "esfoliante-corporal-vanilla": "body-splash",
+    "esfoliante-corporal-melancia": "body-splash",
+    "esfoliante-corporal-maracuja": "body-splash",
+    "esfoliante-corporal-pitaya": "body-splash",
+    "hidratante-facial-e-corporal-para-pele-extrasseca": "hidratantes",
+    "hidratante-corporal-para-pele-extrasseca": "hidratantes",
+    "hidratante-corporal-para-pele-seca": "hidratantes",
+    "hidratante-corporal-q10-e-vitamina-c": "hidratantes",
+    "hidratante-corporal-rosa-mosqueta": "hidratantes",
+    "oleo-de-rosa-mosqueta-puro": "hidratantes",
+    "oleo-de-rosa-mosqueta": "hidratantes",
+    "creme-facial-clareador-de-rosa-mosqueta": "rosto",
+    "creme-facial-preventivo-as-rugas-de-rosa-mosqueta": "rosto",
+    "sabonete-facial-vitamina-c-e-acido-hialuronico": "rosto",
+    "serum-facial-vitamina-c": "rosto",
+    "protetor-solar-facial-vitamina-c": "protecao-solar",
+    "protetor-solar-facial-em-creme": "protecao-solar",
+    "protetor-solar-corporal-em-spray": "protecao-solar",
+    "protetor-solar-facial-fps-80-cor-de-base-bege-natural": "protecao-solar",
+    "protetor-solar-facial-fps-80-cor-de-base-bege-medio": "protecao-solar",
+    "gel-refrescante-pos-sol": "protecao-solar",
+    "sabonete-facial-antibacteriano": "rosto",
+    "locao-tonica-adstringente": "rosto",
+    "gel-secativo-para-espinhas-roll-on": "rosto",
+    "bastao-secativo-para-espinhas": "rosto",
+    "kit-antiacne": "rosto",
+    "locao-para-afinar-os-pes-milagre-dos-pes": "pes",
+    "creme-ultra-hidratante-para-os-pes": "pes",
+    "creme-para-hidratar-e-afinar-os-pes": "pes",
+    "gel-esfoliante-para-os-pes": "pes",
+    "nanopropolis-propolis-verde": "propolis",
+    "mel-tradicional-bisnaga-tampa-cone": "mel",
+    "propolis-2000-extrato-de-propolis-verde-em-capsulas": "propolis",
+    "propoflex-ap60-extrato-de-propolis-verde": "propolis",
+    "propoflex-extrato-de-propolis-verde": "propolis",
+    "relampago-energetico": "energeticos",
+    "protetor-labial-manteiga-de-cacau-com-propolis": "labial",
+    "mantex-manteiga-de-cacau-com-acido-hialuronico": "labial",
+    "spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-ge": "propolis",
+    "spray-para-garganta-extrato-de-propolis-mel-menta-malva-e-ro": "propolis",
+    "balas-diet-halfresh-morango-com-nanopropolis": "balas",
+    "balas-diet-halfresh-mentol-com-nanopropolis": "balas",
+    "balas-diet-halfresh-gengibre-com-nanopropolis": "balas",
+    "propoflex-extrato-aquoso-de-propolis": "propolis",
+    "propoflex-extrato-de-propolis": "propolis",
+    "nanopropolis-extrato-de-propolis-vermelho": "propolis",
+    "propoflex-kids-xarope-mel-propolis": "propolis",
+    "propoflex-kids-propolis": "propolis",
+    "propoflex-kids-propolis-morango": "propolis",
+    "mel-apisvida": "mel",
+    "propoflex-kids-spray-tutti-frutti": "propolis",
+    "mel-organico-sache": "mel",
+    "b-proteica-pistache-com-chocolate-branco": "barras-proteina",
+    "choklers-crisp-caramelo-com-chocolate": "barras-proteina",
+    "choklers-crisp-cookies": "barras-proteina",
+    "choklers-morango-com-nibs-de-cacau": "barras-proteina",
+    "choklers-banoffe": "barras-proteina",
+    "mix-nutri-snack-bacon": "snacks-salgados",
+    "mix-nutri-snack-4-queijos": "snacks-salgados",
+    "mix-nutri-snack-requeijao": "snacks-salgados",
+    "choklers-chocrante": "barras-proteina",
+    "choklers-cookies": "barras-proteina",
+    "choklers-cheesecake": "barras-proteina",
+    "choklers-pistache": "barras-proteina",
+    "mix-nutri-snack-barbecue": "snacks-salgados",
+    "creatina-100": "esportivos",
+    "creatina-100-monohidratada": "esportivos",
+    "diet-shake-baunilha-nutrilatina": "proteinas",
+    "diet-shake-chocolate-nutrilatina": "proteinas",
+    "diet-shake-banana-nutrilatina": "proteinas",
+    "diet-shake-morango-nutrilatina": "proteinas",
+    "whey-sache-baunilha-nutrilatina": "proteinas",
+    "whey-sache-chocolate-belga-nutrilatina": "proteinas",
+    "100-whey-banoffe": "proteinas",
+    "100-whey-cookies-and-cream": "proteinas",
+    "100-whey-chocolate-e-avela": "proteinas"
+  }
+}

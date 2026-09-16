@@ -26,6 +26,34 @@ const gravar = (p, txt) => {
 };
 
 const dados = JSON.parse(ler('data/produtos.json'));
+
+// Seção e tipo de cada produto, para o funil da loja. Mora fora do
+// produtos.json de propósito: aquele arquivo pode ser refeito a partir da
+// exportação do ERP, e a classificação feita à mão se perderia junto.
+const tipos = JSON.parse(ler('data/tipos.json'));
+const tipoPorId = new Map();
+tipos.secoes.forEach(sec => sec.tipos.forEach(t =>
+    tipoPorId.set(t.id, { id: t.id, titulo: t.titulo, secao: sec.id })));
+(function conferirTipos() {
+    const semTipo = dados.produtos.filter(p => !tipos.produtos[p.id]).map(p => p.id);
+    const tipoInvalido = Object.entries(tipos.produtos)
+        .filter(([, t]) => !tipoPorId.has(t)).map(([id, t]) => id + ' → ' + t);
+    if (semTipo.length || tipoInvalido.length) {
+        throw new Error('data/tipos.json desatualizado.' +
+            (semTipo.length ? ' Produto sem tipo: ' + semTipo.join(', ') + '.' : '') +
+            (tipoInvalido.length ? ' Tipo que não existe em "secoes": ' + tipoInvalido.join(', ') + '.' : ''));
+    }
+    const existe = new Set(dados.produtos.map(p => p.id));
+    const sobra = Object.keys(tipos.produtos).filter(id => !existe.has(id));
+    if (sobra.length) console.warn('data/tipos.json cita produto que saiu do catálogo: ' + sobra.join(', '));
+})();
+const tipoDe = p => tipoPorId.get(tipos.produtos[p.id]);
+
+// "Sem açúcar adicionado" só quando o próprio texto do produto diz: sem açúcar,
+// sem adição de açúcares, zero açúcar. "Baixo teor de açúcar" e o nome "Diet"
+// sozinho não bastam — o selo não pode dizer mais do que a embalagem.
+const RE_SEM_ACUCAR = /sem (adi[cç][aã]o de )?a[cç][uú]car(es)?|zero a[cç][uú]car|0% a[cç][uú]car|\b3x zero\b/i;
+const semAcucar = p => RE_SEM_ACUCAR.test(p.nome + ' ' + (p.descricao || ''));
 const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const semAcento = s => String(s == null ? '' : s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -134,6 +162,8 @@ function cartao(p, indice, base) {
     const linhas = [
         '<article class="product-card" data-name="' + esc(p.nome) + '" data-desc="' + esc(textoBusca(p)) + '"' +
             ' data-marca="' + esc(p.marca || '') + '" data-cat="' + esc(p.categoria) + '"' +
+            ' data-secao="' + tipoDe(p).secao + '" data-tipo="' + tipoDe(p).id + '"' +
+            (semAcucar(p) ? ' data-sem-acucar="1"' : '') +
             ' data-foto="' + (p.img ? 'sim' : 'nao') + '"' +
             (p.skus && p.skus.length ? ' data-sku="' + esc(p.skus.join(' ')) + '"' : '') + '>',
         '    <a class="product-card-link" href="' + base + 'produto/' + p.id + '.html">',
@@ -168,56 +198,94 @@ function cartao(p, indice, base) {
     return indentar(linhas.join('\n'), 20);
 }
 
-// Painel de filtros: marca e categoria, montados a partir do
-// próprio catálogo para nunca desencontrar dele.
+// Painel de filtros em funil: seção → tipo, e marca. Tudo montado a partir do
+// próprio catálogo para nunca desencontrar dele. As contagens daqui são as do
+// catálogo inteiro; o app.js refaz cada uma a cada escolha.
 function montarFiltros() {
-    const marcas = [...new Set(dados.produtos.map(p => p.marca).filter(Boolean))]
-        .sort((a, b) => a.localeCompare(b, 'pt'));
+    const conta = (lista, chave) => lista.reduce((m, p) => m.set(chave(p), (m.get(chave(p)) || 0) + 1), new Map());
+    const porSecao = conta(dados.produtos, p => tipoDe(p).secao);
+    const porTipo = conta(dados.produtos, p => tipoDe(p).id);
+    const porMarca = conta(dados.produtos.filter(p => p.marca), p => p.marca);
+    const totalSemAcucar = dados.produtos.filter(semAcucar).length;
 
-    const opcoesMarca = marcas
-        .map(m => '                    <option value="' + esc(m) + '">' + esc(m) + '</option>')
-        .join('\n');
+    // Nome, pontilhado de sumário e contagem: a linha lê como o índice de um
+    // catálogo impresso. A palavra "produtos" existe só para o leitor de tela,
+    // senão ele anuncia "Doces e gomas 34" sem dizer 34 de quê.
+    const opcao = (atributos, titulo, n, extra) =>
+        '<button type="button" class="funil-opcao' + (extra || '') + '" ' + atributos + ' aria-pressed="false">' +
+        '<span class="funil-nome">' + esc(titulo) + '</span>' +
+        '<span class="funil-guia" aria-hidden="true"></span>' +
+        '<span class="funil-n"><span class="funil-n-valor">' + n + '</span><span class="so-leitor">' + (n === 1 ? ' produto' : ' produtos') + '</span></span>' +
+        '<span class="funil-tirar" aria-hidden="true">&times;</span>' +
+        '</button>';
 
-    const opcoesCategoria = dados.categorias
-        .map(c => '                    <option value="' + c.id + '">' + esc(c.titulo) +
-            ' (' + (porCategoria.get(c.id) || []).length + ')</option>')
-        .join('\n');
+    const linhasSecao = tipos.secoes.map(sec =>
+        '                    ' + opcao('data-secao="' + sec.id + '"', sec.titulo, porSecao.get(sec.id) || 0));
+
+    // Todos os tipos já saem no HTML; o app.js mostra só os da seção escolhida.
+    const linhasTipo = [];
+    tipos.secoes.forEach(sec => sec.tipos.forEach(t => {
+        linhasTipo.push('                    ' +
+            opcao('data-tipo="' + t.id + '" data-secao-do-tipo="' + sec.id + '" hidden', t.titulo, porTipo.get(t.id) || 0));
+    }));
+
+    // Marcas da maior para a menor: fechado, o painel mostra as seis que mais
+    // têm produto, e "Ver as N marcas" abre o resto. No celular é trilho de
+    // rolar de lado e aparecem todas.
+    const MARCAS_FECHADO = 6;
+    const marcas = [...porMarca.entries()]
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'pt'));
+    const linhasMarca = marcas.map(([m, n], i) =>
+        '                ' + opcao('data-marca="' + esc(m) + '"', m, n, i >= MARCAS_FECHADO ? ' funil-extra' : ''));
 
     return [
         '        <aside class="filtros" aria-label="Filtrar o catálogo">',
         // Quem navega por teclado cai no painel antes do catálogo e teria de
         // passar por todos os campos para chegar no primeiro produto.
         '            <a class="filtros-pular" href="#resultados">Pular para os resultados</a>',
-        '            <h2 class="filtros-titulo">Filtrar</h2>',
-        '            <div class="filtros-campos">',
-        '                <label class="filtro">',
-        '                    <span>Marca</span>',
-        '                    <select id="filtroMarca">',
-        '                        <option value="">Todas as marcas</option>',
-        opcoesMarca.replace(/^ {20}/gm, '                        '),
-        '                    </select>',
-        '                </label>',
-        '                <label class="filtro">',
-        '                    <span>Categoria</span>',
-        '                    <select id="filtroCategoria">',
-        '                        <option value="">Todas as categorias</option>',
-        opcoesCategoria.replace(/^ {20}/gm, '                        '),
-        '                    </select>',
-        '                </label>',
+        '            <div class="filtros-topo">',
+        '                <h2 class="filtros-titulo">Filtrar</h2>',
+        // O número muda a cada escolha; quem fala é o #searchStatus, então este
+        // fica fora do leitor de tela para não anunciar duas vezes.
+        '                <p class="filtros-total" aria-hidden="true"><span id="filtrosTotal">' + dados.produtos.length + '</span> produtos</p>',
+        '                <button type="button" class="filtro-limpar" id="limparFiltros" aria-label="Limpar filtros" hidden>Limpar</button>',
+        '            </div>',
+        '            <div class="funil" id="funil">',
+        // Seção e tipo dividem o mesmo trilho no celular: escolhida a seção, ela
+        // encolhe para uma etiqueta e os tipos dela seguem na mesma linha.
+        '                <div class="funil-trilho">',
+        '                <div class="funil-etapa funil-secao" role="group" aria-labelledby="funilSecaoRotulo">',
+        '                    <p class="funil-rotulo" id="funilSecaoRotulo">Seção</p>',
+        ...linhasSecao,
+        '                </div>',
+        '                <div class="funil-etapa funil-tipo" role="group" aria-labelledby="funilTipoRotulo" hidden>',
+        '                    <p class="funil-rotulo" id="funilTipoRotulo">Tipo</p>',
+        ...linhasTipo,
+        '                </div>',
+        '                </div>',
+        '                <div class="funil-etapa funil-marca" role="group" aria-labelledby="funilMarcaRotulo">',
+        '                <p class="funil-rotulo" id="funilMarcaRotulo">Marca</p>',
+        ...linhasMarca,
+        '                <button type="button" class="funil-mais" id="funilMaisMarcas" aria-expanded="false">' +
+            'Ver as ' + marcas.length + ' marcas</button>',
+        '                </div>',
+        '                <div class="funil-ajustes">',
+        '                    <label class="funil-sem-acucar">',
+        '                        <input type="checkbox" id="filtroSemAcucar">',
+        '                        <span class="funil-nome">Sem açúcar adicionado</span>',
+        '                        <span class="funil-n"><span id="semAcucarN">' + totalSemAcucar + '</span><span class="so-leitor"> produtos</span></span>',
+        '                    </label>',
         // O catálogo nasce agrupado por linha de produto, que é como o depósito
         // pensa. Quem procura um nome específico pensa em ordem alfabética.
-        '                <label class="filtro">',
-        '                    <span>Ordem</span>',
-        '                    <select id="filtroOrdem">',
-        '                        <option value="">Como no catálogo</option>',
-        '                        <option value="az">Nome (A–Z)</option>',
-        '                        <option value="za">Nome (Z–A)</option>',
-        '                    </select>',
-        '                </label>',
-        // O "Só produtos com foto" saiu quando o catálogo passou a ter foto em
-        // quase tudo: filtrava 5 de 338 cartões. O app.js já trata o campo
-        // ausente, então voltar com ele é só recolocar o label aqui.
-        '                <button type="button" class="filtro-limpar" id="limparFiltros" hidden>Limpar filtros</button>',
+        '                    <label class="filtro filtro-ordem">',
+        '                        <span>Ordem</span>',
+        '                        <select id="filtroOrdem">',
+        '                            <option value="">Ordem do catálogo</option>',
+        '                            <option value="az">Nome (A–Z)</option>',
+        '                            <option value="za">Nome (Z–A)</option>',
+        '                        </select>',
+        '                    </label>',
+        '                </div>',
         '            </div>',
         '            <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>',
         '        </aside>',

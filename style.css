@@ -3910,14 +3910,13 @@ main {
 }
 
 /* =====================================================================
-   Painel de filtros do catálogo
-   ===================================================================== */
-
-/* =====================================================================
-   Catálogo: filtros na coluna da esquerda
-   A faixa horizontal grudava no topo e comia altura de tela justamente na
-   página onde o visitante precisa dela para ver produto. Em coluna, fica à
-   vista o tempo todo sem disputar espaço com a grade.
+   Catálogo: o funil na coluna da esquerda
+   Seção, tipo e marca, uma escolha por etapa. Cada opção é uma linha de
+   índice de catálogo impresso — nome, pontilhado, quantidade em mono — e a
+   escolhida fica carimbada. Os tipos pendem da seção por uma faixa âmbar, a
+   marcação de piso do depósito. No celular as mesmas opções viram trilhos de
+   etiquetas que rolam de lado, em linhas de altura fixa: abrir um link já
+   filtrado não empurra a grade.
    ===================================================================== */
 
 .catalogo-layout {
@@ -3925,7 +3924,7 @@ main {
     margin: 0 auto;
     padding: 1.5rem 1.5rem 0;
     display: grid;
-    grid-template-columns: 250px minmax(0, 1fr);
+    grid-template-columns: 276px minmax(0, 1fr);
     gap: 2.5rem;
     align-items: start;
 }
@@ -3934,20 +3933,21 @@ main {
     position: sticky;
     top: calc(var(--header-total) + 1rem);
     z-index: 21;
-    background: var(--white);
-    border: 1px solid var(--gray-300);
-    border-radius: var(--radius);
-    padding: 1.25rem;
-    box-shadow: var(--shadow);
-    /* Se um dia entrar mais filtro do que cabe na tela, o painel rola por
-       dentro em vez de esconder o de baixo. */
+    background: var(--papel);
+    border: 1px solid var(--linha);
+    border-radius: var(--r-1);
+    padding: var(--e-4) var(--e-4) var(--e-5);
+    box-shadow: var(--el-1);
+    /* Com as marcas abertas o painel passa da altura da tela: rola por dentro
+       em vez de esconder o de baixo. */
     max-height: calc(100vh - var(--header-total) - 2rem);
     overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
 /* "Pular para os resultados": fica fora da tela até receber o foco, igual ao
    "pular para o conteúdo" do topo. Quem usa teclado cai no painel de filtros
-   antes do catálogo e teria de passar por todos os campos para ver o primeiro
+   antes do catálogo e teria de passar por todas as opções para ver o primeiro
    produto. */
 .filtros-pular {
     position: absolute;
@@ -3990,18 +3990,6 @@ main {
     outline: none;
 }
 
-.filtros-titulo {
-    font-family: var(--font-body);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--texto-fraco);
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--gray-300);
-}
-
 /* A grade já dá o respiro; a seção do catálogo não repete a margem nem o
    limite de largura de uma seção solta. */
 .catalogo-layout .section-catalog {
@@ -4014,93 +4002,315 @@ main {
     padding-top: 0;
 }
 
-.filtros-campos {
+/* Só para leitor de tela: a palavra "produtos" depois do número de cada opção
+   e o aviso falado do resultado, que na tela já é o número do topo. */
+.so-leitor,
+.filtros .search-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* --- topo: placa do painel e quantidade que sobrou --- */
+.filtros-topo {
+    display: flex;
+    align-items: baseline;
+    gap: var(--e-3);
+    padding-bottom: var(--e-3);
+    margin-bottom: var(--e-4);
+    border-bottom: 2px solid var(--carbono);
+}
+
+.filtros-titulo {
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--carbono);
+}
+
+.filtros-total {
+    margin-left: auto;
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    letter-spacing: 0.02em;
+    color: var(--grafite);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.filtros-total span {
+    font-size: var(--t-200);
+    font-weight: 600;
+    color: var(--carbono);
+}
+
+.filtro-limpar {
+    font: inherit;
+    font-size: var(--t-100);
+    font-weight: 600;
+    color: var(--sinal-forte);
+    background: transparent;
+    border: 0;
+    padding: var(--e-1) 0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.filtro-limpar:hover {
+    color: var(--carbono);
+}
+
+/* --- etapas --- */
+.funil {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-5);
+}
+
+.funil-trilho {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-3);
+}
+
+.funil-etapa {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 1rem;
+    gap: 1px;
+    min-width: 0;
+}
+
+.funil-rotulo {
+    margin-bottom: var(--e-2);
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--grafite-claro);
+}
+
+/* O tipo mora dentro da seção escolhida: a faixa âmbar é a pista de piso que
+   liga um ao outro. É o único uso da cor no painel. */
+.funil.tem-secao .funil-tipo {
+    margin-left: var(--e-2);
+    padding-left: var(--e-3);
+    border-left: 3px solid var(--faixa);
+}
+
+.funil-opcao {
+    display: flex;
+    align-items: baseline;
+    gap: var(--e-2);
+    width: 100%;
+    min-height: 32px;
+    padding: 6px var(--e-2);
+    border: 0;
+    border-radius: var(--r-1);
+    background: transparent;
+    font: inherit;
+    font-size: var(--t-200);
+    line-height: 1.3;
+    color: var(--carbono);
+    text-align: left;
+    cursor: pointer;
+}
+
+.funil-opcao:hover {
+    background: var(--papel-2);
+}
+
+.funil-nome {
+    min-width: 0;
+}
+
+/* Pontilhado de sumário: liga o nome à quantidade, como no índice de um
+   catálogo de papel. */
+.funil-guia {
+    flex: 1 1 12px;
+    min-width: 12px;
+    border-bottom: 2px dotted var(--linha-forte);
+}
+
+.funil-n {
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    font-variant-numeric: tabular-nums;
+    color: var(--grafite);
+    white-space: nowrap;
+}
+
+.funil-tirar {
+    display: none;
+}
+
+/* Escolhida: carimbo. Tocar de novo desfaz, e o × diz isso. */
+.funil-opcao[aria-pressed="true"] {
+    background: var(--carimbo-fraco);
+    color: var(--carimbo-forte);
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--carimbo);
+    padding-left: calc(var(--e-2) + 3px);
+}
+
+.funil-opcao[aria-pressed="true"] .funil-guia {
+    border-bottom-color: var(--carimbo);
+    opacity: 0.35;
+}
+
+.funil-opcao[aria-pressed="true"] .funil-n {
+    color: var(--carimbo-forte);
+}
+
+.funil-opcao[aria-pressed="true"] .funil-tirar {
+    display: inline-block;
+    align-self: center;
+    font-family: var(--font-body);
+    font-size: 1.15em;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--carimbo);
+}
+
+.funil-opcao[aria-pressed="true"]:hover .funil-tirar {
+    color: var(--sinal-forte);
+}
+
+.funil-mais {
+    align-self: flex-start;
+    margin-top: var(--e-1);
+    padding: var(--e-1) var(--e-2);
+    border: 0;
+    background: transparent;
+    font: inherit;
+    font-size: var(--t-100);
+    font-weight: 600;
+    color: var(--carimbo);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.funil-mais:hover {
+    color: var(--carimbo-forte);
+}
+
+/* --- ajustes: sem açúcar e ordem --- */
+.funil-ajustes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-4);
+    padding-top: var(--e-4);
+    border-top: 1px solid var(--linha);
+}
+
+.funil-sem-acucar {
+    display: flex;
+    align-items: center;
+    gap: var(--e-2);
+    font-size: var(--t-200);
+    color: var(--carbono);
+    cursor: pointer;
+}
+
+.funil-sem-acucar input {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--carimbo);
+    cursor: pointer;
+}
+
+.funil-sem-acucar .funil-n {
+    margin-left: auto;
+}
+
+.funil-sem-acucar:has(input:disabled) {
+    color: var(--grafite-claro);
+    cursor: default;
+}
+
+.funil-sem-acucar input:disabled {
+    cursor: default;
+}
+
+/* "Ordem do catálogo", "Nome (A–Z)": a opção já diz o que é; o rótulo fica só
+   para o leitor de tela. */
+.filtro-ordem > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
 }
 
 .filtro {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: var(--e-1);
     min-width: 0;
 }
 
 .filtro > span {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--texto-fraco);
+    color: var(--grafite-claro);
 }
 
 .filtro select {
     font: inherit;
-    font-size: 0.92rem;
-    color: var(--dark);
-    background: var(--white);
-    border: 1px solid var(--gray-300);
-    border-radius: 10px;
-    padding: 0.55rem 0.7rem;
+    font-size: var(--t-200);
+    color: var(--carbono);
+    background: var(--branco-puro);
+    border: 1px solid var(--linha);
+    border-radius: var(--r-1);
+    padding: 0.5rem 0.6rem;
     width: 100%;
     cursor: pointer;
 }
 
 .filtro select:hover {
-    border-color: var(--texto-fraco);
+    border-color: var(--linha-forte);
 }
 
-.filtro-marcavel {
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
+/* Fechado, o painel mostra as seis marcas que mais têm produto. Só no
+   computador: no celular o trilho rola de lado e todas cabem.
+
+   No computador o funil também fica invisível até o app.js aplicar o que veio
+   no endereço: chegando por "loja.html?secao=doces", a coluna pintava aberta e
+   encolhia em seguida, e o bloco de baixo subia (CLS 0,016). Sem JS o filtro
+   nem funciona, então esperar por ele é honesto. No celular não precisa: lá as
+   linhas têm altura fixa. */
+@media (min-width: 1001px) {
+    .funil:not(.marcas-abertas) .funil-extra {
+        display: none;
+    }
+
+    .filtros:not(.funil-pronto) .funil,
+    .filtros:not(.funil-pronto) .filtros-total {
+        visibility: hidden;
+    }
 }
 
-.filtro-marcavel span {
-    font-size: 0.9rem;
-    color: var(--texto-suave);
-    text-transform: none;
-    letter-spacing: 0;
-    font-weight: 600;
-}
-
-.filtro-marcavel input {
-    width: 17px;
-    height: 17px;
-    accent-color: var(--red);
-    cursor: pointer;
-}
-
-.filtro-limpar {
-    align-self: stretch;
-    text-align: center;
-    font: inherit;
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--red-text);
-    background: transparent;
-    border: 1px solid var(--gray-300);
-    border-radius: var(--r-1);
-    padding: 0.6rem 0.95rem;
-    cursor: pointer;
-}
-
-.filtro-limpar:hover {
-    border-color: var(--red);
-    background: var(--white);
-}
-
-.filtros .search-status {
-    margin: 0.6rem 0 0;
-}
-
-/* A barra de categorias deixa de ser sticky: quem fixa agora é o painel,
-   e duas faixas grudadas no topo comiam metade da tela no celular. */
-/* Abaixo de 1000 px não cabe coluna lateral: o painel volta para o topo,
-   compacto, e o catálogo ocupa a largura toda. */
+/* Abaixo de 1000 px não cabe coluna lateral: o painel volta para o topo e o
+   funil vira trilhos de etiquetas. Cada trilho é uma linha só, de altura fixa,
+   e os tipos entram no mesmo trilho da seção — escolher não acrescenta linha,
+   então chegar por um link já filtrado não empurra a grade para baixo. */
 @media (max-width: 1000px) {
     .catalogo-layout {
         grid-template-columns: minmax(0, 1fr);
@@ -4109,52 +4319,166 @@ main {
         padding-top: 1rem;
     }
 
+    /* O painel vira grade de linhas fixas: quantidade, ordem e "Limpar" na
+       primeira; a barra; o trilho de seção e tipo; o de marcas; o "sem
+       açúcar". Os invólucros saem da frente (display: contents) para as peças
+       caírem direto nas linhas — são divs sem papel para o leitor de tela; os
+       grupos com role ficam de fora disso. */
     .filtros {
+        position: relative;
         max-height: none;
         overflow: visible;
-        padding: 1rem;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        grid-template-areas:
+            "total ordem limpar"
+            "barra barra barra"
+            "trilho trilho trilho"
+            "marca marca marca"
+            "acucar acucar acucar";
+        align-items: center;
+        gap: var(--e-2) var(--e-3);
+        padding: var(--e-2) var(--e-4) var(--e-3);
     }
 
-    /* No topo da página o painel se explica sozinho, e cada pixel de altura
-       aqui é pixel a menos de produto na primeira tela. */
+    .filtros::before {
+        content: "";
+        grid-area: barra;
+        height: 2px;
+        background: var(--carbono);
+    }
+
+    .filtros-topo,
+    .funil,
+    .funil-ajustes {
+        display: contents;
+    }
+
     .filtros-titulo {
         display: none;
     }
 
-    .filtros-campos {
+    .filtros-pular:focus {
+        position: absolute;
+        top: var(--e-2);
+        left: var(--e-4);
+        z-index: 2;
+    }
+
+    .filtros-total {
+        grid-area: total;
+        margin-left: 0;
+    }
+
+    .filtro-ordem {
+        grid-area: ordem;
+        min-width: 0;
+    }
+
+    .filtro-ordem select {
+        font-size: var(--t-100);
+        min-height: 44px;
+    }
+
+    .filtro-limpar {
+        grid-area: limpar;
+        min-height: 44px;
+        padding: 0 var(--e-1);
+    }
+
+    .funil-trilho {
+        grid-area: trilho;
+        min-height: 48px;
+    }
+
+    .funil-marca {
+        grid-area: marca;
+        min-height: 48px;
+    }
+
+    .funil-sem-acucar {
+        grid-area: acucar;
+        justify-self: start;
+    }
+
+    .funil-trilho,
+    .funil-marca {
         flex-direction: row;
-        flex-wrap: wrap;
-        align-items: flex-end;
-        gap: 0.75rem 1rem;
+        align-items: center;
+        gap: var(--e-2);
+        overflow-x: auto;
+        scrollbar-width: none;
+        /* o trilho encosta nas bordas da tela: a etiqueta cortada na ponta é o
+           aviso de que dá para rolar */
+        margin: 0 calc(var(--e-4) * -1);
+        padding: 2px var(--e-4);
     }
 
-    .filtros-campos > .filtro {
-        flex: 1 1 200px;
+    .funil-trilho::-webkit-scrollbar,
+    .funil-marca::-webkit-scrollbar {
+        display: none;
     }
 
-    .filtros-campos > .filtro-marcavel,
-    .filtros-campos > .filtro-limpar {
-        flex: 0 0 auto;
-        align-self: center;
-    }
-}
-
-@media (max-width: 720px) {
-    .catalogo-layout {
-        padding-left: 1rem;
-        padding-right: 1rem;
+    .funil-trilho .funil-etapa {
+        flex: none;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--e-2);
     }
 
-    .filtros {
-        padding: 0.9rem 1rem;
+    .funil-secao .funil-rotulo,
+    .funil-tipo .funil-rotulo,
+    .funil-mais {
+        display: none;
     }
 
-    .filtros-campos > .filtro {
-        flex: 1 1 100%;
+    .funil.tem-secao .funil-tipo {
+        margin-left: 0;
+        padding-left: var(--e-2);
     }
 
-    .filtros-campos {
-        gap: 0.6rem 0.75rem;
+    .funil-marca .funil-rotulo {
+        flex: none;
+        margin: 0 var(--e-1) 0 0;
+    }
+
+    .funil-opcao {
+        flex: none;
+        width: auto;
+        min-height: 44px;
+        align-items: center;
+        padding: 0 var(--e-3);
+        border: 1px solid var(--linha);
+        background: var(--branco-puro);
+        white-space: nowrap;
+    }
+
+    .funil-opcao:hover {
+        background: var(--branco-puro);
+        border-color: var(--linha-forte);
+    }
+
+    .funil-guia {
+        display: none;
+    }
+
+    .funil-opcao[aria-pressed="true"] {
+        border-color: var(--carimbo);
+        box-shadow: none;
+        padding-left: var(--e-3);
+    }
+
+    .funil-opcao[aria-pressed="true"]:hover {
+        background: var(--carimbo-fraco);
+        border-color: var(--carimbo);
+    }
+
+    .funil-sem-acucar {
+        min-height: 44px;
+        padding: 0 var(--e-3);
+        border: 1px solid var(--linha);
+        border-radius: var(--r-1);
+        background: var(--branco-puro);
     }
 }
 
@@ -4711,6 +5035,204 @@ a.service-item {
 
 body.lista-aberta {
     overflow: hidden;
+}
+
+/* --- etapas do painel: a lista, quem está pedindo, o pedido pronto ---
+   Continua sendo o bloco de pedido: primeiro vem o cabeçalho da nota (para
+   quem é), depois o código carimbado. A mesma gaveta, sem modal por cima. */
+.lista-etapa {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.pedido-corpo {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-4);
+    padding: var(--e-4) 1.25rem var(--e-5);
+}
+
+.pedido-resumo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--e-3);
+    padding-bottom: var(--e-2);
+    border-bottom: 1px dashed var(--linha);
+}
+
+.pedido-resumo-texto {
+    font-family: var(--font-dado);
+    font-size: var(--t-100);
+    color: var(--carbono);
+    font-variant-numeric: tabular-nums;
+}
+
+.pedido-link {
+    min-height: 44px;
+    font-size: var(--t-100);
+    font-weight: 600;
+    color: var(--carimbo);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.pedido-link:hover {
+    color: var(--carimbo-forte);
+}
+
+/* Cabeçalho de nota: para quem é o pedido. */
+.pedido-quem {
+    padding: var(--e-3) var(--e-4) var(--e-1);
+    border: 1px solid var(--linha-forte);
+    border-left: 3px solid var(--carbono);
+    border-radius: var(--r-1);
+    background: var(--papel);
+}
+
+.pedido-quem-rotulo,
+.pedido-legenda {
+    padding: 0;
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--grafite-claro);
+}
+
+.pedido-quem-empresa {
+    margin-top: var(--e-1);
+    font-family: var(--font-display);
+    font-size: var(--t-400);
+    line-height: 1.2;
+    color: var(--carbono);
+    overflow-wrap: anywhere;
+}
+
+.pedido-quem-detalhe {
+    margin-top: var(--e-1);
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    line-height: 1.6;
+    color: var(--grafite);
+    overflow-wrap: anywhere;
+}
+
+.pedido-campos {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-3);
+}
+
+.pedido-legenda {
+    margin-bottom: var(--e-1);
+}
+
+.pedido-form .form-field input,
+.pedido-form .form-field textarea {
+    border-radius: var(--r-1);
+    background: var(--branco-puro);
+    /* 16px: abaixo disso o Safari do iPhone dá zoom no campo ao tocar */
+    font-size: 16px;
+}
+
+.pedido-form .form-field textarea {
+    min-height: 64px;
+}
+
+/* CNPJ e telefone são dado: a voz de documento do site. */
+.pedido-form input[name="cnpj"],
+.pedido-form input[name="phone"] {
+    font-family: var(--font-dado);
+    font-size: 15px;
+    letter-spacing: 0.02em;
+}
+
+.pedido-lembrar {
+    margin: 0;
+}
+
+.pedido-lgpd {
+    margin-top: var(--e-2);
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--grafite);
+}
+
+.pedido-lgpd a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* Pedido pronto: o código carimbado é o que os dois lados vão citar. */
+.pedido-codigo {
+    align-self: flex-start;
+    margin-top: var(--e-2);
+    padding: var(--e-1) var(--e-3);
+    border: 2px solid var(--carimbo);
+    border-radius: var(--r-1);
+    font-family: var(--font-dado);
+    font-size: var(--t-500);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--carimbo);
+    transform: rotate(-1.5deg);
+}
+
+.pedido-pronto-titulo {
+    font-family: var(--font-display);
+    font-size: var(--t-500);
+    line-height: 1.15;
+    color: var(--carbono);
+}
+
+.pedido-pronto-titulo:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.pedido-pronto-texto {
+    font-size: var(--t-200);
+    line-height: 1.5;
+    color: var(--grafite);
+}
+
+.pedido-copia {
+    font-size: var(--t-100);
+    color: var(--grafite);
+}
+
+.pedido-copia-ok {
+    color: var(--stamp);
+    font-weight: 600;
+}
+
+.pedido-copia-erro {
+    color: var(--sinal-forte);
+    font-weight: 600;
+}
+
+.pedido-pronto-itens {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px dashed var(--linha);
+}
+
+.pedido-pronto-itens li {
+    padding: var(--e-2) 0;
+    border-bottom: 1px dashed var(--linha);
+    font-size: var(--t-200);
+    color: var(--carbono);
 }
 
 @media (max-width: 460px) {
