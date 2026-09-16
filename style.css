@@ -811,49 +811,122 @@ main {
     display: none;
 }
 
+/* Diretório de corredor: linha cheia, não cartão. O olho desce pela lista
+   como quem lê a placa na entrada do depósito. */
 .services {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--linha);
 }
 
 .service-item {
-    background: var(--white);
-    border: 1px solid var(--gray-300);
-    border-top: 4px solid var(--red);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    flex: 1 1 260px;
-    min-width: 0;
-    max-width: 320px;
-    box-shadow: var(--shadow);
-    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+    align-items: start;
+    column-gap: var(--e-4);
+    row-gap: var(--e-1);
+    padding: var(--e-5) var(--e-3) var(--e-5) var(--e-4);
+    border-bottom: 1px solid var(--linha);
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: background var(--ms-2) var(--ease-firme);
 }
 
-.service-item:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
+/* A barra vermelha entra pela esquerda, como a etiqueta de corredor sendo
+   apontada. Substitui o salto de 6px que todo cartão do site fazia. */
+.service-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--red);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--ms-2) var(--ease-firme);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .service-item:hover {
+        background: var(--papel-2);
+    }
+}
+
+.service-item:hover::before,
+.service-item:focus-visible::before {
+    transform: scaleY(1);
 }
 
 .service-item h3 {
-    color: var(--red);
-    margin-bottom: 0.5rem;
+    grid-column: 2;
+    font-family: var(--font-display);
+    font-size: var(--t-500);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--dark);
+    margin: 0;
+}
+
+.service-item p {
+    grid-column: 2;
+    max-width: 46em;
+    color: var(--texto-suave);
+    font-size: var(--t-200);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.service-item-link {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: center;
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--red-text);
+    white-space: nowrap;
+}
+
+.service-item-link::after {
+    content: " \2192";
 }
 
 .service-item-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    margin-bottom: 1rem;
-    border-radius: 14px;
-    background: var(--gray-100);
-    color: var(--red);
-    line-height: 1;
-    transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--linha);
+    background: var(--branco-puro);
+    color: var(--red-text);
 }
+
+@media (max-width: 640px) {
+    .service-item {
+        grid-template-columns: 2.25rem minmax(0, 1fr);
+        padding: var(--e-4) var(--e-2) var(--e-4) var(--e-3);
+    }
+
+    .service-item-link {
+        grid-column: 2;
+        grid-row: auto;
+        margin-top: var(--e-1);
+    }
+
+    .service-item-icon {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+}
+
 
 .service-item-icon .icon {
     width: 26px;
@@ -1399,37 +1472,78 @@ main {
     color: var(--texto-suave);
 }
 
+/* Folha de dados: etiqueta à esquerda, afirmação e prova à direita. Nada de
+   cartão — a informação aqui é tabular, e tabela não flutua. */
 .proof-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
+    display: grid;
+    gap: 0;
+    border-top: 3px solid var(--dark);
 }
 
 .proof-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    flex: 1 1 300px;
-    min-width: 0;
-    max-width: 340px;
-    box-shadow: var(--shadow);
-    border-left: 4px solid var(--red);
-    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    display: grid;
+    grid-template-columns: 13rem minmax(0, 1fr);
+    gap: var(--e-2) var(--e-5);
+    align-items: baseline;
+    padding: var(--e-5) 0;
+    border-bottom: 1px solid var(--linha);
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    border-left: none;
+    max-width: none;
 }
 
 .proof-fact {
-    display: inline-block;
-    font-family: var(--font-display);
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: start;
+    display: block;
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--red-dark);
-    background: var(--gray-100);
-    padding: 0.25rem 0.6rem;
-    border-radius: var(--r-1);
-    margin-bottom: 0.8rem;
+    color: var(--red-text);
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    margin: 0;
+    line-height: 1.5;
 }
+
+.proof-card h3 {
+    grid-column: 2;
+    font-family: var(--font-display);
+    font-size: var(--t-500);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--dark);
+    margin: 0;
+}
+
+.proof-card p {
+    grid-column: 2;
+    max-width: 52em;
+    color: var(--texto-suave);
+    line-height: 1.55;
+    margin: 0;
+}
+
+@media (max-width: 720px) {
+    .proof-card {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--e-2);
+        padding: var(--e-4) 0;
+    }
+
+    .proof-fact,
+    .proof-card h3,
+    .proof-card p {
+        grid-column: 1;
+        grid-row: auto;
+    }
+}
+
 
 .proof-card h3 {
     font-size: 1.08rem;
