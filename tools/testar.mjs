@@ -108,6 +108,9 @@ async function novaAba(nav, { largura = 1280, altura = 860, celular = false } = 
     const { sessionId } = await nav.envia('Target.attachToTarget', { targetId, flatten: true });
     const aba = { sessionId, targetId, browserContextId, erros: [] };
     aba.cmd = (m, p) => nav.envia(m, p || {}, sessionId);
+    // Uma aba por teste, um ouvinte por aba: sem isto o Node avisa de vazamento
+    // a partir da décima.
+    if (typeof nav.ws.setMaxListeners === 'function') nav.ws.setMaxListeners(0);
     nav.ws.addEventListener('message', (ev) => {
         const msg = JSON.parse(typeof ev.data === 'string' ? ev.data : Buffer.from(ev.data).toString());
         if (msg.sessionId !== sessionId) return;
@@ -187,6 +190,25 @@ teste('filtro de marca muda a contagem da loja', async (nav) => {
         s.value = op.value; s.dispatchEvent(new Event('change', { bubbles: true }));
         return { antes, depois: document.querySelectorAll('.product-card:not([hidden])').length, marca: op.value }; })()`);
     if (!(r.depois > 0 && r.depois < r.antes)) throw new Error('filtro não filtrou: ' + JSON.stringify(r));
+});
+
+teste('filtro vai para o endereço e volta ao abrir o link', async (nav) => {
+    const aba = await novaAba(nav);
+    await ir(aba, '/loja.html');
+    const marca = await avaliar(aba, `(() => { const s = document.getElementById('filtroMarca');
+        const op = [...s.options].find(o => o.value && o.value.length > 2);
+        s.value = op.value; s.dispatchEvent(new Event('change', { bubbles: true })); return op.value; })()`);
+    await espera(700);
+    const url = await avaliar(aba, 'location.search');
+    if (!url.includes('marca=')) throw new Error('filtro não foi para o endereço: ' + url);
+    const aba2 = await novaAba(nav);
+    await ir(aba2, '/loja.html' + url);
+    await espera(900);
+    const r = await avaliar(aba2, `({ marca: document.getElementById('filtroMarca').value,
+        visiveis: document.querySelectorAll('.product-card:not([hidden])').length,
+        total: document.querySelectorAll('.product-card').length })`);
+    if (r.marca !== marca) throw new Error('o link não restaurou o filtro');
+    if (!(r.visiveis > 0 && r.visiveis < r.total)) throw new Error('o link não filtrou: ' + JSON.stringify(r));
 });
 
 teste('lista de pedido soma item e monta a mensagem do WhatsApp', async (nav) => {

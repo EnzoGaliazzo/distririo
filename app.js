@@ -1123,10 +1123,34 @@
             return visiveis;
         }
 
+        // O endereço guarda a busca e os filtros, então dá para mandar
+        // "loja.html?marca=Baly%20Brasil" para um cliente e ele abrir a loja já
+        // filtrada. Antes só a busca ia para a URL, e o resto se perdia.
+        function sincronizarEndereco() {
+            var f = filtrosAtivos();
+            var p = new URLSearchParams();
+            var termo = campo ? campo.value.trim() : '';
+            if (termo) p.set('q', termo);
+            if (f.marca) p.set('marca', f.marca);
+            if (f.categoria) p.set('cat', f.categoria);
+            if (f.soComFoto) p.set('foto', '1');
+            var busca = p.toString();
+            history.replaceState(null, '', 'loja.html' + (busca ? '?' + busca : '') + window.location.hash);
+        }
+
         var parametros = new URLSearchParams(window.location.search);
         var consulta = (parametros.get('q') || '').trim();
-        if (campo && consulta) {
-            campo.value = consulta;
+        var marcaInicial = parametros.get('marca') || '';
+        var categoriaInicial = parametros.get('cat') || '';
+        if (campo && consulta) campo.value = consulta;
+        if (selMarca && marcaInicial && [].some.call(selMarca.options, function (o) { return o.value === marcaInicial; })) {
+            selMarca.value = marcaInicial;
+        }
+        if (selCategoria && categoriaInicial && [].some.call(selCategoria.options, function (o) { return o.value === categoriaInicial; })) {
+            selCategoria.value = categoriaInicial;
+        }
+        if (chkFoto && parametros.get('foto') === '1') chkFoto.checked = true;
+        if (consulta || selMarca && selMarca.value || selCategoria && selCategoria.value || chkFoto && chkFoto.checked) {
             filtrar(consulta, true);
         }
 
@@ -1135,11 +1159,11 @@
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 filtrar(campo.value, true);
-                history.replaceState(null, '', 'loja.html' + (campo.value ? '?q=' + encodeURIComponent(campo.value) : ''));
+                sincronizarEndereco();
             });
         }
         if (campo) {
-            campo.addEventListener('input', debounce(function () { filtrar(campo.value, false); }, 140));
+            campo.addEventListener('input', debounce(function () { filtrar(campo.value, false); sincronizarEndereco(); }, 140));
 
             // Mede o termo depois que a pessoa para de digitar, não a cada
             // tecla — senão "propolis" viraria oito eventos.
@@ -1163,6 +1187,7 @@
             if (!ctrl) return;
             ctrl.addEventListener('change', function () {
                 filtrar(campo ? campo.value : '', true);
+                sincronizarEndereco();
                 var f = filtrosAtivos();
                 medir('filtro_usado', {
                     filtro: ctrl.id === 'filtroMarca' ? 'marca'
@@ -1182,6 +1207,7 @@
                 if (chkFoto) chkFoto.checked = false;
                 if (campo) campo.value = '';
                 filtrar('', false);
+                sincronizarEndereco();
                 rolarAte(document.querySelector('.filtros') || 0);
             });
         }
