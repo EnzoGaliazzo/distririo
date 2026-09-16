@@ -549,7 +549,7 @@ button {
 /* Category quick links (loja.html) */
 /* ===== Hero ===== */
 .hero {
-    text-align: center;
+    text-align: left;
 }
 
 .hero-compact {
@@ -721,10 +721,10 @@ button {
 }
 
 .hero p {
-    max-width: 620px;
-    margin: 0 auto;
+    max-width: 38em;
+    margin: 0;
     color: var(--texto-suave);
-    font-size: 1.05rem;
+    font-size: var(--t-400);
 }
 
 .btn {
@@ -3554,7 +3554,8 @@ main {
     display: grid;
     grid-template-columns: 16rem minmax(0, 38rem);
     gap: var(--e-7);
-    justify-content: center;
+    /* começa na mesma borda do título da página, não no centro da coluna */
+    justify-content: start;
     align-items: start;
 }
 
@@ -3653,7 +3654,7 @@ main {
     display: grid;
     grid-template-columns: minmax(0, 38rem) minmax(0, 22rem);
     gap: var(--e-7);
-    justify-content: center;
+    justify-content: start;
     align-items: start;
 }
 
@@ -3684,6 +3685,33 @@ main {
     .candidatura-duvidas {
         position: static;
     }
+}
+
+/* =====================================================================
+   Contato — o seletor de assunto alinhado à borda, como documento
+   ===================================================================== */
+.contato-assunto {
+    padding-top: var(--e-5);
+}
+
+.contato-assunto .job-form-card {
+    max-width: 38rem;
+    margin: 0;
+    border-top: 5px solid var(--red);
+    border-radius: var(--r-1);
+    box-shadow: none;
+}
+
+/* Dentro do cartão a placa de seção repetia a tarja de cima: some a barra,
+   fica o título. */
+.contato-assunto .job-form-card h2 {
+    border-top: none;
+    padding-top: 0;
+    font-size: var(--t-500);
+}
+
+.contato-assunto .job-form-card h2::before {
+    display: none;
 }
 
 /* =====================================================================
@@ -4026,24 +4054,29 @@ main {
    Heros das páginas internas, mapa e cards de serviço
    ===================================================================== */
 
-/* A faixa com gradiente virava um bloco pesado no topo de toda página
-   interna sem dizer nada. Vira um título de página, e ponto. */
+/* Cabeça de página: mesma largura e mesmo recuo da .section, para o h1 começar
+   na borda exata onde começam as placas logo abaixo. Centralizado, o título
+   fazia o olho andar em zigue-zague: começava no meio e descia para a margem. */
 .hero {
     background: transparent;
-    padding: 2.5rem 1.5rem 0.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--e-7) 1.5rem var(--e-2);
 }
 
 .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(1.7rem, 4vw, 2.6rem);
-    line-height: 1.12;
+    font-size: var(--t-800);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
     color: var(--dark);
     text-wrap: balance;
+    max-width: 16em;
 }
 
 .hero > p {
-    max-width: 36.57em;
-    margin: 0.8rem auto 0;
+    max-width: 38em;
+    margin: var(--e-4) 0 0;
     color: var(--texto-suave);
 }
 
@@ -4051,12 +4084,15 @@ main {
     margin-top: 1.4rem;
 }
 
-/* A página de cadastro abre invertida: é a única cuja tarefa é o formulário. */
+/* A página de cadastro abre invertida: é a única cuja tarefa é o formulário.
+   O fundo corre a largura toda; o texto fica na mesma coluna das outras
+   páginas, calculada pelo recuo e não por um wrapper extra no HTML. */
 .hero-invertido {
     background: var(--superficie-escura);
     color: var(--sobre-escuro);
-    padding: 3rem 1.5rem;
-    margin-bottom: 2rem;
+    max-width: none;
+    padding: var(--e-7) max(1.5rem, calc((100% - 1100px) / 2 + 1.5rem));
+    margin-bottom: var(--e-6);
 }
 
 /* No celular sobravam 80 px em branco entre a faixa escura do título e o
