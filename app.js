@@ -996,14 +996,39 @@
             ativo = -1;
         }
 
+        // Linhas-fantasma no formato da sugestão, para a espera do índice não
+        // ser uma lista em branco. Só entram se a espera passar de 150 ms.
+        var esperaEsqueleto = null;
+
+        function mostrarEsqueleto() {
+            lista.innerHTML = '';
+            for (var k = 0; k < 3; k++) {
+                var li = document.createElement('li');
+                li.className = 'search-suggestion-fantasma';
+                li.setAttribute('aria-hidden', 'true');
+                li.innerHTML = '<span class="fantasma-foto"></span>' +
+                    '<span class="fantasma-texto"><span></span><span></span></span>';
+                lista.appendChild(li);
+            }
+            lista.setAttribute('aria-busy', 'true');
+            lista.hidden = false;
+        }
+
         function desenhar(termo) {
             var t = normalizar(termo.trim());
+            clearTimeout(esperaEsqueleto);
             lista.innerHTML = '';
             ativo = -1;
 
             if (!t) { fechar(); return; }
 
+            esperaEsqueleto = setTimeout(function () {
+                if (normalizar(campo.value.trim()) === t) mostrarEsqueleto();
+            }, 150);
+
             carregarIndice().then(function (produtos) {
+                clearTimeout(esperaEsqueleto);
+                lista.removeAttribute('aria-busy');
                 if (normalizar(campo.value.trim()) !== t) return;
                 var todos = produtos.filter(function (p) { return p.b.indexOf(t) !== -1; });
                 var alguns = todos.slice(0, 6);
@@ -1063,6 +1088,8 @@
                 lista.hidden = false;
                 campo.setAttribute('aria-expanded', 'true');
             }).catch(function () {
+                clearTimeout(esperaEsqueleto);
+                lista.removeAttribute('aria-busy');
                 if (normalizar(campo.value.trim()) !== t) return;
                 lista.innerHTML = '';
                 var erro = document.createElement('li');
@@ -2024,7 +2051,7 @@
                     return;
                 }
                 cnpj.setCustomValidity('');
-                dizer('Conferindo na Receita...');
+                dizer('Conferindo na Receita', 'carregando');
                 consultarCnpj(digitos).then(function (r) {
                     if (cnpj.value.replace(/\D/g, '') !== digitos) return;
                     if (r.indisponivel) { dizer(''); return; }

@@ -3714,6 +3714,90 @@ main {
     display: none;
 }
 
+
+/* =====================================================================
+   Esperas — os dois pontos em que o site depende da rede
+   ===================================================================== */
+
+/* Linha-fantasma da busca: mesmo formato da sugestão (miniatura de 38px, nome
+   e marca), para o resultado entrar no lugar dela sem a lista pular. */
+.search-suggestion-fantasma {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 1rem;
+}
+
+.fantasma-foto,
+.fantasma-texto span {
+    display: block;
+    background: var(--papel-3);
+    border-radius: var(--r-1);
+}
+
+.fantasma-foto {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+}
+
+.fantasma-texto {
+    display: grid;
+    gap: 6px;
+    flex: 1;
+}
+
+.fantasma-texto span:first-child {
+    height: 10px;
+    width: 62%;
+}
+
+.fantasma-texto span:last-child {
+    height: 8px;
+    width: 34%;
+}
+
+/* Uma varredura só, da esquerda para a direita, como papel passando pela
+   impressora de nota — e não o pisca-pisca cinza de todo esqueleto. Só opacity,
+   e parada para quem pediu menos movimento. */
+@keyframes varredura {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+}
+
+.search-suggestion-fantasma:nth-child(1) .fantasma-texto span { animation: varredura 1.1s var(--ease-firme) infinite; }
+.search-suggestion-fantasma:nth-child(2) .fantasma-texto span { animation: varredura 1.1s var(--ease-firme) 0.12s infinite; }
+.search-suggestion-fantasma:nth-child(3) .fantasma-texto span { animation: varredura 1.1s var(--ease-firme) 0.24s infinite; }
+
+/* Consulta do CNPJ em andamento: o marcador de etiqueta pulsa ao lado do
+   rótulo. É um estado, não uma dica — por isso ganhou forma própria. */
+.form-dica-carregando {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--font-dado);
+    font-size: var(--t-50);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--texto-fraco);
+}
+
+.form-dica-carregando::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background: var(--red);
+    animation: varredura 0.9s var(--ease-firme) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .search-suggestion-fantasma .fantasma-texto span,
+    .form-dica-carregando::before {
+        animation: none;
+    }
+}
+
 /* =====================================================================
    Página 404
    ===================================================================== */
