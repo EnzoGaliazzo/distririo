@@ -3,35 +3,26 @@
 
    As fontes vêm do Google e chegam depois do HTML. Sem isto, quando a fonte
    final entra o texto muda de tamanho e a página anda: o salto medido (CLS)
-   chegava a 0,16 no desktop. Estas três faces não baixam nada — pegam a fonte
+   chegava a 0,16 no desktop. Estas duas faces não baixam nada — pegam a fonte
    que já está no aparelho e a esticam para ocupar exatamente o mesmo espaço da
    fonte final. Números medidos no próprio navegador, comparando a caixa de
    texto de cada família com a da reserva (tools de medição em scratchpad).
    ===================================================================== */
 @font-face {
-    font-family: "Bricolage reserva";
-    src: local("Arial Black"), local("Archivo Black");
-    size-adjust: 88%;
-    ascent-override: 105.7%;
-    descent-override: 30.7%;
+    font-family: "Jakarta reserva";
+    src: local("Arial Bold"), local("Arial"), local("Liberation Sans");
+    size-adjust: 102.1%;
+    ascent-override: 101.9%;
+    descent-override: 21.5%;
     line-gap-override: 0%;
 }
 
 @font-face {
-    font-family: "Instrument reserva";
+    font-family: "Inter reserva";
     src: local("Arial"), local("Helvetica"), local("Liberation Sans");
-    size-adjust: 101.1%;
-    ascent-override: 96%;
-    descent-override: 24.7%;
-    line-gap-override: 0%;
-}
-
-@font-face {
-    font-family: "Martian reserva";
-    src: local("Courier New"), local("Liberation Mono");
-    size-adjust: 116.6%;
-    ascent-override: 85.7%;
-    descent-override: 17.1%;
+    size-adjust: 105.7%;
+    ascent-override: 91.6%;
+    descent-override: 22.9%;
     line-gap-override: 0%;
 }
 
@@ -158,9 +149,9 @@
     --descarga-traco: 0.6s;    /* a linha do "Como funciona" recolhendo (entra em 1,3s) */
 
     /* --- famílias --- */
-    --font-display: "Bricolage Grotesque", "Bricolage reserva", "Arial Black", Arial, sans-serif;
-    --font-body: "Instrument Sans", "Instrument reserva", "Segoe UI", Arial, Helvetica, sans-serif;
-    --font-dado: "Martian Mono", "Martian reserva", "Courier New", ui-monospace, monospace;
+    --font-display: "Plus Jakarta Sans", "Jakarta reserva", Arial, Helvetica, sans-serif;
+    --font-body: "Inter", "Inter reserva", "Segoe UI", Arial, Helvetica, sans-serif;
+    --font-dado: "Inter", "Inter reserva", "Segoe UI", Arial, Helvetica, sans-serif;
 
     /* 68 da barra + 3 da borda vermelha, que é o que o app.js mede depois. */
     --header-h: 71px;
@@ -869,6 +860,7 @@ main {
     grid-row: 1;
     align-self: center;
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -1348,6 +1340,7 @@ main {
 /* A contagem da linha anda com o rótulo, em mono: é dado, não frase. */
 .category-count {
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -1447,6 +1440,7 @@ main {
     padding-top: var(--e-2);
     border-top: 1px dashed var(--linha);
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     font-weight: 600;
     line-height: 1.5;
@@ -1514,6 +1508,7 @@ main {
     align-self: start;
     display: block;
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -1827,6 +1822,7 @@ main {
 .mv-card h3 {
     grid-column: 1;
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     font-weight: 600;
     letter-spacing: 0.06em;
@@ -3286,6 +3282,7 @@ main {
 .hero-razao .stat-number,
 .hero-razao .stat-fixo {
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-400);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
@@ -3574,6 +3571,7 @@ main {
 
 .tira-dados .stat-number {
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-300);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
@@ -3608,6 +3606,7 @@ main {
 
 .ficha-rotulo {
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     font-weight: 600;
     letter-spacing: 0.06em;
@@ -3643,6 +3642,7 @@ main {
     left: 0;
     top: 0.1em;
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-100);
     font-weight: 600;
     line-height: 1.5;
@@ -3816,6 +3816,7 @@ main {
     align-items: center;
     gap: 0.5em;
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     font-weight: 600;
     letter-spacing: 0.04em;
@@ -4029,6 +4030,7 @@ main {
 
 .filtros-titulo {
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -4039,6 +4041,7 @@ main {
 .filtros-total {
     margin-left: auto;
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     letter-spacing: 0.02em;
     color: var(--grafite);
@@ -4093,6 +4096,7 @@ main {
 .funil-rotulo {
     margin-bottom: var(--e-2);
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -4144,6 +4148,7 @@ main {
 
 .funil-n {
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     font-variant-numeric: tabular-nums;
     color: var(--grafite);
@@ -4265,6 +4270,7 @@ main {
 
 .filtro > span {
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -4848,6 +4854,7 @@ a.service-item {
 
 .lista-topo h2 {
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-100);
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -4858,6 +4865,7 @@ a.service-item {
    vazia de propósito, em vez de inventar um número que não existe. */
 .lista-topo .lista-codigo {
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     letter-spacing: 0.04em;
     color: var(--texto-fraco-escuro);
@@ -4911,6 +4919,7 @@ a.service-item {
 
 .lista-item-texto span {
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -5067,6 +5076,7 @@ body.lista-aberta {
 
 .pedido-resumo-texto {
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-100);
     color: var(--carbono);
     font-variant-numeric: tabular-nums;
@@ -5098,6 +5108,7 @@ body.lista-aberta {
 .pedido-legenda {
     padding: 0;
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -5117,6 +5128,7 @@ body.lista-aberta {
 .pedido-quem-detalhe {
     margin-top: var(--e-1);
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-50);
     line-height: 1.6;
     color: var(--grafite);
@@ -5153,6 +5165,7 @@ body.lista-aberta {
 .pedido-form input[name="cnpj"],
 .pedido-form input[name="phone"] {
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: 15px;
     letter-spacing: 0.02em;
 }
@@ -5182,6 +5195,7 @@ body.lista-aberta {
     border: 2px solid var(--carimbo);
     border-radius: var(--r-1);
     font-family: var(--font-dado);
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-500);
     font-weight: 600;
     letter-spacing: 0.04em;

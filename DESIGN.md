@@ -57,22 +57,31 @@ falar com o dono.
 
 ## Tipografia
 
-Três famílias, cada uma com um papel. Nenhuma delas é a Inter, que era o que o
-site usava em 2.620 elementos e é a fonte padrão de todo site gerado.
+Duas famílias, três papéis. A tríade anterior (Bricolage Grotesque + Instrument
+Sans + Martian Mono) lia como página de jornal: display de manchete e mono em
+todo dado davam ar de nota impressa, não de distribuidora moderna. A mono era a
+maior responsável — preço, SKU e quantidade em Martian Mono transformavam cada
+card em cupom fiscal.
 
 | Papel | Família | Por quê |
 |---|---|---|
-| Display | **Bricolage Grotesque** 700 | tem inktrap e largura óptica: personalidade sem virar fonte de cartaz |
-| Corpo | **Instrument Sans** 400/600 | sóbria e muito legível em tela pequena sob sol forte, que é a condição real de quem lê atrás do balcão |
-| Dado | **Martian Mono** 600 | código, quantidade e etiqueta. É a voz do documento |
+| Display | **Plus Jakarta Sans** 700/800 | geométrica com terminais levemente humanistas: firme nos títulos sem o peso de manchete |
+| Corpo | **Inter** 400/500/600 | desenhada para tela, ótima em corpo pequeno sob sol forte, que é a condição de quem lê atrás do balcão |
+| Dado | **Inter** + `tabular-nums` | código, quantidade e preço continuam alinhados em coluna, mas na voz da interface, não na do documento |
 
-Cada uma tem **face de reserva com métrica medida no navegador**
-(`size-adjust`, `ascent-override`, `descent-override`), usando a fonte que já
-está no aparelho. Sem isso, o texto muda de tamanho quando a fonte chega e a
-página anda — era assim que o CLS ia a 0,16.
+O papel "dado" perdeu a família própria e ganhou os numerais tabulares da Inter:
+é o que a mono de fato entregava de útil (dígito de largura fixa, coluna de
+preço que não dança), sem o serifado técnico que puxava para o impresso. O
+`--font-dado` continua existindo como variável, então maiúsculas, tracking e
+tamanho de etiqueta seguem separados do texto corrido.
 
-Só os pesos usados são baixados: 3, não 7. Pedir eixo variável trazia a fonte
-inteira (76 KB só da Bricolage).
+Cada família tem **face de reserva com métrica ajustada** (`size-adjust`,
+`ascent-override`, `descent-override`), usando a fonte que já está no aparelho.
+Sem isso, o texto muda de tamanho quando a fonte chega e a página anda — era
+assim que o CLS ia a 0,16.
+
+Só os pesos usados são baixados. Duas famílias em vez de três também significa
+uma requisição a menos de fonte no caminho crítico.
 
 ### Escala
 
