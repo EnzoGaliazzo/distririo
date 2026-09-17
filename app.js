@@ -1976,6 +1976,12 @@
         return 'DR-' + dois(d.getDate()) + dois(d.getMonth() + 1) + '-' + dois(doDia + 1);
     }
 
+    // Um pedido que mistura as duas operações rende dois códigos irmãos: -M para
+    // a linha Mondelez, -D para as demais marcas.
+    function codigosDoPedido(codigo) {
+        return { apartada: codigo + '-M', demais: codigo + '-D' };
+    }
+
     function guardarPedidoEnviado(lista) {
         if (!lista.length) return null;
         var agora = new Date();
@@ -2014,37 +2020,79 @@
         return i.qtd + 'x ' + i.nome + (i.marca ? ' (' + i.marca + ')' : '');
     }
 
+    // A operação Mondelez é apartada por contrato: catálogo, equipe e atendimento
+    // separados do resto. Então uma lista que mistura as duas nunca vira um pedido
+    // só — ela sai como dois pedidos, com códigos e blocos próprios.
+    var MARCA_APARTADA = 'Mondelez';
+
+    function separarPorOperacao(lista) {
+        var apartada = [], demais = [];
+        lista.forEach(function (i) {
+            ((i.marca || '') === MARCA_APARTADA ? apartada : demais).push(i);
+        });
+        return { apartada: apartada, demais: demais, misturou: !!(apartada.length && demais.length) };
+    }
+
+    function linhasDeItens(lista) {
+        return lista.map(function (i) { return '• ' + linhaDoItem(i); });
+    }
+
+    // Corpo da mensagem: um bloco por operação quando a lista mistura as duas.
+    function linhasPorOperacao(lista, codigos) {
+        var g = separarPorOperacao(lista);
+        if (!g.misturou) return linhasDeItens(lista);
+        return ['*PEDIDO ' + codigos.apartada + ' — ' + MARCA_APARTADA + '*']
+            .concat(linhasDeItens(g.apartada))
+            .concat(['', '*PEDIDO ' + codigos.demais + ' — demais marcas*'])
+            .concat(linhasDeItens(g.demais));
+    }
+
     // Lista para mandar a alguém (sócio, gerente): sem dados de quem pede.
     function montarMensagem(lista) {
-        return cortarMensagem('Olá! Montei uma lista pelo site:\n\n', lista,
+        var g = separarPorOperacao(lista);
+        return cortarMensagem('Olá! Montei uma lista pelo site:\n\n',
+            linhasPorOperacao(lista, { apartada: '1', demais: '2' }),
+            (g.misturou ? '\n\n(' + MARCA_APARTADA + ' roda em operação separada, então vira um pedido à parte.)' : '') +
             '\n\nPode confirmar disponibilidade e as condições?');
     }
 
     // O pedido que vai para o WhatsApp: quem pede, os itens e o código.
     function montarMensagemPedido(lista, codigo, d) {
-        var topo = ['Olá! Pedido ' + codigo + ' pelo site.', ''];
+        var g = separarPorOperacao(lista);
+        var codigos = codigosDoPedido(codigo);
+        var topo = [g.misturou
+            ? 'Olá! Pedidos ' + codigos.apartada + ' e ' + codigos.demais + ' pelo site.'
+            : 'Olá! Pedido ' + codigo + ' pelo site.', ''];
         if (d.company) topo.push('*Empresa:* ' + d.company);
         topo.push('*CNPJ:* ' + d.cnpj, '*Responsável:* ' + d.name, '*WhatsApp:* ' + d.phone);
         if (d.bairro) topo.push('*Entrega:* ' + d.bairro);
         var fim = (d.observacao ? '\n\n*Observação:* ' + d.observacao : '') +
+            (g.misturou ? '\n\nSão dois pedidos separados: ' + MARCA_APARTADA +
+                ' roda em operação própria e é atendido à parte.' : '') +
             '\n\nPode confirmar disponibilidade e as condições?';
-        return cortarMensagem(topo.join('\n') + '\n\n', lista, fim);
+        return cortarMensagem(topo.join('\n') + '\n\n', linhasPorOperacao(lista, codigos), fim);
     }
 
-    function cortarMensagem(cabecalho, lista, rodape) {
-        var linhas = lista.map(function (i) { return '• ' + linhaDoItem(i); });
+    function cortarMensagem(cabecalho, linhas, rodape) {
+        // Só as linhas de item entram na conta do que sobrou: cabeçalho de
+        // operação e linha em branco não são itens e não podem virar 'mais 2 itens'.
+        var ehItem = function (l) { return l.indexOf('• ') === 0; };
+        var itens = linhas.filter(ehItem).length;
 
         var cabem = linhas.length;
         while (cabem > 0) {
+            // Não termina num cabeçalho órfão nem numa linha vazia.
+            while (cabem > 0 && !ehItem(linhas[cabem - 1])) cabem--;
+            if (!cabem) break;
+            var faltam = itens - linhas.slice(0, cabem).filter(ehItem).length;
             var corpo = linhas.slice(0, cabem).join('\n');
-            var sobra = cabem < linhas.length
-                ? '\n\n... e mais ' + (linhas.length - cabem) + ' ' +
-                  (linhas.length - cabem === 1 ? 'item' : 'itens') +
+            var sobra = faltam
+                ? '\n\n... e mais ' + faltam + ' ' + (faltam === 1 ? 'item' : 'itens') +
                   '. Mando o resto aqui na conversa.'
                 : '';
             var texto = cabecalho + corpo + sobra + rodape;
             if (encodeURIComponent(texto).length <= LIMITE_URL) {
-                return { texto: texto, cortou: cabem < linhas.length, cabem: cabem };
+                return { texto: texto, cortou: !!faltam, cabem: itens - faltam };
             }
             cabem--;
         }
@@ -2230,6 +2278,14 @@
         }
 
         caixa.innerHTML = '';
+        // Avisa antes de enviar: a lista misturada vai sair como dois pedidos.
+        if (separarPorOperacao(lista).misturou) {
+            var aviso = document.createElement('p');
+            aviso.className = 'lista-aviso-operacao';
+            aviso.textContent = MARCA_APARTADA + ' roda em operação separada, com equipe e '
+                + 'atendimento próprios. Sua lista segue como dois pedidos.';
+            caixa.appendChild(aviso);
+        }
         lista.forEach(function (item) {
             var li = document.createElement('div');
             li.className = 'lista-item' + (item.id === recemEntrou ? ' acabou-de-entrar' : '');
@@ -2536,10 +2592,19 @@
             var abriu = abrirJanelaWhatsApp(url);
 
             // A cópia leva a lista inteira, sem o corte de tamanho da mensagem.
-            form.subject.value = 'Pedido ' + codigo + ' pelo site - ' + (dados.company || dados.cnpj) +
+            var grupos = separarPorOperacao(lista);
+            var codigos = codigosDoPedido(codigo);
+            form.subject.value = (grupos.misturou
+                ? 'Pedidos ' + codigos.apartada + ' e ' + codigos.demais
+                : 'Pedido ' + codigo) + ' pelo site - ' + (dados.company || dados.cnpj) +
                 ' (' + plural(lista.length, 'item', 'itens') + ')';
-            form.pedido.value = codigo;
-            form.itens.value = lista.map(linhaDoItem).join('\n');
+            form.pedido.value = grupos.misturou ? codigos.apartada + ' + ' + codigos.demais : codigo;
+            form.itens.value = grupos.misturou
+                ? [codigos.apartada + ' — ' + MARCA_APARTADA + ' (operação separada)']
+                    .concat(grupos.apartada.map(linhaDoItem))
+                    .concat(['', codigos.demais + ' — demais marcas'])
+                    .concat(grupos.demais.map(linhaDoItem)).join('\n')
+                : lista.map(linhaDoItem).join('\n');
             form.total_de_itens.value = String(lista.length);
             form.total_de_unidades.value = String(totalItens(lista));
             form.pagina.value = window.location.origin + window.location.pathname;
@@ -2565,7 +2630,9 @@
             }
 
             // Tela de pedido pronto: código, o que foi e o caminho do WhatsApp.
-            document.getElementById('pedidoCodigo').textContent = codigo;
+            document.getElementById('pedidoCodigo').textContent = grupos.misturou
+                ? codigos.apartada + ' e ' + codigos.demais
+                : codigo;
             document.getElementById('pedidoProntoTitulo').textContent = abriu
                 ? 'Pedido aberto no WhatsApp'
                 : 'Pedido pronto para enviar';
@@ -2573,13 +2640,26 @@
                 ? 'Confira a mensagem e toque em enviar no WhatsApp.'
                 : 'Toque no botão abaixo para abrir o WhatsApp com o pedido.') +
                 ' A gente confirma disponibilidade e condições na conversa.' +
+                (grupos.misturou ? ' ' + MARCA_APARTADA + ' roda em operação separada, então segue como pedido à parte.' : '') +
                 (msg.cortou ? ' A mensagem leva os ' + msg.cabem + ' primeiros itens e avisa que o resto segue na conversa.' : '');
             var itensPronto = document.getElementById('pedidoProntoItens');
             itensPronto.textContent = '';
-            lista.forEach(function (i) {
-                var li = document.createElement('li');
-                li.textContent = linhaDoItem(i);
-                itensPronto.appendChild(li);
+            var porGrupo = grupos.misturou
+                ? [{ titulo: codigos.apartada + ' — ' + MARCA_APARTADA, itens: grupos.apartada },
+                   { titulo: codigos.demais + ' — demais marcas', itens: grupos.demais }]
+                : [{ titulo: '', itens: lista }];
+            porGrupo.forEach(function (g) {
+                if (g.titulo) {
+                    var cab = document.createElement('li');
+                    cab.className = 'pedido-pronto-grupo';
+                    cab.textContent = g.titulo;
+                    itensPronto.appendChild(cab);
+                }
+                g.itens.forEach(function (i) {
+                    var li = document.createElement('li');
+                    li.textContent = linhaDoItem(i);
+                    itensPronto.appendChild(li);
+                });
             });
             var zap = document.getElementById('pedidoZap');
             zap.href = url;

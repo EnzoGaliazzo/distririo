@@ -5249,6 +5249,32 @@ body.lista-aberta {
     color: var(--carbono);
 }
 
+/* A operação Mondelez é apartada por contrato, então o pedido pode sair dividido:
+   o cabeçalho de cada bloco precisa se distinguir das linhas de item. */
+.pedido-pronto-itens .pedido-pronto-grupo {
+    font-family: var(--font-display);
+    font-size: var(--t-50);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--red-text);
+    border-bottom: 0;
+    padding-bottom: var(--e-1);
+}
+
+.pedido-pronto-itens .pedido-pronto-grupo:not(:first-child) {
+    padding-top: var(--e-4);
+}
+
+.lista-aviso-operacao {
+    margin: 0 0 var(--e-3);
+    padding: var(--e-2) var(--e-3);
+    border-left: 3px solid var(--red);
+    background: var(--papel-2);
+    font-size: var(--t-100);
+    line-height: 1.5;
+    color: var(--carbono);
+}
+
 @media (max-width: 460px) {
     .lista-flutuante-texto {
         display: none;
