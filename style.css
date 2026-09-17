@@ -3235,101 +3235,128 @@ main {
    Home — a proposta de valor no topo, o banner do fornecedor abaixo
    ===================================================================== */
 
-.hero-texto {
-    text-align: left;
-}
-
-.hero-texto .hero-sub,
-.hero-texto .hero-nota {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.hero-texto .hero-acoes {
-    justify-content: flex-start;
-}
-
-/* Abertura assimétrica: o texto ocupa a coluna larga e a razão do estoque
-   corre na margem direita, separada por uma barra estrutural. No celular a
-   razão vira uma tira horizontal acima do texto, que é onde ela funciona
-   como manchete de quantidade. */
+/* Abertura de apresentação comercial: uma coluna só, no meio da página.
+   Antes o texto abria encostado na esquerda de uma coluna larga e a razão do
+   estoque corria na margem direita com fio tracejado — desenho de matéria de
+   jornal, com o bloco todo fora do eixo. Agora o eixo é o centro: etiqueta,
+   título, resumo e botões alinhados nele, e a contagem virou a régua de provas
+   que fecha a chamada. */
 .hero-principal {
-    max-width: 1180px;
+    max-width: 60rem;
     margin: var(--e-6) auto var(--e-7);
     padding: 0 var(--e-5);
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 15rem;
-    gap: var(--e-7);
-    align-items: start;
+    text-align: center;
 }
 
-.hero-razao {
+/* A régua de provas: os quatro dados em fileira, numa chapa de papel que
+   assenta o fim do bloco. Número em fonte de dado, rótulo embaixo. */
+.hero-provas {
     display: grid;
-    gap: 0;
-    border-top: 5px solid var(--dark);
-    padding-top: var(--e-3);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 44rem;
+    margin: var(--e-6) auto 0;
+    padding: var(--e-4) var(--e-2);
+    border: 1px solid var(--linha);
+    border-radius: var(--r-2);
+    background: var(--papel-2);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: hero-intro 0.6s var(--ease) 0.42s both;
 }
 
-.hero-razao .stat-item {
-    display: grid;
-    grid-template-columns: 4.2em minmax(0, 1fr);
-    align-items: baseline;
-    gap: var(--e-3);
-    padding: var(--e-2) 0;
-    border-bottom: 1px dashed var(--linha);
+.hero-provas .stat-item {
+    min-width: 0;
+    padding: 0 var(--e-3);
+    border-left: 1px solid var(--linha);
 }
 
-.hero-razao .stat-number,
-.hero-razao .stat-fixo {
+.hero-provas .stat-item:first-child {
+    border-left: 0;
+}
+
+.hero-provas .stat-number,
+.hero-provas .stat-fixo {
     font-family: var(--font-dado);
     font-variant-numeric: tabular-nums;
-    font-size: var(--t-400);
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
+    font-size: var(--t-600);
+    font-weight: 700;
     line-height: 1;
     color: var(--dark);
 }
 
-.hero-razao .stat-label {
+.hero-provas .stat-label {
+    margin-top: var(--e-2);
     font-family: var(--font-body);
     font-size: var(--t-100);
-    line-height: 1.25;
-    text-align: right;
-    color: var(--texto-fraco);
+    font-weight: 500;
+    line-height: 1.3;
+    /* Sobre a chapa (--papel-2) o cinza fraco cai para 4,27:1 e reprova o
+       1.4.3 em texto pequeno; o suave da 6,1:1 no mesmo fundo. */
+    color: var(--texto-suave);
 }
 
-@media (max-width: 860px) {
-    .hero-principal {
-        grid-template-columns: 1fr;
-        gap: var(--e-5);
-    }
-
-    /* No celular a contagem vem primeiro: é a prova antes da promessa. */
-    .hero-razao {
-        order: -1;
+/* Duas colunas antes de "Marcas distribuídas" começar a quebrar em três linhas. */
+@media (max-width: 680px) {
+    .hero-provas {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        column-gap: var(--e-5);
+        row-gap: var(--e-4);
+    }
+
+    .hero-provas .stat-item:nth-child(odd) {
+        border-left: 0;
     }
 }
 
 
-/* Num monitor de 900 px de altura, esses 20 px eram o que deixava "Quero ser
-   cliente" e "Ver o catálogo" logo abaixo da primeira tela. */
+/* Num monitor de 900 px de altura, o espaço aqui em cima é o que decide se
+   "Quero ser cliente" e "Ver o catálogo" entram na primeira tela. Eram 0,25 rem,
+   de quando a linha de origem era texto solto: agora que ela tem chapa, colada
+   na faixa escura do marquee parecia grudada nela. 1 rem é o que abre respiro
+   sem empurrar os botões para fora — medido em 1440x900, terminam em 874 px. */
 @media (min-width: 1100px) {
     .hero-principal {
-        margin-top: 0.25rem;
+        margin-top: var(--e-4);
     }
 }
 
+/* A linha de origem virou etiqueta. Solta, em 12 px sem peso, ela parecia
+   legenda esquecida acima do título; com chapa, ponto de sinal e o peso do
+   display, vira o primeiro degrau da hierarquia. Por ser caixa de linha, quem
+   a centraliza é o text-align do bloco.
+
+   inline-block e não inline-flex por causa do celular: ali a etiqueta ocupa a
+   largura toda e quebra em duas linhas, e com flex o ponto de sinal ficava
+   boiando no meio da altura, longe do texto. Em linha ele anda junto com a
+   primeira palavra. */
 .hero-kicker {
+    display: inline-block;
+    margin: 0 auto var(--e-3);
+    padding: var(--e-2) var(--e-4);
+    border: 1px solid var(--linha);
+    border-radius: var(--r-1);
+    background: var(--papel-2);
     font-family: var(--font-display);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
+    font-size: var(--t-100);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1.5;
     text-transform: uppercase;
+    text-wrap: balance;
     color: var(--red-text);
-    margin-bottom: 0.6rem;
     opacity: 0;
+    transform: translateY(10px);
     animation: hero-intro 0.6s var(--ease) both;
+}
+
+.hero-kicker::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 0.7em;
+    border-radius: 50%;
+    background: var(--red);
+    vertical-align: 0.08em;
 }
 
 .hero-principal h1 {
@@ -3343,6 +3370,7 @@ main {
     max-width: 14.67em;
     margin: 0 auto;
     opacity: 0;
+    transform: translateY(10px);
     animation: hero-intro 0.6s var(--ease) 0.05s both;
 }
 
@@ -3351,28 +3379,38 @@ main {
 }
 
 .hero-sub {
-    margin: 0.85rem auto 0;
-    font-size: 1.08rem;
+    margin: var(--e-4) auto 0;
+    font-size: var(--t-400);
+    line-height: 1.55;
     color: var(--texto-suave);
-    max-width: 35.33em;
+    max-width: 34em;
     text-wrap: pretty;
     opacity: 0;
+    transform: translateY(10px);
     animation: hero-intro 0.6s var(--ease) 0.18s both;
 }
 
 .hero-acoes {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: var(--e-3);
     justify-content: center;
-    margin-top: 1.1rem;
+    margin-top: var(--e-5);
     opacity: 0;
+    transform: translateY(10px);
     animation: hero-intro 0.6s var(--ease) 0.3s both;
 }
 
+/* O .btn carrega 1,5 rem de margem de topo de quando era botão solto no fim de
+   um texto. Dentro da fileira quem mede a distância até o resumo é a fileira:
+   somadas as duas, os botões descolavam do bloco que deviam fechar. */
+.hero-principal .hero-acoes .btn {
+    margin-top: 0;
+}
+
 .hero-nota {
-    margin-top: 0.9rem;
-    font-size: 0.85rem;
+    margin-top: var(--e-4);
+    font-size: var(--t-100);
     color: var(--texto-fraco);
 }
 
