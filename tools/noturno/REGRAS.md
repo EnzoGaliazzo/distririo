@@ -30,7 +30,7 @@ dono em andamento.
 Decisões já tomadas pelo dono. Não reabra nenhuma delas, mesmo que pareçam
 erradas ou que algum documento de auditoria diga o contrário:
 
-- **`recrutamento@distririo.com.br`** é o e-mail público único. Não trocar.
+- **O e-mail institucional é `comercial@distririo.com.br`** (rodapé, contato, JSON-LD, política). `recrutamento@distririo.com.br` só aparece em Trabalhe conosco e no trecho da política que diz para onde vai aquele formulário. Decisão de 18/09/2026, que substitui a antiga "recrutamento@ é o único".
 - **O site é claro.** Não reintroduzir modo escuro nem `prefers-color-scheme`.
 - **A empresa é de 2017 e tem 9 anos.** Não voltar para 1960 / 66 anos.
 - **O carrossel de banners fica no topo da home**, o texto vem abaixo.

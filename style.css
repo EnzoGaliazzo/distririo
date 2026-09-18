@@ -3408,6 +3408,18 @@ main {
     margin-top: 0;
 }
 
+/* O endereço de recrutamento aparece só na abertura do Trabalhe conosco: no
+   resto do site o contato público é o do comercial. Dentro do .hero o link herda a
+   cor do texto, então ele precisa da cor de sinal para se ler como link. */
+.hero-email {
+    margin-top: var(--e-3);
+}
+
+.hero-email a {
+    color: var(--red-text);
+    font-weight: 600;
+}
+
 .hero-nota {
     margin-top: var(--e-4);
     font-size: var(--t-100);

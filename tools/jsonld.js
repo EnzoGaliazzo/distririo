@@ -28,7 +28,7 @@ function blocoOrganizacao() {
             'cuidados pessoais para comércios do Rio de Janeiro. Vendas exclusivamente para ' +
             'pessoa jurídica (CNPJ).',
         telephone: '+55-21-99211-1843',
-        email: 'recrutamento@distririo.com.br',
+        email: 'comercial@distririo.com.br',
         foundingDate: '2017',
         address: {
             '@type': 'PostalAddress',
