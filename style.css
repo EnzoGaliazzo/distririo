@@ -3248,11 +3248,11 @@ main {
     text-align: center;
 }
 
-/* A régua de provas: os quatro dados em fileira, numa chapa de papel que
+/* A régua de provas: os três dados em fileira, numa chapa de papel que
    assenta o fim do bloco. Número em fonte de dado, rótulo embaixo. */
 .hero-provas {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     max-width: 44rem;
     margin: var(--e-6) auto 0;
     padding: var(--e-4) var(--e-2);
@@ -3274,8 +3274,7 @@ main {
     border-left: 0;
 }
 
-.hero-provas .stat-number,
-.hero-provas .stat-fixo {
+.hero-provas .stat-number {
     font-family: var(--font-dado);
     font-variant-numeric: tabular-nums;
     font-size: var(--t-600);
@@ -3295,15 +3294,21 @@ main {
     color: var(--texto-suave);
 }
 
-/* Duas colunas antes de "Marcas distribuídas" começar a quebrar em três linhas. */
+/* Com três dados a fileira cabe no celular — em duas colunas sobraria um
+   item sozinho embaixo. O que aperta é o rótulo mais longo ("Marcas
+   distribuídas"): devolvo largura tirando padding lateral e descendo o
+   rótulo um degrau da escala, para ele quebrar em duas linhas e não em três. */
 @media (max-width: 680px) {
     .hero-provas {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        row-gap: var(--e-4);
+        padding: var(--e-4) var(--e-1);
     }
 
-    .hero-provas .stat-item:nth-child(odd) {
-        border-left: 0;
+    .hero-provas .stat-item {
+        padding: 0 var(--e-2);
+    }
+
+    .hero-provas .stat-label {
+        font-size: var(--t-50);
     }
 }
 
