@@ -2066,6 +2066,7 @@
         if (d.company) topo.push('*Empresa:* ' + d.company);
         topo.push('*CNPJ:* ' + d.cnpj, '*Responsável:* ' + d.name, '*WhatsApp:* ' + d.phone);
         if (d.bairro) topo.push('*Entrega:* ' + d.bairro);
+        if (d.vendedor) topo.push('*Vim por:* ' + d.vendedor);
         var fim = (d.observacao ? '\n\n*Observação:* ' + d.observacao : '') +
             (g.misturou ? '\n\nSão dois pedidos separados: ' + MARCA_APARTADA +
                 ' roda em operação própria e é atendido à parte.' : '') +
@@ -2180,6 +2181,11 @@
             '<div class="form-field">' +
             '<label for="pedidoBairro">Bairro ou cidade da entrega <span class="form-opcional">(opcional)</span></label>' +
             '<input type="text" id="pedidoBairro" name="bairro" autocomplete="address-level2" maxlength="80">' +
+            '</div>' +
+            '<div class="form-field">' +
+            '<label for="pedidoVendedor">Vim por <span class="form-opcional">(nome do vendedor, se algum atendeu você)</span></label>' +
+            '<input type="text" id="pedidoVendedor" name="vendedor" autocomplete="off" maxlength="80" ' +
+            'placeholder="Nome do vendedor">' +
             '</div>' +
             '</fieldset>' +
 
@@ -2447,7 +2453,7 @@
             var texto = function (v, max) { return typeof v === 'string' ? v.slice(0, max) : ''; };
             var limpo = {
                 cnpj: texto(c.cnpj, 18), company: texto(c.company, 120), name: texto(c.name, 80),
-                phone: texto(c.phone, 15), bairro: texto(c.bairro, 80)
+                phone: texto(c.phone, 15), bairro: texto(c.bairro, 80), vendedor: texto(c.vendedor, 80)
             };
             var completo = cnpjValido(limpo.cnpj) && limpo.name.trim() && limpo.phone.replace(/\D/g, '').length >= 10;
             return completo ? limpo : null;
@@ -2473,10 +2479,11 @@
         var quem = document.getElementById('pedidoQuem');
         var campos = document.getElementById('pedidoCampos');
         if (cliente) {
-            ['cnpj', 'company', 'name', 'phone', 'bairro'].forEach(function (k) { form[k].value = cliente[k]; });
+            ['cnpj', 'company', 'name', 'phone', 'bairro', 'vendedor'].forEach(function (k) { form[k].value = cliente[k] || ''; });
             document.getElementById('pedidoQuemEmpresa').textContent = cliente.company || 'CNPJ ' + cliente.cnpj;
             document.getElementById('pedidoQuemDetalhe').textContent =
-                [cliente.company ? 'CNPJ ' + cliente.cnpj : '', cliente.name, cliente.phone, cliente.bairro].filter(Boolean).join(' · ');
+                [cliente.company ? 'CNPJ ' + cliente.cnpj : '', cliente.name, cliente.phone, cliente.bairro,
+                    cliente.vendedor ? 'vim por ' + cliente.vendedor : ''].filter(Boolean).join(' · ');
         }
         if (quem) quem.hidden = !cliente;
         if (campos) campos.hidden = !!cliente;
@@ -2582,7 +2589,7 @@
             enviando = true;
 
             var dados = {
-                cnpj: val('cnpj'), company: val('company'), name: val('name'),
+                cnpj: val('cnpj'), company: val('company'), name: val('name'), vendedor: val('vendedor'),
                 phone: val('phone'), bairro: val('bairro'), observacao: val('observacao')
             };
             var registro = guardarPedidoEnviado(lista);
@@ -2623,7 +2630,8 @@
             var lembrar = document.getElementById('pedidoLembrar');
             if (lembrar && lembrar.checked) {
                 guardar(CHAVE_CLIENTE, JSON.stringify({
-                    cnpj: dados.cnpj, company: dados.company, name: dados.name, phone: dados.phone, bairro: dados.bairro
+                    cnpj: dados.cnpj, company: dados.company, name: dados.name, phone: dados.phone,
+                    bairro: dados.bairro, vendedor: dados.vendedor
                 }));
             } else {
                 esquecerCliente();
