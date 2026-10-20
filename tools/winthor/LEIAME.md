@@ -34,3 +34,21 @@ esconde o que zerou ou saiu de linha, lista o que é novo, roda
 `node tools/build.js` e publica. Produto novo entra sem foto nem descrição, por
 isso ele fica numa lista de pendências em vez de ir direto ao ar — foto e texto
 continuam sendo decisão de quem cuida do site.
+
+## A foto do produto novo
+
+O WinThor traz código, descrição e estoque — nunca a imagem. Então a foto
+continua sendo um passo à parte, com as regras que já valem para o site e estão
+em `tools/fotos/LEIAME.md`: foto do site oficial da marca (o Enzo autorizou, por
+ser distribuidor), ou do varejo que vende o mesmo SKU, conferindo embalagem e
+gramatura. JPG quadrado de 800x800, fundo branco, 7% de margem, instalada por
+`python tools/fotos/instalar.py <marca> <arquivo> <id>`.
+
+O site aguenta produto sem foto: o cartão mostra a inicial do nome sobre o nome
+da marca, sem quebrar a grade. Mas um catálogo cheio desses cartões fica ruim,
+por isso a rotina noturna não publica produto novo sozinha — ela junta os novos
+num aviso, com o comando da foto já montado, e quem cuida do site aprova.
+
+Vale lembrar que 2 dos 333 produtos de hoje ainda estão sem foto, e que já
+houve uma leva de 125 resolvida em setembro: foto é o gargalo conhecido do
+catálogo, e ligar o WinThor vai aumentar o volume, não diminuir.
