@@ -11,3 +11,6 @@ node_modules/
 *.log
 Thumbs.db
 desktop.ini
+
+# Exportacoes do WinThor: dado da empresa, nao vai para o GitHub
+tools/winthor/export/
