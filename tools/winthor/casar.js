@@ -34,16 +34,30 @@ function palavras(texto) {
     return normalizar(texto).split(' ').filter(p => p.length > 2);
 }
 
+// O WinThor abrevia: "TRID 5S MENTA" é o Trident 5S, "CHOC" é chocolate. Por
+// isso duas palavras contam como a mesma quando uma começa a outra, com pelo
+// menos quatro letras — exigir igualdade literal derrubava o Trident inteiro.
+function mesmaPalavra(a, b) {
+    if (a === b) return true;
+    const curta = a.length < b.length ? a : b;
+    const longa = a.length < b.length ? b : a;
+    return curta.length >= 4 && longa.startsWith(curta);
+}
+
 // Jaccard sobre as palavras: simples, e o bastante para separar o candidato
 // óbvio do resto. O que ficar abaixo do corte vai para conferência de
 // qualquer jeito, então não compensa algo mais elaborado aqui.
 function semelhanca(a, b) {
-    const A = new Set(palavras(a));
-    const B = new Set(palavras(b));
-    if (!A.size || !B.size) return 0;
+    const A = palavras(a);
+    const B = palavras(b);
+    if (!A.length || !B.length) return 0;
+    const usadas = new Set();
     let comuns = 0;
-    A.forEach(p => { if (B.has(p)) comuns++; });
-    return comuns / (A.size + B.size - comuns);
+    A.forEach(function (p) {
+        const i = B.findIndex((q, j) => !usadas.has(j) && mesmaPalavra(p, q));
+        if (i >= 0) { usadas.add(i); comuns++; }
+    });
+    return comuns / (A.length + B.length - comuns);
 }
 
 function lerCsv(arquivo) {
