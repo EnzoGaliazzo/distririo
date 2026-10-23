@@ -478,13 +478,17 @@
       "nome": "Lacta",
       "categoria": "mdz-lacta",
       "marca": "Mondelez",
-      "linha": "Ao Leite, Laka, Diamante Negro, Shot, Diamante Negro/Laka, Amaro",
-      "descricao": "Tabletes de chocolate Lacta de 80 g nas versões ao leite, Laka, Diamante Negro, Shot, Diamante Negro/Laka e Amaro.",
+      "linha": "Ao Leite, Laka, Diamante Negro, Shot, Diamante Negro/Laka, Amaro, Laka Caramelo",
+      "descricao": "Tabletes de chocolate Lacta nas versões ao leite, Laka, Diamante Negro, Shot, Diamante Negro/Laka e Amaro, nos formatos de 20 g, 28 g, 50 g e 80 g, mais a barra Laka Caramelo recheada de 104 g.",
       "embalagens": [
-        "80 g"
+        "20 g",
+        "28 g",
+        "50 g",
+        "80 g",
+        "104 g"
       ],
       "img": "assets/produtos/mondelez/lacta.jpg",
-      "keywords": "lacta 80g ao leite laka diamante negro shot amaro mondelez"
+      "keywords": "lacta 20g 28g 50g 80g 104g tablete barra ao leite laka diamante negro shot amaro caramelo mondelez"
     },
     {
       "id": "lacta-recheados",
